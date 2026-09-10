@@ -4,7 +4,7 @@
 
 **后续接手、查看完成进度和下一步，请先读 [PROJECT_STATUS.md](PROJECT_STATUS.md)。**
 
-已完成本地正确性检查及 RTX 5090 上的 UCF101 三种子实验，详见 [实验报告](reports/experiments/TextConsistency-UCF101三种子实验报告.md)。本轮正在准备无卡服务器上的基线核验、KD 对照和 DTD/Aircraft；正式新实验等待用户开卡。
+已完成本地正确性检查及 RTX 5090 上的 UCF101 三种子实验，详见 [实验报告](reports/experiments/TextConsistency-UCF101三种子实验报告.md)。本轮无卡环境、三个数据集和 KD 对照入口已准备完成，本地/服务器各 36 项测试通过，详见 [准备报告](reports/preparation/无卡准备完成.md)；正式新实验等待用户开卡。
 
 ## GitHub 文件索引
 

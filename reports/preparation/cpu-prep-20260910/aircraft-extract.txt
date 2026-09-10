@@ -1,0 +1,1 @@
+Prepared FGVC Aircraft: /root/autodl-tmp/textconsistency/data/fgvc_aircraft

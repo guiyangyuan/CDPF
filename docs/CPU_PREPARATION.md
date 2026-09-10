@@ -2,6 +2,8 @@
 
 当前阶段以 [PROJECT_STATUS.md](../PROJECT_STATUS.md) 为准。无卡容器内存上限实际为 2 GiB；不要按宿主机 free 输出推断可用内存。完整 CLIP 诊断在本机通过，服务器尝试被 SIGKILL，开卡后复验；轻量测试/数据预检不受这一结果替代。下面的正式运行命令仅在用户开卡后使用；`--plan-only` 不训练。
 
+2026-09-10 无卡准备检查已完成：[完成报告](../reports/preparation/无卡准备完成.md)、[检查记录与已生成的命令计划](../reports/preparation/cpu-prep-20260910/)。这些计划记录的是命令预览，不是已执行的训练日志。
+
 ## 服务器布局
 
 根目录 `/root/autodl-tmp/textconsistency`：
@@ -15,7 +17,7 @@
 - `setup-logs/cpu-prep-20260910/`：CPU 检查、预检、诊断、计划及 readiness。
 - `runs/`：后续 GPU 输出，每个实验必须用新目录。
 
-激活本轮代码：
+激活本轮代码可直接执行 `source /root/autodl-tmp/textconsistency/activate-current.sh`，等价步骤如下：
 
 ```bash
 export TC_ROOT=/root/autodl-tmp/textconsistency

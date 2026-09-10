@@ -1,6 +1,6 @@
 # UCF101 基线核验与 KD 对照：2026-09-10
 
-本批于 2026-09-10 18:02（北京时间）启动，当前运行中，尚无完整三种子结论。用户已开卡并授权执行；后续状态以 [PROJECT_STATUS.md](../../../PROJECT_STATUS.md) 和服务器实时 `status.json` 为准。
+本批于 2026-09-10 18:02（北京时间）启动，官方 matched20 三种子已完成，KD 两组运行中；蒸馏贡献尚待本批完成。用户已开卡并授权执行；后续状态以 [PROJECT_STATUS.md](../../../PROJECT_STATUS.md) 和服务器实时 `status.json` 为准。
 
 ## 已通过的启动检查
 
@@ -40,3 +40,7 @@ KD 结果使用现有汇总器检查模型/配置、seed、源码、样本和所
 官方 seed1 的20轮训练已正常结束，首次包装器在 checkpoint 审计时因 PyTorch 的 weights_only 默认行为与旧调度器对象序列化不兼容而停止。最小复现确认调度器类型为 CosineAnnealingLR；仅在官方子进程对本轮自产的可信模型使用 `TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1`，直接审计时显式 `weights_only=False`。当前 TC 训练进程没有加入此环境覆盖，模型和官方源码均未修改。
 
 [复现与加载验证](start-evidence/checkpoint-compatibility.json)证明 checkpoint 未改变；[恢复记录](start-evidence/launch-resumed.json)记录相同 SHA。保留首次失败状态、执行器和日志，seed1 不重新训练，恢复后从其 Base/Novel 评估继续。
+
+## 已完成：官方 matched20 三种子
+
+[完整结果](official-summary.json)：Base均值83.5574、Novel均值67.0813、HM74.4183。三个种子各自的 Base/Novel 准确率与历史本仓库基线完全一致，证明当前20轮设置的基线结果可以由独立官方实现复现。该结论只适用于本协议；不能替代200轮参考配置或说明已复现所有官方论文指标。

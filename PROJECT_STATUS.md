@@ -2,7 +2,7 @@
 
 最后更新：2026-09-10（GPU 对照运行中；北京时间）。本文件是后续接手和恢复工作的第一入口。每完成一批工作，先更新此处的状态、证据和下一步，再提交 GitHub。**准备完成、训练完成、贡献被验证是三个不同状态。**
 
-**GPU 对照实验已启动。** 用户已开启 RTX 5090 32GB / 120GB 内存实例；完整模型数值复验及 GPU 短训练通过。当前先执行官方 CoOp matched20 三种子，随后执行 KD=0/1 两组受控实验。详见 [本批运行记录](reports/experiments/ucf101-kd-study-20260910/README.md)。UCF101、DTD、FGVC Aircraft 已部署并通过预检，本地和服务器各 36 项测试通过。详见 [无卡准备完成报告](reports/preparation/无卡准备完成.md) 和 [机器可读检查记录](reports/preparation/cpu-prep-20260910/ready.json)。
+**GPU 对照实验已启动。** 用户已开启 RTX 5090 32GB / 120GB 内存实例；完整模型数值复验及 GPU 短训练通过。官方 CoOp matched20 三种子已完成，与旧基线逐种子的 Base/Novel 准确率完全一致（HM 74.42）；KD=0/1 两组受控实验正在并行运行。详见 [本批运行记录](reports/experiments/ucf101-kd-study-20260910/README.md)。UCF101、DTD、FGVC Aircraft 已部署并通过预检，本地和服务器各 36 项测试通过。详见 [无卡准备完成报告](reports/preparation/无卡准备完成.md) 和 [机器可读检查记录](reports/preparation/cpu-prep-20260910/ready.json)。
 
 ## 目标与当前授权
 
@@ -44,8 +44,8 @@
 | 官方 CoOp 差异核查与独立诊断 | 本机、开卡后服务器均通过 | 无卡时期 SIGKILL 保留；开卡后完整模型诊断 logits/梯度/更新差均为0，见本批 start-evidence |
 | KD 开/关受控入口与多数据集入口 | 已实现并通过审查 | 本地/服务器各 36 项测试；匹配 teacher CE/融合，验证实际配置、变体身份、分支 checkpoint 一致性和每类 16-shot |
 | 无卡准备验证和启动计划 | 已完成 | 36 项测试、3 份预检、6 份命令计划、CLI 和无 GPU 拒绝训练检查；11 个脚本/配置 SHA256 与本地一致 |
-| KD 对照正式 GPU 训练 | 已入后台队列，等待基线阶段完成 | UCF101，hierarchical/hierarchical_adapter，KD 0/1，seed 1/2/3 |
-| 独立官方 CoOp GPU 训练 | matched20 三种子运行中 | 20轮同主要超参数对照；200轮参考配置本批未启动 |
+| KD 对照正式 GPU 训练 | KD0 / KD1 两组并行运行中 | UCF101，hierarchical/hierarchical_adapter，KD 0/1，seed 1/2/3 |
+| 独立官方 CoOp GPU 训练 | matched20 三种子已完成 | Base/Novel 各种子准确率与历史基线完全一致；HM 74.42。200轮参考配置未启动 |
 | 层级分组/参数量对照 | 待设计和执行 | 顺序/随机分组，平面参数量控制；当前代码未实现语义分组 |
 | DTD / Aircraft 三种子正式训练 | 待执行 | 固定协议、相同描述来源、保留所有 seed |
 | AAPE / ADK 接近方法比较 | 待适配和执行 | 先核对官方实现与协议，不能用跨协议分数直接比较 |
@@ -83,7 +83,7 @@
 - GPU：RTX 5090 32GB；容器内存上限 120GiB；torch 2.8.0+cu128。
 - 本批目录：`/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402`。
 - 队列 PID：`2741`（首次进程 2155 因旧 checkpoint 加载兼容性停止，现已保留模型恢复），状态入口为上述目录下 `status.json`；PID 只用于本实例本次进程，重启后应重新核对。
-- 子目录：`official_matched20/`、`kd0/`、`kd1/`；后两项在官方阶段通过后创建并并行运行。
+- 子目录：`official_matched20/`、`kd0/`、`kd1/`；官方阶段已通过，KD0 PID 4062、KD1 PID 4063 正在并行运行。
 - 根日志：`/root/autodl-tmp/textconsistency/setup-logs/gpu-start-20260910/queue-resume.log`；阶段日志在本批目录 `official.log`、`kd0.log`、`kd1.log`。
 - 正式训练代码 commit：`03c04e8694398800a5a8c58486d017d4132df8b0`；执行包装器快照保存在本批报告 start-evidence/execution-v2，首次版本和失败证据亦保留。
 - 如失败，先读取状态与日志；保留失败目录和已完成模型，禁止覆盖结果或将部分种子报告成三种子均值。

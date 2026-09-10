@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/root/autodl-tmp/textconsistency/setup-logs/structure-gpu-20260910-27946/queue.py", line 109, in <module>
+    main()
+  File "/root/autodl-tmp/textconsistency/setup-logs/structure-gpu-20260910-27946/queue.py", line 40, in main
+    import torch
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/__init__.py", line 2264, in <module>
+    from torch import quantization as quantization  # usort: skip
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/quantization/__init__.py", line 2, in <module>
+    from .fake_quantize import *  # noqa: F403
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/quantization/fake_quantize.py", line 10, in <module>
+    from torch.ao.quantization.fake_quantize import (
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/ao/quantization/__init__.py", line 12, in <module>
+    from .pt2e._numeric_debugger import (  # noqa: F401
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/ao/quantization/pt2e/_numeric_debugger.py", line 9, in <module>
+    from torch.ao.quantization.pt2e.graph_utils import bfs_trace_with_node_process
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/ao/quantization/pt2e/graph_utils.py", line 9, in <module>
+    from torch.export import ExportedProgram
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/export/__init__.py", line 17, in <module>
+    from torch.fx.passes.infra.pass_base import PassResult
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/fx/passes/infra/__init__.py", line 1, in <module>
+    from . import pass_manager
+  File "/root/miniconda3/lib/python3.12/site-packages/torch/fx/passes/infra/pass_manager.py", line 5, in <module>
+    from queue import Queue
+ImportError: cannot import name 'Queue' from 'queue' (/root/autodl-tmp/textconsistency/setup-logs/structure-gpu-20260910-27946/queue.py)

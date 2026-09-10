@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "models": [
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "epoch": 1,
+      "sha256": "1af370c1148a53bdcf141881e2228edb130fb911c2192952048302aecd380cec"
+    },
+    {
+      "variant": "flat_dual_adapter",
+      "seed": 1,
+      "epoch": 1,
+      "sha256": "4b1585d35798582b1890ed1b20f89160a509cfc0aec28485f7942b44a94428b1"
+    },
+    {
+      "variant": "hierarchical_interleaved_adapter",
+      "seed": 1,
+      "epoch": 1,
+      "sha256": "b563e7b1c68b076a5a363e81ed64699799babf1492b430952dd3ab132869823c"
+    },
+    {
+      "variant": "hierarchical_shuffle17_adapter",
+      "seed": 1,
+      "epoch": 1,
+      "sha256": "a4f505a5f1f96f77b307b333d7963548d5c9478a4462ca79c7d17e09f171d628"
+    },
+    {
+      "variant": "hierarchical_shuffle29_adapter",
+      "seed": 1,
+      "epoch": 1,
+      "sha256": "0cadefec3bba728ce89ef8446133355047e796543962e36c4ccb46f4adf3eb3d"
+    }
+  ]
+}

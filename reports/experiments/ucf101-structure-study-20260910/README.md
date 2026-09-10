@@ -1,6 +1,8 @@
-# UCF101 结构对照：运行中
+# UCF101 结构对照：正式实验运行中
 
-2026-09-10 用户开卡并授权执行。本报告当前是启动记录，正式结果尚未完成。
+2026-09-10 用户开卡并授权执行。5次单轮训练和30次独立重载及审计全部通过，正式实验运行中。原结构seed1的student/teacher/ensemble在Base与Novel上都精确复现上一批数值；完整正式结果尚未完成。
+
+[单轮验证审计](smoke-audit.json)已保存；[完成后审计和备份脚本](execution/)已准备。审计脚本在模拟运行未完成状态下会拒绝生成分析文件。
 
 - 最新SSH：`connect.bjb2.seetacloud.com:27946`，密码未保存。GPU为RTX5090 32GB，驱动580.76.05，cgroup内存90GiB；torch2.8.0+cu128，Python3.12.3。
 - [固定协议](../../../docs/STRUCTURE_CONTROLS.md)：原层级、参数匹配双头平面、交错、随机17/29，共5变体×3seed，20epochs/16-shot/KD1。

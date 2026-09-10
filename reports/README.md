@@ -1,3 +1,5 @@
+> 最新状态：[项目进度](../PROJECT_STATUS.md)；[三种子实验](experiments/TextConsistency-UCF101三种子实验报告.md)；[CoOp 核查](preparation/CoOp基线核查.md)。以下早期报告保留其当时状态。
+
 # 项目报告与历史证据
 
 按以下顺序阅读，早期核查描述的是修订前状态。

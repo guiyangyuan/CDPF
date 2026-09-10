@@ -1,13 +1,19 @@
 # TextConsistency：复现修订版
 
-2026-09-10。本版本从当前工作文件复制并修订；原目录 `/Users/bytedance/Documents/textConsistency` 保留。旧论文数字尚未由此版本复现，现阶段没有可用于证明性能提升的新实验结果。
+2026-09-10。本版本从当前工作文件复制并修订；原目录 `/Users/bytedance/Documents/textConsistency` 保留。已完成 UCF101 三种子、18 次训练、96 次独立评估。完整方法 HM 80.66，当前 CoOp 风格基线 74.42；其他数据集、KD 独立贡献和官方配置基线尚未验证。旧论文数字未被自动验证。
 
-本地已完成官方 CLIP ViT-B/16、真实 UCF101 图像上的训练流程验证。完整数据集训练、GPU 显存/耗时、三种子准确率仍待验证。具体证据见 `verification/` 和 [方法与实验边界](REPRO_METHOD.md)。
+**后续接手、查看完成进度和下一步，请先读 [PROJECT_STATUS.md](PROJECT_STATUS.md)。**
+
+已完成本地正确性检查及 RTX 5090 上的 UCF101 三种子实验，详见 [实验报告](reports/experiments/TextConsistency-UCF101三种子实验报告.md)。本轮正在准备无卡服务器上的基线核验、KD 对照和 DTD/Aircraft；正式新实验等待用户开卡。
 
 ## GitHub 文件索引
 
-这是 `guiyangyuan/textconsistency_v2_tune` 中的复现修订快照。正式 GPU 实验仍待执行；旧论文数字没有被此次修订自动验证。
+这是 `guiyangyuan/textconsistency_v2_tune` 中持续更新的复现代码与研究记录。当前完成情况以 [项目进度](PROJECT_STATUS.md) 为准。
 
+- [项目计划、当前进度和接手说明](PROJECT_STATUS.md)
+- [UCF101 三种子真实实验](reports/experiments/TextConsistency-UCF101三种子实验报告.md)
+- [官方 CoOp 基线核查](reports/preparation/CoOp基线核查.md)
+- [无卡准备及后续运行说明](docs/CPU_PREPARATION.md)
 - [执行报告、代码核查及论文评审](reports/README.md)
 - [本地验证记录](verification/README.md)
 - [方法与实验表述边界](REPRO_METHOD.md)
@@ -32,7 +38,7 @@
 
 本地验证环境：Python 3.12.14、PyTorch 2.8.0、torchvision 0.23.0、FP32、CPU。当前环境未检测到可用 CUDA/MPS。
 
-在服务器上先进入本项目目录，创建独立环境。下面 CUDA 12.6 命令来自 [PyTorch 官方历史版本安装说明](https://pytorch.org/get-started/previous-versions/)，需要服务器驱动支持；该 GPU 环境尚未在本次工作中实际测试。
+在服务器上先进入本项目目录，创建独立环境。下面 CUDA 12.6 命令来自 [PyTorch 官方历史版本安装说明](https://pytorch.org/get-started/previous-versions/)，需要服务器驱动支持；此前 RTX 5090 实测使用的是 torch 2.8.0+cu128 / torchvision 0.23.0+cu128，当前无卡服务器保留该环境；cu126 仅为其他机器的安装示例。
 
 ```bash
 python3.12 -m venv .venv
@@ -91,7 +97,7 @@ python scripts/repro/run_pilot.py --data-root /absolute/datasets-prepared --outp
 python scripts/repro/run_pilot.py --data-root /absolute/datasets-prepared --output-root runs/ucf101-pilot-s1 --seeds 1
 ```
 
-默认 6 个变体、20 epochs、1 个 seed，共 6 次训练和 32 次独立评估。默认要求 CUDA，未检测到 GPU 会停止。服务器首次正式训练若显存不足，应记录后统一调整所有变体的 batch size 并重新生成实验协议；本次不能保证 24GB 显存下的正式配置已通过。
+默认 6 个变体、20 epochs、1 个 seed，共 6 次训练和 32 次独立评估。默认要求 CUDA，未检测到 GPU 会停止。服务器首次正式训练若显存不足，应记录后统一调整所有变体的 batch size 并重新生成实验协议；当前 5090 已验证该配置；未在当前 24GB 4090 上验证。
 
 | 变体 | 描述聚合 | 全局图像 MLP 查询适配 | KD |
 |---|---|---|---|
@@ -123,7 +129,7 @@ python scripts/repro/summarize.py --root runs/ucf101-s123
 
 ## 接下来要完成的投稿工作
 
-1. 在可用 GPU 上完成上述首轮，得到真实显存、耗时、全部分支指标。
+1. 已完成 UCF101 首轮和三种子实验；下一步执行 [当前计划](PROJECT_STATUS.md) 中的官方基线/KD 对照。
 2. 检查完整模块相对 mean/flat 的贡献，以及 teacher 与 student 各自效果。若仅 ensemble 变好，不能将其解释为 student 蒸馏能力改善。
 3. 有稳定贡献后，扩大到代表性数据集并运行 3 个 seed，补真正独立的 KD/MLP/层级消融；不要把当前 6 组误称为所有损失项的完整消融。
 4. 新结果替换论文中的占位或无法溯源数字，方法表述按 `REPRO_METHOD.md` 修订。

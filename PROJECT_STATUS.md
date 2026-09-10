@@ -39,8 +39,8 @@
 | 无卡服务器连接与环境检查 | 已完成 | Python 3.12.3、torch 2.8.0+cu128；CUDA 不可用符合当前模式 |
 | DTD / Aircraft ZIP 本机校验 | 已完成 | reports/preparation/dataset-archives.json |
 | DTD / Aircraft 服务器部署与预检 | 进行中 | 解压、固定划分、图像/描述/三种子采样检查全部通过后更新 |
-| 官方 CoOp 差异核查与独立诊断 | 进行中 | 固定上游 commit；核查初始化/轮数/批大小，真实图像 CPU 行为比较 |
-| KD 开/关受控入口与多数据集入口 | 进行中 | 必须仅改变 KD 权重；保持 teacher CE 和融合规则 |
+| 官方 CoOp 差异核查与独立诊断 | 本机已完成，服务器待开卡复验 | [核查报告](reports/preparation/CoOp基线核查.md)；本机 logits/梯度/更新差为0，服务器无卡完整模型进程被 SIGKILL |
+| KD 开/关受控入口与多数据集入口 | 已实现并通过审查 | 34 项本地测试；匹配 teacher CE/融合，验证实际配置与变体身份 |
 | 无卡准备验证和启动计划 | 待完成 | 测试、预检、CLI、plan-only、无 GPU 拒绝训练检查 |
 | KD 对照正式 GPU 训练 | 等待用户开卡 | UCF101，hierarchical/hierarchical_adapter，KD 0/1，seed 1/2/3 |
 | 独立官方 CoOp GPU 训练 | 待执行 | 与当前同配置实现核验 + 官方配置参考，分别报告 |

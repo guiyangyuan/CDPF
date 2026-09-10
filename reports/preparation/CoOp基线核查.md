@@ -33,6 +33,7 @@
 - prompt 初值、logits、CE、prompt 梯度、更新后 prompt 的最大绝对差均为 **0**。
 - 除 prompt 外所有参数冻结且没有梯度。
 - [证据 JSON](coop-equivalence-local.json)。这不是准确率实验，也不能代替完整训练比较。
+- 服务器无卡模式重复该诊断时，official worker 被 SIGKILL；容器 memory.max=2147483648（2 GiB）。未记录为通过，也不直接断言是 OOM；保留失败日志，开卡后在更充足资源下复验。本机通过结果仍有效。
 
 ## 开卡后的两个独立比较
 

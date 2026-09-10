@@ -1,0 +1,7 @@
+{
+  "benchmark_result": false,
+  "purpose": "read-only compatibility check of existing historical artifacts under stricter validation",
+  "rows_checked": 15,
+  "historical_artifacts_unchanged": true,
+  "old_protocol_rows": 16
+}

@@ -1,0 +1,16 @@
+{
+  "repository": "https://github.com/KaiyangZhou/CoOp",
+  "commit": "ff61507c790454bce7c5052c3ac39e60772f1f89",
+  "files": {
+    "train.py": "49a56b1b0cc9d1a8c810828d4ff8fbdf5102b82b91fc2d086a89a6fe357ccfd6",
+    "trainers/coop.py": "959efe016e9ea13e2c107f01e250e0fc8d373fa884f0ba71eab8a616f1e181eb",
+    "configs/trainers/CoOp/vit_b16_ctxv1.yaml": "9c0a8cfe95bda61dd0c4b0295894d66586b60197203c3037b5a14710d9d28c1b",
+    "configs/trainers/CoOp/vit_b16.yaml": "929c9dad84a8bb89326830777b007de40371e1b57a5f4d898f92bd60ad9bc796",
+    "datasets/ucf101.py": "8b90bdd5572adb06fd97d6a5a68bf2804c4f5ce5ae4935e7b42fa92461655d96",
+    "datasets/dtd.py": "e38afe03f9c3a858f7335f53659aa9ae7f15c029f2dec6b0c7a9ab48856f808b",
+    "datasets/fgvc_aircraft.py": "834fcdac5e903be76da6c38d215c2537b3270c39ec7f8cf5765145d1325efcb3",
+    "clip/model.py": "c0ba5cb62eafbf21e6c4e861e9caf6933d1c7e82313d37f953cd2c1ae85f78de"
+  },
+  "modified_upstream_files": [],
+  "runtime_dependency": "This project vendored Dassl.pytorch (warmup compatibility fix for torch 2.8); separately hash it in the execution protocol."
+}

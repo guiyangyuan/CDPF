@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "benchmark_result": false,
+  "upstream_commit": "ff61507c790454bce7c5052c3ac39e60772f1f89",
+  "shared_clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+  "device": "cpu",
+  "images": [
+    "Apply_Eye_Makeup/v_ApplyEyeMakeup_g12_c03.jpg",
+    "Apply_Lipstick/v_ApplyLipstick_g10_c02.jpg"
+  ],
+  "scope": "2 training images, random 4-token initialization, FP32, one SGD update; not a full training reproduction",
+  "frozen_parameters_without_grad": true,
+  "max_absolute_differences": {
+    "initial_ctx": 0.0,
+    "logits": 0.0,
+    "gradient": 0.0,
+    "updated_ctx": 0.0,
+    "loss": 0.0
+  }
+}

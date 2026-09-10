@@ -1,0 +1,279 @@
+{
+  "passed": true,
+  "id": "20260910-160746",
+  "source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+  "seed": 1,
+  "training_sample_sha256": "7c98facec218325a2090b609092d8f7b0a131a3b1198575e2fddd5795b71cec2",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "gpu_memory_peak_observed_MiB": 2767.0,
+  "memory_sampling_interval_seconds": 5,
+  "memory_is_device_total_not_allocator_peak": true,
+  "stages": [
+    {
+      "stage": "ucf101-pilot",
+      "epochs": 20,
+      "wall_seconds": 886.1891398318112,
+      "command_count": 38,
+      "checkpoint_count": 6,
+      "rows": [
+        {
+          "variant": "baseline",
+          "branch": "student",
+          "seeds": 1,
+          "base_mean": 83.04033092037228,
+          "novel_mean": 64.30502974580854,
+          "hm_of_means": 72.48156203620407,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 72.48156203620407,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "mean",
+          "branch": "student",
+          "seeds": 1,
+          "base_mean": 81.74767321613237,
+          "novel_mean": 74.90535424553813,
+          "hm_of_means": 78.17708371453121,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 78.17708371453121,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "mean",
+          "branch": "teacher",
+          "seeds": 1,
+          "base_mean": 73.83660806618407,
+          "novel_mean": 79.28610059491618,
+          "hm_of_means": 76.46438318538041,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 76.46438318538041,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "mean",
+          "branch": "ensemble",
+          "seeds": 1,
+          "base_mean": 77.55946225439503,
+          "novel_mean": 78.04218496484586,
+          "hm_of_means": 77.80007483472203,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 77.80007483472203,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "flat",
+          "branch": "student",
+          "seeds": 1,
+          "base_mean": 81.33402275077559,
+          "novel_mean": 71.01135749053543,
+          "hm_of_means": 75.82296695246299,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 75.82296695246299,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "flat",
+          "branch": "teacher",
+          "seeds": 1,
+          "base_mean": 74.30196483971045,
+          "novel_mean": 79.44835045970795,
+          "hm_of_means": 76.78902681837356,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 76.78902681837356,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "flat",
+          "branch": "ensemble",
+          "seeds": 1,
+          "base_mean": 78.33505687693899,
+          "novel_mean": 77.06868577609518,
+          "hm_of_means": 77.69671155450106,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 77.69671155450106,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "flat_adapter",
+          "branch": "student",
+          "seeds": 1,
+          "base_mean": 81.95449844881075,
+          "novel_mean": 73.06652244456463,
+          "hm_of_means": 77.2557188158598,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 77.2557188158598,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "flat_adapter",
+          "branch": "teacher",
+          "seeds": 1,
+          "base_mean": 78.02481902792141,
+          "novel_mean": 74.14818820984316,
+          "hm_of_means": 76.03712473503005,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 76.03712473503005,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "flat_adapter",
+          "branch": "ensemble",
+          "seeds": 1,
+          "base_mean": 81.59255429162357,
+          "novel_mean": 75.93293672255272,
+          "hm_of_means": 78.6610753874716,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 78.6610753874716,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "hierarchical",
+          "branch": "student",
+          "seeds": 1,
+          "base_mean": 82.7300930713547,
+          "novel_mean": 72.85018929150893,
+          "hm_of_means": 77.47643658719748,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 77.47643658719748,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "hierarchical",
+          "branch": "teacher",
+          "seeds": 1,
+          "base_mean": 81.1789038262668,
+          "novel_mean": 76.58193618171985,
+          "hm_of_means": 78.81344485501485,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 78.81344485501485,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "hierarchical",
+          "branch": "ensemble",
+          "seeds": 1,
+          "base_mean": 82.8852119958635,
+          "novel_mean": 76.6901027582477,
+          "hm_of_means": 79.6674026292422,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 79.6674026292422,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "hierarchical_adapter",
+          "branch": "student",
+          "seeds": 1,
+          "base_mean": 82.36814891416753,
+          "novel_mean": 76.25743645213629,
+          "hm_of_means": 79.19509159884261,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 79.19509159884261,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "hierarchical_adapter",
+          "branch": "teacher",
+          "seeds": 1,
+          "base_mean": 80.61013443640124,
+          "novel_mean": 76.52785289345593,
+          "hm_of_means": 78.51596694974961,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 78.51596694974961,
+          "seed_hm_std": null
+        },
+        {
+          "variant": "hierarchical_adapter",
+          "branch": "ensemble",
+          "seeds": 1,
+          "base_mean": 82.7300930713547,
+          "novel_mean": 80.20551649540292,
+          "hm_of_means": 81.448246483923,
+          "base_std": null,
+          "novel_std": null,
+          "mean_seed_hm": 81.448246483923,
+          "seed_hm_std": null
+        }
+      ],
+      "checkpoints": [
+        {
+          "variant": "baseline",
+          "sha256": "84cc4b8201232832949cda3585a989d11f3089984639addb1409ec27f7ea89df",
+          "bytes": 7646071
+        },
+        {
+          "variant": "mean",
+          "sha256": "cf4ab2049180c2f83cc6d73922bb7fa9c37b0f2bae04febf34348ae59940b2f2",
+          "bytes": 7646199
+        },
+        {
+          "variant": "flat",
+          "sha256": "b48006002c2437de56eabd9e731c5f3899b5677dc9095a94abe5c86941feb4ee",
+          "bytes": 8700397
+        },
+        {
+          "variant": "flat_adapter",
+          "sha256": "9290bec5dce15ba3b16dfec88e4441c718cae2657120a2f298865245e81535bc",
+          "bytes": 12906205
+        },
+        {
+          "variant": "hierarchical",
+          "sha256": "23ff567b74b3dfff1d83bd5cd70f4e59cbed90a6e38df01ddc1f2a0f598a4659",
+          "bytes": 9754921
+        },
+        {
+          "variant": "hierarchical_adapter",
+          "sha256": "ae67d08ff3ce3ffd16cbb53c93c4880f7dfb3debe159bf6c3d87a13b2fd4216c",
+          "bytes": 13960729
+        }
+      ],
+      "durations": {
+        "baseline": {
+          "train_command_seconds": 83.37985365465283,
+          "eval_commands_seconds": 19.824273318052292
+        },
+        "mean": {
+          "train_command_seconds": 83.9295044913888,
+          "eval_commands_seconds": 63.81684472039342
+        },
+        "flat": {
+          "train_command_seconds": 92.20799011364579,
+          "eval_commands_seconds": 63.706031542271376
+        },
+        "flat_adapter": {
+          "train_command_seconds": 91.54119666293263,
+          "eval_commands_seconds": 65.75082543492317
+        },
+        "hierarchical": {
+          "train_command_seconds": 94.60732425749302,
+          "eval_commands_seconds": 64.34656812250614
+        },
+        "hierarchical_adapter": {
+          "train_command_seconds": 92.90561616793275,
+          "eval_commands_seconds": 66.04469537734985
+        }
+      },
+      "all_in_memory_and_reloaded_base_metrics_match": true
+    }
+  ],
+  "limitations": [
+    "single seed",
+    "UCF101 only",
+    "baseline is this repository implementation",
+    "one-epoch GPU check is not a benchmark result"
+  ]
+}

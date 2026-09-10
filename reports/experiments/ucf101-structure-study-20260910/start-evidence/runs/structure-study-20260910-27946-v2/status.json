@@ -1,0 +1,36 @@
+{
+  "state": "running",
+  "stage": "smoke",
+  "pid": 1553,
+  "started_unix": 1789051198.7382007,
+  "source_commit": "13b34978eeb8b23532b53abd1066af4719a0f909",
+  "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+  "completed": [],
+  "thread_caps": 4,
+  "runs": {
+    "smoke": {
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-u",
+        "/root/autodl-tmp/textconsistency/releases/structure-20260910-v1/scripts/repro/run_pilot.py",
+        "--data-root",
+        "/root/autodl-tmp/textconsistency/data",
+        "--output-root",
+        "/root/autodl-tmp/textconsistency/runs/structure-study-20260910-27946-v2/smoke",
+        "--variants",
+        "hierarchical_adapter",
+        "flat_dual_adapter",
+        "hierarchical_interleaved_adapter",
+        "hierarchical_shuffle17_adapter",
+        "hierarchical_shuffle29_adapter",
+        "--seeds",
+        "1",
+        "--epochs",
+        "1"
+      ],
+      "started_unix": 1789051202.2311249,
+      "pid": 1574
+    }
+  },
+  "new_outputs_only": true
+}

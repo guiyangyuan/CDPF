@@ -95,6 +95,7 @@ def collect(root):
     fixed_settings = protocol.get('fixed_settings')
     observed_code = None
     seed_samples = {}
+    seed_checkpoints = {}
     rows = []
     for variant in protocol['variants']:
         branches = ['student'] if variant == 'baseline' else ['student', 'teacher', 'ensemble']
@@ -110,6 +111,10 @@ def collect(root):
                                     protocol['epochs'], dataset, kd, expected_code, shots, fixed_settings)
                 if base['checkpoints'] != novel['checkpoints']:
                     raise ValueError('Base and novel results came from different checkpoints')
+                checkpoint_key = (variant, seed)
+                if checkpoint_key in seed_checkpoints and seed_checkpoints[checkpoint_key] != base['checkpoints']:
+                    raise ValueError('Evaluation branches came from different checkpoints')
+                seed_checkpoints[checkpoint_key] = base['checkpoints']
                 if base['model_signature'] != novel['model_signature'] or base['code_sha256'] != novel['code_sha256']:
                     raise ValueError('Base/novel model configuration or source mismatch')
                 if observed_code is None:

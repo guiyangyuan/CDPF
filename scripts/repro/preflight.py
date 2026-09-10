@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Verify fixed dataset splits, description coverage, and independent few-shot seeds."""
 import argparse
+from collections import Counter
 import json
 from pathlib import Path
 import sys
@@ -20,6 +21,13 @@ DATASETS = {
     'dtd': {'name': 'DescribableTextures', 'loader': DescribableTextures, 'dir': 'dtd', 'image_dir': 'images', 'split': 'split_zhou_DescribableTextures.json'},
     'fgvc_aircraft': {'name': 'FGVCAircraft', 'loader': FGVCAircraft, 'dir': 'fgvc_aircraft', 'image_dir': 'images'},
 }
+
+
+def _validate_base_shots(train_x, classnames, shots=16):
+    counts = Counter(item.label for item in train_x)
+    expected_labels = set(range(len(classnames)))
+    if set(counts) != expected_labels or any(counts[label] != shots for label in expected_labels):
+        raise ValueError('The base training split is not exactly 16-shot per class')
 
 
 def _fixed_split(data_root, key, spec):
@@ -64,8 +72,7 @@ def check(data_root, dataset='ucf101'):
         cfg.DATASET.SUBSAMPLE_CLASSES = 'base'; cfg.DATASET.NAME = spec['name']
         set_random_seed(seed); base = spec['loader'](cfg)
         base_names = set(base.classnames); description_rows(descriptions, base.classnames, 20)
-        if len(base.train_x) != len(base_names) * 16:
-            raise ValueError('The base training split is not exactly 16-shot per class')
+        _validate_base_shots(base.train_x, base.classnames)
         cfg.DATASET.SUBSAMPLE_CLASSES = 'new'; novel = spec['loader'](cfg)
         description_rows(descriptions, novel.classnames, 20)
         if base_names & set(novel.classnames):

@@ -94,6 +94,17 @@ class RunnerBehavior(unittest.TestCase):
             root = write_new_run(Path(temp), ('baseline', 'flat'), {'baseline': 'a', 'flat': 'b'})
             with self.assertRaises(ValueError): module('summarize').collect(root)
 
+    def test_new_protocol_rejects_mixed_branch_checkpoints(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = write_new_run(Path(temp), ('flat',))
+            for split in ('base', 'new'):
+                path = root / 'flat' / 'seed1' / f'eval_{split}_teacher' / 'metrics.json'
+                data = json.loads(path.read_text())
+                data['checkpoints'] = [{'epoch': 20, 'sha256': 'different-checkpoint'}]
+                path.write_text(json.dumps(data))
+            with self.assertRaisesRegex(ValueError, 'branches came from different checkpoints'):
+                module('summarize').collect(root)
+
     def test_dataset_commands_and_kd_are_explicit(self):
         runner = module('run_pilot')
         for key, display in [('ucf101', 'UCF101'), ('dtd', 'DescribableTextures'),

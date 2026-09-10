@@ -1,5 +1,6 @@
 import importlib.util
 from pathlib import Path
+from types import SimpleNamespace
 import tempfile
 import unittest
 
@@ -29,6 +30,12 @@ class PreflightBehavior(unittest.TestCase):
     def test_unknown_dataset_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp, self.assertRaises(ValueError):
             load_preflight().check(temp, dataset='unknown')
+
+    def test_base_shots_are_counted_per_class(self):
+        train_x = ([SimpleNamespace(label=0)] * 15 +
+                   [SimpleNamespace(label=1)] * 17)
+        with self.assertRaisesRegex(ValueError, 'exactly 16-shot per class'):
+            load_preflight()._validate_base_shots(train_x, ['class zero', 'class one'])
 
 
 if __name__ == '__main__': unittest.main()

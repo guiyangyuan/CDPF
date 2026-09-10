@@ -26,6 +26,7 @@ def main():
     assert not temporary.exists()
     with tarfile.open(temporary, 'w:gz') as tar:
         tar.add(study, arcname=study.name)
+        tar.add(root / 'runs/structure-study-20260910-27946', arcname='first-failed-launch')
         logs = root / 'setup-logs/structure-gpu-20260910-27946'
         tar.add(logs, arcname='structure-gpu-20260910-27946')
     temporary.replace(archive)

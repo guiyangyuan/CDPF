@@ -1,0 +1,100 @@
+"""Write the final report from audited, locally verified experiment evidence."""
+import json
+from pathlib import Path
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+repo = Path('work/github-publish/textconsistency_v2_tune')
+report = repo / 'reports/experiments/ucf101-structure-study-20260910'
+a = json.loads((report/'analysis.json').read_text())
+b = json.loads((report/'backup-receipt.json').read_text())
+s = json.loads((report/'completed-status.json').read_text())
+assert a['passed'] and a['original_exactly_reproduced']
+assert b['all_20_checkpoint_hashes_verified'] and b['local_archive_hash_verified']
+names = {
+    'hierarchical_adapter': '原顺序层级 + MLP',
+    'flat_dual_adapter': '参数匹配双头平面 + MLP',
+    'hierarchical_interleaved_adapter': '交错分组层级 + MLP',
+    'hierarchical_shuffle17_adapter': '随机17分组层级 + MLP',
+    'hierarchical_shuffle29_adapter': '随机29分组层级 + MLP',
+}
+branches = {'student': '学生', 'teacher': '教师', 'ensemble': '融合'}
+finished = datetime.fromtimestamp(s['finished_unix'], ZoneInfo('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M:%S')
+lines = [
+    '# UCF101：参数量匹配与描述分组对照结果',
+    '',
+    f'本批正式队列结束于 {finished}（北京时间），15次正式训练、90次独立重载评估全部完成；逐模型和逐评估审计通过，完整权重已备份到本机并验证。前置5次单轮训练、30次重载仅验证流程，不纳入正式统计。',
+    '',
+    '## 主要结果',
+    '',
+    '五个变体使用相同790,018个可训练参数。下表为seed1/2/3的Base、Novel准确率均值，HM按两个均值计算，主结果固定为alpha=0.5融合。单位为百分数。',
+    '',
+    '| 结构 | Base | Novel | HM（均值计算） |',
+    '|---|---:|---:|---:|',
+]
+for r in a['summary']:
+    if r['branch'] == 'ensemble':
+        lines.append(f"| {names[r['variant']]} | {r['base_mean']:.2f} | {r['novel_mean']:.2f} | {r['hm_of_means']:.2f} |")
+lines += [
+    '',
+    '**原层级相对参数匹配平面的独立收益较小，尚未得到稳定支持。** 融合HM为80.66对80.38；逐种子配对优势为+1.33、−1.01、+0.46个百分点，平均+0.26、样本标准差1.18，仅2/3种子正向。原结构的HM种子标准差为1.17，平面对照为0.30；这批三种子无法证明前者具有稳定优势。',
+    '',
+    '改变分组后的融合HM从79.86到81.20，存在分组敏感性。随机17的均值高于原顺序，随机29略低，交错更低；两套预先固定的随机分组全部保留，没有根据Novel结果选择最终分组，也不能把顺序分组称为经过验证的语义分组。',
+    '',
+    '原结构全部三个种子、三个分支的Base/Novel共18个准确率与上一批KD1逐项完全一致。整体方法相对已核验的CoOp matched20历史HM 74.42仍有提升，但这种整体提升不能单独归因于层级模块。详见[上一批KD报告](../ucf101-kd-study-20260910/README.md)。',
+    '',
+    '## 分组与参数量的成对比较',
+    '',
+    '**本表方向统一为“对照减去原层级”。** 正数表示该对照优于原层级。每个seed先算HM差再汇总，与上表两个HM之差不是完全相同的统计量；标准差为三个配对差值的样本标准差。',
+    '',
+    '| 对照 | 分支 | seed1 ΔHM | seed2 ΔHM | seed3 ΔHM | 平均 ΔHM ± 标准差 | 对照胜出种子数 |',
+    '|---|---|---:|---:|---:|---:|---:|',
+]
+for r in a['paired_vs_original']:
+    values = ' | '.join(f"{x['hm']:+.2f}" for x in r['per_seed'])
+    lines.append(f"| {names[r['variant']]} | {branches[r['branch']]} | {values} | {r['mean_delta_hm']:+.2f} ± {r['std_delta_hm']:.2f} | {r['positive_seeds']}/3 |")
+lines += [
+    '',
+    '## 全部分支汇总',
+    '',
+    'Base/Novel均值旁为三个训练seed的样本标准差。两个HM列分别表示“均值的HM”和“各seed HM的均值及标准差”，请勿混用。逐种子45行原始统计和90次评估计数在[完整分析](analysis.json)。',
+    '',
+    '| 结构 | 分支 | Base ± SD | Novel ± SD | HM（均值计算） | seed HM均值 ± SD |',
+    '|---|---|---:|---:|---:|---:|',
+]
+for r in a['summary']:
+    lines.append(f"| {names[r['variant']]} | {branches[r['branch']]} | {r['base_mean']:.2f} ± {r['base_std']:.2f} | {r['novel_mean']:.2f} ± {r['novel_std']:.2f} | {r['hm_of_means']:.2f} | {r['mean_seed_hm']:.2f} ± {r['seed_hm_std']:.2f} |")
+lines += [
+    '',
+    '## 固定协议与核验',
+    '',
+    '- UCF101、16-shot、ViT-B/16、FP32、20epochs、batch16、seed1/2/3、N_CTX4、最多20个描述视图、4组；KD权重1/温度2、teacher CE1、diversity0、contrastive0、融合alpha0.5。固定使用第20轮模型，未按Novel成绩选epoch、参数、分组或删除种子。',
+    '- 双头平面对照和层级结构具有相同投影矩阵及温度参数，聚合器787,970加prompt2,048，共790,018；不是用不参与计算的参数填数。参数量相同不代表FLOPs或优化动态相同。',
+    '- 审计实际配置、有效描述顺序及类别成员、数据/源码/测试样本哈希和checkpoint签名；相同seed间训练采样一致。各次Base测试1,934张、Novel测试1,849张。90次独立评估的correct/total与metrics准确率全部一致，所有分支加载各自训练的同一个第20轮checkpoint。',
+    '- 15个正式checkpoint的实际文件SHA256、sidecar、epoch、provenance、结构签名、实际参数总数和张量有限性全部通过；本机再次核对15个正式和5个短测试checkpoint的SHA256。',
+    '- 原结构三个seed/三个分支在Base和Novel上精确复现历史结果，18个准确率差值全为0。见[复跑对照](reference-replay.json)和analysis.json中的original_vs_previous_results。',
+    '- 训练代码commit：`13b34978eeb8b23532b53abd1066af4719a0f909`；训练源码SHA256：`9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba`。本轮启动器修复和报告整理均未改变训练源码。',
+    '- RTX5090 32GB，驱动580.76.05，90GiB cgroup内存，Python3.12.3、torch2.8.0+cu128、torchvision0.23.0+cu128；CPU线程统一4，CUDA前后向和基础CLIP完整哈希预检通过。与上一实例的驱动及CPU/内存配置不同。',
+    f"- 正式训练加评估耗时{a['formal_seconds']/60:.2f}分钟，短测试耗时{a['smoke_seconds']/60:.2f}分钟。5秒间隔整卡采样观测峰值{a['observed_device_peak_MiB']:.0f}MiB，包含队列持有的CUDA上下文；这不是单模型分配峰值，也不是公平的效率比较。",
+    '',
+    '## 判断与下一步',
+    '',
+    '当前证据支持继续检验整体框架，但不支持把“两级聚合稳定优于参数匹配平面”写成已成立的贡献。也不应立即替换成随机17并把它的测试提升当作新方法。这里是观察过UCF101后的诊断性对照，不是未触碰的盲测；一个数据集、三个训练种子、两套固定随机排列无法证明广泛稳定性、统计显著、SOTA或录用条件。',
+    '',
+    '下一阶段优先固定配置，在DTD、Aircraft上运行CoOp、原方法及参数匹配平面对照的三种子实验，报告所有seed和相同主分支；进入下一批前写清完整协议并使用新输出目录。根据跨数据集证据判断是否保留层级结构，再补适用的AAPE/ADK公平比较及必要消融。暂不盲目增加模块、不继续用UCF101 Novel调参。本轮尚未运行DTD/Aircraft或接近方法，也未修改论文。',
+    '',
+    '## 执行记录、备份与恢复',
+    '',
+    '- [完整分析](analysis.json)、[正式审计](formal-audit.json)、[短测试审计](smoke-audit.json)、[配置/采样/指标证据](evidence/)、[运行环境](runtime.json)。',
+    '- [原始队列完成状态](completed-status.json)保留执行器的终点`awaiting_analysis_and_backup`；其后分析和备份已完成，最终交付以analysis.json及[本机验证收据](backup-receipt.json)为证，不要将原始状态快照误认为仍有GPU任务。',
+    '- 服务器实验目录：`/root/autodl-tmp/textconsistency/runs/structure-study-20260910-27946-v2`。该批已结束，不要重复运行；旧版本/批次均保留。',
+    '- 首次启动因操作脚本`queue.py`遮蔽Python标准库而在导入PyTorch时失败，未执行训练。已保留首次状态/日志，改用独立execution-v2中的structure_queue.py后正常运行，训练源码不变。见[启动记录](start-evidence/)；完整压缩包亦保留first-failed-launch。',
+    '- [最终执行与审计脚本](execution/)包含运行队列、完整分析、服务端打包及本机验证/报告脚本；远端日志和原始失败脚本包含在完整备份中。',
+    f"- 本机压缩包：工作区`{b['local_archive']}`；解压副本：`{b['local_extracted_study']}`。",
+    f"- 服务器同一压缩包：`{b['path']}`。大小{b['size']:,}字节，SHA256：`{b['sha256']}`，本机压缩包及全部20个checkpoint均验证通过。",
+    '- 完整压缩包保存模型、日志、配置、采样/协议和审计，不含数据集及冻结CLIP基础权重。GitHub保存轻量报告和证据；完整模型同时保留在服务器和本机。服务器电源由用户控制，本任务不关闭实例。',
+    '- 恢复入口：[PROJECT_STATUS.md](../../../PROJECT_STATUS.md)。',
+    '',
+]
+(report/'README.md').write_text('\n'.join(lines))
+print(f'Wrote {report / "README.md"}')

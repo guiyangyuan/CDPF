@@ -1,0 +1,61 @@
+{
+  "comparison": "original structure across all seeds/branches vs previous KD1 run",
+  "per_seed_branch": [
+    {
+      "seed": 1,
+      "branch": "student",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "seed": 1,
+      "branch": "teacher",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "seed": 1,
+      "branch": "ensemble",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "seed": 2,
+      "branch": "student",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "seed": 2,
+      "branch": "teacher",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "seed": 2,
+      "branch": "ensemble",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "seed": 3,
+      "branch": "student",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "seed": 3,
+      "branch": "teacher",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "seed": 3,
+      "branch": "ensemble",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    }
+  ],
+  "all_18_accuracies_exact": true,
+  "not_final_structure_study_result": true
+}

@@ -1,0 +1,135 @@
+{
+  "created_unix": 1789053691.4947386,
+  "path": "/root/autodl-tmp/textconsistency/backups/structure-study-20260910-27946-v2.tar.gz",
+  "size": 127542691,
+  "sha256": "d83f5d813784ea989084ce746f5d630cbfafad368883d9dec36202a806a19be9",
+  "study_complete": true,
+  "includes": "15 formal checkpoints plus 5 smoke checkpoints, configs, logs, protocol, analysis and startup/recovery evidence",
+  "excludes": "datasets and frozen base CLIP weights",
+  "local_archive": "outputs/textconsistency-structure-study-20260910-27946/structure-study-20260910-27946-v2.tar.gz",
+  "local_extracted_study": "outputs/textconsistency-structure-study-20260910-27946/unpacked/structure-study-20260910-27946-v2",
+  "local_archive_hash_verified": true,
+  "all_20_checkpoint_hashes_verified": true,
+  "checkpoints": [
+    {
+      "phase": "formal",
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "sha256": "625f79c7c617b6314d95c131560a7696f9ba9cb082886c30b290a698f61a78bf"
+    },
+    {
+      "phase": "formal",
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "sha256": "cb89b1bbad77f8f384f175bc460a1191172f1c92d58b8c3e8015b3ba61bb0961"
+    },
+    {
+      "phase": "formal",
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "sha256": "8fa9d4dda1ad23ff9d2991ea3135af0d73f9412dbb8d4464c9d2f155ce2d4453"
+    },
+    {
+      "phase": "formal",
+      "variant": "flat_dual_adapter",
+      "seed": 1,
+      "sha256": "1fc9047ca2fe6c1124e5fdde9fbc71a14f7bd39cc3fec3359da1f1961fe603fa"
+    },
+    {
+      "phase": "formal",
+      "variant": "flat_dual_adapter",
+      "seed": 2,
+      "sha256": "8085fab39ede9f1587ba18e89a2534a4598a7216a4dc2afa8734fe622a621835"
+    },
+    {
+      "phase": "formal",
+      "variant": "flat_dual_adapter",
+      "seed": 3,
+      "sha256": "73ff6645aa3ae166c405f0d5a0e4a7550a1a5b1c9f2c552a3d6d8aa3b2c543bc"
+    },
+    {
+      "phase": "formal",
+      "variant": "hierarchical_interleaved_adapter",
+      "seed": 1,
+      "sha256": "3906a5694f762575621cb132cf9bef6c640fbb93d8fc4b9530f3b4428c0d9668"
+    },
+    {
+      "phase": "formal",
+      "variant": "hierarchical_interleaved_adapter",
+      "seed": 2,
+      "sha256": "66d77d7357beba850377f3a3188635cfc497d1cc866263dcac6898cd3e0bc5a1"
+    },
+    {
+      "phase": "formal",
+      "variant": "hierarchical_interleaved_adapter",
+      "seed": 3,
+      "sha256": "2ce98597f6776d18eb33ef2d28b04bc7e2d72e0b084fc7606f95f7737372c71f"
+    },
+    {
+      "phase": "formal",
+      "variant": "hierarchical_shuffle17_adapter",
+      "seed": 1,
+      "sha256": "43938eb7503a001c13f7ac5499166485d4e58f9ea746881dec2a3b925544a97c"
+    },
+    {
+      "phase": "formal",
+      "variant": "hierarchical_shuffle17_adapter",
+      "seed": 2,
+      "sha256": "06401099c748e395b6280fd7f4662a8196161a0fbe483dd9ffd7cec8ff735caf"
+    },
+    {
+      "phase": "formal",
+      "variant": "hierarchical_shuffle17_adapter",
+      "seed": 3,
+      "sha256": "1d2deb43561168e3f7b57d97630cc3e3bbeec7f6b92491243d84ed0c1efda404"
+    },
+    {
+      "phase": "formal",
+      "variant": "hierarchical_shuffle29_adapter",
+      "seed": 1,
+      "sha256": "0a74df42017f9119321a5da92cd2863e55a2140d850f6bdc2d65ef824b91f660"
+    },
+    {
+      "phase": "formal",
+      "variant": "hierarchical_shuffle29_adapter",
+      "seed": 2,
+      "sha256": "598e1055e30be4ec10c2faad1525133e6ad6c4d9f2e9dbcf0fece230b571a473"
+    },
+    {
+      "phase": "formal",
+      "variant": "hierarchical_shuffle29_adapter",
+      "seed": 3,
+      "sha256": "755194232867878f6a7d4f7288ba56cc975fb8df772452a9550b05b55c899d53"
+    },
+    {
+      "phase": "smoke",
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "sha256": "1af370c1148a53bdcf141881e2228edb130fb911c2192952048302aecd380cec"
+    },
+    {
+      "phase": "smoke",
+      "variant": "flat_dual_adapter",
+      "seed": 1,
+      "sha256": "4b1585d35798582b1890ed1b20f89160a509cfc0aec28485f7942b44a94428b1"
+    },
+    {
+      "phase": "smoke",
+      "variant": "hierarchical_interleaved_adapter",
+      "seed": 1,
+      "sha256": "b563e7b1c68b076a5a363e81ed64699799babf1492b430952dd3ab132869823c"
+    },
+    {
+      "phase": "smoke",
+      "variant": "hierarchical_shuffle17_adapter",
+      "seed": 1,
+      "sha256": "a4f505a5f1f96f77b307b333d7963548d5c9478a4462ca79c7d17e09f171d628"
+    },
+    {
+      "phase": "smoke",
+      "variant": "hierarchical_shuffle29_adapter",
+      "seed": 1,
+      "sha256": "0cadefec3bba728ce89ef8446133355047e796543962e36c4ccb46f4adf3eb3d"
+    }
+  ]
+}

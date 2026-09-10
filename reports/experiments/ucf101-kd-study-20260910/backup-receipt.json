@@ -1,0 +1,12 @@
+{
+  "created_unix": 1789036190.9881253,
+  "path": "/root/autodl-tmp/textconsistency/backups/ucf101-kd-study-20260910-38402.tar.gz",
+  "size": 54298211,
+  "sha256": "66b962ba121eca46ff19a77bd996c325886f61bb95c56f020712738a7847ad19",
+  "study_complete": true,
+  "includes": "15 official/TC final checkpoints, configs, logs, protocol, analysis and startup/recovery evidence",
+  "excludes": "datasets and frozen base CLIP weights",
+  "local_archive": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/textconsistency-kd-study-20260910-38402/ucf101-kd-study-20260910-38402.tar.gz",
+  "local_sha256_verified": true,
+  "local_final_checkpoints_verified": 15
+}

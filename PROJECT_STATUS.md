@@ -1,14 +1,14 @@
 # TextConsistency：工作计划与当前进度
 
-最后更新：2026-09-10（GPU 对照运行中；北京时间）。本文件是后续接手和恢复工作的第一入口。每完成一批工作，先更新此处的状态、证据和下一步，再提交 GitHub。**准备完成、训练完成、贡献被验证是三个不同状态。**
+最后更新：2026-09-10（本批 GPU 对照及备份已完成；北京时间）。本文件是后续接手和恢复工作的第一入口。每完成一批工作，先更新此处的状态、证据和下一步，再提交 GitHub。**准备完成、训练完成、贡献被验证是三个不同状态。**
 
-**GPU 对照实验已启动。** 用户已开启 RTX 5090 32GB / 120GB 内存实例；完整模型数值复验及 GPU 短训练通过。官方 CoOp matched20 三种子已完成，与旧基线逐种子的 Base/Novel 准确率完全一致（HM 74.42）；KD=0/1 两组受控实验正在并行运行。详见 [本批运行记录](reports/experiments/ucf101-kd-study-20260910/README.md)。UCF101、DTD、FGVC Aircraft 已部署并通过预检，本地和服务器各 36 项测试通过。详见 [无卡准备完成报告](reports/preparation/无卡准备完成.md) 和 [机器可读检查记录](reports/preparation/cpu-prep-20260910/ready.json)。
+**本批 GPU 基线与 KD 对照已完成并备份。** 共15次正式训练、78次独立重载评估，完整审计通过。官方 CoOp matched20 与旧基线的三个种子准确率完全一致；本轮KD1也逐种子复现历史结果。完整方法KD0→KD1的融合HM为79.50→80.66，3/3种子提高；普通层级为79.91→80.19，仅2/3种子提高。详见 [完整报告](reports/experiments/ucf101-kd-study-20260910/README.md)。三个数据集仍已准备好，DTD/Aircraft正式训练尚未执行。
 
 ## 目标与当前授权
 
 - 目标：完成可复现、有实际贡献的期刊投稿，争取在 2027 年春节前获得录用；尚未确认目标期刊和学校认可条件，未承诺录用。
 - 当前优先代码和实验，暂不修改论文/Overleaf。
-- 无卡准备已完成。用户于 2026-09-10 开卡并提供新 SSH 入口，授权继续执行实验；本批运行官方 CoOp matched20 与 UCF101 KD 开/关三种子对照。
+- 无卡准备已完成。用户于 2026-09-10 开卡并提供新 SSH 入口，授权继续执行实验；本批已完成官方 CoOp matched20 与 UCF101 KD 开/关三种子对照；完整权重已备份。
 - 用户授权将相关代码、报告和进度推送到本仓库。SSH 密码、私钥、访问令牌不得写入仓库。
 
 ## 已完成的可信实验
@@ -24,7 +24,7 @@
 | 层级聚合 | 82.76 | 77.77 | 80.19 |
 | 层级聚合 + MLP | 82.23 | 79.14 | 80.66 |
 
-完整方法相对 baseline / mean 三个种子均提升；层级对平面的平均配对 HM 增益约 +0.74；MLP 在层级版本中仅 2/3 种子提升。当前不能声称 KD 有独立贡献、所有模块稳定有效、达到 SOTA 或达到录用条件。
+完整方法相对 baseline / mean 三个种子均提升；层级对平面的平均配对 HM 增益约 +0.74；MLP 在层级版本中仅 2/3 种子提升。这批历史比较当时未单独验证KD；后续受控KD实验已完成，见本轮报告。仍不能声称所有模块稳定有效、达到SOTA或达到录用条件。
 
 - [完整三种子报告](reports/experiments/TextConsistency-UCF101三种子实验报告.md)
 - [机器可读汇总与逐种子审计](reports/experiments/ucf101-s123-20260910/)
@@ -44,7 +44,7 @@
 | 官方 CoOp 差异核查与独立诊断 | 本机、开卡后服务器均通过 | 无卡时期 SIGKILL 保留；开卡后完整模型诊断 logits/梯度/更新差均为0，见本批 start-evidence |
 | KD 开/关受控入口与多数据集入口 | 已实现并通过审查 | 本地/服务器各 36 项测试；匹配 teacher CE/融合，验证实际配置、变体身份、分支 checkpoint 一致性和每类 16-shot |
 | 无卡准备验证和启动计划 | 已完成 | 36 项测试、3 份预检、6 份命令计划、CLI 和无 GPU 拒绝训练检查；11 个脚本/配置 SHA256 与本地一致 |
-| KD 对照正式 GPU 训练 | KD0 / KD1 两组并行运行中 | UCF101，hierarchical/hierarchical_adapter，KD 0/1，seed 1/2/3 |
+| KD 对照正式 GPU 训练 | 已完成并审计 | 12次训练、72次独立评估；完整方法平均配对ΔHM +1.14，3/3正向；普通层级+0.28，2/3正向 |
 | 独立官方 CoOp GPU 训练 | matched20 三种子已完成 | Base/Novel 各种子准确率与历史基线完全一致；HM 74.42。200轮参考配置未启动 |
 | 层级分组/参数量对照 | 待设计和执行 | 顺序/随机分组，平面参数量控制；当前代码未实现语义分组 |
 | DTD / Aircraft 三种子正式训练 | 待执行 | 固定协议、相同描述来源、保留所有 seed |
@@ -53,10 +53,10 @@
 
 ## 实验顺序和判断规则
 
-恢复本批工作的第一步：先读取下述 status.json，确认进程和已完成输出；不要重复启动同一批次。已通过开卡检查，服务器仍有 `/root/autodl-tmp/textconsistency`，执行 `source /root/autodl-tmp/textconsistency/activate-current.sh`，检查 CUDA、显存、容器内存和数据路径。GPU 前后向、真实短训练和官方等价诊断已通过，正在执行下面的受控实验。若平台切换实例没有保留数据盘，应恢复部署，不能直接假设准备产物存在。具体命令在 [运行说明](docs/CPU_PREPARATION.md)。
+本批 `status.json` 已为 completed，模型和评估均齐全；恢复时先阅读本批报告和备份收据，避免重复启动已结束的队列。下一阶段优先处理分组/参数量对照，再扩到DTD/Aircraft；新实验使用新目录，先检查CUDA、磁盘、代码版本和数据。运行命令基础见 [运行说明](docs/CPU_PREPARATION.md)。
 
-1. 核验基线：本仓库基线与官方 CoOp 的模型计算是否一致；配置是否一致。这与“官方论文指标已复现”不同。
-2. UCF101 KD=0/1 成对实验：同一个模型结构、teacher CE、seed/采样、训练轮数、融合权重，只改变 KD。分别报告 student、teacher、ensemble。
+1. 已完成matched20基线核验：本仓库基线与官方 CoOp 的模型计算是否一致；配置是否一致。这与“官方论文指标已复现”不同。
+2. 已完成UCF101 KD=0/1 成对实验：同一个模型结构、teacher CE、seed/采样、训练轮数、融合权重，只改变 KD。分别报告 student、teacher、ensemble。
 3. 层级结构核验：检查描述顺序、随机分组与参数量带来的影响；不将顺序分组称为语义分组。
 4. DTD、Aircraft 三种子，检验跨任务稳定性；与适用的接近方法做公平比较。
 5. 如层级收益稳定且相对接近方法有性能/效率价值，固定框架补齐投稿实验；若只赢自建基线或模块增益不稳定，针对证据精简或改进，不盲目叠模块。
@@ -78,14 +78,11 @@
 5. GitHub 保存源码、配置、计划、汇总、审计；数据集和 CLIP/训练权重另存。ImageNet-1K 尚未准备，不属于当前无卡阶段。
 6. 每次完成后更新本文件：实际完成项、结果/失败、证据路径、下一条命令。训练中如需跨会话跟进，应先记录运行目录与状态，不靠聊天记忆。
 
-## 当前后台运行位置
+## 最近已完成批次与备份
 
-- GPU：RTX 5090 32GB；容器内存上限 120GiB；torch 2.8.0+cu128。
-- 本批目录：`/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402`。
-- 队列 PID：`2741`（首次进程 2155 因旧 checkpoint 加载兼容性停止，现已保留模型恢复），状态入口为上述目录下 `status.json`；PID 只用于本实例本次进程，重启后应重新核对。
-- 子目录：`official_matched20/`、`kd0/`、`kd1/`；官方阶段已通过，KD0 PID 4062、KD1 PID 4063 正在并行运行。
-- 根日志：`/root/autodl-tmp/textconsistency/setup-logs/gpu-start-20260910/queue-resume.log`；阶段日志在本批目录 `official.log`、`kd0.log`、`kd1.log`。
-- 正式训练代码 commit：`03c04e8694398800a5a8c58486d017d4132df8b0`；执行包装器快照保存在本批报告 start-evidence/execution-v2，首次版本和失败证据亦保留。
-- 如失败，先读取状态与日志；保留失败目录和已完成模型，禁止覆盖结果或将部分种子报告成三种子均值。
-
-- 本批已解决的执行问题：官方 checkpoint 含旧学习率调度器对象，PyTorch 默认安全加载不兼容。仅对本轮可信自产的官方 checkpoint 使用旧加载模式，模型 SHA256 不变；没有改动训练模型、超参数或数据。首次已完成的 seed1 第20轮模型保留，直接续评估。
+- 本批目录：`/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402`，`status.json` 为 completed；15个最终模型和78次独立评估均已审计。
+- 本批队列PID2741、KD进程4062/4063均为历史记录，不能据此启动或停止新进程。首次PID2155因旧checkpoint加载兼容性停止，已保留同一seed1模型恢复，首次失败记录未删除。
+- 正式模型训练源码commit：`03c04e8694398800a5a8c58486d017d4132df8b0`；训练源码SHA256仍为`d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f`。执行器和审计脚本快照在本批报告start-evidence中。
+- 完整备份位于本机工作区 `outputs/textconsistency-kd-study-20260910-38402/`，含压缩包和解压副本。15个checkpoint和压缩包均校验通过；压缩包SHA256：`66b962ba121eca46ff19a77bd996c325886f61bb95c56f020712738a7847ad19`。
+- 同一压缩包还位于服务器 `/root/autodl-tmp/textconsistency/backups/ucf101-kd-study-20260910-38402.tar.gz`。GitHub保存报告、配置/采样/模型哈希证据与完整分析JSON，数据和权重另行保存。
+- [完整本批报告](reports/experiments/ucf101-kd-study-20260910/README.md) / [审计JSON](reports/experiments/ucf101-kd-study-20260910/analysis.json) / [备份收据](reports/experiments/ucf101-kd-study-20260910/backup-receipt.json)。

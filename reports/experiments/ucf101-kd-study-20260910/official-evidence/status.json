@@ -1,0 +1,9 @@
+{
+  "state": "completed",
+  "started_unix": 1789034828.0497196,
+  "completed_commands": 9,
+  "total_commands": 9,
+  "active_command": 8,
+  "active_name": "08-seed3-new",
+  "finished_unix": 1789035041.1955476
+}

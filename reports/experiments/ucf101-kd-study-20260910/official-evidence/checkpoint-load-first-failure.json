@@ -1,0 +1,10 @@
+{
+  "state": "failed",
+  "started_unix": 1789034540.2915678,
+  "completed_commands": 0,
+  "total_commands": 9,
+  "active_command": 0,
+  "active_name": "00-seed1-train",
+  "error": "UnpicklingError('Weights only load failed. This file can still be loaded, to do so you have two options, \\x1b[1mdo those steps only if you trust the source of the checkpoint\\x1b[0m. \\n\\t(1) In PyTorch 2.6, we changed the default value of the `weights_only` argument in `torch.load` from `False` to `True`. Re-running `torch.load` with `weights_only` set to `False` will likely succeed, but it can result in arbitrary code execution. Do it only if you got the file from a trusted source.\\n\\t(2) Alternatively, to load with `weights_only=True` please check the recommended steps in the following error message.\\n\\tWeightsUnpickler error: Unsupported global: GLOBAL torch.optim.lr_scheduler.CosineAnnealingLR was not an allowed global by default. Please use `torch.serialization.add_safe_globals([torch.optim.lr_scheduler.CosineAnnealingLR])` or the `torch.serialization.safe_globals([torch.optim.lr_scheduler.CosineAnnealingLR])` context manager to allowlist this global if you trust this class/function.\\n\\nCheck the documentation of torch.load to learn more about types accepted by default with weights_only https://pytorch.org/docs/stable/generated/torch.load.html.')",
+  "finished_unix": 1789034620.1868668
+}

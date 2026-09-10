@@ -1,46 +1,65 @@
-# UCF101 基线核验与 KD 对照：2026-09-10
+# UCF101：官方基线复现与 KD 对照结果
 
-本批于 2026-09-10 18:02（北京时间）启动，官方 matched20 三种子已完成，KD 两组运行中；蒸馏贡献尚待本批完成。用户已开卡并授权执行；后续状态以 [PROJECT_STATUS.md](../../../PROJECT_STATUS.md) 和服务器实时 `status.json` 为准。
+本批已完成，正式队列结束于 2026-09-10 18:28:44（北京时间）。共15次正式训练、78次独立重载评估，完整审计通过。此前的两次一轮 GPU 短训练仅用于验证流程，未纳入正式统计。
 
-## 已通过的启动检查
+## 主要结果
 
-- RTX 5090 32GB，容器内存上限从无卡时的 2GiB 恢复到 120GiB；原数据盘、三个数据集及已验证 release 保留。
-- [GPU 运算检查](start-evidence/runtime.json)：torch 2.8.0+cu128，CUDA 前向/反向通过。
-- [完整模型数值复验](start-evidence/coop-equivalence/result.json)：在内存充足的服务器上运行相同 CPU 诊断，官方/当前实现 logits、loss、prompt 初值、梯度、一次 SGD 更新差均为0。不是准确率实验。
-- [一轮 GPU 短训练](start-evidence/results.json)：baseline 和 hierarchical_adapter 共两次训练、八次重载评估通过，汇总器验证四个变体/分支行。仅检验真实训练/保存/重载，不纳入正式结果表。
+以下为 seed1/2/3 的 Base/Novel 准确率均值；HM 按两个均值计算。当前方法使用 alpha=0.5 融合，官方 CoOp 为单学生分支。
 
-## 正式实验安排
+| 方法 | KD | Base | Novel | HM |
+|---|---:|---:|---:|---:|
+| 官方 CoOp matched20 | — | 83.56 | 67.08 | 74.42 |
+| 层级聚合 | 0 | 84.40 | 75.88 | 79.91 |
+| 层级聚合 | 1 | 82.76 | 77.77 | 80.19 |
+| 层级聚合 + MLP | 0 | 84.25 | 75.27 | 79.50 |
+| 层级聚合 + MLP | 1 | 82.23 | 79.14 | 80.66 |
 
-1. 独立、固定上游版本的官方 CoOp，`matched20`，三种子，20轮、16-shot、batch16、FP32、4随机上下文 token；分别重载第20轮 checkpoint 评估 Base/Novel。
-2. 当前层级 / 层级+MLP 两个版本，各跑 KD0 与 KD1、seed1/2/3、20轮。只改变 KD 权重，保留 teacher CE=1、融合 alpha=.5 和模型结构。每个模型独立评估 student、teacher、ensemble。
+完整方法开启 KD 后，融合 HM 从79.50到80.66，三种子均提高；Base均值下降约2.02个百分点，Novel提高约3.88个百分点。不带MLP时，融合HM只从79.91到80.19，且仅2/3种子提高。KD的收益依赖模型配置，不能将所有模块都描述成稳定有效。
 
-共15次正式训练、78次独立评估。官方阶段通过后，KD0/KD1 两组作为独立进程并行；数据、批量和轮数均不变，耗时受共享 GPU 影响，不作为方法速度比较。200轮官方参考、DTD/Aircraft 和分组/参数量对照不在本批队列。
+## 成对 KD 效果
 
-## 公平性与证据
+每个 seed 先计算 KD1−KD0 的 HM，再统计均值与样本标准差。因此这里的“平均配对增益”与上表“两个均值的 HM 之差”不是完全相同的统计量。数字单位为百分点；3/3方向一致并不等价于统计显著或跨数据集稳定。
 
-官方源码保持固定 commit `ff61507c790454bce7c5052c3ac39e60772f1f89` 未修改；使用本项目 vendored Dassl 和 FP32，属于明确记录的环境适配。官方入口保留 cudnn benchmark=True，当前 TC 使用确定性算法；不同 backbone 构建过程消耗随机数不同，同一 seed 不代表两条路径的初始 prompt 逐位相同。本批匹配主要训练超参数并报告多种子结果，不宣称完整训练轨迹一致。
+| 结构 | 分支 | seed1 ΔHM | seed2 ΔHM | seed3 ΔHM | 平均 ΔHM ± 标准差 | 提升种子数 |
+|---|---|---:|---:|---:|---:|---:|
+| 层级聚合 | 学生 | +1.96 | +3.77 | +1.45 | +2.39 ± 1.22 | 3/3 |
+| 层级聚合 | 教师 | +0.00 | +0.00 | +0.00 | +0.00 ± 0.00 | 0/3 |
+| 层级聚合 | 融合 | -0.54 | +1.32 | +0.05 | +0.28 ± 0.95 | 2/3 |
+| 层级聚合 + MLP | 学生 | +12.11 | +4.92 | +3.89 | +6.97 ± 4.48 | 3/3 |
+| 层级聚合 + MLP | 教师 | +0.00 | +0.00 | +0.00 | +0.00 ± 0.00 | 0/3 |
+| 层级聚合 + MLP | 融合 | +1.61 | +0.69 | +1.12 | +1.14 ± 0.46 | 3/3 |
 
-官方执行器在每次调用前保存有效配置、训练/测试样本哈希及数量，核对训练采样与已验证 TC 预检相同；训练后核对指定20轮 checkpoint，并在每次评估前后检查 SHA256 不变，要求日志明确加载该文件，再从正确数/总数计算准确率。保存上游、依赖和 CLIP 来源。
+教师分支的零变化不是缺失结果：六对模型的聚合器权重逐张量最大差值均为0，教师分支准确率也完全相同；学生prompt权重发生变化。实际配置与采样审计确认，每对实验只改变KD权重和输出路径。蒸馏收益发生在学生及融合结果，不能归因为教师同时变强。
 
-KD 结果使用现有汇总器检查模型/配置、seed、源码、样本和所有分支的 checkpoint 身份。本批完成后还需成对比较 KD0/1 的配置和采样，保留全部种子及分支，禁止按 Novel 测试结果挑 epoch 或删掉不好的种子。
+学生分支的KD增益比融合增益大，但完整版本KD0的Novel种子波动也较大（标准差7.06），不应只挑学生分支的最大涨点作为方法整体贡献。MLP的独立价值和与KD的交互仍需要其他数据集及结构对照。
 
-## 恢复运行
+## 复现与公平性检查
 
-- 根目录：`/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402`。
-- 队列状态：`status.json`；官方细分状态：`official_matched20/status.json`。
-- 日志：根目录 `official.log`、`kd0.log`、`kd1.log`；官方逐条日志在 `official_matched20/evidence/`，TC 逐模型日志在各 `seedN/` 中。
-- 启动信息：[launch.json](start-evidence/launch-resumed.json)。通过独立进程会话启动，SSH 断开不影响队列；不会自行开卡或关机。
-- 执行包装器快照：[官方执行器](start-evidence/execution-v2/official_runner.py)、[队列](start-evidence/execution-v2/study_queue.py)。它们不改变模型实现。
-- 正式代码 commit：`03c04e8694398800a5a8c58486d017d4132df8b0`。
+- 官方固定上游 CoOp matched20 的三种子 Base/Novel 准确率，与此前本仓库基线逐种子完全相同，HM为74.4183。
+- 本轮两个结构的KD1，全部18个变体/种子/分支行的Base/Novel准确率都与历史结果一致，最大差为0。该证据来自本次相同硬件类型与固定环境下的复跑，不代表任意环境都已验证。
+- 六对KD配置仅KD权重和输出目录不同；源码、训练/验证/测试采样、结构签名和可训练参数量相同。15个最终checkpoint的实际文件SHA256均验证；各Base/Novel/预测分支加载同一指定第20轮模型。
+- 协议固定为UCF101、16-shot、ViT-B/16、FP32、20轮、batch16、seed1/2/3；teacher CE=1，alpha=.5；不根据Novel测试选epoch或删除种子。
+- 官方上游源码未修改，commit为ff61507c790454bce7c5052c3ac39e60772f1f89；FP32和本项目vendored Dassl是明确的环境适配。上游保留cuDNN benchmark设置，当前TC使用确定性算法；未将两条训练轨迹宣称为逐位相同。
+- 两组KD独立进程共享同一RTX5090运行，未改batch或训练设置；本批耗时不用于比较方法效率。
 
-已有输出目录不能直接重复执行；失败时先检查日志，保留失败证据后再制定续跑方式。正式结果完成后更新本文件和 PROJECT_STATUS.md，并备份权重及运行证据。
+## 已处理的执行问题
 
-## 已记录的兼容性修复
+官方seed1的20轮训练已正常完成，但初次checkpoint审计因旧调度器对象与PyTorch weights_only加载不兼容而停止。仅在官方进程读取本轮自产、SHA核对过的可信模型时启用旧加载方式；没有改模型、训练参数、源码或checkpoint内容。保留首次失败证据，从同一个seed1模型继续评估，没有重跑或挑选该种子。详见 [最小复现](start-evidence/checkpoint-compatibility.json) 和 [恢复记录](official-evidence/recovery.json)。
 
-官方 seed1 的20轮训练已正常结束，首次包装器在 checkpoint 审计时因 PyTorch 的 weights_only 默认行为与旧调度器对象序列化不兼容而停止。最小复现确认调度器类型为 CosineAnnealingLR；仅在官方子进程对本轮自产的可信模型使用 `TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD=1`，直接审计时显式 `weights_only=False`。当前 TC 训练进程没有加入此环境覆盖，模型和官方源码均未修改。
+## 结论与下一步
 
-[复现与加载验证](start-evidence/checkpoint-compatibility.json)证明 checkpoint 未改变；[恢复记录](start-evidence/launch-resumed.json)记录相同 SHA。保留首次失败状态、执行器和日志，seed1 不重新训练，恢复后从其 Base/Novel 评估继续。
+本批支持两点：当前基线与两个KD1配置的结果可在本次新实例上复现；KD对完整“层级+MLP”方法在UCF101三种子中有一致正向HM收益。普通层级版本的融合收益较小且不一致，不能将蒸馏泛化成普遍的大幅提升。
 
-## 已完成：官方 matched20 三种子
+这些结果支持继续验证当前框架，尚不能证明创新充分、达到SOTA或满足期刊录用条件。下一阶段优先做描述顺序/随机分组及参数量控制，再用固定协议扩到DTD与Aircraft三种子；补适用的AAPE/ADK比较。官方200轮参考及必要的同预算比较尚未运行。论文/Overleaf本轮未修改。
 
-[完整结果](official-summary.json)：Base均值83.5574、Novel均值67.0813、HM74.4183。三个种子各自的 Base/Novel 准确率与历史本仓库基线完全一致，证明当前20轮设置的基线结果可以由独立官方实现复现。该结论只适用于本协议；不能替代200轮参考配置或说明已复现所有官方论文指标。
+## 文件、备份与恢复
+
+- [完整数值与成对审计](analysis.json)，包含全部分支、逐种子值、参数隔离检查及历史复现差值。
+- [官方原始计划、配置/采样及checkpoint证据](official-evidence/)，[官方结果](official-summary.json)，[队列完成状态](completed-status.json)。计划JSON保留执行前快照；完成状态由实际执行记录提供。
+- [实际依赖版本](start-evidence/packages.json)，[GPU检查](start-evidence/runtime.json)，[完整模型诊断](start-evidence/coop-equivalence/result.json)。
+- [执行器](start-evidence/execution-v2/official_runner.py)、[队列](start-evidence/execution-v2/study_queue.py)、[最终审计脚本](start-evidence/execution-v2/analyze_study.py)；首版和失败记录亦保留。
+- 服务器运行目录：`/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402`。本批队列已完成，不要对该目录重复启动。
+- 本机完整备份目录：工作区 `outputs/textconsistency-kd-study-20260910-38402/`，包含压缩包及解压后的15个最终模型、全部日志、配置、评估记录。
+- 压缩包大小：54,298,211字节；SHA256：`66b962ba121eca46ff19a77bd996c325886f61bb95c56f020712738a7847ad19`。本机压缩包及15个checkpoint逐个核对通过，见 [备份收据](backup-receipt.json)。
+- GitHub保存源码、报告、汇总与审计；完整权重保存在服务器和本机备份。数据集和冻结CLIP基础权重不在本批模型压缩包中。
+- 当前任务入口仍为 [PROJECT_STATUS.md](../../../PROJECT_STATUS.md)，下一批实验使用新目录。

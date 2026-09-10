@@ -1,0 +1,5 @@
+{
+  "resumed_unix": 1789034827.6956964,
+  "kept_seed1_checkpoint_sha256": "e8402920fd81ecd79fa5902aba05ef397bc8502a1cc2967bd2d783abede2d0ef",
+  "reason": "Own checkpoint contains legacy scheduler objects; use legacy loading only in upstream processes; no retraining or weight conversion."
+}

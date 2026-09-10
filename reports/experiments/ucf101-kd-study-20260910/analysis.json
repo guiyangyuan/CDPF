@@ -1,0 +1,1048 @@
+{
+  "passed": true,
+  "scope": "UCF101 only; fixed 20 epochs, 16-shot, all 3 seeds; no test-based selection",
+  "kd_summary": {
+    "0": [
+      {
+        "variant": "hierarchical",
+        "branch": "student",
+        "seeds": 3,
+        "base_mean": 84.35022406066874,
+        "novel_mean": 67.42383270236164,
+        "hm_of_means": 74.94318221134297,
+        "base_std": 1.3838885326539696,
+        "novel_std": 1.6227990828149008,
+        "mean_seed_hm": 74.93531732249555,
+        "seed_hm_std": 1.2553128779946547
+      },
+      {
+        "variant": "hierarchical",
+        "branch": "teacher",
+        "seeds": 3,
+        "base_mean": 81.38572905894519,
+        "novel_mean": 77.77176852352623,
+        "hm_of_means": 79.53771801684572,
+        "base_std": 0.4507651441096864,
+        "novel_std": 2.7428279790386045,
+        "mean_seed_hm": 79.5173590489971,
+        "seed_hm_std": 1.277477568525597
+      },
+      {
+        "variant": "hierarchical",
+        "branch": "ensemble",
+        "seeds": 3,
+        "base_mean": 84.40193036883834,
+        "novel_mean": 75.8788534342888,
+        "hm_of_means": 79.91378070492294,
+        "base_std": 0.3519575638859433,
+        "novel_std": 1.0977708561484294,
+        "mean_seed_hm": 79.9113824114417,
+        "seed_hm_std": 0.6853338601279645
+      },
+      {
+        "variant": "hierarchical_adapter",
+        "branch": "student",
+        "seeds": 3,
+        "base_mean": 83.62633574629439,
+        "novel_mean": 63.313502794303226,
+        "hm_of_means": 72.06590526486114,
+        "base_std": 0.9760493026382472,
+        "novel_std": 7.059958233865816,
+        "mean_seed_hm": 71.88425292840341,
+        "seed_hm_std": 4.317498328147578
+      },
+      {
+        "variant": "hierarchical_adapter",
+        "branch": "teacher",
+        "seeds": 3,
+        "base_mean": 80.81695966907962,
+        "novel_mean": 75.82477014602487,
+        "hm_of_means": 78.24131408714342,
+        "base_std": 0.7960084962947583,
+        "novel_std": 2.903925096518946,
+        "mean_seed_hm": 78.21097203268233,
+        "seed_hm_std": 1.189323773907825
+      },
+      {
+        "variant": "hierarchical_adapter",
+        "branch": "ensemble",
+        "seeds": 3,
+        "base_mean": 84.24681144432954,
+        "novel_mean": 75.26590950063097,
+        "hm_of_means": 79.50353863092268,
+        "base_std": 0.5672003678698466,
+        "novel_std": 1.2995003635074907,
+        "mean_seed_hm": 79.49915454679712,
+        "seed_hm_std": 0.7780794824217929
+      }
+    ],
+    "1": [
+      {
+        "variant": "hierarchical",
+        "branch": "student",
+        "seeds": 3,
+        "base_mean": 82.50603240261978,
+        "novel_mean": 72.76005047773572,
+        "hm_of_means": 77.32716599745997,
+        "base_std": 0.20896855658362576,
+        "novel_std": 0.11258334231834648,
+        "mean_seed_hm": 77.32709075397243,
+        "seed_hm_std": 0.1298646674826776
+      },
+      {
+        "variant": "hierarchical",
+        "branch": "teacher",
+        "seeds": 3,
+        "base_mean": 81.38572905894519,
+        "novel_mean": 77.77176852352623,
+        "hm_of_means": 79.53771801684572,
+        "base_std": 0.4507651441096864,
+        "novel_std": 2.7428279790386045,
+        "mean_seed_hm": 79.5173590489971,
+        "seed_hm_std": 1.277477568525597
+      },
+      {
+        "variant": "hierarchical",
+        "branch": "ensemble",
+        "seeds": 3,
+        "base_mean": 82.76456394346778,
+        "novel_mean": 77.77176852352623,
+        "hm_of_means": 80.190526468958,
+        "base_std": 0.20896855658363162,
+        "novel_std": 0.9506974489587284,
+        "mean_seed_hm": 80.18791173096258,
+        "seed_hm_std": 0.45077410504427423
+      },
+      {
+        "variant": "hierarchical_adapter",
+        "branch": "student",
+        "seeds": 3,
+        "base_mean": 81.282316442606,
+        "novel_mean": 76.5999639444745,
+        "hm_of_means": 78.87170737035386,
+        "base_std": 1.085832471561531,
+        "novel_std": 1.782561989974127,
+        "mean_seed_hm": 78.85708129600677,
+        "seed_hm_std": 0.7273760089412327
+      },
+      {
+        "variant": "hierarchical_adapter",
+        "branch": "teacher",
+        "seeds": 3,
+        "base_mean": 80.81695966907962,
+        "novel_mean": 75.82477014602487,
+        "hm_of_means": 78.24131408714342,
+        "base_std": 0.7960084962947583,
+        "novel_std": 2.903925096518946,
+        "mean_seed_hm": 78.21097203268233,
+        "seed_hm_std": 1.189323773907825
+      },
+      {
+        "variant": "hierarchical_adapter",
+        "branch": "ensemble",
+        "seeds": 3,
+        "base_mean": 82.23026542571527,
+        "novel_mean": 79.14187849287903,
+        "hm_of_means": 80.65651873649395,
+        "base_std": 0.6943549492755485,
+        "novel_std": 2.476242988527958,
+        "mean_seed_hm": 80.63877699875948,
+        "seed_hm_std": 1.1711054526955327
+      }
+    ]
+  },
+  "kd_per_seed": [
+    {
+      "kd": 0,
+      "variant": "hierarchical",
+      "seed": 1,
+      "branch": "student",
+      "base": 85.88417786970011,
+      "novel": 67.38777717685235,
+      "hm": 75.51993239131953
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical",
+      "seed": 1,
+      "branch": "teacher",
+      "base": 81.1789038262668,
+      "novel": 76.58193618171985,
+      "hm": 78.81344485501485
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical",
+      "seed": 1,
+      "branch": "ensemble",
+      "base": 84.79834539813858,
+      "novel": 76.09518658734451,
+      "hm": 80.21137749591641
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical",
+      "seed": 1,
+      "branch": "student",
+      "base": 82.7300930713547,
+      "novel": 72.85018929150893,
+      "hm": 77.47643658719748
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical",
+      "seed": 1,
+      "branch": "teacher",
+      "base": 81.1789038262668,
+      "novel": 76.58193618171985,
+      "hm": 78.81344485501485
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical",
+      "seed": 1,
+      "branch": "ensemble",
+      "base": 82.8852119958635,
+      "novel": 76.6901027582477,
+      "hm": 79.6674026292422
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical",
+      "seed": 2,
+      "branch": "student",
+      "base": 83.19544984488108,
+      "novel": 65.81936181719848,
+      "hm": 73.49432387033356
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical",
+      "seed": 2,
+      "branch": "teacher",
+      "base": 81.90279214064115,
+      "novel": 75.82477014602487,
+      "hm": 78.7466730398682
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical",
+      "seed": 2,
+      "branch": "ensemble",
+      "base": 84.12616339193382,
+      "novel": 74.68902109248242,
+      "hm": 79.12720452276798
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical",
+      "seed": 2,
+      "branch": "student",
+      "base": 82.31644260599793,
+      "novel": 72.796106003245,
+      "hm": 77.26410964791775
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical",
+      "seed": 2,
+      "branch": "teacher",
+      "base": 81.90279214064115,
+      "novel": 75.82477014602487,
+      "hm": 78.7466730398682
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical",
+      "seed": 2,
+      "branch": "ensemble",
+      "base": 82.8852119958635,
+      "novel": 78.15035154137371,
+      "hm": 80.44817322057168
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical",
+      "seed": 3,
+      "branch": "student",
+      "base": 83.97104446742503,
+      "novel": 69.06435911303407,
+      "hm": 75.79169570583358
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical",
+      "seed": 3,
+      "branch": "teacher",
+      "base": 81.0754912099276,
+      "novel": 80.90859924283396,
+      "hm": 80.99195925210824
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical",
+      "seed": 3,
+      "branch": "ensemble",
+      "base": 84.2812823164426,
+      "novel": 76.85235262303948,
+      "hm": 80.39556521564073
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical",
+      "seed": 3,
+      "branch": "student",
+      "base": 82.47156153050672,
+      "novel": 72.63385613845321,
+      "hm": 77.24072602680204
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical",
+      "seed": 3,
+      "branch": "teacher",
+      "base": 81.0754912099276,
+      "novel": 80.90859924283396,
+      "hm": 80.99195925210824
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical",
+      "seed": 3,
+      "branch": "ensemble",
+      "base": 82.52326783867632,
+      "novel": 78.47485127095727,
+      "hm": 80.44815934307388
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "branch": "student",
+      "base": 84.69493278179938,
+      "novel": 55.54353704705246,
+      "hm": 67.08938199917047
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "branch": "teacher",
+      "base": 80.61013443640124,
+      "novel": 76.52785289345593,
+      "hm": 78.51596694974961
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "branch": "ensemble",
+      "base": 84.90175801447776,
+      "novel": 75.33802055164954,
+      "hm": 79.83448863200071
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "branch": "student",
+      "base": 82.36814891416753,
+      "novel": 76.25743645213629,
+      "hm": 79.19509159884261
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "branch": "teacher",
+      "base": 80.61013443640124,
+      "novel": 76.52785289345593,
+      "hm": 78.51596694974961
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "branch": "ensemble",
+      "base": 82.7300930713547,
+      "novel": 80.20551649540292,
+      "hm": 81.448246483923
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "branch": "student",
+      "base": 83.40227507755947,
+      "novel": 65.06219578150352,
+      "hm": 73.09944417435999
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "branch": "teacher",
+      "base": 81.69596690796277,
+      "novel": 72.63385613845321,
+      "hm": 76.8988519568267
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "branch": "ensemble",
+      "base": 83.91933815925543,
+      "novel": 73.93185505678746,
+      "hm": 78.60963504735855
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "branch": "student",
+      "base": 81.282316442606,
+      "novel": 75.01352082206598,
+      "hm": 78.02220255691181
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "branch": "teacher",
+      "base": 81.69596690796277,
+      "novel": 72.63385613845321,
+      "hm": 76.8988519568267
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "branch": "ensemble",
+      "base": 82.52326783867632,
+      "novel": 76.31151974040021,
+      "hm": 79.29592853931018
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "branch": "student",
+      "base": 82.7817993795243,
+      "novel": 69.3347755543537,
+      "hm": 75.46393261167978
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "branch": "teacher",
+      "base": 80.14477766287487,
+      "novel": 78.3126014061655,
+      "hm": 79.21809719147068
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "branch": "ensemble",
+      "base": 83.91933815925543,
+      "novel": 76.52785289345593,
+      "hm": 80.05333996103207
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "branch": "student",
+      "base": 80.19648397104447,
+      "novel": 78.5289345592212,
+      "hm": 79.35394973226589
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "branch": "teacher",
+      "base": 80.14477766287487,
+      "novel": 78.3126014061655,
+      "hm": 79.21809719147068
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "branch": "ensemble",
+      "base": 81.43743536711479,
+      "novel": 80.90859924283396,
+      "hm": 81.17215597304528
+    }
+  ],
+  "paired_kd_effects": [
+    {
+      "variant": "hierarchical",
+      "branch": "student",
+      "per_seed_differences": [
+        {
+          "seed": 1,
+          "base": -3.1540847983454086,
+          "novel": 5.462412114656573,
+          "hm": 1.9565041958779545
+        },
+        {
+          "seed": 2,
+          "base": -0.8790072388831476,
+          "novel": 6.976744186046517,
+          "hm": 3.7697857775841896
+        },
+        {
+          "seed": 3,
+          "base": -1.4994829369183122,
+          "novel": 3.569497025419139,
+          "hm": 1.4490303209684612
+        }
+      ],
+      "mean_delta_hm": 2.3917734314768686,
+      "std_delta_hm": 1.2200700606715447,
+      "positive_seeds": 3
+    },
+    {
+      "variant": "hierarchical",
+      "branch": "teacher",
+      "per_seed_differences": [
+        {
+          "seed": 1,
+          "base": 0.0,
+          "novel": 0.0,
+          "hm": 0.0
+        },
+        {
+          "seed": 2,
+          "base": 0.0,
+          "novel": 0.0,
+          "hm": 0.0
+        },
+        {
+          "seed": 3,
+          "base": 0.0,
+          "novel": 0.0,
+          "hm": 0.0
+        }
+      ],
+      "mean_delta_hm": 0.0,
+      "std_delta_hm": 0.0,
+      "positive_seeds": 0
+    },
+    {
+      "variant": "hierarchical",
+      "branch": "ensemble",
+      "per_seed_differences": [
+        {
+          "seed": 1,
+          "base": -1.9131334022750792,
+          "novel": 0.5949161709031898,
+          "hm": -0.5439748666742048
+        },
+        {
+          "seed": 2,
+          "base": -1.2409513960703151,
+          "novel": 3.461330448891289,
+          "hm": 1.3209686978036927
+        },
+        {
+          "seed": 3,
+          "base": -1.758014477766281,
+          "novel": 1.6224986479177943,
+          "hm": 0.05259412743315295
+        }
+      ],
+      "mean_delta_hm": 0.2765293195208803,
+      "std_delta_hm": 0.9524252476511776,
+      "positive_seeds": 2
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "branch": "student",
+      "per_seed_differences": [
+        {
+          "seed": 1,
+          "base": -2.326783867631846,
+          "novel": 20.71389940508383,
+          "hm": 12.105709599672139
+        },
+        {
+          "seed": 2,
+          "base": -2.1199586349534627,
+          "novel": 9.951325040562466,
+          "hm": 4.9227583825518195
+        },
+        {
+          "seed": 3,
+          "base": -2.585315408479829,
+          "novel": 9.194159004867501,
+          "hm": 3.8900171205861085
+        }
+      ],
+      "mean_delta_hm": 6.972828367603356,
+      "std_delta_hm": 4.4750967515166185,
+      "positive_seeds": 3
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "branch": "teacher",
+      "per_seed_differences": [
+        {
+          "seed": 1,
+          "base": 0.0,
+          "novel": 0.0,
+          "hm": 0.0
+        },
+        {
+          "seed": 2,
+          "base": 0.0,
+          "novel": 0.0,
+          "hm": 0.0
+        },
+        {
+          "seed": 3,
+          "base": 0.0,
+          "novel": 0.0,
+          "hm": 0.0
+        }
+      ],
+      "mean_delta_hm": 0.0,
+      "std_delta_hm": 0.0,
+      "positive_seeds": 0
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "branch": "ensemble",
+      "per_seed_differences": [
+        {
+          "seed": 1,
+          "base": -2.171664943123062,
+          "novel": 4.867495943753383,
+          "hm": 1.613757851922287
+        },
+        {
+          "seed": 2,
+          "base": -1.3960703205791134,
+          "novel": 2.3796646836127593,
+          "hm": 0.6862934919516306
+        },
+        {
+          "seed": 3,
+          "base": -2.4819027921406445,
+          "novel": 4.380746349378029,
+          "hm": 1.1188160120132125
+        }
+      ],
+      "mean_delta_hm": 1.1396224519623768,
+      "std_delta_hm": 0.4640821217322032,
+      "positive_seeds": 3
+    }
+  ],
+  "paired_protocol_audit": [
+    {
+      "variant": "hierarchical",
+      "seed": 1,
+      "only_kd_and_output_changed": true,
+      "train_samples_sha256": "7c98facec218325a2090b609092d8f7b0a131a3b1198575e2fddd5795b71cec2"
+    },
+    {
+      "variant": "hierarchical",
+      "seed": 2,
+      "only_kd_and_output_changed": true,
+      "train_samples_sha256": "103b1bfa5552937df705f16c011a9288bd23c1ea9badfd4a6d6d2e1fffac38ed"
+    },
+    {
+      "variant": "hierarchical",
+      "seed": 3,
+      "only_kd_and_output_changed": true,
+      "train_samples_sha256": "498ed441f612cf736682047f07a2346266fdc3f6d32cc88afe612349574f9a0e"
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "only_kd_and_output_changed": true,
+      "train_samples_sha256": "7c98facec218325a2090b609092d8f7b0a131a3b1198575e2fddd5795b71cec2"
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "only_kd_and_output_changed": true,
+      "train_samples_sha256": "103b1bfa5552937df705f16c011a9288bd23c1ea9badfd4a6d6d2e1fffac38ed"
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "only_kd_and_output_changed": true,
+      "train_samples_sha256": "498ed441f612cf736682047f07a2346266fdc3f6d32cc88afe612349574f9a0e"
+    }
+  ],
+  "parameter_isolation": [
+    {
+      "variant": "hierarchical",
+      "seed": 1,
+      "max_absolute_weight_differences": {
+        "prompt_learner.": 0.2642192840576172,
+        "view_aggregator.": 0.0
+      }
+    },
+    {
+      "variant": "hierarchical",
+      "seed": 2,
+      "max_absolute_weight_differences": {
+        "prompt_learner.": 0.3358749449253082,
+        "view_aggregator.": 0.0
+      }
+    },
+    {
+      "variant": "hierarchical",
+      "seed": 3,
+      "max_absolute_weight_differences": {
+        "prompt_learner.": 0.26164835691452026,
+        "view_aggregator.": 0.0
+      }
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "max_absolute_weight_differences": {
+        "prompt_learner.": 0.23045381903648376,
+        "view_aggregator.": 0.0
+      }
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "max_absolute_weight_differences": {
+        "prompt_learner.": 0.45791617035865784,
+        "view_aggregator.": 0.0
+      }
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "max_absolute_weight_differences": {
+        "prompt_learner.": 0.6301291584968567,
+        "view_aggregator.": 0.0
+      }
+    }
+  ],
+  "verified_tc_checkpoints": [
+    {
+      "kd": 0,
+      "variant": "hierarchical",
+      "seed": 1,
+      "sha256": "104ecf309584f17aaa3310f5e6420cc37e91c40fcc3df4080d9a27736625c1e4",
+      "path": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402/kd0/hierarchical/seed1/textconsistency/model.pth.tar-20"
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical",
+      "seed": 1,
+      "sha256": "23ff567b74b3dfff1d83bd5cd70f4e59cbed90a6e38df01ddc1f2a0f598a4659",
+      "path": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402/kd1/hierarchical/seed1/textconsistency/model.pth.tar-20"
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical",
+      "seed": 2,
+      "sha256": "9f6a2e7fbda0a5c433ef54712e280517d75c8f2d08f510cbb36555e23fd428d6",
+      "path": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402/kd0/hierarchical/seed2/textconsistency/model.pth.tar-20"
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical",
+      "seed": 2,
+      "sha256": "c03e3a20943d7b87e73d60285c5f03be452e1a3073d44ebaf1afcff11dc0d82c",
+      "path": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402/kd1/hierarchical/seed2/textconsistency/model.pth.tar-20"
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical",
+      "seed": 3,
+      "sha256": "8a894fdbdaf9a4adfd79ad7d3eaa63b25f6a9205e7d33c75ae474304d2e4c4d8",
+      "path": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402/kd0/hierarchical/seed3/textconsistency/model.pth.tar-20"
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical",
+      "seed": 3,
+      "sha256": "90caf06cab975d2d14ae204a0d6a01de60ae5f63930dcc62fc30c4eeb8370abd",
+      "path": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402/kd1/hierarchical/seed3/textconsistency/model.pth.tar-20"
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "sha256": "a55a3c7005d570c477f9d33211ea338d68fcc20fcafb74fc3b5f833a4ceb9fa1",
+      "path": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402/kd0/hierarchical_adapter/seed1/textconsistency/model.pth.tar-20"
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "sha256": "ae67d08ff3ce3ffd16cbb53c93c4880f7dfb3debe159bf6c3d87a13b2fd4216c",
+      "path": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402/kd1/hierarchical_adapter/seed1/textconsistency/model.pth.tar-20"
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "sha256": "b391a6866e8316a1e8350d5385fb7feaf7a22e8ac801024b24c4fcdf2feda177",
+      "path": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402/kd0/hierarchical_adapter/seed2/textconsistency/model.pth.tar-20"
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "sha256": "b76653fd4042226ef9c45aa7e146f97601b2a97f53ba5a741af38680fb05b012",
+      "path": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402/kd1/hierarchical_adapter/seed2/textconsistency/model.pth.tar-20"
+    },
+    {
+      "kd": 0,
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "sha256": "3da91c9cc8253bd52a934d9685a812442153e6efa2b6810bdbe67ebf31632c91",
+      "path": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402/kd0/hierarchical_adapter/seed3/textconsistency/model.pth.tar-20"
+    },
+    {
+      "kd": 1,
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "sha256": "1dcebd906fbfe314a527bb0281cda4a177fbb82532ba890e199335768ba141c2",
+      "path": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402/kd1/hierarchical_adapter/seed3/textconsistency/model.pth.tar-20"
+    }
+  ],
+  "official_matched20": {
+    "dataset": "UCF101",
+    "recipe": "matched20",
+    "seeds": [
+      {
+        "seed": 1,
+        "base": 83.04033092037228,
+        "new": 64.30502974580854,
+        "hm": 72.48156203620407
+      },
+      {
+        "seed": 2,
+        "base": 83.86763185108583,
+        "new": 70.09194159004868,
+        "hm": 76.36348973452567
+      },
+      {
+        "seed": 3,
+        "base": 83.76421923474663,
+        "new": 66.84694429421309,
+        "hm": 74.35547227489155
+      }
+    ],
+    "means": {
+      "base": 83.55739400206825,
+      "new": 67.08130521002344
+    },
+    "hm_of_means": 74.41831453569802,
+    "results": [
+      {
+        "seed": 1,
+        "split": "base",
+        "correct": 1606,
+        "total": 1934,
+        "accuracy": 83.04033092037228,
+        "checkpoint_sha256": "e8402920fd81ecd79fa5902aba05ef397bc8502a1cc2967bd2d783abede2d0ef"
+      },
+      {
+        "seed": 1,
+        "split": "new",
+        "correct": 1189,
+        "total": 1849,
+        "accuracy": 64.30502974580854,
+        "checkpoint_sha256": "e8402920fd81ecd79fa5902aba05ef397bc8502a1cc2967bd2d783abede2d0ef"
+      },
+      {
+        "seed": 2,
+        "split": "base",
+        "correct": 1622,
+        "total": 1934,
+        "accuracy": 83.86763185108583,
+        "checkpoint_sha256": "f7150412642812eef10a96bcb2b80b97a1021da2e44b180cc2b5643720d6672f"
+      },
+      {
+        "seed": 2,
+        "split": "new",
+        "correct": 1296,
+        "total": 1849,
+        "accuracy": 70.09194159004868,
+        "checkpoint_sha256": "f7150412642812eef10a96bcb2b80b97a1021da2e44b180cc2b5643720d6672f"
+      },
+      {
+        "seed": 3,
+        "split": "base",
+        "correct": 1620,
+        "total": 1934,
+        "accuracy": 83.76421923474663,
+        "checkpoint_sha256": "9b2a4f8964c375b9102cb74ba1f2b3f6ffad6da82c3fda0990a0c677157bef1b"
+      },
+      {
+        "seed": 3,
+        "split": "new",
+        "correct": 1236,
+        "total": 1849,
+        "accuracy": 66.84694429421309,
+        "checkpoint_sha256": "9b2a4f8964c375b9102cb74ba1f2b3f6ffad6da82c3fda0990a0c677157bef1b"
+      }
+    ]
+  },
+  "kd1_vs_previous_results": [
+    {
+      "variant": "hierarchical",
+      "seed": 1,
+      "branch": "student",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical",
+      "seed": 1,
+      "branch": "teacher",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical",
+      "seed": 1,
+      "branch": "ensemble",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical",
+      "seed": 2,
+      "branch": "student",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical",
+      "seed": 2,
+      "branch": "teacher",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical",
+      "seed": 2,
+      "branch": "ensemble",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical",
+      "seed": 3,
+      "branch": "student",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical",
+      "seed": 3,
+      "branch": "teacher",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical",
+      "seed": 3,
+      "branch": "ensemble",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "branch": "student",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "branch": "teacher",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "branch": "ensemble",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "branch": "student",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "branch": "teacher",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 2,
+      "branch": "ensemble",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "branch": "student",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "branch": "teacher",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "seed": 3,
+      "branch": "ensemble",
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    }
+  ],
+  "official_vs_previous_baseline": [
+    {
+      "seed": 1,
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "seed": 2,
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    },
+    {
+      "seed": 3,
+      "base_difference": 0.0,
+      "novel_difference": 0.0
+    }
+  ],
+  "limitations": [
+    "3 seeds on one dataset do not establish cross-dataset novelty or publication readiness.",
+    "The 200-epoch upstream reference has not been run in this batch.",
+    "Official entry keeps upstream cuDNN/RNG behavior; see provenance for environment adaptations.",
+    "Concurrent KD jobs make elapsed time unsuitable for method efficiency comparisons."
+  ]
+}

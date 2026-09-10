@@ -4,8 +4,57 @@ import argparse
 import csv
 import json
 import math
+import copy
 from pathlib import Path
 from statistics import mean, stdev
+import yaml
+
+VARIANTS = {
+    'baseline': ('CoOp_TextConsistency_Ablation', 'none', False, None, 'baseline'),
+    'mean': ('CoOp_TextConsistency_V2_FG', 'mean', False, 4, None),
+    'flat': ('CoOp_TextConsistency_V2_FG', 'flat', False, 4, None),
+    'flat_adapter': ('CoOp_TextConsistency_V2_FG', 'flat', True, 4, None),
+    'hierarchical': ('CoOp_TextConsistency_V2_FG', 'hierarchical', False, 4, None),
+    'hierarchical_adapter': ('CoOp_TextConsistency_V2_FG', 'hierarchical', True, 4, None),
+}
+
+
+def _read_config(path):
+    data = yaml.safe_load(path.read_text())
+    if not isinstance(data, dict):
+        raise ValueError(f'Invalid effective configuration: {path}')
+    return data
+
+
+def _comparable_config(data):
+    data = copy.deepcopy(data)
+    for field in ('OUTPUT_DIR', 'MODEL_DIR', 'RESUME', 'EVAL_ONLY', 'LOAD_EPOCH'):
+        data.pop(field, None)
+    data.get('DATASET', {}).pop('SUBSAMPLE_CLASSES', None)
+    data.get('TRAINER', {}).get('TEXTCONSISTENCY', {}).pop('INFERENCE_BRANCH', None)
+    return data
+
+
+def _validate_config(data, variant, kd, fixed, dataset, shots, epochs, path):
+    trainer, aggregation, adapter, _, _ = VARIANTS[variant]
+    tc = data.get('TRAINER', {}).get('TEXTCONSISTENCY', {})
+    expected = {'N_CTX': fixed['n_ctx'], 'N_VIEWS': fixed['n_views'], 'N_GROUPS': fixed['n_groups'],
+                'KD_WEIGHT': kd, 'KD_TEMP': fixed['kd_temp'],
+                'ADAPTIVE_CE_WEIGHT': fixed['adaptive_ce_weight'],
+                'CONTRASTIVE_WEIGHT': fixed['contrastive_weight'],
+                'DIVERSITY_WEIGHT': fixed['diversity_weight'], 'ENSEMBLE_ALPHA': fixed['ensemble_alpha'],
+                'AGGREGATION': 'mean' if variant == 'baseline' else aggregation,
+                'USE_FEATURE_ADAPTER': adapter,
+                'ABLATION_GROUP': 'baseline' if variant == 'baseline' else 'full'}
+    if data.get('TRAINER', {}).get('NAME') != trainer:
+        raise ValueError(f'Trainer differs from variant protocol: {path}')
+    if data.get('DATASET', {}).get('NAME') != dataset or data.get('DATASET', {}).get('NUM_SHOTS') != shots:
+        raise ValueError(f'Dataset configuration differs from protocol: {path}')
+    if data.get('OPTIM', {}).get('MAX_EPOCH') != epochs:
+        raise ValueError(f'Training epoch configuration differs from protocol: {path}')
+    for field, value in expected.items():
+        if tc.get(field) != value:
+            raise ValueError(f'Effective configuration differs from protocol: {field} in {path}')
 
 
 def read_metric(path, seed, split, branch, epochs, dataset='UCF101', kd_weight=None,
@@ -45,6 +94,7 @@ def collect(root):
     expected_code = protocol.get('code_sha256')
     fixed_settings = protocol.get('fixed_settings')
     observed_code = None
+    seed_samples = {}
     rows = []
     for variant in protocol['variants']:
         branches = ['student'] if variant == 'baseline' else ['student', 'teacher', 'ensemble']
@@ -78,9 +128,28 @@ def collect(root):
                     if manifest.get('model_signature') != base.get('model_signature'):
                         raise ValueError(f'Training/evaluation model signature mismatch: {manifest_path}')
                     signature = manifest['model_signature']
-                    for field in ('n_ctx', 'n_views', 'n_groups'):
-                        if signature.get(field) != fixed_settings[field]:
-                            raise ValueError(f'Training model setting differs from protocol: {field}')
+                    trainer, aggregation, adapter, n_groups, ablation = VARIANTS[variant]
+                    expected_signature = {'trainer': trainer, 'aggregation': aggregation,
+                                          'feature_adapter': adapter, 'n_groups': n_groups,
+                                          'ablation_group': ablation, 'n_ctx': fixed_settings['n_ctx'],
+                                          'n_views': fixed_settings['n_views']}
+                    for field, value in expected_signature.items():
+                        if signature.get(field) != value:
+                            raise ValueError(f'Model signature differs from variant: {field}')
+                    sample = manifest['train_samples_sha256']
+                    if seed in seed_samples and seed_samples[seed] != sample:
+                        raise ValueError('The same seed used different training samples across variants')
+                    seed_samples[seed] = sample
+                    train_config = _read_config(directory / 'effective_config.yaml')
+                    _validate_config(train_config, variant, kd, fixed_settings, dataset, shots,
+                                     protocol['epochs'], directory / 'effective_config.yaml')
+                    for metric, split_name, branch_name in ((base, 'base', branch), (novel, 'new', branch)):
+                        eval_path = directory / f'eval_{split_name}_{branch_name}/effective_config.yaml'
+                        eval_config = _read_config(eval_path)
+                        _validate_config(eval_config, variant, kd, fixed_settings, dataset, shots,
+                                         protocol['epochs'], eval_path)
+                        if _comparable_config(eval_config) != _comparable_config(train_config):
+                            raise ValueError(f'Train/evaluation non-runtime settings differ: {eval_path}')
                 b, n = float(base['metrics']['accuracy']), float(novel['metrics']['accuracy'])
                 bases.append(b); novels.append(n); hms.append(2*b*n/(b+n) if b+n else 0.)
                 train_hashes.append(base['train_samples_sha256'])

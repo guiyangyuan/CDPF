@@ -14,7 +14,86 @@ def module(name):
     return result
 
 
+def write_new_run(root, variants=('baseline',), sample_by_variant=None):
+    fixed = {'n_ctx': 4, 'n_views': 20, 'n_groups': 4, 'kd_temp': 2.0,
+             'adaptive_ce_weight': 1.0, 'contrastive_weight': 0.0,
+             'diversity_weight': 0.0, 'ensemble_alpha': 0.5}
+    (root / 'protocol.json').write_text(json.dumps(
+        {'dataset': 'UCF101', 'seeds': [1], 'epochs': 20, 'variants': list(variants),
+         'shots': 16, 'kd_weight': 1.0, 'code_sha256': 'code', 'fixed_settings': fixed}))
+    for variant in variants:
+        aggregation = {'baseline': 'none', 'mean': 'mean', 'flat': 'flat',
+                       'flat_adapter': 'flat', 'hierarchical': 'hierarchical',
+                       'hierarchical_adapter': 'hierarchical'}[variant]
+        adapter = variant.endswith('_adapter')
+        trainer = 'CoOp_TextConsistency_Ablation' if variant == 'baseline' else 'CoOp_TextConsistency_V2_FG'
+        signature = {'trainer': trainer, 'n_ctx': 4, 'n_views': 20,
+                     'n_groups': None if variant == 'baseline' else 4,
+                     'aggregation': aggregation, 'feature_adapter': adapter,
+                     'ablation_group': 'baseline' if variant == 'baseline' else None}
+        kd = 0.0 if variant == 'baseline' else 1.0
+        sample = (sample_by_variant or {}).get(variant, 'samples1')
+        directory = root / variant / 'seed1'; directory.mkdir(parents=True)
+        manifest = {'dataset': 'UCF101', 'seed': 1, 'shots': 16, 'code_sha256': 'code',
+                    'train_samples_sha256': sample, 'effective_losses': {'kd': kd},
+                    'model_signature': signature}
+        (directory / 'run_manifest.json').write_text(json.dumps(manifest))
+        config = {'DATASET': {'NAME': 'UCF101', 'NUM_SHOTS': 16, 'SUBSAMPLE_CLASSES': 'base'},
+                  'OPTIM': {'MAX_EPOCH': 20},
+                  'TRAINER': {'NAME': trainer, 'TEXTCONSISTENCY': {
+                      'N_CTX': 4, 'N_VIEWS': 20, 'N_GROUPS': 4, 'KD_WEIGHT': kd, 'KD_TEMP': 2.0,
+                      'ADAPTIVE_CE_WEIGHT': 1.0, 'CONTRASTIVE_WEIGHT': 0.0, 'DIVERSITY_WEIGHT': 0.0,
+                      'ENSEMBLE_ALPHA': 0.5, 'AGGREGATION': 'mean' if variant == 'baseline' else aggregation,
+                      'USE_FEATURE_ADAPTER': adapter, 'ABLATION_GROUP': 'baseline' if variant == 'baseline' else 'full',
+                      'INFERENCE_BRANCH': 'student' if variant == 'baseline' else 'ensemble'}}}
+        import yaml
+        (directory / 'effective_config.yaml').write_text(yaml.safe_dump(config))
+        branches = ('student',) if variant == 'baseline' else ('student', 'teacher', 'ensemble')
+        for split in ('base', 'new'):
+            for branch in branches:
+                target = directory / f'eval_{split}_{branch}'; target.mkdir()
+                eval_config = json.loads(json.dumps(config)); eval_config['DATASET']['SUBSAMPLE_CLASSES'] = split
+                eval_config['TRAINER']['TEXTCONSISTENCY']['INFERENCE_BRANCH'] = branch
+                (target / 'effective_config.yaml').write_text(yaml.safe_dump(eval_config))
+                payload = {**manifest, 'subsample': split, 'branch': branch, 'ensemble_alpha': 0.5,
+                           'state': 'loaded_checkpoint', 'checkpoints': [{'epoch': 20, 'sha256': 'checkpoint'}],
+                           'effective_losses': {'kd': kd, 'adaptive_ce': 1.0, 'contrastive': 0.0, 'diversity': 0.0},
+                           'metrics': {'accuracy': 70.0}}
+                (target / 'metrics.json').write_text(json.dumps(payload))
+    return root
+
+
 class RunnerBehavior(unittest.TestCase):
+    def test_new_protocol_realistic_baseline_collects(self):
+        with tempfile.TemporaryDirectory() as temp:
+            rows = module('summarize').collect(write_new_run(Path(temp)))
+            self.assertEqual(rows[0]['variant'], 'baseline')
+
+    def test_new_protocol_rejects_variant_kd_temp_and_eval_config_drift(self):
+        import yaml
+        mutations = [('flat', 'signature', 'aggregation', 'hierarchical'),
+                     ('hierarchical', 'signature', 'aggregation', 'flat'),
+                     ('flat_adapter', 'signature', 'feature_adapter', False),
+                     ('flat', 'config', 'KD_TEMP', 3.0),
+                     ('flat', 'eval_config', 'N_VIEWS', 19)]
+        for variant, location, field, value in mutations:
+            with self.subTest(variant=variant, location=location, field=field), tempfile.TemporaryDirectory() as temp:
+                root = write_new_run(Path(temp), (variant,))
+                if location == 'signature':
+                    path = root / variant / 'seed1/run_manifest.json'; data = json.loads(path.read_text())
+                    data['model_signature'][field] = value; path.write_text(json.dumps(data))
+                else:
+                    path = (root / variant / 'seed1/effective_config.yaml' if location == 'config'
+                            else root / variant / 'seed1/eval_base_student/effective_config.yaml')
+                    data = yaml.safe_load(path.read_text()); data['TRAINER']['TEXTCONSISTENCY'][field] = value
+                    path.write_text(yaml.safe_dump(data))
+                with self.assertRaises(ValueError): module('summarize').collect(root)
+
+    def test_new_protocol_requires_same_seed_samples_across_variants(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = write_new_run(Path(temp), ('baseline', 'flat'), {'baseline': 'a', 'flat': 'b'})
+            with self.assertRaises(ValueError): module('summarize').collect(root)
+
     def test_dataset_commands_and_kd_are_explicit(self):
         runner = module('run_pilot')
         for key, display in [('ucf101', 'UCF101'), ('dtd', 'DescribableTextures'),

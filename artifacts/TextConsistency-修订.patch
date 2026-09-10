@@ -1,0 +1,3903 @@
+--- a/.gitignore
++++ b/.gitignore
+@@ -12,3 +12,11 @@
+ 
+ # OS metadata
+ .DS_Store
++
++# Local reproduction assets and generated experiment outputs
++.venv/
++data/
++runs/
++verification/**/fixture/
++verification/**/events.out.tfevents.*
++clip/*.part
+--- a/Dassl.pytorch/dassl/optim/lr_scheduler.py
++++ b/Dassl.pytorch/dassl/optim/lr_scheduler.py
+@@ -19,7 +19,7 @@
+     ):
+         self.successor = successor
+         self.warmup_epoch = warmup_epoch
+-        super().__init__(optimizer, last_epoch, verbose)
++        super().__init__(optimizer, last_epoch=last_epoch)
+ 
+     def get_lr(self):
+         raise NotImplementedError
+--- a/README.md
++++ b/README.md
+@@ -1,259 +1,117 @@
+-# TextConsistency
++# TextConsistency：复现修订版
+ 
+-Official research implementation of **TextConsistency**, a multi-view textual
+-consistency framework for improving prompt learning with vision-language
+-models.
++2026-09-10。本版本从当前工作文件复制并修订；原目录 `/Users/bytedance/Documents/textConsistency` 保留。旧论文数字尚未由此版本复现，现阶段没有可用于证明性能提升的新实验结果。
+ 
+-> **Status:** This repository is being prepared for public reproducibility.
+-> The core training implementations are available, but the full paper results
+-> have not yet been re-verified from a clean environment. See
+-> [Reproducibility Status](#reproducibility-status) before using the code.
++本地已完成官方 CLIP ViT-B/16、真实 UCF101 图像上的训练流程验证。完整数据集训练、GPU 显存/耗时、三种子准确率仍待验证。具体证据见 `verification/` 和 [方法与实验边界](REPRO_METHOD.md)。
+ 
+-## Overview
++## 当前修复
+ 
+-TextConsistency extends CoOp and CoCoOp with multiple class descriptions. The
+-current implementation includes:
++- Base 与 Novel 使用同一个已保存模型、同一预测分支规则；分别记录 student、teacher、ensemble。
++- 保存 soft prompt 与整个视图聚合器，检查实际加载文件、epoch、代码、模板、CLIP、seed 与采样信息。缺失、旧式不完整或配置不匹配的模型直接报错。
++- mean / flat / hierarchical 聚合统一实现，MLP 独立开关。非整除分组不丢弃尾部描述；重复文本、token 截断后重复文本与 padding 不再被当作额外视图。
++- 训练可学习的聚合器使用 adaptive CE；KD 对 teacher 停止梯度。拒绝启用旧的冻结特征对比损失。
++- 删除按数据集暗改损失或预测分支的路径；记录实际参数与机器可读指标。
++- 修复缺失的 `imagenet_templates.py` 依赖和 PyTorch 2.8 学习率预热 API 兼容问题。
+ 
+-- dataset-specific multi-view textual descriptions;
+-- fixed averaging and adaptive view aggregation variants;
+-- hierarchical view aggregation for fine-grained recognition;
+-- classification supervision for both prompt and adaptive branches;
+-- optional knowledge distillation, attention diversity, and contrastive losses;
+-- base-to-new class evaluation on the prompt-learning benchmark datasets.
++`docs/history/README-original.md`、原有中文论文说明、旧结果文件和旧 shell 脚本用于历史追溯。此次实验入口是 `scripts/repro/`。旧的 `CoOp_TextConsistency`、`CoOp_TextConsistency_Avg`、`CoOp_TextConsistency_V2` 已被主入口拒绝，避免误用未经修复的训练实现。
+ 
+-The primary implementations are:
++## 环境
+ 
+-- `CoOp_TextConsistency_V2_FG`
+-- `CoCoOp_TextConsistency_V2_FG`
++本地验证环境：Python 3.12.14、PyTorch 2.8.0、torchvision 0.23.0、FP32、CPU。当前环境未检测到可用 CUDA/MPS。
+ 
+-Earlier variants are retained for ablation studies.
++在服务器上先进入本项目目录，创建独立环境。下面 CUDA 12.6 命令来自 [PyTorch 官方历史版本安装说明](https://pytorch.org/get-started/previous-versions/)，需要服务器驱动支持；该 GPU 环境尚未在本次工作中实际测试。
+ 
+-## Repository Structure
+-
+-```text
+-.
+-|-- clip/                 # CLIP model and tokenizer
+-|-- configs/              # dataset and trainer configurations
+-|-- Dassl.pytorch/        # vendored Dassl training framework
+-|-- datasets/             # dataset loaders
+-|-- docs/                 # dataset preparation and baseline documentation
+-|-- scripts/              # experiment scripts
+-|-- templates/            # multi-view descriptions for each dataset
+-|-- trainers/             # CoOp, CoCoOp, and TextConsistency trainers
+-|-- tests/                # lightweight implementation contract tests
+-`-- train.py              # main entry point
++```bash
++python3.12 -m venv .venv
++source .venv/bin/activate
++python -m pip install --upgrade pip
++python -m pip install torch==2.8.0 torchvision==0.23.0 --index-url https://download.pytorch.org/whl/cu126
++python -m pip install -r requirements.lock.txt
++python -m pip check
++export PYTHONPATH="$PWD:$PWD/Dassl.pytorch"
++export CUBLAS_WORKSPACE_CONFIG=:4096:8
++python -c 'import torch; print(torch.__version__, torch.cuda.is_available()); print(torch.cuda.get_device_name(0) if torch.cuda.is_available() else "CPU only")'
+ ```
+ 
+-## Installation
++`requirements.lock.txt` 是本地验证环境的完整版本快照，不是跨平台二进制锁文件。先安装目标平台的 torch/torchvision，再安装其余固定版本；如平台需要调整依赖，保存新的 `pip freeze` 并重新验证。`requirements.txt` 另列直接运行依赖。不要额外安装 vendored Dassl 的旧 requirements，它含有不同版本的依赖。
+ 
+-The code is intended for Linux with an NVIDIA GPU. A CUDA-compatible PyTorch
+-installation is required.
++macOS CPU 验证可将上面的 PyTorch 安装命令换为：
+ 
+ ```bash
+-conda create -n textconsistency python=3.10 -y
+-conda activate textconsistency
+-
+-# Install PyTorch for your CUDA version first:
+-# https://pytorch.org/get-started/locally/
+-
+-pip install -r requirements.txt
+-pip install -e Dassl.pytorch
++python -m pip install torch==2.8.0 torchvision==0.23.0
+ ```
+ 
+-The dependency list is currently provisional. The experiments were developed
+-around the CoOp/Dassl codebase and have not yet been validated against every
+-recent package release.
++本次已有环境位于工作区 `work/tc-venv`。从本项目目录可使用 `../../work/tc-venv/bin/python`，无需再次安装。
+ 
+-## CLIP Checkpoint
++## 准备数据与权重
+ 
+-Download the OpenAI CLIP ViT-B/16 checkpoint and place it at:
++在本项目根目录运行，`/absolute/...` 替换为真实服务器路径：
+ 
+-```text
+-clip/ViT-B-16.pt
++```bash
++python scripts/repro/prepare_assets.py --ucf-zip /absolute/datasets/ucf101.zip --data-root /absolute/datasets-prepared --download-clip
++python scripts/repro/preflight.py --data-root /absolute/datasets-prepared --output verification/server-data-preflight.json
+ ```
+ 
+-The checkpoint is intentionally excluded from version control. The current
+-TextConsistency trainers load this exact local path.
++脚本只接受已核验的作者 UCF101 midframes ZIP，校验 SHA-256 后解压；官方 CLIP 权重校验后保存到 `clip/ViT-B-16.pt`。已有文件校验失败时不会覆盖。UCF101 是动作中间帧分类数据，不是完整视频训练集。
+ 
+-## Dataset Preparation
++本机数据已准备在：
+ 
+-Prepare datasets under a common root directory:
++`/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/datasets-prepared`
+ 
+-```text
+-/path/to/data/
+-|-- caltech-101/
+-|-- dtd/
+-|-- eurosat/
+-|-- fgvc_aircraft/
+-|-- food-101/
+-|-- imagenet/
+-|-- oxford_flowers/
+-|-- oxford_pets/
+-|-- stanford_cars/
+-|-- sun397/
+-`-- ucf101/
++其原始 train / val / test 分别有 7639 / 1898 / 3783 张图像。当前 Base/Novel 为 51/50 类，16-shot Base 训练每个 seed 为 816 张图像。seed 1、2、3 的实际采样哈希互不相同；检查报告是 `verification/ucf101-preflight.json`。文件路径无交叉已核验，尚未额外做图像内容级重复检测。
++
++## 先验证，再跑 pilot
++
++```bash
++python -B -m unittest discover -s tests -v
++python -B scripts/repro/smoke_real.py --data-root /absolute/datasets-prepared --output verification/server-real-smoke --stage train
++python -B scripts/repro/smoke_real.py --data-root /absolute/datasets-prepared --output verification/server-real-smoke --stage reload
++python -B scripts/repro/smoke_cli.py --data-root /absolute/datasets-prepared --output verification/server-cli-smoke
+ ```
+ 
+-Detailed download instructions and expected directory layouts are provided in
+-[`docs/DATASETS.md`](docs/DATASETS.md).
++两个 smoke 脚本使用 CPU：第一个以真实 CLIP/图像检查梯度及独立进程加载后 logits 一致；第二个构造明确标注的 4 类、1-shot 验证划分，调用正常训练/评估命令，检查训练→保存→Base→Novel 完整流程。它们的准确率均不能填写进论文。每次使用新的 output 路径。
+ 
+-The repository contains configurations for 11 prompt-learning datasets and
+-four ImageNet distribution-shift datasets:
+-
+-- Caltech101, OxfordPets, StanfordCars, OxfordFlowers, Food101
+-- FGVCAircraft, SUN397, DTD, EuroSAT, UCF101, ImageNet
+-- ImageNetV2, ImageNet-Sketch, ImageNet-A, ImageNet-R
+-
+-## Quick Start
+-
+-Run commands from the repository root. The editable Dassl installation above
+-is recommended; alternatively, add it to `PYTHONPATH`:
++先打印正式 pilot 将执行的全部命令，随后启动单种子 GPU 实验：
+ 
+ ```bash
+-export PYTHONPATH="$PWD/Dassl.pytorch:$PYTHONPATH"
++python scripts/repro/run_pilot.py --data-root /absolute/datasets-prepared --output-root runs/ucf101-pilot-s1 --seeds 1 --plan-only
++python scripts/repro/run_pilot.py --data-root /absolute/datasets-prepared --output-root runs/ucf101-pilot-s1 --seeds 1
+ ```
+ 
+-The following example trains the CoOp-based final variant on the base classes
+-of Caltech101:
++默认 6 个变体、20 epochs、1 个 seed，共 6 次训练和 32 次独立评估。默认要求 CUDA，未检测到 GPU 会停止。服务器首次正式训练若显存不足，应记录后统一调整所有变体的 batch size 并重新生成实验协议；本次不能保证 24GB 显存下的正式配置已通过。
++
++| 变体 | 描述聚合 | 全局图像 MLP 查询适配 | KD |
++|---|---|---|---|
++| baseline | 无多描述分支 | 无 | 无 |
++| mean | 均值 | 无 | 有 |
++| flat | 单层注意力 | 无 | 有 |
++| flat_adapter | 单层注意力 | 有 | 有 |
++| hierarchical | 顺序分组的两层注意力 | 无 | 有 |
++| hierarchical_adapter | 顺序分组的两层注意力 | 有 | 有 |
++
++这是一组受控的 CoOp 实现比较；baseline 是本仓库共享训练路径下的 CoOp 风格基线，不能声称已经复现官方论文的原始协议或数字。CoCoOp 修订通过小型模型的行为测试，尚未开展真实 CLIP 的完整训练。
++
++固定项：同一描述文件、最多 20 条有效描述、同一数据划分与实际 seed、16-shot、ViT-B/16、4 个 context token、FP32、SGD 0.002、20 epochs、最后一个 epoch、KD 温度 2、KD 权重 1、adaptive CE 权重 1、对比/负熵权重 0、ensemble alpha 0.5。Base 和 Novel 都遵守同一预测规则。各变体的 student、teacher、ensemble 单独报告，baseline 只有 student。
++
++单种子结果只用于流程、耗时与早期可行性检查，不作为投稿结论。根据 Base 验证集检查或选择超参数，不能用 Novel 测试结果选模型/调参；需要在最终测试前固定正式协议。
++
++确认首轮可行后，用全新目录跑三种子：
+ 
+ ```bash
+-python train.py \
+-  --root /path/to/data \
+-  --seed 1 \
+-  --trainer CoOp_TextConsistency_V2_FG \
+-  --dataset-config-file configs/datasets/caltech101.yaml \
+-  --config-file configs/trainers/CoOp/vit_b16.yaml \
+-  --output-dir output/caltech101/seed1 \
+-  TRAINER.TEXTCONSISTENCY.N_CTX 4 \
+-  TRAINER.TEXTCONSISTENCY.N_VIEWS 20 \
+-  TRAINER.TEXTCONSISTENCY.ADAPTIVE_CE_WEIGHT 1.0 \
+-  TRAINER.TEXTCONSISTENCY.KD_WEIGHT 5.0 \
+-  TRAINER.TEXTCONSISTENCY.KD_TEMP 1.0 \
+-  TRAINER.TEXTCONSISTENCY.CONTRASTIVE_WEIGHT 0.0 \
+-  TRAINER.TEXTCONSISTENCY.DIVERSITY_WEIGHT 0.0 \
+-  TRAINER.TEXTCONSISTENCY.N_GROUPS 4 \
+-  TRAINER.TEXTCONSISTENCY.PREC fp32 \
+-  DATASET.NUM_SHOTS 16 \
+-  DATASET.SUBSAMPLE_CLASSES base \
+-  OPTIM.MAX_EPOCH 50
++python scripts/repro/run_pilot.py --data-root /absolute/datasets-prepared --output-root runs/ucf101-s123 --seeds 1 2 3
++python scripts/repro/summarize.py --root runs/ucf101-s123
+ ```
+ 
+-To use the CoCoOp-based implementation, select
+-`CoCoOp_TextConsistency_V2_FG` and a configuration under
+-`configs/trainers/CoCoOp/`.
++汇总器要求协议列出的运行齐全，拒绝缺失 seed、伪装的种子目录、非 16-shot、不同 Base/Novel checkpoint，以及不一致的代码/模型签名。输出 `results.csv` 与 `results.json`，记录 Base/Novel 均值、样本标准差、均值的调和平均及每 seed HM 的均值。一个 seed 时标准差为空。
+ 
+-The shell scripts under `scripts/` record existing experiment configurations.
+-Most contain machine-specific `DATA` paths and must be edited before use.
++每个运行目录保存 `effective_config.yaml`、`run_manifest.json`、完整 checkpoint、SHA-256 及 `metrics.json`。`train_samples_sha256` 是有序路径/标签/类名的哈希，不是逐张图像内容哈希。代码哈希覆盖训练入口、trainers、datasets、CLIP 和 Dassl Python 源码；脚本与配置另行保存在交付包及实验协议中。
+ 
+-## Paper Table 4.3 Ablation
++本版本明确拒绝自动恢复旧训练目录。中断后保留已有产物，在新目录重跑尚需验证的实验；汇总必须对应一套完整协议。只加载自己保存且信任的实验 checkpoint。
+ 
+-The paper ablation uses exactly five groups:
++## 接下来要完成的投稿工作
+ 
+-| Group | Description |
+-| --- | --- |
+-| `baseline` | CoOp-style prompt learner without TextConsistency modules |
+-| `single_view_kd` | Single textual view with KD, no adaptive aggregation, no FG |
+-| `no_kd` | Multi-view adaptive aggregation without KD or FG |
+-| `v2_no_fg` | Multi-view adaptive aggregation with KD, no FG |
+-| `full` | Full TextConsistency V2 + FG configuration |
+-
+-Run one paper dataset:
+-
+-```bash
+-DATA_ROOT=/path/to/data bash scripts/ablation/run_table_4_3.sh caltech101 all
+-```
+-
+-Run all three Table 4.3 datasets:
+-
+-```bash
+-DATA_ROOT=/path/to/data bash scripts/ablation/run_all_table_4_3.sh
+-```
+-
+-Summaries are written to:
+-
+-```text
+-output/ablation/table_4_3/table_4_3_results.csv
+-output/ablation/table_4_3/table_4_3_results.md
+-```
+-
+-The summarizer reports missing runs explicitly rather than silently treating
+-them as zero-valued results.
+-
+-## Available Trainers
+-
+-| Trainer | Purpose |
+-| --- | --- |
+-| `ZeroshotCLIP` | Zero-shot CLIP baseline |
+-| `CoOp` | CoOp baseline |
+-| `CoCoOp` | CoCoOp baseline |
+-| `CoOp_TextConsistency` | Initial multi-view consistency variant |
+-| `CoOp_TextConsistency_Avg` | Fixed-average ablation |
+-| `CoOp_TextConsistency_V2` | Adaptive view aggregation |
+-| `CoOp_TextConsistency_V2_FG` | CoOp with hierarchical fine-grained aggregation |
+-| `CoCoOp_TextConsistency_V2_FG` | CoCoOp with hierarchical fine-grained aggregation |
+-| `CoOp_TextConsistency_Ablation` | Controlled five-group Table 4.3 ablation |
+-
+-## Main Configuration Options
+-
+-| Option | Description |
+-| --- | --- |
+-| `N_CTX` | Number of learnable context tokens |
+-| `N_VIEWS` | Maximum number of textual descriptions per class |
+-| `ADAPTIVE_CE_WEIGHT` | Classification-loss weight for the adaptive branch |
+-| `KD_WEIGHT` | Knowledge-distillation loss weight |
+-| `KD_TEMP` | Distillation temperature |
+-| `CONTRASTIVE_WEIGHT` | Optional supervised image-feature contrastive weight |
+-| `DIVERSITY_WEIGHT` | Attention-diversity regularization weight |
+-| `N_GROUPS` | Number of groups in hierarchical view aggregation |
+-| `PREC` | Numerical precision: `fp16`, `fp32`, or `amp` |
+-
+-Command-line values override the defaults in `train.py` and the selected YAML
+-configuration.
+-
+-## Reproducibility Status
+-
+-The repository currently has the following limitations:
+-
+-1. Published result tables are not included because they have not yet been
+-   reproduced from the cleaned public repository.
+-2. Several experiment scripts contain local filesystem paths and historical
+-   hyperparameter choices.
+-3. GPU end-to-end training has not yet been validated in a clean environment.
+-4. The optional fine-grained contrastive term currently operates on image
+-   features; its exact correspondence with the paper formulation is under
+-   review.
+-
+-Until these items are resolved, treat the repository as a transparent research
+-release rather than a fully verified reproduction package.
+-
+-## Verification
+-
+-Lightweight static checks can be run without datasets:
+-
+-```bash
+-python -m unittest discover -s tests
+-python -m compileall train.py trainers datasets clip
+-```
+-
+-Full verification requires the CLIP checkpoint, prepared datasets, PyTorch,
+-and a CUDA-capable environment.
+-
+-## Acknowledgements
+-
+-This code builds on:
+-
+-- [CLIP](https://github.com/openai/CLIP)
+-- [CoOp and CoCoOp](https://github.com/KaiyangZhou/CoOp)
+-- [Dassl.pytorch](https://github.com/KaiyangZhou/Dassl.pytorch)
+-
+-Please also cite these projects when using this implementation.
+-
+-## Citation
+-
+-The paper citation will be added after the manuscript metadata is finalized.
+-
+-## License
+-
+-Licensing information for the cleaned top-level release is being finalized.
+-The vendored Dassl code and upstream components remain subject to their
+-respective licenses.
++1. 在可用 GPU 上完成上述首轮，得到真实显存、耗时、全部分支指标。
++2. 检查完整模块相对 mean/flat 的贡献，以及 teacher 与 student 各自效果。若仅 ensemble 变好，不能将其解释为 student 蒸馏能力改善。
++3. 有稳定贡献后，扩大到代表性数据集并运行 3 个 seed，补真正独立的 KD/MLP/层级消融；不要把当前 6 组误称为所有损失项的完整消融。
++4. 新结果替换论文中的占位或无法溯源数字，方法表述按 `REPRO_METHOD.md` 修订。
++5. 确認学校认可的期刊要求与投稿费用上限后，再选择刊物和倒排投稿时间；当前没有承诺录用结果。
+--- /dev/null
++++ b/REPRO_METHOD.md
+@@ -0,0 +1,46 @@
++# 方法与实验表述边界
++
++2026-09-10。描述本次修订代码实际执行的算法，不代表已验证创新性或准确率提升。论文 PDF/Overleaf 尚未修改。
++
++## 计算路径
++
++冻结 CLIP 图像/文本编码器及 logit scale。图像生成归一化全局向量 v；共享可学习 soft context 与类别名经文本编码器得到 student 类别向量 s_c，student logits 为 exp(logit_scale) · vᵀs_c。冻结文本编码器参数并不切断 soft context 的梯度。
++
++每类文本描述来自仓库 JSON。先按原有顺序规范空白、去重并取最多 N_VIEWS 条，再对 CLIP 77-token 截断后相同的 token 序列去重。不足的视图使用零 padding 和布尔 mask，不重复首条描述。描述向量预先编码并冻结。
++
++- mean：对有效描述向量求均值，再归一化。
++- flat：图像查询与每条描述的可学习 key 做注意力，mask 后加权、归一化。
++- hierarchical：将描述按顺序分成连续块，先组内注意力，再组间注意力，最后归一化。采用向上取整的块长度与 mask；不丢弃非整除尾部。分组是计算结构，未标注外观/属性/上下文/辨别性四种语义。
++- MLP 开启时：查询输入为 normalize(v + MLP(v))。它处理全局向量，用于描述注意力；最终分类相似度仍使用原始 v。代码没有 patch 级/区域级特征抽取，不应称其为已实现的局部细粒度建模。
++
++得到图像条件下的类别向量 a_c(v)，teacher logits 为 exp(logit_scale) · vᵀa_c(v)。这里 teacher 是训练中的自适应描述分支，不是独立预训练完成的教师网络。
++
++## 损失与梯度
++
++总损失：
++
++L = CE(z_s, y) + λ_a CE(z_t, y) + λ_k T² KL(stopgrad(softmax(z_t/T)) || softmax(z_s/T)) + λ_e Σw log w。
++
++adaptive CE 训练注意力/MLP，KD 训练 student 且不向 teacher 反传。默认 λ_a=1、λ_k=1、T=2、λ_e=0。baseline 无 teacher，实际只用 student CE；mean 的 teacher 不含可学习聚合参数。
++
++负熵 Σw log w 的正权重会鼓励分布更均匀。它既不能保证文本语义多样性，也不是冻结图像之间的对比学习。旧的“对比损失”只依赖冻结特征，没有需要优化的参数，因此本次入口禁止启用，论文应删除相应已验证贡献的表述。
++
++## 推理和实验解释
++
++- student：仅 z_s。
++- teacher：仅 z_t。
++- ensemble：(1−α)z_s + αz_t，默认 α=0.5，是 logits 加权。
++
++同一分支/α 同时用于 Base 与 Novel，从同一个完整 checkpoint 加载。不同分支作为额外分析单列。不能将 student 的 Base 与 teacher 的 Novel 拼成一个方法的 HM；不能仅凭 ensemble 的提升断言 KD 改善了 student。
++
++当前 six-variant pilot 只拆分描述聚合与全局 MLP。要论证 KD，需要在同一架构/数据/推理下补 KD=0 对照；要论证分组结构，需至少比较 flat 与 hierarchical，并承认两者参数量也不同。若要主张语义层次，还需补真实组标签或重新设计并重新实验。
++
++## 论文数字处理
++
++原论文和旧结果文档保留作历史记录。旧 checkpoint 不完整、seed 标签不符、分支混用的结果不能直接作为此次修订版结果。每个待投稿数字必须能追溯到固定代码、有效配置、数据/文本版本、实际 seed、完整 checkpoint 和评估日志。
++
++目前新增的是程序正确性证据：行为测试、小型模型集成、官方 CLIP 的真实图像一步训练/独立进程重载、4 类 CLI smoke。它们不构成完整 UCF101 benchmark，也不能用于填充论文性能表。
++
++三种子表同时报告 Base/Novel 的均值与标准差。HM 需明确采用“Base 与 Novel 均值的调和平均”还是“每 seed HM 的均值”，不要混用；脚本同时输出两者供核对。
++
++扩展数据集、跨数据集/域泛化、更多 backbone、训练效率、显存、统计显著性和最终期刊适配均未完成验证。
+--- /dev/null
++++ b/REPRO_PLAN.md
+@@ -0,0 +1,12 @@
++# 复现修订执行范围（2026-09-10）
++
++本目录由用户当前代码复制而来，原目录保持不变。目标是为一次可靠的小规模验证准备实现与运行环境，所有旧数字仅作为历史记录。
++
++1. 修复缺失 checkpoint 静默评估、分支按 base/new 切换、描述重复和尾部丢弃。
++2. 主模型共享 mean/flat/hierarchical 聚合，特征适配独立开关；顺序分组不再声称是四类语义分组。
++3. 保留 student CE + adaptive CE + stop-gradient KD + 可选负熵；拒绝使用当前无梯度的 contrastive 项。
++4. 统一配置/实际参数，记录 seed、数据 split、文本、代码、CLIP 与 checkpoint 的哈希，独立保存 Base/Novel 和各预测分支指标。
++5. 先运行本地真实梯度与保存/加载测试，再做 UCF101 数据准备及受限 smoke；正式多种子完整训练需要 GPU 环境。
++6. 生成单数据集 pilot 和扩大验证脚本，默认不覆盖历史输出，不从测试集选超参数。
++
++方法修订不代表已经得到性能提升；论文实验表需由新日志生成。
+--- /dev/null
++++ b/configs/repro/ucf101.yaml
+@@ -0,0 +1,42 @@
++DATALOADER:
++  TRAIN_X:
++    BATCH_SIZE: 16
++  TEST:
++    BATCH_SIZE: 16
++  NUM_WORKERS: 4
++INPUT:
++  SIZE: (224, 224)
++  INTERPOLATION: bicubic
++  PIXEL_MEAN: [0.48145466, 0.4578275, 0.40821073]
++  PIXEL_STD: [0.26862954, 0.26130258, 0.27577711]
++  TRANSFORMS: [random_resized_crop, random_flip, normalize]
++OPTIM:
++  NAME: sgd
++  LR: 0.002
++  MOMENTUM: 0.9
++  WEIGHT_DECAY: 0.0005
++  MAX_EPOCH: 20
++  LR_SCHEDULER: cosine
++  WARMUP_EPOCH: 1
++  WARMUP_TYPE: constant
++  WARMUP_CONS_LR: 0.00001
++MODEL:
++  BACKBONE:
++    NAME: ViT-B/16
++TEST:
++  FINAL_MODEL: last_step
++TRAIN:
++  PRINT_FREQ: 10
++TRAINER:
++  TEXTCONSISTENCY:
++    PREC: fp32
++    N_CTX: 4
++    N_VIEWS: 20
++    N_GROUPS: 4
++    KD_WEIGHT: 1.0
++    KD_TEMP: 2.0
++    ADAPTIVE_CE_WEIGHT: 1.0
++    CONTRASTIVE_WEIGHT: 0.0
++    DIVERSITY_WEIGHT: 0.0
++    ENSEMBLE_ALPHA: 0.5
++    TEXT_BATCH_SIZE: 32
+--- /dev/null
++++ b/docs/history/README-original.md
+@@ -0,0 +1,259 @@
++# TextConsistency
++
++Official research implementation of **TextConsistency**, a multi-view textual
++consistency framework for improving prompt learning with vision-language
++models.
++
++> **Status:** This repository is being prepared for public reproducibility.
++> The core training implementations are available, but the full paper results
++> have not yet been re-verified from a clean environment. See
++> [Reproducibility Status](#reproducibility-status) before using the code.
++
++## Overview
++
++TextConsistency extends CoOp and CoCoOp with multiple class descriptions. The
++current implementation includes:
++
++- dataset-specific multi-view textual descriptions;
++- fixed averaging and adaptive view aggregation variants;
++- hierarchical view aggregation for fine-grained recognition;
++- classification supervision for both prompt and adaptive branches;
++- optional knowledge distillation, attention diversity, and contrastive losses;
++- base-to-new class evaluation on the prompt-learning benchmark datasets.
++
++The primary implementations are:
++
++- `CoOp_TextConsistency_V2_FG`
++- `CoCoOp_TextConsistency_V2_FG`
++
++Earlier variants are retained for ablation studies.
++
++## Repository Structure
++
++```text
++.
++|-- clip/                 # CLIP model and tokenizer
++|-- configs/              # dataset and trainer configurations
++|-- Dassl.pytorch/        # vendored Dassl training framework
++|-- datasets/             # dataset loaders
++|-- docs/                 # dataset preparation and baseline documentation
++|-- scripts/              # experiment scripts
++|-- templates/            # multi-view descriptions for each dataset
++|-- trainers/             # CoOp, CoCoOp, and TextConsistency trainers
++|-- tests/                # lightweight implementation contract tests
++`-- train.py              # main entry point
++```
++
++## Installation
++
++The code is intended for Linux with an NVIDIA GPU. A CUDA-compatible PyTorch
++installation is required.
++
++```bash
++conda create -n textconsistency python=3.10 -y
++conda activate textconsistency
++
++# Install PyTorch for your CUDA version first:
++# https://pytorch.org/get-started/locally/
++
++pip install -r requirements.txt
++pip install -e Dassl.pytorch
++```
++
++The dependency list is currently provisional. The experiments were developed
++around the CoOp/Dassl codebase and have not yet been validated against every
++recent package release.
++
++## CLIP Checkpoint
++
++Download the OpenAI CLIP ViT-B/16 checkpoint and place it at:
++
++```text
++clip/ViT-B-16.pt
++```
++
++The checkpoint is intentionally excluded from version control. The current
++TextConsistency trainers load this exact local path.
++
++## Dataset Preparation
++
++Prepare datasets under a common root directory:
++
++```text
++/path/to/data/
++|-- caltech-101/
++|-- dtd/
++|-- eurosat/
++|-- fgvc_aircraft/
++|-- food-101/
++|-- imagenet/
++|-- oxford_flowers/
++|-- oxford_pets/
++|-- stanford_cars/
++|-- sun397/
++`-- ucf101/
++```
++
++Detailed download instructions and expected directory layouts are provided in
++[`docs/DATASETS.md`](docs/DATASETS.md).
++
++The repository contains configurations for 11 prompt-learning datasets and
++four ImageNet distribution-shift datasets:
++
++- Caltech101, OxfordPets, StanfordCars, OxfordFlowers, Food101
++- FGVCAircraft, SUN397, DTD, EuroSAT, UCF101, ImageNet
++- ImageNetV2, ImageNet-Sketch, ImageNet-A, ImageNet-R
++
++## Quick Start
++
++Run commands from the repository root. The editable Dassl installation above
++is recommended; alternatively, add it to `PYTHONPATH`:
++
++```bash
++export PYTHONPATH="$PWD/Dassl.pytorch:$PYTHONPATH"
++```
++
++The following example trains the CoOp-based final variant on the base classes
++of Caltech101:
++
++```bash
++python train.py \
++  --root /path/to/data \
++  --seed 1 \
++  --trainer CoOp_TextConsistency_V2_FG \
++  --dataset-config-file configs/datasets/caltech101.yaml \
++  --config-file configs/trainers/CoOp/vit_b16.yaml \
++  --output-dir output/caltech101/seed1 \
++  TRAINER.TEXTCONSISTENCY.N_CTX 4 \
++  TRAINER.TEXTCONSISTENCY.N_VIEWS 20 \
++  TRAINER.TEXTCONSISTENCY.ADAPTIVE_CE_WEIGHT 1.0 \
++  TRAINER.TEXTCONSISTENCY.KD_WEIGHT 5.0 \
++  TRAINER.TEXTCONSISTENCY.KD_TEMP 1.0 \
++  TRAINER.TEXTCONSISTENCY.CONTRASTIVE_WEIGHT 0.0 \
++  TRAINER.TEXTCONSISTENCY.DIVERSITY_WEIGHT 0.0 \
++  TRAINER.TEXTCONSISTENCY.N_GROUPS 4 \
++  TRAINER.TEXTCONSISTENCY.PREC fp32 \
++  DATASET.NUM_SHOTS 16 \
++  DATASET.SUBSAMPLE_CLASSES base \
++  OPTIM.MAX_EPOCH 50
++```
++
++To use the CoCoOp-based implementation, select
++`CoCoOp_TextConsistency_V2_FG` and a configuration under
++`configs/trainers/CoCoOp/`.
++
++The shell scripts under `scripts/` record existing experiment configurations.
++Most contain machine-specific `DATA` paths and must be edited before use.
++
++## Paper Table 4.3 Ablation
++
++The paper ablation uses exactly five groups:
++
++| Group | Description |
++| --- | --- |
++| `baseline` | CoOp-style prompt learner without TextConsistency modules |
++| `single_view_kd` | Single textual view with KD, no adaptive aggregation, no FG |
++| `no_kd` | Multi-view adaptive aggregation without KD or FG |
++| `v2_no_fg` | Multi-view adaptive aggregation with KD, no FG |
++| `full` | Full TextConsistency V2 + FG configuration |
++
++Run one paper dataset:
++
++```bash
++DATA_ROOT=/path/to/data bash scripts/ablation/run_table_4_3.sh caltech101 all
++```
++
++Run all three Table 4.3 datasets:
++
++```bash
++DATA_ROOT=/path/to/data bash scripts/ablation/run_all_table_4_3.sh
++```
++
++Summaries are written to:
++
++```text
++output/ablation/table_4_3/table_4_3_results.csv
++output/ablation/table_4_3/table_4_3_results.md
++```
++
++The summarizer reports missing runs explicitly rather than silently treating
++them as zero-valued results.
++
++## Available Trainers
++
++| Trainer | Purpose |
++| --- | --- |
++| `ZeroshotCLIP` | Zero-shot CLIP baseline |
++| `CoOp` | CoOp baseline |
++| `CoCoOp` | CoCoOp baseline |
++| `CoOp_TextConsistency` | Initial multi-view consistency variant |
++| `CoOp_TextConsistency_Avg` | Fixed-average ablation |
++| `CoOp_TextConsistency_V2` | Adaptive view aggregation |
++| `CoOp_TextConsistency_V2_FG` | CoOp with hierarchical fine-grained aggregation |
++| `CoCoOp_TextConsistency_V2_FG` | CoCoOp with hierarchical fine-grained aggregation |
++| `CoOp_TextConsistency_Ablation` | Controlled five-group Table 4.3 ablation |
++
++## Main Configuration Options
++
++| Option | Description |
++| --- | --- |
++| `N_CTX` | Number of learnable context tokens |
++| `N_VIEWS` | Maximum number of textual descriptions per class |
++| `ADAPTIVE_CE_WEIGHT` | Classification-loss weight for the adaptive branch |
++| `KD_WEIGHT` | Knowledge-distillation loss weight |
++| `KD_TEMP` | Distillation temperature |
++| `CONTRASTIVE_WEIGHT` | Optional supervised image-feature contrastive weight |
++| `DIVERSITY_WEIGHT` | Attention-diversity regularization weight |
++| `N_GROUPS` | Number of groups in hierarchical view aggregation |
++| `PREC` | Numerical precision: `fp16`, `fp32`, or `amp` |
++
++Command-line values override the defaults in `train.py` and the selected YAML
++configuration.
++
++## Reproducibility Status
++
++The repository currently has the following limitations:
++
++1. Published result tables are not included because they have not yet been
++   reproduced from the cleaned public repository.
++2. Several experiment scripts contain local filesystem paths and historical
++   hyperparameter choices.
++3. GPU end-to-end training has not yet been validated in a clean environment.
++4. The optional fine-grained contrastive term currently operates on image
++   features; its exact correspondence with the paper formulation is under
++   review.
++
++Until these items are resolved, treat the repository as a transparent research
++release rather than a fully verified reproduction package.
++
++## Verification
++
++Lightweight static checks can be run without datasets:
++
++```bash
++python -m unittest discover -s tests
++python -m compileall train.py trainers datasets clip
++```
++
++Full verification requires the CLIP checkpoint, prepared datasets, PyTorch,
++and a CUDA-capable environment.
++
++## Acknowledgements
++
++This code builds on:
++
++- [CLIP](https://github.com/openai/CLIP)
++- [CoOp and CoCoOp](https://github.com/KaiyangZhou/CoOp)
++- [Dassl.pytorch](https://github.com/KaiyangZhou/Dassl.pytorch)
++
++Please also cite these projects when using this implementation.
++
++## Citation
++
++The paper citation will be added after the manuscript metadata is finalized.
++
++## License
++
++Licensing information for the cleaned top-level release is being finalized.
++The vendored Dassl code and upstream components remain subject to their
++respective licenses.
+--- /dev/null
++++ b/requirements.lock.txt
+@@ -0,0 +1,50 @@
++absl-py==2.5.0
++beautifulsoup4==4.15.0
++certifi==2026.7.22
++charset-normalizer==3.5.1
++cloudpickle==3.1.2
++filelock==3.32.6
++fsspec==2026.7.0
++ftfy==6.3.1
++gdown==5.2.0
++grpcio==1.83.1
++idna==3.19
++Jinja2==3.1.6
++joblib==1.6.0
++littleutils==0.2.4
++Markdown==3.10.3
++MarkupSafe==3.0.3
++mpmath==1.3.0
++networkx==3.6.1
++numpy==2.2.6
++ogb==1.3.6
++outdated==0.2.2
++packaging==26.3
++pandas==3.0.5
++pillow==11.2.1
++protobuf==7.36.1
++PySocks==1.7.1
++python-dateutil==2.9.0.post0
++pytz==2026.3.post1
++PyYAML==6.0.3
++regex==2024.11.6
++requests==2.34.2
++scikit-learn==1.6.1
++scipy==1.15.3
++setuptools==84.0.0
++six==1.17.0
++soupsieve==2.9.2
++sympy==1.14.0
++tabulate==0.9.0
++tensorboard==2.19.0
++tensorboard-data-server==0.7.2
++threadpoolctl==3.6.0
++torch==2.8.0
++torchvision==0.23.0
++tqdm==4.67.1
++typing_extensions==4.16.0
++urllib3==2.7.0
++wcwidth==0.8.3
++Werkzeug==3.1.8
++wilds==2.0.0
++yacs==0.1.8
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,18 +1,14 @@
+-regex
+-scikit-learn
+-future
+-yapf
+-flake8
+-numpy
+-wilds
+-regex
+-ftfy
+-fsspec
+-yacs
+-isort
+-google 
+-tensorboard
+-gdown
+-wilds
+-tabulate
+-tb_nightly
++# Runtime dependencies for Python 3.12. Install torch/torchvision separately
++# for the target CPU/CUDA platform as documented in README.md.
++numpy==2.2.6
++scipy==1.15.3
++Pillow==11.2.1
++ftfy==6.3.1
++regex==2024.11.6
++yacs==0.1.8
++tqdm==4.67.1
++scikit-learn==1.6.1
++tabulate==0.9.0
++tensorboard==2.19.0
++gdown==5.2.0
++wilds==2.0.0
+--- /dev/null
++++ b/scripts/repro/preflight.py
+@@ -0,0 +1,61 @@
++#!/usr/bin/env python3
++"""Verify actual UCF101 loader splits, text coverage, and independent seeds."""
++import argparse
++import json
++from pathlib import Path
++import sys
++ROOT = Path(__file__).resolve().parents[2]
++sys.path[:0] = [str(ROOT), str(ROOT / 'Dassl.pytorch')]
++from dassl.config import get_cfg_default
++from dassl.utils import set_random_seed
++from datasets.ucf101 import UCF101
++from train import extend_cfg
++from trainers.textconsistency_common import description_rows, sha256_file
++from trainers.textconsistency_runtime import sample_digest
++
++
++def check(data_root):
++    data_root = Path(data_root).resolve()
++    source = data_root / 'ucf101/split_zhou_UCF101.json'
++    split = json.loads(source.read_text())
++    missing = [row[0] for rows in split.values() for row in rows
++               if not (data_root / 'ucf101/UCF-101-midframes' / row[0]).is_file()]
++    if missing:
++        raise FileNotFoundError(f'{len(missing)} split images are missing; first: {missing[0]}')
++    paths = {name: {row[0] for row in rows} for name, rows in split.items()}
++    if any(paths[a] & paths[b] for a, b in [('train', 'val'), ('train', 'test'), ('val', 'test')]):
++        raise ValueError('Image paths overlap between train/validation/test splits')
++    descriptions = json.loads((ROOT / 'templates/ucf_prompts_full.json').read_text())
++    results = []
++    for seed in (1, 2, 3):
++        cfg = get_cfg_default(); extend_cfg(cfg)
++        cfg.SEED = seed; cfg.DATASET.ROOT = str(data_root); cfg.DATASET.NUM_SHOTS = 16
++        cfg.DATASET.SUBSAMPLE_CLASSES = 'base'; cfg.DATASET.NAME = 'UCF101'
++        set_random_seed(seed)
++        base = UCF101(cfg)
++        base_names = set(base.classnames)
++        description_rows(descriptions, base.classnames, 20)
++        cfg.DATASET.SUBSAMPLE_CLASSES = 'new'
++        novel = UCF101(cfg)
++        description_rows(descriptions, novel.classnames, 20)
++        if base_names & set(novel.classnames):
++            raise ValueError('Base and novel class names overlap')
++        results.append({'seed': seed, 'base_classes': len(base_names), 'novel_classes': len(novel.classnames),
++                        'train_samples': len(base.train_x),
++                        'train_sha256': sample_digest(base.train_x, data_root)})
++    if len({r['train_sha256'] for r in results}) != 3:
++        raise ValueError('Different seeds produced the same training split; inspect cached few-shot files')
++    return {'dataset': 'UCF101', 'split_sha256': sha256_file(source),
++            'image_counts': {name: len(rows) for name, rows in split.items()},
++            'all_images_present': True, 'splits_disjoint': True, 'seeds': results}
++
++
++def main():
++    parser = argparse.ArgumentParser(); parser.add_argument('--data-root', required=True, type=Path)
++    parser.add_argument('--output', type=Path)
++    args = parser.parse_args(); result = check(args.data_root)
++    text = json.dumps(result, indent=2); print(text)
++    if args.output:
++        args.output.parent.mkdir(parents=True, exist_ok=True); args.output.write_text(text)
++
++if __name__ == '__main__': main()
+--- /dev/null
++++ b/scripts/repro/prepare_assets.py
+@@ -0,0 +1,80 @@
++#!/usr/bin/env python3
++"""Prepare the verified UCF101 midframes archive and official OpenAI CLIP weights."""
++import argparse
++import hashlib
++import json
++from pathlib import Path
++import shutil
++import stat
++import subprocess
++import tempfile
++import zipfile
++
++ROOT = Path(__file__).resolve().parents[2]
++CLIP_SHA256 = '5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f'
++CLIP_URL = f'https://openaipublic.azureedge.net/clip/models/{CLIP_SHA256}/ViT-B-16.pt'
++UCF_SHA256 = '2fe1bd40e64408d02ff173badf744da557033ae6c75dd4ea51519366551f3ae6'
++
++
++def digest(path):
++    h = hashlib.sha256()
++    with open(path, 'rb') as handle:
++        for chunk in iter(lambda: handle.read(1024 * 1024), b''):
++            h.update(chunk)
++    return h.hexdigest()
++
++
++def extract_ucf(archive, data_root):
++    if digest(archive) != UCF_SHA256:
++        raise ValueError('UCF archive checksum does not match the verified author bundle')
++    data_root.mkdir(parents=True, exist_ok=True)
++    destination = data_root / 'ucf101'
++    marker = destination / 'source_archive.json'
++    if destination.exists():
++        if marker.is_file() and json.loads(marker.read_text()).get('sha256') == UCF_SHA256:
++            return destination
++        raise FileExistsError(f'Existing dataset lacks the expected archive marker: {destination}')
++    with tempfile.TemporaryDirectory(prefix='.ucf-extract-', dir=data_root) as temp:
++        temp = Path(temp)
++        with zipfile.ZipFile(archive) as z:
++            for entry in z.infolist():
++                path = Path(entry.filename)
++                if path.is_absolute() or '..' in path.parts or stat.S_ISLNK(entry.external_attr >> 16):
++                    raise ValueError(f'Unsafe archive entry: {entry.filename}')
++            z.extractall(temp)
++        source = temp / 'ucf101'
++        if not (source / 'split_zhou_UCF101.json').is_file():
++            raise ValueError('Archive does not contain the expected UCF101 split')
++        (source / 'source_archive.json').write_text(json.dumps({'sha256': UCF_SHA256, 'archive': archive.name}, indent=2))
++        source.rename(destination)
++    return destination
++
++
++def download_clip():
++    destination = ROOT / 'clip/ViT-B-16.pt'
++    if destination.exists():
++        if digest(destination) != CLIP_SHA256:
++            raise ValueError('Existing CLIP file has an unexpected checksum; it was not overwritten')
++        return destination
++    partial = destination.with_suffix('.pt.part')
++    subprocess.run(['curl', '--fail', '--location', '--retry', '3', '--connect-timeout', '30',
++                    '--continue-at', '-', '--output', str(partial), CLIP_URL], check=True)
++    if digest(partial) != CLIP_SHA256:
++        raise ValueError('Downloaded CLIP checksum mismatch')
++    partial.rename(destination)
++    return destination
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument('--ucf-zip', type=Path)
++    parser.add_argument('--data-root', type=Path, default=ROOT / 'data')
++    parser.add_argument('--download-clip', action='store_true')
++    args = parser.parse_args()
++    if args.ucf_zip:
++        print('Prepared UCF101:', extract_ucf(args.ucf_zip.resolve(), args.data_root.resolve()))
++    if args.download_clip:
++        print('Verified CLIP:', download_clip())
++
++if __name__ == '__main__':
++    main()
+--- /dev/null
++++ b/scripts/repro/run_pilot.py
+@@ -0,0 +1,84 @@
++#!/usr/bin/env python3
++"""Matched aggregation comparisons; commands are reviewable with --plan-only."""
++import argparse
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++
++ROOT = Path(__file__).resolve().parents[2]
++VARIANTS = {
++    'baseline': ('none', False), 'mean': ('mean', False), 'flat': ('flat', False),
++    'flat_adapter': ('flat', True), 'hierarchical': ('hierarchical', False),
++    'hierarchical_adapter': ('hierarchical', True),
++}
++
++
++def build_commands(data_root, output_root, seeds, epochs, variants, device='cuda', python=sys.executable):
++    commands = []
++    for variant in variants:
++        if variant not in VARIANTS: raise ValueError(f'Unknown variant: {variant}')
++        mode, adapter = VARIANTS[variant]
++        baseline = variant == 'baseline'
++        trainer = 'CoOp_TextConsistency_Ablation' if baseline else 'CoOp_TextConsistency_V2_FG'
++        for seed in seeds:
++            train_dir = Path(output_root) / variant / f'seed{seed}'
++            common = [python, str(ROOT / 'train.py'), '--root', str(Path(data_root).resolve()),
++                      '--seed', str(seed), '--trainer', trainer,
++                      '--dataset-config-file', str(ROOT / 'configs/datasets/ucf101.yaml'),
++                      '--config-file', str(ROOT / 'configs/repro/ucf101.yaml')]
++            opts = ['DATASET.NUM_SHOTS', '16', 'TRAINER.TEXTCONSISTENCY.DEVICE', device,
++                    'TRAINER.TEXTCONSISTENCY.AGGREGATION', 'mean' if baseline else mode,
++                    'TRAINER.TEXTCONSISTENCY.USE_FEATURE_ADAPTER', str(adapter),
++                    'TRAINER.TEXTCONSISTENCY.ABLATION_GROUP', 'baseline' if baseline else 'full',
++                    'TRAINER.TEXTCONSISTENCY.INFERENCE_BRANCH', 'student' if baseline else 'ensemble',
++                    'OPTIM.MAX_EPOCH', str(epochs)]
++            commands.append(common + ['--output-dir', str(train_dir)] + opts + ['DATASET.SUBSAMPLE_CLASSES', 'base'])
++            for split in ('base', 'new'):
++                for branch in (('student',) if baseline else ('student', 'teacher', 'ensemble')):
++                    eval_opts = opts.copy()
++                    eval_opts[eval_opts.index('TRAINER.TEXTCONSISTENCY.INFERENCE_BRANCH') + 1] = branch
++                    commands.append(common + ['--output-dir', str(train_dir / f'eval_{split}_{branch}'),
++                                              '--model-dir', str(train_dir), '--load-epoch', str(epochs), '--eval-only']
++                                    + eval_opts + ['DATASET.SUBSAMPLE_CLASSES', split])
++    return commands
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument('--data-root', type=Path, required=True)
++    parser.add_argument('--output-root', type=Path, required=True)
++    parser.add_argument('--seeds', type=int, nargs='+', default=[1])
++    parser.add_argument('--epochs', type=int, default=20)
++    parser.add_argument('--variants', nargs='+', choices=list(VARIANTS), default=list(VARIANTS))
++    parser.add_argument('--device', choices=['cuda', 'cpu'], default='cuda')
++    parser.add_argument('--plan-only', action='store_true')
++    args = parser.parse_args()
++    if args.epochs < 1 or len(set(args.seeds)) != len(args.seeds) or any(s < 0 for s in args.seeds):
++        parser.error('Epochs must be positive and seeds must be distinct nonnegative integers')
++    output = args.output_root.resolve()
++    commands = build_commands(args.data_root, output, args.seeds, args.epochs, args.variants, args.device)
++    plan = {'purpose': 'controlled_pilot', 'dataset': 'UCF101', 'seeds': args.seeds, 'epochs': args.epochs,
++            'variants': args.variants, 'primary_branch': 'ensemble (baseline: student)',
++            'checkpoint_rule': 'specified final epoch; no test-based selection', 'commands': commands}
++    if args.plan_only:
++        print(json.dumps(plan, indent=2)); return
++    if output.exists(): raise FileExistsError(f'Choose a fresh output root: {output}')
++    import torch
++    if args.device == 'cuda' and not torch.cuda.is_available():
++        raise RuntimeError('CUDA is unavailable; use a GPU server for the full pilot')
++    from preflight import check
++    preflight = check(args.data_root)
++    output.mkdir(parents=True)
++    (output / 'protocol.json').write_text(json.dumps(plan, indent=2))
++    (output / 'data_preflight.json').write_text(json.dumps(preflight, indent=2))
++    env = os.environ.copy()
++    env['PYTHONPATH'] = os.pathsep.join([str(ROOT), str(ROOT / 'Dassl.pytorch'), env.get('PYTHONPATH', '')])
++    env['CUBLAS_WORKSPACE_CONFIG'] = ':4096:8'
++    for index, command in enumerate(commands):
++        print(f'Running {index+1}/{len(commands)}: {command}', flush=True)
++        subprocess.run(command, cwd=ROOT, env=env, check=True)
++    subprocess.run([sys.executable, str(ROOT / 'scripts/repro/summarize.py'), '--root', str(output)], check=True)
++
++if __name__ == '__main__': main()
+--- /dev/null
++++ b/scripts/repro/smoke_cli.py
+@@ -0,0 +1,61 @@
++#!/usr/bin/env python3
++"""Exercise the normal CLI with four real classes and one image per split/class.
++Fixture results are deliberately 1-shot and must never enter the 16-shot paper table.
++"""
++import argparse
++import json
++import os
++from pathlib import Path
++import subprocess
++import sys
++ROOT = Path(__file__).resolve().parents[2]
++
++
++def main():
++    parser = argparse.ArgumentParser(); parser.add_argument('--data-root', type=Path, required=True)
++    parser.add_argument('--output', type=Path, required=True)
++    args = parser.parse_args(); output = args.output.resolve()
++    if output.exists(): raise FileExistsError(output)
++    source = args.data_root.resolve() / 'ucf101'
++    original = json.loads((source / 'split_zhou_UCF101.json').read_text())
++    labels = sorted({row[1] for row in original['train']})[:4]
++    split = {}
++    for key, rows in original.items():
++        chosen = {}
++        for row in rows:
++            if row[1] in labels: chosen.setdefault(row[1], row)
++        split[key] = [chosen[label] for label in labels]
++    fixture = output / 'fixture/ucf101'; fixture.mkdir(parents=True)
++    (fixture / 'split_zhou_UCF101.json').write_text(json.dumps(split))
++    (fixture / 'UCF-101-midframes').symlink_to(source / 'UCF-101-midframes', target_is_directory=True)
++    (output / 'SMOKE_ONLY.json').write_text(json.dumps({'smoke_only': True, 'classes': 4,
++        'base_classes': 2, 'novel_classes': 2, 'images_per_class_per_split': 1, 'epochs': 1}, indent=2))
++    common = [sys.executable, str(ROOT / 'train.py'), '--root', str(fixture.parent), '--seed', '1',
++              '--trainer', 'CoOp_TextConsistency_V2_FG', '--dataset-config-file', str(ROOT / 'configs/datasets/ucf101.yaml'),
++              '--config-file', str(ROOT / 'configs/repro/ucf101.yaml')]
++    opts = ['TRAINER.TEXTCONSISTENCY.DEVICE','cpu','TRAINER.TEXTCONSISTENCY.N_VIEWS','5',
++            'TRAINER.TEXTCONSISTENCY.N_GROUPS','2','TRAINER.TEXTCONSISTENCY.TEXT_BATCH_SIZE','4',
++            'DATASET.NUM_SHOTS','1','DATALOADER.NUM_WORKERS','0','DATALOADER.TRAIN_X.BATCH_SIZE','2',
++            'DATALOADER.TEST.BATCH_SIZE','2','OPTIM.MAX_EPOCH','1']
++    train_dir = output / 'train'
++    commands = [('train', common + ['--output-dir',str(train_dir)] + opts + ['DATASET.SUBSAMPLE_CLASSES','base'])]
++    for split_name in ('base','new'):
++        commands.append((f'eval_{split_name}', common + ['--output-dir',str(output / f'eval_{split_name}'),
++                         '--model-dir',str(train_dir),'--load-epoch','1','--eval-only'] + opts + ['DATASET.SUBSAMPLE_CLASSES',split_name]))
++    env = os.environ.copy(); env['PYTHONPATH'] = os.pathsep.join([str(ROOT),str(ROOT/'Dassl.pytorch')])
++    env['OMP_NUM_THREADS'] = '4'; env['MKL_NUM_THREADS'] = '4'
++    for stage, command in commands:
++        print('Executing smoke stage:', stage, flush=True)
++        with (output / f'{stage}.console.txt').open('w') as log:
++            subprocess.run(command,cwd=ROOT,env=env,stdout=log,stderr=subprocess.STDOUT,check=True)
++    base = json.loads((output/'eval_base/metrics.json').read_text())
++    novel = json.loads((output/'eval_new/metrics.json').read_text())
++    if base['checkpoints'] != novel['checkpoints']: raise AssertionError('Different checkpoint used across splits')
++    for result in (base,novel):
++        if result['state'] != 'loaded_checkpoint' or result['seed'] != 1: raise AssertionError('Wrong state or seed')
++    summary = {'smoke_only':True,'train_cli_passed':True,'base_eval_cli_passed':True,'novel_eval_cli_passed':True,
++               'same_checkpoint_for_base_and_novel':True,'code_sha256':base['code_sha256'],
++               'checkpoint_sha256':base['checkpoints'][0]['sha256']}
++    (output/'verification.json').write_text(json.dumps(summary,indent=2)); print(json.dumps(summary,indent=2))
++
++if __name__ == '__main__': main()
+--- /dev/null
++++ b/scripts/repro/smoke_real.py
+@@ -0,0 +1,89 @@
++#!/usr/bin/env python3
++"""Two-class CPU smoke using official ViT-B/16 and actual UCF101 images.
++This is a correctness check, not a benchmark accuracy experiment.
++"""
++import argparse
++import json
++from pathlib import Path
++import sys
++from types import SimpleNamespace
++ROOT = Path(__file__).resolve().parents[2]
++sys.path[:0] = [str(ROOT), str(ROOT / 'Dassl.pytorch')]
++import torch
++from PIL import Image
++from clip.clip import _transform
++from dassl.config import get_cfg_default
++from dassl.data.datasets import Datum
++from dassl.engine.trainer import TrainerBase
++from dassl.utils import set_random_seed
++from train import extend_cfg
++from trainers.coop_textconsistency_v2_fg import CoOp_TextConsistency_V2_FG
++
++
++def build(data_root, output):
++    set_random_seed(1); torch.set_num_threads(4)
++    split = json.loads((data_root / 'ucf101/split_zhou_UCF101.json').read_text())
++    chosen = {}
++    for row in split['train']:
++        chosen.setdefault(row[2], row)
++        if len(chosen) == 2: break
++    rows = list(chosen.values())
++    samples = [Datum(impath=str(data_root / 'ucf101/UCF-101-midframes' / row[0]),
++                     label=i, classname=row[2]) for i, row in enumerate(rows)]
++    cfg = get_cfg_default(); extend_cfg(cfg)
++    cfg.SEED = 1; cfg.USE_CUDA = False
++    cfg.DATASET.NAME = 'UCF101'; cfg.DATASET.ROOT = str(data_root)
++    cfg.DATASET.SUBSAMPLE_CLASSES = 'base'; cfg.DATASET.NUM_SHOTS = 1
++    cfg.TRAINER.NAME = 'CoOp_TextConsistency_V2_FG'; cfg.OUTPUT_DIR = str(output)
++    cfg.MODEL.BACKBONE.NAME = 'ViT-B/16'; cfg.OPTIM.MAX_EPOCH = 1; cfg.OPTIM.WARMUP_EPOCH = 0
++    tc = cfg.TRAINER.TEXTCONSISTENCY
++    tc.DEVICE = 'cpu'; tc.N_VIEWS = 5; tc.N_GROUPS = 2; tc.TEXT_BATCH_SIZE = 4
++    tc.KD_WEIGHT = 1.; tc.INFERENCE_BRANCH = 'ensemble'
++    trainer = CoOp_TextConsistency_V2_FG.__new__(CoOp_TextConsistency_V2_FG)
++    TrainerBase.__init__(trainer); trainer.cfg = cfg
++    trainer.dm = SimpleNamespace(dataset=SimpleNamespace(classnames=[r[2] for r in rows],
++                                                          train_x=samples, val=[], test=samples))
++    trainer.check_cfg(cfg); trainer.build_model()
++    trainer.batch_idx = 0; trainer.num_batches = 1
++    images = []
++    for sample in samples:
++        with Image.open(sample.impath) as image: images.append(_transform(224)(image))
++    return trainer, torch.stack(images), [s.impath for s in samples]
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument('--data-root', type=Path, required=True)
++    parser.add_argument('--output', type=Path, required=True)
++    parser.add_argument('--stage', choices=['train', 'reload'], required=True)
++    args = parser.parse_args(); output = args.output.resolve()
++    if args.stage == 'train' and output.exists(): raise FileExistsError(output)
++    trainer, images, image_paths = build(args.data_root.resolve(), output / args.stage)
++    if args.stage == 'train':
++        prompt = trainer.model.prompt_learner.ctx.detach().clone()
++        adapter = trainer.model.view_aggregator.fine_grained_proj[0].weight.detach().clone()
++        losses = trainer.forward_backward({'img': images, 'label': torch.tensor([0, 1])})
++        prompt_changed = not torch.equal(prompt, trainer.model.prompt_learner.ctx)
++        adapter_changed = not torch.equal(adapter, trainer.model.view_aggregator.fine_grained_proj[0].weight)
++        frozen = all(p.grad is None and not p.requires_grad for p in trainer.model.image_encoder.parameters())
++        if not (prompt_changed and adapter_changed and frozen): raise AssertionError('Gradient smoke failed')
++        trainer.save_model(0, output / 'train'); trainer.model.eval()
++        with torch.no_grad(): expected = trainer.model_inference(images)
++        torch.save(expected, output / 'expected_logits.pt')
++        result = {'smoke_only': True, 'pretrained_clip': 'official ViT-B/16', 'device': 'cpu',
++                  'classes': 2, 'images': image_paths, 'optimizer_steps': 1,
++                  'prompt_updated': prompt_changed, 'feature_adapter_updated': adapter_changed,
++                  'image_encoder_frozen': frozen, 'losses': losses}
++        (output / 'train_check.json').write_text(json.dumps(result, indent=2))
++    else:
++        trainer.load_model(output / 'train', 1); trainer.model.eval()
++        expected = torch.load(output / 'expected_logits.pt', map_location='cpu', weights_only=True)
++        with torch.no_grad(): actual = trainer.model_inference(images)
++        torch.testing.assert_close(actual, expected, rtol=0, atol=0)
++        result = {'smoke_only': True, 'fresh_process_reload': True,
++                  'max_logit_difference': float((actual - expected).abs().max()),
++                  'checkpoints': trainer.loaded_checkpoints}
++        (output / 'reload_check.json').write_text(json.dumps(result, indent=2))
++    print(json.dumps(result, indent=2))
++
++if __name__ == '__main__': main()
+--- /dev/null
++++ b/scripts/repro/summarize.py
+@@ -0,0 +1,64 @@
++#!/usr/bin/env python3
++"""Reject missing or mislabelled runs; aggregate matched checkpoint evaluations."""
++import argparse
++import csv
++import json
++import math
++from pathlib import Path
++from statistics import mean, stdev
++
++
++def read_metric(path, seed, split, branch, epochs):
++    data = json.loads(path.read_text())
++    if (data['seed'], data['subsample'], data['branch'], data['dataset']) != (seed, split, branch, 'UCF101'):
++        raise ValueError(f'Actual evaluation protocol differs from its directory label: {path}')
++    if data.get('shots') != 16:
++        raise ValueError(f'Expected the fixed 16-shot protocol: {path}')
++    if data['state'] != 'loaded_checkpoint' or len(data['checkpoints']) != 1:
++        raise ValueError(f'Evaluation did not load exactly one complete checkpoint: {path}')
++    if data['checkpoints'][0]['epoch'] != epochs:
++        raise ValueError(f'Wrong checkpoint epoch: {path}')
++    accuracy = float(data['metrics']['accuracy'])
++    if not math.isfinite(accuracy) or not 0 <= accuracy <= 100:
++        raise ValueError(f'Invalid accuracy in {path}')
++    return data
++
++
++def collect(root):
++    protocol = json.loads((root / 'protocol.json').read_text())
++    rows = []
++    for variant in protocol['variants']:
++        branches = ['student'] if variant == 'baseline' else ['student', 'teacher', 'ensemble']
++        for branch in branches:
++            bases, novels, hms, train_hashes = [], [], [], []
++            for seed in protocol['seeds']:
++                directory = root / variant / f'seed{seed}'
++                base = read_metric(directory / f'eval_base_{branch}/metrics.json', seed, 'base', branch, protocol['epochs'])
++                novel = read_metric(directory / f'eval_new_{branch}/metrics.json', seed, 'new', branch, protocol['epochs'])
++                if base['checkpoints'] != novel['checkpoints']:
++                    raise ValueError('Base and novel results came from different checkpoints')
++                if base['model_signature'] != novel['model_signature'] or base['code_sha256'] != novel['code_sha256']:
++                    raise ValueError('Base/novel model configuration or source mismatch')
++                b, n = float(base['metrics']['accuracy']), float(novel['metrics']['accuracy'])
++                bases.append(b); novels.append(n); hms.append(2*b*n/(b+n) if b+n else 0.)
++                train_hashes.append(base['train_samples_sha256'])
++            if len(set(train_hashes)) != len(train_hashes):
++                raise ValueError('Different seed labels reused the same few-shot training split')
++            b, n = mean(bases), mean(novels)
++            rows.append({'variant': variant, 'branch': branch, 'seeds': len(bases),
++                         'base_mean': b, 'novel_mean': n, 'hm_of_means': 2*b*n/(b+n) if b+n else 0.,
++                         'base_std': stdev(bases) if len(bases)>1 else None,
++                         'novel_std': stdev(novels) if len(novels)>1 else None,
++                         'mean_seed_hm': mean(hms), 'seed_hm_std': stdev(hms) if len(hms)>1 else None})
++    return rows
++
++
++def main():
++    parser = argparse.ArgumentParser(); parser.add_argument('--root', type=Path, required=True)
++    args = parser.parse_args(); rows = collect(args.root)
++    with (args.root / 'results.csv').open('w', newline='') as file:
++        writer = csv.DictWriter(file, fieldnames=list(rows[0])); writer.writeheader(); writer.writerows(rows)
++    (args.root / 'results.json').write_text(json.dumps(rows, indent=2))
++    print(f'Validated {len(rows)} variant/branch rows. Single-seed rows are pilot results only.')
++
++if __name__ == '__main__': main()
+--- /dev/null
++++ b/tests/repro/test_components.py
+@@ -0,0 +1,91 @@
++import tempfile
++from pathlib import Path
++from types import SimpleNamespace
++import unittest
++import torch
++from torch import nn
++from trainers.textconsistency_common import (
++    ViewAggregator, description_rows, prediction_logits, training_losses,
++    load_complete_checkpoint,
++)
++
++
++class ComponentBehavior(unittest.TestCase):
++    def setUp(self):
++        torch.manual_seed(17)
++        torch.set_num_threads(2)
++
++    def test_masked_padding_cannot_change_predictions(self):
++        image = torch.randn(2, 8)
++        views = torch.randn(3, 5, 8)
++        mask = torch.tensor([[1, 1, 0, 0, 0], [1, 1, 1, 0, 0], [1, 0, 0, 0, 0]], dtype=torch.bool)
++        changed = views.clone(); changed[~mask] = 10000
++        for mode in ('mean', 'flat', 'hierarchical'):
++            with self.subTest(mode=mode):
++                model = ViewAggregator(8, 5, mode, n_groups=4, use_feature_adapter=mode != 'mean')
++                a, _ = model(image, views, mask)
++                b, _ = model(image, changed, mask)
++                torch.testing.assert_close(a, b)
++                self.assertTrue(torch.isfinite(a).all())
++
++    def test_each_trainable_aggregation_module_receives_gradient(self):
++        image = torch.randn(4, 8)
++        views = torch.randn(3, 7, 8)
++        labels = torch.tensor([0, 1, 2, 1])
++        for mode, adapter in [('flat', False), ('flat', True), ('hierarchical', False), ('hierarchical', True)]:
++            model = ViewAggregator(8, 7, mode, n_groups=3, use_feature_adapter=adapter)
++            features, attention = model(image, views)
++            teacher = torch.einsum('bd,bcd->bc', image, features)
++            student = torch.randn(4, 3, requires_grad=True)
++            loss, _ = training_losses(student, teacher, labels, attention, 1., 2., 1., 0.01)
++            loss.backward()
++            for name, parameter in model.named_parameters():
++                with self.subTest(mode=mode, adapter=adapter, parameter=name):
++                    self.assertIsNotNone(parameter.grad)
++                    self.assertTrue(torch.isfinite(parameter.grad).all())
++            self.assertGreater(sum(p.grad.abs().sum().item() for p in model.parameters()), 0)
++            self.assertGreater(student.grad.abs().sum().item(), 0)
++
++    def test_kd_updates_student_but_does_not_backpropagate_into_teacher(self):
++        student = torch.randn(3, 4, requires_grad=True)
++        teacher = torch.randn(3, 4, requires_grad=True)
++        _, pieces = training_losses(student, teacher, torch.tensor([0, 1, 2]), {}, 1., 2., 1., 0.)
++        student_grad, teacher_grad = torch.autograd.grad(pieces['loss_kd'], (student, teacher), allow_unused=True)
++        self.assertIsNone(teacher_grad)
++        self.assertGreater(student_grad.abs().sum().item(), 0)
++
++    def test_old_contrastive_term_cannot_silently_be_enabled(self):
++        with self.assertRaises(ValueError):
++            training_losses(torch.randn(2, 3), torch.randn(2, 3), torch.tensor([0, 1]), {}, 0., 1., 1., 0., 0.1)
++
++    def test_duplicate_descriptions_are_not_counted_as_additional_views(self):
++        rows = description_rows({'Cat': ['first', 'first', ' second ', '', 'second']}, ['cat'], 7)
++        self.assertEqual(rows, [['first', 'second']])
++        with self.assertRaises(ValueError):
++            description_rows({'Cat': ['first']}, ['dog'], 4)
++
++    def test_explicit_epoch_never_falls_back(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            folder = Path(tmp, 'textconsistency'); folder.mkdir()
++            torch.save({'state_dict': {}, 'epoch': 3}, folder / 'model.pth.tar-3')
++            trainer = SimpleNamespace(get_model_names=lambda: ['textconsistency'])
++            with self.assertRaises(FileNotFoundError):
++                load_complete_checkpoint(trainer, tmp, 2)
++
++    def test_incomplete_state_is_rejected_before_mutating_model(self):
++        with tempfile.TemporaryDirectory() as tmp:
++            module = nn.ModuleDict({'prompt_learner': nn.Linear(2, 2), 'view_aggregator': nn.Linear(2, 2)})
++            before = module.prompt_learner.weight.detach().clone()
++            folder = Path(tmp, 'textconsistency'); folder.mkdir()
++            torch.save({'state_dict': {'prompt_learner.weight': torch.ones(2, 2)}, 'epoch': 1}, folder / 'model.pth.tar-1')
++            trainer = SimpleNamespace(get_model_names=lambda: ['textconsistency'], _models={'textconsistency': module})
++            with self.assertRaises(ValueError):
++                load_complete_checkpoint(trainer, tmp, 1)
++            torch.testing.assert_close(before, module.prompt_learner.weight)
++
++    def test_baseline_rejects_teacher_or_ensemble_prediction(self):
++        with self.assertRaises(ValueError):
++            prediction_logits(torch.ones(2), None, 'teacher')
++
++if __name__ == '__main__':
++    unittest.main()
+--- /dev/null
++++ b/tests/repro/test_regressions.py
+@@ -0,0 +1,70 @@
++"""Behavior regressions identified in the September paper/code audit."""
++import ast
++import os.path as osp
++from pathlib import Path
++import tempfile
++import types
++import unittest
++
++ROOT = Path(__file__).resolve().parents[2]
++
++
++def source_symbol(filename, class_name, method=None):
++    """Load real source without constructing CLIP or importing dataset plugins."""
++    tree = ast.parse((ROOT / 'trainers' / filename).read_text())
++    cls = next(n for n in tree.body if isinstance(n, ast.ClassDef) and n.name == class_name)
++    node = next(n for n in cls.body if isinstance(n, ast.FunctionDef) and n.name == method) if method else cls
++    namespace = {'osp': osp}
++    try:
++        import torch
++        namespace.update(torch=torch, nn=torch.nn, F=torch.nn.functional)
++    except ImportError:
++        pass
++    if (ROOT / 'trainers/textconsistency_common.py').exists():
++        import trainers.textconsistency_common as common
++        namespace.update({name: getattr(common, name) for name in dir(common) if not name.startswith('_')})
++    exec(compile(ast.fix_missing_locations(ast.Module(body=[node], type_ignores=[])), str(ROOT / 'trainers' / filename), 'exec'), namespace)
++    return namespace[method or class_name]
++
++
++TRAINERS = [('coop_textconsistency_v2_fg.py', 'CoOp_TextConsistency_V2_FG'),
++            ('cocoop_textconsistency_v2_fg.py', 'CoCoOp_TextConsistency_V2_FG'),
++            ('coop_textconsistency_ablation.py', 'CoOp_TextConsistency_Ablation')]
++
++
++class ReproductionRegressions(unittest.TestCase):
++    def test_missing_checkpoint_must_stop_evaluation(self):
++        for filename, cls in TRAINERS:
++            with self.subTest(trainer=cls), tempfile.TemporaryDirectory() as directory:
++                loader = source_symbol(filename, cls, 'load_model')
++                trainer = types.SimpleNamespace(get_model_names=lambda: ['textconsistency'])
++                with self.assertRaises(FileNotFoundError):
++                    loader(trainer, directory, epoch=42)
++
++    def test_prediction_rule_does_not_depend_on_base_or_novel_label(self):
++        for filename, cls in TRAINERS[:2]:
++            method = source_symbol(filename, cls, 'model_inference')
++            values = []
++            for split in ('base', 'new'):
++                tc = types.SimpleNamespace(INFERENCE_BRANCH='ensemble', ENSEMBLE_ALPHA=0.5)
++                cfg = types.SimpleNamespace(DATASET=types.SimpleNamespace(SUBSAMPLE_CLASSES=split),
++                                            TRAINER=types.SimpleNamespace(TEXTCONSISTENCY=tc))
++                trainer = types.SimpleNamespace(cfg=cfg, model=lambda *a, **kw: (2., 10., None, None))
++                values.append(method(trainer, None))
++            self.assertEqual(values, [6., 6.])
++
++    def test_last_view_is_not_discarded_when_group_count_does_not_divide_views(self):
++        import torch
++        cls = source_symbol('coop_textconsistency_v2_fg.py', 'HierarchicalViewAggregator')
++        model = cls(dim=8, n_views=5, n_groups=2)
++        # Uniform attention isolates view coverage from learned weighting.
++        for parameter in model.parameters():
++            torch.nn.init.zeros_(parameter)
++        query = torch.tensor([[1., 0., 0., 0., 0., 0., 0., 0.]])
++        views = torch.randn(2, 5, 8, requires_grad=True)
++        features, _ = model(query, views)
++        features[..., 0].sum().backward()
++        self.assertGreater(views.grad[:, -1, :].abs().sum().item(), 0.)
++
++if __name__ == '__main__':
++    unittest.main()
+--- /dev/null
++++ b/tests/repro/test_runner.py
+@@ -0,0 +1,58 @@
++import importlib.util
++import json
++from pathlib import Path
++import tempfile
++import unittest
++
++ROOT = Path(__file__).resolve().parents[2]
++
++
++def module(name):
++    path = ROOT / 'scripts/repro' / f'{name}.py'
++    spec = importlib.util.spec_from_file_location(name, path)
++    result = importlib.util.module_from_spec(spec); spec.loader.exec_module(result)
++    return result
++
++
++class RunnerBehavior(unittest.TestCase):
++    def test_commands_pass_actual_distinct_seeds_and_exact_epoch(self):
++        runner = module('run_pilot')
++        commands = runner.build_commands('/data', '/results', [1, 2, 3], 7, ['flat'])
++        training = [c for c in commands if '--eval-only' not in c]
++        self.assertEqual([c[c.index('--seed')+1] for c in training], ['1','2','3'])
++        self.assertEqual(len(commands), 21)
++        for command in commands:
++            self.assertEqual(command[command.index('TRAINER.TEXTCONSISTENCY.USE_FEATURE_ADAPTER')+1], 'False')
++            if '--eval-only' in command:
++                self.assertEqual(command[command.index('--load-epoch')+1], '7')
++
++    def test_summary_rejects_fake_seed_label(self):
++        with tempfile.TemporaryDirectory() as temp:
++            file = Path(temp)/'metrics.json'
++            file.write_text(json.dumps({'seed':1,'subsample':'base','branch':'ensemble','dataset':'UCF101'}))
++            with self.assertRaises(ValueError): module('summarize').read_metric(file, 2, 'base', 'ensemble', 20)
++
++    def test_missing_seed_is_not_silently_averaged(self):
++        with tempfile.TemporaryDirectory() as temp:
++            root = Path(temp)
++            (root/'protocol.json').write_text(json.dumps({'seeds':[1,2,3], 'epochs':20, 'variants':['baseline']}))
++            with self.assertRaises(FileNotFoundError): module('summarize').collect(root)
++
++    def test_matched_results_compute_hm_from_base_and_novel_means(self):
++        with tempfile.TemporaryDirectory() as temp:
++            root = Path(temp)
++            (root/'protocol.json').write_text(json.dumps({'seeds':[1,2], 'epochs':20, 'variants':['baseline']}))
++            for seed, scores in [(1, (60.,90.)), (2,(80.,70.))]:
++                for split, score in zip(('base','new'), scores):
++                    directory = root/'baseline'/f'seed{seed}'/f'eval_{split}_student'; directory.mkdir(parents=True)
++                    payload = {'seed':seed,'subsample':split,'branch':'student','dataset':'UCF101','shots':16,
++                               'state':'loaded_checkpoint','checkpoints':[{'epoch':20,'sha256':f'checkpoint{seed}'}],
++                               'model_signature':{},'code_sha256':'code','train_samples_sha256':f'samples{seed}',
++                               'metrics':{'accuracy':score}}
++                    (directory/'metrics.json').write_text(json.dumps(payload))
++            rows = module('summarize').collect(root)
++            self.assertEqual(rows[0]['base_mean'], 70.)
++            self.assertEqual(rows[0]['novel_mean'], 80.)
++            self.assertAlmostEqual(rows[0]['hm_of_means'], 74.6666666667)
++
++if __name__ == '__main__': unittest.main()
+--- /dev/null
++++ b/tests/repro/test_runtime_compatibility.py
+@@ -0,0 +1,19 @@
++import unittest
++import torch
++from dassl.config import get_cfg_default
++from dassl.optim import build_lr_scheduler
++
++
++class RuntimeCompatibility(unittest.TestCase):
++    def test_warmup_scheduler_starts_low_then_restores_training_rate(self):
++        cfg = get_cfg_default().OPTIM
++        cfg.LR = 0.002; cfg.MAX_EPOCH = 20; cfg.LR_SCHEDULER = 'cosine'
++        cfg.WARMUP_EPOCH = 1; cfg.WARMUP_TYPE = 'constant'; cfg.WARMUP_CONS_LR = 0.00001
++        parameter = torch.nn.Parameter(torch.ones(1))
++        optimizer = torch.optim.SGD([parameter], lr=0.002)
++        scheduler = build_lr_scheduler(optimizer, cfg)
++        self.assertAlmostEqual(optimizer.param_groups[0]['lr'], 0.00001)
++        parameter.sum().backward(); optimizer.step(); scheduler.step()
++        self.assertAlmostEqual(optimizer.param_groups[0]['lr'], 0.002)
++
++if __name__ == '__main__': unittest.main()
+--- /dev/null
++++ b/tests/repro/test_trainers.py
+@@ -0,0 +1,126 @@
++"""Integration tests with the real CLIP architecture at tiny dimensions.
++Only loading external pretrained weights is substituted; trainers and losses are real.
++"""
++import contextlib
++import io
++import json
++from pathlib import Path
++import tempfile
++from types import SimpleNamespace
++import unittest
++from unittest.mock import patch
++
++import torch
++from clip.model import CLIP
++from dassl.config import get_cfg_default
++from dassl.engine.trainer import TrainerBase
++from train import extend_cfg
++from trainers.coop_textconsistency_v2_fg import CoOp_TextConsistency_V2_FG
++from trainers.cocoop_textconsistency_v2_fg import CoCoOp_TextConsistency_V2_FG
++from trainers.coop_textconsistency_ablation import CoOp_TextConsistency_Ablation
++
++ROOT = Path(__file__).resolve().parents[2]
++
++
++def tiny_clip(cfg):
++    torch.manual_seed(31)
++    model = CLIP(32, 32, 1, 64, 16, 77, 49408, 64, 1, 1,
++                 {'trainer': 'CoOp', 'vision_depth': 0, 'language_depth': 0, 'vision_ctx': 0, 'language_ctx': 0})
++    model._repro_sha256 = 'tiny-test-model-not-pretrained'
++    return model.float()
++
++
++def make_trainer(trainer_cls, output, mode='hierarchical', adapter=True, group='full'):
++    cfg = get_cfg_default(); extend_cfg(cfg)
++    cfg.SEED = 1; cfg.USE_CUDA = False; cfg.DATASET.ROOT = str(output)
++    cfg.DATASET.NAME = 'Caltech101'; cfg.DATASET.SUBSAMPLE_CLASSES = 'base'
++    cfg.DATASET.NUM_SHOTS = 16; cfg.OUTPUT_DIR = str(output)
++    cfg.TRAINER.NAME = trainer_cls.__name__
++    cfg.MODEL.BACKBONE.NAME = 'ViT-B/16'
++    cfg.OPTIM.MAX_EPOCH = 2; cfg.OPTIM.WARMUP_EPOCH = 0
++    tc = cfg.TRAINER.TEXTCONSISTENCY
++    tc.N_VIEWS = 5; tc.N_GROUPS = 2; tc.N_CTX = 4
++    tc.KD_WEIGHT = 1.; tc.DEVICE = 'cpu'; tc.AGGREGATION = mode
++    tc.USE_FEATURE_ADAPTER = adapter; tc.ABLATION_GROUP = group
++    if group == 'baseline': tc.INFERENCE_BRANCH = 'student'
++    trainer = trainer_cls.__new__(trainer_cls); TrainerBase.__init__(trainer)
++    trainer.cfg = cfg
++    names = list(json.loads((ROOT / 'templates/cal_prompts_full.json').read_text()))[:3]
++    trainer.dm = SimpleNamespace(dataset=SimpleNamespace(classnames=names, train_x=[], val=[], test=[]))
++    trainer.check_cfg(cfg)
++    with patch('trainers.textconsistency_runtime.load_clip_checkpoint', side_effect=tiny_clip):
++        trainer.build_model()
++    trainer.batch_idx = 0; trainer.num_batches = 1
++    return trainer
++
++
++class TrainerIntegration(unittest.TestCase):
++    def setUp(self):
++        torch.set_num_threads(2)
++        self.capture = contextlib.redirect_stdout(io.StringIO()); self.capture.__enter__()
++
++    def tearDown(self):
++        self.capture.__exit__(None, None, None)
++
++    def test_real_training_updates_student_and_aggregator_while_clip_stays_frozen(self):
++        for cls in (CoOp_TextConsistency_V2_FG, CoCoOp_TextConsistency_V2_FG):
++            with self.subTest(trainer=cls.__name__), tempfile.TemporaryDirectory() as temp:
++                trainer = make_trainer(cls, Path(temp))
++                model = trainer.model
++                before = model.prompt_learner.ctx.detach().clone()
++                adapter_before = model.view_aggregator.fine_grained_proj[0].weight.detach().clone()
++                trainer.forward_backward({'img': torch.randn(3, 3, 32, 32), 'label': torch.tensor([0, 1, 2])})
++                self.assertFalse(torch.equal(before, model.prompt_learner.ctx))
++                self.assertFalse(torch.equal(adapter_before, model.view_aggregator.fine_grained_proj[0].weight))
++                self.assertTrue(all(not p.requires_grad and p.grad is None for p in model.image_encoder.parameters()))
++                self.assertTrue(all(not p.requires_grad and p.grad is None for p in model.text_encoder.parameters()))
++
++    def test_save_reload_reproduces_all_prediction_branches(self):
++        with tempfile.TemporaryDirectory() as temp:
++            root = Path(temp)
++            first = make_trainer(CoOp_TextConsistency_V2_FG, root / 'first')
++            images = torch.randn(3, 3, 32, 32)
++            first.forward_backward({'img': images, 'label': torch.tensor([0, 1, 2])})
++            first.save_model(0, root / 'first')
++            second = make_trainer(CoOp_TextConsistency_V2_FG, root / 'second')
++            second.load_model(root / 'first', 1)
++            for branch in ('student', 'teacher', 'ensemble'):
++                for trainer in (first, second):
++                    trainer.cfg.TRAINER.TEXTCONSISTENCY.INFERENCE_BRANCH = branch
++                    trainer.model.eval()
++                torch.testing.assert_close(first.model_inference(images), second.model_inference(images), rtol=0, atol=0)
++            self.assertEqual(second.loaded_checkpoints[0]['epoch'], 1)
++
++    def test_checkpoint_rejects_different_grouping_even_when_tensor_shapes_match(self):
++        with tempfile.TemporaryDirectory() as temp:
++            root = Path(temp)
++            trainer = make_trainer(CoOp_TextConsistency_V2_FG, root / 'one')
++            trainer.save_model(0, root / 'one')
++            trainer.repro_signature = {**trainer.repro_signature, 'n_groups': 3}
++            with self.assertRaises(ValueError): trainer.load_model(root / 'one', 1)
++
++    def test_checkpoint_cannot_be_relabelled_as_a_different_seed(self):
++        with tempfile.TemporaryDirectory() as temp:
++            root = Path(temp)
++            trainer = make_trainer(CoOp_TextConsistency_V2_FG, root / 'one')
++            trainer.save_model(0, root / 'one')
++            trainer.run_provenance = {**trainer.run_provenance, 'seed': 2}
++            with self.assertRaises(ValueError): trainer.load_model(root / 'one', 1)
++
++    def test_cocoop_aggregation_obeys_configuration_for_every_dataset(self):
++        with tempfile.TemporaryDirectory() as temp:
++            trainer = make_trainer(CoCoOp_TextConsistency_V2_FG, Path(temp), 'flat', False)
++            self.assertEqual(trainer.model.view_aggregator.mode, 'flat')
++            self.assertIsNone(trainer.model.view_aggregator.fine_grained_proj)
++            self.assertEqual(trainer.diversity_weight, 0.)
++
++    def test_baseline_without_teacher_trains_and_predicts(self):
++        with tempfile.TemporaryDirectory() as temp:
++            trainer = make_trainer(CoOp_TextConsistency_Ablation, Path(temp), group='baseline')
++            images = torch.randn(3, 3, 32, 32)
++            result = trainer.forward_backward({'img': images, 'label': torch.tensor([0, 1, 2])})
++            self.assertEqual(result['loss_adaptive_ce'], 0.)
++            self.assertEqual(tuple(trainer.model_inference(images).shape), (3, 3))
++
++if __name__ == '__main__':
++    unittest.main()
+--- a/tests/test_adaptive_ce_contract.py
++++ /dev/null
+@@ -1,51 +0,0 @@
+-import re
+-import unittest
+-from pathlib import Path
+-
+-
+-ROOT = Path(__file__).resolve().parents[1]
+-TRAINERS = (
+-    ROOT / "trainers" / "coop_textconsistency_v2_fg.py",
+-    ROOT / "trainers" / "cocoop_textconsistency_v2_fg.py",
+-)
+-
+-
+-class AdaptiveCrossEntropyContractTest(unittest.TestCase):
+-    def test_config_defines_adaptive_ce_weight(self):
+-        source = (ROOT / "train.py").read_text(encoding="utf-8")
+-        self.assertIn(
+-            "cfg.TRAINER.TEXTCONSISTENCY.ADAPTIVE_CE_WEIGHT = 1.0",
+-            source,
+-        )
+-
+-    def test_final_trainers_optimize_and_report_adaptive_ce(self):
+-        for trainer_path in TRAINERS:
+-            with self.subTest(trainer=trainer_path.name):
+-                source = trainer_path.read_text(encoding="utf-8")
+-                self.assertRegex(
+-                    source,
+-                    re.compile(
+-                        r"self\.adaptive_ce_weight\s*=\s*"
+-                        r"cfg\.TRAINER\.TEXTCONSISTENCY\.ADAPTIVE_CE_WEIGHT"
+-                    ),
+-                )
+-                self.assertIn(
+-                    "loss_adaptive_ce = F.cross_entropy(logits_adaptive, label)",
+-                    source,
+-                )
+-                self.assertRegex(
+-                    source,
+-                    re.compile(
+-                        r"loss\s*=.*self\.adaptive_ce_weight\s*\*\s*"
+-                        r"loss_adaptive_ce",
+-                        re.DOTALL,
+-                    ),
+-                )
+-                self.assertIn(
+-                    '"loss_adaptive_ce": loss_adaptive_ce.item()',
+-                    source,
+-                )
+-
+-
+-if __name__ == "__main__":
+-    unittest.main()
+--- a/tests/test_checkpoint_contract.py
++++ /dev/null
+@@ -1,52 +0,0 @@
+-import re
+-import unittest
+-from pathlib import Path
+-
+-
+-ROOT = Path(__file__).resolve().parents[1]
+-TRAINERS = (
+-    ROOT / "trainers" / "coop_textconsistency_v2_fg.py",
+-    ROOT / "trainers" / "cocoop_textconsistency_v2_fg.py",
+-)
+-
+-
+-class CheckpointContractTest(unittest.TestCase):
+-    def test_final_trainers_checkpoint_all_trainable_modules(self):
+-        for trainer_path in TRAINERS:
+-            with self.subTest(trainer=trainer_path.name):
+-                source = trainer_path.read_text(encoding="utf-8")
+-                self.assertRegex(
+-                    source,
+-                    re.compile(
+-                        r"self\.trainable_modules\s*=\s*nn\.ModuleDict\(\s*\{"
+-                        r".*?[\"']prompt_learner[\"']\s*:\s*"
+-                        r"self\.model\.prompt_learner\s*,"
+-                        r".*?[\"']view_aggregator[\"']\s*:\s*"
+-                        r"self\.model\.view_aggregator"
+-                        r".*?\}\s*\)",
+-                        re.DOTALL,
+-                    ),
+-                )
+-                self.assertIn(
+-                    'self.register_model("textconsistency", self.trainable_modules, '
+-                    "self.optim, self.sched)",
+-                    source,
+-                )
+-                self.assertNotIn(
+-                    'self.register_model("prompt_learner", '
+-                    "self.model.prompt_learner, self.optim, self.sched)",
+-                    source,
+-                )
+-
+-    def test_loaders_remove_prompt_buffers_from_nested_state_dict(self):
+-        for trainer_path in TRAINERS:
+-            with self.subTest(trainer=trainer_path.name):
+-                source = trainer_path.read_text(encoding="utf-8")
+-                self.assertIn(
+-                    'key.endswith(("token_prefix", "token_suffix"))',
+-                    source,
+-                )
+-
+-
+-if __name__ == "__main__":
+-    unittest.main()
+--- a/tests/test_table_4_3_ablation_contract.py
++++ /dev/null
+@@ -1,105 +0,0 @@
+-import importlib.util
+-import unittest
+-from pathlib import Path
+-
+-
+-ROOT = Path(__file__).resolve().parents[1]
+-TRAINER = ROOT / "trainers" / "coop_textconsistency_ablation.py"
+-RUNNER = ROOT / "scripts" / "ablation" / "run_table_4_3.sh"
+-RUN_ALL = ROOT / "scripts" / "ablation" / "run_all_table_4_3.sh"
+-SUMMARY = ROOT / "scripts" / "ablation" / "summarize_table_4_3.py"
+-
+-
+-EXPECTED_GROUPS = {
+-    "baseline": {
+-        "n_views": 0,
+-        "use_teacher": False,
+-        "use_adaptive": False,
+-        "use_fg": False,
+-        "use_kd": False,
+-    },
+-    "single_view_kd": {
+-        "n_views": 1,
+-        "use_teacher": True,
+-        "use_adaptive": False,
+-        "use_fg": False,
+-        "use_kd": True,
+-    },
+-    "no_kd": {
+-        "n_views": None,
+-        "use_teacher": True,
+-        "use_adaptive": True,
+-        "use_fg": False,
+-        "use_kd": False,
+-    },
+-    "v2_no_fg": {
+-        "n_views": None,
+-        "use_teacher": True,
+-        "use_adaptive": True,
+-        "use_fg": False,
+-        "use_kd": True,
+-    },
+-    "full": {
+-        "n_views": None,
+-        "use_teacher": True,
+-        "use_adaptive": True,
+-        "use_fg": True,
+-        "use_kd": True,
+-    },
+-}
+-
+-
+-class Table43AblationContractTest(unittest.TestCase):
+-    def test_train_py_imports_ablation_trainer(self):
+-        source = (ROOT / "train.py").read_text(encoding="utf-8")
+-        self.assertIn("import trainers.coop_textconsistency_ablation", source)
+-
+-    def test_trainer_defines_exactly_paper_groups(self):
+-        source = TRAINER.read_text(encoding="utf-8")
+-        self.assertIn("class CoOp_TextConsistency_Ablation", source)
+-        for group, flags in EXPECTED_GROUPS.items():
+-            self.assertIn(f'"{group}"', source)
+-            for key, value in flags.items():
+-                if value is None:
+-                    continue
+-                self.assertIn(f'"{key}": {value}', source)
+-
+-        self.assertNotIn("fixed_avg", source)
+-        self.assertNotIn("module2", source.lower())
+-
+-    def test_trainer_registers_all_trainable_modules_once(self):
+-        source = TRAINER.read_text(encoding="utf-8")
+-        self.assertIn("self.trainable_modules = nn.ModuleDict(", source)
+-        self.assertIn('"prompt_learner": self.model.prompt_learner', source)
+-        self.assertIn('"view_aggregator": self.model.view_aggregator', source)
+-        self.assertIn(
+-            'self.register_model("textconsistency", self.trainable_modules, '
+-            "self.optim, self.sched)",
+-            source,
+-        )
+-        self.assertNotIn('register_model("prompt_learner"', source)
+-
+-    def test_runner_covers_three_paper_datasets_five_groups_and_three_seeds(self):
+-        source = RUNNER.read_text(encoding="utf-8")
+-        for dataset in ("caltech101", "ucf101", "fgvc_aircraft"):
+-            self.assertIn(dataset, source)
+-        for group in EXPECTED_GROUPS:
+-            self.assertIn(group, source)
+-        self.assertIn("SEEDS=${SEEDS:-1 2 3}", source)
+-        self.assertIn("DATASET.SUBSAMPLE_CLASSES base", source)
+-        self.assertIn("DATASET.SUBSAMPLE_CLASSES new", source)
+-
+-        run_all_source = RUN_ALL.read_text(encoding="utf-8")
+-        self.assertIn("caltech101 ucf101 fgvc_aircraft", run_all_source)
+-
+-    def test_summary_parser_computes_harmonic_mean(self):
+-        spec = importlib.util.spec_from_file_location("summarize_table_4_3", SUMMARY)
+-        module = importlib.util.module_from_spec(spec)
+-        spec.loader.exec_module(module)
+-        self.assertEqual(module.harmonic_mean(80.0, 80.0), 80.0)
+-        self.assertAlmostEqual(module.harmonic_mean(60.0, 90.0), 72.0)
+-        self.assertIsNone(module.harmonic_mean(None, 90.0))
+-
+-
+-if __name__ == "__main__":
+-    unittest.main()
+--- a/train.py
++++ b/train.py
+@@ -1,4 +1,7 @@
+ import argparse
++import os
++from pathlib import Path
++os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
+ import torch
+ 
+ from dassl.utils import setup_logger, set_random_seed
+@@ -59,7 +62,7 @@
+     if args.resume:
+         cfg.RESUME = args.resume
+ 
+-    if args.seed:
++    if args.seed is not None:
+         cfg.SEED = args.seed
+ 
+     if args.source_domains:
+@@ -112,7 +115,7 @@
+     # Config for TextConsistency (Multi-View Text Consistency Learning)
+     cfg.TRAINER.TEXTCONSISTENCY = CN()
+     cfg.TRAINER.TEXTCONSISTENCY.N_CTX = 4
+-    cfg.TRAINER.TEXTCONSISTENCY.PREC = "fp16"
++    cfg.TRAINER.TEXTCONSISTENCY.PREC = "fp32"
+     cfg.TRAINER.TEXTCONSISTENCY.N_VIEWS = 5           # 每类使用的描述数量
+     cfg.TRAINER.TEXTCONSISTENCY.CONSISTENCY_WEIGHT = 1.0  # 一致性损失权重
+     cfg.TRAINER.TEXTCONSISTENCY.CONSISTENCY_TEMP = 1.0    # 一致性损失温度
+@@ -124,6 +127,13 @@
+     cfg.TRAINER.TEXTCONSISTENCY.N_GROUPS = 4          # FG: 层次化注意力分组数
+     cfg.TRAINER.TEXTCONSISTENCY.ABLATION_GROUP = "full"  # Paper Table 4.3 group
+ 
++    cfg.TRAINER.TEXTCONSISTENCY.AGGREGATION = "hierarchical"
++    cfg.TRAINER.TEXTCONSISTENCY.USE_FEATURE_ADAPTER = True
++    cfg.TRAINER.TEXTCONSISTENCY.INFERENCE_BRANCH = "ensemble"
++    cfg.TRAINER.TEXTCONSISTENCY.ENSEMBLE_ALPHA = 0.5
++    cfg.TRAINER.TEXTCONSISTENCY.DEVICE = "auto"
++    cfg.TRAINER.TEXTCONSISTENCY.CLIP_PATH = "clip/ViT-B-16.pt"
++    cfg.TRAINER.TEXTCONSISTENCY.TEXT_BATCH_SIZE = 32
+     cfg.DATASET.SUBSAMPLE_CLASSES = "all"  # all, base or new
+ 
+ def setup_cfg(args):
+@@ -151,13 +161,24 @@
+ 
+ def main(args):
+     cfg = setup_cfg(args)
++    legacy_trainers = {"CoOp_TextConsistency", "CoOp_TextConsistency_Avg", "CoOp_TextConsistency_V2"}
++    if cfg.TRAINER.NAME in legacy_trainers:
++        raise ValueError("Legacy trainer is not validated; use CoOp_TextConsistency_V2_FG with AGGREGATION mean/flat/hierarchical")
++    if "TextConsistency" in cfg.TRAINER.NAME:
++        directory = Path(cfg.OUTPUT_DIR)
++        if cfg.RESUME:
++            raise ValueError("Use a fresh output for the corrected protocol; legacy resume is not supported")
++        if directory.exists() and any(directory.iterdir()):
++            raise FileExistsError(f"Output already contains files; choose a fresh directory: {directory}")
++        torch.use_deterministic_algorithms(True)
+     if cfg.SEED >= 0:
+         print("Setting fixed seed: {}".format(cfg.SEED))
+         set_random_seed(cfg.SEED)
+     setup_logger(cfg.OUTPUT_DIR)
+ 
+     if torch.cuda.is_available() and cfg.USE_CUDA:
+-        torch.backends.cudnn.benchmark = True
++        torch.backends.cudnn.benchmark = False
++        torch.backends.cudnn.deterministic = True
+ 
+     print_args(args, cfg)
+     # print("Collecting env info ...")
+--- a/trainers/cocoop_textconsistency_v2_fg.py
++++ b/trainers/cocoop_textconsistency_v2_fg.py
+@@ -1,65 +1,19 @@
+-"""
+-CoCoOp + TextConsistency V2 + Fine-Grained Enhancement
+-
+-结合CoCoOp的图像条件化提示和TextConsistency的多视角一致性学习
+-在细粒度数据集上自动使用FG增强模块
+-"""
+-
+-import os.path as osp
+-import json
++"""Validated TextConsistency with configurable aggregation and fixed inference rule."""
+ from collections import OrderedDict
+ import torch
+-import torch.nn as nn
++from torch import nn
+ from torch.nn import functional as F
+-from torch.cuda.amp import GradScaler
+-
+-from dassl.engine import TRAINER_REGISTRY, TrainerX
+-from dassl.metrics import compute_accuracy
+-from dassl.utils import load_checkpoint
+-from dassl.optim import build_lr_scheduler
++from dassl.engine import TRAINER_REGISTRY
+ from clip import clip
+-from clip.simple_tokenizer import SimpleTokenizer as _Tokenizer
+-
+-_tokenizer = _Tokenizer()
+-
+-TEMPLATE_FILES = {
+-    "Caltech101": "templates/cal_prompts_full.json",
+-    "OxfordPets": "templates/pets_prompts_full.json",
+-    "StanfordCars": "templates/cars_prompts_full.json",
+-    "OxfordFlowers": "templates/flower_prompts_full.json",
+-    "Food101": "templates/food_prompts_full.json",
+-    "FGVCAircraft": "templates/airplane_prompts_full.json",
+-    "SUN397": "templates/sun_prompts_full.json",
+-    "DescribableTextures": "templates/texture_prompts_full.json",
+-    "EuroSAT": "templates/eurosat_prompts_full.json",
+-    "UCF101": "templates/ucf_prompts_full.json",
+-}
+-
+-# 细粒度数据集配置（使用FG增强）
+-FG_DATASETS = {
+-    # 原有的细粒度数据集
+-    "DescribableTextures": {"n_groups": 4, "contrastive_w": 0.15, "diversity_w": 0.08},
+-    "FGVCAircraft": {"n_groups": 4, "contrastive_w": 0.1, "diversity_w": 0.05},
+-    "UCF101": {"n_groups": 5, "contrastive_w": 0.1, "diversity_w": 0.05},
+-    
+-    # 新增：困难数据集启用FG增强
+-    "OxfordPets": {"n_groups": 4, "contrastive_w": 0.12, "diversity_w": 0.06},
+-    "StanfordCars": {"n_groups": 4, "contrastive_w": 0.1, "diversity_w": 0.05},
+-    "OxfordFlowers": {"n_groups": 4, "contrastive_w": 0.12, "diversity_w": 0.06},
+-}
++from .textconsistency_common import (
++    ViewAggregator, CachedMultiViewTextEncoder, TEMPLATE_FILES, build_view_aggregator,
++    prediction_logits, load_complete_checkpoint, load_clip_checkpoint,
++)
++from .textconsistency_runtime import ValidatedTrainer
+ 
+ 
+ def load_clip_to_cpu(cfg):
+-    model_path = './clip/ViT-B-16.pt'
+-    try:
+-        model = torch.jit.load(model_path, map_location="cpu").eval()
+-        state_dict = None
+-    except RuntimeError:
+-        state_dict = torch.load(model_path, map_location="cpu")
+-    design_details = {"trainer": 'CoCoOp', "vision_depth": 0, "language_depth": 0,
+-                      "vision_ctx": 0, "language_ctx": 0}
+-    model = clip.build_model(state_dict or model.state_dict(), design_details)
+-    return model
++    return load_clip_checkpoint(cfg)
+ 
+ 
+ class TextEncoder(nn.Module):
+@@ -79,7 +33,6 @@
+         x = self.ln_final(x).type(self.dtype)
+         x = x[torch.arange(x.shape[0]), tokenized_prompts.argmax(dim=-1)] @ self.text_projection
+         return x
+-
+ 
+ class PromptLearner(nn.Module):
+     """CoCoOp风格的图像条件化提示学习器"""
+@@ -151,424 +104,50 @@
+         
+         return prompts
+ 
+-
+-class HierarchicalViewAggregator(nn.Module):
+-    """层次化视角聚合器（FG增强）"""
+-    def __init__(self, dim, n_views, n_groups=4, hidden_dim=None):
+-        super().__init__()
+-        if hidden_dim is None:
+-            hidden_dim = dim // 4
+-        
+-        self.n_views = n_views
+-        self.n_groups = n_groups
+-        self.views_per_group = max(1, n_views // n_groups)
+-        
+-        self.intra_group_query = nn.Linear(dim, hidden_dim)
+-        self.intra_group_key = nn.Linear(dim, hidden_dim)
+-        self.intra_group_temp = nn.Parameter(torch.ones(1) * 0.07)
+-        
+-        self.inter_group_query = nn.Linear(dim, hidden_dim)
+-        self.inter_group_key = nn.Linear(dim, hidden_dim)
+-        self.inter_group_temp = nn.Parameter(torch.ones(1) * 0.07)
+-        
+-        self.fine_grained_proj = nn.Sequential(
+-            nn.Linear(dim, dim),
+-            nn.ReLU(),
+-            nn.Linear(dim, dim)
+-        )
+-        
+-        self._init_weights()
+-    
+-    def _init_weights(self):
+-        for m in self.modules():
+-            if isinstance(m, nn.Linear):
+-                nn.init.xavier_uniform_(m.weight)
+-                if m.bias is not None:
+-                    nn.init.zeros_(m.bias)
+-    
+-    def forward(self, image_features, multiview_features):
+-        batch_size = image_features.shape[0]
+-        n_cls, n_views, dim = multiview_features.shape
+-        
+-        image_features_float = image_features.float()
+-        multiview_features_float = multiview_features.float()
+-        
+-        enhanced_image = self.fine_grained_proj(image_features_float)
+-        enhanced_image = enhanced_image + image_features_float
+-        enhanced_image = enhanced_image / enhanced_image.norm(dim=-1, keepdim=True)
+-        
+-        actual_groups = min(self.n_groups, n_views)
+-        views_per_group = n_views // actual_groups
+-        
+-        grouped_features = multiview_features_float[:, :actual_groups*views_per_group, :].view(
+-            n_cls, actual_groups, views_per_group, dim
+-        )
+-        
+-        intra_query = self.intra_group_query(enhanced_image)
+-        intra_keys = self.intra_group_key(
+-            grouped_features.reshape(-1, dim)
+-        ).view(n_cls, actual_groups, views_per_group, -1)
+-        
+-        intra_sim = torch.einsum('bh,cgvh->bcgv', intra_query, intra_keys)
+-        intra_temp = self.intra_group_temp.abs().clamp(min=0.01)
+-        intra_attn = F.softmax(intra_sim / intra_temp, dim=-1)
+-        
+-        group_features = torch.einsum('bcgv,cgvd->bcgd', intra_attn, grouped_features)
+-        
+-        inter_query = self.inter_group_query(enhanced_image)
+-        inter_keys = self.inter_group_key(
+-            group_features.reshape(-1, dim)
+-        ).view(batch_size, n_cls, actual_groups, -1)
+-        
+-        inter_sim = torch.einsum('bh,bcgh->bcg', inter_query, inter_keys)
+-        inter_temp = self.inter_group_temp.abs().clamp(min=0.01)
+-        inter_attn = F.softmax(inter_sim / inter_temp, dim=-1)
+-        
+-        final_features = torch.einsum('bcg,bcgd->bcd', inter_attn, group_features)
+-        final_features = final_features / final_features.norm(dim=-1, keepdim=True)
+-        final_features = final_features.type(image_features.dtype)
+-        
+-        attn_info = {'intra_attn': intra_attn, 'inter_attn': inter_attn}
+-        return final_features, attn_info
++class HierarchicalViewAggregator(ViewAggregator):
++    def __init__(self, dim, n_views, n_groups=4, hidden_dim=None, use_feature_adapter=True):
++        super().__init__(dim, n_views, 'hierarchical', n_groups, use_feature_adapter, hidden_dim)
+ 
+ 
+-class AdaptiveViewAggregator(nn.Module):
+-    """自适应视角聚合器（标准版）"""
+-    def __init__(self, dim, n_views, hidden_dim=None):
+-        super().__init__()
+-        if hidden_dim is None:
+-            hidden_dim = dim // 4
+-        
+-        self.query_proj = nn.Linear(dim, hidden_dim)
+-        self.key_proj = nn.Linear(dim, hidden_dim)
+-        self.temperature = nn.Parameter(torch.ones(1) * 0.07)
+-        self.n_views = n_views
+-        self._init_weights()
+-    
+-    def _init_weights(self):
+-        nn.init.xavier_uniform_(self.query_proj.weight)
+-        nn.init.xavier_uniform_(self.key_proj.weight)
+-        nn.init.zeros_(self.query_proj.bias)
+-        nn.init.zeros_(self.key_proj.bias)
+-    
+-    def forward(self, image_features, multiview_features):
+-        batch_size = image_features.shape[0]
+-        n_cls, n_views, dim = multiview_features.shape
+-        
+-        image_features_float = image_features.float()
+-        multiview_features_float = multiview_features.float()
+-        
+-        query = self.query_proj(image_features_float)
+-        keys = self.key_proj(multiview_features_float.view(-1, dim))
+-        keys = keys.view(n_cls, n_views, -1)
+-        
+-        sim = torch.einsum('bh,cvh->bcv', query, keys)
+-        temp = self.temperature.abs().clamp(min=0.01)
+-        attn_weights = F.softmax(sim / temp, dim=-1)
+-        
+-        weighted_features = torch.einsum('bcv,cvd->bcd', attn_weights, multiview_features_float)
+-        weighted_features = weighted_features / weighted_features.norm(dim=-1, keepdim=True)
+-        weighted_features = weighted_features.type(image_features.dtype)
+-        
+-        return weighted_features, {'attn': attn_weights}
+-
+-
+-class MultiViewTextEncoder(nn.Module):
+-    """多视角文本编码器"""
+-    def __init__(self, cfg, classnames, clip_model):
+-        super().__init__()
+-        self.n_cls = len(classnames)
+-        self.n_views = cfg.TRAINER.TEXTCONSISTENCY.N_VIEWS
+-        self._load_multiview_features(cfg, classnames, clip_model)
+-    
+-    def _load_multiview_features(self, cfg, classnames, clip_model):
+-        dataset_name = cfg.DATASET.NAME
+-        template_file = TEMPLATE_FILES.get(dataset_name)
+-        
+-        if template_file is None or not osp.exists(template_file):
+-            self._create_default_features(classnames)
+-            return
+-        
+-        with open(template_file, 'r') as f:
+-            templates = json.load(f)
+-        
+-        clip_model_cuda = load_clip_to_cpu(cfg).cuda()
+-        clip_model_cuda.eval()
+-        
+-        all_view_features = []
+-        
+-        with torch.no_grad():
+-            for classname in classnames:
+-                key = classname.replace("_", " ").lower()
+-                descriptions = None
+-                
+-                for k in [key, classname, classname.replace("_", " ")]:
+-                    if k in templates:
+-                        descriptions = templates[k][:self.n_views]
+-                        break
+-                
+-                if descriptions is None or len(descriptions) == 0:
+-                    descriptions = [f"a photo of a {classname.replace('_', ' ')}"]
+-                
+-                while len(descriptions) < self.n_views:
+-                    descriptions.append(descriptions[0])
+-                descriptions = descriptions[:self.n_views]
+-                
+-                tokens = clip.tokenize(descriptions, truncate=True).cuda()
+-                features = clip_model_cuda.encode_text(tokens)
+-                features = features / features.norm(dim=-1, keepdim=True)
+-                all_view_features.append(features)
+-        
+-        multiview_features = torch.stack(all_view_features, dim=0)
+-        self.register_buffer("multiview_features", multiview_features)
+-        
+-        del clip_model_cuda
+-        torch.cuda.empty_cache()
+-    
+-    def _create_default_features(self, classnames):
+-        clip_model_cuda = load_clip_to_cpu(None).cuda()
+-        clip_model_cuda.eval()
+-        
+-        with torch.no_grad():
+-            texts = [f"a photo of a {name.replace('_', ' ')}" for name in classnames]
+-            tokens = clip.tokenize(texts).cuda()
+-            features = clip_model_cuda.encode_text(tokens)
+-            features = features / features.norm(dim=-1, keepdim=True)
+-        
+-        multiview_features = features.unsqueeze(1).expand(-1, self.n_views, -1).clone()
+-        self.register_buffer("multiview_features", multiview_features)
+-        
+-        del clip_model_cuda
+-        torch.cuda.empty_cache()
+-    
+-    def get_view_features(self):
+-        return self.multiview_features
++class MultiViewTextEncoder(CachedMultiViewTextEncoder):
++    pass
+ 
+ 
+ class CustomCLIP(nn.Module):
+     def __init__(self, cfg, classnames, clip_model):
+         super().__init__()
+-        self.cfg = cfg
+-        self.n_cls = len(classnames)
+-        self.dataset_name = cfg.DATASET.NAME
+-        
+-        # 判断是否使用FG增强
+-        self.use_fg = self.dataset_name in FG_DATASETS
+-        
+         self.prompt_learner = PromptLearner(cfg, classnames, clip_model)
+         self.tokenized_prompts = self.prompt_learner.tokenized_prompts
+-        
+         self.multiview_encoder = MultiViewTextEncoder(cfg, classnames, clip_model)
+-        
+-        dim = clip_model.ln_final.weight.shape[0]
+-        n_views = cfg.TRAINER.TEXTCONSISTENCY.N_VIEWS
+-        
+-        # 根据数据集选择聚合器
+-        if self.use_fg:
+-            fg_config = FG_DATASETS[self.dataset_name]
+-            n_groups = fg_config["n_groups"]
+-            self.view_aggregator = HierarchicalViewAggregator(dim, n_views, n_groups)
+-            print(f"Using FG enhancement for {self.dataset_name} with {n_groups} groups")
+-        else:
+-            self.view_aggregator = AdaptiveViewAggregator(dim, n_views)
+-            print(f"Using standard aggregator for {self.dataset_name}")
+-        
++        self.view_aggregator = build_view_aggregator(cfg, clip_model.text_projection.shape[-1])
+         self.image_encoder = clip_model.visual
+         self.text_encoder = TextEncoder(clip_model)
+         self.logit_scale = clip_model.logit_scale
+         self.dtype = clip_model.dtype
+ 
+     def forward(self, image, return_attn=False):
+-        # 编码图像
+-        image_features = self.image_encoder(image.type(self.dtype))
+-        image_features = image_features / image_features.norm(dim=-1, keepdim=True)
+-        
+-        # CoCoOp风格：图像条件化提示
+-        prompts = self.prompt_learner(image_features)  # [batch, n_cls, seq_len, ctx_dim]
+-        
+-        # 为每个图像编码文本
++        with torch.no_grad():
++            image_features = F.normalize(self.image_encoder(image.to(self.dtype)), dim=-1)
++        prompts = self.prompt_learner(image_features)
+         logits = []
+-        for pts_i, imf_i in zip(prompts, image_features):
+-            text_features = self.text_encoder(pts_i, self.tokenized_prompts)
+-            text_features = text_features / text_features.norm(dim=-1, keepdim=True)
+-            l_i = self.logit_scale.exp() * imf_i @ text_features.t()
+-            logits.append(l_i)
++        for prompt, features in zip(prompts, image_features):
++            text = F.normalize(self.text_encoder(prompt, self.tokenized_prompts), dim=-1)
++            logits.append(self.logit_scale.exp() * features @ text.t())
+         logits = torch.stack(logits)
+-        
+-        # 多视角自适应加权
+-        multiview_features = self.multiview_encoder.get_view_features()
+-        adaptive_features, attn_info = self.view_aggregator(image_features, multiview_features)
+-        logits_adaptive = self.logit_scale.exp() * torch.einsum('bd,bcd->bc', image_features, adaptive_features)
+-        
+-        if return_attn:
+-            return logits, logits_adaptive, image_features, attn_info
+-        return logits, logits_adaptive, image_features, None
++        adaptive, attention = self.view_aggregator(image_features,
++            self.multiview_encoder.get_view_features(), self.multiview_encoder.view_mask)
++        teacher = self.logit_scale.exp() * torch.einsum('bd,bcd->bc', image_features, adaptive)
++        return logits, teacher, image_features, attention if return_attn else None
+ 
+ 
+ @TRAINER_REGISTRY.register()
+-class CoCoOp_TextConsistency_V2_FG(TrainerX):
+-
+-    def check_cfg(self, cfg):
+-        assert cfg.TRAINER.TEXTCONSISTENCY.PREC in ["fp16", "fp32", "amp"]
+-
+-    def build_model(self):
+-        cfg = self.cfg
+-        classnames = self.dm.dataset.classnames
+-
+-        print(f"Loading CLIP (backbone: {cfg.MODEL.BACKBONE.NAME})")
+-        clip_model = load_clip_to_cpu(cfg)
+-
+-        if cfg.TRAINER.TEXTCONSISTENCY.PREC == "fp32" or cfg.TRAINER.TEXTCONSISTENCY.PREC == "amp":
+-            clip_model.float()
+-
+-        print("Building CoCoOp + TextConsistency V2 + FG CLIP")
+-        self.model = CustomCLIP(cfg, classnames, clip_model)
+-
+-        for name, param in self.model.named_parameters():
+-            if "prompt_learner" not in name and "view_aggregator" not in name:
+-                param.requires_grad_(False)
+-
+-        self.model.to(self.device)
+-
+-        self.optim = torch.optim.SGD(
+-            [p for p in self.model.parameters() if p.requires_grad],
+-            lr=cfg.OPTIM.LR, 
+-            momentum=cfg.OPTIM.MOMENTUM,
+-            weight_decay=cfg.OPTIM.WEIGHT_DECAY
+-        )
+-        self.sched = build_lr_scheduler(self.optim, cfg.OPTIM)
+-        self.trainable_modules = nn.ModuleDict(
+-            {
+-                "prompt_learner": self.model.prompt_learner,
+-                "view_aggregator": self.model.view_aggregator,
+-            }
+-        )
+-        self.register_model("textconsistency", self.trainable_modules, self.optim, self.sched)
+-        self.scaler = GradScaler() if cfg.TRAINER.TEXTCONSISTENCY.PREC == "amp" else None
+-        
+-        self.kd_weight = cfg.TRAINER.TEXTCONSISTENCY.KD_WEIGHT
+-        self.kd_temp = cfg.TRAINER.TEXTCONSISTENCY.KD_TEMP
+-        self.adaptive_ce_weight = cfg.TRAINER.TEXTCONSISTENCY.ADAPTIVE_CE_WEIGHT
+-        
+-        # FG增强参数（如果使用）
+-        if self.model.use_fg:
+-            fg_config = FG_DATASETS[cfg.DATASET.NAME]
+-            self.contrastive_weight = fg_config["contrastive_w"]
+-            self.diversity_weight = fg_config["diversity_w"]
+-            print(f"FG parameters: contrastive_w={self.contrastive_weight}, diversity_w={self.diversity_weight}")
+-        else:
+-            self.contrastive_weight = 0.0
+-            self.diversity_weight = 0.0
+-
+-    def forward_backward(self, batch):
+-        image, label = self.parse_batch_train(batch)
+-
+-        logits, logits_adaptive, image_features, attn_info = self.model(image, return_attn=True)
+-        
+-        loss_ce = F.cross_entropy(logits, label)
+-        loss_adaptive_ce = F.cross_entropy(logits_adaptive, label)
+-        
+-        if self.kd_weight > 0:
+-            loss_kd = F.kl_div(
+-                F.log_softmax(logits / self.kd_temp, dim=1),
+-                F.softmax(logits_adaptive.detach() / self.kd_temp, dim=1),
+-                reduction='batchmean'
+-            ) * (self.kd_temp ** 2)
+-        else:
+-            loss_kd = torch.tensor(0.0).to(self.device)
+-        
+-        # FG增强：对比学习
+-        if self.contrastive_weight > 0:
+-            image_features_norm = image_features / image_features.norm(dim=-1, keepdim=True)
+-            sim_matrix = image_features_norm @ image_features_norm.t()
+-            
+-            label_matrix = label.unsqueeze(1) == label.unsqueeze(0)
+-            label_matrix.fill_diagonal_(False)
+-            
+-            pos_mask = label_matrix.float()
+-            neg_mask = (~label_matrix).float()
+-            
+-            if pos_mask.sum() > 0:
+-                pos_sim = (sim_matrix * pos_mask).sum() / (pos_mask.sum() + 1e-8)
+-                neg_sim = (sim_matrix * neg_mask).sum() / (neg_mask.sum() + 1e-8)
+-                loss_contrastive = -pos_sim + neg_sim
+-            else:
+-                loss_contrastive = torch.tensor(0.0).to(self.device)
+-        else:
+-            loss_contrastive = torch.tensor(0.0).to(self.device)
+-        
+-        # FG增强：多样性正则化
+-        if self.diversity_weight > 0 and attn_info is not None and 'intra_attn' in attn_info:
+-            intra_attn = attn_info['intra_attn']
+-            inter_attn = attn_info['inter_attn']
+-            
+-            intra_entropy = -(intra_attn * (intra_attn + 1e-8).log()).sum(dim=-1).mean()
+-            inter_entropy = -(inter_attn * (inter_attn + 1e-8).log()).sum(dim=-1).mean()
+-            
+-            loss_diversity = -(intra_entropy + inter_entropy) * self.diversity_weight
+-        else:
+-            loss_diversity = torch.tensor(0.0).to(self.device)
+-        
+-        loss = (
+-            loss_ce
+-            + self.adaptive_ce_weight * loss_adaptive_ce
+-            + self.kd_weight * loss_kd
+-            + self.contrastive_weight * loss_contrastive
+-            + loss_diversity
+-        )
+-        
+-        self.model_backward_and_update(loss)
+-
+-        loss_summary = {
+-            "loss": loss.item(),
+-            "loss_ce": loss_ce.item(),
+-            "loss_adaptive_ce": loss_adaptive_ce.item(),
+-            "loss_kd": loss_kd.item() if isinstance(loss_kd, torch.Tensor) else loss_kd,
+-            "acc": compute_accuracy(logits, label)[0].item(),
+-        }
+-
+-        if (self.batch_idx + 1) == self.num_batches:
+-            self.update_lr()
+-
+-        return loss_summary
+-
+-    def parse_batch_train(self, batch):
+-        input = batch["img"].to(self.device)
+-        label = batch["label"].to(self.device)
+-        return input, label
++class CoCoOp_TextConsistency_V2_FG(ValidatedTrainer):
++    model_builder = CustomCLIP
+ 
+     def model_inference(self, image):
+-        logits, logits_adaptive, _, _ = self.model(image, return_attn=False)
+-        
+-        # Base类用软提示，Novel类用ensemble
+-        if self.cfg.DATASET.SUBSAMPLE_CLASSES == "new":
+-            return (logits + logits_adaptive) / 2
+-        else:
+-            return logits
++        student, teacher, _, _ = self.model(image, return_attn=False)
++        tc = self.cfg.TRAINER.TEXTCONSISTENCY
++        return prediction_logits(student, teacher, tc.INFERENCE_BRANCH, tc.ENSEMBLE_ALPHA)
+ 
+     def load_model(self, directory, epoch=None):
+-        if not directory:
+-            return
+-        names = self.get_model_names()
+-        model_file = "model-best.pth.tar"
+-        if epoch is not None:
+-            model_file = "model.pth.tar-" + str(epoch)
+-
+-        for name in names:
+-            model_path = osp.join(directory, name, model_file)
+-            if not osp.exists(model_path):
+-                import glob
+-                pattern = osp.join(directory, name, "model.pth.tar-*")
+-                model_files = glob.glob(pattern)
+-                if model_files:
+-                    model_files.sort(key=lambda x: int(x.split("-")[-1]))
+-                    model_path = model_files[-1]
+-                else:
+-                    continue
+-
+-            checkpoint = load_checkpoint(model_path)
+-            state_dict = checkpoint["state_dict"]
+-            for key in list(state_dict):
+-                if key.endswith(("token_prefix", "token_suffix")):
+-                    del state_dict[key]
+-            self._models[name].load_state_dict(state_dict, strict=False)
++        return load_complete_checkpoint(self, directory, epoch)
+--- a/trainers/coop_textconsistency_ablation.py
++++ b/trainers/coop_textconsistency_ablation.py
+@@ -1,32 +1,13 @@
+-"""
+-Controlled TextConsistency ablations for paper Table 4.3.
+-
+-The trainer exposes exactly the five groups reported in the paper:
+-baseline, single_view_kd, no_kd, v2_no_fg, and full.
+-"""
+-
+-import json
+-import os.path as osp
+-
++"""Legacy component ablations. For isolated aggregation controls use run_pilot.py."""
+ import torch
+-import torch.nn as nn
++from torch import nn
+ from torch.nn import functional as F
+-from torch.cuda.amp import GradScaler
+-
+-from dassl.engine import TRAINER_REGISTRY, TrainerX
+-from dassl.metrics import compute_accuracy
+-from dassl.optim import build_lr_scheduler
+-from dassl.utils import load_checkpoint
+-from clip import clip
+-
+-from trainers.coop_textconsistency_v2_fg import (
+-    HierarchicalViewAggregator,
+-    PromptLearner,
+-    TEMPLATE_FILES,
+-    TextEncoder,
+-    load_clip_to_cpu,
++from dassl.engine import TRAINER_REGISTRY
++from .coop_textconsistency_v2_fg import PromptLearner, TextEncoder
++from .textconsistency_common import (
++    CachedMultiViewTextEncoder, ViewAggregator, prediction_logits, load_complete_checkpoint,
+ )
+-
++from .textconsistency_runtime import ValidatedTrainer
+ 
+ ABLATION_GROUPS = {
+     "baseline": {
+@@ -66,341 +47,53 @@
+     },
+ }
+ 
+-
+-class AdaptiveViewAggregator(nn.Module):
+-    def __init__(self, dim, n_views, hidden_dim=None):
+-        super().__init__()
+-        if hidden_dim is None:
+-            hidden_dim = dim // 4
+-
+-        self.query_proj = nn.Linear(dim, hidden_dim)
+-        self.key_proj = nn.Linear(dim, hidden_dim)
+-        self.temperature = nn.Parameter(torch.ones(1) * 0.07)
+-        self.n_views = n_views
+-        self._init_weights()
+-
+-    def _init_weights(self):
+-        nn.init.xavier_uniform_(self.query_proj.weight)
+-        nn.init.xavier_uniform_(self.key_proj.weight)
+-        nn.init.zeros_(self.query_proj.bias)
+-        nn.init.zeros_(self.key_proj.bias)
+-
+-    def forward(self, image_features, multiview_features):
+-        n_cls, n_views, dim = multiview_features.shape
+-
+-        image_features_float = image_features.float()
+-        multiview_features_float = multiview_features.float()
+-
+-        query = self.query_proj(image_features_float)
+-        keys = self.key_proj(multiview_features_float.reshape(-1, dim))
+-        keys = keys.view(n_cls, n_views, -1)
+-
+-        sim = torch.einsum("bh,cvh->bcv", query, keys)
+-        temp = self.temperature.abs().clamp(min=0.01)
+-        attn_weights = F.softmax(sim / temp, dim=-1)
+-
+-        weighted_features = torch.einsum(
+-            "bcv,cvd->bcd",
+-            attn_weights,
+-            multiview_features_float,
+-        )
+-        weighted_features = weighted_features / weighted_features.norm(
+-            dim=-1,
+-            keepdim=True,
+-        )
+-        weighted_features = weighted_features.type(image_features.dtype)
+-
+-        return weighted_features, {"attn": attn_weights}
+-
+-
+-class MultiViewTextEncoder(nn.Module):
+-    def __init__(self, cfg, classnames, n_views):
+-        super().__init__()
+-        self.n_cls = len(classnames)
+-        self.n_views = n_views
+-        self._load_multiview_features(cfg, classnames)
+-
+-    def _load_multiview_features(self, cfg, classnames):
+-        dataset_name = cfg.DATASET.NAME
+-        template_file = TEMPLATE_FILES.get(dataset_name)
+-
+-        if template_file is None or not osp.exists(template_file):
+-            descriptions_by_class = [
+-                [f"a photo of a {name.replace('_', ' ')}"]
+-                for name in classnames
+-            ]
+-        else:
+-            with open(template_file, "r") as f:
+-                templates = json.load(f)
+-            descriptions_by_class = []
+-            for classname in classnames:
+-                key = classname.replace("_", " ").lower()
+-                descriptions = None
+-                for candidate in (key, classname, classname.replace("_", " ")):
+-                    if candidate in templates:
+-                        descriptions = templates[candidate][:self.n_views]
+-                        break
+-                if not descriptions:
+-                    descriptions = [f"a photo of a {classname.replace('_', ' ')}"]
+-                descriptions_by_class.append(descriptions)
+-
+-        clip_device = "cuda" if torch.cuda.is_available() else "cpu"
+-        clip_model = load_clip_to_cpu(cfg).to(clip_device)
+-        clip_model.eval()
+-
+-        all_view_features = []
+-        with torch.no_grad():
+-            for descriptions in descriptions_by_class:
+-                while len(descriptions) < self.n_views:
+-                    descriptions.append(descriptions[0])
+-                descriptions = descriptions[:self.n_views]
+-                tokens = clip.tokenize(descriptions, truncate=True).to(clip_device)
+-                features = clip_model.encode_text(tokens)
+-                features = features / features.norm(dim=-1, keepdim=True)
+-                all_view_features.append(features.cpu())
+-
+-        multiview_features = torch.stack(all_view_features, dim=0)
+-        self.register_buffer("multiview_features", multiview_features)
+-
+-        del clip_model
+-        if torch.cuda.is_available():
+-            torch.cuda.empty_cache()
+-
+-    def get_view_features(self):
+-        return self.multiview_features
+-
+-    def get_single_view_features(self):
+-        return self.multiview_features[:, 0, :]
+-
+-
+ class CustomCLIP(nn.Module):
+     def __init__(self, cfg, classnames, clip_model):
+         super().__init__()
+-        group_name = cfg.TRAINER.TEXTCONSISTENCY.ABLATION_GROUP
+-        self.group = ABLATION_GROUPS[group_name]
+-        self.n_cls = len(classnames)
+-
++        name = cfg.TRAINER.TEXTCONSISTENCY.ABLATION_GROUP
++        self.group = ABLATION_GROUPS[name]
+         self.prompt_learner = PromptLearner(cfg, classnames, clip_model)
+         self.tokenized_prompts = self.prompt_learner.tokenized_prompts
+-
+-        self.multiview_encoder = None
+-        self.view_aggregator = nn.Identity()
+-
+-        dim = clip_model.ln_final.weight.shape[0]
+-        if self.group["use_teacher"]:
+-            n_views = self.group["n_views"] or cfg.TRAINER.TEXTCONSISTENCY.N_VIEWS
+-            self.multiview_encoder = MultiViewTextEncoder(cfg, classnames, n_views)
+-
+-            if self.group["use_adaptive"]:
+-                if self.group["use_fg"]:
+-                    n_groups = cfg.TRAINER.TEXTCONSISTENCY.N_GROUPS
+-                    self.view_aggregator = HierarchicalViewAggregator(
+-                        dim,
+-                        n_views,
+-                        n_groups,
+-                    )
+-                else:
+-                    self.view_aggregator = AdaptiveViewAggregator(dim, n_views)
+-
+         self.image_encoder = clip_model.visual
+         self.text_encoder = TextEncoder(clip_model)
+-        self.logit_scale = clip_model.logit_scale
+-        self.dtype = clip_model.dtype
++        self.logit_scale, self.dtype = clip_model.logit_scale, clip_model.dtype
++        self.multiview_encoder, self.view_aggregator = None, nn.Identity()
++        if self.group['use_teacher']:
++            effective = cfg.clone(); effective.defrost()
++            tc = effective.TRAINER.TEXTCONSISTENCY
++            if self.group['n_views'] is not None:
++                tc.N_VIEWS = self.group['n_views']
++            self.multiview_encoder = CachedMultiViewTextEncoder(effective, classnames, clip_model)
++            mode = 'hierarchical' if self.group['use_fg'] else ('flat' if self.group['use_adaptive'] else 'mean')
++            self.view_aggregator = ViewAggregator(clip_model.text_projection.shape[-1], tc.N_VIEWS,
++                                                  mode, tc.N_GROUPS, self.group['use_fg'])
+ 
+     def forward(self, image, return_attn=False):
+-        image_features = self.image_encoder(image.type(self.dtype))
+-        image_features = image_features / image_features.norm(dim=-1, keepdim=True)
+-
+-        prompts = self.prompt_learner()
+-        text_features = self.text_encoder(prompts, self.tokenized_prompts)
+-        text_features = text_features / text_features.norm(dim=-1, keepdim=True)
+-
+-        logit_scale = self.logit_scale.exp()
+-        logits = logit_scale * image_features @ text_features.t()
+-
+-        teacher_logits = None
+-        attn_info = None
+-
+-        if self.group["use_teacher"]:
+-            multiview_features = self.multiview_encoder.get_view_features().to(
+-                image_features.device
+-            )
+-            if self.group["use_adaptive"]:
+-                teacher_features, attn_info = self.view_aggregator(
+-                    image_features,
+-                    multiview_features,
+-                )
+-                teacher_logits = logit_scale * torch.einsum(
+-                    "bd,bcd->bc",
+-                    image_features,
+-                    teacher_features,
+-                )
+-            else:
+-                teacher_features = self.multiview_encoder.get_single_view_features().to(
+-                    image_features.device
+-                )
+-                teacher_logits = logit_scale * image_features @ teacher_features.t()
+-
+-        if return_attn:
+-            return logits, teacher_logits, image_features, attn_info
+-        return logits, teacher_logits, image_features, None
++        with torch.no_grad():
++            features = F.normalize(self.image_encoder(image.to(self.dtype)), dim=-1)
++        text = F.normalize(self.text_encoder(self.prompt_learner(), self.tokenized_prompts), dim=-1)
++        student = self.logit_scale.exp() * features @ text.t()
++        teacher, attention = None, None
++        if self.multiview_encoder is not None:
++            text, attention = self.view_aggregator(features, self.multiview_encoder.get_view_features(),
++                                                   self.multiview_encoder.view_mask)
++            teacher = self.logit_scale.exp() * torch.einsum('bd,bcd->bc', features, text)
++        return student, teacher, features, attention if return_attn else None
+ 
+ 
+ @TRAINER_REGISTRY.register()
+-class CoOp_TextConsistency_Ablation(TrainerX):
++class CoOp_TextConsistency_Ablation(ValidatedTrainer):
++    model_builder = CustomCLIP
++
+     def check_cfg(self, cfg):
+-        assert cfg.TRAINER.TEXTCONSISTENCY.PREC in ["fp16", "fp32", "amp"]
+-        group = cfg.TRAINER.TEXTCONSISTENCY.ABLATION_GROUP
+-        assert group in ABLATION_GROUPS, f"Unknown ablation group: {group}"
+-
+-    def build_model(self):
+-        cfg = self.cfg
+-        classnames = self.dm.dataset.classnames
+-        group_name = cfg.TRAINER.TEXTCONSISTENCY.ABLATION_GROUP
+-        self.group = ABLATION_GROUPS[group_name]
+-
+-        print(f"Loading CLIP (backbone: {cfg.MODEL.BACKBONE.NAME})")
+-        clip_model = load_clip_to_cpu(cfg)
+-        if cfg.TRAINER.TEXTCONSISTENCY.PREC in ["fp32", "amp"]:
+-            clip_model.float()
+-
+-        print(f"Building Table 4.3 ablation model: {group_name}")
+-        self.model = CustomCLIP(cfg, classnames, clip_model)
+-
+-        for name, param in self.model.named_parameters():
+-            if "prompt_learner" not in name and "view_aggregator" not in name:
+-                param.requires_grad_(False)
+-
+-        self.model.to(self.device)
+-
+-        trainable_params = [p for p in self.model.parameters() if p.requires_grad]
+-        self.optim = torch.optim.SGD(
+-            trainable_params,
+-            lr=cfg.OPTIM.LR,
+-            momentum=cfg.OPTIM.MOMENTUM,
+-            weight_decay=cfg.OPTIM.WEIGHT_DECAY,
+-        )
+-        self.sched = build_lr_scheduler(self.optim, cfg.OPTIM)
+-        self.trainable_modules = nn.ModuleDict(
+-            {
+-                "prompt_learner": self.model.prompt_learner,
+-                "view_aggregator": self.model.view_aggregator,
+-            }
+-        )
+-        self.register_model("textconsistency", self.trainable_modules, self.optim, self.sched)
+-        self.scaler = GradScaler() if cfg.TRAINER.TEXTCONSISTENCY.PREC == "amp" else None
+-
+-        self.kd_weight = cfg.TRAINER.TEXTCONSISTENCY.KD_WEIGHT
+-        self.kd_temp = cfg.TRAINER.TEXTCONSISTENCY.KD_TEMP
+-        self.adaptive_ce_weight = cfg.TRAINER.TEXTCONSISTENCY.ADAPTIVE_CE_WEIGHT
+-        self.contrastive_weight = cfg.TRAINER.TEXTCONSISTENCY.CONTRASTIVE_WEIGHT
+-        self.diversity_weight = cfg.TRAINER.TEXTCONSISTENCY.DIVERSITY_WEIGHT
+-
+-    def forward_backward(self, batch):
+-        image, label = self.parse_batch_train(batch)
+-
+-        logits, teacher_logits, image_features, attn_info = self.model(
+-            image,
+-            return_attn=True,
+-        )
+-
+-        loss_ce = F.cross_entropy(logits, label)
+-        loss_kd = torch.tensor(0.0).to(self.device)
+-        loss_adaptive_ce = torch.tensor(0.0).to(self.device)
+-        loss_contrastive = torch.tensor(0.0).to(self.device)
+-        loss_diversity = torch.tensor(0.0).to(self.device)
+-
+-        if self.group["use_kd"] and teacher_logits is not None and self.kd_weight > 0:
+-            loss_kd = F.kl_div(
+-                F.log_softmax(logits / self.kd_temp, dim=1),
+-                F.softmax(teacher_logits.detach() / self.kd_temp, dim=1),
+-                reduction="batchmean",
+-            ) * (self.kd_temp ** 2)
+-
+-        if self.group["use_adaptive"] and teacher_logits is not None:
+-            loss_adaptive_ce = F.cross_entropy(teacher_logits, label)
+-
+-        if self.group["use_fg"] and self.contrastive_weight > 0:
+-            image_features_norm = image_features / image_features.norm(
+-                dim=-1,
+-                keepdim=True,
+-            )
+-            sim_matrix = image_features_norm @ image_features_norm.t()
+-            label_matrix = label.unsqueeze(1) == label.unsqueeze(0)
+-            label_matrix.fill_diagonal_(False)
+-            pos_mask = label_matrix.float()
+-            neg_mask = (~label_matrix).float()
+-            if pos_mask.sum() > 0:
+-                pos_sim = (sim_matrix * pos_mask).sum() / (pos_mask.sum() + 1e-8)
+-                neg_sim = (sim_matrix * neg_mask).sum() / (neg_mask.sum() + 1e-8)
+-                loss_contrastive = -pos_sim + neg_sim
+-
+-        if self.group["use_fg"] and self.diversity_weight > 0 and attn_info is not None:
+-            intra_attn = attn_info.get("intra_attn")
+-            inter_attn = attn_info.get("inter_attn")
+-            if intra_attn is not None and inter_attn is not None:
+-                intra_entropy = -(intra_attn * (intra_attn + 1e-8).log()).sum(dim=-1).mean()
+-                inter_entropy = -(inter_attn * (inter_attn + 1e-8).log()).sum(dim=-1).mean()
+-                loss_diversity = -(intra_entropy + inter_entropy)
+-
+-        loss = (
+-            loss_ce
+-            + self.group["use_adaptive"] * self.adaptive_ce_weight * loss_adaptive_ce
+-            + self.group["use_kd"] * self.kd_weight * loss_kd
+-            + self.group["use_fg"] * self.contrastive_weight * loss_contrastive
+-            + self.group["use_fg"] * self.diversity_weight * loss_diversity
+-        )
+-
+-        self.model_backward_and_update(loss)
+-
+-        loss_summary = {
+-            "loss": loss.item(),
+-            "loss_ce": loss_ce.item(),
+-            "loss_adaptive_ce": loss_adaptive_ce.item(),
+-            "loss_kd": loss_kd.item(),
+-            "acc": compute_accuracy(logits, label)[0].item(),
+-        }
+-
+-        if (self.batch_idx + 1) == self.num_batches:
+-            self.update_lr()
+-
+-        return loss_summary
+-
+-    def parse_batch_train(self, batch):
+-        input = batch["img"].to(self.device)
+-        label = batch["label"].to(self.device)
+-        return input, label
++        super().check_cfg(cfg)
++        if cfg.TRAINER.TEXTCONSISTENCY.ABLATION_GROUP not in ABLATION_GROUPS:
++            raise ValueError('Unknown ablation group')
+ 
+     def model_inference(self, image):
+-        logits, teacher_logits, _, _ = self.model(image, return_attn=False)
+-        if self.cfg.DATASET.SUBSAMPLE_CLASSES == "new" and teacher_logits is not None:
+-            return teacher_logits
+-        return logits
++        student, teacher, _, _ = self.model(image, return_attn=False)
++        tc = self.cfg.TRAINER.TEXTCONSISTENCY
++        return prediction_logits(student, teacher, tc.INFERENCE_BRANCH, tc.ENSEMBLE_ALPHA)
+ 
+     def load_model(self, directory, epoch=None):
+-        if not directory:
+-            return
+-        names = self.get_model_names()
+-        model_file = "model-best.pth.tar"
+-        if epoch is not None:
+-            model_file = "model.pth.tar-" + str(epoch)
+-
+-        for name in names:
+-            model_path = osp.join(directory, name, model_file)
+-            if not osp.exists(model_path):
+-                import glob
+-
+-                pattern = osp.join(directory, name, "model.pth.tar-*")
+-                model_files = glob.glob(pattern)
+-                if model_files:
+-                    model_files.sort(key=lambda x: int(x.split("-")[-1]))
+-                    model_path = model_files[-1]
+-                else:
+-                    continue
+-
+-            checkpoint = load_checkpoint(model_path)
+-            state_dict = checkpoint["state_dict"]
+-            for key in list(state_dict):
+-                if key.endswith(("token_prefix", "token_suffix")):
+-                    del state_dict[key]
+-            self._models[name].load_state_dict(state_dict, strict=False)
++        return load_complete_checkpoint(self, directory, epoch)
+--- a/trainers/coop_textconsistency_v2_fg.py
++++ b/trainers/coop_textconsistency_v2_fg.py
+@@ -1,53 +1,19 @@
+-"""
+-TextConsistency V2 + Fine-Grained Enhancement
+-
+-针对细粒度数据集的改进（不使用anchor知识）：
+-1. 层次化注意力：对不同粒度的描述分组加权
+-2. 对比学习：拉近同类样本，推远不同类样本
+-3. 描述多样性正则化：鼓励关注多个互补的描述
+-"""
+-
+-import os.path as osp
+-import json
++"""Validated TextConsistency with configurable aggregation and fixed inference rule."""
++from collections import OrderedDict
+ import torch
+-import torch.nn as nn
++from torch import nn
+ from torch.nn import functional as F
+-from torch.cuda.amp import GradScaler
+-
+-from dassl.engine import TRAINER_REGISTRY, TrainerX
+-from dassl.metrics import compute_accuracy
+-from dassl.utils import load_checkpoint
+-from dassl.optim import build_lr_scheduler
++from dassl.engine import TRAINER_REGISTRY
+ from clip import clip
+-from clip.simple_tokenizer import SimpleTokenizer as _Tokenizer
+-
+-_tokenizer = _Tokenizer()
+-
+-TEMPLATE_FILES = {
+-    "Caltech101": "templates/cal_prompts_full.json",
+-    "OxfordPets": "templates/pets_prompts_full.json",
+-    "StanfordCars": "templates/cars_prompts_full.json",
+-    "OxfordFlowers": "templates/flower_prompts_full.json",
+-    "Food101": "templates/food_prompts_full.json",
+-    "FGVCAircraft": "templates/airplane_prompts_full.json",
+-    "SUN397": "templates/sun_prompts_full.json",
+-    "DescribableTextures": "templates/texture_prompts_full.json",
+-    "EuroSAT": "templates/eurosat_prompts_full.json",
+-    "UCF101": "templates/ucf_prompts_full.json",
+-}
++from .textconsistency_common import (
++    ViewAggregator, CachedMultiViewTextEncoder, TEMPLATE_FILES, build_view_aggregator,
++    prediction_logits, load_complete_checkpoint, load_clip_checkpoint,
++)
++from .textconsistency_runtime import ValidatedTrainer
+ 
+ 
+ def load_clip_to_cpu(cfg):
+-    model_path = './clip/ViT-B-16.pt'
+-    try:
+-        model = torch.jit.load(model_path, map_location="cpu").eval()
+-        state_dict = None
+-    except RuntimeError:
+-        state_dict = torch.load(model_path, map_location="cpu")
+-    design_details = {"trainer": 'CoOp', "vision_depth": 0, "language_depth": 0,
+-                      "vision_ctx": 0, "language_ctx": 0}
+-    model = clip.build_model(state_dict or model.state_dict(), design_details)
+-    return model
++    return load_clip_checkpoint(cfg)
+ 
+ 
+ class TextEncoder(nn.Module):
+@@ -67,7 +33,6 @@
+         x = self.ln_final(x).type(self.dtype)
+         x = x[torch.arange(x.shape[0]), tokenized_prompts.argmax(dim=-1)] @ self.text_projection
+         return x
+-
+ 
+ class PromptLearner(nn.Module):
+     def __init__(self, cfg, classnames, clip_model):
+@@ -102,351 +67,47 @@
+         prompts = torch.cat([self.token_prefix, ctx, self.token_suffix], dim=1)
+         return prompts
+ 
+-
+-class HierarchicalViewAggregator(nn.Module):
+-    def __init__(self, dim, n_views, n_groups=4, hidden_dim=None):
+-        super().__init__()
+-        if hidden_dim is None:
+-            hidden_dim = dim // 4
+-        
+-        self.n_views = n_views
+-        self.n_groups = n_groups
+-        self.views_per_group = max(1, n_views // n_groups)
+-        
+-        self.intra_group_query = nn.Linear(dim, hidden_dim)
+-        self.intra_group_key = nn.Linear(dim, hidden_dim)
+-        self.intra_group_temp = nn.Parameter(torch.ones(1) * 0.07)
+-        
+-        self.inter_group_query = nn.Linear(dim, hidden_dim)
+-        self.inter_group_key = nn.Linear(dim, hidden_dim)
+-        self.inter_group_temp = nn.Parameter(torch.ones(1) * 0.07)
+-        
+-        self.fine_grained_proj = nn.Sequential(
+-            nn.Linear(dim, dim),
+-            nn.ReLU(),
+-            nn.Linear(dim, dim)
+-        )
+-        
+-        self._init_weights()
+-    
+-    def _init_weights(self):
+-        for m in self.modules():
+-            if isinstance(m, nn.Linear):
+-                nn.init.xavier_uniform_(m.weight)
+-                if m.bias is not None:
+-                    nn.init.zeros_(m.bias)
+-    
+-    def forward(self, image_features, multiview_features):
+-        batch_size = image_features.shape[0]
+-        n_cls, n_views, dim = multiview_features.shape
+-        
+-        image_features_float = image_features.float()
+-        multiview_features_float = multiview_features.float()
+-        
+-        enhanced_image = self.fine_grained_proj(image_features_float)
+-        enhanced_image = enhanced_image + image_features_float
+-        enhanced_image = enhanced_image / enhanced_image.norm(dim=-1, keepdim=True)
+-        
+-        actual_groups = min(self.n_groups, n_views)
+-        views_per_group = n_views // actual_groups
+-        
+-        grouped_features = multiview_features_float[:, :actual_groups*views_per_group, :].view(
+-            n_cls, actual_groups, views_per_group, dim
+-        )
+-        
+-        intra_query = self.intra_group_query(enhanced_image)
+-        intra_keys = self.intra_group_key(
+-            grouped_features.reshape(-1, dim)
+-        ).view(n_cls, actual_groups, views_per_group, -1)
+-        
+-        intra_sim = torch.einsum('bh,cgvh->bcgv', intra_query, intra_keys)
+-        intra_temp = self.intra_group_temp.abs().clamp(min=0.01)
+-        intra_attn = F.softmax(intra_sim / intra_temp, dim=-1)
+-        
+-        group_features = torch.einsum('bcgv,cgvd->bcgd', intra_attn, grouped_features)
+-        
+-        inter_query = self.inter_group_query(enhanced_image)
+-        inter_keys = self.inter_group_key(
+-            group_features.reshape(-1, dim)
+-        ).view(batch_size, n_cls, actual_groups, -1)
+-        
+-        inter_sim = torch.einsum('bh,bcgh->bcg', inter_query, inter_keys)
+-        inter_temp = self.inter_group_temp.abs().clamp(min=0.01)
+-        inter_attn = F.softmax(inter_sim / inter_temp, dim=-1)
+-        
+-        final_features = torch.einsum('bcg,bcgd->bcd', inter_attn, group_features)
+-        final_features = final_features / final_features.norm(dim=-1, keepdim=True)
+-        final_features = final_features.type(image_features.dtype)
+-        
+-        attn_info = {'intra_attn': intra_attn, 'inter_attn': inter_attn}
+-        return final_features, attn_info
++class HierarchicalViewAggregator(ViewAggregator):
++    def __init__(self, dim, n_views, n_groups=4, hidden_dim=None, use_feature_adapter=True):
++        super().__init__(dim, n_views, 'hierarchical', n_groups, use_feature_adapter, hidden_dim)
+ 
+ 
+-class MultiViewTextEncoder(nn.Module):
+-    def __init__(self, cfg, classnames, clip_model):
+-        super().__init__()
+-        self.n_cls = len(classnames)
+-        self.n_views = cfg.TRAINER.TEXTCONSISTENCY.N_VIEWS
+-        self._load_multiview_features(cfg, classnames, clip_model)
+-    
+-    def _load_multiview_features(self, cfg, classnames, clip_model):
+-        dataset_name = cfg.DATASET.NAME
+-        template_file = TEMPLATE_FILES.get(dataset_name)
+-        
+-        if template_file is None or not osp.exists(template_file):
+-            self._create_default_features(classnames)
+-            return
+-        
+-        with open(template_file, 'r') as f:
+-            templates = json.load(f)
+-        
+-        clip_model_cuda = load_clip_to_cpu(cfg).cuda()
+-        clip_model_cuda.eval()
+-        
+-        all_view_features = []
+-        
+-        with torch.no_grad():
+-            for classname in classnames:
+-                key = classname.replace("_", " ").lower()
+-                descriptions = None
+-                
+-                for k in [key, classname, classname.replace("_", " ")]:
+-                    if k in templates:
+-                        descriptions = templates[k][:self.n_views]
+-                        break
+-                
+-                if descriptions is None or len(descriptions) == 0:
+-                    descriptions = [f"a photo of a {classname.replace('_', ' ')}"]
+-                
+-                while len(descriptions) < self.n_views:
+-                    descriptions.append(descriptions[0])
+-                descriptions = descriptions[:self.n_views]
+-                
+-                tokens = clip.tokenize(descriptions, truncate=True).cuda()
+-                features = clip_model_cuda.encode_text(tokens)
+-                features = features / features.norm(dim=-1, keepdim=True)
+-                all_view_features.append(features)
+-        
+-        multiview_features = torch.stack(all_view_features, dim=0)
+-        self.register_buffer("multiview_features", multiview_features)
+-        
+-        del clip_model_cuda
+-        torch.cuda.empty_cache()
+-    
+-    def _create_default_features(self, classnames):
+-        clip_model_cuda = load_clip_to_cpu(None).cuda()
+-        clip_model_cuda.eval()
+-        
+-        with torch.no_grad():
+-            texts = [f"a photo of a {name.replace('_', ' ')}" for name in classnames]
+-            tokens = clip.tokenize(texts).cuda()
+-            features = clip_model_cuda.encode_text(tokens)
+-            features = features / features.norm(dim=-1, keepdim=True)
+-        
+-        multiview_features = features.unsqueeze(1).expand(-1, self.n_views, -1).clone()
+-        self.register_buffer("multiview_features", multiview_features)
+-        
+-        del clip_model_cuda
+-        torch.cuda.empty_cache()
+-    
+-    def get_view_features(self):
+-        return self.multiview_features
++class MultiViewTextEncoder(CachedMultiViewTextEncoder):
++    pass
+ 
+ 
+ class CustomCLIP(nn.Module):
+     def __init__(self, cfg, classnames, clip_model):
+         super().__init__()
+-        self.cfg = cfg
+-        self.n_cls = len(classnames)
+-        
+         self.prompt_learner = PromptLearner(cfg, classnames, clip_model)
+         self.tokenized_prompts = self.prompt_learner.tokenized_prompts
+-        
+         self.multiview_encoder = MultiViewTextEncoder(cfg, classnames, clip_model)
+-        
+-        dim = clip_model.ln_final.weight.shape[0]
+-        n_views = cfg.TRAINER.TEXTCONSISTENCY.N_VIEWS
+-        n_groups = getattr(cfg.TRAINER.TEXTCONSISTENCY, 'N_GROUPS', 4)
+-        self.view_aggregator = HierarchicalViewAggregator(dim, n_views, n_groups)
+-        
++        self.view_aggregator = build_view_aggregator(cfg, clip_model.text_projection.shape[-1])
+         self.image_encoder = clip_model.visual
+         self.text_encoder = TextEncoder(clip_model)
+         self.logit_scale = clip_model.logit_scale
+         self.dtype = clip_model.dtype
+ 
+     def forward(self, image, return_attn=False):
+-        image_features = self.image_encoder(image.type(self.dtype))
+-        image_features = image_features / image_features.norm(dim=-1, keepdim=True)
+-        
++        with torch.no_grad():
++            image_features = F.normalize(self.image_encoder(image.to(self.dtype)), dim=-1)
+         prompts = self.prompt_learner()
+-        text_features = self.text_encoder(prompts, self.tokenized_prompts)
+-        text_features = text_features / text_features.norm(dim=-1, keepdim=True)
+-        
+-        logit_scale = self.logit_scale.exp()
+-        logits = logit_scale * image_features @ text_features.t()
+-        
+-        multiview_features = self.multiview_encoder.get_view_features()
+-        adaptive_features, attn_info = self.view_aggregator(image_features, multiview_features)
+-        logits_adaptive = logit_scale * torch.einsum('bd,bcd->bc', image_features, adaptive_features)
+-        
+-        if return_attn:
+-            return logits, logits_adaptive, image_features, attn_info
+-        return logits, logits_adaptive, image_features, None
++        text = F.normalize(self.text_encoder(prompts, self.tokenized_prompts), dim=-1)
++        logits = self.logit_scale.exp() * image_features @ text.t()
++        adaptive, attention = self.view_aggregator(image_features,
++            self.multiview_encoder.get_view_features(), self.multiview_encoder.view_mask)
++        teacher = self.logit_scale.exp() * torch.einsum('bd,bcd->bc', image_features, adaptive)
++        return logits, teacher, image_features, attention if return_attn else None
+ 
+ 
+ @TRAINER_REGISTRY.register()
+-class CoOp_TextConsistency_V2_FG(TrainerX):
+-
+-    def check_cfg(self, cfg):
+-        assert cfg.TRAINER.TEXTCONSISTENCY.PREC in ["fp16", "fp32", "amp"]
+-
+-    def build_model(self):
+-        cfg = self.cfg
+-        classnames = self.dm.dataset.classnames
+-
+-        print(f"Loading CLIP (backbone: {cfg.MODEL.BACKBONE.NAME})")
+-        clip_model = load_clip_to_cpu(cfg)
+-
+-        if cfg.TRAINER.TEXTCONSISTENCY.PREC == "fp32" or cfg.TRAINER.TEXTCONSISTENCY.PREC == "amp":
+-            clip_model.float()
+-
+-        print("Building TextConsistency V2 + Fine-Grained CLIP")
+-        self.model = CustomCLIP(cfg, classnames, clip_model)
+-
+-        for name, param in self.model.named_parameters():
+-            if "prompt_learner" not in name and "view_aggregator" not in name:
+-                param.requires_grad_(False)
+-
+-        self.model.to(self.device)
+-
+-        self.optim = torch.optim.SGD(
+-            [p for p in self.model.parameters() if p.requires_grad],
+-            lr=cfg.OPTIM.LR, 
+-            momentum=cfg.OPTIM.MOMENTUM,
+-            weight_decay=cfg.OPTIM.WEIGHT_DECAY
+-        )
+-        self.sched = build_lr_scheduler(self.optim, cfg.OPTIM)
+-        self.trainable_modules = nn.ModuleDict(
+-            {
+-                "prompt_learner": self.model.prompt_learner,
+-                "view_aggregator": self.model.view_aggregator,
+-            }
+-        )
+-        self.register_model("textconsistency", self.trainable_modules, self.optim, self.sched)
+-        self.scaler = GradScaler() if cfg.TRAINER.TEXTCONSISTENCY.PREC == "amp" else None
+-        
+-        self.kd_weight = cfg.TRAINER.TEXTCONSISTENCY.KD_WEIGHT
+-        self.kd_temp = cfg.TRAINER.TEXTCONSISTENCY.KD_TEMP
+-        self.adaptive_ce_weight = cfg.TRAINER.TEXTCONSISTENCY.ADAPTIVE_CE_WEIGHT
+-        self.contrastive_weight = getattr(cfg.TRAINER.TEXTCONSISTENCY, 'CONTRASTIVE_WEIGHT', 0.0)
+-        self.diversity_weight = getattr(cfg.TRAINER.TEXTCONSISTENCY, 'DIVERSITY_WEIGHT', 0.0)
+-
+-    def forward_backward(self, batch):
+-        image, label = self.parse_batch_train(batch)
+-
+-        logits, logits_adaptive, image_features, attn_info = self.model(image, return_attn=True)
+-        
+-        loss_ce = F.cross_entropy(logits, label)
+-        loss_adaptive_ce = F.cross_entropy(logits_adaptive, label)
+-        
+-        if self.kd_weight > 0:
+-            loss_kd = F.kl_div(
+-                F.log_softmax(logits / self.kd_temp, dim=1),
+-                F.softmax(logits_adaptive.detach() / self.kd_temp, dim=1),
+-                reduction='batchmean'
+-            ) * (self.kd_temp ** 2)
+-        else:
+-            loss_kd = torch.tensor(0.0).to(self.device)
+-        
+-        if self.contrastive_weight > 0:
+-            image_features_norm = image_features / image_features.norm(dim=-1, keepdim=True)
+-            sim_matrix = image_features_norm @ image_features_norm.t()
+-            
+-            label_matrix = label.unsqueeze(1) == label.unsqueeze(0)
+-            label_matrix.fill_diagonal_(False)
+-            
+-            pos_mask = label_matrix.float()
+-            neg_mask = (~label_matrix).float()
+-            
+-            if pos_mask.sum() > 0:
+-                pos_sim = (sim_matrix * pos_mask).sum() / (pos_mask.sum() + 1e-8)
+-                neg_sim = (sim_matrix * neg_mask).sum() / (neg_mask.sum() + 1e-8)
+-                loss_contrastive = -pos_sim + neg_sim
+-            else:
+-                loss_contrastive = torch.tensor(0.0).to(self.device)
+-        else:
+-            loss_contrastive = torch.tensor(0.0).to(self.device)
+-        
+-        if self.diversity_weight > 0 and attn_info is not None:
+-            intra_attn = attn_info['intra_attn']
+-            inter_attn = attn_info['inter_attn']
+-            
+-            intra_entropy = -(intra_attn * (intra_attn + 1e-8).log()).sum(dim=-1).mean()
+-            inter_entropy = -(inter_attn * (inter_attn + 1e-8).log()).sum(dim=-1).mean()
+-            
+-            loss_diversity = -(intra_entropy + inter_entropy) * self.diversity_weight
+-        else:
+-            loss_diversity = torch.tensor(0.0).to(self.device)
+-        
+-        loss = (
+-            loss_ce
+-            + self.adaptive_ce_weight * loss_adaptive_ce
+-            + self.kd_weight * loss_kd
+-            + self.contrastive_weight * loss_contrastive
+-            + loss_diversity
+-        )
+-        
+-        self.model_backward_and_update(loss)
+-
+-        loss_summary = {
+-            "loss": loss.item(),
+-            "loss_ce": loss_ce.item(),
+-            "loss_adaptive_ce": loss_adaptive_ce.item(),
+-            "loss_kd": loss_kd.item() if isinstance(loss_kd, torch.Tensor) else loss_kd,
+-            "acc": compute_accuracy(logits, label)[0].item(),
+-        }
+-
+-        if (self.batch_idx + 1) == self.num_batches:
+-            self.update_lr()
+-
+-        return loss_summary
+-
+-    def parse_batch_train(self, batch):
+-        input = batch["img"].to(self.device)
+-        label = batch["label"].to(self.device)
+-        return input, label
++class CoOp_TextConsistency_V2_FG(ValidatedTrainer):
++    model_builder = CustomCLIP
+ 
+     def model_inference(self, image):
+-        logits, logits_adaptive, _, _ = self.model(image, return_attn=False)
+-        
+-        if self.cfg.DATASET.SUBSAMPLE_CLASSES == "new":
+-            return logits_adaptive
+-        else:
+-            return logits
++        student, teacher, _, _ = self.model(image, return_attn=False)
++        tc = self.cfg.TRAINER.TEXTCONSISTENCY
++        return prediction_logits(student, teacher, tc.INFERENCE_BRANCH, tc.ENSEMBLE_ALPHA)
+ 
+     def load_model(self, directory, epoch=None):
+-        if not directory:
+-            return
+-        names = self.get_model_names()
+-        model_file = "model-best.pth.tar"
+-        if epoch is not None:
+-            model_file = "model.pth.tar-" + str(epoch)
+-
+-        for name in names:
+-            model_path = osp.join(directory, name, model_file)
+-            if not osp.exists(model_path):
+-                import glob
+-                pattern = osp.join(directory, name, "model.pth.tar-*")
+-                model_files = glob.glob(pattern)
+-                if model_files:
+-                    model_files.sort(key=lambda x: int(x.split("-")[-1]))
+-                    model_path = model_files[-1]
+-                else:
+-                    continue
+-
+-            checkpoint = load_checkpoint(model_path)
+-            state_dict = checkpoint["state_dict"]
+-            for key in list(state_dict):
+-                if key.endswith(("token_prefix", "token_suffix")):
+-                    del state_dict[key]
+-            self._models[name].load_state_dict(state_dict, strict=False)
++        return load_complete_checkpoint(self, directory, epoch)
+--- /dev/null
++++ b/trainers/imagenet_templates.py
+@@ -0,0 +1,74 @@
++# source: https://github.com/openai/CLIP/blob/main/notebooks/Prompt_Engineering_for_ImageNet.ipynb
++
++IMAGENET_TEMPLATES = [
++    "a photo of a {}.",
++    "a bad photo of a {}.",
++    "a photo of many {}.",
++    "a sculpture of a {}.",
++    "a photo of the hard to see {}.",
++    "a low resolution photo of the {}.",
++    "a rendering of a {}.",
++    "graffiti of a {}.",
++    "a bad photo of the {}.",
++    "a cropped photo of the {}.",
++    "a tattoo of a {}.",
++    "the embroidered {}.",
++    "a photo of a hard to see {}.",
++    "a bright photo of a {}.",
++    "a photo of a clean {}.",
++    "a photo of a dirty {}.",
++    "a dark photo of the {}.",
++    "a drawing of a {}.",
++    "a photo of my {}.",
++    "the plastic {}.",
++    "a photo of the cool {}.",
++    "a close-up photo of a {}.",
++    "a black and white photo of the {}.",
++    "a painting of the {}.",
++    "a painting of a {}.",
++    "a pixelated photo of the {}.",
++    "a sculpture of the {}.",
++    "a bright photo of the {}.",
++    "a cropped photo of a {}.",
++    "a plastic {}.",
++    "a photo of the dirty {}.",
++    "a jpeg corrupted photo of a {}.",
++    "a blurry photo of the {}.",
++    "a photo of the {}.",
++    "a good photo of the {}.",
++    "a rendering of the {}.",
++    "a {} in a video game.",
++    "a photo of one {}.",
++    "a doodle of a {}.",
++    "a close-up photo of the {}.",
++    "the origami {}.",
++    "the {} in a video game.",
++    "a sketch of a {}.",
++    "a doodle of the {}.",
++    "a origami {}.",
++    "a low resolution photo of a {}.",
++    "the toy {}.",
++    "a rendition of the {}.",
++    "a photo of the clean {}.",
++    "a photo of a large {}.",
++    "a rendition of a {}.",
++    "a photo of a nice {}.",
++    "a photo of a weird {}.",
++    "a blurry photo of a {}.",
++    "a cartoon {}.",
++    "art of a {}.",
++    "a sketch of the {}.",
++    "a embroidered {}.",
++    "a pixelated photo of a {}.",
++    "itap of the {}.",
++]
++
++IMAGENET_TEMPLATES_SELECT = [
++    "itap of a {}.",
++    "a bad photo of the {}.",
++    "a origami {}.",
++    "a photo of the large {}.",
++    "a {} in a video game.",
++    "art of the {}.",
++    "a photo of the small {}.",
++]
+\ No newline at end of file
+--- /dev/null
++++ b/trainers/textconsistency_common.py
+@@ -0,0 +1,315 @@
++"""Shared, device-neutral TextConsistency primitives for controlled experiments.
++
++Groups are contiguous blocks of descriptions, not annotated semantic categories.
++"""
++import hashlib
++import json
++import math
++from pathlib import Path
++
++import torch
++from torch import nn
++from torch.nn import functional as F
++
++PROJECT_ROOT = Path(__file__).resolve().parents[1]
++TEMPLATE_FILES = {
++    'Caltech101': 'templates/cal_prompts_full.json',
++    'OxfordPets': 'templates/pets_prompts_full.json',
++    'StanfordCars': 'templates/cars_prompts_full.json',
++    'OxfordFlowers': 'templates/flower_prompts_full.json',
++    'Food101': 'templates/food_prompts_full.json',
++    'FGVCAircraft': 'templates/airplane_prompts_full.json',
++    'SUN397': 'templates/sun_prompts_full.json',
++    'DescribableTextures': 'templates/texture_prompts_full.json',
++    'EuroSAT': 'templates/eurosat_prompts_full.json',
++    'UCF101': 'templates/ucf_prompts_full.json',
++    **{key: 'templates/imagenet_prompts_full.json' for key in
++       ('ImageNet', 'ImageNetV2', 'ImageNetSketch', 'ImageNetA', 'ImageNetR')},
++}
++
++
++def sha256_file(path):
++    h = hashlib.sha256()
++    with open(path, 'rb') as handle:
++        for chunk in iter(lambda: handle.read(1024 * 1024), b''):
++            h.update(chunk)
++    return h.hexdigest()
++
++
++def select_device(cfg):
++    name = cfg.TRAINER.TEXTCONSISTENCY.DEVICE
++    if name == 'auto':
++        name = 'cuda' if cfg.USE_CUDA and torch.cuda.is_available() else 'cpu'
++    if name == 'cuda' and not torch.cuda.is_available():
++        raise RuntimeError('CUDA requested but unavailable')
++    if name not in ('cpu', 'cuda'):
++        raise ValueError('Supported reproducibility devices: auto, cpu, cuda')
++    return torch.device(name)
++
++
++def prediction_logits(student, teacher, branch, alpha=0.5):
++    if branch not in ('student', 'teacher', 'ensemble'):
++        raise ValueError(f'Unknown inference branch: {branch}')
++    if not 0 <= alpha <= 1:
++        raise ValueError('ENSEMBLE_ALPHA must be in [0, 1]')
++    if teacher is None:
++        if branch != 'student':
++            raise ValueError('This baseline only supports student inference')
++        return student
++    if branch == 'student':
++        return student
++    if branch == 'teacher':
++        return teacher
++    return (1 - alpha) * student + alpha * teacher
++
++
++def resolve_checkpoint(directory, name, epoch=None):
++    if not directory:
++        raise FileNotFoundError('Evaluation requires a checkpoint directory')
++    folder = Path(directory) / name
++    if epoch is not None:
++        path = folder / f'model.pth.tar-{epoch}'
++    elif (folder / 'model-best.pth.tar').is_file():
++        path = folder / 'model-best.pth.tar'
++    else:
++        candidates = [p for p in folder.glob('model.pth.tar-*') if p.name.rsplit('-', 1)[-1].isdigit()]
++        if not candidates:
++            raise FileNotFoundError(f'No complete checkpoint in {folder}; old prompt-only weights are insufficient')
++        path = max(candidates, key=lambda p: int(p.name.rsplit('-', 1)[-1]))
++    if not path.is_file():
++        raise FileNotFoundError(f'Requested checkpoint does not exist: {path}')
++    return path
++
++
++def load_complete_checkpoint(trainer, directory, epoch=None):
++    records = []
++    for name in trainer.get_model_names():
++        path = resolve_checkpoint(directory, name, epoch)
++        # These are local experiment checkpoints (including optimizer state).
++        checkpoint = torch.load(path, map_location='cpu', weights_only=False)
++        if epoch is not None and checkpoint.get('epoch') != epoch:
++            raise ValueError('Checkpoint epoch does not match the requested epoch')
++        saved_spec = checkpoint.get('repro_signature')
++        expected_spec = getattr(trainer, 'repro_signature', None)
++        if expected_spec is not None and saved_spec != expected_spec:
++            raise ValueError('Checkpoint model/data-text signature mismatch; use the matching configuration')
++        current_provenance = getattr(trainer, 'run_provenance', None)
++        if current_provenance is not None:
++            saved_provenance = checkpoint.get('run_provenance', {})
++            for field in ('code_sha256', 'seed', 'shots', 'effective_losses'):
++                if saved_provenance.get(field) != current_provenance[field]:
++                    raise ValueError(f'Checkpoint training provenance mismatch: {field}')
++            source_dataset, target_dataset = saved_provenance.get('dataset'), current_provenance['dataset']
++            if source_dataset != target_dataset and not (source_dataset == 'ImageNet' and target_dataset.startswith('ImageNet')):
++                raise ValueError('Checkpoint dataset mismatch')
++            if current_provenance['subsample'] == 'base' and saved_provenance.get('train_samples_sha256') != current_provenance['train_samples_sha256']:
++                raise ValueError('Checkpoint few-shot training split mismatch')
++        model = trainer._models[name]
++        state = {k: v for k, v in checkpoint['state_dict'].items()
++                 if not k.endswith(('token_prefix', 'token_suffix'))}
++        expected = {k: v for k, v in model.state_dict().items()
++                    if not k.endswith(('token_prefix', 'token_suffix'))}
++        missing, extra = set(expected) - set(state), set(state) - set(expected)
++        if missing or extra:
++            raise ValueError(f'Incomplete checkpoint; missing={sorted(missing)}, unexpected={sorted(extra)}')
++        if any(expected[k].shape != state[k].shape for k in expected):
++            raise ValueError('Checkpoint tensor shapes do not match the model')
++        model.load_state_dict(state, strict=False)  # only class-dependent prompt buffers are rebuilt
++        record = {'path': str(path.resolve()), 'sha256': sha256_file(path), 'epoch': checkpoint['epoch']}
++        records.append(record)
++        print('Loaded checkpoint: ' + json.dumps(record, sort_keys=True))
++    trainer.loaded_checkpoints = records
++    return records
++
++
++def _masked_softmax(logits, mask, dim=-1):
++    weights = torch.softmax(logits.masked_fill(~mask, torch.finfo(logits.dtype).min), dim=dim)
++    weights = weights * mask.to(weights.dtype)
++    return weights / weights.sum(dim=dim, keepdim=True).clamp_min(1e-12)
++
++
++class ViewAggregator(nn.Module):
++    def __init__(self, dim, n_views, mode='hierarchical', n_groups=4,
++                 use_feature_adapter=True, hidden_dim=None):
++        super().__init__()
++        if mode not in ('mean', 'flat', 'hierarchical') or n_views < 1 or n_groups < 1:
++            raise ValueError('Invalid aggregation configuration')
++        if mode == 'mean' and use_feature_adapter:
++            raise ValueError('A query adapter has no effect on mean aggregation')
++        self.mode, self.n_groups, self.n_views = mode, n_groups, n_views
++        hidden_dim = hidden_dim or max(1, dim // 4)
++        self.fine_grained_proj = (nn.Sequential(nn.Linear(dim, dim), nn.ReLU(), nn.Linear(dim, dim))
++                                  if use_feature_adapter else None)
++        if mode != 'mean':
++            self.intra_group_query = nn.Linear(dim, hidden_dim)
++            self.intra_group_key = nn.Linear(dim, hidden_dim)
++            self.intra_group_temp = nn.Parameter(torch.tensor([0.07]))
++        if mode == 'hierarchical':
++            self.inter_group_query = nn.Linear(dim, hidden_dim)
++            self.inter_group_key = nn.Linear(dim, hidden_dim)
++            self.inter_group_temp = nn.Parameter(torch.tensor([0.07]))
++        for module in self.modules():
++            if isinstance(module, nn.Linear):
++                nn.init.xavier_uniform_(module.weight)
++                nn.init.zeros_(module.bias)
++
++    def forward(self, image_features, multiview_features, view_mask=None):
++        image, features = image_features.float(), multiview_features.float()
++        n_cls, n_views, dim = features.shape
++        mask = (torch.ones((n_cls, n_views), dtype=torch.bool, device=features.device)
++                if view_mask is None else view_mask.bool())
++        if mask.shape != features.shape[:2] or not mask.any(dim=-1).all():
++            raise ValueError('Each class requires at least one valid description')
++        if self.fine_grained_proj is not None:
++            image = F.normalize(image + self.fine_grained_proj(image), dim=-1)
++        if self.mode == 'mean':
++            weights = mask.float() / mask.sum(-1, keepdim=True)
++            result = torch.einsum('cv,cvd->cd', weights, features)
++            return F.normalize(result, dim=-1).unsqueeze(0).expand(image.shape[0], -1, -1).to(image_features.dtype), {}
++        query = self.intra_group_query(image)
++        if self.mode == 'flat':
++            keys = self.intra_group_key(features)
++            logits = torch.einsum('bh,cvh->bcv', query, keys)
++            weights = _masked_softmax(logits / self.intra_group_temp.abs().clamp_min(0.01), mask[None])
++            result = torch.einsum('bcv,cvd->bcd', weights, features)
++            return F.normalize(result, dim=-1).to(image_features.dtype), {'attn': weights}
++        groups = min(self.n_groups, n_views)
++        width = math.ceil(n_views / groups)
++        pad = groups * width - n_views
++        grouped = F.pad(features, (0, 0, 0, pad)).reshape(n_cls, groups, width, dim)
++        grouped_mask = F.pad(mask, (0, pad), value=False).reshape(n_cls, groups, width)
++        intra_logits = torch.einsum('bh,cgvh->bcgv', query, self.intra_group_key(grouped))
++        intra = _masked_softmax(intra_logits / self.intra_group_temp.abs().clamp_min(0.01), grouped_mask[None])
++        pooled = torch.einsum('bcgv,cgvd->bcgd', intra, grouped)
++        inter_logits = torch.einsum('bh,bcgh->bcg', self.inter_group_query(image), self.inter_group_key(pooled))
++        inter = _masked_softmax(inter_logits / self.inter_group_temp.abs().clamp_min(0.01), grouped_mask.any(-1)[None])
++        result = torch.einsum('bcg,bcgd->bcd', inter, pooled)
++        return F.normalize(result, dim=-1).to(image_features.dtype), {'intra_attn': intra, 'inter_attn': inter}
++
++
++def build_view_aggregator(cfg, dim):
++    tc = cfg.TRAINER.TEXTCONSISTENCY
++    return ViewAggregator(dim, tc.N_VIEWS, tc.AGGREGATION, tc.N_GROUPS, tc.USE_FEATURE_ADAPTER)
++
++
++def description_rows(templates, classnames, n_views):
++    if n_views < 1:
++        raise ValueError('N_VIEWS must be positive')
++    def canonical(name):
++        return ' '.join(name.replace('_', ' ').casefold().split())
++    lookup = {}
++    for key, value in templates.items():
++        normalized = canonical(key)
++        if normalized in lookup and lookup[normalized] != value:
++            raise ValueError(f'Ambiguous normalized class name: {key}')
++        lookup[normalized] = value
++    rows = []
++    for name in classnames:
++        candidates = lookup.get(canonical(name))
++        if not isinstance(candidates, list) or any(not isinstance(x, str) for x in candidates):
++            raise ValueError(f'Missing or invalid descriptions for class: {name}')
++        # Padding is applied only to tensors with an explicit mask, never by repeating text.
++        unique = list(dict.fromkeys(' '.join(x.split()) for x in candidates if x.strip()))[:n_views]
++        if not unique:
++            raise ValueError(f'No nonempty descriptions for class: {name}')
++        rows.append(unique)
++    return rows
++
++
++class CachedMultiViewTextEncoder(nn.Module):
++    def __init__(self, cfg, classnames, clip_model):
++        super().__init__()
++        from clip import clip
++        tc = cfg.TRAINER.TEXTCONSISTENCY
++        relative = TEMPLATE_FILES.get(cfg.DATASET.NAME)
++        if relative is None:
++            raise ValueError(f'No template mapping for {cfg.DATASET.NAME}')
++        path = PROJECT_ROOT / relative
++        rows = description_rows(json.loads(path.read_text()), classnames, tc.N_VIEWS)
++        self.template_sha256 = sha256_file(path)
++        self.description_counts = [len(row) for row in rows]
++        self.classnames = list(classnames)
++        self.n_views = tc.N_VIEWS
++        device = select_device(cfg)
++        original_device = next(clip_model.parameters()).device
++        clip_model.to(device).eval()
++        flat = [text for row in rows for text in row]
++        tokens = clip.tokenize(flat, truncate=True)
++        # Token truncation can make descriptions identical; deduplicate token rows
++        # and record the resulting effective counts.
++        encoded = []
++        with torch.no_grad():
++            for chunk in tokens.split(tc.TEXT_BATCH_SIZE):
++                features = clip_model.encode_text(chunk.to(device)).float()
++                encoded.append(F.normalize(features, dim=-1).cpu())
++        all_features = torch.cat(encoded)
++        features = torch.zeros(len(rows), tc.N_VIEWS, all_features.shape[-1])
++        mask = torch.zeros(len(rows), tc.N_VIEWS, dtype=torch.bool)
++        offset = 0
++        token_counts = []
++        for i, row in enumerate(rows):
++            count = len(row)
++            seen, indices = set(), []
++            for j in range(count):
++                key = tuple(tokens[offset+j].tolist())
++                if key not in seen:
++                    seen.add(key); indices.append(j)
++            token_counts.append(len(indices))
++            features[i, :len(indices)] = all_features[offset:offset+count][indices]
++            mask[i, :len(indices)] = True
++            offset += count
++        self.description_counts = token_counts
++        self.register_buffer('multiview_features', features)
++        self.register_buffer('view_mask', mask)
++        clip_model.to(original_device)
++        print('Effective description counts: ' + json.dumps(dict(zip(classnames, token_counts)), sort_keys=True))
++
++    def get_view_features(self):
++        return self.multiview_features
++
++    def get_single_view_features(self):
++        return self.multiview_features[:, 0]
++
++
++def training_losses(student, teacher, labels, attention, kd_weight, kd_temp,
++                    adaptive_ce_weight, diversity_weight, contrastive_weight=0.):
++    if contrastive_weight != 0:
++        raise ValueError('CONTRASTIVE_WEIGHT must be 0: the previous frozen-feature loss is disabled')
++    if kd_temp <= 0 or min(kd_weight, adaptive_ce_weight, diversity_weight) < 0:
++        raise ValueError('Invalid loss weights or KD temperature')
++    ce = F.cross_entropy(student, labels)
++    zero = ce.new_zeros(())
++    adaptive_ce = F.cross_entropy(teacher, labels) if teacher is not None else zero
++    kd = (F.kl_div(F.log_softmax(student / kd_temp, dim=-1),
++                   F.softmax(teacher.detach() / kd_temp, dim=-1), reduction='batchmean') * kd_temp**2
++          if teacher is not None and kd_weight else zero)
++    neg_entropy = zero
++    for name in ('attn', 'intra_attn', 'inter_attn'):
++        if attention is not None and name in attention:
++            weights = attention[name]
++            valid = weights.sum(-1) > 0
++            terms = (weights * weights.clamp_min(1e-12).log()).sum(-1)
++            neg_entropy = neg_entropy + terms[valid].mean()
++    total = ce + adaptive_ce_weight * adaptive_ce + kd_weight * kd + diversity_weight * neg_entropy
++    return total, {'loss_ce': ce, 'loss_adaptive_ce': adaptive_ce, 'loss_kd': kd, 'loss_negative_entropy': neg_entropy}
++
++
++def load_clip_checkpoint(cfg):
++    from clip import clip
++    tc = cfg.TRAINER.TEXTCONSISTENCY
++    path = Path(tc.CLIP_PATH).expanduser()
++    if not path.is_absolute():
++        path = PROJECT_ROOT / path
++    if cfg.MODEL.BACKBONE.NAME != 'ViT-B/16':
++        raise ValueError('This reproduction configuration is validated only for ViT-B/16')
++    if not path.is_file():
++        raise FileNotFoundError(f'CLIP checkpoint missing: {path}; run scripts/repro/prepare_assets.py')
++    digest = sha256_file(path)
++    expected = clip._MODELS['ViT-B/16'].split('/')[-2]
++    if digest != expected:
++        raise ValueError('CLIP checkpoint SHA-256 does not match the official ViT-B/16 weights')
++    jit_model = torch.jit.load(str(path), map_location='cpu').eval()
++    details = {'trainer': 'CoOp', 'vision_depth': 0, 'language_depth': 0, 'vision_ctx': 0, 'language_ctx': 0}
++    model = clip.build_model(jit_model.state_dict(), details).float().eval()
++    model._repro_sha256 = digest
++    return model
+--- /dev/null
++++ b/trainers/textconsistency_runtime.py
+@@ -0,0 +1,164 @@
++"""Training, checkpoint provenance and machine-readable evaluation for TC."""
++import hashlib
++import json
++import platform
++from pathlib import Path
++
++import torch
++from torch import nn
++from dassl.engine import TrainerX
++from dassl.optim import build_lr_scheduler
++from dassl.metrics import compute_accuracy
++from .textconsistency_common import (
++    PROJECT_ROOT, load_clip_checkpoint, select_device, training_losses, sha256_file,
++)
++
++
++def sample_digest(items, root):
++    records = []
++    for item in items or []:
++        path = Path(item.impath)
++        try:
++            path = path.relative_to(Path(root).resolve())
++        except ValueError:
++            raise ValueError(f'Dataset image is outside DATASET.ROOT: {path}')
++        records.append((str(path), int(item.label), item.classname))
++    return hashlib.sha256(json.dumps(records, ensure_ascii=False).encode()).hexdigest()
++
++
++def source_digest():
++    h = hashlib.sha256()
++    files = [PROJECT_ROOT / 'train.py']
++    for folder in ('trainers', 'datasets', 'clip', 'Dassl.pytorch/dassl'):
++        files.extend(sorted((PROJECT_ROOT / folder).rglob('*.py')))
++    for path in files:
++        h.update(str(path.relative_to(PROJECT_ROOT)).encode())
++        h.update(path.read_bytes())
++    return h.hexdigest()
++
++
++class ValidatedTrainer(TrainerX):
++    def check_cfg(self, cfg):
++        tc = cfg.TRAINER.TEXTCONSISTENCY
++        if tc.PREC != 'fp32':
++            raise ValueError('Use PREC fp32 for the validated reproduction; mixed precision is not yet validated')
++        if tc.CONTRASTIVE_WEIGHT != 0:
++            raise ValueError('Disable the old frozen-feature contrastive loss (CONTRASTIVE_WEIGHT=0)')
++        if cfg.SEED < 0:
++            raise ValueError('A nonnegative explicit SEED is required')
++        if tc.TEXT_BATCH_SIZE < 1 or tc.N_VIEWS < 1 or tc.N_GROUPS < 1:
++            raise ValueError('Description batch size, view count and group count must be positive')
++        if tc.KD_TEMP <= 0 or min(tc.KD_WEIGHT, tc.ADAPTIVE_CE_WEIGHT, tc.DIVERSITY_WEIGHT) < 0:
++            raise ValueError('Invalid loss configuration')
++
++    def build_model(self):
++        cfg, tc = self.cfg, self.cfg.TRAINER.TEXTCONSISTENCY
++        self.device = select_device(cfg)
++        clip_model = load_clip_checkpoint(cfg)
++        self.model = self.model_builder(cfg, self.dm.dataset.classnames, clip_model)
++        for name, parameter in self.model.named_parameters():
++            parameter.requires_grad_(name.startswith(('prompt_learner.', 'view_aggregator.')))
++        self.model.to(self.device)
++        self.model.image_encoder.eval()
++        self.model.text_encoder.eval()
++        self.trainable_modules = nn.ModuleDict({'prompt_learner': self.model.prompt_learner,
++                                                'view_aggregator': self.model.view_aggregator})
++        parameters = [p for p in self.trainable_modules.parameters() if p.requires_grad]
++        self.optim = torch.optim.SGD(parameters, lr=cfg.OPTIM.LR, momentum=cfg.OPTIM.MOMENTUM,
++                                     weight_decay=cfg.OPTIM.WEIGHT_DECAY)
++        self.sched = build_lr_scheduler(self.optim, cfg.OPTIM)
++        self.register_model('textconsistency', self.trainable_modules, self.optim, self.sched)
++        self.group = getattr(self.model, 'group', None)
++        self.kd_weight = tc.KD_WEIGHT if self.group is None or self.group['use_kd'] else 0.
++        self.adaptive_ce_weight = tc.ADAPTIVE_CE_WEIGHT
++        self.diversity_weight = tc.DIVERSITY_WEIGHT
++        if self.group is not None and not self.group['use_fg']:
++            self.diversity_weight = 0.
++        if any(p.requires_grad for p in self.model.view_aggregator.parameters()) and self.adaptive_ce_weight <= 0:
++            raise ValueError('A trainable aggregator requires positive ADAPTIVE_CE_WEIGHT')
++        encoder = self.model.multiview_encoder
++        self.repro_signature = {
++            'format': 1, 'trainer': cfg.TRAINER.NAME, 'n_ctx': tc.N_CTX,
++            'aggregation': getattr(self.model.view_aggregator, 'mode', 'none'),
++            'feature_adapter': getattr(self.model.view_aggregator, 'fine_grained_proj', None) is not None,
++            'n_groups': getattr(self.model.view_aggregator, 'n_groups', None),
++            'n_views': tc.N_VIEWS, 'ablation_group': tc.ABLATION_GROUP if self.group is not None else None,
++            'clip_sha256': clip_model._repro_sha256,
++            'template_sha256': getattr(encoder, 'template_sha256', None),
++        }
++        self.run_provenance = {
++            'seed': cfg.SEED, 'dataset': cfg.DATASET.NAME, 'shots': cfg.DATASET.NUM_SHOTS,
++            'subsample': cfg.DATASET.SUBSAMPLE_CLASSES, 'model_signature': self.repro_signature,
++            'code_sha256': source_digest(), 'torch': torch.__version__, 'python': platform.python_version(),
++            'device': str(self.device), 'cuda_runtime': torch.version.cuda,
++            'gpu': torch.cuda.get_device_name(self.device) if self.device.type == 'cuda' else None,
++            'effective_losses': {'kd': self.kd_weight, 'adaptive_ce': self.adaptive_ce_weight,
++                                 'diversity': self.diversity_weight, 'contrastive': 0.},
++            'train_samples_sha256': sample_digest(self.dm.dataset.train_x, cfg.DATASET.ROOT),
++            'val_samples_sha256': sample_digest(self.dm.dataset.val, cfg.DATASET.ROOT),
++            'test_samples_sha256': sample_digest(self.dm.dataset.test, cfg.DATASET.ROOT),
++            'trainable_parameters': sum(p.numel() for p in parameters),
++            'description_counts': getattr(encoder, 'description_counts', []),
++        }
++        directory = Path(cfg.OUTPUT_DIR); directory.mkdir(parents=True, exist_ok=True)
++        (directory / 'run_manifest.json').write_text(json.dumps(self.run_provenance, indent=2))
++        (directory / 'effective_config.yaml').write_text(cfg.dump())
++        print('Effective protocol: ' + json.dumps(self.run_provenance, sort_keys=True))
++
++    def set_model_mode(self, mode='train', names=None):
++        super().set_model_mode(mode, names)
++        if hasattr(self, 'model'):
++            self.model.image_encoder.eval()
++            self.model.text_encoder.eval()
++
++    def forward_backward(self, batch):
++        image, label = self.parse_batch_train(batch)
++        logits, teacher, _, attention = self.model(image, return_attn=True)
++        loss, pieces = training_losses(logits, teacher, label, attention, self.kd_weight,
++                                       self.cfg.TRAINER.TEXTCONSISTENCY.KD_TEMP,
++                                       self.adaptive_ce_weight, self.diversity_weight)
++        self.model_backward_and_update(loss)
++        if self.batch_idx + 1 == self.num_batches:
++            self.update_lr()
++        return {'loss': loss.item(), **{k: v.item() for k, v in pieces.items()},
++                'acc': compute_accuracy(logits, label)[0].item()}
++
++    def parse_batch_train(self, batch):
++        return batch['img'].to(self.device), batch['label'].to(self.device)
++
++    def save_model(self, epoch, directory, is_best=False, val_result=None, model_name=''):
++        for name in self.get_model_names():
++            folder = Path(directory) / name; folder.mkdir(parents=True, exist_ok=True)
++            filename = model_name or ('model-best.pth.tar' if is_best else f'model.pth.tar-{epoch + 1}')
++            path = folder / filename
++            state = {'state_dict': self._models[name].state_dict(), 'epoch': epoch + 1,
++                     'optimizer': self.optim.state_dict(), 'scheduler': self.sched.state_dict(),
++                     'val_result': val_result, 'repro_signature': self.repro_signature,
++                     'run_provenance': self.run_provenance}
++            temporary = path.with_name(path.name + '.tmp')
++            torch.save(state, temporary); temporary.replace(path)
++            (folder / 'checkpoint').write_text(filename)
++            (path.with_name(path.name + '.sha256')).write_text(sha256_file(path) + '\n')
++            print(f'Checkpoint saved to {path}')
++
++    @torch.no_grad()
++    def test(self, split=None, is_final=False):
++        self.set_model_mode('eval')
++        split = split or self.cfg.TEST.SPLIT
++        if split == 'val' and self.val_loader is not None:
++            loader = self.val_loader
++        else:
++            split, loader = 'test', self.test_loader
++        self.evaluator.reset()
++        for batch in loader:
++            image, label = self.parse_batch_test(batch)
++            self.evaluator.process(self.model_inference(image), label)
++        results = self.evaluator.evaluate()
++        tc = self.cfg.TRAINER.TEXTCONSISTENCY
++        payload = {**self.run_provenance, 'split': split, 'branch': tc.INFERENCE_BRANCH,
++                   'ensemble_alpha': tc.ENSEMBLE_ALPHA,
++                   'checkpoints': getattr(self, 'loaded_checkpoints', []),
++                   'state': 'loaded_checkpoint' if hasattr(self, 'loaded_checkpoints') else 'training_in_memory',
++                   'metrics': {k: float(v) for k, v in results.items()}}
++        Path(self.cfg.OUTPUT_DIR, 'metrics.json').write_text(json.dumps(payload, indent=2))
++        return float(results['accuracy'])

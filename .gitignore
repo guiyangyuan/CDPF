@@ -1,0 +1,28 @@
+clip/*.pt
+*.pth.tar*
+
+# Experiment artifacts
+output/
+*.log
+
+# Python caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# OS metadata
+.DS_Store
+
+# Local reproduction assets and generated experiment outputs
+/.venv/
+/data/
+/runs/
+verification/**/fixture/
+verification/**/events.out.tfevents.*
+clip/*.part
+
+# Local credentials and development settings
+.env
+.env.*
+*.pem
+*.key

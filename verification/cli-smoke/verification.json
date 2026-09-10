@@ -1,0 +1,9 @@
+{
+  "smoke_only": true,
+  "train_cli_passed": true,
+  "base_eval_cli_passed": true,
+  "novel_eval_cli_passed": true,
+  "same_checkpoint_for_base_and_novel": true,
+  "code_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+  "checkpoint_sha256": "f3d69dedc41e74c2356049ceea76030d045fc7e24d3672748fee8577263ce58a"
+}

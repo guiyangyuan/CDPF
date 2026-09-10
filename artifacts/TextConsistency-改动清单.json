@@ -1,0 +1,188 @@
+[
+  {
+    "file": ".gitignore",
+    "status": "modified",
+    "before_sha256": "030eeaf512174659a500a3ed13bd0adeca3e2f6c4b46665fd0908268375c9bd1",
+    "after_sha256": "4836e81b8bf803d999671e27c357a1f423df0ec1b2d193a548ca1c61a2b3a337"
+  },
+  {
+    "file": "Dassl.pytorch/dassl/optim/lr_scheduler.py",
+    "status": "modified",
+    "before_sha256": "2e55a69398a73e29fba413076b7c486cb261d8bc495f0f03cc538c23dd8f9bf0",
+    "after_sha256": "0152c5bda02fbec5e7fa6c31611d1c967bb75ff9236fc895fe48c3fc7f247db0"
+  },
+  {
+    "file": "README.md",
+    "status": "modified",
+    "before_sha256": "f1200a4cf8da2c9322705025e2c034c5d9268298503b4160850a9b835c5f578f",
+    "after_sha256": "50afd53501ac475ff902de522b305aba447e719385e23edc1463445c1a597992"
+  },
+  {
+    "file": "REPRO_METHOD.md",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "1ca1ef5a39eea62c696f50ed1b210203c9d11cb14059a356cb806f013733ca67"
+  },
+  {
+    "file": "REPRO_PLAN.md",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "ede21c60f9fb204a187e97c084843becb400ed32fb0068cb237a899d1a8fef56"
+  },
+  {
+    "file": "configs/repro/ucf101.yaml",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "0e4a18ac96d25f64422d612decff71e70db54c505b74df470312d6b2674b9df8"
+  },
+  {
+    "file": "docs/history/README-original.md",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "f1200a4cf8da2c9322705025e2c034c5d9268298503b4160850a9b835c5f578f"
+  },
+  {
+    "file": "requirements.lock.txt",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "3ebf6d133ad052898e9e7e328c1e6440f6c16bc011048794f9f60c688b0a8b82"
+  },
+  {
+    "file": "requirements.txt",
+    "status": "modified",
+    "before_sha256": "c1d9c041e2e193ef13e298fb26ab009cd905dbf98a0fec020836631a14d242f9",
+    "after_sha256": "971202f3f6e1e239589846af6ef3d046933cc5540322d63bfa0b75105b542dba"
+  },
+  {
+    "file": "scripts/repro/preflight.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "a916d2b03356907b66daaf7bf6efa2ff2dd061167706bc57d43abedbde4068da"
+  },
+  {
+    "file": "scripts/repro/prepare_assets.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "e2493d4bac2d3c3d60d67da0f419ef2b0603d43c461a43552454214f9abdc956"
+  },
+  {
+    "file": "scripts/repro/run_pilot.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "f9a1c0512c975c2918aa5f409cb4f8a2252ad476a92fbd3693066f868cf4ff8e"
+  },
+  {
+    "file": "scripts/repro/smoke_cli.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "77679799d099302162927d8158c1f2d2e8d24d2995579453455622ec974da3b3"
+  },
+  {
+    "file": "scripts/repro/smoke_real.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "0177e943176a1f4a7586ccdc62cfe1f2236725066165618712d029ca51010118"
+  },
+  {
+    "file": "scripts/repro/summarize.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "64f694ca821ab505ff1a1c030829adc349586a958e2cd107b2e9438c23e1acf5"
+  },
+  {
+    "file": "tests/repro/__init__.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "file": "tests/repro/test_components.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "5cfa37bfc32ff075ada9e69e2a9156d9835ec621f526a7178532c192cb2cbd1c"
+  },
+  {
+    "file": "tests/repro/test_regressions.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "ec07d250e46c59a35fedab8e5c640c9fe96fdf2bc695894e5028b7e4932061ec"
+  },
+  {
+    "file": "tests/repro/test_runner.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "df2eef19bf3cc40a70295ba926549fbbf24ba4b23405f57a64e0f081d0752334"
+  },
+  {
+    "file": "tests/repro/test_runtime_compatibility.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "a0bec6116ab5dc3f4377dec33816d29acf6cfb5e1d3649213574daba9490b374"
+  },
+  {
+    "file": "tests/repro/test_trainers.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "fd2dd1192bfb20f306a33b00b7a0176fc3da05385f4722bc4e1566128b225e5c"
+  },
+  {
+    "file": "tests/test_adaptive_ce_contract.py",
+    "status": "deleted",
+    "before_sha256": "b4d8685c3d090005ef20e2aadbbcb2de1510934e135b36203944e56c6b821f5e",
+    "after_sha256": null
+  },
+  {
+    "file": "tests/test_checkpoint_contract.py",
+    "status": "deleted",
+    "before_sha256": "df4ff8692183c3f7bbf4214f74daa90737a9719e74ed514f55aaf9ccee4804d3",
+    "after_sha256": null
+  },
+  {
+    "file": "tests/test_table_4_3_ablation_contract.py",
+    "status": "deleted",
+    "before_sha256": "738e7a8892bdf65c3b4c2b7c2251a600887662d3982c7537a9a65b4ae8802c52",
+    "after_sha256": null
+  },
+  {
+    "file": "train.py",
+    "status": "modified",
+    "before_sha256": "b045b6ff7b49fc56e436905e6405f9097936e78e3162a44da9d5e45426e08818",
+    "after_sha256": "fd4b1575043840860d9637c4e9bc60f3c73f42b3cdb2c9481072a6a050db094f"
+  },
+  {
+    "file": "trainers/cocoop_textconsistency_v2_fg.py",
+    "status": "modified",
+    "before_sha256": "a1e42cd71b533e45be3962279a992a537d8710e6e25eaf2f179cbdb21e493342",
+    "after_sha256": "07b13640359e7cffb5a74ecebd0951e2d44e2bc0d36520cf719ebb32e6e280be"
+  },
+  {
+    "file": "trainers/coop_textconsistency_ablation.py",
+    "status": "modified",
+    "before_sha256": "5ed7cbd1b526d4763ffe5c8e96c6788b5257989cf265e15417756f85276cefa3",
+    "after_sha256": "2812e5291958344925e54d3b8361ae4020910d6871af29b11d78252a1cc9a884"
+  },
+  {
+    "file": "trainers/coop_textconsistency_v2_fg.py",
+    "status": "modified",
+    "before_sha256": "07c107850340f1329d180cbb090792f64c8230efefd7c49c0eff6398ac6710b4",
+    "after_sha256": "be4646fc9b90cc6aa09865e293c11bd0cbe7908e8b399441fd05785e9c57a549"
+  },
+  {
+    "file": "trainers/imagenet_templates.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "51325ca32bd7c94157fb3cc7c91d088468514defe866d9023fc901d23d4644b0"
+  },
+  {
+    "file": "trainers/textconsistency_common.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "c01c801913a8bf27b7775a4aa9ce04474d3a8d7cbaeea97d8d938a58f90339f3"
+  },
+  {
+    "file": "trainers/textconsistency_runtime.py",
+    "status": "added",
+    "before_sha256": null,
+    "after_sha256": "d53eb5c6eeff70cd650868ddbd46420de3ab7cc3d0a3802e165b5ea1a3fb8ecb"
+  }
+]

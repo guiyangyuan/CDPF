@@ -1,0 +1,22 @@
+{
+  "smoke_only": true,
+  "pretrained_clip": "official ViT-B/16",
+  "device": "cpu",
+  "classes": 2,
+  "images": [
+    "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/datasets-prepared/ucf101/UCF-101-midframes/Apply_Eye_Makeup/v_ApplyEyeMakeup_g12_c03.jpg",
+    "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/datasets-prepared/ucf101/UCF-101-midframes/Apply_Lipstick/v_ApplyLipstick_g10_c02.jpg"
+  ],
+  "optimizer_steps": 1,
+  "prompt_updated": true,
+  "feature_adapter_updated": true,
+  "image_encoder_frozen": true,
+  "losses": {
+    "loss": 0.8356917500495911,
+    "loss_ce": 0.21756978332996368,
+    "loss_adaptive_ce": 0.13188911974430084,
+    "loss_kd": 0.48623284697532654,
+    "loss_negative_entropy": -1.58416748046875,
+    "acc": 100.0
+  }
+}

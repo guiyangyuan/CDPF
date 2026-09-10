@@ -1,0 +1,18 @@
+{
+  "head": "53d0c171eb05048e5db59c816c09551fee152ee7",
+  "status_counts": {
+    " D": 291,
+    " M": 6,
+    "??": 4
+  },
+  "current_primary_sha256": {
+    "trainers/coop_textconsistency_v2_fg.py": "07c107850340f1329d180cbb090792f64c8230efefd7c49c0eff6398ac6710b4",
+    "trainers/cocoop_textconsistency_v2_fg.py": "a1e42cd71b533e45be3962279a992a537d8710e6e25eaf2f179cbdb21e493342",
+    "trainers/coop_textconsistency_v2.py": "6c459f066b668a089818e75508c253f022ab9d863a0e5b8b8b83bc6a3bbdc760",
+    "train.py": "b045b6ff7b49fc56e436905e6405f9097936e78e3162a44da9d5e45426e08818",
+    "Dassl.pytorch/dassl/utils/logger.py": "982b4acdbcd25e3bf5d8454f7dafb75b329140b92f81bac9f9c2fb94357f37c7"
+  },
+  "historical_logs_count": 60,
+  "history_text_bytes": 22634913,
+  "current_clip_checkpoint_exists": false
+}

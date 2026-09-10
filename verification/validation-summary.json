@@ -1,0 +1,46 @@
+{
+  "date": "2026-09-10",
+  "scope": "local implementation repair and correctness verification",
+  "code_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+  "python": "3.12.14",
+  "torch": "2.8.0",
+  "torchvision": "0.23.0",
+  "device": "cpu",
+  "behavior_tests_passed": 23,
+  "pip_check": "No broken requirements found",
+  "official_clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+  "real_image_optimizer_step_passed": true,
+  "fresh_process_max_logit_difference": 0.0,
+  "normal_cli_train_base_novel_passed": true,
+  "same_checkpoint_for_base_and_novel": true,
+  "ucf101_preflight_passed": true,
+  "no_gpu_fails_before_training": true,
+  "original_files_unchanged": 300,
+  "planned_commands": {
+    "pilot-plan": {
+      "seeds": [
+        1
+      ],
+      "training_commands": 6,
+      "evaluation_commands": 32
+    },
+    "three-seed-plan": {
+      "seeds": [
+        1,
+        2,
+        3
+      ],
+      "training_commands": 18,
+      "evaluation_commands": 96
+    }
+  },
+  "full_dataset_training_completed": false,
+  "gpu_training_verified": false,
+  "benchmark_accuracy_or_improvement_established": false,
+  "pending": [
+    "GPU server access",
+    "full pilot",
+    "multi-seed and additional dataset experiments",
+    "paper result replacement"
+  ]
+}

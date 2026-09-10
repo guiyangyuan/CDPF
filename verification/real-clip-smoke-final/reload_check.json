@@ -1,0 +1,12 @@
+{
+  "smoke_only": true,
+  "fresh_process_reload": true,
+  "max_logit_difference": 0.0,
+  "checkpoints": [
+    {
+      "path": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/textConsistency-repro/verification/real-clip-smoke-final/train/textconsistency/model.pth.tar-1",
+      "sha256": "1ee1969d7394bd20dc99badd336dbb83ff4e2a8372d990cf55e92dc333998c68",
+      "epoch": 1
+    }
+  ]
+}

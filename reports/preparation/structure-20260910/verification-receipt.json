@@ -1,0 +1,10 @@
+{
+  "all_9_release_file_hashes_match_local": true,
+  "all_3_dataset_preflights_exactly_match_previous": true,
+  "source_code_commit": "13b34978eeb8b23532b53abd1066af4719a0f909",
+  "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+  "server_evidence_archive_sha256": "3c1be70abeb7672a2d71458bb62cf02cd5126eaaca332c106faa47f486c43735",
+  "local_evidence_archive": "work/structure-prep-20260910/server-evidence.tar.gz",
+  "local_code_archive": "work/structure-prep-20260910/source.tar.gz",
+  "formal_gpu_training_started": false
+}

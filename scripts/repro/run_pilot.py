@@ -2,6 +2,7 @@
 """Matched aggregation comparisons; commands are reviewable with --plan-only."""
 import argparse
 import json
+import math
 import os
 from pathlib import Path
 import subprocess
@@ -13,9 +14,19 @@ VARIANTS = {
     'flat_adapter': ('flat', True), 'hierarchical': ('hierarchical', False),
     'hierarchical_adapter': ('hierarchical', True),
 }
+DATASETS = {
+    'ucf101': {'name': 'UCF101'},
+    'dtd': {'name': 'DescribableTextures'},
+    'fgvc_aircraft': {'name': 'FGVCAircraft'},
+}
 
 
-def build_commands(data_root, output_root, seeds, epochs, variants, device='cuda', python=sys.executable):
+def build_commands(data_root, output_root, seeds, epochs, variants, device='cuda', python=sys.executable,
+                   dataset='ucf101', kd_weight=1.0):
+    if dataset not in DATASETS:
+        raise ValueError(f'Unknown dataset: {dataset}')
+    if not math.isfinite(kd_weight) or kd_weight < 0:
+        raise ValueError('KD weight must be a finite nonnegative number')
     commands = []
     for variant in variants:
         if variant not in VARIANTS: raise ValueError(f'Unknown variant: {variant}')
@@ -26,13 +37,14 @@ def build_commands(data_root, output_root, seeds, epochs, variants, device='cuda
             train_dir = Path(output_root) / variant / f'seed{seed}'
             common = [python, str(ROOT / 'train.py'), '--root', str(Path(data_root).resolve()),
                       '--seed', str(seed), '--trainer', trainer,
-                      '--dataset-config-file', str(ROOT / 'configs/datasets/ucf101.yaml'),
-                      '--config-file', str(ROOT / 'configs/repro/ucf101.yaml')]
+                      '--dataset-config-file', str(ROOT / f'configs/datasets/{dataset}.yaml'),
+                      '--config-file', str(ROOT / f'configs/repro/{dataset}.yaml')]
             opts = ['DATASET.NUM_SHOTS', '16', 'TRAINER.TEXTCONSISTENCY.DEVICE', device,
                     'TRAINER.TEXTCONSISTENCY.AGGREGATION', 'mean' if baseline else mode,
                     'TRAINER.TEXTCONSISTENCY.USE_FEATURE_ADAPTER', str(adapter),
                     'TRAINER.TEXTCONSISTENCY.ABLATION_GROUP', 'baseline' if baseline else 'full',
                     'TRAINER.TEXTCONSISTENCY.INFERENCE_BRANCH', 'student' if baseline else 'ensemble',
+                    'TRAINER.TEXTCONSISTENCY.KD_WEIGHT', str(0.0 if baseline else kd_weight),
                     'OPTIM.MAX_EPOCH', str(epochs)]
             commands.append(common + ['--output-dir', str(train_dir)] + opts + ['DATASET.SUBSAMPLE_CLASSES', 'base'])
             for split in ('base', 'new'):
@@ -53,14 +65,24 @@ def main():
     parser.add_argument('--epochs', type=int, default=20)
     parser.add_argument('--variants', nargs='+', choices=list(VARIANTS), default=list(VARIANTS))
     parser.add_argument('--device', choices=['cuda', 'cpu'], default='cuda')
+    parser.add_argument('--dataset', choices=list(DATASETS), default='ucf101')
+    parser.add_argument('--kd-weight', type=float, default=1.0)
     parser.add_argument('--plan-only', action='store_true')
     args = parser.parse_args()
     if args.epochs < 1 or len(set(args.seeds)) != len(args.seeds) or any(s < 0 for s in args.seeds):
         parser.error('Epochs must be positive and seeds must be distinct nonnegative integers')
     output = args.output_root.resolve()
-    commands = build_commands(args.data_root, output, args.seeds, args.epochs, args.variants, args.device)
-    plan = {'purpose': 'controlled_pilot', 'dataset': 'UCF101', 'seeds': args.seeds, 'epochs': args.epochs,
+    if not math.isfinite(args.kd_weight) or args.kd_weight < 0:
+        parser.error('KD weight must be a finite nonnegative number')
+    commands = build_commands(args.data_root, output, args.seeds, args.epochs, args.variants, args.device,
+                              dataset=args.dataset, kd_weight=args.kd_weight)
+    plan = {'purpose': 'controlled_pilot', 'dataset': DATASETS[args.dataset]['name'],
+            'dataset_key': args.dataset, 'seeds': args.seeds, 'epochs': args.epochs,
             'variants': args.variants, 'primary_branch': 'ensemble (baseline: student)',
+            'kd_weight': args.kd_weight, 'shots': 16,
+            'fixed_settings': {'n_ctx': 4, 'n_views': 20, 'n_groups': 4, 'kd_temp': 2.0,
+                               'adaptive_ce_weight': 1.0, 'contrastive_weight': 0.0,
+                               'diversity_weight': 0.0, 'ensemble_alpha': 0.5},
             'checkpoint_rule': 'specified final epoch; no test-based selection', 'commands': commands}
     if args.plan_only:
         print(json.dumps(plan, indent=2)); return
@@ -69,7 +91,9 @@ def main():
     if args.device == 'cuda' and not torch.cuda.is_available():
         raise RuntimeError('CUDA is unavailable; use a GPU server for the full pilot')
     from preflight import check
-    preflight = check(args.data_root)
+    preflight = check(args.data_root, args.dataset)
+    from trainers.textconsistency_runtime import source_digest
+    plan['code_sha256'] = source_digest()
     output.mkdir(parents=True)
     (output / 'protocol.json').write_text(json.dumps(plan, indent=2))
     (output / 'data_preflight.json').write_text(json.dumps(preflight, indent=2))

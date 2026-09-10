@@ -15,6 +15,26 @@ def module(name):
 
 
 class RunnerBehavior(unittest.TestCase):
+    def test_dataset_commands_and_kd_are_explicit(self):
+        runner = module('run_pilot')
+        for key, display in [('ucf101', 'UCF101'), ('dtd', 'DescribableTextures'),
+                             ('fgvc_aircraft', 'FGVCAircraft')]:
+            commands = runner.build_commands('/data', '/results', [1], 3,
+                                             ['baseline', 'flat'], dataset=key, kd_weight=0.25)
+            self.assertTrue(all(str(ROOT / f'configs/datasets/{key}.yaml') in c for c in commands))
+            self.assertTrue(all(str(ROOT / f'configs/repro/{key}.yaml') in c for c in commands))
+            baseline = [c for c in commands if '/baseline/' in c[c.index('--output-dir') + 1]]
+            flat = [c for c in commands if '/flat/' in c[c.index('--output-dir') + 1]]
+            self.assertTrue(all(c[c.index('TRAINER.TEXTCONSISTENCY.KD_WEIGHT') + 1] == '0.0' for c in baseline))
+            self.assertTrue(all(c[c.index('TRAINER.TEXTCONSISTENCY.KD_WEIGHT') + 1] == '0.25' for c in flat))
+            self.assertEqual(runner.DATASETS[key]['name'], display)
+
+    def test_kd_weight_rejects_negative_and_nonfinite_values(self):
+        runner = module('run_pilot')
+        for value in (-1, float('nan'), float('inf')):
+            with self.assertRaises(ValueError):
+                runner.build_commands('/data', '/results', [1], 3, ['flat'], kd_weight=value)
+
     def test_commands_pass_actual_distinct_seeds_and_exact_epoch(self):
         runner = module('run_pilot')
         commands = runner.build_commands('/data', '/results', [1, 2, 3], 7, ['flat'])
@@ -54,5 +74,21 @@ class RunnerBehavior(unittest.TestCase):
             self.assertEqual(rows[0]['base_mean'], 70.)
             self.assertEqual(rows[0]['novel_mean'], 80.)
             self.assertAlmostEqual(rows[0]['hm_of_means'], 74.6666666667)
+
+    def test_summary_rejects_dataset_kd_and_source_mismatch(self):
+        summary = module('summarize')
+        payload = {'seed': 1, 'subsample': 'base', 'branch': 'student', 'dataset': 'FGVCAircraft',
+                   'shots': 16, 'state': 'loaded_checkpoint', 'checkpoints': [{'epoch': 20}],
+                   'effective_losses': {'kd': 1.0}, 'code_sha256': 'actual'}
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / 'metrics.json'; path.write_text(json.dumps(payload))
+            with self.assertRaises(ValueError):
+                summary.read_metric(path, 1, 'base', 'student', 20, dataset='UCF101')
+            with self.assertRaises(ValueError):
+                summary.read_metric(path, 1, 'base', 'student', 20, dataset='FGVCAircraft',
+                                    kd_weight=0.0)
+            with self.assertRaises(ValueError):
+                summary.read_metric(path, 1, 'base', 'student', 20, dataset='FGVCAircraft',
+                                    kd_weight=1.0, code_sha256='expected')
 
 if __name__ == '__main__': unittest.main()

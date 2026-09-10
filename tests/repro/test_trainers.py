@@ -30,7 +30,8 @@ def tiny_clip(cfg):
     return model.float()
 
 
-def make_trainer(trainer_cls, output, mode='hierarchical', adapter=True, group='full'):
+def make_trainer(trainer_cls, output, mode='hierarchical', adapter=True, group='full',
+                 view_order='contiguous', order_seed=0):
     cfg = get_cfg_default(); extend_cfg(cfg)
     cfg.SEED = 1; cfg.USE_CUDA = False; cfg.DATASET.ROOT = str(output)
     cfg.DATASET.NAME = 'Caltech101'; cfg.DATASET.SUBSAMPLE_CLASSES = 'base'
@@ -42,6 +43,7 @@ def make_trainer(trainer_cls, output, mode='hierarchical', adapter=True, group='
     tc.N_VIEWS = 5; tc.N_GROUPS = 2; tc.N_CTX = 4
     tc.KD_WEIGHT = 1.; tc.DEVICE = 'cpu'; tc.AGGREGATION = mode
     tc.USE_FEATURE_ADAPTER = adapter; tc.ABLATION_GROUP = group
+    tc.VIEW_ORDER = view_order; tc.ORDER_SEED = order_seed
     if group == 'baseline': tc.INFERENCE_BRANCH = 'student'
     trainer = trainer_cls.__new__(trainer_cls); TrainerBase.__init__(trainer)
     trainer.cfg = cfg

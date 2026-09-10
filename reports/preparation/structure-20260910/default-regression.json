@@ -1,0 +1,154 @@
+{
+  "passed": true,
+  "scope": "CPU synthetic aggregator regression; not benchmark/GPU evidence",
+  "reference_commit": "f30395c8659e3371fcc97e36521cf486f2f14c55",
+  "reference_common_sha256": "c01c801913a8bf27b7775a4aa9ce04474d3a8d7cbaeea97d8d938a58f90339f3",
+  "cases": [
+    {
+      "seed": 1,
+      "aggregation": "mean",
+      "adapter": false,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": null,
+      "rng_equal": true
+    },
+    {
+      "seed": 1,
+      "aggregation": "flat",
+      "adapter": false,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": 0,
+      "rng_equal": true
+    },
+    {
+      "seed": 1,
+      "aggregation": "flat",
+      "adapter": true,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": 0,
+      "rng_equal": true
+    },
+    {
+      "seed": 1,
+      "aggregation": "hierarchical",
+      "adapter": false,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": 0,
+      "rng_equal": true
+    },
+    {
+      "seed": 1,
+      "aggregation": "hierarchical",
+      "adapter": true,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": 0,
+      "rng_equal": true
+    },
+    {
+      "seed": 2,
+      "aggregation": "mean",
+      "adapter": false,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": null,
+      "rng_equal": true
+    },
+    {
+      "seed": 2,
+      "aggregation": "flat",
+      "adapter": false,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": 0,
+      "rng_equal": true
+    },
+    {
+      "seed": 2,
+      "aggregation": "flat",
+      "adapter": true,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": 0,
+      "rng_equal": true
+    },
+    {
+      "seed": 2,
+      "aggregation": "hierarchical",
+      "adapter": false,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": 0,
+      "rng_equal": true
+    },
+    {
+      "seed": 2,
+      "aggregation": "hierarchical",
+      "adapter": true,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": 0,
+      "rng_equal": true
+    },
+    {
+      "seed": 3,
+      "aggregation": "mean",
+      "adapter": false,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": null,
+      "rng_equal": true
+    },
+    {
+      "seed": 3,
+      "aggregation": "flat",
+      "adapter": false,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": 0,
+      "rng_equal": true
+    },
+    {
+      "seed": 3,
+      "aggregation": "flat",
+      "adapter": true,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": 0,
+      "rng_equal": true
+    },
+    {
+      "seed": 3,
+      "aggregation": "hierarchical",
+      "adapter": false,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": 0,
+      "rng_equal": true
+    },
+    {
+      "seed": 3,
+      "aggregation": "hierarchical",
+      "adapter": true,
+      "initial_state_max_abs_diff": 0,
+      "output_max_abs_diff": 0,
+      "gradient_max_abs_diff": 0,
+      "rng_equal": true
+    }
+  ],
+  "capacity": {
+    "hierarchical": {
+      "aggregator": 787970,
+      "with_coop_prompt": 790018
+    },
+    "flat_dual": {
+      "aggregator": 787970,
+      "with_coop_prompt": 790018
+    }
+  },
+  "matched_initial_state_equal": true
+}

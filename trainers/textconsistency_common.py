@@ -5,6 +5,7 @@ Groups are contiguous blocks of descriptions, not annotated semantic categories.
 import hashlib
 import json
 import math
+import random
 from pathlib import Path
 
 import torch
@@ -132,7 +133,7 @@ class ViewAggregator(nn.Module):
     def __init__(self, dim, n_views, mode='hierarchical', n_groups=4,
                  use_feature_adapter=True, hidden_dim=None):
         super().__init__()
-        if mode not in ('mean', 'flat', 'hierarchical') or n_views < 1 or n_groups < 1:
+        if mode not in ('mean', 'flat', 'flat_dual', 'hierarchical') or n_views < 1 or n_groups < 1:
             raise ValueError('Invalid aggregation configuration')
         if mode == 'mean' and use_feature_adapter:
             raise ValueError('A query adapter has no effect on mean aggregation')
@@ -144,7 +145,7 @@ class ViewAggregator(nn.Module):
             self.intra_group_query = nn.Linear(dim, hidden_dim)
             self.intra_group_key = nn.Linear(dim, hidden_dim)
             self.intra_group_temp = nn.Parameter(torch.tensor([0.07]))
-        if mode == 'hierarchical':
+        if mode in ('hierarchical', 'flat_dual'):
             self.inter_group_query = nn.Linear(dim, hidden_dim)
             self.inter_group_key = nn.Linear(dim, hidden_dim)
             self.inter_group_temp = nn.Parameter(torch.tensor([0.07]))
@@ -167,10 +168,17 @@ class ViewAggregator(nn.Module):
             result = torch.einsum('cv,cvd->cd', weights, features)
             return F.normalize(result, dim=-1).unsqueeze(0).expand(image.shape[0], -1, -1).to(image_features.dtype), {}
         query = self.intra_group_query(image)
-        if self.mode == 'flat':
+        if self.mode in ('flat', 'flat_dual'):
             keys = self.intra_group_key(features)
             logits = torch.einsum('bh,cvh->bcv', query, keys)
             weights = _masked_softmax(logits / self.intra_group_temp.abs().clamp_min(0.01), mask[None])
+            if self.mode == 'flat_dual':
+                # Two global heads: exactly the hierarchical projection/temperature
+                # budget, with no partitioning or unused capacity-matching weights.
+                second_logits = torch.einsum('bh,cvh->bcv', self.inter_group_query(image),
+                                              self.inter_group_key(features))
+                second = _masked_softmax(second_logits / self.inter_group_temp.abs().clamp_min(0.01), mask[None])
+                weights = 0.5 * (weights + second)
             result = torch.einsum('bcv,cvd->bcd', weights, features)
             return F.normalize(result, dim=-1).to(image_features.dtype), {'attn': weights}
         groups = min(self.n_groups, n_views)
@@ -216,6 +224,35 @@ def description_rows(templates, classnames, n_views):
     return rows
 
 
+def description_permutation(count, policy='contiguous', n_groups=4, seed=0):
+    """Reorder only effective views, with an RNG independent of training seeds.
+
+    Interleaved order gathers positions 0,G,2G,... then 1,1+G,... before
+    the unchanged contiguous hierarchical pooling. No semantic labels are used.
+    """
+    if count < 1 or n_groups < 1 or not isinstance(seed, int) or seed < 0:
+        raise ValueError('Invalid description order configuration')
+    if policy not in ('contiguous', 'interleaved', 'shuffle') or (policy != 'shuffle' and seed != 0):
+        raise ValueError('Use contiguous/interleaved with seed 0, or shuffle with an explicit seed')
+    order = list(range(count))
+    if policy == 'interleaved':
+        order.sort(key=lambda index: (index % n_groups, index // n_groups))
+    elif policy == 'shuffle':
+        random.Random(seed).shuffle(order)
+    return order
+
+
+def view_order_manifest(classnames, counts, policy, n_groups, seed):
+    records = [{'classname': name, 'count': count,
+                'order': description_permutation(count, policy, n_groups, seed)}
+               for name, count in zip(classnames, counts)]
+    if len(classnames) != len(counts) or len(set(classnames)) != len(classnames):
+        raise ValueError('Description ordering requires unique classes and complete counts')
+    payload = {'version': 1, 'policy': policy, 'seed': seed, 'n_groups': n_groups, 'classes': records}
+    payload['sha256'] = hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+    return payload
+
+
 class CachedMultiViewTextEncoder(nn.Module):
     def __init__(self, cfg, classnames, clip_model):
         super().__init__()
@@ -259,6 +296,13 @@ class CachedMultiViewTextEncoder(nn.Module):
             mask[i, :len(indices)] = True
             offset += count
         self.description_counts = token_counts
+        self.view_order_manifest = view_order_manifest(
+            self.classnames, token_counts, tc.VIEW_ORDER, tc.N_GROUPS, tc.ORDER_SEED)
+        # Encode/deduplicate in original order first. Reorder valid entries only,
+        # preserving description membership and the exact padding/group occupancy.
+        if tc.VIEW_ORDER != 'contiguous':
+            for i, row in enumerate(self.view_order_manifest['classes']):
+                features[i, :row['count']] = features[i, row['order']].clone()
         self.register_buffer('multiview_features', features)
         self.register_buffer('view_mask', mask)
         clip_model.to(original_device)

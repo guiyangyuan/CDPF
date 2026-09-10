@@ -9,11 +9,15 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+from scripts.repro.structure_spec import EXTRA_VARIANTS, STRUCTURE_VARIANTS, order_settings
 VARIANTS = {
     'baseline': ('none', False), 'mean': ('mean', False), 'flat': ('flat', False),
     'flat_adapter': ('flat', True), 'hierarchical': ('hierarchical', False),
     'hierarchical_adapter': ('hierarchical', True),
 }
+DEFAULT_VARIANTS = tuple(VARIANTS)
+VARIANTS.update(EXTRA_VARIANTS)
 DATASETS = {
     'ucf101': {'name': 'UCF101'},
     'dtd': {'name': 'DescribableTextures'},
@@ -31,6 +35,7 @@ def build_commands(data_root, output_root, seeds, epochs, variants, device='cuda
     for variant in variants:
         if variant not in VARIANTS: raise ValueError(f'Unknown variant: {variant}')
         mode, adapter = VARIANTS[variant]
+        order = order_settings(variant)
         baseline = variant == 'baseline'
         trainer = 'CoOp_TextConsistency_Ablation' if baseline else 'CoOp_TextConsistency_V2_FG'
         for seed in seeds:
@@ -42,6 +47,8 @@ def build_commands(data_root, output_root, seeds, epochs, variants, device='cuda
             opts = ['DATASET.NUM_SHOTS', '16', 'TRAINER.TEXTCONSISTENCY.DEVICE', device,
                     'TRAINER.TEXTCONSISTENCY.AGGREGATION', 'mean' if baseline else mode,
                     'TRAINER.TEXTCONSISTENCY.USE_FEATURE_ADAPTER', str(adapter),
+                    'TRAINER.TEXTCONSISTENCY.VIEW_ORDER', order['policy'],
+                    'TRAINER.TEXTCONSISTENCY.ORDER_SEED', str(order['seed']),
                     'TRAINER.TEXTCONSISTENCY.ABLATION_GROUP', 'baseline' if baseline else 'full',
                     'TRAINER.TEXTCONSISTENCY.INFERENCE_BRANCH', 'student' if baseline else 'ensemble',
                     'TRAINER.TEXTCONSISTENCY.KD_WEIGHT', str(0.0 if baseline else kd_weight),
@@ -63,12 +70,21 @@ def main():
     parser.add_argument('--output-root', type=Path, required=True)
     parser.add_argument('--seeds', type=int, nargs='+', default=[1])
     parser.add_argument('--epochs', type=int, default=20)
-    parser.add_argument('--variants', nargs='+', choices=list(VARIANTS), default=list(VARIANTS))
+    selection = parser.add_mutually_exclusive_group()
+    selection.add_argument('--variants', nargs='+', choices=list(VARIANTS))
+    selection.add_argument('--structure-study', action='store_true',
+                           help='Fixed UCF101 capacity/order controls; seeds 1 2 3, 20 epochs, KD=1')
     parser.add_argument('--device', choices=['cuda', 'cpu'], default='cuda')
     parser.add_argument('--dataset', choices=list(DATASETS), default='ucf101')
     parser.add_argument('--kd-weight', type=float, default=1.0)
     parser.add_argument('--plan-only', action='store_true')
     args = parser.parse_args()
+    if args.structure_study and (args.seeds != [1, 2, 3] or args.epochs != 20 or
+                                args.kd_weight != 1.0 or args.dataset != 'ucf101' or args.device != 'cuda'):
+        parser.error('Structure study requires UCF101, CUDA, --seeds 1 2 3, 20 epochs and KD=1')
+    args.variants = list(STRUCTURE_VARIANTS) if args.structure_study else (args.variants or list(DEFAULT_VARIANTS))
+    if len(set(args.variants)) != len(args.variants):
+        parser.error('Variants must be distinct')
     if args.epochs < 1 or len(set(args.seeds)) != len(args.seeds) or any(s < 0 for s in args.seeds):
         parser.error('Epochs must be positive and seeds must be distinct nonnegative integers')
     output = args.output_root.resolve()
@@ -80,6 +96,8 @@ def main():
             'dataset_key': args.dataset, 'seeds': args.seeds, 'epochs': args.epochs,
             'variants': args.variants, 'primary_branch': 'ensemble (baseline: student)',
             'kd_weight': args.kd_weight, 'shots': 16,
+            'view_orders': {variant: order_settings(variant) for variant in args.variants},
+            'structure_study': args.structure_study,
             'fixed_settings': {'n_ctx': 4, 'n_views': 20, 'n_groups': 4, 'kd_temp': 2.0,
                                'adaptive_ce_weight': 1.0, 'contrastive_weight': 0.0,
                                'diversity_weight': 0.0, 'ensemble_alpha': 0.5},

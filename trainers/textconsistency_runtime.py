@@ -11,6 +11,7 @@ from dassl.optim import build_lr_scheduler
 from dassl.metrics import compute_accuracy
 from .textconsistency_common import (
     PROJECT_ROOT, load_clip_checkpoint, select_device, training_losses, sha256_file,
+    description_permutation,
 )
 
 
@@ -50,6 +51,9 @@ class ValidatedTrainer(TrainerX):
             raise ValueError('Description batch size, view count and group count must be positive')
         if tc.KD_TEMP <= 0 or min(tc.KD_WEIGHT, tc.ADAPTIVE_CE_WEIGHT, tc.DIVERSITY_WEIGHT) < 0:
             raise ValueError('Invalid loss configuration')
+        description_permutation(tc.N_VIEWS, tc.VIEW_ORDER, tc.N_GROUPS, tc.ORDER_SEED)
+        if tc.VIEW_ORDER != 'contiguous' and (tc.AGGREGATION != 'hierarchical' or tc.ABLATION_GROUP != 'full'):
+            raise ValueError('Description order controls require the full hierarchical model')
 
     def build_model(self):
         cfg, tc = self.cfg, self.cfg.TRAINER.TEXTCONSISTENCY
@@ -78,13 +82,14 @@ class ValidatedTrainer(TrainerX):
             raise ValueError('A trainable aggregator requires positive ADAPTIVE_CE_WEIGHT')
         encoder = self.model.multiview_encoder
         self.repro_signature = {
-            'format': 1, 'trainer': cfg.TRAINER.NAME, 'n_ctx': tc.N_CTX,
+            'format': 2, 'trainer': cfg.TRAINER.NAME, 'n_ctx': tc.N_CTX,
             'aggregation': getattr(self.model.view_aggregator, 'mode', 'none'),
             'feature_adapter': getattr(self.model.view_aggregator, 'fine_grained_proj', None) is not None,
             'n_groups': getattr(self.model.view_aggregator, 'n_groups', None),
             'n_views': tc.N_VIEWS, 'ablation_group': tc.ABLATION_GROUP if self.group is not None else None,
             'clip_sha256': clip_model._repro_sha256,
             'template_sha256': getattr(encoder, 'template_sha256', None),
+            'view_order': tc.VIEW_ORDER, 'order_seed': tc.ORDER_SEED, 'order_version': 1,
         }
         self.run_provenance = {
             'seed': cfg.SEED, 'dataset': cfg.DATASET.NAME, 'shots': cfg.DATASET.NUM_SHOTS,
@@ -99,6 +104,7 @@ class ValidatedTrainer(TrainerX):
             'test_samples_sha256': sample_digest(self.dm.dataset.test, cfg.DATASET.ROOT),
             'trainable_parameters': sum(p.numel() for p in parameters),
             'description_counts': getattr(encoder, 'description_counts', []),
+            'view_order_manifest': getattr(encoder, 'view_order_manifest', None),
         }
         directory = Path(cfg.OUTPUT_DIR); directory.mkdir(parents=True, exist_ok=True)
         (directory / 'run_manifest.json').write_text(json.dumps(self.run_provenance, indent=2))

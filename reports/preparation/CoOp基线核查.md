@@ -41,3 +41,7 @@
 2. `reference200`：上游 vit_b16_ctxv1 配置，200 epochs / batch32 / a photo of a 初始化，FP32，Base-to-New；作为更接近官方配置的参考，明确这不是 20-epoch 同预算消融。
 
 两者均 seed1/2/3、16-shot、固定最后一个 epoch，Base/Novel 独立重载同一模型；禁止基于 Novel 测试选 epoch。先在 UCF101 执行，再决定后续扩展预算。运行上游时使用本项目 vendored Dassl（含 torch2.8 学习率兼容修复），记录依赖源码哈希；不宣称完整原始软件环境复现。
+
+## 2026-09-10 开卡复验更新
+
+内存恢复到120GiB后，服务器相同完整模型 CPU 诊断通过，五项最大绝对差仍为0。随后 GPU 真实短训练、保存、重载评估通过，并启动 matched20 正式三种子核验。[运行记录与证据](../experiments/ucf101-kd-study-20260910/README.md)。此前无卡 SIGKILL 作为历史失败保留，不再是待处理的阻塞项。

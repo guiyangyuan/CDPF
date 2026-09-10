@@ -1,6 +1,6 @@
 # 无卡准备与后续运行
 
-当前阶段以 [PROJECT_STATUS.md](../PROJECT_STATUS.md) 为准。无卡容器内存上限实际为 2 GiB；不要按宿主机 free 输出推断可用内存。完整 CLIP 诊断在本机通过，服务器尝试被 SIGKILL，开卡后复验；轻量测试/数据预检不受这一结果替代。下面的正式运行命令仅在用户开卡后使用；`--plan-only` 不训练。
+当前阶段以 [PROJECT_STATUS.md](../PROJECT_STATUS.md) 为准。无卡容器内存上限实际为 2 GiB；不要按宿主机 free 输出推断可用内存。准备阶段完整 CLIP 诊断在本机通过，服务器无卡尝试被 SIGKILL；现已开卡并在120GiB内存下复验通过，见 [本批记录](../reports/experiments/ucf101-kd-study-20260910/README.md)；轻量测试/数据预检不受这一结果替代。下面的正式运行命令仅在用户开卡后使用；`--plan-only` 不训练。
 
 2026-09-10 无卡准备检查已完成：[完成报告](../reports/preparation/无卡准备完成.md)、[检查记录与已生成的命令计划](../reports/preparation/cpu-prep-20260910/)。这些计划记录的是命令预览，不是已执行的训练日志。
 

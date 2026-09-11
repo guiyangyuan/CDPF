@@ -57,6 +57,13 @@ def family_config(config):
     return value
 
 
+def validate_effective_config(actual, expected, seed, path):
+    if actual.get("SEED") != seed:
+        raise ValueError(f"Effective configuration seed differs from directory identity: {path}")
+    if actual != expected:
+        raise ValueError(f"Effective configuration differs from prepared source-derived configuration: {path}")
+
+
 def validate_metric_samples(metric, expected):
     if metric.get("split") != "test" or metric.get("test_samples_sha256") != expected["test_sha256"]:
         raise ValueError("Evaluation split/test hash differs from preparation")
@@ -118,6 +125,7 @@ def audit_dataset(source_root, root, prepared, kind, dataset):
     if len(summary_rows) != 7:
         raise ValueError("Expected exactly seven variant/branch summary rows")
     configs = {}; detailed = []
+    expected_configs = prepared["expected_effective_configs"][stage["name"]]
     for variant in VARIANTS:
         for seed in stage["seeds"]:
             directory = protocol_path.parent / variant / f"seed{seed}"
@@ -129,7 +137,12 @@ def audit_dataset(source_root, root, prepared, kind, dataset):
                 if manifest.get(f"{field}_samples_sha256") != evidence[f"{field}_sha256"]:
                     raise ValueError(f"Prepared {field} sample hash differs")
             import yaml
-            cfg = yaml.safe_load((directory / "effective_config.yaml").read_text())
+            config_path = directory / "effective_config.yaml"
+            cfg = yaml.safe_load(config_path.read_text())
+            train_index = next(i for i, command in enumerate(stage["commands"])
+                               if "--eval-only" not in command and
+                               command[command.index("--output-dir") + 1] == str(directory))
+            validate_effective_config(cfg, expected_configs[train_index], seed, config_path)
             key = (dataset, seed); normalized = family_config(cfg)
             if key in configs and configs[key] != normalized:
                 raise ValueError("Training configuration drift outside explicit model differences")
@@ -157,6 +170,9 @@ def audit_dataset(source_root, root, prepared, kind, dataset):
                     log_path = root / "logs" / f"{kind}_{dataset}"
                     command_index = next(i for i, cmd in enumerate(stage["commands"])
                                          if cmd[cmd.index("--output-dir") + 1] == str(directory / f"eval_{split}_{branch}"))
+                    eval_config_path = directory / f"eval_{split}_{branch}/effective_config.yaml"
+                    eval_config = yaml.safe_load(eval_config_path.read_text())
+                    validate_effective_config(eval_config, expected_configs[command_index], seed, eval_config_path)
                     correct, total = parse_log(log_path / f"{command_index:03d}.stdout.log")
                     accuracy = float(metric["metrics"]["accuracy"])
                     if total != expected["test_count"] or not math.isclose(accuracy, 100 * correct / total, abs_tol=5e-4):

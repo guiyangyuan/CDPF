@@ -120,6 +120,26 @@ class CrossDatasetPlanTests(unittest.TestCase):
 
 
 class CrossDatasetAuditTests(unittest.TestCase):
+    def test_source_derived_effective_configs_pass_and_reject_seed_and_shared_drift(self):
+        study = module("cross_dataset_study"); audit = module("cross_dataset_audit")
+        plan = study.build_plan(ROOT, "/data", "/tmp/fixed-config-study", "/python")
+        commands = [plan["stages"][0]["commands"][0],
+                    plan["stages"][2]["commands"][17],
+                    plan["stages"][2]["commands"][50]]
+        configs = [study.effective_config_for_command(ROOT, command) for command in commands]
+        for command, config in zip(commands, configs):
+            seed = int(command[command.index("--seed") + 1])
+            audit.validate_effective_config(config, json.loads(json.dumps(config)), seed, "fixture.yaml")
+        seed2 = json.loads(json.dumps(configs[1])); seed2["OPTIM"]["LR"] = 0.02
+        with self.assertRaisesRegex(ValueError, "source-derived"):
+            audit.validate_effective_config(seed2, configs[1], configs[1]["SEED"], "seed2.yaml")
+        uniform_drift = json.loads(json.dumps(configs[0])); uniform_drift["DATALOADER"]["TRAIN_X"]["BATCH_SIZE"] = 32
+        with self.assertRaisesRegex(ValueError, "source-derived"):
+            audit.validate_effective_config(uniform_drift, configs[0], configs[0]["SEED"], "all-seeds.yaml")
+        wrong_seed = json.loads(json.dumps(configs[0])); wrong_seed["SEED"] = 2
+        with self.assertRaisesRegex(ValueError, "seed differs"):
+            audit.validate_effective_config(wrong_seed, wrong_seed, 1, "seed1.yaml")
+
     def test_final_rejects_incomplete_and_uses_all_rows(self):
         audit = module("cross_dataset_audit")
         with self.assertRaisesRegex(ValueError, "84 formal evaluations"):

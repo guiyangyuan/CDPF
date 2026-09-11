@@ -136,6 +136,30 @@ def dataset_evidence(source_root, data_root, key):
     return checked
 
 
+def effective_config_for_command(source_root, command):
+    """Resolve a generated command through the immutable training setup_cfg."""
+    parser = argparse.ArgumentParser(add_help=False)
+    parser.add_argument("--root", default=""); parser.add_argument("--output-dir", default="")
+    parser.add_argument("--resume", default=""); parser.add_argument("--seed", type=int, default=-1)
+    parser.add_argument("--source-domains", nargs="+"); parser.add_argument("--target-domains", nargs="+")
+    parser.add_argument("--transforms", nargs="+"); parser.add_argument("--config-file", default="")
+    parser.add_argument("--dataset-config-file", default=""); parser.add_argument("--trainer", default="")
+    parser.add_argument("--backbone", default=""); parser.add_argument("--head", default="")
+    parser.add_argument("--eval-only", action="store_true"); parser.add_argument("--model-dir", default="")
+    parser.add_argument("--load-epoch", type=int); parser.add_argument("--no-train", action="store_true")
+    parser.add_argument("opts", nargs=argparse.REMAINDER)
+    args = parser.parse_args(list(command)[2:])
+    train = source_module(source_root, "train.py", "cross_expected_train")
+    import yaml
+    return yaml.safe_load(train.setup_cfg(args).dump())
+
+
+def expected_effective_configs(plan):
+    return {stage["name"]: [effective_config_for_command(plan["source_root"], command)
+                             for command in stage["commands"]]
+            for stage in plan["stages"]}
+
+
 def prepare(plan, preparation_dir, clip_path=None):
     target = Path(preparation_dir).resolve()
     if target.exists():
@@ -155,6 +179,7 @@ def prepare(plan, preparation_dir, clip_path=None):
                     "immutable_inputs": "images are inventory-checked by path/size/mtime; fixed split metadata and description templates are SHA-256 checked"
                 },
                 "operational_scripts_sha256": operational_hashes(),
+                "expected_effective_configs": expected_effective_configs(plan),
                 "datasets": {key: dataset_evidence(source, plan["data_root"], key) for key in DATASETS}}
     target.mkdir(parents=True)
     atomic_json(target / "preparation.json", evidence)

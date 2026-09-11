@@ -152,7 +152,7 @@ def prepare(plan, preparation_dir, clip_path=None):
                 "environment": cpu_environment(),
                 "dataset_preparation_policy": {
                     "derived_split_fewshot_cache": "authorized deterministic loader output",
-                    "immutable_inputs": "images, fixed split metadata, and description templates are hash-checked"
+                    "immutable_inputs": "images are inventory-checked by path/size/mtime; fixed split metadata and description templates are SHA-256 checked"
                 },
                 "operational_scripts_sha256": operational_hashes(),
                 "datasets": {key: dataset_evidence(source, plan["data_root"], key) for key in DATASETS}}

@@ -1,0 +1,1611 @@
+# Review package: 158c49a..04a9142
+
+## Commits
+04a9142 docs: record validation probe verification
+76922fa feat: add frozen validation probe tooling
+
+## Files changed
+ .../2026-09-11-validation-probe/task-1-report.md   | 152 +++++
+ scripts/repro/validation_analysis.py               | 342 +++++++++++
+ scripts/repro/validation_probe.py                  | 671 +++++++++++++++++++++
+ tests/repro/test_validation_analysis.py            | 149 +++++
+ tests/repro/test_validation_probe.py               | 252 ++++++++
+ 5 files changed, 1566 insertions(+)
+
+## Diff
+diff --git a/.superpowers/sdd/2026-09-11-validation-probe/task-1-report.md b/.superpowers/sdd/2026-09-11-validation-probe/task-1-report.md
+new file mode 100644
+index 0000000..3b2be81
+--- /dev/null
++++ b/.superpowers/sdd/2026-09-11-validation-probe/task-1-report.md
+@@ -0,0 +1,152 @@
++# Task 1 implementation report
++
++## Scope and commit
++
++Implementation commit: `76922fa` (`feat: add frozen validation probe tooling`), based on parent commit `158c49a`.
++
++Owned implementation and tests:
++
++- `scripts/repro/validation_probe.py`
++- `scripts/repro/validation_analysis.py`
++- `tests/repro/test_validation_probe.py`
++- `tests/repro/test_validation_analysis.py`
++
++No model, trainer, dataset, CLIP, historical checkpoint, configuration, or parent-owned preparation report was changed. Parent-owned untracked files under `reports/preparation/validation-probe-20260911/` were left unstaged.
++
++## Implemented behavior
++
++### CPU preparation
++
++`validation_probe.py prepare` accepts one fixed dataset/seed case and a fresh output directory. It validates the inventory case, all three role checkpoints and their sidecars/manifests, epoch and provenance fields, role-specific schemas and losses, model signatures, checkpoint hashes, source hashes, CLIP/template hashes, and exact T0/T1 aggregator tensors.
++
++The command imports the requested frozen source directly with bytecode writing disabled and rejects source-module contamination. It rebuilds the effective source configuration with explicit evaluation overrides. The legacy UCF CoOp declared-KD1/effective-KD0 exception is handled only for the inventory case that records it.
++
++Dataset reconstruction avoids constructors that write caches. It uses the frozen source's fixed-split readers, seeded few-shot generation in the historical order (train16, then val4), and Base-class subsampling. Aircraft uses a read-only instance and source reader. It validates file existence, labels, class order, symlink-resolved train/val disjointness, and exact train/val/test sample digests. Test membership is metadata-only; test images are not decoded.
++
++The source evaluation transform, `DatasetWrapper`, and sequential loader are built for validation only with zero workers. Preparation decodes every validation image and records deterministic transform evidence, source metadata hashes, complete sample inventories, effective configuration, protocol, source/assets/checkpoint provenance, environment data, and the tool hash in `prepared.json`. Preparation never constructs CLIP or runs model inference.
++
++### CUDA-only export
++
++`validation_probe.py export` accepts a prepared receipt and a fresh output directory. It revalidates the prepared inputs and dataset/transform identities before loading the models and after evaluation. CUDA availability is mandatory; there is no CPU inference fallback. A rejection writes `failure.json` and does not write a success receipt.
++
++The exporter constructs the frozen source model classes directly rather than instantiating a Trainer. All source model instances are constructed before the shared CLIP module is moved to CUDA. It manually strict-loads the prompt learner and aggregator `ModuleDict`, including class-dependent token buffers, and rejects missing, unexpected, non-finite, or wrong-shape state. It freezes all parameters, sets evaluation mode, and uses inference mode. Tests make optimizer creation and backward invocation fail immediately if attempted.
++
++Each validation image batch is transferred once to the model device and supplied to each role's direct full forward. The exporter checks shared frozen image features and CLIP logit scale. It exports finite FP32 `C`, `S0`, `S1`, `M`, `T0`, and `T1` arrays plus int64 labels in a non-pickle NPZ. `M` uses the frozen masked normalized descriptor mean and historical CLIP scale. T0 and T1 remain separate, with tensor equality and output equality recorded independently. `export.json` records row identities, class order, precision, configuration, transform, source/assets/checkpoint/tool hashes, and the NPZ hash.
++
++### CPU analysis and aggregation
++
++`validation_analysis.py analyze` validates the complete export receipt and NPZ status, hashes, fixed schema, sample order, class order, shapes, dtypes, and finite values. It reports accuracy, NLL, multiclass Brier score (per-sample class sum, then sample mean), and explicitly named probability top1-top2 margin for all six raw branches and all 18 fixed student/teacher half-fusions. Both logits and probability fusion are included. Probability-fusion NLL uses stable log-softmax and log-add-exp rather than clipping. The analysis also saves complete predictions, student/teacher error overlap and disagreement, and paired rescue/harm counts versus C.
++
++`validation_analysis.py aggregate` requires exactly the nine unique dataset/seed analyses, validates Base/validation protocol, source/assets/checkpoint provenance, compatible settings, and unique role checkpoint hashes, and rejects missing, duplicate, or mixed cases. It records every dataset/seed result and reports three-seed means and sample standard deviations for every branch/combination and metric, followed by equal-dataset macro weighting. The fixed guards compare S1+M logits with C+M logits and probability, require a non-negative macro delta and each dataset mean delta of at least -1 percentage point, and require S1+M logits to exceed S0+M logits macroscopically. T0/T1 do not double-weight guards. The output makes no Novel/HM, significance, or automatic-training claim.
++
++## CLI interfaces
++
++All commands run from the validation checkout with `PYTHONPATH=.:Dassl.pytorch`; the project Python is `../../tc-venv/bin/python`.
++
++Prepare one case:
++
++```sh
++PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:Dassl.pytorch ../../tc-venv/bin/python -B scripts/repro/validation_probe.py prepare \
++  --inventory <proposed-probe-inputs.json> \
++  --workspace-root <original-task-workspace> \
++  --source-root <frozen-source-root> \
++  --data-root <dataset-root> \
++  --dataset {ucf101,dtd,fgvc_aircraft} \
++  --seed {1,2,3} \
++  --output-dir <new-directory>
++```
++
++Export one prepared case on CUDA:
++
++```sh
++PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:Dassl.pytorch ../../tc-venv/bin/python -B scripts/repro/validation_probe.py export \
++  --prepared <prepared.json> \
++  --output-dir <new-directory>
++```
++
++Analyze one completed export on CPU:
++
++```sh
++PYTHONPATH=.:Dassl.pytorch ../../tc-venv/bin/python scripts/repro/validation_analysis.py analyze \
++  --export <export.json> \
++  --output-dir <new-directory>
++```
++
++Aggregate the exact nine analyses on CPU:
++
++```sh
++PYTHONPATH=.:Dassl.pytorch ../../tc-venv/bin/python scripts/repro/validation_analysis.py aggregate \
++  --analyses <nine analysis.json paths> \
++  --output-dir <new-directory>
++```
++
++Every output directory must be absent before invocation; existing destinations are rejected.
++
++## TDD evidence
++
++The implementation followed `superpowers:test-driven-development` and its `writing-good-tests.md` guidance.
++
++Initial CLI test command:
++
++```sh
++OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
++PYTHONPATH=.:Dassl.pytorch ../../tc-venv/bin/python \
++  -m unittest tests.repro.test_validation_probe tests.repro.test_validation_analysis -v
++```
++
++The first run was red with two failures because both requested scripts were absent. Minimal CLI skeletons made only the help tests green. Adding the full behavioral tests produced the next red run with ten errors from missing implementation functions before those functions were written.
++
++Further focused red/green cycles covered issues found during review:
++
++- Shared CLIP construction order: red because `instantiate_frozen_models` did not exist, then green after all source models were constructed before moving the shared CLIP module.
++- CUDA rejection receipt: red because CUDA-unavailable export did not write `failure.json`, then green after the availability check moved into the receipt-producing failure path.
++- Batch device transfer: red because `export_batches` had no device argument, then green after each image batch was moved to the requested device before direct forwards.
++- Stable probability-fusion NLL: red because the stable helper did not exist, then green after probability fusion used log-softmax and log-add-exp.
++
++The final focused command passed all 16 targeted tests. These tests include hand-derived metric and fusion fixtures, strict checkpoint loading with tiny real torch modules, non-finite and shape failures, missing validation data, class/sample permutation and hash failures, output collision, CUDA-unavailable failure receipt, no optimizer/backward invariant, shared CLIP construction order, image device transfer, safe NPZ schema, and a complete synthetic export-to-analysis-to-nine-case-aggregate path with negative aggregation cases.
++
++## Real CPU preparation evidence
++
++Two real source/data integration cases were run read-only with `-B` and `PYTHONDONTWRITEBYTECODE=1`. Logs and outputs are outside the checkout and outside all immutable inputs:
++
++- `/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/validation-probe-20260911/implementation-attempts/dtd-seed1-prepare.log`
++- `/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/validation-probe-20260911/implementation-attempts/dtd-seed1-prepared/prepared.json`
++- `/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/validation-probe-20260911/implementation-attempts/ucf101-seed1-prepare.log`
++- `/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/validation-probe-20260911/implementation-attempts/ucf101-seed1-prepared/prepared.json`
++
++DTD seed 1 regenerated 24 Base classes, 384 training samples, 96 validation samples, and 864 metadata-only test samples. Its train/val/test digests were `53f6e066...a1ff49`, `28a600bf...54e4b`, and `cdffe9f9...8cf4a`; all 96 validation images decoded as float32 `[3,224,224]`, and all role teacher tensors matched exactly.
++
++UCF101 seed 1 regenerated 51 Base classes, 816 training samples, 204 validation samples, and 1,934 metadata-only test samples. Its train/val/test digests were `7c98face...1cec2`, `768126b3...95a153`, and `5e65b514...149c9`; all 204 validation images decoded as float32 `[3,224,224]`, and all role teacher tensors matched exactly.
++
++These results agree with the independently authenticated historical sampling inventory. The parent will run all nine CPU preparation cases against the reviewed commit.
++
++## Final verification
++
++Focused suite:
++
++```text
++Ran 16 tests
++OK
++```
++
++Complete suite, using the required one-thread environment:
++
++```sh
++OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
++PYTHONPATH=.:Dassl.pytorch ../../tc-venv/bin/python -m unittest discover -s tests -v
++```
++
++Result:
++
++```text
++Ran 126 tests in 6.267s
++OK
++```
++
++`git diff --check` and the equivalent whitespace checks for the new untracked files produced no errors before commit. A prohibited-API scan found no `build_trainer`, `torch.optim`, `.backward(`, or `test_loader` use in either implementation script.
++
++## Remaining limitations
++
++No server or GPU was used in this task. Full CUDA export, real frozen CLIP/model forward execution, direct-forward parity on the historical models, and the resulting measured analysis and aggregate metrics remain pending for a later user-authorized server/GPU turn. This turn establishes local CPU preparation, CPU analysis/aggregation, synthetic export behavior, and explicit CUDA-unavailable rejection; it does not establish GPU readiness or any research result.
++
++The parent next runs only all nine CPU preparation cases plus the CUDA-unavailable rejection against reviewed code. No measured performance claims should be made from the synthetic fixtures or the two preparation receipts.
+diff --git a/scripts/repro/validation_analysis.py b/scripts/repro/validation_analysis.py
+new file mode 100644
+index 0000000..53b15c4
+--- /dev/null
++++ b/scripts/repro/validation_analysis.py
+@@ -0,0 +1,342 @@
++#!/usr/bin/env python3
++"""Analyze and aggregate frozen validation-only crossed-inference exports."""
++
++from __future__ import annotations
++
++import argparse
++import copy
++import json
++import math
++import statistics
++from pathlib import Path
++from typing import Any, Mapping
++
++import numpy as np
++
++try:
++    from scripts.repro import validation_probe as probe
++except ImportError:
++    import validation_probe as probe
++
++
++DATASETS = ("ucf101", "dtd", "fgvc_aircraft")
++EXPECTED_SOURCES = probe.EXPECTED_SOURCES
++EXPECTED_TEMPLATES = {
++    "ucf101": "3acc805cbcd115331cc975f6146b24de2fc1732c45ee54a57c25259facbc6b9a",
++    "dtd": "dabdcafded7babd67046d0f90abeb510b648bdaaf397b884f265f3460a7942a9",
++    "fgvc_aircraft": "d86833c2483c1d12907abeb6198412f1d0a020bd12999a3f170967a7f549e3b8",
++}
++STUDENTS = ("C", "S0", "S1")
++TEACHERS = ("M", "T0", "T1")
++
++
++def _fresh_output(path: Path) -> Path:
++    target = Path(path).resolve()
++    if target.exists():
++        raise FileExistsError(f"Output must be a fresh path: {target}")
++    return target
++
++
++def _atomic_json(path: Path, value: Mapping[str, Any]) -> None:
++    temporary = path.with_name(path.name + ".tmp")
++    temporary.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n")
++    temporary.replace(path)
++
++
++def _validate_logits(logits: np.ndarray, labels: np.ndarray) -> tuple[int, int]:
++    value = np.asarray(logits)
++    targets = np.asarray(labels)
++    if value.ndim != 2 or targets.ndim != 1 or value.shape[0] != targets.shape[0]:
++        raise ValueError("Logits/labels require aligned [N,C]/[N] shapes")
++    if value.shape[0] == 0 or value.shape[1] < 2 or not np.isfinite(value).all():
++        raise ValueError("Logits must be a nonempty finite multiclass matrix")
++    if not np.issubdtype(targets.dtype, np.integer) or np.any(targets < 0) or np.any(targets >= value.shape[1]):
++        raise ValueError("Labels are invalid for the logits class order")
++    return value.shape
++
++
++def stable_softmax(logits: np.ndarray) -> np.ndarray:
++    value = np.asarray(logits, dtype=np.float64)
++    shifted = value - np.max(value, axis=1, keepdims=True)
++    exp = np.exp(shifted)
++    probabilities = exp / exp.sum(axis=1, keepdims=True)
++    if not np.isfinite(probabilities).all():
++        raise ValueError("Softmax produced non-finite probabilities")
++    return probabilities
++
++
++def stable_log_softmax(logits: np.ndarray) -> np.ndarray:
++    value = np.asarray(logits, dtype=np.float64)
++    maximum = np.max(value, axis=1, keepdims=True)
++    return value - maximum - np.log(np.exp(value - maximum).sum(axis=1, keepdims=True))
++
++
++def probability_metrics(probabilities: np.ndarray, labels: np.ndarray,
++                        log_probabilities: np.ndarray | None = None) -> dict[str, Any]:
++    probs, targets = np.asarray(probabilities, dtype=np.float64), np.asarray(labels)
++    _validate_logits(probs, targets)
++    if np.any(probs < 0) or not np.allclose(probs.sum(axis=1), 1.0, rtol=0, atol=1e-12):
++        raise ValueError("Probability rows must be nonnegative and sum to one")
++    predictions = np.argmax(probs, axis=1); correct = int(np.sum(predictions == targets)); n = len(targets)
++    if log_probabilities is None:
++        true_probability = probs[np.arange(n), targets]
++        nll = float("inf") if np.any(true_probability <= 0) else float(-np.log(true_probability).mean())
++    else:
++        log_probs = np.asarray(log_probabilities, dtype=np.float64)
++        if log_probs.shape != probs.shape or not np.isfinite(log_probs).all():
++            raise ValueError("Log probabilities must be finite and aligned")
++        nll = float(-log_probs[np.arange(n), targets].mean())
++    one_hot = np.zeros_like(probs); one_hot[np.arange(n), targets] = 1.0
++    sorted_probs = np.sort(probs, axis=1)
++    return {"correct": correct, "total": n, "accuracy_pct": 100.0 * correct / n,
++            "nll": nll, "multiclass_brier": float(np.square(probs - one_hot).sum(axis=1).mean()),
++            "probability_top1_top2_margin": float((sorted_probs[:, -1] - sorted_probs[:, -2]).mean())}
++
++
++def branch_metrics(logits: np.ndarray, labels: np.ndarray) -> dict[str, Any]:
++    _validate_logits(logits, labels)
++    value = np.asarray(logits, dtype=np.float64)
++    return probability_metrics(stable_softmax(value), labels, stable_log_softmax(value))
++
++
++def fixed_probability_fusion_metrics(student_logits: np.ndarray, teacher_logits: np.ndarray,
++                                     labels: np.ndarray) -> dict[str, Any]:
++    student_log = stable_log_softmax(student_logits); teacher_log = stable_log_softmax(teacher_logits)
++    fused_log = np.logaddexp(student_log, teacher_log) - math.log(2.0)
++    fused_probability = 0.5 * np.exp(student_log) + 0.5 * np.exp(teacher_log)
++    return {"metrics": probability_metrics(fused_probability, labels, fused_log),
++            "probabilities": fused_probability}
++
++
++def load_export(export_path: Path) -> tuple[dict[str, Any], dict[str, np.ndarray]]:
++    path = Path(export_path).resolve()
++    receipt = json.loads(path.read_text())
++    if receipt.get("status") != "passed" or receipt.get("schema_version") != 1:
++        raise ValueError("Export status/schema is not complete")
++    if receipt.get("protocol") != probe.PROTOCOL or set(receipt.get("branches", [])) != set(probe.BRANCHES):
++        raise ValueError("Export protocol/branch schema mismatch")
++    dataset, seed = receipt.get("dataset_key"), receipt.get("seed")
++    if dataset not in DATASETS or seed not in (1, 2, 3):
++        raise ValueError("Export dataset/seed is outside the fixed nine cases")
++    provenance = receipt.get("provenance", {})
++    if provenance.get("source_sha256") != EXPECTED_SOURCES[dataset]:
++        raise ValueError("Export frozen source provenance mismatch")
++    if provenance.get("clip_sha256") != probe.CLIP_SHA256 or \
++            provenance.get("template_sha256") != EXPECTED_TEMPLATES[dataset]:
++        raise ValueError("Export frozen asset provenance mismatch")
++    checkpoint_hashes = provenance.get("checkpoint_sha256")
++    if not isinstance(checkpoint_hashes, dict) or set(checkpoint_hashes) != set(probe.ROLES) or \
++            any(not isinstance(value, str) or not value for value in checkpoint_hashes.values()):
++        raise ValueError("Export checkpoint provenance is incomplete")
++    if receipt.get("prepared") is not None and \
++            probe.sha256_file(Path(receipt["prepared"])) != receipt.get("prepared_sha256"):
++        raise ValueError("Export prepared-receipt hash mismatch")
++    npz = Path(receipt["npz"])
++    if not npz.is_absolute():
++        npz = path.parent / npz
++    if probe.sha256_file(npz) != receipt.get("npz_sha256"):
++        raise ValueError("Export NPZ hash mismatch")
++    with np.load(npz, allow_pickle=False) as archive:
++        if set(archive.files) != {"labels", *probe.BRANCHES}:
++            raise ValueError("Export NPZ has missing or extra arrays")
++        arrays = {name: archive[name].copy() for name in archive.files}
++    labels = arrays.pop("labels")
++    if labels.dtype != np.int64:
++        raise ValueError("Export labels must be int64")
++    classes, rows = receipt.get("class_order", []), receipt.get("rows", [])
++    if not classes or len(set(classes)) != len(classes) or len(rows) != len(labels):
++        raise ValueError("Export class/sample alignment metadata is invalid")
++    if [row.get("row") for row in rows] != list(range(len(rows))) or \
++            [row.get("label") for row in rows] != labels.tolist() or \
++            any(row.get("classname") != classes[int(row["label"])] for row in rows):
++        raise ValueError("Export sample alignment differs from NPZ labels")
++    if len({row.get("sample_id") for row in rows}) != len(rows):
++        raise ValueError("Export sample IDs are duplicated")
++    for name in probe.BRANCHES:
++        if arrays[name].dtype != np.float32 or arrays[name].shape != (len(labels), len(classes)):
++            raise ValueError(f"Export {name} dtype/shape mismatch")
++        if not np.isfinite(arrays[name]).all():
++            raise ValueError(f"Export {name} contains non-finite logits")
++    arrays["labels"] = labels
++    return receipt, arrays
++
++
++def _pair_audit(student_prediction: np.ndarray, teacher_prediction: np.ndarray,
++                labels: np.ndarray) -> dict[str, int]:
++    student_correct, teacher_correct = student_prediction == labels, teacher_prediction == labels
++    return {"prediction_disagreement": int(np.sum(student_prediction != teacher_prediction)),
++            "both_wrong_error_overlap": int(np.sum(~student_correct & ~teacher_correct)),
++            "student_wrong_teacher_correct": int(np.sum(~student_correct & teacher_correct)),
++            "student_correct_teacher_wrong": int(np.sum(student_correct & ~teacher_correct))}
++
++
++def _paired_vs_c(candidate_prediction: np.ndarray, c_prediction: np.ndarray,
++                 labels: np.ndarray) -> dict[str, int]:
++    candidate_correct, c_correct = candidate_prediction == labels, c_prediction == labels
++    return {"rescue_vs_C": int(np.sum(candidate_correct & ~c_correct)),
++            "harm_vs_C": int(np.sum(~candidate_correct & c_correct)),
++            "both_correct": int(np.sum(candidate_correct & c_correct)),
++            "both_wrong": int(np.sum(~candidate_correct & ~c_correct)),
++            "prediction_disagreement_vs_C": int(np.sum(candidate_prediction != c_prediction))}
++
++
++def analyze_export(export_path: Path, output_dir: Path) -> dict[str, Any]:
++    output = _fresh_output(output_dir)
++    receipt, arrays = load_export(export_path)
++    labels = arrays["labels"]
++    branches, combinations, predictions, pair_audits, paired_vs_c = {}, {}, {}, {}, {}
++    for name in probe.BRANCHES:
++        branches[name] = branch_metrics(arrays[name], labels)
++        predictions[name] = np.argmax(arrays[name], axis=1).astype(int).tolist()
++    c_prediction = np.argmax(arrays["C"], axis=1)
++    for student in STUDENTS:
++        for teacher in TEACHERS:
++            pair_audits[f"{student}_vs_{teacher}"] = _pair_audit(
++                np.argmax(arrays[student], axis=1), np.argmax(arrays[teacher], axis=1), labels)
++            logits_name = f"{student}+{teacher}_logits"
++            fused_logits = 0.5 * arrays[student].astype(np.float64) + 0.5 * arrays[teacher].astype(np.float64)
++            combinations[logits_name] = branch_metrics(fused_logits, labels)
++            logits_prediction = np.argmax(fused_logits, axis=1)
++            predictions[logits_name] = logits_prediction.astype(int).tolist()
++            paired_vs_c[logits_name] = _paired_vs_c(logits_prediction, c_prediction, labels)
++            probability_name = f"{student}+{teacher}_probability"
++            probability_result = fixed_probability_fusion_metrics(arrays[student], arrays[teacher], labels)
++            fused_probability = probability_result["probabilities"]
++            combinations[probability_name] = probability_result["metrics"]
++            probability_prediction = np.argmax(fused_probability, axis=1)
++            predictions[probability_name] = probability_prediction.astype(int).tolist()
++            paired_vs_c[probability_name] = _paired_vs_c(probability_prediction, c_prediction, labels)
++    report = {"status": "passed", "schema_version": 1, "dataset_key": receipt["dataset_key"],
++              "seed": receipt["seed"], "protocol": receipt["protocol"],
++              "provenance": copy.deepcopy(receipt.get("provenance", {})),
++              "export": str(Path(export_path).resolve()), "export_sha256": probe.sha256_file(Path(export_path)),
++              "sample_ids": [row["sample_id"] for row in receipt["rows"]],
++              "labels": labels.astype(int).tolist(), "class_order": receipt["class_order"],
++              "teacher_tensor_exact_equal": receipt["teacher_tensor_exact_equal"],
++              "teacher_logits_exact_equal": receipt.get("teacher_logits_exact_equal"),
++              "tool": {"validation_analysis_sha256": probe.sha256_file(Path(__file__).resolve())},
++              "branches": branches, "combinations": combinations, "student_teacher_audits": pair_audits,
++              "paired_comparisons_vs_C": paired_vs_c, "predictions": predictions,
++              "claims": {"split": "Base validation only", "novel_or_hm": False,
++                         "significance_test": False, "automatic_training_action": False}}
++    output.mkdir(parents=True); _atomic_json(output / "analysis.json", report)
++    return report
++
++
++def _mean_sd(values: list[float]) -> dict[str, Any]:
++    return {"values": values, "mean": statistics.mean(values),
++            "sample_sd": statistics.stdev(values) if len(values) > 1 else None}
++
++
++def aggregate_reports(reports: list[Mapping[str, Any]]) -> dict[str, Any]:
++    if len(reports) != 9:
++        raise ValueError("Aggregate requires exactly nine complete cases")
++    expected = {(dataset, seed) for dataset in DATASETS for seed in (1, 2, 3)}
++    keys = [(report.get("dataset_key"), report.get("seed")) for report in reports]
++    if len(set(keys)) != len(keys):
++        raise ValueError("Aggregate contains a duplicate dataset/seed case")
++    if set(keys) != expected:
++        raise ValueError("Aggregate is missing one or more fixed nine cases")
++    if any(report.get("status") != "passed" or report.get("protocol") != probe.PROTOCOL for report in reports):
++        raise ValueError("Aggregate contains incomplete or mixed protocol results")
++    clips = {report.get("provenance", {}).get("clip_sha256") for report in reports}
++    if len(clips) != 1:
++        raise ValueError("Aggregate settings are not compatible: CLIP differs")
++    for dataset in DATASETS:
++        group = [report for report in reports if report["dataset_key"] == dataset]
++        source = {report["provenance"].get("source_sha256") for report in group}
++        template = {report["provenance"].get("template_sha256") for report in group}
++        compatibility = {report["provenance"].get("config_compatibility_sha256",
++                                                  report["provenance"].get("config_sha256")) for report in group}
++        if source != {EXPECTED_SOURCES[dataset]} or len(template) != 1 or len(compatibility) != 1:
++            raise ValueError(f"Aggregate settings are not compatible for {dataset}")
++    for role in probe.ROLES:
++        hashes = [report["provenance"].get("checkpoint_sha256", {}).get(role) for report in reports]
++        if any(not value for value in hashes) or len(set(hashes)) != 9:
++            raise ValueError(f"Aggregate checkpoint provenance is missing or duplicated for {role}")
++    selected = ("S1+M_logits", "C+M_logits", "S1+M_probability", "C+M_probability", "S0+M_logits")
++    for report in reports:
++        if any(name not in report.get("combinations", {}) for name in selected):
++            raise ValueError("Aggregate report lacks a fixed guard combination")
++    dataset_means = {}
++    for dataset in DATASETS:
++        group = sorted((r for r in reports if r["dataset_key"] == dataset), key=lambda r: r["seed"])
++        dataset_means[dataset] = {name: _mean_sd([float(r["combinations"][name]["accuracy_pct"])
++                                                  for r in group]) for name in selected}
++    macro = {name: _mean_sd([dataset_means[dataset][name]["mean"] for dataset in DATASETS]) for name in selected}
++    all_methods = list(probe.BRANCHES) + [f"{student}+{teacher}_{mode}"
++        for student in STUDENTS for teacher in TEACHERS for mode in ("logits", "probability")]
++    metric_fields = ("accuracy_pct", "nll", "multiclass_brier", "probability_top1_top2_margin")
++    complete_dataset_metrics = {}
++    for dataset in DATASETS:
++        group = sorted((r for r in reports if r["dataset_key"] == dataset), key=lambda r: r["seed"])
++        complete_dataset_metrics[dataset] = {}
++        for method in all_methods:
++            complete_dataset_metrics[dataset][method] = {}
++            for field in metric_fields:
++                values = [float((r["branches"] if method in probe.BRANCHES else r["combinations"])[method][field])
++                          for r in group]
++                complete_dataset_metrics[dataset][method][field] = _mean_sd(values)
++    complete_macro_metrics = {}
++    for method in all_methods:
++        complete_macro_metrics[method] = {}
++        for field in metric_fields:
++            values = [complete_dataset_metrics[dataset][method][field]["mean"] for dataset in DATASETS]
++            complete_macro_metrics[method][field] = _mean_sd(values)
++    deltas = {
++        "candidate_vs_C_logits_macro_pp": macro["S1+M_logits"]["mean"] - macro["C+M_logits"]["mean"],
++        "candidate_vs_C_probability_macro_pp": macro["S1+M_probability"]["mean"] - macro["C+M_probability"]["mean"],
++        "candidate_vs_S0_logits_macro_pp": macro["S1+M_logits"]["mean"] - macro["S0+M_logits"]["mean"],
++        "candidate_vs_C_logits_dataset_pp": {dataset: dataset_means[dataset]["S1+M_logits"]["mean"] -
++                                               dataset_means[dataset]["C+M_logits"]["mean"] for dataset in DATASETS},
++        "candidate_vs_C_probability_dataset_pp": {dataset: dataset_means[dataset]["S1+M_probability"]["mean"] -
++                                                    dataset_means[dataset]["C+M_probability"]["mean"] for dataset in DATASETS},
++    }
++    guards = {
++        "S1+M_vs_C+M_logits": deltas["candidate_vs_C_logits_macro_pp"] >= 0 and
++            min(deltas["candidate_vs_C_logits_dataset_pp"].values()) >= -1.0,
++        "S1+M_vs_C+M_probability": deltas["candidate_vs_C_probability_macro_pp"] >= 0 and
++            min(deltas["candidate_vs_C_probability_dataset_pp"].values()) >= -1.0,
++        "S1+M_vs_S0+M_logits": deltas["candidate_vs_S0_logits_macro_pp"] > 0,
++    }
++    guards["all_passed"] = all(guards.values())
++    return {"status": "passed", "case_count": 9, "protocol": probe.PROTOCOL,
++            "weighting": "three-seed mean within dataset; equal mean across three datasets",
++            "cases": [{"dataset_key": r["dataset_key"], "seed": r["seed"],
++                       "branches": r["branches"], "combinations": r["combinations"]}
++                      for r in sorted(reports, key=lambda r: (DATASETS.index(r["dataset_key"]), r["seed"]))],
++            "dataset_means": dataset_means, "macro": macro,
++            "complete_dataset_metrics": complete_dataset_metrics,
++            "complete_macro_metrics": complete_macro_metrics,
++            "deltas_pp": deltas, "guards": guards,
++            "claims": {"split": "Base validation only", "novel_or_hm": False,
++                       "significance_test": False, "automatic_training_action": False,
++                       "duplicated_teacher_weighting": "T0/T1 retained in reports and excluded from guards"}}
++
++
++def aggregate_files(paths: list[Path], output_dir: Path) -> dict[str, Any]:
++    output = _fresh_output(output_dir)
++    reports = [json.loads(Path(path).read_text()) for path in paths]
++    result = aggregate_reports(reports)
++    result["inputs"] = [{"path": str(Path(path).resolve()), "sha256": probe.sha256_file(Path(path))} for path in paths]
++    output.mkdir(parents=True); _atomic_json(output / "aggregate.json", result)
++    return result
++
++
++def build_parser() -> argparse.ArgumentParser:
++    parser = argparse.ArgumentParser(description=__doc__); commands = parser.add_subparsers(dest="command", required=True)
++    analyze = commands.add_parser("analyze", help="analyze one completed export on CPU")
++    analyze.add_argument("--export", type=Path, required=True); analyze.add_argument("--output-dir", type=Path, required=True)
++    aggregate = commands.add_parser("aggregate", help="aggregate exactly nine completed analyses")
++    aggregate.add_argument("--analyses", type=Path, nargs=9, required=True)
++    aggregate.add_argument("--output-dir", type=Path, required=True)
++    return parser
++
++
++def main(argv: list[str] | None = None) -> int:
++    args = build_parser().parse_args(argv)
++    result = analyze_export(args.export, args.output_dir) if args.command == "analyze" else aggregate_files(args.analyses, args.output_dir)
++    print(json.dumps(result, indent=2, ensure_ascii=False)); return 0
++
++
++if __name__ == "__main__": raise SystemExit(main())
+diff --git a/scripts/repro/validation_probe.py b/scripts/repro/validation_probe.py
+new file mode 100644
+index 0000000..2610e5a
+--- /dev/null
++++ b/scripts/repro/validation_probe.py
+@@ -0,0 +1,671 @@
++#!/usr/bin/env python3
++"""Prepare and export the frozen validation-only crossed-inference probe.
++
++``prepare`` is CPU-only and reconstructs the historical validation loader without
++calling dataset constructors. ``export`` requires CUDA and constructs the frozen
++source model classes directly; it never constructs a trainer or optimizer.
++"""
++
++from __future__ import annotations
++
++import argparse
++import copy
++import hashlib
++import importlib
++import json
++import platform
++import random
++import sys
++from pathlib import Path
++from types import SimpleNamespace
++from typing import Any, Iterable, Mapping
++
++sys.dont_write_bytecode = True
++
++import numpy as np
++import torch
++from torch.nn import functional as F
++
++
++DATASETS = {
++    "ucf101": ("UCF101", "ucf101", "ucf_prompts_full.json"),
++    "dtd": ("DescribableTextures", "dtd", "texture_prompts_full.json"),
++    "fgvc_aircraft": ("FGVCAircraft", "fgvc_aircraft", "airplane_prompts_full.json"),
++}
++OLD_SOURCE_SHA256 = "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f"
++NEW_SOURCE_SHA256 = "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
++EXPECTED_SOURCES = {"ucf101": OLD_SOURCE_SHA256, "dtd": NEW_SOURCE_SHA256,
++                    "fgvc_aircraft": NEW_SOURCE_SHA256}
++CLIP_SHA256 = "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f"
++BRANCHES = ("C", "S0", "S1", "M", "T0", "T1")
++ROLES = ("coop", "kd0", "kd1")
++PROTOCOL = {
++    "version": 1, "split": "val", "subsample_classes": "base", "shots": 16,
++    "val_shots": 4, "epoch": 20, "alpha": 0.5, "sampler": "SequentialSampler",
++    "workers": 0, "student_roles": {"C": "coop", "S0": "kd0", "S1": "kd1"},
++    "teacher_roles": {"T0": "kd0", "T1": "kd1"},
++    "description_mean": "normalize(each valid descriptor), masked mean, normalize(mean)",
++    "selection": "all fixed branches and combinations; no fitting or search",
++}
++
++
++def sha256_file(path: Path) -> str:
++    digest = hashlib.sha256()
++    with Path(path).open("rb") as handle:
++        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
++            digest.update(chunk)
++    return digest.hexdigest()
++
++
++def json_digest(value: Any) -> str:
++    data = json.dumps(value, sort_keys=True, ensure_ascii=False, separators=(",", ":"))
++    return hashlib.sha256(data.encode()).hexdigest()
++
++
++def model_source_digest(source_root: Path) -> str:
++    root = Path(source_root).resolve()
++    files = [root / "train.py"]
++    for folder in ("trainers", "datasets", "clip", "Dassl.pytorch/dassl"):
++        files.extend(sorted((root / folder).rglob("*.py")))
++    if any(not path.is_file() for path in files):
++        raise FileNotFoundError("Frozen source tree is incomplete")
++    digest = hashlib.sha256()
++    for path in files:
++        digest.update(str(path.relative_to(root)).encode())
++        digest.update(path.read_bytes())
++    return digest.hexdigest()
++
++
++def _read_json(path: Path) -> dict[str, Any]:
++    if not Path(path).is_file():
++        raise FileNotFoundError(f"Required JSON is missing: {path}")
++    value = json.loads(Path(path).read_text())
++    if not isinstance(value, dict):
++        raise ValueError(f"Expected JSON object: {path}")
++    return value
++
++
++def _atomic_json(path: Path, value: Mapping[str, Any]) -> None:
++    temporary = path.with_name(path.name + ".tmp")
++    temporary.write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n")
++    temporary.replace(path)
++
++
++def _fresh_output(path: Path, protected: Iterable[Path] = ()) -> Path:
++    target = Path(path).resolve()
++    for item in protected:
++        other = Path(item).resolve()
++        if target == other or target in other.parents or other in target.parents:
++            raise ValueError(f"Output must be disjoint from immutable input: {other}")
++    if target.exists():
++        raise FileExistsError(f"Output must be a fresh path: {target}")
++    return target
++
++
++def validate_inventory(inventory: Mapping[str, Any], dataset: str, seed: int) -> dict[str, Any]:
++    if dataset not in DATASETS or seed not in (1, 2, 3):
++        raise ValueError("Only UCF101/DTD/FGVCAircraft seeds 1/2/3 are allowed")
++    cases = [case for case in inventory.get("cases", [])
++             if case.get("dataset") == dataset and case.get("seed") == seed]
++    if len(cases) != 1:
++        raise ValueError("Inventory case is missing or duplicated")
++    case = copy.deepcopy(cases[0])
++    if case.get("split") != "val" or case.get("candidate_classes") != "base":
++        raise ValueError("Inventory must request validation split and Base classes")
++    required_case = {"dataset", "seed", "split", "candidate_classes", "train_samples_sha256",
++                     "val_samples_sha256", "clip_sha256", "template_sha256",
++                     "coop_training_template_sha256", "checkpoints"}
++    if not required_case.issubset(case):
++        raise ValueError("Inventory case schema is incomplete")
++    if set(case["checkpoints"]) != set(ROLES):
++        raise ValueError("Inventory role schema must contain exactly coop/kd0/kd1")
++    required_role = {"workspace_relative_checkpoint", "sha256", "manifest_sha256",
++                     "model_source_sha256", "effective_kd_weight", "epoch"}
++    for role, expected_kd in (("coop", 0.0), ("kd0", 0.0), ("kd1", 1.0)):
++        record = case["checkpoints"][role]
++        if set(record) != required_role:
++            raise ValueError(f"Inventory {role} schema has missing or extra fields")
++        if record["epoch"] != 20 or record["effective_kd_weight"] != expected_kd:
++            raise ValueError(f"Inventory {role} has the wrong epoch or effective loss")
++        if record["model_source_sha256"] != EXPECTED_SOURCES[dataset]:
++            raise ValueError(f"Inventory {role} has the wrong frozen source")
++        for field in ("sha256", "manifest_sha256", "model_source_sha256"):
++            if not isinstance(record[field], str) or len(record[field]) != 64:
++                raise ValueError(f"Inventory {role} has invalid {field}")
++    if case["clip_sha256"] != CLIP_SHA256:
++        raise ValueError("Inventory CLIP hash differs from the fixed asset")
++    if case["coop_training_template_sha256"] is not None:
++        raise ValueError("CoOp training template must remain null")
++    return case
++
++
++def sample_digest(items: Iterable[Any], data_root: Path) -> str:
++    root = Path(data_root).resolve()
++    rows = []
++    for item in items or []:
++        path = Path(item.impath).resolve()
++        try:
++            relative = path.relative_to(root)
++        except ValueError as exc:
++            raise ValueError(f"Dataset image is outside data root: {path}") from exc
++        rows.append((str(relative), int(item.label), item.classname))
++    return hashlib.sha256(json.dumps(rows, ensure_ascii=False).encode()).hexdigest()
++
++
++def _sample_rows(items: Iterable[Any], root: Path, classnames: list[str]) -> list[dict[str, Any]]:
++    base = Path(root).resolve()
++    rows, seen = [], set()
++    for item in items or []:
++        path = Path(item.impath)
++        if not path.is_file():
++            raise FileNotFoundError(f"Dataset image is missing: {path}")
++        identity = path.resolve()
++        try:
++            relative = identity.relative_to(base)
++        except ValueError as exc:
++            raise ValueError(f"Dataset image is outside data root: {identity}") from exc
++        label = int(item.label)
++        if label < 0 or label >= len(classnames) or item.classname != classnames[label]:
++            raise ValueError("Sample label/class order differs from rebuilt classes")
++        if identity in seen:
++            raise ValueError("Duplicate resolved image identity within a split")
++        seen.add(identity)
++        stat = identity.stat()
++        rows.append({"sample_id": str(relative), "label": label, "classname": item.classname,
++                     "size": stat.st_size, "mtime_ns": stat.st_mtime_ns})
++    return rows
++
++
++def validate_samples(train: list[Any], val: list[Any], test: list[Any], data_root: Path,
++                     classnames: list[str]) -> dict[str, Any]:
++    if not val:
++        raise ValueError("Validation split is missing or empty; test fallback is forbidden")
++    if not train or not test:
++        raise ValueError("Official train/test metadata is missing or empty")
++    if not classnames or len(set(classnames)) != len(classnames):
++        raise ValueError("Class order is empty or duplicated")
++    result = {name: _sample_rows(items, data_root, classnames)
++              for name, items in (("train", train), ("val", val), ("test", test))}
++    identities = {name: {row["sample_id"] for row in rows} for name, rows in result.items()}
++    if identities["train"] & identities["val"]:
++        raise ValueError("Resolved train/validation image identities overlap")
++    result["classes"] = list(classnames)
++    result["inventory_sha256"] = json_digest(result)
++    return result
++
++
++def _assert_manifest(role: str, manifest: Mapping[str, Any], case: Mapping[str, Any]) -> None:
++    expected_loss = {"coop": 0.0, "kd0": 0.0, "kd1": 1.0}[role]
++    fixed = {"dataset": DATASETS[case["dataset"]][0], "seed": case["seed"], "shots": 16,
++             "subsample": "base", "code_sha256": EXPECTED_SOURCES[case["dataset"]],
++             "train_samples_sha256": case["train_samples_sha256"],
++             "val_samples_sha256": case["val_samples_sha256"]}
++    for key, value in fixed.items():
++        if manifest.get(key) != value:
++            raise ValueError(f"{role} manifest mismatch: {key}")
++    losses = manifest.get("effective_losses")
++    if losses != {"kd": expected_loss, "adaptive_ce": 1.0, "diversity": 0.0, "contrastive": 0.0}:
++        raise ValueError(f"{role} manifest has the wrong effective losses")
++    signature = manifest.get("model_signature", {})
++    for key, value in {"n_ctx": 4, "n_views": 20, "clip_sha256": case["clip_sha256"]}.items():
++        if signature.get(key) != value:
++            raise ValueError(f"{role} model signature mismatch: {key}")
++    if role == "coop":
++        expected = {"trainer": "CoOp_TextConsistency_Ablation", "aggregation": "none",
++                    "feature_adapter": False, "n_groups": None, "ablation_group": "baseline",
++                    "template_sha256": None}; expected_parameters = 2048
++    else:
++        expected = {"trainer": "CoOp_TextConsistency_V2_FG", "aggregation": "hierarchical",
++                    "feature_adapter": True, "n_groups": 4, "ablation_group": None,
++                    "template_sha256": case["template_sha256"]}; expected_parameters = 790018
++    for key, value in expected.items():
++        if signature.get(key) != value:
++            raise ValueError(f"{role} model signature mismatch: {key}")
++    if manifest.get("trainable_parameters") != expected_parameters:
++        raise ValueError(f"{role} trainable parameter count mismatch")
++
++
++def _checkpoint_state(path: Path) -> dict[str, Any]:
++    state = torch.load(path, map_location="cpu", weights_only=False)
++    if not isinstance(state, dict):
++        raise ValueError("Checkpoint is not a mapping")
++    return state
++
++
++def validate_checkpoint_bundles(case: Mapping[str, Any], workspace_root: Path) -> dict[str, Any]:
++    root, receipts, teacher_states = Path(workspace_root).resolve(), {}, {}
++    for role in ROLES:
++        expected = case["checkpoints"][role]
++        checkpoint = (root / expected["workspace_relative_checkpoint"]).resolve()
++        try:
++            checkpoint.relative_to(root)
++        except ValueError as exc:
++            raise ValueError("Checkpoint escapes --workspace-root") from exc
++        if sha256_file(checkpoint) != expected["sha256"]:
++            raise ValueError(f"{role} checkpoint hash mismatch")
++        sidecar = checkpoint.with_name(checkpoint.name + ".sha256")
++        if sidecar.read_text().strip() != expected["sha256"]:
++            raise ValueError(f"{role} checkpoint sidecar mismatch")
++        model_dir, manifest_path = checkpoint.parent.parent, checkpoint.parent.parent / "run_manifest.json"
++        if sha256_file(manifest_path) != expected["manifest_sha256"]:
++            raise ValueError(f"{role} manifest hash mismatch")
++        manifest = _read_json(manifest_path); _assert_manifest(role, manifest, case)
++        state = _checkpoint_state(checkpoint)
++        if state.get("epoch") != 20 or state.get("repro_signature") != manifest["model_signature"]:
++            raise ValueError(f"{role} checkpoint epoch/signature mismatch")
++        provenance = state.get("run_provenance", {})
++        for field in ("dataset", "seed", "shots", "subsample", "code_sha256", "effective_losses",
++                      "train_samples_sha256", "val_samples_sha256", "test_samples_sha256",
++                      "trainable_parameters", "model_signature"):
++            if provenance.get(field) != manifest.get(field):
++                raise ValueError(f"{role} checkpoint provenance mismatch: {field}")
++        tensors = state.get("state_dict")
++        if not isinstance(tensors, dict) or not tensors or any(
++                not torch.is_tensor(value) or not torch.isfinite(value).all().item() for value in tensors.values()):
++            raise ValueError(f"{role} checkpoint has missing or non-finite tensors")
++        trainable = {key: value for key, value in tensors.items()
++                     if not key.endswith(("token_prefix", "token_suffix"))}
++        expected_count = 2048 if role == "coop" else 790018
++        if sum(value.numel() for value in trainable.values()) != expected_count:
++            raise ValueError(f"{role} checkpoint omits role parameters")
++        if role == "coop" and set(trainable) != {"prompt_learner.ctx"}:
++            raise ValueError("CoOp checkpoint has an unexpected parameter schema")
++        if role != "coop":
++            required = {"prompt_learner.ctx", "view_aggregator.intra_group_temp",
++                        "view_aggregator.inter_group_temp"}
++            if not set(trainable).issuperset(required):
++                raise ValueError(f"{role} checkpoint omits role parameters")
++            teacher_states[role] = {key: value for key, value in trainable.items()
++                                    if key.startswith("view_aggregator.")}
++        config_path = model_dir / "effective_config.yaml"
++        if not config_path.is_file():
++            raise FileNotFoundError(f"{role} effective config is missing")
++        receipts[role] = {
++            "checkpoint": str(checkpoint), "checkpoint_sha256": expected["sha256"],
++            "sidecar": str(sidecar), "sidecar_sha256": sha256_file(sidecar),
++            "manifest": str(manifest_path), "manifest_sha256": expected["manifest_sha256"],
++            "effective_config": str(config_path), "effective_config_sha256": sha256_file(config_path),
++            "manifest_payload": manifest,
++        }
++    left, right = teacher_states["kd0"], teacher_states["kd1"]
++    receipts["teacher_tensor_exact_equal"] = set(left) == set(right) and all(
++        torch.equal(left[key], right[key]) for key in left)
++    receipts["teacher_tensor_keys"] = sorted(set(left) | set(right))
++    return receipts
++
++
++def _source_modules(source_root: Path):
++    root = Path(source_root).resolve()
++    for name, module in list(sys.modules.items()):
++        if name in ("train", "clip", "datasets", "trainers", "dassl") or \
++                name.startswith(("clip.", "datasets.", "trainers.", "dassl.")):
++            filename = getattr(module, "__file__", None)
++            if filename and root not in Path(filename).resolve().parents:
++                raise RuntimeError(f"Frozen source module contamination: {name} from {filename}")
++    sys.path[:0] = [str(root), str(root / "Dassl.pytorch")]
++    training = importlib.import_module("train")
++    if Path(training.__file__).resolve() != root / "train.py":
++        raise RuntimeError(f"Imported train.py from the wrong source: {training.__file__}")
++    return training
++
++
++def _config_args(config_path: Path, data_root: Path, output_dir: Path, seed: int,
++                 source_root: Path, cuda: bool):
++    return SimpleNamespace(root=str(data_root), output_dir=str(output_dir), resume="", seed=seed,
++        source_domains=None, target_domains=None, transforms=None, trainer="", backbone="", head="",
++        dataset_config_file="", config_file=str(config_path),
++        opts=["TEST.SPLIT", "val", "DATALOADER.NUM_WORKERS", "0",
++              "DATALOADER.TEST.SAMPLER", "SequentialSampler", "USE_CUDA", str(cuda),
++              "TRAINER.TEXTCONSISTENCY.DEVICE", "cuda" if cuda else "cpu",
++              "TRAINER.TEXTCONSISTENCY.CLIP_PATH", str(source_root / "clip/ViT-B-16.pt")])
++
++
++def build_role_config(training: Any, config_path: Path, data_root: Path, output_dir: Path,
++                      seed: int, source_root: Path, *, cuda: bool):
++    cfg = training.setup_cfg(_config_args(config_path, data_root, output_dir, seed, source_root, cuda))
++    if cfg.TEST.SPLIT != "val" or cfg.DATASET.SUBSAMPLE_CLASSES != "base" or cfg.DATASET.NUM_SHOTS != 16:
++        raise ValueError("Source setup_cfg changed the frozen validation/Base protocol")
++    if cfg.DATALOADER.NUM_WORKERS != 0 or cfg.DATALOADER.TEST.SAMPLER != "SequentialSampler":
++        raise ValueError("Source setup_cfg changed the deterministic loader protocol")
++    return cfg
++
++
++def rebuild_source_dataset(training: Any, cfg: Any, dataset_key: str):
++    """Use source readers/samplers directly, never their cache-writing constructors."""
++    random.seed(int(cfg.SEED))
++    root = Path(cfg.DATASET.ROOT).resolve()
++    pets = importlib.import_module("datasets.oxford_pets").OxfordPets
++    base_cls = importlib.import_module("dassl.data.datasets").DatasetBase
++    _, folder, _ = DATASETS[dataset_key]; dataset_dir = root / folder
++    if dataset_key in ("ucf101", "dtd"):
++        filename = "split_zhou_UCF101.json" if dataset_key == "ucf101" else "split_zhou_DescribableTextures.json"
++        split_path = dataset_dir / filename
++        if not split_path.is_file():
++            raise FileNotFoundError("Fixed official split metadata is missing; generation is forbidden")
++        image_dir = dataset_dir / ("UCF-101-midframes" if dataset_key == "ucf101" else "images")
++        train, val, test = pets.read_split(str(split_path), str(image_dir)); metadata_paths = [split_path]
++    else:
++        aircraft = importlib.import_module("datasets.fgvc_aircraft").FGVCAircraft
++        instance = object.__new__(aircraft)
++        instance.dataset_dir, instance.image_dir = str(dataset_dir), str(dataset_dir / "images")
++        variants = dataset_dir / "variants.txt"
++        if not variants.is_file():
++            raise FileNotFoundError("Aircraft variants metadata is missing")
++        classnames = variants.read_text().splitlines(); cname2lab = {name: i for i, name in enumerate(classnames)}
++        files = ["images_variant_train.txt", "images_variant_val.txt", "images_variant_test.txt"]
++        train, val, test = [aircraft.read_data(instance, cname2lab, name) for name in files]
++        metadata_paths = [variants, *(dataset_dir / name for name in files)]
++    sampler = object.__new__(base_cls)
++    train = base_cls.generate_fewshot_dataset(sampler, train, num_shots=16)
++    val = base_cls.generate_fewshot_dataset(sampler, val, num_shots=4)
++    train, val, test = pets.subsample_classes(train, val, test, subsample="base")
++    classnames = list(base_cls.get_lab2cname(train)[1])
++    if not classnames:
++        raise ValueError("Rebuilt Base class order is empty")
++    return train, val, test, classnames, metadata_paths
++
++
++def build_val_loader(cfg: Any, val: list[Any]):
++    transforms = importlib.import_module("dassl.data.transforms")
++    data = importlib.import_module("dassl.data.data_manager")
++    transform = transforms.build_transform(cfg, is_train=False)
++    wrapper = data.DatasetWrapper(cfg, val, transform=transform, is_train=False)
++    loader = torch.utils.data.DataLoader(wrapper, batch_size=int(cfg.DATALOADER.TEST.BATCH_SIZE),
++        sampler=torch.utils.data.SequentialSampler(wrapper), num_workers=0, drop_last=False, pin_memory=False)
++    return loader, transform
++
++
++def _decode_evidence(loader: Any) -> dict[str, Any]:
++    digest, count, shape, dtype = hashlib.sha256(), 0, None, None
++    for batch in loader:
++        images, labels = batch["img"].detach().cpu().contiguous(), batch["label"].detach().cpu().contiguous()
++        if not torch.isfinite(images).all().item():
++            raise ValueError("Decoded validation transform produced non-finite pixels")
++        digest.update(images.numpy().tobytes()); digest.update(labels.numpy().tobytes())
++        for path in batch["impath"]: digest.update(str(path).encode())
++        count += int(labels.numel()); shape, dtype = list(images.shape[1:]), str(images.dtype)
++    if count == 0: raise ValueError("Validation loader decoded zero images")
++    return {"count": count, "tensor_shape": shape, "tensor_dtype": dtype,
++            "ordered_transform_sha256": digest.hexdigest()}
++
++
++def _metadata_receipt(paths: Iterable[Path]) -> list[dict[str, str]]:
++    return [{"path": str(Path(path).resolve()), "sha256": sha256_file(Path(path))} for path in paths]
++
++
++def prepare_case(args: argparse.Namespace) -> dict[str, Any]:
++    inventory_path, workspace_root = Path(args.inventory).resolve(), Path(args.workspace_root).resolve()
++    source_root, data_root = Path(args.source_root).resolve(), Path(args.data_root).resolve()
++    case = validate_inventory(_read_json(inventory_path), args.dataset, args.seed)
++    checkpoint_inputs = [(workspace_root / case["checkpoints"][role]["workspace_relative_checkpoint"]).resolve()
++                         for role in ROLES]
++    output = _fresh_output(args.output_dir, (inventory_path, source_root, data_root, *checkpoint_inputs))
++    source_sha = model_source_digest(source_root)
++    if source_sha != EXPECTED_SOURCES[args.dataset]: raise ValueError("Frozen source tree SHA-256 differs")
++    clip_path, template_path = source_root / "clip/ViT-B-16.pt", source_root / "templates" / DATASETS[args.dataset][2]
++    if sha256_file(clip_path) != case["clip_sha256"] or sha256_file(template_path) != case["template_sha256"]:
++        raise ValueError("Frozen CLIP/template asset hash mismatch")
++    bundles = validate_checkpoint_bundles(case, workspace_root)
++    training = _source_modules(source_root)
++    configs = {role: build_role_config(training, Path(bundles[role]["effective_config"]), data_root,
++                                       output, args.seed, source_root, cuda=False) for role in ROLES}
++    cfg = configs["coop"]
++    if cfg.TRAINER.NAME != "CoOp_TextConsistency_Ablation" or \
++            cfg.TRAINER.TEXTCONSISTENCY.ABLATION_GROUP != "baseline":
++        raise ValueError("CoOp effective config has the wrong role schema")
++    for role, weight in (("kd0", 0.0), ("kd1", 1.0)):
++        role_cfg = configs[role]
++        if role_cfg.TRAINER.NAME != "CoOp_TextConsistency_V2_FG" or \
++                role_cfg.TRAINER.TEXTCONSISTENCY.KD_WEIGHT != weight or \
++                role_cfg.TRAINER.TEXTCONSISTENCY.AGGREGATION != "hierarchical":
++            raise ValueError(f"{role} effective config has the wrong role schema")
++    train, val, test, classnames, metadata_paths = rebuild_source_dataset(training, cfg, args.dataset)
++    samples = validate_samples(train, val, test, data_root, classnames)
++    for name, items, expected in (("train", train, case["train_samples_sha256"]),
++                                  ("val", val, case["val_samples_sha256"])):
++        if sample_digest(items, data_root) != expected: raise ValueError(f"Rebuilt {name} sample hash differs")
++    test_sha = sample_digest(test, data_root)
++    if any(test_sha != bundles[role]["manifest_payload"]["test_samples_sha256"] for role in ROLES):
++        raise ValueError("Rebuilt test metadata hash differs from role manifest")
++    loader, transform = build_val_loader(cfg, val); decoded = _decode_evidence(loader)
++    import yaml
++    effective_cfg = yaml.safe_load(cfg.dump())
++    compatible_cfg = copy.deepcopy(effective_cfg)
++    compatible_cfg["SEED"] = "<seed>"; compatible_cfg["OUTPUT_DIR"] = "<output>"
++    receipt = {"status": "prepared", "dataset_key": args.dataset, "dataset": DATASETS[args.dataset][0],
++        "seed": args.seed, "protocol": PROTOCOL,
++        "inventory": {"path": str(inventory_path), "sha256": sha256_file(inventory_path), "case": case},
++        "workspace_root": str(workspace_root), "source_root": str(source_root), "data_root": str(data_root),
++        "source_sha256": source_sha,
++        "assets": {"clip": str(clip_path.resolve()), "clip_sha256": sha256_file(clip_path),
++                   "template": str(template_path.resolve()), "template_sha256": sha256_file(template_path)},
++        "checkpoints": bundles, "teacher_tensor_exact_equal": bundles["teacher_tensor_exact_equal"],
++        "samples": samples, "sample_hashes": {"train": sample_digest(train, data_root),
++        "val": sample_digest(val, data_root), "test": test_sha},
++        "source_metadata": _metadata_receipt(metadata_paths), "effective_config": effective_cfg,
++        "effective_config_sha256": json_digest(effective_cfg),
++        "config_compatibility_sha256": json_digest(compatible_cfg),
++        "config_compatibility": {"coop_declared_kd_weight": float(cfg.TRAINER.TEXTCONSISTENCY.KD_WEIGHT),
++            "coop_effective_kd_weight": 0.0,
++            "legacy_exception": "ucf101 baseline ablation disables declared KD=1" if
++                args.dataset == "ucf101" and cfg.TRAINER.TEXTCONSISTENCY.KD_WEIGHT == 1.0 else None},
++        "tool": {"validation_probe_sha256": sha256_file(Path(__file__).resolve())},
++        "transform": {"repr": repr(transform), "repr_sha256": hashlib.sha256(repr(transform).encode()).hexdigest(),
++                      "decoded_val": decoded},
++        "environment": {"python": platform.python_version(), "torch": torch.__version__, "device": "cpu"},
++        "limitations": ["CUDA model construction and forward parity are not exercised by prepare"]}
++    output.mkdir(parents=True); _atomic_json(output / "prepared.json", receipt)
++    return receipt
++
++
++def strict_load_trainable_modules(model: torch.nn.Module, checkpoint: Mapping[str, Any]) -> None:
++    modules = torch.nn.ModuleDict({"prompt_learner": model.prompt_learner,
++                                   "view_aggregator": model.view_aggregator})
++    expected, saved = modules.state_dict(), checkpoint.get("state_dict")
++    if not isinstance(saved, Mapping): raise ValueError("Checkpoint state_dict is missing")
++    missing, unexpected = set(expected) - set(saved), set(saved) - set(expected)
++    if missing or unexpected:
++        raise ValueError(f"Strict checkpoint mismatch: missing={sorted(missing)}, unexpected={sorted(unexpected)}")
++    for key, value in expected.items():
++        actual = saved[key]
++        if not torch.is_tensor(actual) or actual.shape != value.shape:
++            raise ValueError(f"Checkpoint tensor shape mismatch: {key}")
++        if not torch.isfinite(actual).all().item(): raise ValueError(f"Checkpoint tensor is non-finite: {key}")
++        if key.endswith(("token_prefix", "token_suffix")) and not torch.equal(actual.cpu(), value.cpu()):
++            raise ValueError(f"Checkpoint class-dependent buffer differs: {key}")
++    modules.load_state_dict(dict(saved), strict=True)
++
++
++def _freeze(model: torch.nn.Module) -> torch.nn.Module:
++    model.eval()
++    for parameter in model.parameters(): parameter.requires_grad_(False)
++    return model
++
++
++def instantiate_frozen_models(classes: Mapping[str, Any], configs: Mapping[str, Any],
++                              classnames: list[str], clip_model: Any,
++                              checkpoints: Mapping[str, Mapping[str, Any]], device: Any):
++    """Construct every model before moving their shared CLIP modules to a device."""
++    if set(classes) != set(ROLES) or set(configs) != set(ROLES) or set(checkpoints) != set(ROLES):
++        raise ValueError("Model construction requires complete coop/kd0/kd1 inputs")
++    models = {role: classes[role](configs[role], classnames, clip_model) for role in ROLES}
++    for role in ROLES:
++        strict_load_trainable_modules(models[role], checkpoints[role])
++    for role in ROLES:
++        models[role] = _freeze(models[role].to(device))
++    return models
++
++
++def export_batches(models: Mapping[str, torch.nn.Module], batches: Iterable[Mapping[str, Any]],
++                   description_features: torch.Tensor, view_mask: torch.Tensor,
++                   classnames: list[str], *, device: Any | None = None) -> dict[str, Any]:
++    if set(models) != set(ROLES): raise ValueError("Export requires exactly coop/kd0/kd1 models")
++    for model in models.values(): _freeze(model)
++    descriptions = F.normalize(description_features.float(), dim=-1)
++    mask = view_mask.to(device=descriptions.device, dtype=torch.bool)
++    if descriptions.ndim != 3 or mask.shape != descriptions.shape[:2] or not mask.any(dim=1).all().item():
++        raise ValueError("Description features/mask have invalid shapes or empty classes")
++    weights = mask.to(descriptions.dtype) / mask.sum(dim=1, keepdim=True)
++    mean_features = F.normalize(torch.einsum("cv,cvd->cd", weights, descriptions), dim=-1)
++    collected, labels, sample_ids = {name: [] for name in BRANCHES}, [], []
++    teacher_equal, precision = True, set()
++    if device is None:
++        device = next(models["coop"].parameters()).device
++    with torch.inference_mode():
++        for batch in batches:
++            images = batch["img"].to(device)
++            outputs = {role: model(images, return_attn=False) for role, model in models.items()}
++            coop_s, _, coop_f, _ = outputs["coop"]; s0, t0, f0, _ = outputs["kd0"]; s1, t1, f1, _ = outputs["kd1"]
++            if t0 is None or t1 is None: raise ValueError("KD source direct forward omitted a teacher branch")
++            if not torch.equal(coop_f, f0) or not torch.equal(f0, f1):
++                raise ValueError("Frozen image features differ across role forwards")
++            scales = [models[role].logit_scale.exp().detach() for role in ROLES]
++            if not all(torch.equal(scales[0], scale) for scale in scales[1:]):
++                raise ValueError("Historical CLIP logit scales differ across roles")
++            mean_logits = scales[0].float() * F.normalize(coop_f.float(), dim=-1) @ mean_features.t()
++            values = {"C": coop_s, "S0": s0, "S1": s1, "M": mean_logits, "T0": t0, "T1": t1}
++            expected_shape = tuple(coop_s.shape)
++            if expected_shape[1] != len(classnames) or any(tuple(v.shape) != expected_shape for v in values.values()):
++                raise ValueError("Branch logits shape/class order mismatch")
++            if any(not torch.isfinite(v).all().item() for v in values.values()):
++                raise ValueError("Export branch contains non-finite logits")
++            teacher_equal = teacher_equal and torch.equal(t0, t1)
++            for name, value in values.items():
++                precision.add(str(value.dtype).replace("torch.", "")); collected[name].append(value.float().cpu().numpy())
++            batch_labels = batch["label"].cpu().numpy().astype(np.int64, copy=False)
++            paths = [str(path) for path in batch["impath"]]
++            if len(paths) != len(batch_labels): raise ValueError("Batch sample IDs and labels differ in length")
++            labels.append(batch_labels); sample_ids.extend(paths)
++    if not labels: raise ValueError("Validation loader produced no batches")
++    label_array = np.concatenate(labels)
++    if np.any(label_array < 0) or np.any(label_array >= len(classnames)):
++        raise ValueError("Validation labels are outside the class order")
++    return {"logits": {name: np.concatenate(values).astype(np.float32, copy=False)
++                       for name, values in collected.items()}, "labels": label_array,
++            "sample_ids": sample_ids, "classnames": list(classnames),
++            "teacher_logits_exact_equal": teacher_equal,
++            "forward_precision": sorted(precision) if len(precision) != 1 else next(iter(precision))}
++
++
++def write_export_artifact(output_dir: Path, payload: Mapping[str, Any], metadata: Mapping[str, Any],
++                          *, existing_empty_ok: bool = False) -> dict[str, Any]:
++    target = Path(output_dir).resolve()
++    if target.exists() and (not existing_empty_ok or any(target.iterdir())):
++        raise FileExistsError(f"Output must be a fresh path: {target}")
++    target.mkdir(parents=True, exist_ok=True)
++    logits = payload["logits"]
++    if set(logits) != set(BRANCHES): raise ValueError("Export artifact requires all six raw branches")
++    labels = np.asarray(payload["labels"]); arrays = {name: np.asarray(logits[name], dtype=np.float32) for name in BRANCHES}
++    if labels.ndim != 1 or not np.issubdtype(labels.dtype, np.integer):
++        raise ValueError("Export labels must be one-dimensional integers")
++    n, c = len(labels), len(payload["classnames"])
++    if n == 0 or c < 2 or any(v.shape != (n, c) or not np.isfinite(v).all() for v in arrays.values()):
++        raise ValueError("Export logits must be finite [N,C] arrays")
++    if len(payload["sample_ids"]) != n or len(set(payload["sample_ids"])) != n:
++        raise ValueError("Export sample IDs must be unique and aligned")
++    npz_path = target / "logits.npz"; np.savez(npz_path, labels=labels.astype(np.int64), **arrays)
++    rows = [{"row": i, "sample_id": str(sample), "label": int(labels[i]),
++             "classname": payload["classnames"][int(labels[i])]}
++            for i, sample in enumerate(payload["sample_ids"])]
++    receipt = {**copy.deepcopy(dict(metadata)), "status": "passed", "schema_version": 1,
++        "branches": list(BRANCHES), "npz": str(npz_path), "npz_sha256": sha256_file(npz_path),
++        "rows": rows, "class_order": list(payload["classnames"]),
++        "teacher_tensor_exact_equal": bool(metadata.get("teacher_tensor_exact_equal",
++                                                        payload.get("teacher_exact_equal", False))),
++        "teacher_logits_exact_equal": bool(payload.get("teacher_logits_exact_equal",
++                                                        payload.get("teacher_exact_equal", False))),
++        "forward_precision": payload["forward_precision"], "storage_precision": "float32"}
++    _atomic_json(target / "export.json", receipt); return receipt
++
++
++def _revalidate_prepared(prepared: Mapping[str, Any]) -> None:
++    if prepared.get("status") != "prepared" or prepared.get("protocol") != PROTOCOL:
++        raise ValueError("Prepared receipt status/protocol mismatch")
++    checks = [(prepared["inventory"]["path"], prepared["inventory"]["sha256"]),
++              (prepared["assets"]["clip"], prepared["assets"]["clip_sha256"]),
++              (prepared["assets"]["template"], prepared["assets"]["template_sha256"])]
++    for role in ROLES:
++        row = prepared["checkpoints"][role]
++        checks += [(row["checkpoint"], row["checkpoint_sha256"]), (row["sidecar"], row["sidecar_sha256"]),
++                   (row["manifest"], row["manifest_sha256"]),
++                   (row["effective_config"], row["effective_config_sha256"])]
++    checks += [(row["path"], row["sha256"]) for row in prepared["source_metadata"]]
++    for path, expected in checks:
++        if sha256_file(Path(path)) != expected: raise ValueError(f"Prepared input hash changed: {path}")
++    if model_source_digest(Path(prepared["source_root"])) != prepared["source_sha256"]:
++        raise ValueError("Prepared frozen source changed")
++
++
++def export_case(args: argparse.Namespace) -> dict[str, Any]:
++    prepared_path = Path(args.prepared).resolve(); prepared = _read_json(prepared_path)
++    protected = [prepared_path, Path(prepared["source_root"]), Path(prepared["data_root"]),
++                 *(Path(prepared["checkpoints"][role]["checkpoint"]) for role in ROLES)]
++    output = _fresh_output(args.output_dir, protected)
++    output.mkdir(parents=True)
++    try:
++        if not torch.cuda.is_available():
++            raise RuntimeError("CUDA is required for export; CPU fallback is forbidden")
++        _revalidate_prepared(prepared)
++        source_root, data_root = Path(prepared["source_root"]), Path(prepared["data_root"])
++        training = _source_modules(source_root)
++        configs = {role: build_role_config(training, Path(prepared["checkpoints"][role]["effective_config"]),
++                   data_root, output, prepared["seed"], source_root, cuda=True) for role in ROLES}
++        train, val, test, classnames, _ = rebuild_source_dataset(training, configs["coop"], prepared["dataset_key"])
++        if validate_samples(train, val, test, data_root, classnames) != prepared["samples"]:
++            raise ValueError("Rebuilt source samples/classes differ from prepared receipt")
++        loader, transform = build_val_loader(configs["coop"], val)
++        if hashlib.sha256(repr(transform).encode()).hexdigest() != prepared["transform"]["repr_sha256"]:
++            raise ValueError("Validation transform identity differs from prepare")
++        common = importlib.import_module("trainers.textconsistency_common")
++        clip_model = common.load_clip_checkpoint(configs["coop"])
++        baseline_cls = importlib.import_module("trainers.coop_textconsistency_ablation").CustomCLIP
++        full_cls = importlib.import_module("trainers.coop_textconsistency_v2_fg").CustomCLIP
++        classes = {"coop": baseline_cls, "kd0": full_cls, "kd1": full_cls}
++        checkpoints = {role: _checkpoint_state(Path(prepared["checkpoints"][role]["checkpoint"]))
++                       for role in ROLES}
++        models = instantiate_frozen_models(classes, configs, classnames, clip_model, checkpoints, "cuda")
++        encoder = models["kd1"].multiview_encoder
++        result = export_batches(models, loader, encoder.get_view_features().to("cuda"),
++                                encoder.view_mask.to("cuda"), classnames, device="cuda")
++        root = data_root.resolve(); result["sample_ids"] = [str(Path(p).resolve().relative_to(root)) for p in result["sample_ids"]]
++        if result["sample_ids"] != [row["sample_id"] for row in prepared["samples"]["val"]] or \
++                result["labels"].tolist() != [row["label"] for row in prepared["samples"]["val"]]:
++            raise ValueError("Export row order differs from prepared validation order")
++        _revalidate_prepared(prepared)
++        metadata = {"dataset_key": prepared["dataset_key"], "dataset": prepared["dataset"], "seed": prepared["seed"],
++            "protocol": PROTOCOL, "prepared": str(prepared_path), "prepared_sha256": sha256_file(prepared_path),
++            "teacher_tensor_exact_equal": prepared["teacher_tensor_exact_equal"],
++            "tool": {"validation_probe_sha256": sha256_file(Path(__file__).resolve())},
++            "effective_config": prepared["effective_config"],
++            "transform": prepared["transform"], "sample_hashes": prepared["sample_hashes"],
++            "sample_inventory_sha256": prepared["samples"]["inventory_sha256"],
++            "provenance": {"source_sha256": prepared["source_sha256"],
++                "clip_sha256": prepared["assets"]["clip_sha256"], "template_sha256": prepared["assets"]["template_sha256"],
++                "config_sha256": prepared["effective_config_sha256"],
++                "config_compatibility_sha256": prepared["config_compatibility_sha256"],
++                "checkpoint_sha256": {role: prepared["checkpoints"][role]["checkpoint_sha256"] for role in ROLES}},
++            "environment": {"python": platform.python_version(), "torch": torch.__version__,
++                "cuda_runtime": torch.version.cuda, "gpu": torch.cuda.get_device_name(0), "device": "cuda"}}
++        return write_export_artifact(output, result, metadata, existing_empty_ok=True)
++    except Exception as exc:
++        _atomic_json(output / "failure.json", {"status": "failed", "error": f"{type(exc).__name__}: {exc}"}); raise
++
++
++def build_parser() -> argparse.ArgumentParser:
++    parser = argparse.ArgumentParser(description=__doc__); commands = parser.add_subparsers(dest="command", required=True)
++    prepare = commands.add_parser("prepare", help="CPU-only input and real validation-loader preparation")
++    for name in ("inventory", "workspace-root", "source-root", "data-root", "output-dir"):
++        prepare.add_argument(f"--{name}", type=Path, required=True)
++    prepare.add_argument("--dataset", choices=tuple(DATASETS), required=True)
++    prepare.add_argument("--seed", type=int, choices=(1, 2, 3), required=True)
++    export = commands.add_parser("export", help="CUDA-only frozen logits export")
++    export.add_argument("--prepared", type=Path, required=True); export.add_argument("--output-dir", type=Path, required=True)
++    return parser
++
++
++def main(argv: list[str] | None = None) -> int:
++    args = build_parser().parse_args(argv); result = prepare_case(args) if args.command == "prepare" else export_case(args)
++    print(json.dumps(result, indent=2, ensure_ascii=False)); return 0
++
++
++if __name__ == "__main__": raise SystemExit(main())
+diff --git a/tests/repro/test_validation_analysis.py b/tests/repro/test_validation_analysis.py
+new file mode 100644
+index 0000000..37289f8
+--- /dev/null
++++ b/tests/repro/test_validation_analysis.py
+@@ -0,0 +1,149 @@
++import subprocess
++import copy
++import json
++import tempfile
++import unittest
++from pathlib import Path
++
++import numpy as np
++
++from scripts.repro import validation_analysis as analysis
++from scripts.repro import validation_probe as probe
++
++
++ROOT = Path(__file__).resolve().parents[2]
++PYTHON = ROOT.parents[1] / "tc-venv/bin/python"
++
++
++class ValidationAnalysisCli(unittest.TestCase):
++    def test_help_exposes_analyze_and_aggregate(self):
++        result = subprocess.run(
++            [str(PYTHON), "scripts/repro/validation_analysis.py", "--help"],
++            cwd=ROOT,
++            text=True,
++            capture_output=True,
++            check=False,
++        )
++        self.assertEqual(result.returncode, 0, result.stderr)
++        self.assertIn("analyze", result.stdout)
++        self.assertIn("aggregate", result.stdout)
++
++
++def _synthetic_payload(dataset, seed):
++    labels = np.array([0, 1, 1], dtype=np.int64)
++    logits = {
++        "C": np.array([[3, 0], [5, 0], [0, 3]], dtype=np.float32),
++        "S0": np.array([[2, 0], [5, 0], [0, 2]], dtype=np.float32),
++        "S1": np.array([[4, 0], [0, 4], [0, 4]], dtype=np.float32),
++        "M": np.array([[2, 0], [0, 2], [0, 2]], dtype=np.float32),
++        "T0": np.array([[1, 0], [2, 0], [0, 1]], dtype=np.float32),
++        "T1": np.array([[1, 0], [2, 0], [0, 1]], dtype=np.float32),
++    }
++    return {
++        "logits": logits, "labels": labels,
++        "sample_ids": [f"{dataset}-{seed}-{i}" for i in range(3)],
++        "classnames": ["zero", "one"], "teacher_exact_equal": True,
++        "forward_precision": "float32",
++    }
++
++
++def _provenance(dataset, seed):
++    return {
++        "source_sha256": analysis.EXPECTED_SOURCES[dataset],
++        "clip_sha256": probe.CLIP_SHA256,
++        "template_sha256": analysis.EXPECTED_TEMPLATES[dataset],
++        "config_sha256": "f" * 64,
++        "config_compatibility_sha256": dataset * 4,
++        "checkpoint_sha256": {role: f"{dataset}-{seed}-{role}" for role in probe.ROLES},
++    }
++
++
++class ValidationAnalysisContracts(unittest.TestCase):
++    def test_metrics_use_stable_softmax_sum_brier_and_probability_margin(self):
++        logits = np.array([[2.0, 0.0], [0.0, 2.0]], dtype=np.float64)
++        result = analysis.branch_metrics(logits, np.array([0, 1]))
++        probability = np.exp(2.0) / (np.exp(2.0) + 1.0)
++        self.assertEqual(result["correct"], 2)
++        self.assertEqual(result["accuracy_pct"], 100.0)
++        self.assertAlmostEqual(result["nll"], -np.log(probability))
++        self.assertAlmostEqual(result["multiclass_brier"], 2 * (1 - probability) ** 2)
++        self.assertAlmostEqual(result["probability_top1_top2_margin"], 2 * probability - 1)
++        extreme = analysis.branch_metrics(np.array([[-10000.0, 10000.0]]), np.array([0]))
++        self.assertTrue(np.isfinite(extreme["nll"]))
++        self.assertAlmostEqual(extreme["nll"], 20000.0)
++        fused = analysis.fixed_probability_fusion_metrics(
++            np.array([[-10000.0, 10000.0]]), np.array([[-10000.0, 10000.0]]), np.array([0]))
++        self.assertTrue(np.isfinite(fused["metrics"]["nll"]))
++        self.assertAlmostEqual(fused["metrics"]["nll"], 20000.0)
++
++    def test_analysis_rejects_hash_nonfinite_and_row_permutation(self):
++        with tempfile.TemporaryDirectory() as temp:
++            root = Path(temp)
++            export = root / "export"
++            probe.write_export_artifact(export, _synthetic_payload("dtd", 1), {
++                "dataset_key": "dtd", "seed": 1, "protocol": probe.PROTOCOL,
++                "provenance": _provenance("dtd", 1),
++            })
++            receipt = json.loads((export / "export.json").read_text())
++            receipt["rows"][0], receipt["rows"][1] = receipt["rows"][1], receipt["rows"][0]
++            (export / "export.json").write_text(json.dumps(receipt))
++            with self.assertRaisesRegex(ValueError, "sample alignment"):
++                analysis.load_export(export / "export.json")
++            receipt["rows"][0], receipt["rows"][1] = receipt["rows"][1], receipt["rows"][0]
++            receipt["npz_sha256"] = "0" * 64
++            (export / "export.json").write_text(json.dumps(receipt))
++            with self.assertRaisesRegex(ValueError, "hash"):
++                analysis.load_export(export / "export.json")
++
++    def test_end_to_end_nine_case_analysis_reports_all_combinations_and_guards(self):
++        with tempfile.TemporaryDirectory() as temp:
++            root = Path(temp)
++            reports = []
++            for dataset in analysis.DATASETS:
++                for seed in (1, 2, 3):
++                    export = root / f"export-{dataset}-{seed}"
++                    probe.write_export_artifact(export, _synthetic_payload(dataset, seed), {
++                        "dataset_key": dataset, "seed": seed, "protocol": probe.PROTOCOL,
++                        "provenance": _provenance(dataset, seed),
++                    })
++                    report = analysis.analyze_export(export / "export.json", root / f"analysis-{dataset}-{seed}")
++                    self.assertEqual(len(report["combinations"]), 18)
++                    self.assertEqual(len(report["predictions"]), 24)
++                    reports.append(report)
++            aggregate = analysis.aggregate_reports(reports)
++            self.assertEqual(aggregate["case_count"], 9)
++            self.assertTrue(aggregate["guards"]["all_passed"])
++            self.assertEqual(set(aggregate["dataset_means"]), set(analysis.DATASETS))
++            self.assertIn("sample_sd", aggregate["macro"]["S1+M_logits"])
++            self.assertEqual(len(aggregate["complete_macro_metrics"]), 24)
++            self.assertIn("multiclass_brier", aggregate["complete_macro_metrics"]["T1"])
++
++    def test_aggregate_rejects_missing_duplicate_and_mixed_provenance(self):
++        template = {
++            "status": "passed", "dataset_key": "ucf101", "seed": 1,
++            "protocol": probe.PROTOCOL,
++            "provenance": _provenance("ucf101", 1),
++            "branches": {}, "combinations": {
++                "S1+M_logits": {"accuracy_pct": 80.0}, "C+M_logits": {"accuracy_pct": 70.0},
++                "C+M_probability": {"accuracy_pct": 70.0}, "S1+M_probability": {"accuracy_pct": 80.0},
++                "S0+M_logits": {"accuracy_pct": 60.0},
++            },
++        }
++        with self.assertRaisesRegex(ValueError, "nine"):
++            analysis.aggregate_reports([template])
++        cases = []
++        for dataset in analysis.DATASETS:
++            for seed in (1, 2, 3):
++                case = copy.deepcopy(template); case["dataset_key"] = dataset; case["seed"] = seed
++                case["provenance"] = _provenance(dataset, seed)
++                cases.append(case)
++        cases[-1]["seed"] = 2
++        with self.assertRaisesRegex(ValueError, "duplicate"):
++            analysis.aggregate_reports(cases)
++        cases[-1]["seed"] = 3; cases[-1]["provenance"]["clip_sha256"] = "different"
++        with self.assertRaisesRegex(ValueError, "compatible"):
++            analysis.aggregate_reports(cases)
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/tests/repro/test_validation_probe.py b/tests/repro/test_validation_probe.py
+new file mode 100644
+index 0000000..2c3c6d8
+--- /dev/null
++++ b/tests/repro/test_validation_probe.py
+@@ -0,0 +1,252 @@
++import subprocess
++import hashlib
++import json
++import tempfile
++import unittest
++from unittest import mock
++from pathlib import Path
++from types import SimpleNamespace
++
++import numpy as np
++import torch
++
++from scripts.repro import validation_probe as probe
++
++
++ROOT = Path(__file__).resolve().parents[2]
++PYTHON = ROOT.parents[1] / "tc-venv/bin/python"
++
++
++class ValidationProbeCli(unittest.TestCase):
++    def test_help_exposes_prepare_and_export_without_importing_clip(self):
++        result = subprocess.run(
++            [str(PYTHON), "scripts/repro/validation_probe.py", "--help"],
++            cwd=ROOT,
++            text=True,
++            capture_output=True,
++            check=False,
++        )
++        self.assertEqual(result.returncode, 0, result.stderr)
++        self.assertIn("prepare", result.stdout)
++        self.assertIn("export", result.stdout)
++
++
++class ValidationProbeContracts(unittest.TestCase):
++    def test_inventory_rejects_missing_role_parameters_and_wrong_protocol(self):
++        case = {
++            "dataset": "dtd", "seed": 1, "split": "val", "candidate_classes": "base",
++            "train_samples_sha256": "1" * 64, "val_samples_sha256": "2" * 64,
++            "clip_sha256": probe.CLIP_SHA256, "template_sha256": "4" * 64,
++            "coop_training_template_sha256": None,
++            "checkpoints": {
++                role: {
++                    "workspace_relative_checkpoint": f"{role}/model.pth.tar-20",
++                    "sha256": "5" * 64, "manifest_sha256": "6" * 64,
++                    "model_source_sha256": probe.NEW_SOURCE_SHA256,
++                    "effective_kd_weight": weight, "epoch": 20,
++                }
++                for role, weight in (("coop", 0.0), ("kd0", 0.0), ("kd1", 1.0))
++            },
++        }
++        validated = probe.validate_inventory({"cases": [case]}, "dtd", 1)
++        self.assertEqual(validated["split"], "val")
++        del case["checkpoints"]["kd1"]["effective_kd_weight"]
++        with self.assertRaisesRegex(ValueError, "schema"):
++            probe.validate_inventory({"cases": [case]}, "dtd", 1)
++        case["checkpoints"]["kd1"]["effective_kd_weight"] = 1.0
++        case["candidate_classes"] = "new"
++        with self.assertRaisesRegex(ValueError, "Base"):
++            probe.validate_inventory({"cases": [case]}, "dtd", 1)
++
++    def test_sample_validation_catches_missing_val_overlap_and_permutations(self):
++        with tempfile.TemporaryDirectory() as temp:
++            root = Path(temp)
++            for name in ("a.png", "b.png", "c.png"):
++                (root / name).write_bytes(b"image")
++            train = [SimpleNamespace(impath=str(root / "a.png"), label=0, classname="zero")]
++            val = [SimpleNamespace(impath=str(root / "b.png"), label=0, classname="zero")]
++            test = [SimpleNamespace(impath=str(root / "c.png"), label=0, classname="zero")]
++            result = probe.validate_samples(train, val, test, root, ["zero"])
++            self.assertEqual(result["classes"], ["zero"])
++            self.assertEqual(result["val"][0]["sample_id"], "b.png")
++            with self.assertRaisesRegex(ValueError, "empty"):
++                probe.validate_samples(train, [], test, root, ["zero"])
++            with self.assertRaisesRegex(ValueError, "overlap"):
++                probe.validate_samples(train, train, test, root, ["zero"])
++            bad = [SimpleNamespace(impath=str(root / "b.png"), label=0, classname="wrong")]
++            with self.assertRaisesRegex(ValueError, "class"):
++                probe.validate_samples(train, bad, test, root, ["zero"])
++
++    def test_historical_sample_digest_is_order_and_label_sensitive(self):
++        with tempfile.TemporaryDirectory() as temp:
++            root = Path(temp)
++            (root / "dataset").mkdir()
++            for name in ("a.png", "b.png"):
++                (root / "dataset" / name).write_bytes(b"x")
++            rows = [
++                SimpleNamespace(impath=str(root / "dataset/a.png"), label=0, classname="zero"),
++                SimpleNamespace(impath=str(root / "dataset/b.png"), label=1, classname="one"),
++            ]
++            self.assertEqual(
++                probe.sample_digest(rows, root),
++                "6a9e6d9621742fc1cf1087f6e43a9c94464776c9f5be0030f2588551effa91b6",
++            )
++            self.assertNotEqual(probe.sample_digest(list(reversed(rows)), root), probe.sample_digest(rows, root))
++
++    def test_strict_load_verifies_class_buffers_and_every_trainable_tensor(self):
++        class Tiny(torch.nn.Module):
++            def __init__(self):
++                super().__init__()
++                self.prompt_learner = torch.nn.Linear(2, 2, bias=False)
++                self.prompt_learner.register_buffer("token_prefix", torch.ones(1, 1))
++                self.view_aggregator = torch.nn.Linear(2, 2)
++
++        model = Tiny()
++        saved = torch.nn.ModuleDict({
++            "prompt_learner": model.prompt_learner,
++            "view_aggregator": model.view_aggregator,
++        }).state_dict()
++        checkpoint = {"state_dict": {key: value.clone() for key, value in saved.items()}}
++        probe.strict_load_trainable_modules(model, checkpoint)
++        missing = {"state_dict": dict(checkpoint["state_dict"])}
++        missing["state_dict"].pop("view_aggregator.bias")
++        with self.assertRaisesRegex(ValueError, "missing"):
++            probe.strict_load_trainable_modules(model, missing)
++        bad_buffer = {"state_dict": {key: value.clone() for key, value in checkpoint["state_dict"].items()}}
++        bad_buffer["state_dict"]["prompt_learner.token_prefix"].zero_()
++        with self.assertRaisesRegex(ValueError, "class-dependent"):
++            probe.strict_load_trainable_modules(model, bad_buffer)
++
++    def test_export_batches_uses_direct_frozen_forwards_and_fixed_mean_formula(self):
++        class TinyModel(torch.nn.Module):
++            def __init__(self, student, teacher, features):
++                super().__init__()
++                self.weight = torch.nn.Parameter(torch.tensor(1.0))
++                self.student = student
++                self.teacher = teacher
++                self.features = features
++                self.logit_scale = torch.tensor(0.0)
++
++            def forward(self, images, return_attn=False):
++                if torch.is_grad_enabled() or any(p.requires_grad for p in self.parameters()):
++                    raise AssertionError("export enabled backward")
++                return self.student[:len(images)], self.teacher[:len(images)] if self.teacher is not None else None, self.features[:len(images)], None
++
++        features = torch.tensor([[1.0, 0.0], [0.0, 1.0]])
++        models = {
++            "coop": TinyModel(torch.tensor([[3.0, 0.0], [0.0, 3.0]]), None, features),
++            "kd0": TinyModel(torch.tensor([[2.0, 0.0], [0.0, 2.0]]), torch.tensor([[1.0, 0.0], [0.0, 1.0]]), features),
++            "kd1": TinyModel(torch.tensor([[4.0, 0.0], [0.0, 4.0]]), torch.tensor([[2.0, 0.0], [0.0, 2.0]]), features),
++        }
++        descriptions = torch.tensor([[[1.0, 0.0], [0.0, 1.0]], [[0.0, 1.0], [0.0, 9.0]]])
++        mask = torch.tensor([[True, True], [True, False]])
++        batches = [{"img": torch.ones(2, 1), "label": torch.tensor([0, 1]), "impath": ["a", "b"]}]
++        with mock.patch("torch.optim.SGD", side_effect=AssertionError("optimizer created")), \
++                mock.patch.object(torch.Tensor, "backward", side_effect=AssertionError("backward called")):
++            result = probe.export_batches(models, batches, descriptions, mask, ["zero", "one"])
++        self.assertEqual(set(result["logits"]), set(probe.BRANCHES))
++        np.testing.assert_allclose(result["logits"]["M"], [[2 ** -0.5, 0.0], [2 ** -0.5, 1.0]], rtol=1e-6)
++        np.testing.assert_array_equal(result["labels"], [0, 1])
++        self.assertTrue(result["teacher_logits_exact_equal"] is False)
++
++    def test_write_export_rejects_collision_and_writes_no_object_arrays(self):
++        payload = {
++            "logits": {name: np.ones((2, 2), dtype=np.float32) for name in probe.BRANCHES},
++            "labels": np.array([0, 1], dtype=np.int64),
++            "sample_ids": ["a", "b"], "classnames": ["zero", "one"],
++            "teacher_exact_equal": True, "forward_precision": "float32",
++        }
++        metadata = {"dataset_key": "dtd", "seed": 1, "protocol": probe.PROTOCOL}
++        with tempfile.TemporaryDirectory() as temp:
++            target = Path(temp) / "export"
++            receipt = probe.write_export_artifact(target, payload, metadata)
++            with np.load(target / "logits.npz", allow_pickle=False) as archive:
++                self.assertTrue(all(archive[key].dtype != object for key in archive.files))
++            self.assertEqual(receipt["status"], "passed")
++            with self.assertRaisesRegex(FileExistsError, "fresh"):
++                probe.write_export_artifact(target, payload, metadata)
++
++    def test_export_rejects_nonfinite_or_wrong_shape_before_writing_success(self):
++        payload = {
++            "logits": {name: np.ones((2, 2), dtype=np.float32) for name in probe.BRANCHES},
++            "labels": np.array([0, 1]), "sample_ids": ["a", "b"],
++            "classnames": ["zero", "one"], "teacher_exact_equal": True,
++            "forward_precision": "float32",
++        }
++        with tempfile.TemporaryDirectory() as temp:
++            payload["logits"]["M"][0, 0] = np.nan
++            with self.assertRaisesRegex(ValueError, "finite"):
++                probe.write_export_artifact(Path(temp) / "nonfinite", payload, {})
++            payload["logits"]["M"] = np.ones((1, 2), dtype=np.float32)
++            with self.assertRaisesRegex(ValueError, "finite"):
++                probe.write_export_artifact(Path(temp) / "shape", payload, {})
++
++    def test_all_shared_clip_models_are_constructed_before_any_device_move(self):
++        clip = SimpleNamespace(moved=False)
++
++        class Tiny(torch.nn.Module):
++            def __init__(self, cfg, classnames, shared_clip):
++                super().__init__()
++                if shared_clip.moved:
++                    raise AssertionError("constructed after shared CLIP moved")
++                self.shared_clip = shared_clip
++                self.prompt_learner = torch.nn.Linear(1, 1, bias=False)
++                self.view_aggregator = torch.nn.Identity()
++
++            def to(self, device):
++                self.shared_clip.moved = True
++                return self
++
++        states = {role: {"state_dict": {"prompt_learner.weight": torch.ones(1, 1)}}
++                  for role in probe.ROLES}
++        models = probe.instantiate_frozen_models(
++            {role: Tiny for role in probe.ROLES}, {role: object() for role in probe.ROLES},
++            ["one"], clip, states, "fixture-device")
++        self.assertEqual(set(models), set(probe.ROLES))
++        self.assertTrue(all(not parameter.requires_grad for model in models.values()
++                            for parameter in model.parameters()))
++
++    def test_cuda_rejection_records_failure_without_cpu_fallback(self):
++        with tempfile.TemporaryDirectory() as temp:
++            root = Path(temp)
++            prepared = root / "prepared.json"
++            prepared.write_text(json.dumps({
++                "workspace_root": str(root / "workspace"), "source_root": str(root / "source"),
++                "data_root": str(root / "data"),
++                "checkpoints": {role: {"checkpoint": str(root / f"{role}.pt")} for role in probe.ROLES},
++            }))
++            output = root / "export"
++            with mock.patch("torch.cuda.is_available", return_value=False), \
++                    self.assertRaisesRegex(RuntimeError, "CUDA"):
++                probe.export_case(SimpleNamespace(prepared=prepared, output_dir=output))
++            failure = json.loads((output / "failure.json").read_text())
++            self.assertEqual(failure["status"], "failed")
++            self.assertIn("CUDA", failure["error"])
++
++    def test_export_moves_loader_images_to_the_model_device(self):
++        moved = []
++
++        class Images:
++            def to(self, device):
++                moved.append(device)
++                return torch.ones(1, 1)
++
++        class Tiny(torch.nn.Module):
++            def __init__(self, teacher):
++                super().__init__(); self.weight = torch.nn.Parameter(torch.ones(()))
++                self.teacher = teacher; self.logit_scale = torch.tensor(0.0)
++
++            def forward(self, images, return_attn=False):
++                feature = torch.tensor([[1.0, 0.0]])
++                logits = torch.tensor([[1.0, 0.0]])
++                return logits, logits if self.teacher else None, feature, None
++
++        models = {"coop": Tiny(False), "kd0": Tiny(True), "kd1": Tiny(True)}
++        probe.export_batches(models, [{"img": Images(), "label": torch.tensor([0]), "impath": ["a"]}],
++            torch.tensor([[[1.0, 0.0]], [[0.0, 1.0]]]), torch.ones(2, 1, dtype=torch.bool),
++            ["zero", "one"], device="cuda-fixture")
++        self.assertEqual(moved, ["cuda-fixture"])
++
++
++if __name__ == "__main__":
++    unittest.main()

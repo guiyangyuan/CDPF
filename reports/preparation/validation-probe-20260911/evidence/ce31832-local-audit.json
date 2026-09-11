@@ -1,0 +1,145 @@
+{
+  "state": "cpu_checks_passed_review_pending",
+  "gpu_export_run": false,
+  "new_training_runs": 0,
+  "revision": "ce318328da81b6faba835e1067422fef0a17318c",
+  "tools_sha256": {
+    "scripts/repro/validation_analysis.py": "2f81606db887c84b73038c6220afd2fb1295198286cbc665d716bad58f34d92b",
+    "scripts/repro/validation_probe.py": "d852e909d6b970136fe234f25c2a15ad4622af1e22ebf1cf0abeae584b7c5b57"
+  },
+  "validation_cases": 9,
+  "model_count": 27,
+  "val_records": 1500,
+  "unique_val_images": 1280,
+  "teacher_exact_equal_pairs": 9,
+  "prepare_total_seconds": 41.89280812290963,
+  "cases": [
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "classes": 51,
+      "train_count": 816,
+      "val_count": 204,
+      "decoded_count": 204,
+      "teacher_tensor_exact_equal": true,
+      "val_samples_sha256": "768126b3e8ec96ff6142c2a18ca3da9bbc053f3238d686d13f52d643c795a153",
+      "transformed_val_sha256": "9c721f8253b221e0fb8fd85af2a77328753563ccf285322bef0ab7a0a009805a",
+      "prepared_sha256": "cde8defe5160044b4fe9bb8c12a1e4b1093c9742dcf74af7ca3499b6bf72bab8"
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "classes": 51,
+      "train_count": 816,
+      "val_count": 204,
+      "decoded_count": 204,
+      "teacher_tensor_exact_equal": true,
+      "val_samples_sha256": "1f84281d46c8fc7cfbd0718b376493fd10cbe6c8534195b2a4fb8a94fb48625d",
+      "transformed_val_sha256": "21794ea530c59d7a9a13e49c48703103d98b9f122c75335e3b12a330700f87a1",
+      "prepared_sha256": "d79ec51ed12d0ff98811100351038844611ec5a37d567ca606d9b15634f40c29"
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "classes": 51,
+      "train_count": 816,
+      "val_count": 204,
+      "decoded_count": 204,
+      "teacher_tensor_exact_equal": true,
+      "val_samples_sha256": "0d9465b6ba9cd2927cf4fa81df4f5648fc4111ce9e3f489fdf02c30b99649334",
+      "transformed_val_sha256": "c3ffb0e4353fa38e1fa37f927cdec7549a82acb900d1e34afc62ff992032f77d",
+      "prepared_sha256": "142e78e1a97c18f58830510140af028975ddadb5cc77f2b1f9f3b2688ec4d84d"
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "classes": 24,
+      "train_count": 384,
+      "val_count": 96,
+      "decoded_count": 96,
+      "teacher_tensor_exact_equal": true,
+      "val_samples_sha256": "28a600bf7140b5155e369de0eeaff9bf31e809f034f671e25568bed82fe54e4b",
+      "transformed_val_sha256": "81b0d6ad43af7b77b4fc8a06b8dcfe92c08c2ce748380dfb0373bf58187b3043",
+      "prepared_sha256": "d91cb1d4e4c27444698cb6498795dea2b4312780f369b887a162cd5154654c28"
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "classes": 24,
+      "train_count": 384,
+      "val_count": 96,
+      "decoded_count": 96,
+      "teacher_tensor_exact_equal": true,
+      "val_samples_sha256": "8c5420e361f8f88268aa1edd2c7a027fdf1be501f75cb901e62f53e3d683cb2c",
+      "transformed_val_sha256": "59048bca26e76d0f7cfffad3fe35332623399663fad2fe0370b35fac86d4dc82",
+      "prepared_sha256": "760e61ee10d575061083094ec3064f67b9618d4cdfa8c420617781e5fd15e46b"
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "classes": 24,
+      "train_count": 384,
+      "val_count": 96,
+      "decoded_count": 96,
+      "teacher_tensor_exact_equal": true,
+      "val_samples_sha256": "cf27026a4346a1da5878f581e8b104ba20b9900ccee3e612af7b015412f97492",
+      "transformed_val_sha256": "510e34f0e13d75f13a22feb49d15e0002dbe94455307a83f7f7aa49dbd7d24b8",
+      "prepared_sha256": "24a456efcfe4af526fb7c703b17616601059268285cfa6160d4dd0c1b2ee767a"
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "classes": 50,
+      "train_count": 800,
+      "val_count": 200,
+      "decoded_count": 200,
+      "teacher_tensor_exact_equal": true,
+      "val_samples_sha256": "7ac44ab40ea24086902991743d3b51720e467204034efd2b5a98352416fd02bb",
+      "transformed_val_sha256": "6d851253be34377a30c3f5bc9fdabf3e5c5cbdcc17ddb4d92baeaace26b27830",
+      "prepared_sha256": "c894ee9082e3c9eb107624014e96f504ecdce62e65f7e9a72bf0290bb147911d"
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "classes": 50,
+      "train_count": 800,
+      "val_count": 200,
+      "decoded_count": 200,
+      "teacher_tensor_exact_equal": true,
+      "val_samples_sha256": "b0ca0002cb5bedba08cd952a6d54ce585ff35c8402ee0d5c3c5c5ec870a885dd",
+      "transformed_val_sha256": "5e75e9418440bcbc2aa61c070e4417e57d7151e8b5c4d22068197ebf36fea1aa",
+      "prepared_sha256": "110e6017b91b86abe85842e031e8c85484a982272f9f47101b684192433a8359"
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "classes": 50,
+      "train_count": 800,
+      "val_count": 200,
+      "decoded_count": 200,
+      "teacher_tensor_exact_equal": true,
+      "val_samples_sha256": "876b21e83aaddab61013d7dc66102109a761273127135f712fcb7907bd811115",
+      "transformed_val_sha256": "6bc89392f82f826b6e4bc85c1d061253792afee79bc8816ad384487db3e92091",
+      "prepared_sha256": "be2775b52f824b9bb28094d9f3b4ed44048c13dddfa575bb0dfb46b069d396f3"
+    }
+  ],
+  "receipts_sha256": {
+    "ucf101-seed1/prepared.json": "cde8defe5160044b4fe9bb8c12a1e4b1093c9742dcf74af7ca3499b6bf72bab8",
+    "ucf101-seed2/prepared.json": "d79ec51ed12d0ff98811100351038844611ec5a37d567ca606d9b15634f40c29",
+    "ucf101-seed3/prepared.json": "142e78e1a97c18f58830510140af028975ddadb5cc77f2b1f9f3b2688ec4d84d",
+    "dtd-seed1/prepared.json": "d91cb1d4e4c27444698cb6498795dea2b4312780f369b887a162cd5154654c28",
+    "dtd-seed2/prepared.json": "760e61ee10d575061083094ec3064f67b9618d4cdfa8c420617781e5fd15e46b",
+    "dtd-seed3/prepared.json": "24a456efcfe4af526fb7c703b17616601059268285cfa6160d4dd0c1b2ee767a",
+    "fgvc_aircraft-seed1/prepared.json": "c894ee9082e3c9eb107624014e96f504ecdce62e65f7e9a72bf0290bb147911d",
+    "fgvc_aircraft-seed2/prepared.json": "110e6017b91b86abe85842e031e8c85484a982272f9f47101b684192433a8359",
+    "fgvc_aircraft-seed3/prepared.json": "be2775b52f824b9bb28094d9f3b4ed44048c13dddfa575bb0dfb46b069d396f3"
+  },
+  "source_data_and_checkpoint_inputs_unchanged": true,
+  "snapshot_after_sha256": "443ab31788c2046fa3bdd8af738ba435371bd948fe6cb0cae7cb626e63578316",
+  "cuda_unavailable_guard_passed": true,
+  "limitations": [
+    "No actual CUDA model construction/forward parity or prediction run",
+    "Base validation is known-class screening, not Novel/HM confirmation",
+    "Image immutability snapshot uses path/size/mtime, not all-image content hashes"
+  ]
+}

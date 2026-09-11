@@ -246,3 +246,71 @@ Python compilation, `git diff --check`, and the prohibited-API scan remained cle
 ### Remaining limitation after fix round 1
 
 No server or GPU was used. Real CUDA model construction, historical direct-forward parity, and full CUDA export remain pending for a later user-authorized server/GPU turn. The parent will rerun all nine CPU preparation cases and CUDA-unavailable rejection against `3888aa3`; those CPU checks cannot establish GPU readiness or measured research performance.
+
+## Final fix wave: preprocessing, row identity, and metric integrity
+
+Review base: `8326ad3`. Final implementation commit: `62771b4` (`fix: authenticate validation analysis inputs`). This wave addresses all three Important findings in `final-review.md` together. The command-line interfaces and fixed research candidate remain unchanged.
+
+### Exact historical input transform
+
+`validate_effective_role_config` now requires the exact frozen `INPUT.TRANSFORMS` list:
+
+```text
+random_resized_crop, random_flip, normalize
+```
+
+Removing `normalize`, inserting `instance_norm`, reordering the transforms, or adding another transform changes the effective-config protocol and is rejected during preparation and again during export configuration reconstruction. Pixel mean/std, interpolation, size, and `NO_TRANSFORM` remain independently checked.
+
+### Authenticated ordered rows and class order
+
+Analysis now recomputes the historical validation digest from every ordered `(sample_id, label, classname)` export row and compares it with the selected authenticated inventory case. It also requires unique nonempty sample IDs, internal label/class consistency, and complete class-label coverage. An internally coherent class-order relabeling therefore changes the authenticated digest and fails.
+
+When the referenced prepared receipt is locally available, analysis verifies its exact file hash and binds its dataset, seed, protocol, class order, validation rows, validation hash, and inventory case to the export. Relocated or downloaded exports remain analyzable without historical source/model/data directories: the authenticated ordered row digest supplies the self-contained identity binding, a missing original prepared path is not dereferenced, and an unavailable absolute NPZ path falls back to the same-named sibling only after the pinned NPZ hash succeeds.
+
+Synthetic tests no longer attach real historical provenance to unrelated fixture rows. They create a temporary complete nine-case inventory, hash it at the test boundary, and pass that exact path/hash only through keyword-only Python test hooks. Production CLI calls retain the repository's pinned inventory path/hash and expose no inventory override.
+
+### Aggregate metric recomputation
+
+The analysis calculation is factored into the pure `compute_analysis` function. `analyze` uses it to produce all branch metrics, all 18 fusion metrics, predictions, counts, student/teacher audits, and paired C comparisons.
+
+Before aggregation, each analysis must have schema version 1, a present referenced export, the exact recorded export JSON hash, and the current analysis-tool hash. Aggregation loads and fully validates every referenced export and NPZ, then calls the same pure computation and compares the complete derived payload with the submitted analysis. This rejects plausible finite score edits as well as impossible values, non-finite metrics, changed counts, changed predictions, missing schema, missing exports, export-hash changes, row/class changes, and malformed or hash-changed NPZ data. Range checks are not used as a substitute for recomputation.
+
+The fixed guard remains `S1+M_logits` against both `C+M_logits` and `C+M_probability`, plus `S0+M_logits`; no search, tuning, Novel/HM, significance, or automatic-training claim was added.
+
+### Final-wave TDD evidence
+
+Focused red command:
+
+```sh
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:Dassl.pytorch \
+../../tc-venv/bin/python -B -m unittest \
+  tests.repro.test_validation_probe tests.repro.test_validation_analysis -v
+```
+
+The first run was red with 18 tests, two failures, and three errors. Both altered transform lists were accepted. `load_export` lacked the fixture-inventory validation boundary, and `analyze_export`/aggregation lacked the path that recomputes reports against referenced exports.
+
+A separate relocation regression was then added and failed because `load_export` dereferenced the unavailable original absolute NPZ path instead of the downloaded sibling. After the hash-gated relocation fallback was implemented, the complete focused suite passed:
+
+```text
+Ran 18 tests in 1.822s
+OK
+```
+
+The final regressions cover normalization removal, `instance_norm` insertion, sample-ID-only edits, coherent class-order/classname edits, prepared-class mismatch even after updating its file hash, relocated NPZ resolution, plausible finite metric edits, non-finite metrics, count edits, prediction edits, missing analysis schema, missing export files, and changed export hashes. The end-to-end synthetic export-to-analysis-to-nine-case-aggregate test continues to distinguish `S1+M_logits` from `S1+M_probability` and exercises every method table.
+
+### Final-wave complete verification
+
+After the focused suite and static review, the complete suite was run once:
+
+```sh
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:Dassl.pytorch \
+../../tc-venv/bin/python -B -m unittest discover -s tests -v
+```
+
+Result: 128 tests passed, exit code 0. The run completed in 11.9 seconds wall time. Python compilation, `git diff --check`, and the prohibited-API scan were also clean. No `build_trainer`, `torch.optim`, `.backward(`, or `test_loader` use was introduced.
+
+### Remaining limitation after the final fix wave
+
+No GPU, server, network, training, source edit, or full CLIP inference was used. Real CUDA model construction, historical direct-forward parity, and full CUDA logits export remain pending for a later authorized GPU turn. The parent will regenerate and archive all nine CPU preparations plus the CUDA-unavailable rejection against `62771b4`; those checks validate preparation and refusal behavior only and do not establish GPU readiness or measured research results.

@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "check": "CUDA unavailable refuses real model export",
+  "returncode": 1,
+  "seconds": 0.9369613749440759,
+  "command": [
+    "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/tc-venv/bin/python",
+    "-B",
+    "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency-validation/scripts/repro/validation_probe.py",
+    "export",
+    "--prepared",
+    "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/validation-probe-20260911/prepared-ce31832/ucf101-seed1/prepared.json",
+    "--output-dir",
+    "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/validation-probe-20260911/prepared-ce31832/cuda-unavailable-rejection"
+  ],
+  "failure": {
+    "status": "failed",
+    "error": "RuntimeError: CUDA is required for export; CPU fallback is forbidden"
+  },
+  "no_logits_or_success_export": true,
+  "log_sha256": "7cf0c51ea63c875ff89b3f2a0d9a7e6f58ecab158c6cda53d1b31c2f15a68f92"
+}

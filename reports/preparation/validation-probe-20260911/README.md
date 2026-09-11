@@ -1,6 +1,6 @@
 # 旧模型验证集交叉检查：本机准备
 
-2026-09-11。当前状态：**本机工具和九组真实 CPU 预检完成，任务复审通过，最终审查进行中；未运行 GPU 推理，没有新增方法成绩。** 用户已关闭服务器，本阶段完全在本机完成。
+2026-09-11。当前状态：**本机工具和九组真实 CPU 预检完成，独立审查及全部修复复审通过；未运行 GPU 推理，没有新增方法成绩。** 用户已关闭服务器，本阶段完全在本机完成。
 
 ## 本轮范围
 
@@ -18,13 +18,13 @@
 
 ## 完成记录
 
-- 原有109项复现测试通过；当前实现与修复提交为`76922fa`、`3888aa3`，报告提交`1406ca3`。17项针对性测试通过，完整127项测试通过（6.214秒）。完整测试从`tests/`运行，基线109项从`tests/repro/`运行，统计范围不同。
+- 原有109项复现测试通过；当前实现与修复提交为`76922fa`、`3888aa3`、`62771b4`，报告提交`ce31832`。18项针对性测试通过，完整128项测试通过（11.9秒墙钟）。完整测试从`tests/`运行，基线109项从`tests/repro/`运行，统计范围不同。
 - 本机数据已找到：UCF有13,320张、DTD有5,640张、Aircraft有10,000张JPEG。图片数量和文件存在不代替真实loader验证。
 - [独立历史采样核对](evidence/historical-sampling-check.json)通过：九份本机已保存采样缓存的SHA先匹配本轮输入快照，再读取并检查训练/验证样本哈希。每seed验证图片数为UCF204、DTD96、Aircraft200；合计1,500条记录、1,280张不同图片。训练/验证真实路径不重叠。该检查不等于新增导出工具实际运行通过。
-- `1406ca3`的[九组独立CPU预检](evidence/1406ca3-local-audit.json)全部通过，总子进程时间37.25秒。每组在独立进程使用原始源码读取、采样和预处理，没有构建CLIP。
-- [无CUDA拒绝检查](evidence/1406ca3-cuda-unavailable-check.json)通过：导出返回1，明确记录CUDA必需，没有生成NPZ或成功的export.json。这是预期拒绝，不是失败的训练。
-- [输入不变与归档收据](evidence/1406ca3-evidence-receipt.json)通过：源码、数据路径/大小/mtime、非图片元数据SHA及108个checkpoint相关文件均与运行前一致。图片内容没有全部逐张计算SHA，因此这里只证明上述记录不变。
-- [完整预检证据包](evidence/cpu-prepared-1406ca3.tar.gz)包含九组prepared.json、实际命令/日志、核对结果及无CUDA拒绝记录，不含图片或模型权重。
+- `ce31832`的[九组独立CPU预检](evidence/ce31832-local-audit.json)全部通过，总子进程时间41.89秒。每组在独立进程使用原始源码读取、采样和预处理，没有构建CLIP。
+- [无CUDA拒绝检查](evidence/ce31832-cuda-unavailable-check.json)通过：导出返回1，明确记录CUDA必需，没有生成NPZ或成功的export.json。这是预期拒绝，不是失败的训练。
+- [输入不变与归档收据](evidence/ce31832-evidence-receipt.json)通过：源码、数据路径/大小/mtime、非图片元数据SHA及108个checkpoint相关文件均与运行前一致。图片内容没有全部逐张计算SHA，因此这里只证明上述记录不变。
+- [完整预检证据包](evidence/cpu-prepared-ce31832.tar.gz)包含九组prepared.json、实际命令/日志、核对结果及无CUDA拒绝记录，不含图片或模型权重。
 
 | 数据集 | 每seed Base类别 | 每seed训练图片 | 每seed验证图片 | seeds | 实际解码总数 | 教师KD0/KD1参数相同 |
 |---|---:|---:|---:|---|---:|---|
@@ -54,15 +54,15 @@ python -B scripts/repro/validation_analysis.py analyze --export /path/to/new-exp
 python -B scripts/repro/validation_analysis.py aggregate --analyses /path/to/nine/analysis.json/files --output-dir /path/to/new-aggregate
 ```
 
-最后一条的占位位置应传入九个实际analysis.json路径。以上export/analyze/aggregate命令尚未对本项目真实模型输出执行；合成测试不当作实验分数。当前阶段没有连接服务器。下一步可先无卡启动：部署本仓库工具和历史输入，按服务器路径重做九组prepare并核验环境；这些通过后再开卡执行旧模型推理。
+最后一条的占位位置应传入九个实际analysis.json路径。 汇总会核验每份analysis引用的export.json文件哈希、NPZ和样本身份，并重新计算完整指标；修改分数、预测或计数都会拒绝。下载产物后保留每组export.json与其同名NPZ在一起，重新运行analyze生成本机路径的报告，再aggregate；不改写原始收据里的哈希。原prepared路径不可用时可依靠固定清单绑定的实际行摘要核验，若可用则额外核验其内容和文件哈希。以上export/analyze/aggregate命令尚未对本项目真实模型输出执行；合成测试不当作实验分数。当前阶段没有连接服务器。下一步可先无卡启动：部署本仓库工具和历史输入，按服务器路径重做九组prepare并核验环境；这些通过后再开卡执行旧模型推理。
 
 ## 执行中发现和修正的事项
 
 - 自查补上共享CLIP迁移设备的正确顺序，以及图片批次送入模型设备的步骤；增加对应回归测试。
 - 概率融合的NLL使用稳定的log-softmax/log-add-exp，避免用截断概率掩盖极端置信度。
 - 本机核对脚本最初误把checkpoint部分当作只有三个角色键；实际还记录了教师相等性及张量键列表。核对在写结果前拒绝，按完整schema修正后通过，未修改实验输入或降低SHA要求。
-- 首轮独立审查发现四项问题：概率对照误换主要候选、配置绑定不完整、实际前向输入缺少再核对、聚合仅检查输入相互一致。现已修复；[逐项复审](review/task-1-fix1-review.md)确认4/4解决，没有新增回归。最终全分支审查单独记录。
-- 旧版本`04a9142`的预检证据保留为修复前历史，不作为当前代码通过的依据。当前[状态收据](ready.json)指向`1406ca3`的九组预检与工具SHA；[实现记录](review/task-1-report.md)包含测试命令及红绿结果。
+- 首轮独立审查发现四项问题：概率对照误换主要候选、配置绑定不完整、实际前向输入缺少再核对、聚合仅检查输入相互一致。现已修复；[逐项复审](review/task-1-fix1-review.md)确认4/4解决，没有新增回归。[最终全分支审查](review/final-review.md)另发现三项边界问题：归一化列表未固定、导出行未绑定真实采样哈希、汇总未核验原始输出。已通过一轮修复补上：锁定历史transform、逐行重算采样摘要、由已校验logits重算全部指标/预测/计数；[最终修复复审](review/final-fix-review.md)确认3/3解决，没有新的严重问题。
+- 旧版本`04a9142`、`1406ca3`的预检证据保留为修复前历史，不作为当前代码通过的依据。当前[状态收据](ready.json)指向`ce31832`的九组预检与工具SHA；[实现记录](review/task-1-report.md)包含测试命令及红绿结果。
 
 ## 阅读结果时的限制
 

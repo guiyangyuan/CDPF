@@ -28,6 +28,8 @@ Ownership: 新增scripts/repro/evaluate_frozen_fusion.py及tests/repro/test_froz
 
 新增三个并列输出，与原三个共六个分支：description_instance、mean_probability_fusion、adk_probability_fusion。令s=CLIP.logit_scale.exp()、v为单位图像向量、t为单位有效描述向量；a=masked_softmax(s*cos(v,t))按每类描述维计算，instance文本是sum(a*t)再单位化，instance_logits=s*cos(v,instance_text)。p_student/mean/instance各按类softmax；mean_probability_fusion=0.5*p_student+0.5*p_mean；adk_probability_fusion=0.5*p_student+0.25*p_mean+0.25*p_instance，与Eq12/13的argmax等价；其余原simple_fusion仍固定logit均值。所有六个预测/计数均保存，不据成绩更换主比较。有效mask无效描述必须不影响结果；数学fixture独立核对attention温度/类别归一化/概率融合，并验证ADK额外描述损失相对于仅可训练CoOp上下文梯度为零。当前适配冻结CLIP和描述，故ADK的描述CE不更新CoOp上下文，沿用原CoOp训练模型；不能推广为论文原adapter训练复现。CLI/metrics新增方法身份和公式来源字段。此补充在任何新GPU测试前冻结。
 
+真实历史兼容性补充：旧UCF基线的effective_config记载KD_WEIGHT1，但其baseline group禁用KD，checkpoint/manifest有效KD为0；现有cpu-prep run_pilot生成baseline声明KD0。只允许UCF这一明确字段差异，且要求所有相关历史有效KD=0，其余cfg除输出路径重定位外仍精确匹配；输出记录历史声明值、有效值及当前派生值。不得忽略通用KD/config核验，不得改写历史文件。该兼容性不适用于DTD/Aircraft或任何有效KD非0情况。
+
 ## Task 2: DTD/Aircraft KD开关固定队列及独立审计
 
 Ownership: scripts/repro/attribution_study.py、scripts/repro/attribution_audit.py、tests/repro/test_attribution.py。只新增操作代码；借用旧run_pilot.build_commands、cross_dataset_study和cross_dataset_audit的可复用函数，不修改既有模型。你不独占工作区，不回退他人修改，不生成子代理。工作Python为/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/tc-venv/bin/python。
@@ -48,7 +50,7 @@ CLI互斥plan-only / prepare-only / execute / audit-only，--preparation-dir单�
 
 状态原子写status.json，含stage/state/PID、每条命令开始结束码、已完成阶段；raw stdout/stderr独立保存；训练开始前保存protocol/data_preflight，未齐全不能passed。所有子进程设置PYTHONPATH使用各自源码、CPU线程4、CUBLAS_WORKSPACE_CONFIG=:4096:8，去掉TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD。无卡prepare线程1。所有新输出必须与source/data/baseline/历史model隔离；输入若缺失、错seed/错数据/重复条目/路径混用均拒绝。GPU要求仅在execute验证。
 
-独立audit检查普通重载metrics与actualcfg、实际checkpoint SHA/sidecar/epoch/signature/provenance/参数790018有限性；日志correct/total与accuracy、真实样本数/采样哈希、类别及描述顺序一致；同seed KD0/1完整训练cfg仅允许KD_WEIGHT和输出位置不同；三分支和两split同checkpoint。所有正式KD0/KD1×2datasets×3seeds×3branches共36行seed-branch，Base/Novel合为一行。融合3datasets×3seeds×6branches共54行，均校验Task1指标和逐样本预测文件SHA及计数。anchor独立报告不进入正式配对。最终分析分别给出全部seed/branch Base/Novel/HM、均值和样本SD、HMofmeans与meanSeedHM分开；KD1-KD0逐seed差，simple_fusion-baseline逐seed差，以及完整原方法ensemble-simple_fusion（DTD/Aircraft用旧KD1，UCF用receipt.ucf101_full已核实历史参考）。未齐全或任何失败拒绝最终passed，禁止选择最优分支。
+独立audit检查普通重载metrics与actualcfg、实际checkpoint SHA/sidecar/epoch/signature/provenance/参数790018有限性；日志correct/total与accuracy、真实样本数/采样哈希、类别及描述顺序一致；同seed KD0/1完整训练cfg仅允许KD_WEIGHT和输出位置不同；三分支和两split同checkpoint。所有正式KD0/KD1×2datasets×3seeds×3branches共36行seed-branch，Base/Novel合为一行。融合3datasets×3seeds×6branches共54行，均校验Task1指标和逐样本预测文件SHA及计数。anchor独立报告不进入正式配对。最终分析分别给出全部seed/branch Base/Novel/HM、均值和样本SD、HMofmeans与meanSeedHM分开；KD1-KD0逐seed差，simple_fusion-baseline、mean_probability_fusion-simple_fusion、adk_probability_fusion-mean_probability_fusion逐seed差，以及完整原方法ensemble-simple_fusion和完整原方法ensemble-adk_probability_fusion（DTD/Aircraft用旧KD1，UCF用receipt.ucf101_full已核实历史参考）。未齐全或任何失败拒绝最终passed，禁止选择最优分支。
 
 有针对性的CPU测试：124条命令/阶段结构；无副作用plan；拒绝无GPU与已有目录；冻结cfg和seed错误/统一漂移；输入checkpoint或模板SHA篡改；不完整/重复结果；错误correct/total、KD方向、anchor差异；CLI import/plan不需完整CLIP。小型真实JSON/checkpoint fixture优先，不能下载权重或跑GPU。Task1已经测试过的细节无需重复测试。focused和既有repro tests一次，记录输出并仅提交拥有文件。控制者负责真实服务器验证和备份。
 

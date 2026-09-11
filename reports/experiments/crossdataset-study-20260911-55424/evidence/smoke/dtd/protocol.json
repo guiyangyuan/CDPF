@@ -1,0 +1,39 @@
+{
+  "dataset": "DescribableTextures",
+  "seeds": [
+    1
+  ],
+  "epochs": 1,
+  "variants": [
+    "baseline",
+    "hierarchical_adapter",
+    "flat_dual_adapter"
+  ],
+  "shots": 16,
+  "kd_weight": 1.0,
+  "code_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+  "fixed_settings": {
+    "n_ctx": 4,
+    "n_views": 20,
+    "n_groups": 4,
+    "kd_temp": 2.0,
+    "adaptive_ce_weight": 1.0,
+    "diversity_weight": 0.0,
+    "contrastive_weight": 0.0,
+    "ensemble_alpha": 0.5
+  },
+  "view_orders": {
+    "baseline": {
+      "policy": "contiguous",
+      "seed": 0
+    },
+    "hierarchical_adapter": {
+      "policy": "contiguous",
+      "seed": 0
+    },
+    "flat_dual_adapter": {
+      "policy": "contiguous",
+      "seed": 0
+    }
+  }
+}

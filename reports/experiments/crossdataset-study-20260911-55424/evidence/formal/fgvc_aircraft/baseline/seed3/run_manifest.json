@@ -1,0 +1,39 @@
+{
+  "seed": 3,
+  "dataset": "FGVCAircraft",
+  "shots": 16,
+  "subsample": "base",
+  "model_signature": {
+    "format": 2,
+    "trainer": "CoOp_TextConsistency_Ablation",
+    "n_ctx": 4,
+    "aggregation": "none",
+    "feature_adapter": false,
+    "n_groups": null,
+    "n_views": 20,
+    "ablation_group": "baseline",
+    "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+    "template_sha256": null,
+    "view_order": "contiguous",
+    "order_seed": 0,
+    "order_version": 1
+  },
+  "code_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+  "torch": "2.8.0+cu128",
+  "python": "3.12.3",
+  "device": "cuda",
+  "cuda_runtime": "12.8",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "effective_losses": {
+    "kd": 0.0,
+    "adaptive_ce": 1.0,
+    "diversity": 0.0,
+    "contrastive": 0.0
+  },
+  "train_samples_sha256": "aa24df6792e0120acda0d6b5ed48e1e5c500586e1da207ac4fb095fd18a5ab8a",
+  "val_samples_sha256": "876b21e83aaddab61013d7dc66102109a761273127135f712fcb7907bd811115",
+  "test_samples_sha256": "78dd9ed86b8d2d13c40d88fac9b778ec450b322707c44347521c07e7db9b714a",
+  "trainable_parameters": 2048,
+  "description_counts": [],
+  "view_order_manifest": null
+}

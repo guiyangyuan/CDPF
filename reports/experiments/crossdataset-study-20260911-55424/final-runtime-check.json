@@ -1,0 +1,8 @@
+{
+  "checked_unix": 1789097554.119708,
+  "state": "passed",
+  "successful_commands": 141,
+  "active_gpu_compute_processes": "",
+  "gpu": "0 %, 2 MiB",
+  "server_power_changed_by_agent": false
+}

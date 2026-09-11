@@ -150,3 +150,99 @@ OK
 No server or GPU was used in this task. Full CUDA export, real frozen CLIP/model forward execution, direct-forward parity on the historical models, and the resulting measured analysis and aggregate metrics remain pending for a later user-authorized server/GPU turn. This turn establishes local CPU preparation, CPU analysis/aggregation, synthetic export behavior, and explicit CUDA-unavailable rejection; it does not establish GPU readiness or any research result.
 
 The parent next runs only all nine CPU preparation cases plus the CUDA-unavailable rejection against reviewed code. No measured performance claims should be made from the synthetic fixtures or the two preparation receipts.
+
+## Fix round 1: decision and provenance integrity
+
+Review base: `04a9142`. Fix implementation commit: `3888aa3` (`fix: bind validation decisions to trusted inputs`). The fixes address all four Important findings in `task-1-review.md`; the task protocol and CLI signatures did not change.
+
+### Fixed main-candidate guard
+
+The sole candidate is now always `S1+M_logits`. Both the macro and per-dataset probability-baseline deltas subtract `C+M_probability` accuracy from `S1+M_logits` accuracy. `S1+M_probability` remains in the complete exploratory metric table but no longer substitutes for the fixed candidate in any guard. Aggregate output records `fixed_candidate: S1+M_logits`.
+
+The regression fixture uses three classes, with `S1=[-6,-4,-6]` and `M=[1,-2,0]`. Equal-logit fusion predicts class 0 while equal-probability fusion predicts class 1. Across the synthetic nine cases, the fixed logit candidate and `C+M_probability` both score 100%, so the required delta is 0 percentage points and passes. The previous implementation used the wrong probability-fusion candidate, scored 0%, and failed this same guard.
+
+### Authenticated effective configuration
+
+Preparation now requires the exact authenticated inventory file hash. Model signatures are compared as complete mappings, including format, trainer, prompt/view/group counts, aggregation, feature-adapter behavior, ablation role, CLIP/template hashes, and format-2 view-order/version fields.
+
+Each role's source-built effective configuration is then bound to its authenticated manifest signature and the fixed protocol. The validation covers the role trainer, all behavior-bearing `TEXTCONSISTENCY` values, effective losses, legacy UCF CoOp declared/effective KD exception, seed, CUDA/device mode, validation/Base split, shots, deterministic loader and batch size, backbone, evaluation image size/interpolation/normalization, and resolved CLIP path. All three role configurations and their authenticated bindings are persisted; the config and compatibility hashes now cover the complete role set rather than only CoOp.
+
+The same role-config validation runs again after the CUDA overrides during export. Prepared-receipt revalidation also binds the selected inventory case, source/assets, train/val hashes, and every checkpoint/manifest hash back to the authenticated inventory.
+
+### Evaluated transform identity
+
+Export decodes and hashes the complete validation loader before CLIP/model construction. The digest includes each contiguous pre-device transform tensor, label tensor, and ordered path. `export_batches` independently hashes the exact pre-device batches it consumes, and that digest must equal preparation evidence. After inference, export revalidates sample metadata, rebuilds the validation transform/loader, decodes the complete split again, and requires the same transform representation and ordered tensor/label/path digest before it can write success. The evaluated digest is persisted separately as `evaluated_transform`.
+
+Regression coverage changes the image tensor, label order, and path order independently and verifies that each mutation is rejected.
+
+### Trusted aggregate provenance
+
+Analysis and aggregation authenticate the repository's fixed nine-case inventory by its pinned SHA-256 (`858bfbf1f64d71e93c5ca89f706bd757ca69b1f6250b2cadb55a521dcda4d185`). Every export/analysis case must match the exact inventory case digest, source, CLIP and dataset-template hashes, train/val sample hashes, and role-specific checkpoint and manifest hashes. Config and compatibility digests must also be full SHA-256 values. Aggregate still checks compatible settings within each dataset after these exact comparisons.
+
+The negative regression changes every one of the nine cases to consistently wrong CLIP, template, inventory, checkpoint, and manifest hashes. These remain mutually consistent and unique where applicable, but aggregation now rejects them against the trusted inventory before reading metric tables.
+
+### Fix-round TDD evidence
+
+Focused red command:
+
+```sh
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+PYTHONPATH=.:Dassl.pytorch ../../tc-venv/bin/python \
+  -m unittest tests.repro.test_validation_probe tests.repro.test_validation_analysis -v
+```
+
+The initial regression run was red with 17 tests: one failure and three errors. The guard fixture failed because `all_passed` was false; config validation raised `AttributeError` because `validate_effective_role_config` did not exist; the exporter omitted `decoded_val`; and the uniformly wrong provenance reached later metric-table processing instead of being rejected by provenance validation.
+
+After implementation, the same focused command passed:
+
+```text
+Ran 17 tests in 1.626s
+OK
+```
+
+### Real CPU integration after the fixes
+
+Both historical source formats passed fresh CPU-only preparation with bytecode disabled:
+
+- DTD seed 1 log: `/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/validation-probe-20260911/implementation-attempts/dtd-seed1-round1-prepare.log`
+- DTD seed 1 receipt: `/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/validation-probe-20260911/implementation-attempts/dtd-seed1-round1-prepared/prepared.json`
+- UCF101 seed 1 log: `/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/validation-probe-20260911/implementation-attempts/ucf101-seed1-round1-prepare.log`
+- UCF101 seed 1 receipt: `/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/validation-probe-20260911/implementation-attempts/ucf101-seed1-round1-prepared/prepared.json`
+
+DTD format-2 regenerated the same 384/96/864 train/val/test membership and the same ordered transform digest `81b0d6ad...87b3043`. UCF101 format-1 regenerated the same 816/204/1,934 membership and the same ordered transform digest `9c721f82...009805a`. Each receipt contains authenticated bindings for `coop`, `kd0`, and `kd1`.
+
+The successful command form for each case was:
+
+```sh
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.:Dassl.pytorch \
+../../tc-venv/bin/python -B scripts/repro/validation_probe.py prepare \
+  --inventory reports/diagnostics/error-analysis-20260911/evidence/proposed-probe-inputs.json \
+  --workspace-root /Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt \
+  --source-root <authenticated-source-root> --data-root <real-data-root> \
+  --dataset <dtd-or-ucf101> --seed 1 --output-dir <fresh-attempt-directory>
+```
+
+Both processes exited 0. The immutable source and data paths were read only.
+
+### Fix-round final verification
+
+The final complete suite ran once after the implementation and real-source checks:
+
+```sh
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+PYTHONPATH=.:Dassl.pytorch ../../tc-venv/bin/python -m unittest discover -s tests -v
+```
+
+Result:
+
+```text
+Ran 127 tests in 6.214s
+OK
+```
+
+Python compilation, `git diff --check`, and the prohibited-API scan remained clean. No `build_trainer`, `torch.optim`, `.backward(`, or `test_loader` use was introduced in either implementation script.
+
+### Remaining limitation after fix round 1
+
+No server or GPU was used. Real CUDA model construction, historical direct-forward parity, and full CUDA export remain pending for a later user-authorized server/GPU turn. The parent will rerun all nine CPU preparation cases and CUDA-unavailable rejection against `3888aa3`; those CPU checks cannot establish GPU readiness or measured research performance.

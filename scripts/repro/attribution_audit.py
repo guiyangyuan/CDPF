@@ -229,6 +229,15 @@ def validate_predictions(metric, directory, expected):
         accuracy_counts(stats['accuracy'], stats['correct'], stats['total'], len(records))
 
 
+def validate_fusion_student(student, historical, receipt_accuracy, correct, total, expected_total):
+    require(historical == {'correct': correct, 'total': total, 'accuracy': receipt_accuracy},
+            'Fusion historical student differs from receipt/log identity')
+    for stats in (historical, student):
+        require((stats['correct'], stats['total']) == (correct, total),
+                'Fusion student correct/total differs from historical baseline')
+        accuracy_counts(stats['accuracy'], stats['correct'], stats['total'], expected_total)
+
+
 def audit_fusion(stage, prepared):
     evidence = prepared['datasets_by_source'][stage['source_root']][stage['dataset']]
     rows = []
@@ -265,10 +274,8 @@ def audit_fusion(stage, prepared):
                     math.isfinite(scale) and scale > 0 and math.isclose(protocol['attention_tau'], 1 / scale), 'Fusion fixed protocol differs')
             validate_predictions(metric, directory, expected)
             old_correct, old_total = common.parse_log(historical_dir / 'log.txt')
-            accuracy_counts(receipt['historical'][split]['accuracy'], old_correct, old_total, expected['test_count'])
-            require(metric['metrics']['student'] == metric['historical_student'] ==
-                    {'correct': old_correct, 'total': old_total, 'accuracy': receipt['historical'][split]['accuracy']},
-                    'Fusion student differs from historical baseline')
+            validate_fusion_student(metric['metrics']['student'], metric['historical_student'],
+                                    receipt['historical'][split]['accuracy'], old_correct, old_total, expected['test_count'])
             fusion = study.common.load_file(HERE / 'evaluate_frozen_fusion.py', 'audit_fusion_tensors')
             fusion._validate_checkpoint_tensors(cp, read_json(Path(receipt['baseline_dir']) / 'run_manifest.json'))
         for branch in study.FUSION_BRANCHES:

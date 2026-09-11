@@ -151,6 +151,29 @@ class PlanTests(unittest.TestCase):
             with self.subTest(mutation=mutation), self.assertRaises(ValueError):
                 study.validate_receipt(r, ROOT)
 
+    def test_receipt_rejects_source_dot_and_symlink_aliases_without_mutation(self):
+        canonical = receipt()
+        study.validate_receipt(canonical, ROOT)
+        dotted = copy.deepcopy(canonical)
+        dotted['fusion_baselines'][0]['source_root'] = '/old-source/./'
+        original = copy.deepcopy(dotted)
+        with self.assertRaisesRegex(ValueError, 'canonical absolute spelling'):
+            study.validate_receipt(dotted, ROOT)
+        self.assertEqual(dotted, original)
+        with tempfile.TemporaryDirectory() as temp:
+            source = Path(temp).resolve() / 'source'; source.mkdir()
+            alias = source.with_name('source-alias'); alias.symlink_to(source, target_is_directory=True)
+            r = receipt()
+            for row in r['fusion_baselines']:
+                if row['dataset'] in study.DATASETS:
+                    row['source_root'] = str(source)
+            study.validate_receipt(r, source)
+            next(row for row in r['fusion_baselines'] if row['dataset'] == 'dtd')['source_root'] = str(alias)
+            original = copy.deepcopy(r)
+            with self.assertRaisesRegex(ValueError, 'canonical absolute spelling'):
+                study.validate_receipt(r, source)
+            self.assertEqual(r, original)
+
     def test_execute_no_gpu_and_existing_output_have_no_side_effects(self):
         with tempfile.TemporaryDirectory() as temp:
             p = plan(temp)
@@ -310,6 +333,23 @@ class AuditTests(unittest.TestCase):
         audit.accuracy_counts(50, 1, 2, 2)
         for values in ((50, 1, 3, 2), (50, -1, 2, 2), (150, 3, 2, 2), (50, 1, 0, 0), (float('nan'), 1, 2, 2), (51, 1, 2, 2)):
             with self.subTest(values=values), self.assertRaises(ValueError): audit.accuracy_counts(*values)
+
+    def test_fusion_accepts_rounded_history_but_requires_exact_counts_and_receipt(self):
+        student = {'correct': 2, 'total': 3, 'accuracy': 200.0 / 3}
+        historical = {'correct': 2, 'total': 3, 'accuracy': 66.667}
+        audit.validate_fusion_student(student, historical, 66.667, 2, 3, 3)
+        for changed in ({'correct': 1, 'total': 3, 'accuracy': 100.0 / 3},
+                        {'correct': 4, 'total': 6, 'accuracy': 200.0 / 3}):
+            with self.assertRaisesRegex(ValueError, 'correct/total differs'):
+                audit.validate_fusion_student(changed, historical, 66.667, 2, 3, 3)
+        changed = dict(historical, accuracy=66.6668)
+        with self.assertRaisesRegex(ValueError, 'receipt/log identity'):
+            audit.validate_fusion_student(student, changed, 66.667, 2, 3, 3)
+        for changed in (dict(student, accuracy=66.668), dict(student, accuracy=float('nan'))):
+            with self.assertRaisesRegex(ValueError, 'Accuracy differs'):
+                audit.validate_fusion_student(changed, historical, 66.667, 2, 3, 3)
+        with self.assertRaisesRegex(ValueError, 'Accuracy differs'):
+            audit.validate_fusion_student(student, dict(historical, accuracy=66.668), 66.668, 2, 3, 3)
 
     def test_anchor_requires_exact_counts_and_test_hash(self):
         expected = {'correct': 4, 'total': 10, 'test_sha256': 'fixed'}

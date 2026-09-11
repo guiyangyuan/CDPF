@@ -66,6 +66,8 @@ def validate_receipt(receipt, source_root):
             if group == 'fusion_baselines':
                 if not Path(row['source_root']).is_absolute():
                     raise ValueError('Source root must be absolute')
+                if row['source_root'] != str(Path(row['source_root']).resolve()):
+                    raise ValueError('Source root must use canonical absolute spelling')
                 if row['dataset'] in DATASETS and Path(row['source_root']).resolve() != Path(source_root).resolve():
                     raise ValueError('DTD/Aircraft source root differs from requested source')
                 if set(row.get('historical', {})) != {'base', 'new'}:

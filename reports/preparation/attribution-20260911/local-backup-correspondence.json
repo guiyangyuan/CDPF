@@ -1,0 +1,133 @@
+{
+  "passed": true,
+  "count": 18,
+  "checks": [
+    {
+      "group": "fusion_baselines",
+      "dataset": "ucf101",
+      "seed": 1,
+      "sha256": "84cc4b8201232832949cda3585a989d11f3089984639addb1409ec27f7ea89df",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "fusion_baselines",
+      "dataset": "ucf101",
+      "seed": 2,
+      "sha256": "d0aa4b4e1ba39c91577415c93eb89e278928d08000a3e4dfe2a14d2311b09248",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "fusion_baselines",
+      "dataset": "ucf101",
+      "seed": 3,
+      "sha256": "67e4520dc1f000d220541f876afe5015d7538009d278cb48d5e91a3503139516",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "fusion_baselines",
+      "dataset": "dtd",
+      "seed": 1,
+      "sha256": "b8954631a9fba87b1ffe68827067946c0acb8340b7de9530cfb73caea9762e13",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "fusion_baselines",
+      "dataset": "dtd",
+      "seed": 2,
+      "sha256": "ede7a2d666a442fcf0fde727ab0e63bc2f17b10d80f58e73279f990c6c885e4a",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "fusion_baselines",
+      "dataset": "dtd",
+      "seed": 3,
+      "sha256": "89d5d692654f616f6115f06bfdfb51b7049f4c0e9f51fd0f820487f99ea019ad",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "fusion_baselines",
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "sha256": "07cbda0ab8e300600c823f51ccfde38867c1ef898e58b5a7ace634c55305fce8",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "fusion_baselines",
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "sha256": "d5528de6f1a229dfa2a43f926940470f11e8f35041089015d3167ed650d1a998",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "fusion_baselines",
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "sha256": "5da8cc806ae09e2e1d91e732bcf7d606ad595eabf8c8fb87199b59ac973272e3",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "historical_kd1",
+      "dataset": "dtd",
+      "seed": 1,
+      "sha256": "32cd5221abfe2a2888f64937f161b92b6a735d62948c25e86bec3069e629da74",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "historical_kd1",
+      "dataset": "dtd",
+      "seed": 2,
+      "sha256": "c28753266b556eaf0f5d0bf0ee34d2f02194347520ea72ee821fcc11e5596f93",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "historical_kd1",
+      "dataset": "dtd",
+      "seed": 3,
+      "sha256": "b7d1d6f7cc5260a343a55c36710c4a43efd9ffd187bea994be320b2065d85d88",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "historical_kd1",
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "sha256": "406c715b7af9b7095d76db2b3651f82218fd09d2b7ab4564d947e88c864c7eec",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "historical_kd1",
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "sha256": "788af68e8347a2752727bd17ba354cd0a859feb304523030273df1236793aaf9",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "historical_kd1",
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "sha256": "117fa95e951ad51f563ebb8e0156f4a89afa2804aa43ea578707ef5b91658fc6",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "ucf101_full",
+      "dataset": "ucf101",
+      "seed": 1,
+      "sha256": "625f79c7c617b6314d95c131560a7696f9ba9cb082886c30b290a698f61a78bf",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "ucf101_full",
+      "dataset": "ucf101",
+      "seed": 2,
+      "sha256": "cb89b1bbad77f8f384f175bc460a1191172f1c92d58b8c3e8015b3ba61bb0961",
+      "matches_local_complete_backup": true
+    },
+    {
+      "group": "ucf101_full",
+      "dataset": "ucf101",
+      "seed": 3,
+      "sha256": "8fa9d4dda1ad23ff9d2991ea3135af0d73f9412dbb8d4464c9d2f155ce2d4453",
+      "matches_local_complete_backup": true
+    }
+  ],
+  "new_gpu_evaluation_complete": false
+}

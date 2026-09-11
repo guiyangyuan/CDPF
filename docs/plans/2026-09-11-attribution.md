@@ -12,7 +12,7 @@
 
 Ownership: 新增scripts/repro/evaluate_frozen_fusion.py及tests/repro/test_frozen_fusion.py。你不独占工作区，不回退他人修改，不生成子代理，不修改旧训练源码或配置。工作Python为/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/tc-venv/bin/python；包式测试命令 `PYTHONPATH=.:Dassl.pytorch <python> -m unittest discover -s tests/repro -t . -q`。
 
-提供可导入的纯张量融合函数及独立GPU评估CLI。后文开跑前补充将评估输出从三个扩为六个，其余原始三分支定义不变。CLI需source-root、baseline-dir、dataset、seed、split(base/new)、data-root、output-dir、expected-source-sha256；固定epoch20和alpha0.5，不提供搜索或训练功能。允许额外prepare/validate-only模式检查元数据，不加载CLIP模型；无CUDA执行在写输出前拒绝。输出目录必须全新且不在baseline/source/data下，不改写旧metrics。
+提供可导入的纯张量融合函数及独立GPU评估CLI。后文开跑前补充将评估输出从三个扩为六个，其余原始三分支定义不变。CLI需source-root、baseline-dir、dataset、seed(仅1/2/3)、split(base/new)、data-root、output-dir、expected-source-sha256；固定epoch20和alpha0.5，不提供搜索或训练功能。允许额外prepare/validate-only模式检查元数据，不加载CLIP模型；无CUDA执行在写输出前拒绝。输出目录必须全新且不在baseline/source/data下，不改写旧metrics。
 
 从指定source-root的原run_pilot.build_commands及train.setup_cfg构造baseline对应split实际配置，使用原baseline trainer、原load_model完成严格重载；保留provenance/signature/seed/shot/code SHA检查，不临时伪造签名绕过。UCF101使用cpu-prep-20260910源码（model digest d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f）配历史本仓库baseline，DTD/Aircraft使用structure-20260910-v1（digest 9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba）。可用显式source-root/digest逐次新进程运行，避免Python模块缓存跨版本。不得修改或注入旧源码。
 
@@ -46,7 +46,7 @@ CLI互斥plan-only / prepare-only / execute / audit-only，--preparation-dir单�
 5. historical_dtd_kd1、historical_fgvc_aircraft_kd1，各历史3seed×Base/Novel×student/teacher/ensemble共18次独立重载到新输出目录，不能覆盖旧目录；与历史正确数/测试哈希/模型SHA核对。
 合计2次短训练/12短重载、8次正式训练(含2anchor)/84个完整模型正式重载(含12anchor)、18次融合独立评估；旧模型不修改。训练/评估普通命令总数124；阶段审计及最终审计另计。新正式处理模型为6个KD0，anchor不是额外统计种子，旧KD1仍用于配对。KD只改权重0/1，其他训练cfg完全相同。
 
-复用run_pilot.build_commands构造训练/普通评估，通过实际旧train.setup_cfg冻结每条完整cfg；重用历史模型eval时准确重定位--model-dir而非训练目录。prepare记录真实loader的train/val/test采样hash及计数/类别、模板sha和顺序、当前图像inventory、历史config/manifest/metrics/log/checkpoint及sidecar文件hash、操作脚本和源依赖sha、完整CLIPsha。不能只互相比较同轮cfg而漏过共同漂移。执行前后核对immutable输入，缓存split_fewshot属于允许的派生输出。
+复用run_pilot.build_commands构造训练/普通评估，通过实际旧train.setup_cfg冻结每条完整cfg；融合cfg也必须在各source的独立进程中调用Task1.build_source_configs得到真实完整cfg，避免同进程旧/新train模块缓存混用；重用历史模型eval时准确重定位--model-dir而非训练目录。prepare记录真实loader的train/val/test采样hash及计数/类别、模板sha和顺序、当前图像inventory、历史config/manifest/metrics/log/checkpoint及sidecar文件hash、操作脚本和源依赖sha、完整CLIPsha。不能只互相比较同轮cfg而漏过共同漂移。执行前后核对immutable输入，缓存split_fewshot属于允许的派生输出。
 
 状态原子写status.json，含stage/state/PID、每条命令开始结束码、已完成阶段；raw stdout/stderr独立保存；训练开始前保存protocol/data_preflight，未齐全不能passed。所有子进程设置PYTHONPATH使用各自源码、CPU线程4、CUBLAS_WORKSPACE_CONFIG=:4096:8，去掉TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD。无卡prepare线程1。所有新输出必须与source/data/baseline/历史model隔离；输入若缺失、错seed/错数据/重复条目/路径混用均拒绝。GPU要求仅在execute验证。
 

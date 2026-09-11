@@ -1,0 +1,55 @@
+{
+  "checked_unix": 1789096146.53653,
+  "scope": "DTD formal only; Aircraft is still running; not the final full-study backup",
+  "local_directory": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/textconsistency-crossdataset-study-20260911-55424/partial-dtd",
+  "archive_bytes": 37334517,
+  "archive_sha256": "dc415427cc2f74a9c133d729c13662cec31ffea99df1beed651a2ceb304ba1ea",
+  "all_9_checkpoint_hashes_match_sidecars_and_evaluation_records": true,
+  "checkpoints": [
+    {
+      "path": "formal/dtd/baseline/seed1/textconsistency/model.pth.tar-20",
+      "sha256": "b8954631a9fba87b1ffe68827067946c0acb8340b7de9530cfb73caea9762e13",
+      "bytes": 3609591
+    },
+    {
+      "path": "formal/dtd/baseline/seed2/textconsistency/model.pth.tar-20",
+      "sha256": "ede7a2d666a442fcf0fde727ab0e63bc2f17b10d80f58e73279f990c6c885e4a",
+      "bytes": 3609591
+    },
+    {
+      "path": "formal/dtd/baseline/seed3/textconsistency/model.pth.tar-20",
+      "sha256": "89d5d692654f616f6115f06bfdfb51b7049f4c0e9f51fd0f820487f99ea019ad",
+      "bytes": 3609591
+    },
+    {
+      "path": "formal/dtd/hierarchical_adapter/seed1/textconsistency/model.pth.tar-20",
+      "sha256": "32cd5221abfe2a2888f64937f161b92b6a735d62948c25e86bec3069e629da74",
+      "bytes": 9926553
+    },
+    {
+      "path": "formal/dtd/hierarchical_adapter/seed2/textconsistency/model.pth.tar-20",
+      "sha256": "c28753266b556eaf0f5d0bf0ee34d2f02194347520ea72ee821fcc11e5596f93",
+      "bytes": 9926553
+    },
+    {
+      "path": "formal/dtd/hierarchical_adapter/seed3/textconsistency/model.pth.tar-20",
+      "sha256": "b7d1d6f7cc5260a343a55c36710c4a43efd9ffd187bea994be320b2065d85d88",
+      "bytes": 9926553
+    },
+    {
+      "path": "formal/dtd/flat_dual_adapter/seed1/textconsistency/model.pth.tar-20",
+      "sha256": "ac20cba0e6af6bf495575f6fc8b1498e00ff00de78a78738078741df83abe4f6",
+      "bytes": 9926553
+    },
+    {
+      "path": "formal/dtd/flat_dual_adapter/seed2/textconsistency/model.pth.tar-20",
+      "sha256": "483d9085ff9caa72ae9a1aaeb3822014b342f98855d9b8344b8d92e70b93cd0e",
+      "bytes": 9926553
+    },
+    {
+      "path": "formal/dtd/flat_dual_adapter/seed3/textconsistency/model.pth.tar-20",
+      "sha256": "29ed46c2881bb4fc43af2f1aae2aa065df8537715ed5b427c665cf2b440619ea",
+      "bytes": 9926553
+    }
+  ]
+}

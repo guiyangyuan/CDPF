@@ -1,0 +1,329 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "student",
+      "base": 38.59543817527011,
+      "novel": 32.63347330533893,
+      "hm": 35.364943117049215,
+      "counts": {
+        "base": {
+          "correct": 643,
+          "total": 1666
+        },
+        "new": {
+          "correct": 544,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "description_mean",
+      "base": 30.4921968787515,
+      "novel": 40.611877624475106,
+      "hm": 34.83191017654167,
+      "counts": {
+        "base": {
+          "correct": 508,
+          "total": 1666
+        },
+        "new": {
+          "correct": 677,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "simple_fusion",
+      "base": 36.8547418967587,
+      "novel": 39.892021595680866,
+      "hm": 38.31328104913701,
+      "counts": {
+        "base": {
+          "correct": 614,
+          "total": 1666
+        },
+        "new": {
+          "correct": 665,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "description_instance",
+      "base": 30.972388955582232,
+      "novel": 42.23155368926215,
+      "hm": 35.73611091982632,
+      "counts": {
+        "base": {
+          "correct": 516,
+          "total": 1666
+        },
+        "new": {
+          "correct": 704,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "mean_probability_fusion",
+      "base": 37.454981992797116,
+      "novel": 40.31193761247751,
+      "hm": 38.83098122013557,
+      "counts": {
+        "base": {
+          "correct": 624,
+          "total": 1666
+        },
+        "new": {
+          "correct": 672,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "adk_probability_fusion",
+      "base": 37.15486194477791,
+      "novel": 40.971805638872226,
+      "hm": 38.97009380339034,
+      "counts": {
+        "base": {
+          "correct": 619,
+          "total": 1666
+        },
+        "new": {
+          "correct": 683,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "student",
+      "base": 37.09483793517407,
+      "novel": 29.394121175764848,
+      "hm": 32.79853304493904,
+      "counts": {
+        "base": {
+          "correct": 618,
+          "total": 1666
+        },
+        "new": {
+          "correct": 490,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "description_mean",
+      "base": 30.4921968787515,
+      "novel": 40.611877624475106,
+      "hm": 34.83191017654167,
+      "counts": {
+        "base": {
+          "correct": 508,
+          "total": 1666
+        },
+        "new": {
+          "correct": 677,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "simple_fusion",
+      "base": 37.15486194477791,
+      "novel": 39.112177564487105,
+      "hm": 38.1084035021871,
+      "counts": {
+        "base": {
+          "correct": 619,
+          "total": 1666
+        },
+        "new": {
+          "correct": 652,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "description_instance",
+      "base": 30.972388955582232,
+      "novel": 42.23155368926215,
+      "hm": 35.73611091982632,
+      "counts": {
+        "base": {
+          "correct": 516,
+          "total": 1666
+        },
+        "new": {
+          "correct": 704,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "mean_probability_fusion",
+      "base": 37.5750300120048,
+      "novel": 38.03239352129574,
+      "hm": 37.80232842775407,
+      "counts": {
+        "base": {
+          "correct": 626,
+          "total": 1666
+        },
+        "new": {
+          "correct": 634,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "adk_probability_fusion",
+      "base": 37.5750300120048,
+      "novel": 37.6124775044991,
+      "hm": 37.593744432801884,
+      "counts": {
+        "base": {
+          "correct": 626,
+          "total": 1666
+        },
+        "new": {
+          "correct": 627,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "student",
+      "base": 36.91476590636255,
+      "novel": 32.51349730053989,
+      "hm": 34.57462670698799,
+      "counts": {
+        "base": {
+          "correct": 615,
+          "total": 1666
+        },
+        "new": {
+          "correct": 542,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "description_mean",
+      "base": 30.4921968787515,
+      "novel": 40.611877624475106,
+      "hm": 34.83191017654167,
+      "counts": {
+        "base": {
+          "correct": 508,
+          "total": 1666
+        },
+        "new": {
+          "correct": 677,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "simple_fusion",
+      "base": 37.15486194477791,
+      "novel": 39.95200959808039,
+      "hm": 38.50270076663761,
+      "counts": {
+        "base": {
+          "correct": 619,
+          "total": 1666
+        },
+        "new": {
+          "correct": 666,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "description_instance",
+      "base": 30.972388955582232,
+      "novel": 42.23155368926215,
+      "hm": 35.73611091982632,
+      "counts": {
+        "base": {
+          "correct": 516,
+          "total": 1666
+        },
+        "new": {
+          "correct": 704,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "mean_probability_fusion",
+      "base": 37.39495798319328,
+      "novel": 40.131973605278944,
+      "hm": 38.71515190922835,
+      "counts": {
+        "base": {
+          "correct": 623,
+          "total": 1666
+        },
+        "new": {
+          "correct": 669,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "adk_probability_fusion",
+      "base": 37.5750300120048,
+      "novel": 39.95200959808039,
+      "hm": 38.72708069953156,
+      "counts": {
+        "base": {
+          "correct": 626,
+          "total": 1666
+        },
+        "new": {
+          "correct": 666,
+          "total": 1667
+        }
+      }
+    }
+  ]
+}

@@ -4,6 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from unittest.mock import patch
+from types import SimpleNamespace
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -41,12 +42,81 @@ class CrossDatasetPlanTests(unittest.TestCase):
             clip = Path(temp) / "clip"; clip.write_bytes(b"fixture")
             datasets = {key: {} for key in study.DATASETS}
             prepared = {"protocol": plan, "files_sha256": plan["files_sha256"], "datasets": datasets,
-                        "clip": {"path": str(clip), "sha256": study.sha256(clip)}}
+                        "clip": {"path": str(clip), "sha256": study.sha256(clip)},
+                        "operational_scripts_sha256": study.operational_hashes()}
             (prep / "preparation.json").write_text(json.dumps(prepared))
             with patch.object(study, "dataset_evidence", side_effect=lambda source, data, key: datasets[key]), \
                     patch("torch.cuda.is_available", return_value=False), self.assertRaisesRegex(RuntimeError, "CUDA"):
                 study.execute(plan, prep)
             self.assertFalse(output.exists())
+
+    def test_gpu_guard_rejects_active_low_memory_process_and_accepts_idle(self):
+        study = module("cross_dataset_study")
+        cuda = SimpleNamespace(is_available=lambda: True, device_count=lambda: 1,
+                               mem_get_info=lambda index: (99, 100))
+        torch = SimpleNamespace(cuda=cuda)
+        active = lambda *a, **k: SimpleNamespace(returncode=0, stdout="GPU-uuid, 123\n")
+        with self.assertRaisesRegex(RuntimeError, "Active GPU"):
+            study.assert_gpus_idle(torch, active)
+        idle = lambda *a, **k: SimpleNamespace(returncode=0, stdout="")
+        study.assert_gpus_idle(torch, idle)
+
+    def test_external_source_and_operational_dependencies_are_frozen(self):
+        audit = module("cross_dataset_audit")
+        with tempfile.TemporaryDirectory() as temp:
+            source = Path(temp); dependency = source / "scripts/repro/structure_spec.py"
+            dependency.parent.mkdir(parents=True); dependency.write_text("fixed")
+            here = ROOT / "scripts/repro"
+            prepared = {"files_sha256": {"scripts/repro/structure_spec.py": audit.digest(dependency)},
+                        "operational_scripts_sha256": {
+                            "cross_dataset_study.py": audit.digest(here / "cross_dataset_study.py"),
+                            "cross_dataset_audit.py": audit.digest(here / "cross_dataset_audit.py")}}
+            audit.verify_frozen(source, prepared)
+            dependency.write_text("changed")
+            with self.assertRaisesRegex(ValueError, "dependency changed"):
+                audit.verify_frozen(source, prepared)
+
+    def test_stage_protocol_preflight_exist_before_first_raw_command_and_audit_logs_named(self):
+        study = module("cross_dataset_study")
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp); stage_root = root / "smoke/dtd"
+            stage = {"name": "smoke_dtd", "kind": "smoke", "dataset": "dtd", "seeds": [1],
+                     "epochs": 1, "commands": [["python", "train.py"]]}
+            plan = {"source_root": str(ROOT), "fixed_settings": study.FIXED,
+                    "view_orders": {v: {"policy": "contiguous", "seed": 0} for v in study.VARIANTS},
+                    "stages": [stage]}
+            prepared = {"model_source_sha256": "model", "datasets": {"dtd": {"loader": "fixed"}}}
+            status = {"state": "running", "commands": [], "completed": []}
+            calls = []
+            def fake_run(command, stdout, stderr, **kwargs):
+                self.assertTrue((stage_root / "protocol.json").is_file())
+                self.assertTrue((stage_root / "data_preflight.json").is_file())
+                calls.append((str(stdout), str(stderr)))
+                return SimpleNamespace(returncode=0)
+            with patch.object(study, "run_logged", side_effect=fake_run):
+                study.execute_stages(plan, prepared, root / "prep", root, status)
+            self.assertTrue(any(path.endswith("smoke_dtd/audit.stdout.log") for path, _ in calls))
+            self.assertTrue(any(path.endswith("final_audit/audit.stdout.log") for path, _ in calls))
+
+    def test_launch_exception_records_failed_status(self):
+        study = module("cross_dataset_study")
+        with tempfile.TemporaryDirectory() as temp:
+            output = Path(temp) / "study"; prep = Path(temp) / "prep"; prep.mkdir()
+            plan = study.build_plan(ROOT, "/data", output, "/python")
+            clip = Path(temp) / "clip"; clip.write_bytes(b"fixture")
+            datasets = {key: {} for key in study.DATASETS}
+            prepared = {"protocol": plan, "files_sha256": plan["files_sha256"], "datasets": datasets,
+                        "clip": {"path": str(clip), "sha256": study.sha256(clip)},
+                        "operational_scripts_sha256": study.operational_hashes()}
+            (prep / "preparation.json").write_text(json.dumps(prepared))
+            with patch.object(study, "dataset_evidence", side_effect=lambda source, data, key: datasets[key]), \
+                    patch.object(study, "assert_gpus_idle"), \
+                    patch.object(study, "execute_stages", side_effect=OSError("launch failed")), \
+                    self.assertRaisesRegex(OSError, "launch failed"):
+                study.execute(plan, prep)
+            status = json.loads((output / "status.json").read_text())
+            self.assertEqual(status["state"], "failed")
+            self.assertEqual(status["error"]["type"], "OSError")
 
 
 class CrossDatasetAuditTests(unittest.TestCase):
@@ -115,6 +185,24 @@ class CrossDatasetAuditTests(unittest.TestCase):
         self.assertEqual(audit.family_config(base), audit.family_config(full))
         full["OPTIM"]["LR"] = .02
         self.assertNotEqual(audit.family_config(base), audit.family_config(full))
+
+    def test_read_only_audit_rejects_order_protocol_mutation(self):
+        audit = module("cross_dataset_audit")
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp); target = root / "smoke/dtd"; target.mkdir(parents=True)
+            stage = {"name": "smoke_dtd", "seeds": [1], "epochs": 1}
+            prepared = {"model_source_sha256": "model", "protocol": {"stages": [stage],
+                        "fixed_settings": {}, "view_orders": {v: {"policy": "contiguous", "seed": 0}
+                                                               for v in audit.VARIANTS}},
+                        "datasets": {"dtd": {}}}
+            scoped = {"dataset": "DescribableTextures", "seeds": [1], "epochs": 1,
+                      "variants": list(audit.VARIANTS), "shots": 16, "kd_weight": 1.0,
+                      "code_sha256": "model", "fixed_settings": {},
+                      "view_orders": json.loads(json.dumps(prepared["protocol"]["view_orders"]))}
+            scoped["view_orders"]["hierarchical_adapter"] = {"policy": "shuffle", "seed": 9}
+            (target / "protocol.json").write_text(json.dumps(scoped)); (target / "data_preflight.json").write_text("{}")
+            with patch.object(audit, "load"), self.assertRaisesRegex(ValueError, "protocol identity"):
+                audit.audit_dataset(ROOT, root, prepared, "smoke", "dtd")
 
 
 if __name__ == "__main__": unittest.main()

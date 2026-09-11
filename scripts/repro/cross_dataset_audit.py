@@ -26,6 +26,18 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def verify_frozen(source_root, prepared):
+    source_root = Path(source_root)
+    for relative, expected in prepared["files_sha256"].items():
+        path = source_root / relative
+        if not path.is_file() or digest(path) != expected:
+            raise ValueError(f"Prepared source dependency changed: {relative}")
+    here = Path(__file__).resolve()
+    operational = {here.name: digest(here), "cross_dataset_study.py": digest(here.with_name("cross_dataset_study.py"))}
+    if operational != prepared["operational_scripts_sha256"]:
+        raise ValueError("Prepared operational scripts changed before audit")
+
+
 def comparable(config):
     value = copy.deepcopy(config)
     for field in ("OUTPUT_DIR", "MODEL_DIR", "RESUME", "EVAL_ONLY", "LOAD_EPOCH", "SEED"):
@@ -92,15 +104,16 @@ def audit_dataset(source_root, root, prepared, kind, dataset):
     source_root, root = Path(source_root), Path(root)
     summarize = load(source_root / "scripts/repro/summarize.py", f"cross_summary_{kind}_{dataset}")
     protocol_path = root / kind / dataset / "protocol.json"
-    # The runner writes the global protocol at study root; make a scoped protocol only for collect in memory/on disk.
     stage = next(s for s in prepared["protocol"]["stages"] if s["name"] == f"{kind}_{dataset}")
     scoped = {"dataset": DATASET_NAMES[dataset], "seeds": stage["seeds"], "epochs": stage["epochs"],
               "variants": list(VARIANTS), "shots": 16, "kd_weight": 1.0,
-              "code_sha256": prepared["model_source_sha256"], "fixed_settings": prepared["protocol"]["fixed_settings"]}
-    protocol_path.parent.mkdir(parents=True, exist_ok=True)
-    if protocol_path.exists() and json.loads(protocol_path.read_text()) != scoped:
+              "code_sha256": prepared["model_source_sha256"], "fixed_settings": prepared["protocol"]["fixed_settings"],
+              "view_orders": prepared["protocol"]["view_orders"]}
+    if not protocol_path.is_file() or json.loads(protocol_path.read_text()) != scoped:
         raise ValueError("Dataset protocol identity changed")
-    protocol_path.write_text(json.dumps(scoped, indent=2))
+    preflight_path = protocol_path.parent / "data_preflight.json"
+    if not preflight_path.is_file() or json.loads(preflight_path.read_text()) != prepared["datasets"][dataset]:
+        raise ValueError("Dataset preflight identity is missing or changed")
     summary_rows = summarize.collect(protocol_path.parent)
     if len(summary_rows) != 7:
         raise ValueError("Expected exactly seven variant/branch summary rows")
@@ -168,8 +181,8 @@ def final_analysis(rows, summaries):
                                    ("hierarchical_adapter", "baseline", "method_minus_baseline")):
             values = []
             for seed in (1, 2, 3):
-                values.append({metric: indexed[left, seed][metric] - indexed[right, seed][metric]
-                               for metric in ("base", "novel", "hm")})
+                values.append({"seed": seed, **{metric: indexed[left, seed][metric] - indexed[right, seed][metric]
+                                                for metric in ("base", "novel", "hm")}})
             comparisons.append({"dataset": dataset, "comparison": label, "per_seed": values,
                                 "mean": {m: mean(v[m] for v in values) for m in ("base", "novel", "hm")},
                                 "sample_sd": {m: stdev(v[m] for v in values) for m in ("base", "novel", "hm")}})
@@ -183,6 +196,7 @@ def main(argv=None):
     parser.add_argument("--final", action="store_true"); args = parser.parse_args(argv)
     if bool(args.stage) == bool(args.final): parser.error("choose exactly one of --stage or --final")
     prepared = json.loads((args.preparation_dir / "preparation.json").read_text())
+    verify_frozen(args.source_root, prepared)
     if args.stage:
         kind, dataset = args.stage.split("_", 1); rows, summaries = audit_dataset(args.source_root, args.study_root, prepared, kind, dataset)
         output = args.study_root / "audit" / f"{args.stage}.json"; output.parent.mkdir(parents=True, exist_ok=True)

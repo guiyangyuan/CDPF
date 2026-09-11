@@ -1,0 +1,16 @@
+{
+  "python": "3.12.14",
+  "torch": "2.8.0",
+  "torchvision": "0.23.0",
+  "numpy": "2.2.6",
+  "pyyaml": "6.0.3",
+  "cuda_available": false,
+  "mode": "CPU metadata, tensors, image transforms and tests only",
+  "baseline_tests": {
+    "count": 109,
+    "passed": true,
+    "seconds": 5.207,
+    "source": "initial command output this turn",
+    "command": "OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 PYTHONPATH=.:Dassl.pytorch ../../tc-venv/bin/python -m unittest discover -s tests/repro -t . -q"
+  }
+}

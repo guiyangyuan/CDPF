@@ -26,3 +26,7 @@ Implement this cohesive local toolset:
 Tests should exercise real functions with temporary files and tiny real torch modules/images. Mock only unavailable CLIP/CUDA boundaries, not assertions on mock existence. At least one end-to-end synthetic artifact->analysis->nine-case aggregation verifies outputs/guards and failure cases independently of implementation formulas; negative cases include permuted classes/samples, omitted role parameters, hash mismatch and already-existing output. Tests must show optimizer creation/backward would fail if invoked by export. Small tests don't establish actual CUDA parity; label that pending in report.
 
 Report full implementation, tests/red-green evidence, commit SHA, any unresolved limitations to this plan's task-1-report.md. Return brief status/commit/test summary only. Ask controller for concrete missing input rather than guessing protocol.
+
+## Execution status
+
+Task 1 implementation and one fix round completed on `1406ca3`; task re-review approved all four fixes. Focused17/full127 tests and all9 real CPU preparations passed, plus explicit no-CUDA export rejection and immutable input checks. See [preparation report](../../reports/preparation/validation-probe-20260911/README.md). Final whole-branch review pending; real CUDA export remains a separate unexecuted phase. No server access, new training, measured method result, or paper change.

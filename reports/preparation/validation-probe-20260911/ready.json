@@ -1,0 +1,35 @@
+{
+  "revision": "1406ca31d572730d23456378231f7fb4d044b725",
+  "validation_cases": 9,
+  "model_count": 27,
+  "val_records": 1500,
+  "unique_val_images": 1280,
+  "teacher_exact_equal_pairs": 9,
+  "prepare_total_seconds": 37.250019209,
+  "source_data_and_checkpoint_inputs_unchanged": true,
+  "cuda_unavailable_guard_passed": true,
+  "limitations": [
+    "No actual CUDA model construction/forward parity or prediction run",
+    "Base validation is known-class screening, not Novel/HM confirmation",
+    "Image immutability snapshot uses path/size/mtime, not all-image content hashes"
+  ],
+  "state": "local_cpu_checks_passed_final_review_pending",
+  "server_accessed": false,
+  "gpu_export_run": false,
+  "real_cuda_forward_verified": false,
+  "new_training_runs": 0,
+  "new_method_results": false,
+  "full_tests": 127,
+  "focused_tests": 17,
+  "tools_sha256": {
+    "scripts/repro/validation_analysis.py": "37bb87ea4f5d5c8ab5f383f6f016cea7faa980829abcea032480c2d343b1384f",
+    "scripts/repro/validation_probe.py": "472665cf60bb0efdbf13d99e17ebf3f6f63b09a2180e6c2ce29310d5f87239ee"
+  },
+  "primary_candidate": "S1+M_logits",
+  "review": {
+    "task": "review/task-1-fix1-review.md",
+    "whole_branch": "pending"
+  },
+  "evidence_receipt": "evidence/1406ca3-evidence-receipt.json",
+  "next_step": "Deploy immutable inputs and tools to no-GPU server, rerun prepare at destination; then user-enabled GPU inference with existing checkpoints"
+}

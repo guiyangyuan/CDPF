@@ -1,0 +1,107 @@
+{
+  "state": "historical_local_sampling_cache_matches_model_inventory",
+  "cases": [
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "cache_sha256": "b999e69daf2639c2fef42ebbce7d19ceafb632f5dd3557ce64f90888b9404fd6",
+      "train_count": 816,
+      "val_count": 204,
+      "base_class_count": 51,
+      "train_sha256": "7c98facec218325a2090b609092d8f7b0a131a3b1198575e2fddd5795b71cec2",
+      "val_sha256": "768126b3e8ec96ff6142c2a18ca3da9bbc053f3238d686d13f52d643c795a153",
+      "train_val_paths_disjoint": true
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "cache_sha256": "8aef7dab5aa6b325ce717e8e1772f2c7e8b1501d600ea661c026a6f36db7f385",
+      "train_count": 816,
+      "val_count": 204,
+      "base_class_count": 51,
+      "train_sha256": "103b1bfa5552937df705f16c011a9288bd23c1ea9badfd4a6d6d2e1fffac38ed",
+      "val_sha256": "1f84281d46c8fc7cfbd0718b376493fd10cbe6c8534195b2a4fb8a94fb48625d",
+      "train_val_paths_disjoint": true
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "cache_sha256": "2a58bf57dcaff789d8bf0f9688a9ade1c298577ae66266705d6f1025068f0a2c",
+      "train_count": 816,
+      "val_count": 204,
+      "base_class_count": 51,
+      "train_sha256": "498ed441f612cf736682047f07a2346266fdc3f6d32cc88afe612349574f9a0e",
+      "val_sha256": "0d9465b6ba9cd2927cf4fa81df4f5648fc4111ce9e3f489fdf02c30b99649334",
+      "train_val_paths_disjoint": true
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "cache_sha256": "5961b12c571784ade307f8a3f2551ad57aebcf2d0cf78df42451ae9f8122bfe5",
+      "train_count": 384,
+      "val_count": 96,
+      "base_class_count": 24,
+      "train_sha256": "53f6e0660e3ef7138005025ca17a8cb1a0c279d6f55ad3a193150b3f13a1ff49",
+      "val_sha256": "28a600bf7140b5155e369de0eeaff9bf31e809f034f671e25568bed82fe54e4b",
+      "train_val_paths_disjoint": true
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "cache_sha256": "99ba521d81424bffb47743cb030aa1995c28f81b0e9e6c6ddb0d72e2964772dc",
+      "train_count": 384,
+      "val_count": 96,
+      "base_class_count": 24,
+      "train_sha256": "ee8a244383c70686097466868ce9a4579a5dd65d4ed70c248f731a0ffb0a090d",
+      "val_sha256": "8c5420e361f8f88268aa1edd2c7a027fdf1be501f75cb901e62f53e3d683cb2c",
+      "train_val_paths_disjoint": true
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "cache_sha256": "4ae2995bb7d11e6172b179a7a7ff730cc28699e40308b321e1c28e92cc5b8052",
+      "train_count": 384,
+      "val_count": 96,
+      "base_class_count": 24,
+      "train_sha256": "9b76b91c9aa1e736d225f9ee2c6c838649e3f2e1ebd5022b7d530028493a83da",
+      "val_sha256": "cf27026a4346a1da5878f581e8b104ba20b9900ccee3e612af7b015412f97492",
+      "train_val_paths_disjoint": true
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "cache_sha256": "9e69b8f5329981a7aa4633a7a17be816924554dc935f1182cf0c82e9f3e62686",
+      "train_count": 800,
+      "val_count": 200,
+      "base_class_count": 50,
+      "train_sha256": "ae5851085ef5e74b7cb612cda7454fde300601ef14ad21b707bbbfbbd3c85e9a",
+      "val_sha256": "7ac44ab40ea24086902991743d3b51720e467204034efd2b5a98352416fd02bb",
+      "train_val_paths_disjoint": true
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "cache_sha256": "58c1878c3fbe1598a74b99470b44a69d175ca8a84457956512d7b1afb7659280",
+      "train_count": 800,
+      "val_count": 200,
+      "base_class_count": 50,
+      "train_sha256": "ae05002965cddf63fa83c5537d249e45f968af7683fa8b9b87b6dd048739585e",
+      "val_sha256": "b0ca0002cb5bedba08cd952a6d54ce585ff35c8402ee0d5c3c5c5ec870a885dd",
+      "train_val_paths_disjoint": true
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "cache_sha256": "6daa9452050f37075b4f8ea956f2679fde91ebc3199940c7791ca5b4b34264f0",
+      "train_count": 800,
+      "val_count": 200,
+      "base_class_count": 50,
+      "train_sha256": "aa24df6792e0120acda0d6b5ed48e1e5c500586e1da207ac4fb095fd18a5ab8a",
+      "val_sha256": "876b21e83aaddab61013d7dc66102109a761273127135f712fcb7907bd811115",
+      "train_val_paths_disjoint": true
+    }
+  ],
+  "val_records_across_seeds": 1500,
+  "unique_val_images": 1280,
+  "scope": "Independent check of previously saved local sampling caches, not the new exporter; no CLIP construction or prediction; actual new loader image decoding remains pending."
+}

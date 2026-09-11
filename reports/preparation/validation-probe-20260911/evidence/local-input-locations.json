@@ -1,0 +1,25 @@
+{
+  "state": "sources_and_local_data_located_not_prepared",
+  "source_roots": {
+    "ucf101": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/textConsistency-repro",
+    "dtd": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/validation-probe-20260911/sources/structure",
+    "fgvc_aircraft": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/validation-probe-20260911/sources/structure"
+  },
+  "source_hashes": {
+    "ucf101": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+    "dtd": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+    "fgvc_aircraft": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
+  },
+  "data_roots": {
+    "ucf101": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/datasets-prepared",
+    "dtd": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/crossdataset-20260910/data",
+    "fgvc_aircraft": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/crossdataset-20260910/data"
+  },
+  "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+  "expected_image_counts": {
+    "ucf101": 13320,
+    "dtd": 5640,
+    "fgvc_aircraft": 10000
+  },
+  "note": "No new data download, training or source change. New source copy has model digest identical to original; CLIP file is an immutable local symlink. Actual nine-case loader checks pending."
+}

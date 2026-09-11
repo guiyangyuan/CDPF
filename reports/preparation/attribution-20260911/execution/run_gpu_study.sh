@@ -3,8 +3,8 @@
 # Existing or failed studies are preserved; no automatic retry or overwrite.
 set -euo pipefail
 TC_ROOT=/root/autodl-tmp/textconsistency
-TC_OPS="$TC_ROOT/releases/attribution-ops-20260911-778d9d0"
-TC_PREP="$TC_ROOT/setup-logs/attribution-prep-20260911-v1/prepared-778d9d0"
+TC_OPS="$TC_ROOT/releases/attribution-ops-20260911-43e537c"
+TC_PREP="$TC_ROOT/setup-logs/attribution-prep-20260911-v1/prepared-43e537c"
 export OMP_NUM_THREADS=4 MKL_NUM_THREADS=4 OPENBLAS_NUM_THREADS=4 NUMEXPR_NUM_THREADS=4
 export CUBLAS_WORKSPACE_CONFIG=:4096:8 PYTHONDONTWRITEBYTECODE=1
 unset TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD

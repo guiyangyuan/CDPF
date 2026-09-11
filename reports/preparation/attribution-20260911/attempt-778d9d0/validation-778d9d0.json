@@ -1,0 +1,65 @@
+[
+  {
+    "name": "plan-778d9d0",
+    "command": [
+      "/root/autodl-tmp/textconsistency/.venv/bin/python",
+      "/root/autodl-tmp/textconsistency/releases/attribution-ops-20260911-778d9d0/scripts/repro/attribution_study.py",
+      "--source-root",
+      "/root/autodl-tmp/textconsistency/releases/structure-20260910-v1",
+      "--data-root",
+      "/root/autodl-tmp/textconsistency/data",
+      "--output-root",
+      "/root/autodl-tmp/textconsistency/runs/attribution-study-20260911-v1",
+      "--input-receipt",
+      "/root/autodl-tmp/textconsistency/reused-inputs/attribution-20260911/input-receipt.json",
+      "--preparation-dir",
+      "/root/autodl-tmp/textconsistency/setup-logs/attribution-prep-20260911-v1/prepared-778d9d0",
+      "--clip-path",
+      "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+      "--plan-only"
+    ],
+    "exit_code": 0,
+    "seconds": 0.48720693588256836,
+    "log": "/root/autodl-tmp/textconsistency/setup-logs/attribution-prep-20260911-v1/plan-778d9d0.log"
+  },
+  {
+    "name": "tests-778d9d0",
+    "command": [
+      "/root/autodl-tmp/textconsistency/.venv/bin/python",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests/repro",
+      "-t",
+      ".",
+      "-q"
+    ],
+    "exit_code": 0,
+    "seconds": 27.68176579475403,
+    "log": "/root/autodl-tmp/textconsistency/setup-logs/attribution-prep-20260911-v1/tests-778d9d0.log"
+  },
+  {
+    "name": "prepare-778d9d0",
+    "command": [
+      "/root/autodl-tmp/textconsistency/.venv/bin/python",
+      "/root/autodl-tmp/textconsistency/releases/attribution-ops-20260911-778d9d0/scripts/repro/attribution_study.py",
+      "--source-root",
+      "/root/autodl-tmp/textconsistency/releases/structure-20260910-v1",
+      "--data-root",
+      "/root/autodl-tmp/textconsistency/data",
+      "--output-root",
+      "/root/autodl-tmp/textconsistency/runs/attribution-study-20260911-v1",
+      "--input-receipt",
+      "/root/autodl-tmp/textconsistency/reused-inputs/attribution-20260911/input-receipt.json",
+      "--preparation-dir",
+      "/root/autodl-tmp/textconsistency/setup-logs/attribution-prep-20260911-v1/prepared-778d9d0",
+      "--clip-path",
+      "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+      "--prepare-only"
+    ],
+    "exit_code": 0,
+    "seconds": 160.39889430999756,
+    "log": "/root/autodl-tmp/textconsistency/setup-logs/attribution-prep-20260911-v1/prepare-778d9d0.log"
+  }
+]

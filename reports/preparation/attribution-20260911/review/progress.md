@@ -37,3 +37,10 @@ Task 2: controller realCPUprepare7e02cb1 failed after118s on Aircraft historical
 
 Task 2: fix round1/5 (2 addressed,0 Important open — source-owned-only paths and exactCPUtoken dedup; commits7e02cb1..778d9d0); focused23passed, 36actualhistoricalmetrics count/order checks pass; scoped review approved.
 Task 2: complete (commits92b01a1..778d9d0, taskreview clean; 2minor deferred tofinaltriage). Realserverprepare778d9d0 running; Task3 still inprogress.
+
+Controller: real serverprepared778d9d0 PASSED160.399s; serverfull107passed15.880s; completepreparation12366835bytes SHAaf70fc356f979d708f39323890b20d168664b834a1b1575ffea9af80db327f18 copiedlocal andgzipmetadataarchivedreports/attempt-778d9d0. Formalstudyabsent.
+Finalreview1c0144a: ReadyYes, noCritical/Important, twoMinorcompatibilityedgesconfirmednonblockingactualreceipt. ONEfinalfixwave attribution_queue dispatched to alignaccuracytolerancewhilecountsexact and rejectnoncanonicalsourcealiases; no scientific/protocolchange. Willscopedrereview andfreshpreparebecauseoperationalhashchanges.
+
+Finalfixwave43e537c: bothMinoraddressed; focused25passed, final-rereviewapproved/no newbreakage. No remainingreviewfindings. Finalrelease43e537c deployed; finalCPUpreparation running becauseoperationSHAchanged. NoGPUrun.
+
+Task 3: complete — final release43e537c, realCPUpreparepassed; localmergedtree/serverfull109tests passed; actualnoCUDAexecutionrejectswithoutstudycreation; launcher/readiness/completecompressedmetadata saved. No newGPUexperiment. Final review and scoped fix review clean; no remaining findings. Git synchronization follows under existing user authorization.

@@ -1,17 +1,22 @@
-# 描述融合与KD贡献验证：准备记录
+# 描述融合与KD贡献验证：无卡准备完成
 
-2026-09-11。用户授权在前一轮评估后开始下一步；本批服务器bjb1:55424实际为无卡模式，cgroup内存上限2,147,483,648字节。本文件当前记录已验证输入，不代表新训练或评估已完成。
+2026-09-11。**当前只完成环境、输入、脚本及实验协议准备，尚未运行本批GPU训练或评估，没有新涨点结论。** 服务器实际为无卡模式，cgroup内存2GB；GPU开关由用户操作。
 
-- [预先固定的实验计划](../../../docs/plans/2026-09-11-attribution.md)：复用CoOp做描述均值融合，补DTD/Aircraft的KD0，核对两次KD1重现，再做明确标注的ADK公式受控适配。没有Novel调参或种子选择。接近方法的作者发布证据和公式适配边界见[核对记录](closest-methods.md)。
-- [模型输入收据](input-receipt.json)：九个CoOp基线、六个DTD/Aircraft历史KD1、三个UCF101完整方法参考均已核对实际checkpoint SHA和sidecar。
-- [UCF101恢复收据](ucf101-baselines-receipt.json)：三个历史基线从本机完整备份恢复到服务器全新目录`reused-inputs/attribution-20260911/ucf101/baseline`，原checkpoint没有修改。恢复压缩包1,442,120字节，SHA256 `a18262644ab7970d41e8ce22f2b2ccd35e11ca8f9dedad1305dd218664b0f9f5`。权重不进入Git。
-- [真实数据预检](input-preflight.json)：UCF101、DTD、Aircraft固定三种子loader、描述覆盖和样本检查通过；记录原图路径/大小/mtime清单哈希，未逐图做内容SHA。
-- [跨机器模型一致性](local-backup-correspondence.json)：服务器全部18个参考模型的实际SHA与本机已验证完整备份的模型字节一致。
-- [历史划分一致性](historical-sample-check.json)：九个基线的18组Base/Novel测试哈希与当前真实loader一致。
-- 本地新worktree基线59项测试通过。首次测试调用少了`-t .`导致相对导入错误，修正调用后通过，未改测试或源码来消除错误。
+- [就绪收据](final/ready.json)：最终操作代码43e537c，真实准备通过；本机整合后的代码与服务器分别109项测试通过。无CUDA时启动器明确拒绝，正式study未创建。
+- [固定实验计划](../../../docs/plans/2026-09-11-attribution.md)：11阶段、124条普通实验命令，阶段审计及最终审计另计。包括2次短训练、2次历史KD1重现训练、6次正式KD0训练、18次融合评估，所有种子/分支保留，不用Novel选参数或结果。
+- [输入收据](input-receipt.json)：9个CoOp基线、6个DTD/Aircraft历史KD1、3个UCF完整方法参考；实际18个模型均与[本机完整备份](local-backup-correspondence.json)逐个SHA一致。
+- [数据预检](input-preflight.json)和[历史样本核对](historical-sample-check.json)：UCF101/DTD/Aircraft三个seed的真实loader、类别、样本和描述覆盖已核对。记录原图路径/大小/mtime清单，不声称逐图内容SHA。
+- 最终完整配置/依赖/历史文件/CLIP/模板/分词词表/有效描述顺序均冻结。原训练源码、模型和数据文件没有修改。
+- [整体审查](review/final-review.md)及[最终复审](review/final-rereview.md)：所有问题已修复，没有剩余审查项。首次真实准备失败由Aircraft分词后重复描述引起，已按原encoder精确修正并保留[失败记录](attempt-7e02cb1/validation-7e02cb1.json)。中间版本通过的准备也保留在attempt-778d9d0。
 
-GPU开关由用户操作。正式新输出计划为`/root/autodl-tmp/textconsistency/runs/attribution-study-20260911-v1`，当前未创建；准备目录为`setup-logs/attribution-prep-20260911-v1`。融合/ADK评估入口已实现，21项新测试与59项既有测试通过，旧UCF seed1的Base/Novel元数据实际验证通过；种子域限制修复后25项focused通过，独立任务审查和复审已通过，见[审查记录](review/task-1-rereview.md)。KD固定队列正在实现，仍待审查，尚未形成可执行就绪结论。所有旧批次结果和备份保持可用。
+最终服务器入口：`connect.bjb1.seetacloud.com:55424`。代码目录`/root/autodl-tmp/textconsistency/releases/attribution-ops-20260911-43e537c`；准备目录`/root/autodl-tmp/textconsistency/setup-logs/attribution-prep-20260911-v1/prepared-43e537c`。
 
-已审查的独立评估脚本92b01a1已部署到准备目录，脚本SHA `e964e035e39844d566a39924366d0322a5bf10c669f343403de41db7984f3e56`。服务器按两个源码版本分进程验证，UCF101六组和DTD/Aircraft十二组全部通过；[UCF记录](fusion-metadata-ucf101.json)、[跨数据集记录](fusion-metadata-crossdataset.json)、[部署包收据](fusion-evaluator-package.json)。均为元数据检查，未加载完整CLIP、未做新GPU评估、未创建正式study。
+开卡后使用[启动脚本](execution/run_gpu_study.sh)：
+```bash
+bash /root/autodl-tmp/textconsistency/setup-logs/attribution-prep-20260911-v1/run_gpu_study.sh
+```
+正式输出固定为`/root/autodl-tmp/textconsistency/runs/attribution-study-20260911-v1`。开跑前再次确认GPU空闲和输入哈希；发现已有目录、失败状态或正在运行的队列时，先查状态，禁止覆盖/重复启动。两次历史重现检查必须精确匹配正确数，才能继续正式实验；失败即停止调查。
 
-固定124条队列与独立审计已实现（Task2 commit7e02cb1），本机/服务器均104项测试通过。首轮真实CPU准备在历史Aircraft Novel描述计数核对处停止，未创建正式study或准备完成证据；失败计划、日志和部署收据见[首轮记录](attempt-7e02cb1/validation-7e02cb1.json)。原因是准备脚本缺少原encoder的分词去重，修复778d9d0完全沿用原语义并冻结分词词表，同时修复source路径替换范围。23项focused及36份真实历史指标的有效描述计数/完整顺序核对通过，见[复审](review/task-2-rereview.md)。778d9d0已独立部署，新的真实CPU准备正在执行；完整分支审查和最终ready收据仍待完成。
+完整准备证据以[preparation.json.gz](final/preparation.json.gz)和[protocol.json.gz](final/protocol.json.gz)保存在Git，分别附解压后及压缩包SHA收据；本机与服务器同时保留原始JSON。这里没有数据集或模型权重，模型完整备份位置见PROJECT_STATUS及历史实验报告。
+
+本轮比较包含简单logit融合、概率均值融合以及ADK公式受控适配。作者发布证据、公式和边界见[接近方法核对](closest-methods.md)。ADK作者仓库目前未公开可用实现，本轮不能称官方代码复现或论文表格指标复现。公式/温度解释如有误，需修正并重评该对照；UCF旧基线仅接受已证明有效KD为0的一项历史声明差异，该兼容性如不成立需重跑匹配基线。三项决策及代价完整保存在[工作记录](review/progress.md)。

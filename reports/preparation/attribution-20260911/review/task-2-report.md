@@ -173,3 +173,31 @@ PASS: 36 immutable local historical metrics match CPU token-effective counts and
 ```
 
 Only the focused covering suite was run in this fix round; the broader repro suite was not repeated. Controller should deploy a new operational release and create a **fresh preparation directory**, since both the operation-script hash and the preparation evidence schema changed. This worker did not access the server or run GPU work.
+
+## Final consolidated fix wave: both remaining Minor findings
+
+Status: DONE. Addressed both remaining findings from `final-review.md`, with no additional scope.
+
+- Fusion auditing now keeps exact historical `correct`/`total` and exact receipt accuracy identity, while checking both reloaded-student and historical accuracy against those counts using the existing `accuracy_counts` absolute tolerance of `5e-4`. It no longer requires the recomputed student float to have the same representation as a rounded historical float. Test: historical `66.667` and count-derived `200 / 3` pass for exactly `2 / 3`; wrong correct/total, a changed receipt value (even if within numeric tolerance), non-finite accuracy and accuracy outside tolerance still fail.
+- Receipt validation now rejects a source-root string unless it exactly equals its canonical absolute resolved spelling. This handles `/./`, trailing spelling differences and symlink aliases before raw source strings can become mismatched dictionary keys. It preserves the immutable original receipt instead of rewriting it. Tests cover both `/./` and a real temporary symlink, canonical acceptance, and unchanged receipt contents after rejection.
+- The supplied canonical receipt and exact historical scores are unaffected. No scientific inputs, tuning settings, stage counts or GPU protocol changed.
+
+Exact focused verification:
+
+```text
+PYTHONPATH=.:Dassl.pytorch /Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/tc-venv/bin/python -m unittest tests.repro.test_attribution -q
+----------------------------------------------------------------------
+Ran 25 tests in 5.683s
+
+OK
+```
+
+Exact syntax/whitespace verification:
+
+```text
+PYTHONPATH=.:Dassl.pytorch /Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/tc-venv/bin/python -m py_compile scripts/repro/attribution_study.py scripts/repro/attribution_audit.py tests/repro/test_attribution.py
+git diff --check
+# no output, exit 0
+```
+
+Only the focused suite was run, as requested. No full-suite, server or GPU execution was performed by this worker. The controller will perform the final full-suite, deployment and fresh preparation after scoped review; preparation hashes must be refreshed for the changed operation files.

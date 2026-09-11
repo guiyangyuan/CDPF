@@ -1,0 +1,32 @@
+{
+  "state": "cpu_preparation_complete",
+  "operational_commit": "43e537c",
+  "release": "/root/autodl-tmp/textconsistency/releases/attribution-ops-20260911-43e537c",
+  "preparation_dir": "/root/autodl-tmp/textconsistency/setup-logs/attribution-prep-20260911-v1/prepared-43e537c",
+  "preparation_sha256": "b469afe6c6134dd3121a48a293230212a57ae2af6bfb6299668b12ae7b839f58",
+  "preparation_bytes": 12366835,
+  "protocol_sha256": "b7b67a8c91edaa13bdb0cf3b6dc44f682304ea6398db826a993c3bbb248fbaa5",
+  "launcher": "/root/autodl-tmp/textconsistency/setup-logs/attribution-prep-20260911-v1/run_gpu_study.sh",
+  "launcher_sha256": "0bb8c1974e4d91d6d5d231ae425578d501d22d544b2eb6c23ae5638ba69ac4d3",
+  "study_root": "/root/autodl-tmp/textconsistency/runs/attribution-study-20260911-v1",
+  "study_exists": false,
+  "raw_command_count": 124,
+  "stage_count": 11,
+  "frozen_dependency_files": 418,
+  "frozen_historical_files": 415,
+  "reference_models": 18,
+  "full_historical_models": 9,
+  "test_log": "/root/autodl-tmp/textconsistency/setup-logs/attribution-prep-20260911-v1/tests-43e537c.log",
+  "validation_receipt": "/root/autodl-tmp/textconsistency/setup-logs/attribution-prep-20260911-v1/validation-43e537c.json",
+  "no_gpu_guard": {
+    "exit_code": 1,
+    "expected_rejection": true,
+    "seconds": 4.374382972717285
+  },
+  "cuda_available": false,
+  "gpu_smoke_completed": false,
+  "new_gpu_evaluation_completed": false,
+  "formal_training_completed": false,
+  "cgroup_memory_max": "2147483648",
+  "created_utc": "2026-09-11T07:37:07Z"
+}

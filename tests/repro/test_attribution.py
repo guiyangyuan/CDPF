@@ -93,6 +93,44 @@ class PlanTests(unittest.TestCase):
                         self.assertTrue(study.value(command, '--output-dir').startswith(p['output_root']))
             self.assertFalse(Path(p['output_root']).exists())
 
+    def test_operation_checkout_paths_remain_caller_owned_with_distinct_source(self):
+        with tempfile.TemporaryDirectory() as temp:
+            source = Path(temp).resolve() / 'immutable-source'
+            data = ROOT / 'path-regression-data'
+            output = ROOT / 'path-regression-study'
+            python = str(ROOT / 'path-regression-venv/bin/python')
+            r = receipt()
+            for row in r['fusion_baselines']:
+                if row['dataset'] in study.DATASETS:
+                    row['source_root'] = str(source)
+            for row in r['historical_kd1']:
+                row['model_dir'] = str(ROOT / 'path-regression-history' / row['dataset'] / f"seed{row['seed']}")
+            receipt_path = Path(temp) / 'receipt.json'
+            receipt_path.write_text(json.dumps(r))
+            p = study.build_plan(source, data, output, receipt_path, python)
+            for stage in p['stages']:
+                for command in stage['commands']:
+                    self.assertEqual(command[0], python)
+                    destination = Path(study.value(command, '--output-dir'))
+                    self.assertTrue(destination.is_relative_to(output))
+                    self.assertTrue(destination.is_relative_to(Path(stage['root'])))
+                    if stage['kind'] == 'fusion':
+                        self.assertEqual(study.value(command, '--data-root'), str(data))
+                        continue
+                    self.assertEqual(command[1], str(source / 'train.py'))
+                    self.assertEqual(study.value(command, '--root'), str(data))
+                    self.assertEqual(study.value(command, '--config-file'), str(source / f"configs/repro/{stage['dataset']}.yaml"))
+                    self.assertEqual(study.value(command, '--dataset-config-file'), str(source / f"configs/datasets/{stage['dataset']}.yaml"))
+                    if '--model-dir' in command:
+                        seed = int(study.value(command, '--seed'))
+                        if stage['kind'] == 'historical':
+                            expected = study.row_for(r, 'historical_kd1', stage['dataset'], seed)['model_dir']
+                        else:
+                            expected = str(Path(stage['root']) / 'hierarchical_adapter' / f'seed{seed}')
+                        self.assertEqual(study.value(command, '--model-dir'), expected)
+            self.assertFalse(output.exists())
+            self.assertFalse(source.exists())
+
     def test_cli_plan_needs_neither_site_packages_nor_data_source_clip(self):
         with tempfile.TemporaryDirectory() as temp:
             p = plan(temp)
@@ -185,6 +223,43 @@ class PlanTests(unittest.TestCase):
             status = study.read_json(Path(p['output_root']) / 'status.json')
             self.assertEqual(status['state'], 'failed')
             self.assertEqual(status['completed'], [])
+
+    def test_cpu_description_metadata_matches_historical_aircraft_token_dedup(self):
+        from types import SimpleNamespace
+        from clip import clip
+        import trainers.textconsistency_common as tc
+        base_classes = ['737-200', '737-300', '737-400']
+        new_classes = ['DHC-8-100', 'Il-76', 'Saab 340']
+        evidence = {'loader_evidence': [{'seed': 1, 'splits': {
+            'base': {'classes': base_classes}, 'new': {'classes': new_classes}}}]}
+        preflight = SimpleNamespace(DATASETS={'fgvc_aircraft': {'name': 'FGVCAircraft'}})
+        with patch.object(study.common, 'dataset_evidence', return_value=evidence), \
+                patch.object(study.common, 'source_module', return_value=preflight), \
+                patch.object(clip, 'load', side_effect=AssertionError('CLIP model must not load')), \
+                patch.object(tc, 'load_clip_checkpoint', side_effect=AssertionError('CLIP checkpoint must not load')):
+            result = study.dataset_metadata(ROOT, '/unused', 'fgvc_aircraft')
+        splits = result['loader_evidence'][0]['splits']
+        # These exact effective counts are in the immutable seed-1 historical metrics.
+        for split, raw_counts, expected in (('base', [19, 19, 16], [19, 19, 16]),
+                                            ('new', [20, 19, 11], [19, 18, 10])):
+            actual = splits[split]
+            self.assertEqual([len(row) for row in actual['description_rows']], raw_counts)
+            self.assertEqual(actual['description_counts'], expected)
+            self.assertEqual([row['count'] for row in actual['view_order_manifest']['classes']], expected)
+            for raw, kept, effective, order, count in zip(actual['description_rows'], actual['effective_description_indices'],
+                    actual['effective_description_rows'], actual['view_order_manifest']['classes'], expected):
+                self.assertEqual(effective, [raw[i] for i in kept])
+                self.assertEqual(order['order'], list(range(count)))
+                self.assertEqual(kept, sorted(kept))
+        vocab = ROOT / 'clip/bpe_simple_vocab_16e6.txt.gz'
+        self.assertEqual(result['tokenizer']['sha256'], study.sha256(vocab))
+        self.assertEqual(study.source_hashes(ROOT)[str(vocab)], study.sha256(vocab))
+
+    def test_token_dedup_preserves_first_occurrence_and_class_boundaries_after_truncation(self):
+        from clip import clip
+        prefix = 'aircraft ' * 100
+        rows = [['HELLO', 'hello', prefix + 'one', prefix + 'two', 'different'], ['hello', 'Hello']]
+        self.assertEqual(study.token_unique_indices(rows, clip.tokenize), [[0, 2, 4], [0]])
 
     def test_dependency_and_template_tamper_rejected(self):
         with tempfile.TemporaryDirectory() as temp:

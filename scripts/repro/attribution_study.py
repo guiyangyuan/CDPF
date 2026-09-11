@@ -85,15 +85,13 @@ def row_for(receipt, group, dataset, seed):
 
 
 def full_commands(source, data, output, seeds, epochs, kd, python, dataset):
-    # run_pilot is pure command construction; replace its local ROOT paths for remote planning.
+    # Only the source-owned train/config paths use runner.ROOT; caller paths stay untouched.
     previous_path = list(sys.path)
     try:
         runner = common.load_file(HERE / 'run_pilot.py', 'attribution_run_pilot')
-        commands = runner.build_commands(data, output, seeds, epochs, ['hierarchical_adapter'],
-                                         python=python, dataset=dataset, kd_weight=float(kd))
-        local = str(runner.ROOT)
-        return [[str(source) + arg[len(local):] if arg.startswith(local + '/') else arg for arg in command]
-                for command in commands]
+        runner.ROOT = Path(source).resolve()
+        return runner.build_commands(data, output, seeds, epochs, ['hierarchical_adapter'],
+                                     python=python, dataset=dataset, kd_weight=float(kd))
     finally:
         sys.path[:] = previous_path
 
@@ -151,7 +149,7 @@ def operational_hashes():
 
 def source_hashes(source):
     source = Path(source)
-    paths = [source / 'train.py']
+    paths = [source / 'train.py', source / 'clip/bpe_simple_vocab_16e6.txt.gz']
     for directory, pattern in (('trainers', '*.py'), ('datasets', '*.py'), ('clip', '*.py'),
                                ('Dassl.pytorch/dassl', '*.py'), ('configs', '*.yaml'), ('templates', '*.json'),
                                ('scripts/repro', '*.py')):
@@ -179,18 +177,41 @@ def isolated(source, payload, python=sys.executable):
     return json.loads(result.stdout)
 
 
+def token_unique_indices(rows, tokenize):
+    """Mirror the source encoder's within-class token deduplication without encoding."""
+    tokens = tokenize([text for row in rows for text in row], truncate=True)
+    effective, offset = [], 0
+    for row in rows:
+        seen, indices = set(), []
+        for index in range(len(row)):
+            key = tuple(tokens[offset + index].tolist())
+            if key not in seen:
+                seen.add(key)
+                indices.append(index)
+        effective.append(indices)
+        offset += len(row)
+    return effective
+
+
 def dataset_metadata(source, data, dataset):
     evidence = common.dataset_evidence(source, data, dataset)
     preflight = common.source_module(source, 'scripts/repro/preflight.py', 'attribution_preflight')
     import trainers.textconsistency_common as tc
+    from clip import clip
+    from clip.simple_tokenizer import default_bpe
+    vocabulary = Path(default_bpe()).resolve()
+    evidence['tokenizer'] = {'path': str(vocabulary), 'sha256': sha256(vocabulary), 'truncate': True}
     template = Path(source) / tc.TEMPLATE_FILES[preflight.DATASETS[dataset]['name']]
     templates = read_json(template)
     evidence['template'] = {'path': str(template), 'sha256': sha256(template)}
     for row in evidence['loader_evidence']:
         for split in row['splits'].values():
             descriptions = tc.description_rows(templates, split['classes'], 20)
-            counts = [len(r) for r in descriptions]
+            indices = token_unique_indices(descriptions, clip.tokenize)
+            counts = [len(row) for row in indices]
             split['description_rows'] = descriptions
+            split['effective_description_indices'] = indices
+            split['effective_description_rows'] = [[row[i] for i in kept] for row, kept in zip(descriptions, indices)]
             split['description_counts'] = counts
             # This is the explicit contiguous order of the fixed protocol, including the old UCF source.
             order = {'version': 1, 'policy': 'contiguous', 'seed': 0, 'n_groups': 4,

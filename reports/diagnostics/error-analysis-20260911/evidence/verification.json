@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "checks": {
+    "audited_count_comparisons": 126,
+    "class_group_sums": 54,
+    "class_rows": 2232,
+    "fusion_partition_totals": 54,
+    "seed_summaries": 42,
+    "input_file_sha256_rechecked": 38,
+    "checkpoint_and_manifest_sha256_rechecked": 27,
+    "teacher_identical_student_changed_pairs": 6,
+    "local_markdown_targets": 17,
+    "corrupted_receipt_rejected_before_output": true,
+    "scripts_compile": true
+  },
+  "audited_source_analysis_sha256": "1c503a1b244a358428498c8b0d9e8a0682a90ff97eaee949d01d9d89b561e5dd",
+  "artifacts_sha256": {
+    "analyze_predictions.py": "cafa6e1865120a2fcfc05c9ce201bc846eca38ea73929ed18b0f987e01d6bf32",
+    "compare_kd_checkpoints.py": "af5cfb52ce44bb6788296d32bc5aacf80c884e9b206b26fa6fe0256de4c38871",
+    "evidence/class-transitions.csv": "c4eac49cf8f180f43ee3e34eff2c69316f9977483359dbb5091fdb4686b16af0",
+    "evidence/diagnostic.json": "fad0bdeda531009231e048623b1f905b48881fbe2b191d6d48410d290440ad2f",
+    "evidence/fusion-partitions.csv": "fe598d8fb735e2f45d6ad599525fd98515e5866114e8aae79b792d59c31ef033",
+    "evidence/kd-tensor-comparison.json": "dc640aab4cb27c83a9d52d0ba5f0fbb8434ee342486a1fc26197d47cc6206db1",
+    "evidence/proposed-probe-inputs.json": "858bfbf1f64d71e93c5ca89f706bd757ca69b1f6250b2cadb55a521dcda4d185",
+    "evidence/transition-summaries.csv": "d8ef0f02011c04bab9323aad4cffa51981b4ed0dc3b1e27055ed2072e7ee8139",
+    "evidence/transitions.csv": "527bb0f3dbbcd48694a21797236d3afec4603126540c91b27209ae7280a67237",
+    "inventory_probe_inputs.py": "edcdf7a7173d1e63d2e9370bca674304ac55c3354caa054a7d71b4dc789c9278",
+    "verify_evidence.py": "63f2f63d0cc9ace37d5c1d20b4f03d1953b3fe4ada511f4e100568295b224ac6"
+  },
+  "scope": "Local evidence consistency only; no new model inference or GPU readiness assertion"
+}

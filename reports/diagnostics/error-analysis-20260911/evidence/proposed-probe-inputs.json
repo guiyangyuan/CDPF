@@ -1,0 +1,347 @@
+{
+  "state": "local_input_inventory_verified_not_gpu_ready",
+  "model_count": 27,
+  "validation_cases": 9,
+  "old_ucf_archive_sha256": "66b962ba121eca46ff19a77bd996c325886f61bb95c56f020712738a7847ad19",
+  "cases": [
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "split": "val",
+      "candidate_classes": "base",
+      "train_samples_sha256": "7c98facec218325a2090b609092d8f7b0a131a3b1198575e2fddd5795b71cec2",
+      "val_samples_sha256": "768126b3e8ec96ff6142c2a18ca3da9bbc053f3238d686d13f52d643c795a153",
+      "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+      "template_sha256": "3acc805cbcd115331cc975f6146b24de2fc1732c45ee54a57c25259facbc6b9a",
+      "coop_training_template_sha256": null,
+      "checkpoints": {
+        "coop": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-ucf101-s123-20260910-163256/runs/ucf101-pilot-20260910-160746/baseline/seed1/textconsistency/model.pth.tar-20",
+          "sha256": "84cc4b8201232832949cda3585a989d11f3089984639addb1409ec27f7ea89df",
+          "manifest_sha256": "d5d50e5afa4c46fcb866015d2703fb3a8d32107f99b5db912474e7ee4eb2a71f",
+          "model_source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd0": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-kd-study-20260910-38402/unpacked/ucf101-kd-study-20260910-38402/kd0/hierarchical_adapter/seed1/textconsistency/model.pth.tar-20",
+          "sha256": "a55a3c7005d570c477f9d33211ea338d68fcc20fcafb74fc3b5f833a4ceb9fa1",
+          "manifest_sha256": "aad9ef5d61b4bb1a35ba41175cdf453dc1de8b91c2cad89a8d83df55d01b0d68",
+          "model_source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd1": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-kd-study-20260910-38402/unpacked/ucf101-kd-study-20260910-38402/kd1/hierarchical_adapter/seed1/textconsistency/model.pth.tar-20",
+          "sha256": "ae67d08ff3ce3ffd16cbb53c93c4880f7dfb3debe159bf6c3d87a13b2fd4216c",
+          "manifest_sha256": "51e72d99772f0e97eefc2cdd1467e17690a1b790202cb0cb71067b50d1661708",
+          "model_source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+          "effective_kd_weight": 1.0,
+          "epoch": 20
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "split": "val",
+      "candidate_classes": "base",
+      "train_samples_sha256": "103b1bfa5552937df705f16c011a9288bd23c1ea9badfd4a6d6d2e1fffac38ed",
+      "val_samples_sha256": "1f84281d46c8fc7cfbd0718b376493fd10cbe6c8534195b2a4fb8a94fb48625d",
+      "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+      "template_sha256": "3acc805cbcd115331cc975f6146b24de2fc1732c45ee54a57c25259facbc6b9a",
+      "coop_training_template_sha256": null,
+      "checkpoints": {
+        "coop": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-ucf101-s123-20260910-163256/runs/ucf101-pilot-20260910-163256-seed2/baseline/seed2/textconsistency/model.pth.tar-20",
+          "sha256": "d0aa4b4e1ba39c91577415c93eb89e278928d08000a3e4dfe2a14d2311b09248",
+          "manifest_sha256": "dd9ae43943a9a02d4a0790936a133af216aef7cc1d086a32e1d993d441a62d01",
+          "model_source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd0": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-kd-study-20260910-38402/unpacked/ucf101-kd-study-20260910-38402/kd0/hierarchical_adapter/seed2/textconsistency/model.pth.tar-20",
+          "sha256": "b391a6866e8316a1e8350d5385fb7feaf7a22e8ac801024b24c4fcdf2feda177",
+          "manifest_sha256": "796e04b83bb7434865af7b5455ebd67d1459bd7416006d926f0a035758fd3e37",
+          "model_source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd1": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-kd-study-20260910-38402/unpacked/ucf101-kd-study-20260910-38402/kd1/hierarchical_adapter/seed2/textconsistency/model.pth.tar-20",
+          "sha256": "b76653fd4042226ef9c45aa7e146f97601b2a97f53ba5a741af38680fb05b012",
+          "manifest_sha256": "85cf1c053438e887685b9e4ae2ec8515e6db8077896076e06ab3c5b0a48856c4",
+          "model_source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+          "effective_kd_weight": 1.0,
+          "epoch": 20
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "split": "val",
+      "candidate_classes": "base",
+      "train_samples_sha256": "498ed441f612cf736682047f07a2346266fdc3f6d32cc88afe612349574f9a0e",
+      "val_samples_sha256": "0d9465b6ba9cd2927cf4fa81df4f5648fc4111ce9e3f489fdf02c30b99649334",
+      "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+      "template_sha256": "3acc805cbcd115331cc975f6146b24de2fc1732c45ee54a57c25259facbc6b9a",
+      "coop_training_template_sha256": null,
+      "checkpoints": {
+        "coop": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-ucf101-s123-20260910-163256/runs/ucf101-pilot-20260910-163256-seed3/baseline/seed3/textconsistency/model.pth.tar-20",
+          "sha256": "67e4520dc1f000d220541f876afe5015d7538009d278cb48d5e91a3503139516",
+          "manifest_sha256": "b612ddc1290aacc37f730cacbc624b541ce894725a42837588fd1a8ff78a3fd2",
+          "model_source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd0": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-kd-study-20260910-38402/unpacked/ucf101-kd-study-20260910-38402/kd0/hierarchical_adapter/seed3/textconsistency/model.pth.tar-20",
+          "sha256": "3da91c9cc8253bd52a934d9685a812442153e6efa2b6810bdbe67ebf31632c91",
+          "manifest_sha256": "d5fbc40a7012a253c3911a5d2879c59242a45178f04d93e8f9a65fbd09b26051",
+          "model_source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd1": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-kd-study-20260910-38402/unpacked/ucf101-kd-study-20260910-38402/kd1/hierarchical_adapter/seed3/textconsistency/model.pth.tar-20",
+          "sha256": "1dcebd906fbfe314a527bb0281cda4a177fbb82532ba890e199335768ba141c2",
+          "manifest_sha256": "9725056f16abf0379f904818c5d8aac8813f0c56c36f39d0145cfaf30ec0e659",
+          "model_source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+          "effective_kd_weight": 1.0,
+          "epoch": 20
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "split": "val",
+      "candidate_classes": "base",
+      "train_samples_sha256": "53f6e0660e3ef7138005025ca17a8cb1a0c279d6f55ad3a193150b3f13a1ff49",
+      "val_samples_sha256": "28a600bf7140b5155e369de0eeaff9bf31e809f034f671e25568bed82fe54e4b",
+      "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+      "template_sha256": "dabdcafded7babd67046d0f90abeb510b648bdaaf397b884f265f3460a7942a9",
+      "coop_training_template_sha256": null,
+      "checkpoints": {
+        "coop": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-crossdataset-study-20260911-55424/runs/crossdataset-study-20260910-v1/formal/dtd/baseline/seed1/textconsistency/model.pth.tar-20",
+          "sha256": "b8954631a9fba87b1ffe68827067946c0acb8340b7de9530cfb73caea9762e13",
+          "manifest_sha256": "f80c8b5fb56ac4f7c67753a16415cdb64bdf563c46e85aed58ad31603e858a36",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd0": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-attribution-study-20260911-42527/unpacked/attribution-study-20260911-v1/formal_dtd_kd0/hierarchical_adapter/seed1/textconsistency/model.pth.tar-20",
+          "sha256": "d3d744d70e22b4a491281561f98e1974261e1bceff643162568fc9aa6d154e64",
+          "manifest_sha256": "7e8f46c2d5c99576cf633cb83f7225f13e2e1c876538430a780bb8b27bb2087c",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd1": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-crossdataset-study-20260911-55424/runs/crossdataset-study-20260910-v1/formal/dtd/hierarchical_adapter/seed1/textconsistency/model.pth.tar-20",
+          "sha256": "32cd5221abfe2a2888f64937f161b92b6a735d62948c25e86bec3069e629da74",
+          "manifest_sha256": "40d206226ef8bdb15b3aa96cc633839d961e2b13d129a3326986ebec2b9d74d1",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 1.0,
+          "epoch": 20
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "split": "val",
+      "candidate_classes": "base",
+      "train_samples_sha256": "ee8a244383c70686097466868ce9a4579a5dd65d4ed70c248f731a0ffb0a090d",
+      "val_samples_sha256": "8c5420e361f8f88268aa1edd2c7a027fdf1be501f75cb901e62f53e3d683cb2c",
+      "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+      "template_sha256": "dabdcafded7babd67046d0f90abeb510b648bdaaf397b884f265f3460a7942a9",
+      "coop_training_template_sha256": null,
+      "checkpoints": {
+        "coop": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-crossdataset-study-20260911-55424/runs/crossdataset-study-20260910-v1/formal/dtd/baseline/seed2/textconsistency/model.pth.tar-20",
+          "sha256": "ede7a2d666a442fcf0fde727ab0e63bc2f17b10d80f58e73279f990c6c885e4a",
+          "manifest_sha256": "9f283fd9fe8efc6fb5a44c38470a9d99ab31991048dd8a47eedfc7742aeaadc9",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd0": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-attribution-study-20260911-42527/unpacked/attribution-study-20260911-v1/formal_dtd_kd0/hierarchical_adapter/seed2/textconsistency/model.pth.tar-20",
+          "sha256": "ef071c9b9f366e421bda55c3e3c0a1ee6e8993e06cbabb3cad3956b12009cf2d",
+          "manifest_sha256": "7ebcc372ad7f050dac7c148504860b5ef9e69c802bd097cd3d2083b8493cc422",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd1": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-crossdataset-study-20260911-55424/runs/crossdataset-study-20260910-v1/formal/dtd/hierarchical_adapter/seed2/textconsistency/model.pth.tar-20",
+          "sha256": "c28753266b556eaf0f5d0bf0ee34d2f02194347520ea72ee821fcc11e5596f93",
+          "manifest_sha256": "3b3abe646417a06a6f5b867a81bc788821caae02ecf435494f16c13cb87a4f20",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 1.0,
+          "epoch": 20
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "split": "val",
+      "candidate_classes": "base",
+      "train_samples_sha256": "9b76b91c9aa1e736d225f9ee2c6c838649e3f2e1ebd5022b7d530028493a83da",
+      "val_samples_sha256": "cf27026a4346a1da5878f581e8b104ba20b9900ccee3e612af7b015412f97492",
+      "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+      "template_sha256": "dabdcafded7babd67046d0f90abeb510b648bdaaf397b884f265f3460a7942a9",
+      "coop_training_template_sha256": null,
+      "checkpoints": {
+        "coop": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-crossdataset-study-20260911-55424/runs/crossdataset-study-20260910-v1/formal/dtd/baseline/seed3/textconsistency/model.pth.tar-20",
+          "sha256": "89d5d692654f616f6115f06bfdfb51b7049f4c0e9f51fd0f820487f99ea019ad",
+          "manifest_sha256": "dd7b30b9ff5268c7e2ccb47621c9e1afebf9761c05c4d3f318c0941844e85179",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd0": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-attribution-study-20260911-42527/unpacked/attribution-study-20260911-v1/formal_dtd_kd0/hierarchical_adapter/seed3/textconsistency/model.pth.tar-20",
+          "sha256": "e1fd469eaff49d80c80e85a29eb04f2fe98fd18044053184df173f49a1ca099b",
+          "manifest_sha256": "d79ea954f1b9a4d8a14f5219e36f2a8f25c0f529418d6b1b7e2c579cfe60f732",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd1": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-crossdataset-study-20260911-55424/runs/crossdataset-study-20260910-v1/formal/dtd/hierarchical_adapter/seed3/textconsistency/model.pth.tar-20",
+          "sha256": "b7d1d6f7cc5260a343a55c36710c4a43efd9ffd187bea994be320b2065d85d88",
+          "manifest_sha256": "a3503e0898431844770014974c644a37c17054428fd68215e740899bb8180b92",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 1.0,
+          "epoch": 20
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "split": "val",
+      "candidate_classes": "base",
+      "train_samples_sha256": "ae5851085ef5e74b7cb612cda7454fde300601ef14ad21b707bbbfbbd3c85e9a",
+      "val_samples_sha256": "7ac44ab40ea24086902991743d3b51720e467204034efd2b5a98352416fd02bb",
+      "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+      "template_sha256": "d86833c2483c1d12907abeb6198412f1d0a020bd12999a3f170967a7f549e3b8",
+      "coop_training_template_sha256": null,
+      "checkpoints": {
+        "coop": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-crossdataset-study-20260911-55424/runs/crossdataset-study-20260910-v1/formal/fgvc_aircraft/baseline/seed1/textconsistency/model.pth.tar-20",
+          "sha256": "07cbda0ab8e300600c823f51ccfde38867c1ef898e58b5a7ace634c55305fce8",
+          "manifest_sha256": "68e6eee32e01e7532f1e911def65533377845b944a013e2f3898fe6a83a3fe2e",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd0": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-attribution-study-20260911-42527/unpacked/attribution-study-20260911-v1/formal_fgvc_aircraft_kd0/hierarchical_adapter/seed1/textconsistency/model.pth.tar-20",
+          "sha256": "cb6d540dc4566721a964a178099b87ac403c7c597cc375157c9b00526324dd1d",
+          "manifest_sha256": "5515043cb410e02e89cdde1d638f0027cc976bcfbe7d75e0e96b8cb9aa87f6c6",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd1": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-crossdataset-study-20260911-55424/runs/crossdataset-study-20260910-v1/formal/fgvc_aircraft/hierarchical_adapter/seed1/textconsistency/model.pth.tar-20",
+          "sha256": "406c715b7af9b7095d76db2b3651f82218fd09d2b7ab4564d947e88c864c7eec",
+          "manifest_sha256": "b59aef2558e3f537d45c4d321213b49c5efde46de4eb80756e87f353ad2d6e89",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 1.0,
+          "epoch": 20
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "split": "val",
+      "candidate_classes": "base",
+      "train_samples_sha256": "ae05002965cddf63fa83c5537d249e45f968af7683fa8b9b87b6dd048739585e",
+      "val_samples_sha256": "b0ca0002cb5bedba08cd952a6d54ce585ff35c8402ee0d5c3c5c5ec870a885dd",
+      "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+      "template_sha256": "d86833c2483c1d12907abeb6198412f1d0a020bd12999a3f170967a7f549e3b8",
+      "coop_training_template_sha256": null,
+      "checkpoints": {
+        "coop": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-crossdataset-study-20260911-55424/runs/crossdataset-study-20260910-v1/formal/fgvc_aircraft/baseline/seed2/textconsistency/model.pth.tar-20",
+          "sha256": "d5528de6f1a229dfa2a43f926940470f11e8f35041089015d3167ed650d1a998",
+          "manifest_sha256": "15948b5a007177b5ca04f827552e01ba986a92ea704dcca0c041c6ac1c34babf",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd0": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-attribution-study-20260911-42527/unpacked/attribution-study-20260911-v1/formal_fgvc_aircraft_kd0/hierarchical_adapter/seed2/textconsistency/model.pth.tar-20",
+          "sha256": "d51dab3b83b10f3bee6b3a2f4369c855b54de2608b3a1c94a5a50e27fa9f608f",
+          "manifest_sha256": "d8954e3235345622550bfd07053899c398209f0047d085b6be31dec4b5c1078b",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd1": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-crossdataset-study-20260911-55424/runs/crossdataset-study-20260910-v1/formal/fgvc_aircraft/hierarchical_adapter/seed2/textconsistency/model.pth.tar-20",
+          "sha256": "788af68e8347a2752727bd17ba354cd0a859feb304523030273df1236793aaf9",
+          "manifest_sha256": "664e887938dd5b1348b31527486b2680270818500417d12f3a6fcc38a743cb49",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 1.0,
+          "epoch": 20
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "split": "val",
+      "candidate_classes": "base",
+      "train_samples_sha256": "aa24df6792e0120acda0d6b5ed48e1e5c500586e1da207ac4fb095fd18a5ab8a",
+      "val_samples_sha256": "876b21e83aaddab61013d7dc66102109a761273127135f712fcb7907bd811115",
+      "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+      "template_sha256": "d86833c2483c1d12907abeb6198412f1d0a020bd12999a3f170967a7f549e3b8",
+      "coop_training_template_sha256": null,
+      "checkpoints": {
+        "coop": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-crossdataset-study-20260911-55424/runs/crossdataset-study-20260910-v1/formal/fgvc_aircraft/baseline/seed3/textconsistency/model.pth.tar-20",
+          "sha256": "5da8cc806ae09e2e1d91e732bcf7d606ad595eabf8c8fb87199b59ac973272e3",
+          "manifest_sha256": "bb5c9220ff74b46c3dde1e80f86940948fa137432d6e1d05214b7cc33db082bd",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd0": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-attribution-study-20260911-42527/unpacked/attribution-study-20260911-v1/formal_fgvc_aircraft_kd0/hierarchical_adapter/seed3/textconsistency/model.pth.tar-20",
+          "sha256": "464ff13ebc2090221e20d64497d83733f0006d95b9ea1ff019e3945509bbe2a2",
+          "manifest_sha256": "cffb646233925da8934135e4875c2be73b6969713f7cf33b43bc583d1e142187",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 0.0,
+          "epoch": 20
+        },
+        "kd1": {
+          "workspace_relative_checkpoint": "outputs/textconsistency-crossdataset-study-20260911-55424/runs/crossdataset-study-20260910-v1/formal/fgvc_aircraft/hierarchical_adapter/seed3/textconsistency/model.pth.tar-20",
+          "sha256": "117fa95e951ad51f563ebb8e0156f4a89afa2804aa43ea578707ef5b91658fc6",
+          "manifest_sha256": "eddf64c8b4052ca41b354914582e91c5afb889412081b3c72df4d5c174fd6248",
+          "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+          "effective_kd_weight": 1.0,
+          "epoch": 20
+        }
+      }
+    }
+  ],
+  "pending": [
+    "Independent evaluation exporter implementation and tests",
+    "Real validation loader/transform hashes and no train-val image overlap check",
+    "Server deployment and CUDA preflight only after user opens server"
+  ],
+  "note": "A manifest hash match is not proof of train/val disjointness or unseen-class validation; do not use novel test labels to select settings."
+}

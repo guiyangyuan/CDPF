@@ -1,0 +1,2233 @@
+dataset,seed,split,fusion,label,classname,n,reference_correct,target_correct,both_correct,rescued,harmed,neither_correct,predictions_differ,net_correct,net_pp
+ucf101,1,base,simple_fusion,0,Apply_Eye_Makeup,44,38,42,37,5,1,1,6,4,9.090909090909092
+ucf101,1,base,simple_fusion,1,Apply_Lipstick,32,23,30,23,7,0,2,7,7,21.875
+ucf101,1,base,simple_fusion,2,Archery,41,37,36,36,0,1,4,2,-1,-2.4390243902439024
+ucf101,1,base,simple_fusion,3,Baby_Crawling,35,34,34,34,0,0,1,0,0,0.0
+ucf101,1,base,simple_fusion,4,Balance_Beam,31,27,20,20,0,7,4,7,-7,-22.580645161290324
+ucf101,1,base,simple_fusion,5,Band_Marching,43,43,43,43,0,0,0,0,0,0.0
+ucf101,1,base,simple_fusion,6,Baseball_Pitch,43,37,37,37,0,0,6,5,0,0.0
+ucf101,1,base,simple_fusion,7,Basketball,35,30,30,29,1,1,4,3,0,0.0
+ucf101,1,base,simple_fusion,8,Basketball_Dunk,37,35,34,34,0,1,2,1,-1,-2.7027027027027026
+ucf101,1,base,simple_fusion,9,Bench_Press,48,41,41,41,0,0,7,0,0,0.0
+ucf101,1,base,simple_fusion,10,Biking,38,38,38,38,0,0,0,0,0,0.0
+ucf101,1,base,simple_fusion,11,Billiards,40,40,40,40,0,0,0,0,0,0.0
+ucf101,1,base,simple_fusion,12,Blow_Dry_Hair,38,26,32,26,6,0,6,6,6,15.789473684210526
+ucf101,1,base,simple_fusion,13,Blowing_Candles,33,33,33,33,0,0,0,0,0,0.0
+ucf101,1,base,simple_fusion,14,Body_Weight_Squats,30,14,12,12,0,2,16,7,-2,-6.666666666666667
+ucf101,1,base,simple_fusion,15,Bowling,43,43,43,43,0,0,0,0,0,0.0
+ucf101,1,base,simple_fusion,16,Boxing_Punching_Bag,49,24,23,21,2,3,23,7,-1,-2.0408163265306123
+ucf101,1,base,simple_fusion,17,Boxing_Speed_Bag,37,27,29,26,3,1,7,4,2,5.405405405405405
+ucf101,1,base,simple_fusion,18,Breast_Stroke,28,14,17,14,3,0,11,5,3,10.714285714285714
+ucf101,1,base,simple_fusion,19,Brushing_Teeth,36,29,31,29,2,0,5,3,2,5.555555555555555
+ucf101,1,base,simple_fusion,20,Clean_And_Jerk,33,33,33,33,0,0,0,0,0,0.0
+ucf101,1,base,simple_fusion,21,Cliff_Diving,39,33,34,33,1,0,5,1,1,2.5641025641025643
+ucf101,1,base,simple_fusion,22,Cricket_Bowling,36,19,19,17,2,2,15,6,0,0.0
+ucf101,1,base,simple_fusion,23,Cricket_Shot,49,34,30,24,6,10,9,16,-4,-8.16326530612245
+ucf101,1,base,simple_fusion,24,Cutting_In_Kitchen,33,32,32,32,0,0,1,0,0,0.0
+ucf101,1,base,simple_fusion,25,Diving,45,45,41,41,0,4,0,4,-4,-8.88888888888889
+ucf101,1,base,simple_fusion,26,Drumming,45,42,41,41,0,1,3,1,-1,-2.2222222222222223
+ucf101,1,base,simple_fusion,27,Fencing,34,34,34,34,0,0,0,0,0,0.0
+ucf101,1,base,simple_fusion,28,Field_Hockey_Penalty,40,36,39,36,3,0,1,3,3,7.5
+ucf101,1,base,simple_fusion,29,Floor_Gymnastics,36,23,26,20,6,3,7,10,3,8.333333333333334
+ucf101,1,base,simple_fusion,30,Frisbee_Catch,37,33,32,31,1,2,3,3,-1,-2.7027027027027026
+ucf101,1,base,simple_fusion,31,Front_Crawl,37,22,21,21,0,1,15,1,-1,-2.7027027027027026
+ucf101,1,base,simple_fusion,32,Golf_Swing,39,36,36,36,0,0,3,2,0,0.0
+ucf101,1,base,simple_fusion,33,Haircut,33,26,25,24,1,2,6,3,-1,-3.0303030303030303
+ucf101,1,base,simple_fusion,34,Hammering,33,27,26,26,0,1,6,1,-1,-3.0303030303030303
+ucf101,1,base,simple_fusion,35,Hammer_Throw,45,44,44,44,0,0,1,1,0,0.0
+ucf101,1,base,simple_fusion,36,Handstand_Pushups,28,27,28,27,1,0,0,1,1,3.5714285714285716
+ucf101,1,base,simple_fusion,37,Handstand_Walking,34,17,15,13,2,4,15,8,-2,-5.882352941176471
+ucf101,1,base,simple_fusion,38,Head_Massage,41,35,29,29,0,6,6,6,-6,-14.634146341463415
+ucf101,1,base,simple_fusion,39,High_Jump,37,25,17,16,1,9,11,10,-8,-21.62162162162162
+ucf101,1,base,simple_fusion,40,Horse_Race,35,34,35,34,1,0,0,1,1,2.857142857142857
+ucf101,1,base,simple_fusion,41,Horse_Riding,49,49,49,49,0,0,0,0,0,0.0
+ucf101,1,base,simple_fusion,42,Hula_Hoop,34,31,31,31,0,0,3,0,0,0.0
+ucf101,1,base,simple_fusion,43,Ice_Dancing,46,46,46,46,0,0,0,0,0,0.0
+ucf101,1,base,simple_fusion,44,Javelin_Throw,31,16,17,15,2,1,13,8,1,3.225806451612903
+ucf101,1,base,simple_fusion,45,Juggling_Balls,40,34,33,33,0,1,6,4,-1,-2.5
+ucf101,1,base,simple_fusion,46,Jumping_Jack,37,25,27,24,3,1,9,9,2,5.405405405405405
+ucf101,1,base,simple_fusion,47,Jump_Rope,38,19,18,13,5,6,14,13,-1,-2.6315789473684212
+ucf101,1,base,simple_fusion,48,Kayaking,36,33,32,32,0,1,3,1,-1,-2.7777777777777777
+ucf101,1,base,simple_fusion,49,Knitting,34,33,33,33,0,0,1,0,0,0.0
+ucf101,1,base,simple_fusion,50,Long_Jump,39,30,30,29,1,1,8,4,0,0.0
+ucf101,1,base,mean_probability_fusion,0,Apply_Eye_Makeup,44,38,42,37,5,1,1,6,4,9.090909090909092
+ucf101,1,base,mean_probability_fusion,1,Apply_Lipstick,32,23,29,23,6,0,3,6,6,18.75
+ucf101,1,base,mean_probability_fusion,2,Archery,41,37,35,35,0,2,4,3,-2,-4.878048780487805
+ucf101,1,base,mean_probability_fusion,3,Baby_Crawling,35,34,34,34,0,0,1,0,0,0.0
+ucf101,1,base,mean_probability_fusion,4,Balance_Beam,31,27,24,24,0,3,4,3,-3,-9.67741935483871
+ucf101,1,base,mean_probability_fusion,5,Band_Marching,43,43,43,43,0,0,0,0,0,0.0
+ucf101,1,base,mean_probability_fusion,6,Baseball_Pitch,43,37,37,37,0,0,6,5,0,0.0
+ucf101,1,base,mean_probability_fusion,7,Basketball,35,30,30,29,1,1,4,3,0,0.0
+ucf101,1,base,mean_probability_fusion,8,Basketball_Dunk,37,35,34,34,0,1,2,1,-1,-2.7027027027027026
+ucf101,1,base,mean_probability_fusion,9,Bench_Press,48,41,41,41,0,0,7,0,0,0.0
+ucf101,1,base,mean_probability_fusion,10,Biking,38,38,38,38,0,0,0,0,0,0.0
+ucf101,1,base,mean_probability_fusion,11,Billiards,40,40,40,40,0,0,0,0,0,0.0
+ucf101,1,base,mean_probability_fusion,12,Blow_Dry_Hair,38,26,31,25,6,1,6,7,5,13.157894736842104
+ucf101,1,base,mean_probability_fusion,13,Blowing_Candles,33,33,33,33,0,0,0,0,0,0.0
+ucf101,1,base,mean_probability_fusion,14,Body_Weight_Squats,30,14,12,12,0,2,16,4,-2,-6.666666666666667
+ucf101,1,base,mean_probability_fusion,15,Bowling,43,43,43,43,0,0,0,0,0,0.0
+ucf101,1,base,mean_probability_fusion,16,Boxing_Punching_Bag,49,24,21,20,1,4,24,7,-3,-6.122448979591836
+ucf101,1,base,mean_probability_fusion,17,Boxing_Speed_Bag,37,27,29,26,3,1,7,4,2,5.405405405405405
+ucf101,1,base,mean_probability_fusion,18,Breast_Stroke,28,14,17,14,3,0,11,5,3,10.714285714285714
+ucf101,1,base,mean_probability_fusion,19,Brushing_Teeth,36,29,31,29,2,0,5,2,2,5.555555555555555
+ucf101,1,base,mean_probability_fusion,20,Clean_And_Jerk,33,33,33,33,0,0,0,0,0,0.0
+ucf101,1,base,mean_probability_fusion,21,Cliff_Diving,39,33,34,33,1,0,5,1,1,2.5641025641025643
+ucf101,1,base,mean_probability_fusion,22,Cricket_Bowling,36,19,19,18,1,1,16,4,0,0.0
+ucf101,1,base,mean_probability_fusion,23,Cricket_Shot,49,34,29,24,5,10,10,15,-5,-10.204081632653061
+ucf101,1,base,mean_probability_fusion,24,Cutting_In_Kitchen,33,32,32,32,0,0,1,0,0,0.0
+ucf101,1,base,mean_probability_fusion,25,Diving,45,45,41,41,0,4,0,4,-4,-8.88888888888889
+ucf101,1,base,mean_probability_fusion,26,Drumming,45,42,41,41,0,1,3,1,-1,-2.2222222222222223
+ucf101,1,base,mean_probability_fusion,27,Fencing,34,34,34,34,0,0,0,0,0,0.0
+ucf101,1,base,mean_probability_fusion,28,Field_Hockey_Penalty,40,36,40,36,4,0,0,4,4,10.0
+ucf101,1,base,mean_probability_fusion,29,Floor_Gymnastics,36,23,23,18,5,5,8,12,0,0.0
+ucf101,1,base,mean_probability_fusion,30,Frisbee_Catch,37,33,33,32,1,1,3,2,0,0.0
+ucf101,1,base,mean_probability_fusion,31,Front_Crawl,37,22,21,21,0,1,15,1,-1,-2.7027027027027026
+ucf101,1,base,mean_probability_fusion,32,Golf_Swing,39,36,36,36,0,0,3,1,0,0.0
+ucf101,1,base,mean_probability_fusion,33,Haircut,33,26,25,24,1,2,6,3,-1,-3.0303030303030303
+ucf101,1,base,mean_probability_fusion,34,Hammering,33,27,27,27,0,0,6,0,0,0.0
+ucf101,1,base,mean_probability_fusion,35,Hammer_Throw,45,44,44,44,0,0,1,1,0,0.0
+ucf101,1,base,mean_probability_fusion,36,Handstand_Pushups,28,27,28,27,1,0,0,1,1,3.5714285714285716
+ucf101,1,base,mean_probability_fusion,37,Handstand_Walking,34,17,14,13,1,4,16,8,-3,-8.823529411764707
+ucf101,1,base,mean_probability_fusion,38,Head_Massage,41,35,29,29,0,6,6,6,-6,-14.634146341463415
+ucf101,1,base,mean_probability_fusion,39,High_Jump,37,25,16,15,1,10,11,11,-9,-24.324324324324323
+ucf101,1,base,mean_probability_fusion,40,Horse_Race,35,34,35,34,1,0,0,1,1,2.857142857142857
+ucf101,1,base,mean_probability_fusion,41,Horse_Riding,49,49,49,49,0,0,0,0,0,0.0
+ucf101,1,base,mean_probability_fusion,42,Hula_Hoop,34,31,31,31,0,0,3,0,0,0.0
+ucf101,1,base,mean_probability_fusion,43,Ice_Dancing,46,46,46,46,0,0,0,0,0,0.0
+ucf101,1,base,mean_probability_fusion,44,Javelin_Throw,31,16,15,14,1,2,14,10,-1,-3.225806451612903
+ucf101,1,base,mean_probability_fusion,45,Juggling_Balls,40,34,34,34,0,0,6,2,0,0.0
+ucf101,1,base,mean_probability_fusion,46,Jumping_Jack,37,25,26,25,1,0,11,7,1,2.7027027027027026
+ucf101,1,base,mean_probability_fusion,47,Jump_Rope,38,19,21,16,5,3,14,11,2,5.2631578947368425
+ucf101,1,base,mean_probability_fusion,48,Kayaking,36,33,32,32,0,1,3,1,-1,-2.7777777777777777
+ucf101,1,base,mean_probability_fusion,49,Knitting,34,33,33,33,0,0,1,0,0,0.0
+ucf101,1,base,mean_probability_fusion,50,Long_Jump,39,30,29,29,0,1,9,4,-1,-2.5641025641025643
+ucf101,1,base,adk_probability_fusion,0,Apply_Eye_Makeup,44,38,42,37,5,1,1,6,4,9.090909090909092
+ucf101,1,base,adk_probability_fusion,1,Apply_Lipstick,32,23,27,23,4,0,5,4,4,12.5
+ucf101,1,base,adk_probability_fusion,2,Archery,41,37,35,35,0,2,4,3,-2,-4.878048780487805
+ucf101,1,base,adk_probability_fusion,3,Baby_Crawling,35,34,34,34,0,0,1,0,0,0.0
+ucf101,1,base,adk_probability_fusion,4,Balance_Beam,31,27,26,26,0,1,4,1,-1,-3.225806451612903
+ucf101,1,base,adk_probability_fusion,5,Band_Marching,43,43,43,43,0,0,0,0,0,0.0
+ucf101,1,base,adk_probability_fusion,6,Baseball_Pitch,43,37,37,37,0,0,6,6,0,0.0
+ucf101,1,base,adk_probability_fusion,7,Basketball,35,30,31,29,2,1,3,5,1,2.857142857142857
+ucf101,1,base,adk_probability_fusion,8,Basketball_Dunk,37,35,34,34,0,1,2,1,-1,-2.7027027027027026
+ucf101,1,base,adk_probability_fusion,9,Bench_Press,48,41,41,41,0,0,7,0,0,0.0
+ucf101,1,base,adk_probability_fusion,10,Biking,38,38,38,38,0,0,0,0,0,0.0
+ucf101,1,base,adk_probability_fusion,11,Billiards,40,40,40,40,0,0,0,0,0,0.0
+ucf101,1,base,adk_probability_fusion,12,Blow_Dry_Hair,38,26,30,26,4,0,8,4,4,10.526315789473685
+ucf101,1,base,adk_probability_fusion,13,Blowing_Candles,33,33,33,33,0,0,0,0,0,0.0
+ucf101,1,base,adk_probability_fusion,14,Body_Weight_Squats,30,14,12,12,0,2,16,4,-2,-6.666666666666667
+ucf101,1,base,adk_probability_fusion,15,Bowling,43,43,43,43,0,0,0,0,0,0.0
+ucf101,1,base,adk_probability_fusion,16,Boxing_Punching_Bag,49,24,22,21,1,3,24,7,-2,-4.081632653061225
+ucf101,1,base,adk_probability_fusion,17,Boxing_Speed_Bag,37,27,28,26,2,1,8,3,1,2.7027027027027026
+ucf101,1,base,adk_probability_fusion,18,Breast_Stroke,28,14,18,14,4,0,10,5,4,14.285714285714286
+ucf101,1,base,adk_probability_fusion,19,Brushing_Teeth,36,29,30,28,2,1,5,3,1,2.7777777777777777
+ucf101,1,base,adk_probability_fusion,20,Clean_And_Jerk,33,33,33,33,0,0,0,0,0,0.0
+ucf101,1,base,adk_probability_fusion,21,Cliff_Diving,39,33,34,33,1,0,5,1,1,2.5641025641025643
+ucf101,1,base,adk_probability_fusion,22,Cricket_Bowling,36,19,19,18,1,1,16,3,0,0.0
+ucf101,1,base,adk_probability_fusion,23,Cricket_Shot,49,34,30,25,5,9,10,14,-4,-8.16326530612245
+ucf101,1,base,adk_probability_fusion,24,Cutting_In_Kitchen,33,32,32,32,0,0,1,0,0,0.0
+ucf101,1,base,adk_probability_fusion,25,Diving,45,45,42,42,0,3,0,3,-3,-6.666666666666667
+ucf101,1,base,adk_probability_fusion,26,Drumming,45,42,42,42,0,0,3,0,0,0.0
+ucf101,1,base,adk_probability_fusion,27,Fencing,34,34,34,34,0,0,0,0,0,0.0
+ucf101,1,base,adk_probability_fusion,28,Field_Hockey_Penalty,40,36,39,36,3,0,1,3,3,7.5
+ucf101,1,base,adk_probability_fusion,29,Floor_Gymnastics,36,23,23,18,5,5,8,11,0,0.0
+ucf101,1,base,adk_probability_fusion,30,Frisbee_Catch,37,33,33,32,1,1,3,2,0,0.0
+ucf101,1,base,adk_probability_fusion,31,Front_Crawl,37,22,20,20,0,2,15,2,-2,-5.405405405405405
+ucf101,1,base,adk_probability_fusion,32,Golf_Swing,39,36,36,36,0,0,3,1,0,0.0
+ucf101,1,base,adk_probability_fusion,33,Haircut,33,26,28,25,3,1,4,4,2,6.0606060606060606
+ucf101,1,base,adk_probability_fusion,34,Hammering,33,27,27,27,0,0,6,0,0,0.0
+ucf101,1,base,adk_probability_fusion,35,Hammer_Throw,45,44,44,44,0,0,1,1,0,0.0
+ucf101,1,base,adk_probability_fusion,36,Handstand_Pushups,28,27,28,27,1,0,0,1,1,3.5714285714285716
+ucf101,1,base,adk_probability_fusion,37,Handstand_Walking,34,17,16,14,2,3,15,8,-1,-2.9411764705882355
+ucf101,1,base,adk_probability_fusion,38,Head_Massage,41,35,27,27,0,8,6,8,-8,-19.51219512195122
+ucf101,1,base,adk_probability_fusion,39,High_Jump,37,25,16,15,1,10,11,11,-9,-24.324324324324323
+ucf101,1,base,adk_probability_fusion,40,Horse_Race,35,34,34,34,0,0,1,0,0,0.0
+ucf101,1,base,adk_probability_fusion,41,Horse_Riding,49,49,49,49,0,0,0,0,0,0.0
+ucf101,1,base,adk_probability_fusion,42,Hula_Hoop,34,31,31,31,0,0,3,0,0,0.0
+ucf101,1,base,adk_probability_fusion,43,Ice_Dancing,46,46,46,46,0,0,0,0,0,0.0
+ucf101,1,base,adk_probability_fusion,44,Javelin_Throw,31,16,16,15,1,1,14,9,0,0.0
+ucf101,1,base,adk_probability_fusion,45,Juggling_Balls,40,34,34,34,0,0,6,1,0,0.0
+ucf101,1,base,adk_probability_fusion,46,Jumping_Jack,37,25,26,25,1,0,11,7,1,2.7027027027027026
+ucf101,1,base,adk_probability_fusion,47,Jump_Rope,38,19,23,16,7,3,12,13,4,10.526315789473685
+ucf101,1,base,adk_probability_fusion,48,Kayaking,36,33,32,32,0,1,3,1,-1,-2.7777777777777777
+ucf101,1,base,adk_probability_fusion,49,Knitting,34,33,33,33,0,0,1,0,0,0.0
+ucf101,1,base,adk_probability_fusion,50,Long_Jump,39,30,28,28,0,2,9,5,-2,-5.128205128205129
+ucf101,1,new,simple_fusion,0,Lunges,37,1,13,1,12,0,24,17,12,32.432432432432435
+ucf101,1,new,simple_fusion,1,Military_Parade,33,33,33,33,0,0,0,0,0,0.0
+ucf101,1,new,simple_fusion,2,Mixing,45,23,29,23,6,0,16,6,6,13.333333333333334
+ucf101,1,new,simple_fusion,3,Mopping_Floor,34,26,31,26,5,0,3,8,5,14.705882352941176
+ucf101,1,new,simple_fusion,4,Nunchucks,35,0,9,0,9,0,26,16,9,25.714285714285715
+ucf101,1,new,simple_fusion,5,Parallel_Bars,37,0,0,0,0,0,37,5,0,0.0
+ucf101,1,new,simple_fusion,6,Pizza_Tossing,33,15,24,15,9,0,9,11,9,27.272727272727273
+ucf101,1,new,simple_fusion,7,Playing_Cello,44,44,44,44,0,0,0,0,0,0.0
+ucf101,1,new,simple_fusion,8,Playing_Daf,41,0,0,0,0,0,41,6,0,0.0
+ucf101,1,new,simple_fusion,9,Playing_Dhol,49,47,48,47,1,0,1,1,1,2.0408163265306123
+ucf101,1,new,simple_fusion,10,Playing_Flute,48,47,47,47,0,0,1,0,0,0.0
+ucf101,1,new,simple_fusion,11,Playing_Guitar,43,43,43,43,0,0,0,0,0,0.0
+ucf101,1,new,simple_fusion,12,Playing_Piano,28,28,28,28,0,0,0,0,0,0.0
+ucf101,1,new,simple_fusion,13,Playing_Sitar,44,38,43,38,5,0,1,5,5,11.363636363636363
+ucf101,1,new,simple_fusion,14,Playing_Tabla,31,0,9,0,9,0,22,9,9,29.032258064516128
+ucf101,1,new,simple_fusion,15,Playing_Violin,28,26,28,26,2,0,0,2,2,7.142857142857143
+ucf101,1,new,simple_fusion,16,Pole_Vault,40,11,22,11,11,0,18,13,11,27.5
+ucf101,1,new,simple_fusion,17,Pommel_Horse,35,8,22,8,14,0,13,16,14,40.0
+ucf101,1,new,simple_fusion,18,Pull_Ups,28,27,27,27,0,0,1,0,0,0.0
+ucf101,1,new,simple_fusion,19,Punch,39,39,39,39,0,0,0,0,0,0.0
+ucf101,1,new,simple_fusion,20,Push_Ups,30,30,30,30,0,0,0,0,0,0.0
+ucf101,1,new,simple_fusion,21,Rafting,28,24,25,24,1,0,3,1,1,3.5714285714285716
+ucf101,1,new,simple_fusion,22,Rock_Climbing_Indoor,41,9,38,9,29,0,3,29,29,70.73170731707317
+ucf101,1,new,simple_fusion,23,Rope_Climbing,34,5,7,4,3,1,26,14,2,5.882352941176471
+ucf101,1,new,simple_fusion,24,Rowing,36,33,35,33,2,0,1,2,2,5.555555555555555
+ucf101,1,new,simple_fusion,25,Salsa_Spin,43,8,28,8,20,0,15,22,20,46.51162790697674
+ucf101,1,new,simple_fusion,26,Shaving_Beard,43,43,43,43,0,0,0,0,0,0.0
+ucf101,1,new,simple_fusion,27,Shotput,46,9,7,7,0,2,37,6,-2,-4.3478260869565215
+ucf101,1,new,simple_fusion,28,Skate_Boarding,32,26,32,26,6,0,0,6,6,18.75
+ucf101,1,new,simple_fusion,29,Skiing,40,31,29,28,1,3,8,4,-2,-5.0
+ucf101,1,new,simple_fusion,30,Skijet,28,6,18,6,12,0,10,12,12,42.857142857142854
+ucf101,1,new,simple_fusion,31,Sky_Diving,31,29,30,29,1,0,1,1,1,3.225806451612903
+ucf101,1,new,simple_fusion,32,Soccer_Juggling,39,38,34,34,0,4,1,4,-4,-10.256410256410257
+ucf101,1,new,simple_fusion,33,Soccer_Penalty,41,41,41,41,0,0,0,0,0,0.0
+ucf101,1,new,simple_fusion,34,Still_Rings,32,1,1,1,0,0,31,11,0,0.0
+ucf101,1,new,simple_fusion,35,Sumo_Wrestling,34,30,34,30,4,0,0,4,4,11.764705882352942
+ucf101,1,new,simple_fusion,36,Surfing,33,33,33,33,0,0,0,0,0,0.0
+ucf101,1,new,simple_fusion,37,Swing,42,27,22,22,0,5,15,7,-5,-11.904761904761905
+ucf101,1,new,simple_fusion,38,Table_Tennis_Shot,39,39,39,39,0,0,0,0,0,0.0
+ucf101,1,new,simple_fusion,39,Tai_Chi,28,28,28,28,0,0,0,0,0,0.0
+ucf101,1,new,simple_fusion,40,Tennis_Swing,49,35,36,35,1,0,13,5,1,2.0408163265306123
+ucf101,1,new,simple_fusion,41,Throw_Discus,38,29,31,27,4,2,5,9,2,5.2631578947368425
+ucf101,1,new,simple_fusion,42,Trampoline_Jumping,32,27,30,27,3,0,2,3,3,9.375
+ucf101,1,new,simple_fusion,43,Typing,43,38,43,38,5,0,0,5,5,11.627906976744185
+ucf101,1,new,simple_fusion,44,Uneven_Bars,28,18,19,16,3,2,7,5,1,3.5714285714285716
+ucf101,1,new,simple_fusion,45,Volleyball_Spiking,35,29,31,29,2,0,4,3,2,5.714285714285714
+ucf101,1,new,simple_fusion,46,Walking_With_Dog,36,34,33,33,0,1,2,1,-1,-2.7777777777777777
+ucf101,1,new,simple_fusion,47,Wall_Pushups,35,0,11,0,11,0,24,13,11,31.428571428571427
+ucf101,1,new,simple_fusion,48,Writing_On_Board,45,33,40,33,7,0,5,7,7,15.555555555555555
+ucf101,1,new,simple_fusion,49,Yo_Yo,36,0,4,0,4,0,32,20,4,11.11111111111111
+ucf101,1,new,mean_probability_fusion,0,Lunges,37,1,13,1,12,0,24,16,12,32.432432432432435
+ucf101,1,new,mean_probability_fusion,1,Military_Parade,33,33,33,33,0,0,0,0,0,0.0
+ucf101,1,new,mean_probability_fusion,2,Mixing,45,23,30,23,7,0,15,7,7,15.555555555555555
+ucf101,1,new,mean_probability_fusion,3,Mopping_Floor,34,26,29,26,3,0,5,7,3,8.823529411764707
+ucf101,1,new,mean_probability_fusion,4,Nunchucks,35,0,9,0,9,0,26,12,9,25.714285714285715
+ucf101,1,new,mean_probability_fusion,5,Parallel_Bars,37,0,0,0,0,0,37,4,0,0.0
+ucf101,1,new,mean_probability_fusion,6,Pizza_Tossing,33,15,24,15,9,0,9,11,9,27.272727272727273
+ucf101,1,new,mean_probability_fusion,7,Playing_Cello,44,44,44,44,0,0,0,0,0,0.0
+ucf101,1,new,mean_probability_fusion,8,Playing_Daf,41,0,2,0,2,0,39,6,2,4.878048780487805
+ucf101,1,new,mean_probability_fusion,9,Playing_Dhol,49,47,48,47,1,0,1,1,1,2.0408163265306123
+ucf101,1,new,mean_probability_fusion,10,Playing_Flute,48,47,46,46,0,1,1,1,-1,-2.0833333333333335
+ucf101,1,new,mean_probability_fusion,11,Playing_Guitar,43,43,43,43,0,0,0,0,0,0.0
+ucf101,1,new,mean_probability_fusion,12,Playing_Piano,28,28,28,28,0,0,0,0,0,0.0
+ucf101,1,new,mean_probability_fusion,13,Playing_Sitar,44,38,43,38,5,0,1,5,5,11.363636363636363
+ucf101,1,new,mean_probability_fusion,14,Playing_Tabla,31,0,16,0,16,0,15,16,16,51.61290322580645
+ucf101,1,new,mean_probability_fusion,15,Playing_Violin,28,26,27,26,1,0,1,1,1,3.5714285714285716
+ucf101,1,new,mean_probability_fusion,16,Pole_Vault,40,11,23,11,12,0,17,15,12,30.0
+ucf101,1,new,mean_probability_fusion,17,Pommel_Horse,35,8,21,8,13,0,14,13,13,37.142857142857146
+ucf101,1,new,mean_probability_fusion,18,Pull_Ups,28,27,27,27,0,0,1,0,0,0.0
+ucf101,1,new,mean_probability_fusion,19,Punch,39,39,39,39,0,0,0,0,0,0.0
+ucf101,1,new,mean_probability_fusion,20,Push_Ups,30,30,30,30,0,0,0,0,0,0.0
+ucf101,1,new,mean_probability_fusion,21,Rafting,28,24,25,24,1,0,3,1,1,3.5714285714285716
+ucf101,1,new,mean_probability_fusion,22,Rock_Climbing_Indoor,41,9,38,9,29,0,3,29,29,70.73170731707317
+ucf101,1,new,mean_probability_fusion,23,Rope_Climbing,34,5,4,3,1,2,28,12,-1,-2.9411764705882355
+ucf101,1,new,mean_probability_fusion,24,Rowing,36,33,35,33,2,0,1,2,2,5.555555555555555
+ucf101,1,new,mean_probability_fusion,25,Salsa_Spin,43,8,30,8,22,0,13,22,22,51.16279069767442
+ucf101,1,new,mean_probability_fusion,26,Shaving_Beard,43,43,43,43,0,0,0,0,0,0.0
+ucf101,1,new,mean_probability_fusion,27,Shotput,46,9,7,7,0,2,37,5,-2,-4.3478260869565215
+ucf101,1,new,mean_probability_fusion,28,Skate_Boarding,32,26,31,25,6,1,0,7,5,15.625
+ucf101,1,new,mean_probability_fusion,29,Skiing,40,31,29,28,1,3,8,6,-2,-5.0
+ucf101,1,new,mean_probability_fusion,30,Skijet,28,6,19,6,13,0,9,13,13,46.42857142857143
+ucf101,1,new,mean_probability_fusion,31,Sky_Diving,31,29,30,29,1,0,1,1,1,3.225806451612903
+ucf101,1,new,mean_probability_fusion,32,Soccer_Juggling,39,38,34,34,0,4,1,4,-4,-10.256410256410257
+ucf101,1,new,mean_probability_fusion,33,Soccer_Penalty,41,41,41,41,0,0,0,0,0,0.0
+ucf101,1,new,mean_probability_fusion,34,Still_Rings,32,1,1,1,0,0,31,8,0,0.0
+ucf101,1,new,mean_probability_fusion,35,Sumo_Wrestling,34,30,34,30,4,0,0,4,4,11.764705882352942
+ucf101,1,new,mean_probability_fusion,36,Surfing,33,33,33,33,0,0,0,0,0,0.0
+ucf101,1,new,mean_probability_fusion,37,Swing,42,27,23,23,0,4,15,4,-4,-9.523809523809524
+ucf101,1,new,mean_probability_fusion,38,Table_Tennis_Shot,39,39,39,39,0,0,0,0,0,0.0
+ucf101,1,new,mean_probability_fusion,39,Tai_Chi,28,28,28,28,0,0,0,0,0,0.0
+ucf101,1,new,mean_probability_fusion,40,Tennis_Swing,49,35,35,35,0,0,14,2,0,0.0
+ucf101,1,new,mean_probability_fusion,41,Throw_Discus,38,29,31,27,4,2,5,8,2,5.2631578947368425
+ucf101,1,new,mean_probability_fusion,42,Trampoline_Jumping,32,27,29,27,2,0,3,3,2,6.25
+ucf101,1,new,mean_probability_fusion,43,Typing,43,38,43,38,5,0,0,5,5,11.627906976744185
+ucf101,1,new,mean_probability_fusion,44,Uneven_Bars,28,18,17,16,1,2,9,3,-1,-3.5714285714285716
+ucf101,1,new,mean_probability_fusion,45,Volleyball_Spiking,35,29,31,29,2,0,4,2,2,5.714285714285714
+ucf101,1,new,mean_probability_fusion,46,Walking_With_Dog,36,34,33,33,0,1,2,1,-1,-2.7777777777777777
+ucf101,1,new,mean_probability_fusion,47,Wall_Pushups,35,0,27,0,27,0,8,27,27,77.14285714285714
+ucf101,1,new,mean_probability_fusion,48,Writing_On_Board,45,33,40,33,7,0,5,8,7,15.555555555555555
+ucf101,1,new,mean_probability_fusion,49,Yo_Yo,36,0,11,0,11,0,25,19,11,30.555555555555557
+ucf101,1,new,adk_probability_fusion,0,Lunges,37,1,12,1,11,0,25,13,11,29.72972972972973
+ucf101,1,new,adk_probability_fusion,1,Military_Parade,33,33,33,33,0,0,0,0,0,0.0
+ucf101,1,new,adk_probability_fusion,2,Mixing,45,23,31,23,8,0,14,8,8,17.77777777777778
+ucf101,1,new,adk_probability_fusion,3,Mopping_Floor,34,26,29,26,3,0,5,7,3,8.823529411764707
+ucf101,1,new,adk_probability_fusion,4,Nunchucks,35,0,9,0,9,0,26,12,9,25.714285714285715
+ucf101,1,new,adk_probability_fusion,5,Parallel_Bars,37,0,0,0,0,0,37,4,0,0.0
+ucf101,1,new,adk_probability_fusion,6,Pizza_Tossing,33,15,22,15,7,0,11,10,7,21.21212121212121
+ucf101,1,new,adk_probability_fusion,7,Playing_Cello,44,44,44,44,0,0,0,0,0,0.0
+ucf101,1,new,adk_probability_fusion,8,Playing_Daf,41,0,5,0,5,0,36,7,5,12.195121951219512
+ucf101,1,new,adk_probability_fusion,9,Playing_Dhol,49,47,48,47,1,0,1,1,1,2.0408163265306123
+ucf101,1,new,adk_probability_fusion,10,Playing_Flute,48,47,46,46,0,1,1,1,-1,-2.0833333333333335
+ucf101,1,new,adk_probability_fusion,11,Playing_Guitar,43,43,43,43,0,0,0,0,0,0.0
+ucf101,1,new,adk_probability_fusion,12,Playing_Piano,28,28,28,28,0,0,0,0,0,0.0
+ucf101,1,new,adk_probability_fusion,13,Playing_Sitar,44,38,42,38,4,0,2,4,4,9.090909090909092
+ucf101,1,new,adk_probability_fusion,14,Playing_Tabla,31,0,12,0,12,0,19,12,12,38.70967741935484
+ucf101,1,new,adk_probability_fusion,15,Playing_Violin,28,26,27,26,1,0,1,1,1,3.5714285714285716
+ucf101,1,new,adk_probability_fusion,16,Pole_Vault,40,11,24,11,13,0,16,15,13,32.5
+ucf101,1,new,adk_probability_fusion,17,Pommel_Horse,35,8,18,8,10,0,17,11,10,28.571428571428573
+ucf101,1,new,adk_probability_fusion,18,Pull_Ups,28,27,27,27,0,0,1,0,0,0.0
+ucf101,1,new,adk_probability_fusion,19,Punch,39,39,39,39,0,0,0,0,0,0.0
+ucf101,1,new,adk_probability_fusion,20,Push_Ups,30,30,30,30,0,0,0,0,0,0.0
+ucf101,1,new,adk_probability_fusion,21,Rafting,28,24,25,24,1,0,3,1,1,3.5714285714285716
+ucf101,1,new,adk_probability_fusion,22,Rock_Climbing_Indoor,41,9,35,9,26,0,6,27,26,63.41463414634146
+ucf101,1,new,adk_probability_fusion,23,Rope_Climbing,34,5,4,3,1,2,28,13,-1,-2.9411764705882355
+ucf101,1,new,adk_probability_fusion,24,Rowing,36,33,35,33,2,0,1,2,2,5.555555555555555
+ucf101,1,new,adk_probability_fusion,25,Salsa_Spin,43,8,30,8,22,0,13,22,22,51.16279069767442
+ucf101,1,new,adk_probability_fusion,26,Shaving_Beard,43,43,43,43,0,0,0,0,0,0.0
+ucf101,1,new,adk_probability_fusion,27,Shotput,46,9,9,8,1,1,36,4,0,0.0
+ucf101,1,new,adk_probability_fusion,28,Skate_Boarding,32,26,31,25,6,1,0,7,5,15.625
+ucf101,1,new,adk_probability_fusion,29,Skiing,40,31,27,26,1,5,8,8,-4,-10.0
+ucf101,1,new,adk_probability_fusion,30,Skijet,28,6,20,6,14,0,8,14,14,50.0
+ucf101,1,new,adk_probability_fusion,31,Sky_Diving,31,29,30,29,1,0,1,1,1,3.225806451612903
+ucf101,1,new,adk_probability_fusion,32,Soccer_Juggling,39,38,35,35,0,3,1,3,-3,-7.6923076923076925
+ucf101,1,new,adk_probability_fusion,33,Soccer_Penalty,41,41,41,41,0,0,0,0,0,0.0
+ucf101,1,new,adk_probability_fusion,34,Still_Rings,32,1,2,1,1,0,30,11,1,3.125
+ucf101,1,new,adk_probability_fusion,35,Sumo_Wrestling,34,30,34,30,4,0,0,4,4,11.764705882352942
+ucf101,1,new,adk_probability_fusion,36,Surfing,33,33,33,33,0,0,0,0,0,0.0
+ucf101,1,new,adk_probability_fusion,37,Swing,42,27,24,24,0,3,15,4,-3,-7.142857142857143
+ucf101,1,new,adk_probability_fusion,38,Table_Tennis_Shot,39,39,39,39,0,0,0,0,0,0.0
+ucf101,1,new,adk_probability_fusion,39,Tai_Chi,28,28,28,28,0,0,0,0,0,0.0
+ucf101,1,new,adk_probability_fusion,40,Tennis_Swing,49,35,35,35,0,0,14,1,0,0.0
+ucf101,1,new,adk_probability_fusion,41,Throw_Discus,38,29,31,27,4,2,5,8,2,5.2631578947368425
+ucf101,1,new,adk_probability_fusion,42,Trampoline_Jumping,32,27,29,27,2,0,3,3,2,6.25
+ucf101,1,new,adk_probability_fusion,43,Typing,43,38,43,38,5,0,0,5,5,11.627906976744185
+ucf101,1,new,adk_probability_fusion,44,Uneven_Bars,28,18,17,16,1,2,9,3,-1,-3.5714285714285716
+ucf101,1,new,adk_probability_fusion,45,Volleyball_Spiking,35,29,30,29,1,0,5,1,1,2.857142857142857
+ucf101,1,new,adk_probability_fusion,46,Walking_With_Dog,36,34,33,33,0,1,2,1,-1,-2.7777777777777777
+ucf101,1,new,adk_probability_fusion,47,Wall_Pushups,35,0,24,0,24,0,11,24,24,68.57142857142857
+ucf101,1,new,adk_probability_fusion,48,Writing_On_Board,45,33,43,33,10,0,2,11,10,22.22222222222222
+ucf101,1,new,adk_probability_fusion,49,Yo_Yo,36,0,12,0,12,0,24,20,12,33.333333333333336
+ucf101,2,base,simple_fusion,0,Apply_Eye_Makeup,44,37,42,37,5,0,2,5,5,11.363636363636363
+ucf101,2,base,simple_fusion,1,Apply_Lipstick,32,24,29,24,5,0,3,5,5,15.625
+ucf101,2,base,simple_fusion,2,Archery,41,35,35,35,0,0,6,1,0,0.0
+ucf101,2,base,simple_fusion,3,Baby_Crawling,35,35,34,34,0,1,0,1,-1,-2.857142857142857
+ucf101,2,base,simple_fusion,4,Balance_Beam,31,21,15,15,0,6,10,6,-6,-19.35483870967742
+ucf101,2,base,simple_fusion,5,Band_Marching,43,43,43,43,0,0,0,0,0,0.0
+ucf101,2,base,simple_fusion,6,Baseball_Pitch,43,37,37,37,0,0,6,0,0,0.0
+ucf101,2,base,simple_fusion,7,Basketball,35,33,31,31,0,2,2,3,-2,-5.714285714285714
+ucf101,2,base,simple_fusion,8,Basketball_Dunk,37,37,35,35,0,2,0,2,-2,-5.405405405405405
+ucf101,2,base,simple_fusion,9,Bench_Press,48,41,41,41,0,0,7,0,0,0.0
+ucf101,2,base,simple_fusion,10,Biking,38,38,38,38,0,0,0,0,0,0.0
+ucf101,2,base,simple_fusion,11,Billiards,40,40,40,40,0,0,0,0,0,0.0
+ucf101,2,base,simple_fusion,12,Blow_Dry_Hair,38,31,35,31,4,0,3,6,4,10.526315789473685
+ucf101,2,base,simple_fusion,13,Blowing_Candles,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,base,simple_fusion,14,Body_Weight_Squats,30,20,14,14,0,6,10,8,-6,-20.0
+ucf101,2,base,simple_fusion,15,Bowling,43,43,43,43,0,0,0,0,0,0.0
+ucf101,2,base,simple_fusion,16,Boxing_Punching_Bag,49,37,35,34,1,3,11,4,-2,-4.081632653061225
+ucf101,2,base,simple_fusion,17,Boxing_Speed_Bag,37,28,28,27,1,1,8,2,0,0.0
+ucf101,2,base,simple_fusion,18,Breast_Stroke,28,20,21,19,2,1,6,5,1,3.5714285714285716
+ucf101,2,base,simple_fusion,19,Brushing_Teeth,36,30,30,30,0,0,6,4,0,0.0
+ucf101,2,base,simple_fusion,20,Clean_And_Jerk,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,base,simple_fusion,21,Cliff_Diving,39,30,32,30,2,0,7,2,2,5.128205128205129
+ucf101,2,base,simple_fusion,22,Cricket_Bowling,36,16,17,16,1,0,19,3,1,2.7777777777777777
+ucf101,2,base,simple_fusion,23,Cricket_Shot,49,33,30,29,1,4,15,5,-3,-6.122448979591836
+ucf101,2,base,simple_fusion,24,Cutting_In_Kitchen,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,base,simple_fusion,25,Diving,45,42,38,38,0,4,3,4,-4,-8.88888888888889
+ucf101,2,base,simple_fusion,26,Drumming,45,44,42,42,0,2,1,2,-2,-4.444444444444445
+ucf101,2,base,simple_fusion,27,Fencing,34,34,34,34,0,0,0,0,0,0.0
+ucf101,2,base,simple_fusion,28,Field_Hockey_Penalty,40,39,40,39,1,0,0,1,1,2.5
+ucf101,2,base,simple_fusion,29,Floor_Gymnastics,36,26,27,26,1,0,9,6,1,2.7777777777777777
+ucf101,2,base,simple_fusion,30,Frisbee_Catch,37,35,33,33,0,2,2,2,-2,-5.405405405405405
+ucf101,2,base,simple_fusion,31,Front_Crawl,37,14,15,13,2,1,21,5,1,2.7027027027027026
+ucf101,2,base,simple_fusion,32,Golf_Swing,39,38,38,38,0,0,1,0,0,0.0
+ucf101,2,base,simple_fusion,33,Haircut,33,28,27,26,1,2,4,3,-1,-3.0303030303030303
+ucf101,2,base,simple_fusion,34,Hammering,33,22,23,22,1,0,10,1,1,3.0303030303030303
+ucf101,2,base,simple_fusion,35,Hammer_Throw,45,43,43,43,0,0,2,1,0,0.0
+ucf101,2,base,simple_fusion,36,Handstand_Pushups,28,26,27,26,1,0,1,1,1,3.5714285714285716
+ucf101,2,base,simple_fusion,37,Handstand_Walking,34,14,14,13,1,1,19,5,0,0.0
+ucf101,2,base,simple_fusion,38,Head_Massage,41,40,37,37,0,3,1,3,-3,-7.317073170731708
+ucf101,2,base,simple_fusion,39,High_Jump,37,14,15,11,4,3,19,9,1,2.7027027027027026
+ucf101,2,base,simple_fusion,40,Horse_Race,35,34,35,34,1,0,0,1,1,2.857142857142857
+ucf101,2,base,simple_fusion,41,Horse_Riding,49,49,49,49,0,0,0,0,0,0.0
+ucf101,2,base,simple_fusion,42,Hula_Hoop,34,30,30,30,0,0,4,0,0,0.0
+ucf101,2,base,simple_fusion,43,Ice_Dancing,46,46,46,46,0,0,0,0,0,0.0
+ucf101,2,base,simple_fusion,44,Javelin_Throw,31,18,19,18,1,0,12,3,1,3.225806451612903
+ucf101,2,base,simple_fusion,45,Juggling_Balls,40,36,35,35,0,1,4,1,-1,-2.5
+ucf101,2,base,simple_fusion,46,Jumping_Jack,37,22,26,21,5,1,10,9,4,10.81081081081081
+ucf101,2,base,simple_fusion,47,Jump_Rope,38,26,20,17,3,9,9,14,-6,-15.789473684210526
+ucf101,2,base,simple_fusion,48,Kayaking,36,35,33,33,0,2,1,2,-2,-5.555555555555555
+ucf101,2,base,simple_fusion,49,Knitting,34,34,33,33,0,1,0,1,-1,-2.9411764705882355
+ucf101,2,base,simple_fusion,50,Long_Jump,39,25,26,22,4,3,10,11,1,2.5641025641025643
+ucf101,2,base,mean_probability_fusion,0,Apply_Eye_Makeup,44,37,42,37,5,0,2,5,5,11.363636363636363
+ucf101,2,base,mean_probability_fusion,1,Apply_Lipstick,32,24,27,24,3,0,5,3,3,9.375
+ucf101,2,base,mean_probability_fusion,2,Archery,41,35,35,35,0,0,6,1,0,0.0
+ucf101,2,base,mean_probability_fusion,3,Baby_Crawling,35,35,34,34,0,1,0,1,-1,-2.857142857142857
+ucf101,2,base,mean_probability_fusion,4,Balance_Beam,31,21,17,17,0,4,10,4,-4,-12.903225806451612
+ucf101,2,base,mean_probability_fusion,5,Band_Marching,43,43,43,43,0,0,0,0,0,0.0
+ucf101,2,base,mean_probability_fusion,6,Baseball_Pitch,43,37,37,37,0,0,6,0,0,0.0
+ucf101,2,base,mean_probability_fusion,7,Basketball,35,33,31,31,0,2,2,3,-2,-5.714285714285714
+ucf101,2,base,mean_probability_fusion,8,Basketball_Dunk,37,37,35,35,0,2,0,2,-2,-5.405405405405405
+ucf101,2,base,mean_probability_fusion,9,Bench_Press,48,41,41,41,0,0,7,0,0,0.0
+ucf101,2,base,mean_probability_fusion,10,Biking,38,38,38,38,0,0,0,0,0,0.0
+ucf101,2,base,mean_probability_fusion,11,Billiards,40,40,40,40,0,0,0,0,0,0.0
+ucf101,2,base,mean_probability_fusion,12,Blow_Dry_Hair,38,31,33,30,3,1,4,6,2,5.2631578947368425
+ucf101,2,base,mean_probability_fusion,13,Blowing_Candles,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,base,mean_probability_fusion,14,Body_Weight_Squats,30,20,15,15,0,5,10,6,-5,-16.666666666666668
+ucf101,2,base,mean_probability_fusion,15,Bowling,43,43,43,43,0,0,0,0,0,0.0
+ucf101,2,base,mean_probability_fusion,16,Boxing_Punching_Bag,49,37,35,34,1,3,11,4,-2,-4.081632653061225
+ucf101,2,base,mean_probability_fusion,17,Boxing_Speed_Bag,37,28,28,27,1,1,8,2,0,0.0
+ucf101,2,base,mean_probability_fusion,18,Breast_Stroke,28,20,21,19,2,1,6,5,1,3.5714285714285716
+ucf101,2,base,mean_probability_fusion,19,Brushing_Teeth,36,30,30,30,0,0,6,2,0,0.0
+ucf101,2,base,mean_probability_fusion,20,Clean_And_Jerk,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,base,mean_probability_fusion,21,Cliff_Diving,39,30,32,30,2,0,7,2,2,5.128205128205129
+ucf101,2,base,mean_probability_fusion,22,Cricket_Bowling,36,16,17,16,1,0,19,4,1,2.7777777777777777
+ucf101,2,base,mean_probability_fusion,23,Cricket_Shot,49,33,30,29,1,4,15,5,-3,-6.122448979591836
+ucf101,2,base,mean_probability_fusion,24,Cutting_In_Kitchen,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,base,mean_probability_fusion,25,Diving,45,42,40,40,0,2,3,3,-2,-4.444444444444445
+ucf101,2,base,mean_probability_fusion,26,Drumming,45,44,43,43,0,1,1,1,-1,-2.2222222222222223
+ucf101,2,base,mean_probability_fusion,27,Fencing,34,34,34,34,0,0,0,0,0,0.0
+ucf101,2,base,mean_probability_fusion,28,Field_Hockey_Penalty,40,39,40,39,1,0,0,1,1,2.5
+ucf101,2,base,mean_probability_fusion,29,Floor_Gymnastics,36,26,25,25,0,1,10,6,-1,-2.7777777777777777
+ucf101,2,base,mean_probability_fusion,30,Frisbee_Catch,37,35,33,33,0,2,2,2,-2,-5.405405405405405
+ucf101,2,base,mean_probability_fusion,31,Front_Crawl,37,14,16,13,3,1,20,5,2,5.405405405405405
+ucf101,2,base,mean_probability_fusion,32,Golf_Swing,39,38,38,38,0,0,1,0,0,0.0
+ucf101,2,base,mean_probability_fusion,33,Haircut,33,28,27,26,1,2,4,3,-1,-3.0303030303030303
+ucf101,2,base,mean_probability_fusion,34,Hammering,33,22,23,22,1,0,10,1,1,3.0303030303030303
+ucf101,2,base,mean_probability_fusion,35,Hammer_Throw,45,43,43,43,0,0,2,1,0,0.0
+ucf101,2,base,mean_probability_fusion,36,Handstand_Pushups,28,26,27,26,1,0,1,1,1,3.5714285714285716
+ucf101,2,base,mean_probability_fusion,37,Handstand_Walking,34,14,14,13,1,1,19,5,0,0.0
+ucf101,2,base,mean_probability_fusion,38,Head_Massage,41,40,37,37,0,3,1,3,-3,-7.317073170731708
+ucf101,2,base,mean_probability_fusion,39,High_Jump,37,14,15,11,4,3,19,10,1,2.7027027027027026
+ucf101,2,base,mean_probability_fusion,40,Horse_Race,35,34,35,34,1,0,0,1,1,2.857142857142857
+ucf101,2,base,mean_probability_fusion,41,Horse_Riding,49,49,49,49,0,0,0,0,0,0.0
+ucf101,2,base,mean_probability_fusion,42,Hula_Hoop,34,30,30,30,0,0,4,0,0,0.0
+ucf101,2,base,mean_probability_fusion,43,Ice_Dancing,46,46,46,46,0,0,0,0,0,0.0
+ucf101,2,base,mean_probability_fusion,44,Javelin_Throw,31,18,18,18,0,0,13,5,0,0.0
+ucf101,2,base,mean_probability_fusion,45,Juggling_Balls,40,36,35,35,0,1,4,1,-1,-2.5
+ucf101,2,base,mean_probability_fusion,46,Jumping_Jack,37,22,26,22,4,0,11,7,4,10.81081081081081
+ucf101,2,base,mean_probability_fusion,47,Jump_Rope,38,26,19,18,1,8,11,12,-7,-18.42105263157895
+ucf101,2,base,mean_probability_fusion,48,Kayaking,36,35,33,33,0,2,1,2,-2,-5.555555555555555
+ucf101,2,base,mean_probability_fusion,49,Knitting,34,34,34,34,0,0,0,0,0,0.0
+ucf101,2,base,mean_probability_fusion,50,Long_Jump,39,25,26,22,4,3,10,11,1,2.5641025641025643
+ucf101,2,base,adk_probability_fusion,0,Apply_Eye_Makeup,44,37,42,37,5,0,2,5,5,11.363636363636363
+ucf101,2,base,adk_probability_fusion,1,Apply_Lipstick,32,24,28,24,4,0,4,4,4,12.5
+ucf101,2,base,adk_probability_fusion,2,Archery,41,35,35,35,0,0,6,1,0,0.0
+ucf101,2,base,adk_probability_fusion,3,Baby_Crawling,35,35,34,34,0,1,0,1,-1,-2.857142857142857
+ucf101,2,base,adk_probability_fusion,4,Balance_Beam,31,21,19,19,0,2,10,2,-2,-6.451612903225806
+ucf101,2,base,adk_probability_fusion,5,Band_Marching,43,43,43,43,0,0,0,0,0,0.0
+ucf101,2,base,adk_probability_fusion,6,Baseball_Pitch,43,37,37,37,0,0,6,1,0,0.0
+ucf101,2,base,adk_probability_fusion,7,Basketball,35,33,32,32,0,1,2,2,-1,-2.857142857142857
+ucf101,2,base,adk_probability_fusion,8,Basketball_Dunk,37,37,36,36,0,1,0,1,-1,-2.7027027027027026
+ucf101,2,base,adk_probability_fusion,9,Bench_Press,48,41,41,41,0,0,7,0,0,0.0
+ucf101,2,base,adk_probability_fusion,10,Biking,38,38,38,38,0,0,0,0,0,0.0
+ucf101,2,base,adk_probability_fusion,11,Billiards,40,40,40,40,0,0,0,0,0,0.0
+ucf101,2,base,adk_probability_fusion,12,Blow_Dry_Hair,38,31,32,30,2,1,5,6,1,2.6315789473684212
+ucf101,2,base,adk_probability_fusion,13,Blowing_Candles,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,base,adk_probability_fusion,14,Body_Weight_Squats,30,20,16,16,0,4,10,6,-4,-13.333333333333334
+ucf101,2,base,adk_probability_fusion,15,Bowling,43,43,43,43,0,0,0,0,0,0.0
+ucf101,2,base,adk_probability_fusion,16,Boxing_Punching_Bag,49,37,33,33,0,4,12,4,-4,-8.16326530612245
+ucf101,2,base,adk_probability_fusion,17,Boxing_Speed_Bag,37,28,28,27,1,1,8,2,0,0.0
+ucf101,2,base,adk_probability_fusion,18,Breast_Stroke,28,20,22,20,2,0,6,3,2,7.142857142857143
+ucf101,2,base,adk_probability_fusion,19,Brushing_Teeth,36,30,30,30,0,0,6,2,0,0.0
+ucf101,2,base,adk_probability_fusion,20,Clean_And_Jerk,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,base,adk_probability_fusion,21,Cliff_Diving,39,30,32,30,2,0,7,2,2,5.128205128205129
+ucf101,2,base,adk_probability_fusion,22,Cricket_Bowling,36,16,16,16,0,0,20,3,0,0.0
+ucf101,2,base,adk_probability_fusion,23,Cricket_Shot,49,33,33,32,1,1,15,2,0,0.0
+ucf101,2,base,adk_probability_fusion,24,Cutting_In_Kitchen,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,base,adk_probability_fusion,25,Diving,45,42,40,40,0,2,3,2,-2,-4.444444444444445
+ucf101,2,base,adk_probability_fusion,26,Drumming,45,44,43,43,0,1,1,1,-1,-2.2222222222222223
+ucf101,2,base,adk_probability_fusion,27,Fencing,34,34,34,34,0,0,0,0,0,0.0
+ucf101,2,base,adk_probability_fusion,28,Field_Hockey_Penalty,40,39,40,39,1,0,0,1,1,2.5
+ucf101,2,base,adk_probability_fusion,29,Floor_Gymnastics,36,26,26,26,0,0,10,4,0,0.0
+ucf101,2,base,adk_probability_fusion,30,Frisbee_Catch,37,35,33,33,0,2,2,2,-2,-5.405405405405405
+ucf101,2,base,adk_probability_fusion,31,Front_Crawl,37,14,16,13,3,1,20,5,2,5.405405405405405
+ucf101,2,base,adk_probability_fusion,32,Golf_Swing,39,38,38,38,0,0,1,1,0,0.0
+ucf101,2,base,adk_probability_fusion,33,Haircut,33,28,27,26,1,2,4,3,-1,-3.0303030303030303
+ucf101,2,base,adk_probability_fusion,34,Hammering,33,22,23,22,1,0,10,1,1,3.0303030303030303
+ucf101,2,base,adk_probability_fusion,35,Hammer_Throw,45,43,43,43,0,0,2,1,0,0.0
+ucf101,2,base,adk_probability_fusion,36,Handstand_Pushups,28,26,27,26,1,0,1,1,1,3.5714285714285716
+ucf101,2,base,adk_probability_fusion,37,Handstand_Walking,34,14,14,13,1,1,19,6,0,0.0
+ucf101,2,base,adk_probability_fusion,38,Head_Massage,41,40,34,34,0,6,1,6,-6,-14.634146341463415
+ucf101,2,base,adk_probability_fusion,39,High_Jump,37,14,14,10,4,4,19,11,0,0.0
+ucf101,2,base,adk_probability_fusion,40,Horse_Race,35,34,35,34,1,0,0,1,1,2.857142857142857
+ucf101,2,base,adk_probability_fusion,41,Horse_Riding,49,49,49,49,0,0,0,0,0,0.0
+ucf101,2,base,adk_probability_fusion,42,Hula_Hoop,34,30,30,30,0,0,4,0,0,0.0
+ucf101,2,base,adk_probability_fusion,43,Ice_Dancing,46,46,46,46,0,0,0,0,0,0.0
+ucf101,2,base,adk_probability_fusion,44,Javelin_Throw,31,18,18,17,1,1,12,9,0,0.0
+ucf101,2,base,adk_probability_fusion,45,Juggling_Balls,40,36,35,35,0,1,4,1,-1,-2.5
+ucf101,2,base,adk_probability_fusion,46,Jumping_Jack,37,22,26,22,4,0,11,7,4,10.81081081081081
+ucf101,2,base,adk_probability_fusion,47,Jump_Rope,38,26,20,19,1,7,11,11,-6,-15.789473684210526
+ucf101,2,base,adk_probability_fusion,48,Kayaking,36,35,33,33,0,2,1,2,-2,-5.555555555555555
+ucf101,2,base,adk_probability_fusion,49,Knitting,34,34,34,34,0,0,0,0,0,0.0
+ucf101,2,base,adk_probability_fusion,50,Long_Jump,39,25,24,21,3,4,11,12,-1,-2.5641025641025643
+ucf101,2,new,simple_fusion,0,Lunges,37,15,18,15,3,0,19,6,3,8.108108108108109
+ucf101,2,new,simple_fusion,1,Military_Parade,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,new,simple_fusion,2,Mixing,45,1,20,1,19,0,25,32,19,42.22222222222222
+ucf101,2,new,simple_fusion,3,Mopping_Floor,34,25,28,25,3,0,6,3,3,8.823529411764707
+ucf101,2,new,simple_fusion,4,Nunchucks,35,16,21,16,5,0,14,8,5,14.285714285714286
+ucf101,2,new,simple_fusion,5,Parallel_Bars,37,0,0,0,0,0,37,9,0,0.0
+ucf101,2,new,simple_fusion,6,Pizza_Tossing,33,17,22,16,6,1,10,9,5,15.151515151515152
+ucf101,2,new,simple_fusion,7,Playing_Cello,44,44,44,44,0,0,0,0,0,0.0
+ucf101,2,new,simple_fusion,8,Playing_Daf,41,0,4,0,4,0,37,10,4,9.75609756097561
+ucf101,2,new,simple_fusion,9,Playing_Dhol,49,42,42,42,0,0,7,0,0,0.0
+ucf101,2,new,simple_fusion,10,Playing_Flute,48,46,46,46,0,0,2,1,0,0.0
+ucf101,2,new,simple_fusion,11,Playing_Guitar,43,43,43,43,0,0,0,0,0,0.0
+ucf101,2,new,simple_fusion,12,Playing_Piano,28,28,28,28,0,0,0,0,0,0.0
+ucf101,2,new,simple_fusion,13,Playing_Sitar,44,44,44,44,0,0,0,0,0,0.0
+ucf101,2,new,simple_fusion,14,Playing_Tabla,31,10,21,10,11,0,10,11,11,35.483870967741936
+ucf101,2,new,simple_fusion,15,Playing_Violin,28,25,28,25,3,0,0,3,3,10.714285714285714
+ucf101,2,new,simple_fusion,16,Pole_Vault,40,17,26,17,9,0,14,13,9,22.5
+ucf101,2,new,simple_fusion,17,Pommel_Horse,35,26,30,26,4,0,5,5,4,11.428571428571429
+ucf101,2,new,simple_fusion,18,Pull_Ups,28,28,28,28,0,0,0,0,0,0.0
+ucf101,2,new,simple_fusion,19,Punch,39,35,38,35,3,0,1,3,3,7.6923076923076925
+ucf101,2,new,simple_fusion,20,Push_Ups,30,20,25,20,5,0,5,5,5,16.666666666666668
+ucf101,2,new,simple_fusion,21,Rafting,28,26,28,26,2,0,0,2,2,7.142857142857143
+ucf101,2,new,simple_fusion,22,Rock_Climbing_Indoor,41,34,39,34,5,0,2,5,5,12.195121951219512
+ucf101,2,new,simple_fusion,23,Rope_Climbing,34,10,8,6,2,4,22,12,-2,-5.882352941176471
+ucf101,2,new,simple_fusion,24,Rowing,36,36,36,36,0,0,0,0,0,0.0
+ucf101,2,new,simple_fusion,25,Salsa_Spin,43,29,40,29,11,0,3,13,11,25.58139534883721
+ucf101,2,new,simple_fusion,26,Shaving_Beard,43,43,43,43,0,0,0,0,0,0.0
+ucf101,2,new,simple_fusion,27,Shotput,46,18,14,13,1,5,27,6,-4,-8.695652173913043
+ucf101,2,new,simple_fusion,28,Skate_Boarding,32,31,31,31,0,0,1,0,0,0.0
+ucf101,2,new,simple_fusion,29,Skiing,40,29,27,27,0,2,11,2,-2,-5.0
+ucf101,2,new,simple_fusion,30,Skijet,28,0,6,0,6,0,22,7,6,21.428571428571427
+ucf101,2,new,simple_fusion,31,Sky_Diving,31,30,30,30,0,0,1,1,0,0.0
+ucf101,2,new,simple_fusion,32,Soccer_Juggling,39,30,31,29,2,1,7,7,1,2.5641025641025643
+ucf101,2,new,simple_fusion,33,Soccer_Penalty,41,41,41,41,0,0,0,0,0,0.0
+ucf101,2,new,simple_fusion,34,Still_Rings,32,0,1,0,1,0,31,8,1,3.125
+ucf101,2,new,simple_fusion,35,Sumo_Wrestling,34,34,34,34,0,0,0,0,0,0.0
+ucf101,2,new,simple_fusion,36,Surfing,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,new,simple_fusion,37,Swing,42,1,4,1,3,0,38,13,3,7.142857142857143
+ucf101,2,new,simple_fusion,38,Table_Tennis_Shot,39,38,39,38,1,0,0,1,1,2.5641025641025643
+ucf101,2,new,simple_fusion,39,Tai_Chi,28,26,27,25,2,1,0,3,1,3.5714285714285716
+ucf101,2,new,simple_fusion,40,Tennis_Swing,49,45,44,44,0,1,4,1,-1,-2.0408163265306123
+ucf101,2,new,simple_fusion,41,Throw_Discus,38,30,34,30,4,0,4,5,4,10.526315789473685
+ucf101,2,new,simple_fusion,42,Trampoline_Jumping,32,24,27,24,3,0,5,3,3,9.375
+ucf101,2,new,simple_fusion,43,Typing,43,31,42,31,11,0,1,11,11,25.58139534883721
+ucf101,2,new,simple_fusion,44,Uneven_Bars,28,12,14,12,2,0,14,3,2,7.142857142857143
+ucf101,2,new,simple_fusion,45,Volleyball_Spiking,35,27,31,27,4,0,4,6,4,11.428571428571429
+ucf101,2,new,simple_fusion,46,Walking_With_Dog,36,34,33,33,0,1,2,1,-1,-2.7777777777777777
+ucf101,2,new,simple_fusion,47,Wall_Pushups,35,27,30,27,3,0,5,3,3,8.571428571428571
+ucf101,2,new,simple_fusion,48,Writing_On_Board,45,41,44,41,3,0,1,4,3,6.666666666666667
+ucf101,2,new,simple_fusion,49,Yo_Yo,36,21,25,19,6,2,9,10,4,11.11111111111111
+ucf101,2,new,mean_probability_fusion,0,Lunges,37,15,21,15,6,0,16,8,6,16.216216216216218
+ucf101,2,new,mean_probability_fusion,1,Military_Parade,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,new,mean_probability_fusion,2,Mixing,45,1,27,1,26,0,18,33,26,57.77777777777778
+ucf101,2,new,mean_probability_fusion,3,Mopping_Floor,34,25,29,25,4,0,5,4,4,11.764705882352942
+ucf101,2,new,mean_probability_fusion,4,Nunchucks,35,16,21,16,5,0,14,7,5,14.285714285714286
+ucf101,2,new,mean_probability_fusion,5,Parallel_Bars,37,0,1,0,1,0,36,8,1,2.7027027027027026
+ucf101,2,new,mean_probability_fusion,6,Pizza_Tossing,33,17,23,16,7,1,9,9,6,18.181818181818183
+ucf101,2,new,mean_probability_fusion,7,Playing_Cello,44,44,44,44,0,0,0,0,0,0.0
+ucf101,2,new,mean_probability_fusion,8,Playing_Daf,41,0,4,0,4,0,37,10,4,9.75609756097561
+ucf101,2,new,mean_probability_fusion,9,Playing_Dhol,49,42,42,42,0,0,7,0,0,0.0
+ucf101,2,new,mean_probability_fusion,10,Playing_Flute,48,46,46,46,0,0,2,1,0,0.0
+ucf101,2,new,mean_probability_fusion,11,Playing_Guitar,43,43,43,43,0,0,0,0,0,0.0
+ucf101,2,new,mean_probability_fusion,12,Playing_Piano,28,28,28,28,0,0,0,0,0,0.0
+ucf101,2,new,mean_probability_fusion,13,Playing_Sitar,44,44,44,44,0,0,0,0,0,0.0
+ucf101,2,new,mean_probability_fusion,14,Playing_Tabla,31,10,21,10,11,0,10,11,11,35.483870967741936
+ucf101,2,new,mean_probability_fusion,15,Playing_Violin,28,25,28,25,3,0,0,3,3,10.714285714285714
+ucf101,2,new,mean_probability_fusion,16,Pole_Vault,40,17,27,17,10,0,13,14,10,25.0
+ucf101,2,new,mean_probability_fusion,17,Pommel_Horse,35,26,28,26,2,0,7,3,2,5.714285714285714
+ucf101,2,new,mean_probability_fusion,18,Pull_Ups,28,28,28,28,0,0,0,0,0,0.0
+ucf101,2,new,mean_probability_fusion,19,Punch,39,35,37,35,2,0,2,2,2,5.128205128205129
+ucf101,2,new,mean_probability_fusion,20,Push_Ups,30,20,25,20,5,0,5,5,5,16.666666666666668
+ucf101,2,new,mean_probability_fusion,21,Rafting,28,26,27,26,1,0,1,1,1,3.5714285714285716
+ucf101,2,new,mean_probability_fusion,22,Rock_Climbing_Indoor,41,34,39,34,5,0,2,5,5,12.195121951219512
+ucf101,2,new,mean_probability_fusion,23,Rope_Climbing,34,10,7,6,1,4,23,7,-3,-8.823529411764707
+ucf101,2,new,mean_probability_fusion,24,Rowing,36,36,36,36,0,0,0,0,0,0.0
+ucf101,2,new,mean_probability_fusion,25,Salsa_Spin,43,29,43,29,14,0,0,14,14,32.55813953488372
+ucf101,2,new,mean_probability_fusion,26,Shaving_Beard,43,43,43,43,0,0,0,0,0,0.0
+ucf101,2,new,mean_probability_fusion,27,Shotput,46,18,15,14,1,4,27,5,-3,-6.521739130434782
+ucf101,2,new,mean_probability_fusion,28,Skate_Boarding,32,31,31,31,0,0,1,0,0,0.0
+ucf101,2,new,mean_probability_fusion,29,Skiing,40,29,26,26,0,3,11,3,-3,-7.5
+ucf101,2,new,mean_probability_fusion,30,Skijet,28,0,10,0,10,0,18,10,10,35.714285714285715
+ucf101,2,new,mean_probability_fusion,31,Sky_Diving,31,30,30,30,0,0,1,1,0,0.0
+ucf101,2,new,mean_probability_fusion,32,Soccer_Juggling,39,30,29,28,1,2,8,7,-1,-2.5641025641025643
+ucf101,2,new,mean_probability_fusion,33,Soccer_Penalty,41,41,41,41,0,0,0,0,0,0.0
+ucf101,2,new,mean_probability_fusion,34,Still_Rings,32,0,3,0,3,0,29,6,3,9.375
+ucf101,2,new,mean_probability_fusion,35,Sumo_Wrestling,34,34,34,34,0,0,0,0,0,0.0
+ucf101,2,new,mean_probability_fusion,36,Surfing,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,new,mean_probability_fusion,37,Swing,42,1,4,1,3,0,38,12,3,7.142857142857143
+ucf101,2,new,mean_probability_fusion,38,Table_Tennis_Shot,39,38,39,38,1,0,0,1,1,2.5641025641025643
+ucf101,2,new,mean_probability_fusion,39,Tai_Chi,28,26,25,25,0,1,2,1,-1,-3.5714285714285716
+ucf101,2,new,mean_probability_fusion,40,Tennis_Swing,49,45,44,44,0,1,4,1,-1,-2.0408163265306123
+ucf101,2,new,mean_probability_fusion,41,Throw_Discus,38,30,32,30,2,0,6,2,2,5.2631578947368425
+ucf101,2,new,mean_probability_fusion,42,Trampoline_Jumping,32,24,27,24,3,0,5,4,3,9.375
+ucf101,2,new,mean_probability_fusion,43,Typing,43,31,42,31,11,0,1,11,11,25.58139534883721
+ucf101,2,new,mean_probability_fusion,44,Uneven_Bars,28,12,15,12,3,0,13,3,3,10.714285714285714
+ucf101,2,new,mean_probability_fusion,45,Volleyball_Spiking,35,27,31,27,4,0,4,5,4,11.428571428571429
+ucf101,2,new,mean_probability_fusion,46,Walking_With_Dog,36,34,33,33,0,1,2,1,-1,-2.7777777777777777
+ucf101,2,new,mean_probability_fusion,47,Wall_Pushups,35,27,30,27,3,0,5,3,3,8.571428571428571
+ucf101,2,new,mean_probability_fusion,48,Writing_On_Board,45,41,43,41,2,0,2,3,2,4.444444444444445
+ucf101,2,new,mean_probability_fusion,49,Yo_Yo,36,21,25,19,6,2,9,9,4,11.11111111111111
+ucf101,2,new,adk_probability_fusion,0,Lunges,37,15,19,15,4,0,18,6,4,10.81081081081081
+ucf101,2,new,adk_probability_fusion,1,Military_Parade,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,new,adk_probability_fusion,2,Mixing,45,1,30,1,29,0,15,35,29,64.44444444444444
+ucf101,2,new,adk_probability_fusion,3,Mopping_Floor,34,25,29,25,4,0,5,4,4,11.764705882352942
+ucf101,2,new,adk_probability_fusion,4,Nunchucks,35,16,21,16,5,0,14,7,5,14.285714285714286
+ucf101,2,new,adk_probability_fusion,5,Parallel_Bars,37,0,0,0,0,0,37,8,0,0.0
+ucf101,2,new,adk_probability_fusion,6,Pizza_Tossing,33,17,22,16,6,1,10,8,5,15.151515151515152
+ucf101,2,new,adk_probability_fusion,7,Playing_Cello,44,44,44,44,0,0,0,0,0,0.0
+ucf101,2,new,adk_probability_fusion,8,Playing_Daf,41,0,4,0,4,0,37,8,4,9.75609756097561
+ucf101,2,new,adk_probability_fusion,9,Playing_Dhol,49,42,42,42,0,0,7,0,0,0.0
+ucf101,2,new,adk_probability_fusion,10,Playing_Flute,48,46,46,46,0,0,2,1,0,0.0
+ucf101,2,new,adk_probability_fusion,11,Playing_Guitar,43,43,43,43,0,0,0,0,0,0.0
+ucf101,2,new,adk_probability_fusion,12,Playing_Piano,28,28,28,28,0,0,0,0,0,0.0
+ucf101,2,new,adk_probability_fusion,13,Playing_Sitar,44,44,44,44,0,0,0,0,0,0.0
+ucf101,2,new,adk_probability_fusion,14,Playing_Tabla,31,10,18,10,8,0,13,8,8,25.806451612903224
+ucf101,2,new,adk_probability_fusion,15,Playing_Violin,28,25,28,25,3,0,0,3,3,10.714285714285714
+ucf101,2,new,adk_probability_fusion,16,Pole_Vault,40,17,29,17,12,0,11,15,12,30.0
+ucf101,2,new,adk_probability_fusion,17,Pommel_Horse,35,26,28,26,2,0,7,3,2,5.714285714285714
+ucf101,2,new,adk_probability_fusion,18,Pull_Ups,28,28,28,28,0,0,0,0,0,0.0
+ucf101,2,new,adk_probability_fusion,19,Punch,39,35,37,35,2,0,2,2,2,5.128205128205129
+ucf101,2,new,adk_probability_fusion,20,Push_Ups,30,20,24,19,5,1,5,6,4,13.333333333333334
+ucf101,2,new,adk_probability_fusion,21,Rafting,28,26,28,26,2,0,0,2,2,7.142857142857143
+ucf101,2,new,adk_probability_fusion,22,Rock_Climbing_Indoor,41,34,39,34,5,0,2,5,5,12.195121951219512
+ucf101,2,new,adk_probability_fusion,23,Rope_Climbing,34,10,9,8,1,2,23,6,-1,-2.9411764705882355
+ucf101,2,new,adk_probability_fusion,24,Rowing,36,36,36,36,0,0,0,0,0,0.0
+ucf101,2,new,adk_probability_fusion,25,Salsa_Spin,43,29,43,29,14,0,0,14,14,32.55813953488372
+ucf101,2,new,adk_probability_fusion,26,Shaving_Beard,43,43,43,43,0,0,0,0,0,0.0
+ucf101,2,new,adk_probability_fusion,27,Shotput,46,18,17,16,1,2,27,3,-1,-2.1739130434782608
+ucf101,2,new,adk_probability_fusion,28,Skate_Boarding,32,31,30,30,0,1,1,1,-1,-3.125
+ucf101,2,new,adk_probability_fusion,29,Skiing,40,29,24,24,0,5,11,6,-5,-12.5
+ucf101,2,new,adk_probability_fusion,30,Skijet,28,0,10,0,10,0,18,10,10,35.714285714285715
+ucf101,2,new,adk_probability_fusion,31,Sky_Diving,31,30,30,30,0,0,1,1,0,0.0
+ucf101,2,new,adk_probability_fusion,32,Soccer_Juggling,39,30,31,30,1,0,8,3,1,2.5641025641025643
+ucf101,2,new,adk_probability_fusion,33,Soccer_Penalty,41,41,41,41,0,0,0,0,0,0.0
+ucf101,2,new,adk_probability_fusion,34,Still_Rings,32,0,1,0,1,0,31,5,1,3.125
+ucf101,2,new,adk_probability_fusion,35,Sumo_Wrestling,34,34,34,34,0,0,0,0,0,0.0
+ucf101,2,new,adk_probability_fusion,36,Surfing,33,33,33,33,0,0,0,0,0,0.0
+ucf101,2,new,adk_probability_fusion,37,Swing,42,1,4,1,3,0,38,12,3,7.142857142857143
+ucf101,2,new,adk_probability_fusion,38,Table_Tennis_Shot,39,38,39,38,1,0,0,1,1,2.5641025641025643
+ucf101,2,new,adk_probability_fusion,39,Tai_Chi,28,26,25,25,0,1,2,1,-1,-3.5714285714285716
+ucf101,2,new,adk_probability_fusion,40,Tennis_Swing,49,45,44,44,0,1,4,1,-1,-2.0408163265306123
+ucf101,2,new,adk_probability_fusion,41,Throw_Discus,38,30,32,30,2,0,6,2,2,5.2631578947368425
+ucf101,2,new,adk_probability_fusion,42,Trampoline_Jumping,32,24,27,24,3,0,5,4,3,9.375
+ucf101,2,new,adk_probability_fusion,43,Typing,43,31,42,31,11,0,1,11,11,25.58139534883721
+ucf101,2,new,adk_probability_fusion,44,Uneven_Bars,28,12,15,12,3,0,13,3,3,10.714285714285714
+ucf101,2,new,adk_probability_fusion,45,Volleyball_Spiking,35,27,30,27,3,0,5,6,3,8.571428571428571
+ucf101,2,new,adk_probability_fusion,46,Walking_With_Dog,36,34,33,33,0,1,2,1,-1,-2.7777777777777777
+ucf101,2,new,adk_probability_fusion,47,Wall_Pushups,35,27,30,27,3,0,5,3,3,8.571428571428571
+ucf101,2,new,adk_probability_fusion,48,Writing_On_Board,45,41,44,41,3,0,1,4,3,6.666666666666667
+ucf101,2,new,adk_probability_fusion,49,Yo_Yo,36,21,26,20,6,1,9,8,5,13.88888888888889
+ucf101,3,base,simple_fusion,0,Apply_Eye_Makeup,44,42,42,42,0,0,2,0,0,0.0
+ucf101,3,base,simple_fusion,1,Apply_Lipstick,32,30,30,30,0,0,2,0,0,0.0
+ucf101,3,base,simple_fusion,2,Archery,41,37,35,35,0,2,4,4,-2,-4.878048780487805
+ucf101,3,base,simple_fusion,3,Baby_Crawling,35,34,34,34,0,0,1,0,0,0.0
+ucf101,3,base,simple_fusion,4,Balance_Beam,31,22,18,18,0,4,9,4,-4,-12.903225806451612
+ucf101,3,base,simple_fusion,5,Band_Marching,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,base,simple_fusion,6,Baseball_Pitch,43,37,38,37,1,0,5,2,1,2.3255813953488373
+ucf101,3,base,simple_fusion,7,Basketball,35,32,28,28,0,4,3,5,-4,-11.428571428571429
+ucf101,3,base,simple_fusion,8,Basketball_Dunk,37,37,32,32,0,5,0,5,-5,-13.513513513513514
+ucf101,3,base,simple_fusion,9,Bench_Press,48,42,41,41,0,1,6,1,-1,-2.0833333333333335
+ucf101,3,base,simple_fusion,10,Biking,38,38,38,38,0,0,0,0,0,0.0
+ucf101,3,base,simple_fusion,11,Billiards,40,40,40,40,0,0,0,0,0,0.0
+ucf101,3,base,simple_fusion,12,Blow_Dry_Hair,38,28,33,28,5,0,5,5,5,13.157894736842104
+ucf101,3,base,simple_fusion,13,Blowing_Candles,33,33,33,33,0,0,0,0,0,0.0
+ucf101,3,base,simple_fusion,14,Body_Weight_Squats,30,18,11,10,1,8,11,11,-7,-23.333333333333332
+ucf101,3,base,simple_fusion,15,Bowling,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,base,simple_fusion,16,Boxing_Punching_Bag,49,38,34,34,0,4,11,4,-4,-8.16326530612245
+ucf101,3,base,simple_fusion,17,Boxing_Speed_Bag,37,30,30,29,1,1,6,3,0,0.0
+ucf101,3,base,simple_fusion,18,Breast_Stroke,28,13,18,12,6,1,9,7,5,17.857142857142858
+ucf101,3,base,simple_fusion,19,Brushing_Teeth,36,32,31,31,0,1,4,2,-1,-2.7777777777777777
+ucf101,3,base,simple_fusion,20,Clean_And_Jerk,33,33,33,33,0,0,0,0,0,0.0
+ucf101,3,base,simple_fusion,21,Cliff_Diving,39,31,34,31,3,0,5,3,3,7.6923076923076925
+ucf101,3,base,simple_fusion,22,Cricket_Bowling,36,16,17,14,3,2,17,8,1,2.7777777777777777
+ucf101,3,base,simple_fusion,23,Cricket_Shot,49,25,24,22,2,3,22,5,-1,-2.0408163265306123
+ucf101,3,base,simple_fusion,24,Cutting_In_Kitchen,33,32,33,32,1,0,0,1,1,3.0303030303030303
+ucf101,3,base,simple_fusion,25,Diving,45,44,39,39,0,5,1,5,-5,-11.11111111111111
+ucf101,3,base,simple_fusion,26,Drumming,45,41,41,41,0,0,4,0,0,0.0
+ucf101,3,base,simple_fusion,27,Fencing,34,34,34,34,0,0,0,0,0,0.0
+ucf101,3,base,simple_fusion,28,Field_Hockey_Penalty,40,40,40,40,0,0,0,0,0,0.0
+ucf101,3,base,simple_fusion,29,Floor_Gymnastics,36,25,25,24,1,1,10,5,0,0.0
+ucf101,3,base,simple_fusion,30,Frisbee_Catch,37,34,29,29,0,5,3,6,-5,-13.513513513513514
+ucf101,3,base,simple_fusion,31,Front_Crawl,37,19,19,19,0,0,18,1,0,0.0
+ucf101,3,base,simple_fusion,32,Golf_Swing,39,35,36,35,1,0,3,4,1,2.5641025641025643
+ucf101,3,base,simple_fusion,33,Haircut,33,28,26,26,0,2,5,2,-2,-6.0606060606060606
+ucf101,3,base,simple_fusion,34,Hammering,33,24,25,24,1,0,8,4,1,3.0303030303030303
+ucf101,3,base,simple_fusion,35,Hammer_Throw,45,42,43,42,1,0,2,2,1,2.2222222222222223
+ucf101,3,base,simple_fusion,36,Handstand_Pushups,28,27,28,27,1,0,0,1,1,3.5714285714285716
+ucf101,3,base,simple_fusion,37,Handstand_Walking,34,16,14,14,0,2,18,3,-2,-5.882352941176471
+ucf101,3,base,simple_fusion,38,Head_Massage,41,41,34,34,0,7,0,7,-7,-17.073170731707318
+ucf101,3,base,simple_fusion,39,High_Jump,37,11,12,8,4,3,22,10,1,2.7027027027027026
+ucf101,3,base,simple_fusion,40,Horse_Race,35,35,35,35,0,0,0,0,0,0.0
+ucf101,3,base,simple_fusion,41,Horse_Riding,49,49,49,49,0,0,0,0,0,0.0
+ucf101,3,base,simple_fusion,42,Hula_Hoop,34,30,30,30,0,0,4,0,0,0.0
+ucf101,3,base,simple_fusion,43,Ice_Dancing,46,46,46,46,0,0,0,0,0,0.0
+ucf101,3,base,simple_fusion,44,Javelin_Throw,31,17,14,14,0,3,14,8,-3,-9.67741935483871
+ucf101,3,base,simple_fusion,45,Juggling_Balls,40,30,30,28,2,2,8,5,0,0.0
+ucf101,3,base,simple_fusion,46,Jumping_Jack,37,23,26,21,5,2,9,13,3,8.108108108108109
+ucf101,3,base,simple_fusion,47,Jump_Rope,38,34,31,31,0,3,4,3,-3,-7.894736842105263
+ucf101,3,base,simple_fusion,48,Kayaking,36,34,33,33,0,1,2,1,-1,-2.7777777777777777
+ucf101,3,base,simple_fusion,49,Knitting,34,33,33,32,1,1,0,2,0,0.0
+ucf101,3,base,simple_fusion,50,Long_Jump,39,22,25,22,3,0,14,9,3,7.6923076923076925
+ucf101,3,base,mean_probability_fusion,0,Apply_Eye_Makeup,44,42,42,42,0,0,2,0,0,0.0
+ucf101,3,base,mean_probability_fusion,1,Apply_Lipstick,32,30,30,30,0,0,2,0,0,0.0
+ucf101,3,base,mean_probability_fusion,2,Archery,41,37,35,35,0,2,4,3,-2,-4.878048780487805
+ucf101,3,base,mean_probability_fusion,3,Baby_Crawling,35,34,34,34,0,0,1,0,0,0.0
+ucf101,3,base,mean_probability_fusion,4,Balance_Beam,31,22,18,18,0,4,9,4,-4,-12.903225806451612
+ucf101,3,base,mean_probability_fusion,5,Band_Marching,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,base,mean_probability_fusion,6,Baseball_Pitch,43,37,38,37,1,0,5,1,1,2.3255813953488373
+ucf101,3,base,mean_probability_fusion,7,Basketball,35,32,29,29,0,3,3,4,-3,-8.571428571428571
+ucf101,3,base,mean_probability_fusion,8,Basketball_Dunk,37,37,32,32,0,5,0,5,-5,-13.513513513513514
+ucf101,3,base,mean_probability_fusion,9,Bench_Press,48,42,41,41,0,1,6,1,-1,-2.0833333333333335
+ucf101,3,base,mean_probability_fusion,10,Biking,38,38,38,38,0,0,0,0,0,0.0
+ucf101,3,base,mean_probability_fusion,11,Billiards,40,40,40,40,0,0,0,0,0,0.0
+ucf101,3,base,mean_probability_fusion,12,Blow_Dry_Hair,38,28,33,28,5,0,5,5,5,13.157894736842104
+ucf101,3,base,mean_probability_fusion,13,Blowing_Candles,33,33,33,33,0,0,0,0,0,0.0
+ucf101,3,base,mean_probability_fusion,14,Body_Weight_Squats,30,18,12,11,1,7,11,10,-6,-20.0
+ucf101,3,base,mean_probability_fusion,15,Bowling,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,base,mean_probability_fusion,16,Boxing_Punching_Bag,49,38,34,34,0,4,11,4,-4,-8.16326530612245
+ucf101,3,base,mean_probability_fusion,17,Boxing_Speed_Bag,37,30,30,29,1,1,6,3,0,0.0
+ucf101,3,base,mean_probability_fusion,18,Breast_Stroke,28,13,19,13,6,0,9,6,6,21.428571428571427
+ucf101,3,base,mean_probability_fusion,19,Brushing_Teeth,36,32,31,31,0,1,4,2,-1,-2.7777777777777777
+ucf101,3,base,mean_probability_fusion,20,Clean_And_Jerk,33,33,33,33,0,0,0,0,0,0.0
+ucf101,3,base,mean_probability_fusion,21,Cliff_Diving,39,31,34,31,3,0,5,3,3,7.6923076923076925
+ucf101,3,base,mean_probability_fusion,22,Cricket_Bowling,36,16,17,14,3,2,17,8,1,2.7777777777777777
+ucf101,3,base,mean_probability_fusion,23,Cricket_Shot,49,25,25,23,2,2,22,4,0,0.0
+ucf101,3,base,mean_probability_fusion,24,Cutting_In_Kitchen,33,32,33,32,1,0,0,1,1,3.0303030303030303
+ucf101,3,base,mean_probability_fusion,25,Diving,45,44,39,39,0,5,1,5,-5,-11.11111111111111
+ucf101,3,base,mean_probability_fusion,26,Drumming,45,41,41,41,0,0,4,0,0,0.0
+ucf101,3,base,mean_probability_fusion,27,Fencing,34,34,34,34,0,0,0,0,0,0.0
+ucf101,3,base,mean_probability_fusion,28,Field_Hockey_Penalty,40,40,40,40,0,0,0,0,0,0.0
+ucf101,3,base,mean_probability_fusion,29,Floor_Gymnastics,36,25,24,24,0,1,11,5,-1,-2.7777777777777777
+ucf101,3,base,mean_probability_fusion,30,Frisbee_Catch,37,34,29,29,0,5,3,6,-5,-13.513513513513514
+ucf101,3,base,mean_probability_fusion,31,Front_Crawl,37,19,19,19,0,0,18,0,0,0.0
+ucf101,3,base,mean_probability_fusion,32,Golf_Swing,39,35,36,35,1,0,3,2,1,2.5641025641025643
+ucf101,3,base,mean_probability_fusion,33,Haircut,33,28,26,26,0,2,5,2,-2,-6.0606060606060606
+ucf101,3,base,mean_probability_fusion,34,Hammering,33,24,25,24,1,0,8,4,1,3.0303030303030303
+ucf101,3,base,mean_probability_fusion,35,Hammer_Throw,45,42,43,42,1,0,2,2,1,2.2222222222222223
+ucf101,3,base,mean_probability_fusion,36,Handstand_Pushups,28,27,28,27,1,0,0,1,1,3.5714285714285716
+ucf101,3,base,mean_probability_fusion,37,Handstand_Walking,34,16,15,15,0,1,18,1,-1,-2.9411764705882355
+ucf101,3,base,mean_probability_fusion,38,Head_Massage,41,41,36,36,0,5,0,5,-5,-12.195121951219512
+ucf101,3,base,mean_probability_fusion,39,High_Jump,37,11,11,8,3,3,23,9,0,0.0
+ucf101,3,base,mean_probability_fusion,40,Horse_Race,35,35,35,35,0,0,0,0,0,0.0
+ucf101,3,base,mean_probability_fusion,41,Horse_Riding,49,49,49,49,0,0,0,0,0,0.0
+ucf101,3,base,mean_probability_fusion,42,Hula_Hoop,34,30,30,30,0,0,4,0,0,0.0
+ucf101,3,base,mean_probability_fusion,43,Ice_Dancing,46,46,46,46,0,0,0,0,0,0.0
+ucf101,3,base,mean_probability_fusion,44,Javelin_Throw,31,17,15,15,0,2,14,7,-2,-6.451612903225806
+ucf101,3,base,mean_probability_fusion,45,Juggling_Balls,40,30,30,28,2,2,8,4,0,0.0
+ucf101,3,base,mean_probability_fusion,46,Jumping_Jack,37,23,25,22,3,1,11,9,2,5.405405405405405
+ucf101,3,base,mean_probability_fusion,47,Jump_Rope,38,34,31,31,0,3,4,3,-3,-7.894736842105263
+ucf101,3,base,mean_probability_fusion,48,Kayaking,36,34,34,34,0,0,2,0,0,0.0
+ucf101,3,base,mean_probability_fusion,49,Knitting,34,33,33,33,0,0,1,1,0,0.0
+ucf101,3,base,mean_probability_fusion,50,Long_Jump,39,22,24,22,2,0,15,9,2,5.128205128205129
+ucf101,3,base,adk_probability_fusion,0,Apply_Eye_Makeup,44,42,42,42,0,0,2,0,0,0.0
+ucf101,3,base,adk_probability_fusion,1,Apply_Lipstick,32,30,30,30,0,0,2,0,0,0.0
+ucf101,3,base,adk_probability_fusion,2,Archery,41,37,35,35,0,2,4,4,-2,-4.878048780487805
+ucf101,3,base,adk_probability_fusion,3,Baby_Crawling,35,34,34,34,0,0,1,0,0,0.0
+ucf101,3,base,adk_probability_fusion,4,Balance_Beam,31,22,19,19,0,3,9,3,-3,-9.67741935483871
+ucf101,3,base,adk_probability_fusion,5,Band_Marching,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,base,adk_probability_fusion,6,Baseball_Pitch,43,37,37,37,0,0,6,1,0,0.0
+ucf101,3,base,adk_probability_fusion,7,Basketball,35,32,32,32,0,0,3,1,0,0.0
+ucf101,3,base,adk_probability_fusion,8,Basketball_Dunk,37,37,33,33,0,4,0,4,-4,-10.81081081081081
+ucf101,3,base,adk_probability_fusion,9,Bench_Press,48,42,41,41,0,1,6,1,-1,-2.0833333333333335
+ucf101,3,base,adk_probability_fusion,10,Biking,38,38,38,38,0,0,0,0,0,0.0
+ucf101,3,base,adk_probability_fusion,11,Billiards,40,40,40,40,0,0,0,0,0,0.0
+ucf101,3,base,adk_probability_fusion,12,Blow_Dry_Hair,38,28,32,28,4,0,6,4,4,10.526315789473685
+ucf101,3,base,adk_probability_fusion,13,Blowing_Candles,33,33,33,33,0,0,0,0,0,0.0
+ucf101,3,base,adk_probability_fusion,14,Body_Weight_Squats,30,18,13,13,0,5,12,7,-5,-16.666666666666668
+ucf101,3,base,adk_probability_fusion,15,Bowling,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,base,adk_probability_fusion,16,Boxing_Punching_Bag,49,38,32,32,0,6,11,6,-6,-12.244897959183673
+ucf101,3,base,adk_probability_fusion,17,Boxing_Speed_Bag,37,30,29,29,0,1,7,2,-1,-2.7027027027027026
+ucf101,3,base,adk_probability_fusion,18,Breast_Stroke,28,13,18,13,5,0,10,5,5,17.857142857142858
+ucf101,3,base,adk_probability_fusion,19,Brushing_Teeth,36,32,31,31,0,1,4,2,-1,-2.7777777777777777
+ucf101,3,base,adk_probability_fusion,20,Clean_And_Jerk,33,33,33,33,0,0,0,0,0,0.0
+ucf101,3,base,adk_probability_fusion,21,Cliff_Diving,39,31,33,31,2,0,6,2,2,5.128205128205129
+ucf101,3,base,adk_probability_fusion,22,Cricket_Bowling,36,16,16,14,2,2,18,8,0,0.0
+ucf101,3,base,adk_probability_fusion,23,Cricket_Shot,49,25,25,23,2,2,22,4,0,0.0
+ucf101,3,base,adk_probability_fusion,24,Cutting_In_Kitchen,33,32,33,32,1,0,0,1,1,3.0303030303030303
+ucf101,3,base,adk_probability_fusion,25,Diving,45,44,41,41,0,3,1,3,-3,-6.666666666666667
+ucf101,3,base,adk_probability_fusion,26,Drumming,45,41,41,41,0,0,4,0,0,0.0
+ucf101,3,base,adk_probability_fusion,27,Fencing,34,34,34,34,0,0,0,0,0,0.0
+ucf101,3,base,adk_probability_fusion,28,Field_Hockey_Penalty,40,40,40,40,0,0,0,0,0,0.0
+ucf101,3,base,adk_probability_fusion,29,Floor_Gymnastics,36,25,24,24,0,1,11,4,-1,-2.7777777777777777
+ucf101,3,base,adk_probability_fusion,30,Frisbee_Catch,37,34,30,30,0,4,3,5,-4,-10.81081081081081
+ucf101,3,base,adk_probability_fusion,31,Front_Crawl,37,19,19,19,0,0,18,1,0,0.0
+ucf101,3,base,adk_probability_fusion,32,Golf_Swing,39,35,36,35,1,0,3,2,1,2.5641025641025643
+ucf101,3,base,adk_probability_fusion,33,Haircut,33,28,25,25,0,3,5,3,-3,-9.090909090909092
+ucf101,3,base,adk_probability_fusion,34,Hammering,33,24,25,24,1,0,8,4,1,3.0303030303030303
+ucf101,3,base,adk_probability_fusion,35,Hammer_Throw,45,42,43,42,1,0,2,2,1,2.2222222222222223
+ucf101,3,base,adk_probability_fusion,36,Handstand_Pushups,28,27,28,27,1,0,0,1,1,3.5714285714285716
+ucf101,3,base,adk_probability_fusion,37,Handstand_Walking,34,16,16,16,0,0,18,1,0,0.0
+ucf101,3,base,adk_probability_fusion,38,Head_Massage,41,41,33,33,0,8,0,8,-8,-19.51219512195122
+ucf101,3,base,adk_probability_fusion,39,High_Jump,37,11,8,8,0,3,26,9,-3,-8.108108108108109
+ucf101,3,base,adk_probability_fusion,40,Horse_Race,35,35,35,35,0,0,0,0,0,0.0
+ucf101,3,base,adk_probability_fusion,41,Horse_Riding,49,49,49,49,0,0,0,0,0,0.0
+ucf101,3,base,adk_probability_fusion,42,Hula_Hoop,34,30,30,30,0,0,4,0,0,0.0
+ucf101,3,base,adk_probability_fusion,43,Ice_Dancing,46,46,46,46,0,0,0,0,0,0.0
+ucf101,3,base,adk_probability_fusion,44,Javelin_Throw,31,17,16,16,0,1,14,8,-1,-3.225806451612903
+ucf101,3,base,adk_probability_fusion,45,Juggling_Balls,40,30,29,27,2,3,8,5,-1,-2.5
+ucf101,3,base,adk_probability_fusion,46,Jumping_Jack,37,23,25,22,3,1,11,9,2,5.405405405405405
+ucf101,3,base,adk_probability_fusion,47,Jump_Rope,38,34,32,32,0,2,4,2,-2,-5.2631578947368425
+ucf101,3,base,adk_probability_fusion,48,Kayaking,36,34,34,34,0,0,2,0,0,0.0
+ucf101,3,base,adk_probability_fusion,49,Knitting,34,33,33,33,0,0,1,1,0,0.0
+ucf101,3,base,adk_probability_fusion,50,Long_Jump,39,22,22,21,1,1,16,8,0,0.0
+ucf101,3,new,simple_fusion,0,Lunges,37,9,20,9,11,0,17,17,11,29.72972972972973
+ucf101,3,new,simple_fusion,1,Military_Parade,33,33,33,33,0,0,0,0,0,0.0
+ucf101,3,new,simple_fusion,2,Mixing,45,41,42,41,1,0,3,2,1,2.2222222222222223
+ucf101,3,new,simple_fusion,3,Mopping_Floor,34,25,30,25,5,0,4,7,5,14.705882352941176
+ucf101,3,new,simple_fusion,4,Nunchucks,35,1,15,1,14,0,20,14,14,40.0
+ucf101,3,new,simple_fusion,5,Parallel_Bars,37,14,9,8,1,6,22,10,-5,-13.513513513513514
+ucf101,3,new,simple_fusion,6,Pizza_Tossing,33,18,25,18,7,0,8,8,7,21.21212121212121
+ucf101,3,new,simple_fusion,7,Playing_Cello,44,44,44,44,0,0,0,0,0,0.0
+ucf101,3,new,simple_fusion,8,Playing_Daf,41,0,1,0,1,0,40,13,1,2.4390243902439024
+ucf101,3,new,simple_fusion,9,Playing_Dhol,49,42,44,42,2,0,5,6,2,4.081632653061225
+ucf101,3,new,simple_fusion,10,Playing_Flute,48,46,45,45,0,1,2,2,-1,-2.0833333333333335
+ucf101,3,new,simple_fusion,11,Playing_Guitar,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,new,simple_fusion,12,Playing_Piano,28,28,28,28,0,0,0,0,0,0.0
+ucf101,3,new,simple_fusion,13,Playing_Sitar,44,41,43,41,2,0,1,2,2,4.545454545454546
+ucf101,3,new,simple_fusion,14,Playing_Tabla,31,3,15,3,12,0,16,12,12,38.70967741935484
+ucf101,3,new,simple_fusion,15,Playing_Violin,28,25,27,25,2,0,1,2,2,7.142857142857143
+ucf101,3,new,simple_fusion,16,Pole_Vault,40,17,25,16,9,1,14,11,8,20.0
+ucf101,3,new,simple_fusion,17,Pommel_Horse,35,7,21,7,14,0,14,17,14,40.0
+ucf101,3,new,simple_fusion,18,Pull_Ups,28,27,25,25,0,2,1,2,-2,-7.142857142857143
+ucf101,3,new,simple_fusion,19,Punch,39,0,6,0,6,0,33,20,6,15.384615384615385
+ucf101,3,new,simple_fusion,20,Push_Ups,30,4,17,4,13,0,13,13,13,43.333333333333336
+ucf101,3,new,simple_fusion,21,Rafting,28,25,26,25,1,0,2,1,1,3.5714285714285716
+ucf101,3,new,simple_fusion,22,Rock_Climbing_Indoor,41,34,39,34,5,0,2,5,5,12.195121951219512
+ucf101,3,new,simple_fusion,23,Rope_Climbing,34,12,10,9,1,3,21,11,-2,-5.882352941176471
+ucf101,3,new,simple_fusion,24,Rowing,36,36,36,36,0,0,0,0,0,0.0
+ucf101,3,new,simple_fusion,25,Salsa_Spin,43,32,40,32,8,0,3,8,8,18.6046511627907
+ucf101,3,new,simple_fusion,26,Shaving_Beard,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,new,simple_fusion,27,Shotput,46,16,8,6,2,10,28,14,-8,-17.391304347826086
+ucf101,3,new,simple_fusion,28,Skate_Boarding,32,21,31,20,11,1,0,12,10,31.25
+ucf101,3,new,simple_fusion,29,Skiing,40,16,19,14,5,2,19,9,3,7.5
+ucf101,3,new,simple_fusion,30,Skijet,28,1,12,1,11,0,16,11,11,39.285714285714285
+ucf101,3,new,simple_fusion,31,Sky_Diving,31,30,30,30,0,0,1,0,0,0.0
+ucf101,3,new,simple_fusion,32,Soccer_Juggling,39,27,28,25,3,2,9,9,1,2.5641025641025643
+ucf101,3,new,simple_fusion,33,Soccer_Penalty,41,40,41,40,1,0,0,1,1,2.4390243902439024
+ucf101,3,new,simple_fusion,34,Still_Rings,32,0,1,0,1,0,31,12,1,3.125
+ucf101,3,new,simple_fusion,35,Sumo_Wrestling,34,34,34,34,0,0,0,0,0,0.0
+ucf101,3,new,simple_fusion,36,Surfing,33,33,33,33,0,0,0,0,0,0.0
+ucf101,3,new,simple_fusion,37,Swing,42,27,19,19,0,8,15,14,-8,-19.047619047619047
+ucf101,3,new,simple_fusion,38,Table_Tennis_Shot,39,39,39,39,0,0,0,0,0,0.0
+ucf101,3,new,simple_fusion,39,Tai_Chi,28,28,28,28,0,0,0,0,0,0.0
+ucf101,3,new,simple_fusion,40,Tennis_Swing,49,40,37,37,0,3,9,6,-3,-6.122448979591836
+ucf101,3,new,simple_fusion,41,Throw_Discus,38,29,32,29,3,0,6,3,3,7.894736842105263
+ucf101,3,new,simple_fusion,42,Trampoline_Jumping,32,23,27,23,4,0,5,5,4,12.5
+ucf101,3,new,simple_fusion,43,Typing,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,new,simple_fusion,44,Uneven_Bars,28,11,15,11,4,0,13,8,4,14.285714285714286
+ucf101,3,new,simple_fusion,45,Volleyball_Spiking,35,28,30,28,2,0,5,6,2,5.714285714285714
+ucf101,3,new,simple_fusion,46,Walking_With_Dog,36,35,34,34,0,1,1,1,-1,-2.7777777777777777
+ucf101,3,new,simple_fusion,47,Wall_Pushups,35,21,30,21,9,0,5,9,9,25.714285714285715
+ucf101,3,new,simple_fusion,48,Writing_On_Board,45,42,45,42,3,0,0,3,3,6.666666666666667
+ucf101,3,new,simple_fusion,49,Yo_Yo,36,2,7,2,5,0,29,15,5,13.88888888888889
+ucf101,3,new,mean_probability_fusion,0,Lunges,37,9,19,9,10,0,18,14,10,27.027027027027028
+ucf101,3,new,mean_probability_fusion,1,Military_Parade,33,33,33,33,0,0,0,0,0,0.0
+ucf101,3,new,mean_probability_fusion,2,Mixing,45,41,40,39,1,2,3,3,-1,-2.2222222222222223
+ucf101,3,new,mean_probability_fusion,3,Mopping_Floor,34,25,30,25,5,0,4,7,5,14.705882352941176
+ucf101,3,new,mean_probability_fusion,4,Nunchucks,35,1,15,1,14,0,20,14,14,40.0
+ucf101,3,new,mean_probability_fusion,5,Parallel_Bars,37,14,10,9,1,5,22,9,-4,-10.81081081081081
+ucf101,3,new,mean_probability_fusion,6,Pizza_Tossing,33,18,23,18,5,0,10,6,5,15.151515151515152
+ucf101,3,new,mean_probability_fusion,7,Playing_Cello,44,44,44,44,0,0,0,0,0,0.0
+ucf101,3,new,mean_probability_fusion,8,Playing_Daf,41,0,3,0,3,0,38,15,3,7.317073170731708
+ucf101,3,new,mean_probability_fusion,9,Playing_Dhol,49,42,45,42,3,0,4,5,3,6.122448979591836
+ucf101,3,new,mean_probability_fusion,10,Playing_Flute,48,46,45,45,0,1,2,1,-1,-2.0833333333333335
+ucf101,3,new,mean_probability_fusion,11,Playing_Guitar,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,new,mean_probability_fusion,12,Playing_Piano,28,28,28,28,0,0,0,0,0,0.0
+ucf101,3,new,mean_probability_fusion,13,Playing_Sitar,44,41,43,41,2,0,1,2,2,4.545454545454546
+ucf101,3,new,mean_probability_fusion,14,Playing_Tabla,31,3,18,3,15,0,13,15,15,48.38709677419355
+ucf101,3,new,mean_probability_fusion,15,Playing_Violin,28,25,27,25,2,0,1,2,2,7.142857142857143
+ucf101,3,new,mean_probability_fusion,16,Pole_Vault,40,17,24,15,9,2,14,12,7,17.5
+ucf101,3,new,mean_probability_fusion,17,Pommel_Horse,35,7,24,7,17,0,11,19,17,48.57142857142857
+ucf101,3,new,mean_probability_fusion,18,Pull_Ups,28,27,25,25,0,2,1,2,-2,-7.142857142857143
+ucf101,3,new,mean_probability_fusion,19,Punch,39,0,28,0,28,0,11,29,28,71.7948717948718
+ucf101,3,new,mean_probability_fusion,20,Push_Ups,30,4,17,4,13,0,13,13,13,43.333333333333336
+ucf101,3,new,mean_probability_fusion,21,Rafting,28,25,26,25,1,0,2,1,1,3.5714285714285716
+ucf101,3,new,mean_probability_fusion,22,Rock_Climbing_Indoor,41,34,39,34,5,0,2,5,5,12.195121951219512
+ucf101,3,new,mean_probability_fusion,23,Rope_Climbing,34,12,8,8,0,4,22,7,-4,-11.764705882352942
+ucf101,3,new,mean_probability_fusion,24,Rowing,36,36,36,36,0,0,0,0,0,0.0
+ucf101,3,new,mean_probability_fusion,25,Salsa_Spin,43,32,40,32,8,0,3,8,8,18.6046511627907
+ucf101,3,new,mean_probability_fusion,26,Shaving_Beard,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,new,mean_probability_fusion,27,Shotput,46,16,6,5,1,11,29,12,-10,-21.73913043478261
+ucf101,3,new,mean_probability_fusion,28,Skate_Boarding,32,21,31,20,11,1,0,12,10,31.25
+ucf101,3,new,mean_probability_fusion,29,Skiing,40,16,19,14,5,2,19,9,3,7.5
+ucf101,3,new,mean_probability_fusion,30,Skijet,28,1,15,1,14,0,13,14,14,50.0
+ucf101,3,new,mean_probability_fusion,31,Sky_Diving,31,30,30,30,0,0,1,0,0,0.0
+ucf101,3,new,mean_probability_fusion,32,Soccer_Juggling,39,27,28,25,3,2,9,8,1,2.5641025641025643
+ucf101,3,new,mean_probability_fusion,33,Soccer_Penalty,41,40,41,40,1,0,0,1,1,2.4390243902439024
+ucf101,3,new,mean_probability_fusion,34,Still_Rings,32,0,2,0,2,0,30,10,2,6.25
+ucf101,3,new,mean_probability_fusion,35,Sumo_Wrestling,34,34,34,34,0,0,0,0,0,0.0
+ucf101,3,new,mean_probability_fusion,36,Surfing,33,33,33,33,0,0,0,0,0,0.0
+ucf101,3,new,mean_probability_fusion,37,Swing,42,27,21,21,0,6,15,11,-6,-14.285714285714286
+ucf101,3,new,mean_probability_fusion,38,Table_Tennis_Shot,39,39,39,39,0,0,0,0,0,0.0
+ucf101,3,new,mean_probability_fusion,39,Tai_Chi,28,28,28,28,0,0,0,0,0,0.0
+ucf101,3,new,mean_probability_fusion,40,Tennis_Swing,49,40,38,38,0,2,9,4,-2,-4.081632653061225
+ucf101,3,new,mean_probability_fusion,41,Throw_Discus,38,29,32,29,3,0,6,3,3,7.894736842105263
+ucf101,3,new,mean_probability_fusion,42,Trampoline_Jumping,32,23,27,23,4,0,5,4,4,12.5
+ucf101,3,new,mean_probability_fusion,43,Typing,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,new,mean_probability_fusion,44,Uneven_Bars,28,11,15,11,4,0,13,7,4,14.285714285714286
+ucf101,3,new,mean_probability_fusion,45,Volleyball_Spiking,35,28,30,28,2,0,5,4,2,5.714285714285714
+ucf101,3,new,mean_probability_fusion,46,Walking_With_Dog,36,35,35,35,0,0,1,0,0,0.0
+ucf101,3,new,mean_probability_fusion,47,Wall_Pushups,35,21,29,21,8,0,6,8,8,22.857142857142858
+ucf101,3,new,mean_probability_fusion,48,Writing_On_Board,45,42,45,42,3,0,0,3,3,6.666666666666667
+ucf101,3,new,mean_probability_fusion,49,Yo_Yo,36,2,13,2,11,0,23,19,11,30.555555555555557
+ucf101,3,new,adk_probability_fusion,0,Lunges,37,9,17,9,8,0,20,12,8,21.62162162162162
+ucf101,3,new,adk_probability_fusion,1,Military_Parade,33,33,33,33,0,0,0,0,0,0.0
+ucf101,3,new,adk_probability_fusion,2,Mixing,45,41,42,41,1,0,3,1,1,2.2222222222222223
+ucf101,3,new,adk_probability_fusion,3,Mopping_Floor,34,25,30,25,5,0,4,7,5,14.705882352941176
+ucf101,3,new,adk_probability_fusion,4,Nunchucks,35,1,15,1,14,0,20,14,14,40.0
+ucf101,3,new,adk_probability_fusion,5,Parallel_Bars,37,14,9,9,0,5,23,8,-5,-13.513513513513514
+ucf101,3,new,adk_probability_fusion,6,Pizza_Tossing,33,18,21,17,4,1,11,6,3,9.090909090909092
+ucf101,3,new,adk_probability_fusion,7,Playing_Cello,44,44,44,44,0,0,0,0,0,0.0
+ucf101,3,new,adk_probability_fusion,8,Playing_Daf,41,0,7,0,7,0,34,18,7,17.073170731707318
+ucf101,3,new,adk_probability_fusion,9,Playing_Dhol,49,42,45,42,3,0,4,4,3,6.122448979591836
+ucf101,3,new,adk_probability_fusion,10,Playing_Flute,48,46,45,45,0,1,2,2,-1,-2.0833333333333335
+ucf101,3,new,adk_probability_fusion,11,Playing_Guitar,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,new,adk_probability_fusion,12,Playing_Piano,28,28,28,28,0,0,0,0,0,0.0
+ucf101,3,new,adk_probability_fusion,13,Playing_Sitar,44,41,43,41,2,0,1,2,2,4.545454545454546
+ucf101,3,new,adk_probability_fusion,14,Playing_Tabla,31,3,17,3,14,0,14,14,14,45.16129032258065
+ucf101,3,new,adk_probability_fusion,15,Playing_Violin,28,25,27,25,2,0,1,2,2,7.142857142857143
+ucf101,3,new,adk_probability_fusion,16,Pole_Vault,40,17,25,16,9,1,14,11,8,20.0
+ucf101,3,new,adk_probability_fusion,17,Pommel_Horse,35,7,22,7,15,0,13,18,15,42.857142857142854
+ucf101,3,new,adk_probability_fusion,18,Pull_Ups,28,27,26,26,0,1,1,1,-1,-3.5714285714285716
+ucf101,3,new,adk_probability_fusion,19,Punch,39,0,26,0,26,0,13,29,26,66.66666666666667
+ucf101,3,new,adk_probability_fusion,20,Push_Ups,30,4,13,4,9,0,17,9,9,30.0
+ucf101,3,new,adk_probability_fusion,21,Rafting,28,25,26,25,1,0,2,1,1,3.5714285714285716
+ucf101,3,new,adk_probability_fusion,22,Rock_Climbing_Indoor,41,34,38,34,4,0,3,5,4,9.75609756097561
+ucf101,3,new,adk_probability_fusion,23,Rope_Climbing,34,12,11,11,0,1,22,6,-1,-2.9411764705882355
+ucf101,3,new,adk_probability_fusion,24,Rowing,36,36,36,36,0,0,0,0,0,0.0
+ucf101,3,new,adk_probability_fusion,25,Salsa_Spin,43,32,40,32,8,0,3,8,8,18.6046511627907
+ucf101,3,new,adk_probability_fusion,26,Shaving_Beard,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,new,adk_probability_fusion,27,Shotput,46,16,7,6,1,10,29,11,-9,-19.565217391304348
+ucf101,3,new,adk_probability_fusion,28,Skate_Boarding,32,21,31,20,11,1,0,12,10,31.25
+ucf101,3,new,adk_probability_fusion,29,Skiing,40,16,16,13,3,3,21,8,0,0.0
+ucf101,3,new,adk_probability_fusion,30,Skijet,28,1,16,1,15,0,12,15,15,53.57142857142857
+ucf101,3,new,adk_probability_fusion,31,Sky_Diving,31,30,30,30,0,0,1,0,0,0.0
+ucf101,3,new,adk_probability_fusion,32,Soccer_Juggling,39,27,30,25,5,2,7,9,3,7.6923076923076925
+ucf101,3,new,adk_probability_fusion,33,Soccer_Penalty,41,40,41,40,1,0,0,1,1,2.4390243902439024
+ucf101,3,new,adk_probability_fusion,34,Still_Rings,32,0,1,0,1,0,31,10,1,3.125
+ucf101,3,new,adk_probability_fusion,35,Sumo_Wrestling,34,34,34,34,0,0,0,0,0,0.0
+ucf101,3,new,adk_probability_fusion,36,Surfing,33,33,33,33,0,0,0,0,0,0.0
+ucf101,3,new,adk_probability_fusion,37,Swing,42,27,23,23,0,4,15,9,-4,-9.523809523809524
+ucf101,3,new,adk_probability_fusion,38,Table_Tennis_Shot,39,39,39,39,0,0,0,0,0,0.0
+ucf101,3,new,adk_probability_fusion,39,Tai_Chi,28,28,28,28,0,0,0,0,0,0.0
+ucf101,3,new,adk_probability_fusion,40,Tennis_Swing,49,40,37,37,0,3,9,5,-3,-6.122448979591836
+ucf101,3,new,adk_probability_fusion,41,Throw_Discus,38,29,31,29,2,0,7,2,2,5.2631578947368425
+ucf101,3,new,adk_probability_fusion,42,Trampoline_Jumping,32,23,27,23,4,0,5,4,4,12.5
+ucf101,3,new,adk_probability_fusion,43,Typing,43,43,43,43,0,0,0,0,0,0.0
+ucf101,3,new,adk_probability_fusion,44,Uneven_Bars,28,11,17,11,6,0,11,8,6,21.428571428571427
+ucf101,3,new,adk_probability_fusion,45,Volleyball_Spiking,35,28,30,28,2,0,5,5,2,5.714285714285714
+ucf101,3,new,adk_probability_fusion,46,Walking_With_Dog,36,35,35,35,0,0,1,1,0,0.0
+ucf101,3,new,adk_probability_fusion,47,Wall_Pushups,35,21,28,21,7,0,7,7,7,20.0
+ucf101,3,new,adk_probability_fusion,48,Writing_On_Board,45,42,45,42,3,0,0,3,3,6.666666666666667
+ucf101,3,new,adk_probability_fusion,49,Yo_Yo,36,2,14,2,12,0,22,17,12,33.333333333333336
+dtd,1,base,simple_fusion,0,banded,36,18,28,18,10,0,8,11,10,27.77777777777778
+dtd,1,base,simple_fusion,1,blotchy,36,24,22,20,2,4,10,7,-2,-5.555555555555555
+dtd,1,base,simple_fusion,2,braided,36,20,24,20,4,0,12,5,4,11.11111111111111
+dtd,1,base,simple_fusion,3,bubbly,36,35,35,35,0,0,1,0,0,0.0
+dtd,1,base,simple_fusion,4,bumpy,36,15,12,12,0,3,21,7,-3,-8.333333333333334
+dtd,1,base,simple_fusion,5,chequered,36,35,36,35,1,0,0,1,1,2.7777777777777777
+dtd,1,base,simple_fusion,6,cobwebbed,36,33,36,33,3,0,0,3,3,8.333333333333334
+dtd,1,base,simple_fusion,7,cracked,36,35,34,34,0,1,1,1,-1,-2.7777777777777777
+dtd,1,base,simple_fusion,8,crosshatched,36,22,16,16,0,6,14,8,-6,-16.666666666666668
+dtd,1,base,simple_fusion,9,crystalline,36,35,33,33,0,2,1,3,-2,-5.555555555555555
+dtd,1,base,simple_fusion,10,dotted,36,31,32,31,1,0,4,1,1,2.7777777777777777
+dtd,1,base,simple_fusion,11,fibrous,36,34,34,34,0,0,2,0,0,0.0
+dtd,1,base,simple_fusion,12,flecked,36,22,15,15,0,7,14,10,-7,-19.444444444444443
+dtd,1,base,simple_fusion,13,freckled,36,35,34,34,0,1,1,1,-1,-2.7777777777777777
+dtd,1,base,simple_fusion,14,frilly,36,29,28,26,2,3,5,6,-1,-2.7777777777777777
+dtd,1,base,simple_fusion,15,gauzy,36,26,27,26,1,0,9,4,1,2.7777777777777777
+dtd,1,base,simple_fusion,16,grid,36,25,21,21,0,4,11,4,-4,-11.11111111111111
+dtd,1,base,simple_fusion,17,grooved,36,20,20,17,3,3,13,8,0,0.0
+dtd,1,base,simple_fusion,18,honeycombed,36,31,32,31,1,0,4,2,1,2.7777777777777777
+dtd,1,base,simple_fusion,19,interlaced,36,33,28,28,0,5,3,5,-5,-13.88888888888889
+dtd,1,base,simple_fusion,20,knitted,36,35,36,35,1,0,0,1,1,2.7777777777777777
+dtd,1,base,simple_fusion,21,lacelike,36,29,33,29,4,0,3,4,4,11.11111111111111
+dtd,1,base,simple_fusion,22,lined,36,21,19,19,0,2,15,6,-2,-5.555555555555555
+dtd,1,base,simple_fusion,23,marbled,36,32,32,32,0,0,4,1,0,0.0
+dtd,1,base,mean_probability_fusion,0,banded,36,18,25,18,7,0,11,8,7,19.444444444444443
+dtd,1,base,mean_probability_fusion,1,blotchy,36,24,23,21,2,3,10,5,-1,-2.7777777777777777
+dtd,1,base,mean_probability_fusion,2,braided,36,20,23,20,3,0,13,4,3,8.333333333333334
+dtd,1,base,mean_probability_fusion,3,bubbly,36,35,35,35,0,0,1,0,0,0.0
+dtd,1,base,mean_probability_fusion,4,bumpy,36,15,13,13,0,2,21,6,-2,-5.555555555555555
+dtd,1,base,mean_probability_fusion,5,chequered,36,35,36,35,1,0,0,1,1,2.7777777777777777
+dtd,1,base,mean_probability_fusion,6,cobwebbed,36,33,36,33,3,0,0,3,3,8.333333333333334
+dtd,1,base,mean_probability_fusion,7,cracked,36,35,34,34,0,1,1,1,-1,-2.7777777777777777
+dtd,1,base,mean_probability_fusion,8,crosshatched,36,22,18,18,0,4,14,6,-4,-11.11111111111111
+dtd,1,base,mean_probability_fusion,9,crystalline,36,35,33,33,0,2,1,3,-2,-5.555555555555555
+dtd,1,base,mean_probability_fusion,10,dotted,36,31,32,31,1,0,4,1,1,2.7777777777777777
+dtd,1,base,mean_probability_fusion,11,fibrous,36,34,34,34,0,0,2,0,0,0.0
+dtd,1,base,mean_probability_fusion,12,flecked,36,22,18,18,0,4,14,5,-4,-11.11111111111111
+dtd,1,base,mean_probability_fusion,13,freckled,36,35,33,33,0,2,1,2,-2,-5.555555555555555
+dtd,1,base,mean_probability_fusion,14,frilly,36,29,28,26,2,3,5,6,-1,-2.7777777777777777
+dtd,1,base,mean_probability_fusion,15,gauzy,36,26,26,26,0,0,10,4,0,0.0
+dtd,1,base,mean_probability_fusion,16,grid,36,25,21,21,0,4,11,4,-4,-11.11111111111111
+dtd,1,base,mean_probability_fusion,17,grooved,36,20,20,18,2,2,14,4,0,0.0
+dtd,1,base,mean_probability_fusion,18,honeycombed,36,31,32,31,1,0,4,1,1,2.7777777777777777
+dtd,1,base,mean_probability_fusion,19,interlaced,36,33,32,32,0,1,3,1,-1,-2.7777777777777777
+dtd,1,base,mean_probability_fusion,20,knitted,36,35,36,35,1,0,0,1,1,2.7777777777777777
+dtd,1,base,mean_probability_fusion,21,lacelike,36,29,31,29,2,0,5,2,2,5.555555555555555
+dtd,1,base,mean_probability_fusion,22,lined,36,21,19,19,0,2,15,6,-2,-5.555555555555555
+dtd,1,base,mean_probability_fusion,23,marbled,36,32,32,32,0,0,4,1,0,0.0
+dtd,1,base,adk_probability_fusion,0,banded,36,18,26,18,8,0,10,8,8,22.22222222222222
+dtd,1,base,adk_probability_fusion,1,blotchy,36,24,24,21,3,3,9,8,0,0.0
+dtd,1,base,adk_probability_fusion,2,braided,36,20,22,20,2,0,14,3,2,5.555555555555555
+dtd,1,base,adk_probability_fusion,3,bubbly,36,35,35,35,0,0,1,0,0,0.0
+dtd,1,base,adk_probability_fusion,4,bumpy,36,15,14,14,0,1,21,5,-1,-2.7777777777777777
+dtd,1,base,adk_probability_fusion,5,chequered,36,35,35,35,0,0,1,0,0,0.0
+dtd,1,base,adk_probability_fusion,6,cobwebbed,36,33,35,33,2,0,1,2,2,5.555555555555555
+dtd,1,base,adk_probability_fusion,7,cracked,36,35,35,35,0,0,1,0,0,0.0
+dtd,1,base,adk_probability_fusion,8,crosshatched,36,22,19,19,0,3,14,5,-3,-8.333333333333334
+dtd,1,base,adk_probability_fusion,9,crystalline,36,35,33,33,0,2,1,3,-2,-5.555555555555555
+dtd,1,base,adk_probability_fusion,10,dotted,36,31,32,31,1,0,4,1,1,2.7777777777777777
+dtd,1,base,adk_probability_fusion,11,fibrous,36,34,34,34,0,0,2,0,0,0.0
+dtd,1,base,adk_probability_fusion,12,flecked,36,22,19,19,0,3,14,4,-3,-8.333333333333334
+dtd,1,base,adk_probability_fusion,13,freckled,36,35,34,34,0,1,1,1,-1,-2.7777777777777777
+dtd,1,base,adk_probability_fusion,14,frilly,36,29,30,28,2,1,5,4,1,2.7777777777777777
+dtd,1,base,adk_probability_fusion,15,gauzy,36,26,26,26,0,0,10,3,0,0.0
+dtd,1,base,adk_probability_fusion,16,grid,36,25,21,21,0,4,11,4,-4,-11.11111111111111
+dtd,1,base,adk_probability_fusion,17,grooved,36,20,19,17,2,3,14,6,-1,-2.7777777777777777
+dtd,1,base,adk_probability_fusion,18,honeycombed,36,31,32,31,1,0,4,1,1,2.7777777777777777
+dtd,1,base,adk_probability_fusion,19,interlaced,36,33,32,32,0,1,3,1,-1,-2.7777777777777777
+dtd,1,base,adk_probability_fusion,20,knitted,36,35,35,35,0,0,1,0,0,0.0
+dtd,1,base,adk_probability_fusion,21,lacelike,36,29,31,29,2,0,5,2,2,5.555555555555555
+dtd,1,base,adk_probability_fusion,22,lined,36,21,19,19,0,2,15,5,-2,-5.555555555555555
+dtd,1,base,adk_probability_fusion,23,marbled,36,32,32,32,0,0,4,1,0,0.0
+dtd,1,new,simple_fusion,0,matted,36,9,24,9,15,0,12,18,15,41.666666666666664
+dtd,1,new,simple_fusion,1,meshed,36,17,19,15,4,2,15,8,2,5.555555555555555
+dtd,1,new,simple_fusion,2,paisley,36,36,36,36,0,0,0,0,0,0.0
+dtd,1,new,simple_fusion,3,perforated,36,30,29,29,0,1,6,1,-1,-2.7777777777777777
+dtd,1,new,simple_fusion,4,pitted,36,1,2,1,1,0,34,15,1,2.7777777777777777
+dtd,1,new,simple_fusion,5,pleated,36,21,23,20,3,1,12,8,2,5.555555555555555
+dtd,1,new,simple_fusion,6,polka-dotted,36,30,33,30,3,0,3,3,3,8.333333333333334
+dtd,1,new,simple_fusion,7,porous,36,14,16,10,6,4,16,12,2,5.555555555555555
+dtd,1,new,simple_fusion,8,potholed,36,21,34,21,13,0,2,13,13,36.111111111111114
+dtd,1,new,simple_fusion,9,scaly,36,33,32,32,0,1,3,2,-1,-2.7777777777777777
+dtd,1,new,simple_fusion,10,smeared,36,16,19,14,5,2,15,14,3,8.333333333333334
+dtd,1,new,simple_fusion,11,spiralled,36,22,21,20,1,2,13,8,-1,-2.7777777777777777
+dtd,1,new,simple_fusion,12,sprinkled,36,21,21,18,3,3,12,9,0,0.0
+dtd,1,new,simple_fusion,13,stained,36,1,3,1,2,0,33,14,2,5.555555555555555
+dtd,1,new,simple_fusion,14,stratified,36,0,11,0,11,0,25,21,11,30.555555555555557
+dtd,1,new,simple_fusion,15,striped,36,21,30,21,9,0,6,9,9,25.0
+dtd,1,new,simple_fusion,16,studded,36,29,31,29,2,0,5,3,2,5.555555555555555
+dtd,1,new,simple_fusion,17,swirly,36,21,20,17,3,4,12,8,-1,-2.7777777777777777
+dtd,1,new,simple_fusion,18,veined,36,2,14,2,12,0,22,17,12,33.333333333333336
+dtd,1,new,simple_fusion,19,waffled,36,29,29,29,0,0,7,1,0,0.0
+dtd,1,new,simple_fusion,20,woven,36,15,21,15,6,0,15,9,6,16.666666666666668
+dtd,1,new,simple_fusion,21,wrinkled,36,25,26,24,2,1,9,4,1,2.7777777777777777
+dtd,1,new,simple_fusion,22,zigzagged,36,30,30,28,2,2,4,4,0,0.0
+dtd,1,new,mean_probability_fusion,0,matted,36,9,25,9,16,0,11,18,16,44.44444444444444
+dtd,1,new,mean_probability_fusion,1,meshed,36,17,16,14,2,3,17,6,-1,-2.7777777777777777
+dtd,1,new,mean_probability_fusion,2,paisley,36,36,36,36,0,0,0,0,0,0.0
+dtd,1,new,mean_probability_fusion,3,perforated,36,30,29,29,0,1,6,1,-1,-2.7777777777777777
+dtd,1,new,mean_probability_fusion,4,pitted,36,1,2,1,1,0,34,13,1,2.7777777777777777
+dtd,1,new,mean_probability_fusion,5,pleated,36,21,24,20,4,1,11,9,3,8.333333333333334
+dtd,1,new,mean_probability_fusion,6,polka-dotted,36,30,33,30,3,0,3,3,3,8.333333333333334
+dtd,1,new,mean_probability_fusion,7,porous,36,14,16,11,5,3,17,8,2,5.555555555555555
+dtd,1,new,mean_probability_fusion,8,potholed,36,21,33,21,12,0,3,12,12,33.333333333333336
+dtd,1,new,mean_probability_fusion,9,scaly,36,33,32,32,0,1,3,2,-1,-2.7777777777777777
+dtd,1,new,mean_probability_fusion,10,smeared,36,16,18,14,4,2,16,11,2,5.555555555555555
+dtd,1,new,mean_probability_fusion,11,spiralled,36,22,21,20,1,2,13,8,-1,-2.7777777777777777
+dtd,1,new,mean_probability_fusion,12,sprinkled,36,21,21,19,2,2,13,6,0,0.0
+dtd,1,new,mean_probability_fusion,13,stained,36,1,2,1,1,0,34,7,1,2.7777777777777777
+dtd,1,new,mean_probability_fusion,14,stratified,36,0,15,0,15,0,21,22,15,41.666666666666664
+dtd,1,new,mean_probability_fusion,15,striped,36,21,30,21,9,0,6,9,9,25.0
+dtd,1,new,mean_probability_fusion,16,studded,36,29,31,29,2,0,5,3,2,5.555555555555555
+dtd,1,new,mean_probability_fusion,17,swirly,36,21,19,17,2,4,13,8,-2,-5.555555555555555
+dtd,1,new,mean_probability_fusion,18,veined,36,2,22,2,20,0,14,22,20,55.55555555555556
+dtd,1,new,mean_probability_fusion,19,waffled,36,29,29,29,0,0,7,1,0,0.0
+dtd,1,new,mean_probability_fusion,20,woven,36,15,21,15,6,0,15,8,6,16.666666666666668
+dtd,1,new,mean_probability_fusion,21,wrinkled,36,25,26,25,1,0,10,1,1,2.7777777777777777
+dtd,1,new,mean_probability_fusion,22,zigzagged,36,30,31,29,2,1,4,3,1,2.7777777777777777
+dtd,1,new,adk_probability_fusion,0,matted,36,9,26,9,17,0,10,19,17,47.22222222222222
+dtd,1,new,adk_probability_fusion,1,meshed,36,17,16,14,2,3,17,6,-1,-2.7777777777777777
+dtd,1,new,adk_probability_fusion,2,paisley,36,36,36,36,0,0,0,0,0,0.0
+dtd,1,new,adk_probability_fusion,3,perforated,36,30,29,29,0,1,6,1,-1,-2.7777777777777777
+dtd,1,new,adk_probability_fusion,4,pitted,36,1,2,1,1,0,34,10,1,2.7777777777777777
+dtd,1,new,adk_probability_fusion,5,pleated,36,21,24,20,4,1,11,9,3,8.333333333333334
+dtd,1,new,adk_probability_fusion,6,polka-dotted,36,30,33,30,3,0,3,3,3,8.333333333333334
+dtd,1,new,adk_probability_fusion,7,porous,36,14,13,11,2,3,20,5,-1,-2.7777777777777777
+dtd,1,new,adk_probability_fusion,8,potholed,36,21,33,21,12,0,3,12,12,33.333333333333336
+dtd,1,new,adk_probability_fusion,9,scaly,36,33,33,33,0,0,3,1,0,0.0
+dtd,1,new,adk_probability_fusion,10,smeared,36,16,17,13,4,3,16,14,1,2.7777777777777777
+dtd,1,new,adk_probability_fusion,11,spiralled,36,22,20,19,1,3,13,9,-2,-5.555555555555555
+dtd,1,new,adk_probability_fusion,12,sprinkled,36,21,21,19,2,2,13,6,0,0.0
+dtd,1,new,adk_probability_fusion,13,stained,36,1,3,1,2,0,33,9,2,5.555555555555555
+dtd,1,new,adk_probability_fusion,14,stratified,36,0,23,0,23,0,13,27,23,63.888888888888886
+dtd,1,new,adk_probability_fusion,15,striped,36,21,29,21,8,0,7,8,8,22.22222222222222
+dtd,1,new,adk_probability_fusion,16,studded,36,29,32,29,3,0,4,4,3,8.333333333333334
+dtd,1,new,adk_probability_fusion,17,swirly,36,21,22,19,3,2,12,6,1,2.7777777777777777
+dtd,1,new,adk_probability_fusion,18,veined,36,2,24,2,22,0,12,22,22,61.111111111111114
+dtd,1,new,adk_probability_fusion,19,waffled,36,29,29,29,0,0,7,1,0,0.0
+dtd,1,new,adk_probability_fusion,20,woven,36,15,21,15,6,0,15,8,6,16.666666666666668
+dtd,1,new,adk_probability_fusion,21,wrinkled,36,25,26,25,1,0,10,1,1,2.7777777777777777
+dtd,1,new,adk_probability_fusion,22,zigzagged,36,30,31,29,2,1,4,3,1,2.7777777777777777
+dtd,2,base,simple_fusion,0,banded,36,24,30,24,6,0,6,7,6,16.666666666666668
+dtd,2,base,simple_fusion,1,blotchy,36,22,20,17,3,5,11,9,-2,-5.555555555555555
+dtd,2,base,simple_fusion,2,braided,36,21,23,19,4,2,11,8,2,5.555555555555555
+dtd,2,base,simple_fusion,3,bubbly,36,32,35,32,3,0,1,3,3,8.333333333333334
+dtd,2,base,simple_fusion,4,bumpy,36,24,22,22,0,2,12,3,-2,-5.555555555555555
+dtd,2,base,simple_fusion,5,chequered,36,33,36,33,3,0,0,3,3,8.333333333333334
+dtd,2,base,simple_fusion,6,cobwebbed,36,36,36,36,0,0,0,0,0,0.0
+dtd,2,base,simple_fusion,7,cracked,36,31,31,30,1,1,4,2,0,0.0
+dtd,2,base,simple_fusion,8,crosshatched,36,17,18,16,2,1,17,5,1,2.7777777777777777
+dtd,2,base,simple_fusion,9,crystalline,36,34,34,33,1,1,1,2,0,0.0
+dtd,2,base,simple_fusion,10,dotted,36,30,30,30,0,0,6,3,0,0.0
+dtd,2,base,simple_fusion,11,fibrous,36,34,34,34,0,0,2,0,0,0.0
+dtd,2,base,simple_fusion,12,flecked,36,27,21,21,0,6,9,6,-6,-16.666666666666668
+dtd,2,base,simple_fusion,13,freckled,36,32,33,32,1,0,3,1,1,2.7777777777777777
+dtd,2,base,simple_fusion,14,frilly,36,30,33,30,3,0,3,4,3,8.333333333333334
+dtd,2,base,simple_fusion,15,gauzy,36,25,26,25,1,0,10,3,1,2.7777777777777777
+dtd,2,base,simple_fusion,16,grid,36,23,21,21,0,2,13,4,-2,-5.555555555555555
+dtd,2,base,simple_fusion,17,grooved,36,22,23,21,2,1,12,6,1,2.7777777777777777
+dtd,2,base,simple_fusion,18,honeycombed,36,27,32,27,5,0,4,6,5,13.88888888888889
+dtd,2,base,simple_fusion,19,interlaced,36,31,25,25,0,6,5,6,-6,-16.666666666666668
+dtd,2,base,simple_fusion,20,knitted,36,35,36,35,1,0,0,1,1,2.7777777777777777
+dtd,2,base,simple_fusion,21,lacelike,36,28,33,28,5,0,3,7,5,13.88888888888889
+dtd,2,base,simple_fusion,22,lined,36,15,12,12,0,3,21,3,-3,-8.333333333333334
+dtd,2,base,simple_fusion,23,marbled,36,30,32,30,2,0,4,2,2,5.555555555555555
+dtd,2,base,mean_probability_fusion,0,banded,36,24,30,24,6,0,6,7,6,16.666666666666668
+dtd,2,base,mean_probability_fusion,1,blotchy,36,22,23,20,3,2,11,6,1,2.7777777777777777
+dtd,2,base,mean_probability_fusion,2,braided,36,21,24,20,4,1,11,7,3,8.333333333333334
+dtd,2,base,mean_probability_fusion,3,bubbly,36,32,35,32,3,0,1,3,3,8.333333333333334
+dtd,2,base,mean_probability_fusion,4,bumpy,36,24,23,23,0,1,12,2,-1,-2.7777777777777777
+dtd,2,base,mean_probability_fusion,5,chequered,36,33,36,33,3,0,0,3,3,8.333333333333334
+dtd,2,base,mean_probability_fusion,6,cobwebbed,36,36,36,36,0,0,0,0,0,0.0
+dtd,2,base,mean_probability_fusion,7,cracked,36,31,31,30,1,1,4,2,0,0.0
+dtd,2,base,mean_probability_fusion,8,crosshatched,36,17,15,15,0,2,19,4,-2,-5.555555555555555
+dtd,2,base,mean_probability_fusion,9,crystalline,36,34,33,33,0,1,2,2,-1,-2.7777777777777777
+dtd,2,base,mean_probability_fusion,10,dotted,36,30,30,30,0,0,6,2,0,0.0
+dtd,2,base,mean_probability_fusion,11,fibrous,36,34,34,34,0,0,2,0,0,0.0
+dtd,2,base,mean_probability_fusion,12,flecked,36,27,25,25,0,2,9,2,-2,-5.555555555555555
+dtd,2,base,mean_probability_fusion,13,freckled,36,32,32,32,0,0,4,1,0,0.0
+dtd,2,base,mean_probability_fusion,14,frilly,36,30,33,30,3,0,3,4,3,8.333333333333334
+dtd,2,base,mean_probability_fusion,15,gauzy,36,25,26,25,1,0,10,2,1,2.7777777777777777
+dtd,2,base,mean_probability_fusion,16,grid,36,23,22,22,0,1,13,1,-1,-2.7777777777777777
+dtd,2,base,mean_probability_fusion,17,grooved,36,22,23,22,1,0,13,4,1,2.7777777777777777
+dtd,2,base,mean_probability_fusion,18,honeycombed,36,27,29,27,2,0,7,5,2,5.555555555555555
+dtd,2,base,mean_probability_fusion,19,interlaced,36,31,27,27,0,4,5,4,-4,-11.11111111111111
+dtd,2,base,mean_probability_fusion,20,knitted,36,35,36,35,1,0,0,1,1,2.7777777777777777
+dtd,2,base,mean_probability_fusion,21,lacelike,36,28,31,28,3,0,5,4,3,8.333333333333334
+dtd,2,base,mean_probability_fusion,22,lined,36,15,12,12,0,3,21,3,-3,-8.333333333333334
+dtd,2,base,mean_probability_fusion,23,marbled,36,30,32,30,2,0,4,2,2,5.555555555555555
+dtd,2,base,adk_probability_fusion,0,banded,36,24,31,24,7,0,5,8,7,19.444444444444443
+dtd,2,base,adk_probability_fusion,1,blotchy,36,22,22,20,2,2,12,5,0,0.0
+dtd,2,base,adk_probability_fusion,2,braided,36,21,24,20,4,1,11,6,3,8.333333333333334
+dtd,2,base,adk_probability_fusion,3,bubbly,36,32,35,32,3,0,1,3,3,8.333333333333334
+dtd,2,base,adk_probability_fusion,4,bumpy,36,24,23,23,0,1,12,2,-1,-2.7777777777777777
+dtd,2,base,adk_probability_fusion,5,chequered,36,33,36,33,3,0,0,3,3,8.333333333333334
+dtd,2,base,adk_probability_fusion,6,cobwebbed,36,36,36,36,0,0,0,0,0,0.0
+dtd,2,base,adk_probability_fusion,7,cracked,36,31,33,31,2,0,3,2,2,5.555555555555555
+dtd,2,base,adk_probability_fusion,8,crosshatched,36,17,16,16,0,1,19,3,-1,-2.7777777777777777
+dtd,2,base,adk_probability_fusion,9,crystalline,36,34,33,33,0,1,2,1,-1,-2.7777777777777777
+dtd,2,base,adk_probability_fusion,10,dotted,36,30,30,30,0,0,6,3,0,0.0
+dtd,2,base,adk_probability_fusion,11,fibrous,36,34,34,34,0,0,2,0,0,0.0
+dtd,2,base,adk_probability_fusion,12,flecked,36,27,25,25,0,2,9,2,-2,-5.555555555555555
+dtd,2,base,adk_probability_fusion,13,freckled,36,32,32,32,0,0,4,1,0,0.0
+dtd,2,base,adk_probability_fusion,14,frilly,36,30,33,30,3,0,3,4,3,8.333333333333334
+dtd,2,base,adk_probability_fusion,15,gauzy,36,25,26,25,1,0,10,1,1,2.7777777777777777
+dtd,2,base,adk_probability_fusion,16,grid,36,23,22,22,0,1,13,1,-1,-2.7777777777777777
+dtd,2,base,adk_probability_fusion,17,grooved,36,22,23,22,1,0,13,3,1,2.7777777777777777
+dtd,2,base,adk_probability_fusion,18,honeycombed,36,27,30,27,3,0,6,4,3,8.333333333333334
+dtd,2,base,adk_probability_fusion,19,interlaced,36,31,27,27,0,4,5,4,-4,-11.11111111111111
+dtd,2,base,adk_probability_fusion,20,knitted,36,35,36,35,1,0,0,1,1,2.7777777777777777
+dtd,2,base,adk_probability_fusion,21,lacelike,36,28,31,28,3,0,5,3,3,8.333333333333334
+dtd,2,base,adk_probability_fusion,22,lined,36,15,12,12,0,3,21,3,-3,-8.333333333333334
+dtd,2,base,adk_probability_fusion,23,marbled,36,30,32,30,2,0,4,2,2,5.555555555555555
+dtd,2,new,simple_fusion,0,matted,36,11,25,11,14,0,11,18,14,38.888888888888886
+dtd,2,new,simple_fusion,1,meshed,36,6,9,6,3,0,27,6,3,8.333333333333334
+dtd,2,new,simple_fusion,2,paisley,36,27,35,27,8,0,1,8,8,22.22222222222222
+dtd,2,new,simple_fusion,3,perforated,36,30,30,30,0,0,6,0,0,0.0
+dtd,2,new,simple_fusion,4,pitted,36,5,6,4,2,1,29,14,1,2.7777777777777777
+dtd,2,new,simple_fusion,5,pleated,36,27,27,25,2,2,7,5,0,0.0
+dtd,2,new,simple_fusion,6,polka-dotted,36,33,34,33,1,0,2,1,1,2.7777777777777777
+dtd,2,new,simple_fusion,7,porous,36,17,19,17,2,0,17,7,2,5.555555555555555
+dtd,2,new,simple_fusion,8,potholed,36,23,34,23,11,0,2,11,11,30.555555555555557
+dtd,2,new,simple_fusion,9,scaly,36,6,21,6,15,0,15,17,15,41.666666666666664
+dtd,2,new,simple_fusion,10,smeared,36,7,14,7,7,0,22,10,7,19.444444444444443
+dtd,2,new,simple_fusion,11,spiralled,36,22,22,20,2,2,12,6,0,0.0
+dtd,2,new,simple_fusion,12,sprinkled,36,16,17,15,2,1,18,9,1,2.7777777777777777
+dtd,2,new,simple_fusion,13,stained,36,2,6,2,4,0,30,5,4,11.11111111111111
+dtd,2,new,simple_fusion,14,stratified,36,4,15,4,11,0,21,15,11,30.555555555555557
+dtd,2,new,simple_fusion,15,striped,36,27,30,27,3,0,6,4,3,8.333333333333334
+dtd,2,new,simple_fusion,16,studded,36,29,31,29,2,0,5,3,2,5.555555555555555
+dtd,2,new,simple_fusion,17,swirly,36,25,27,25,2,0,9,3,2,5.555555555555555
+dtd,2,new,simple_fusion,18,veined,36,19,24,19,5,0,12,6,5,13.88888888888889
+dtd,2,new,simple_fusion,19,waffled,36,27,29,27,2,0,7,3,2,5.555555555555555
+dtd,2,new,simple_fusion,20,woven,36,22,24,22,2,0,12,5,2,5.555555555555555
+dtd,2,new,simple_fusion,21,wrinkled,36,25,26,24,2,1,9,3,1,2.7777777777777777
+dtd,2,new,simple_fusion,22,zigzagged,36,34,33,32,1,2,1,3,-1,-2.7777777777777777
+dtd,2,new,mean_probability_fusion,0,matted,36,11,22,11,11,0,14,15,11,30.555555555555557
+dtd,2,new,mean_probability_fusion,1,meshed,36,6,9,6,3,0,27,5,3,8.333333333333334
+dtd,2,new,mean_probability_fusion,2,paisley,36,27,36,27,9,0,0,9,9,25.0
+dtd,2,new,mean_probability_fusion,3,perforated,36,30,30,30,0,0,6,0,0,0.0
+dtd,2,new,mean_probability_fusion,4,pitted,36,5,6,4,2,1,29,9,1,2.7777777777777777
+dtd,2,new,mean_probability_fusion,5,pleated,36,27,26,24,2,3,7,6,-1,-2.7777777777777777
+dtd,2,new,mean_probability_fusion,6,polka-dotted,36,33,34,33,1,0,2,1,1,2.7777777777777777
+dtd,2,new,mean_probability_fusion,7,porous,36,17,20,17,3,0,16,6,3,8.333333333333334
+dtd,2,new,mean_probability_fusion,8,potholed,36,23,34,23,11,0,2,11,11,30.555555555555557
+dtd,2,new,mean_probability_fusion,9,scaly,36,6,25,6,19,0,11,22,19,52.77777777777778
+dtd,2,new,mean_probability_fusion,10,smeared,36,7,12,7,5,0,24,7,5,13.88888888888889
+dtd,2,new,mean_probability_fusion,11,spiralled,36,22,22,21,1,1,13,4,0,0.0
+dtd,2,new,mean_probability_fusion,12,sprinkled,36,16,15,15,0,1,20,5,-1,-2.7777777777777777
+dtd,2,new,mean_probability_fusion,13,stained,36,2,6,2,4,0,30,5,4,11.11111111111111
+dtd,2,new,mean_probability_fusion,14,stratified,36,4,13,4,9,0,23,12,9,25.0
+dtd,2,new,mean_probability_fusion,15,striped,36,27,30,27,3,0,6,4,3,8.333333333333334
+dtd,2,new,mean_probability_fusion,16,studded,36,29,31,29,2,0,5,2,2,5.555555555555555
+dtd,2,new,mean_probability_fusion,17,swirly,36,25,25,24,1,1,10,4,0,0.0
+dtd,2,new,mean_probability_fusion,18,veined,36,19,23,19,4,0,13,4,4,11.11111111111111
+dtd,2,new,mean_probability_fusion,19,waffled,36,27,29,27,2,0,7,3,2,5.555555555555555
+dtd,2,new,mean_probability_fusion,20,woven,36,22,24,22,2,0,12,3,2,5.555555555555555
+dtd,2,new,mean_probability_fusion,21,wrinkled,36,25,25,25,0,0,11,1,0,0.0
+dtd,2,new,mean_probability_fusion,22,zigzagged,36,34,33,32,1,2,1,3,-1,-2.7777777777777777
+dtd,2,new,adk_probability_fusion,0,matted,36,11,22,11,11,0,14,15,11,30.555555555555557
+dtd,2,new,adk_probability_fusion,1,meshed,36,6,9,6,3,0,27,5,3,8.333333333333334
+dtd,2,new,adk_probability_fusion,2,paisley,36,27,35,27,8,0,1,8,8,22.22222222222222
+dtd,2,new,adk_probability_fusion,3,perforated,36,30,30,30,0,0,6,0,0,0.0
+dtd,2,new,adk_probability_fusion,4,pitted,36,5,7,5,2,0,29,5,2,5.555555555555555
+dtd,2,new,adk_probability_fusion,5,pleated,36,27,26,24,2,3,7,6,-1,-2.7777777777777777
+dtd,2,new,adk_probability_fusion,6,polka-dotted,36,33,34,33,1,0,2,1,1,2.7777777777777777
+dtd,2,new,adk_probability_fusion,7,porous,36,17,20,17,3,0,16,8,3,8.333333333333334
+dtd,2,new,adk_probability_fusion,8,potholed,36,23,33,23,10,0,3,10,10,27.77777777777778
+dtd,2,new,adk_probability_fusion,9,scaly,36,6,25,6,19,0,11,22,19,52.77777777777778
+dtd,2,new,adk_probability_fusion,10,smeared,36,7,13,7,6,0,23,8,6,16.666666666666668
+dtd,2,new,adk_probability_fusion,11,spiralled,36,22,22,21,1,1,13,3,0,0.0
+dtd,2,new,adk_probability_fusion,12,sprinkled,36,16,15,15,0,1,20,3,-1,-2.7777777777777777
+dtd,2,new,adk_probability_fusion,13,stained,36,2,6,2,4,0,30,5,4,11.11111111111111
+dtd,2,new,adk_probability_fusion,14,stratified,36,4,16,4,12,0,20,14,12,33.333333333333336
+dtd,2,new,adk_probability_fusion,15,striped,36,27,30,27,3,0,6,4,3,8.333333333333334
+dtd,2,new,adk_probability_fusion,16,studded,36,29,32,29,3,0,4,3,3,8.333333333333334
+dtd,2,new,adk_probability_fusion,17,swirly,36,25,27,25,2,0,9,3,2,5.555555555555555
+dtd,2,new,adk_probability_fusion,18,veined,36,19,25,19,6,0,11,6,6,16.666666666666668
+dtd,2,new,adk_probability_fusion,19,waffled,36,27,29,27,2,0,7,3,2,5.555555555555555
+dtd,2,new,adk_probability_fusion,20,woven,36,22,23,22,1,0,13,1,1,2.7777777777777777
+dtd,2,new,adk_probability_fusion,21,wrinkled,36,25,25,25,0,0,11,1,0,0.0
+dtd,2,new,adk_probability_fusion,22,zigzagged,36,34,34,33,1,1,1,2,0,0.0
+dtd,3,base,simple_fusion,0,banded,36,26,29,26,3,0,7,3,3,8.333333333333334
+dtd,3,base,simple_fusion,1,blotchy,36,23,20,19,1,4,12,9,-3,-8.333333333333334
+dtd,3,base,simple_fusion,2,braided,36,22,25,21,4,1,10,7,3,8.333333333333334
+dtd,3,base,simple_fusion,3,bubbly,36,35,35,35,0,0,1,0,0,0.0
+dtd,3,base,simple_fusion,4,bumpy,36,26,19,18,1,8,9,14,-7,-19.444444444444443
+dtd,3,base,simple_fusion,5,chequered,36,32,35,32,3,0,1,3,3,8.333333333333334
+dtd,3,base,simple_fusion,6,cobwebbed,36,34,34,34,0,0,2,0,0,0.0
+dtd,3,base,simple_fusion,7,cracked,36,32,32,31,1,1,3,2,0,0.0
+dtd,3,base,simple_fusion,8,crosshatched,36,14,15,13,2,1,20,11,1,2.7777777777777777
+dtd,3,base,simple_fusion,9,crystalline,36,34,35,34,1,0,1,1,1,2.7777777777777777
+dtd,3,base,simple_fusion,10,dotted,36,32,32,32,0,0,4,0,0,0.0
+dtd,3,base,simple_fusion,11,fibrous,36,34,34,34,0,0,2,0,0,0.0
+dtd,3,base,simple_fusion,12,flecked,36,17,14,13,1,4,18,6,-3,-8.333333333333334
+dtd,3,base,simple_fusion,13,freckled,36,32,32,32,0,0,4,1,0,0.0
+dtd,3,base,simple_fusion,14,frilly,36,33,30,30,0,3,3,4,-3,-8.333333333333334
+dtd,3,base,simple_fusion,15,gauzy,36,27,28,27,1,0,8,3,1,2.7777777777777777
+dtd,3,base,simple_fusion,16,grid,36,24,24,21,3,3,9,8,0,0.0
+dtd,3,base,simple_fusion,17,grooved,36,23,22,20,2,3,11,7,-1,-2.7777777777777777
+dtd,3,base,simple_fusion,18,honeycombed,36,27,32,27,5,0,4,8,5,13.88888888888889
+dtd,3,base,simple_fusion,19,interlaced,36,30,26,26,0,4,6,4,-4,-11.11111111111111
+dtd,3,base,simple_fusion,20,knitted,36,34,36,34,2,0,0,2,2,5.555555555555555
+dtd,3,base,simple_fusion,21,lacelike,36,33,33,33,0,0,3,2,0,0.0
+dtd,3,base,simple_fusion,22,lined,36,23,17,17,0,6,13,7,-6,-16.666666666666668
+dtd,3,base,simple_fusion,23,marbled,36,31,32,31,1,0,4,2,1,2.7777777777777777
+dtd,3,base,mean_probability_fusion,0,banded,36,26,27,26,1,0,9,2,1,2.7777777777777777
+dtd,3,base,mean_probability_fusion,1,blotchy,36,23,23,23,0,0,13,2,0,0.0
+dtd,3,base,mean_probability_fusion,2,braided,36,22,23,20,3,2,11,7,1,2.7777777777777777
+dtd,3,base,mean_probability_fusion,3,bubbly,36,35,35,35,0,0,1,0,0,0.0
+dtd,3,base,mean_probability_fusion,4,bumpy,36,26,24,23,1,3,9,8,-2,-5.555555555555555
+dtd,3,base,mean_probability_fusion,5,chequered,36,32,35,32,3,0,1,3,3,8.333333333333334
+dtd,3,base,mean_probability_fusion,6,cobwebbed,36,34,34,34,0,0,2,0,0,0.0
+dtd,3,base,mean_probability_fusion,7,cracked,36,32,31,31,0,1,4,1,-1,-2.7777777777777777
+dtd,3,base,mean_probability_fusion,8,crosshatched,36,14,13,13,0,1,22,8,-1,-2.7777777777777777
+dtd,3,base,mean_probability_fusion,9,crystalline,36,34,35,34,1,0,1,1,1,2.7777777777777777
+dtd,3,base,mean_probability_fusion,10,dotted,36,32,32,31,1,1,3,3,0,0.0
+dtd,3,base,mean_probability_fusion,11,fibrous,36,34,34,34,0,0,2,0,0,0.0
+dtd,3,base,mean_probability_fusion,12,flecked,36,17,15,15,0,2,19,4,-2,-5.555555555555555
+dtd,3,base,mean_probability_fusion,13,freckled,36,32,32,32,0,0,4,1,0,0.0
+dtd,3,base,mean_probability_fusion,14,frilly,36,33,31,31,0,2,3,2,-2,-5.555555555555555
+dtd,3,base,mean_probability_fusion,15,gauzy,36,27,27,26,1,1,8,4,0,0.0
+dtd,3,base,mean_probability_fusion,16,grid,36,24,25,22,3,2,9,6,1,2.7777777777777777
+dtd,3,base,mean_probability_fusion,17,grooved,36,23,22,21,1,2,12,4,-1,-2.7777777777777777
+dtd,3,base,mean_probability_fusion,18,honeycombed,36,27,29,27,2,0,7,4,2,5.555555555555555
+dtd,3,base,mean_probability_fusion,19,interlaced,36,30,28,28,0,2,6,2,-2,-5.555555555555555
+dtd,3,base,mean_probability_fusion,20,knitted,36,34,35,34,1,0,1,1,1,2.7777777777777777
+dtd,3,base,mean_probability_fusion,21,lacelike,36,33,33,33,0,0,3,2,0,0.0
+dtd,3,base,mean_probability_fusion,22,lined,36,23,18,18,0,5,13,6,-5,-13.88888888888889
+dtd,3,base,mean_probability_fusion,23,marbled,36,31,31,31,0,0,5,0,0,0.0
+dtd,3,base,adk_probability_fusion,0,banded,36,26,27,26,1,0,9,1,1,2.7777777777777777
+dtd,3,base,adk_probability_fusion,1,blotchy,36,23,20,20,0,3,13,4,-3,-8.333333333333334
+dtd,3,base,adk_probability_fusion,2,braided,36,22,23,22,1,0,13,3,1,2.7777777777777777
+dtd,3,base,adk_probability_fusion,3,bubbly,36,35,35,35,0,0,1,0,0,0.0
+dtd,3,base,adk_probability_fusion,4,bumpy,36,26,24,23,1,3,9,6,-2,-5.555555555555555
+dtd,3,base,adk_probability_fusion,5,chequered,36,32,35,32,3,0,1,3,3,8.333333333333334
+dtd,3,base,adk_probability_fusion,6,cobwebbed,36,34,34,34,0,0,2,0,0,0.0
+dtd,3,base,adk_probability_fusion,7,cracked,36,32,31,31,0,1,4,1,-1,-2.7777777777777777
+dtd,3,base,adk_probability_fusion,8,crosshatched,36,14,13,13,0,1,22,7,-1,-2.7777777777777777
+dtd,3,base,adk_probability_fusion,9,crystalline,36,34,35,34,1,0,1,1,1,2.7777777777777777
+dtd,3,base,adk_probability_fusion,10,dotted,36,32,31,31,0,1,4,2,-1,-2.7777777777777777
+dtd,3,base,adk_probability_fusion,11,fibrous,36,34,34,34,0,0,2,0,0,0.0
+dtd,3,base,adk_probability_fusion,12,flecked,36,17,15,15,0,2,19,4,-2,-5.555555555555555
+dtd,3,base,adk_probability_fusion,13,freckled,36,32,32,32,0,0,4,1,0,0.0
+dtd,3,base,adk_probability_fusion,14,frilly,36,33,32,32,0,1,3,1,-1,-2.7777777777777777
+dtd,3,base,adk_probability_fusion,15,gauzy,36,27,27,25,2,2,7,6,0,0.0
+dtd,3,base,adk_probability_fusion,16,grid,36,24,26,23,3,1,9,5,2,5.555555555555555
+dtd,3,base,adk_probability_fusion,17,grooved,36,23,22,21,1,2,12,4,-1,-2.7777777777777777
+dtd,3,base,adk_probability_fusion,18,honeycombed,36,27,30,27,3,0,6,4,3,8.333333333333334
+dtd,3,base,adk_probability_fusion,19,interlaced,36,30,28,28,0,2,6,2,-2,-5.555555555555555
+dtd,3,base,adk_probability_fusion,20,knitted,36,34,35,34,1,0,1,1,1,2.7777777777777777
+dtd,3,base,adk_probability_fusion,21,lacelike,36,33,33,33,0,0,3,2,0,0.0
+dtd,3,base,adk_probability_fusion,22,lined,36,23,17,17,0,6,13,7,-6,-16.666666666666668
+dtd,3,base,adk_probability_fusion,23,marbled,36,31,31,31,0,0,5,0,0,0.0
+dtd,3,new,simple_fusion,0,matted,36,16,24,16,8,0,12,10,8,22.22222222222222
+dtd,3,new,simple_fusion,1,meshed,36,15,20,15,5,0,16,8,5,13.88888888888889
+dtd,3,new,simple_fusion,2,paisley,36,34,36,34,2,0,0,2,2,5.555555555555555
+dtd,3,new,simple_fusion,3,perforated,36,31,28,28,0,3,5,3,-3,-8.333333333333334
+dtd,3,new,simple_fusion,4,pitted,36,4,6,3,3,1,29,15,2,5.555555555555555
+dtd,3,new,simple_fusion,5,pleated,36,23,27,22,5,1,8,8,4,11.11111111111111
+dtd,3,new,simple_fusion,6,polka-dotted,36,31,35,31,4,0,1,4,4,11.11111111111111
+dtd,3,new,simple_fusion,7,porous,36,13,17,12,5,1,18,13,4,11.11111111111111
+dtd,3,new,simple_fusion,8,potholed,36,5,33,5,28,0,3,28,28,77.77777777777777
+dtd,3,new,simple_fusion,9,scaly,36,5,22,5,17,0,14,20,17,47.22222222222222
+dtd,3,new,simple_fusion,10,smeared,36,16,18,15,3,1,17,9,2,5.555555555555555
+dtd,3,new,simple_fusion,11,spiralled,36,21,20,19,1,2,14,7,-1,-2.7777777777777777
+dtd,3,new,simple_fusion,12,sprinkled,36,11,14,11,3,0,22,8,3,8.333333333333334
+dtd,3,new,simple_fusion,13,stained,36,8,12,8,4,0,24,7,4,11.11111111111111
+dtd,3,new,simple_fusion,14,stratified,36,26,27,25,2,1,8,7,1,2.7777777777777777
+dtd,3,new,simple_fusion,15,striped,36,29,30,29,1,0,6,1,1,2.7777777777777777
+dtd,3,new,simple_fusion,16,studded,36,31,32,31,1,0,4,2,1,2.7777777777777777
+dtd,3,new,simple_fusion,17,swirly,36,29,29,27,2,2,5,4,0,0.0
+dtd,3,new,simple_fusion,18,veined,36,1,9,1,8,0,27,14,8,22.22222222222222
+dtd,3,new,simple_fusion,19,waffled,36,28,29,28,1,0,7,6,1,2.7777777777777777
+dtd,3,new,simple_fusion,20,woven,36,24,27,24,3,0,9,4,3,8.333333333333334
+dtd,3,new,simple_fusion,21,wrinkled,36,26,28,25,3,1,7,5,2,5.555555555555555
+dtd,3,new,simple_fusion,22,zigzagged,36,28,28,26,2,2,6,4,0,0.0
+dtd,3,new,mean_probability_fusion,0,matted,36,16,24,16,8,0,12,10,8,22.22222222222222
+dtd,3,new,mean_probability_fusion,1,meshed,36,15,18,15,3,0,18,7,3,8.333333333333334
+dtd,3,new,mean_probability_fusion,2,paisley,36,34,36,34,2,0,0,2,2,5.555555555555555
+dtd,3,new,mean_probability_fusion,3,perforated,36,31,28,28,0,3,5,3,-3,-8.333333333333334
+dtd,3,new,mean_probability_fusion,4,pitted,36,4,4,3,1,1,31,10,0,0.0
+dtd,3,new,mean_probability_fusion,5,pleated,36,23,25,22,3,1,10,6,2,5.555555555555555
+dtd,3,new,mean_probability_fusion,6,polka-dotted,36,31,34,31,3,0,2,3,3,8.333333333333334
+dtd,3,new,mean_probability_fusion,7,porous,36,13,18,13,5,0,18,11,5,13.88888888888889
+dtd,3,new,mean_probability_fusion,8,potholed,36,5,33,5,28,0,3,28,28,77.77777777777777
+dtd,3,new,mean_probability_fusion,9,scaly,36,5,24,5,19,0,12,20,19,52.77777777777778
+dtd,3,new,mean_probability_fusion,10,smeared,36,16,19,16,3,0,17,8,3,8.333333333333334
+dtd,3,new,mean_probability_fusion,11,spiralled,36,21,20,19,1,2,14,6,-1,-2.7777777777777777
+dtd,3,new,mean_probability_fusion,12,sprinkled,36,11,15,11,4,0,21,7,4,11.11111111111111
+dtd,3,new,mean_probability_fusion,13,stained,36,8,12,8,4,0,24,6,4,11.11111111111111
+dtd,3,new,mean_probability_fusion,14,stratified,36,26,27,25,2,1,8,7,1,2.7777777777777777
+dtd,3,new,mean_probability_fusion,15,striped,36,29,30,29,1,0,6,1,1,2.7777777777777777
+dtd,3,new,mean_probability_fusion,16,studded,36,31,32,31,1,0,4,2,1,2.7777777777777777
+dtd,3,new,mean_probability_fusion,17,swirly,36,29,30,28,2,1,5,3,1,2.7777777777777777
+dtd,3,new,mean_probability_fusion,18,veined,36,1,17,1,16,0,19,16,16,44.44444444444444
+dtd,3,new,mean_probability_fusion,19,waffled,36,28,29,28,1,0,7,6,1,2.7777777777777777
+dtd,3,new,mean_probability_fusion,20,woven,36,24,27,24,3,0,9,4,3,8.333333333333334
+dtd,3,new,mean_probability_fusion,21,wrinkled,36,26,27,25,2,1,8,4,1,2.7777777777777777
+dtd,3,new,mean_probability_fusion,22,zigzagged,36,28,28,26,2,2,6,4,0,0.0
+dtd,3,new,adk_probability_fusion,0,matted,36,16,26,16,10,0,10,11,10,27.77777777777778
+dtd,3,new,adk_probability_fusion,1,meshed,36,15,17,14,3,1,18,8,2,5.555555555555555
+dtd,3,new,adk_probability_fusion,2,paisley,36,34,36,34,2,0,0,2,2,5.555555555555555
+dtd,3,new,adk_probability_fusion,3,perforated,36,31,28,28,0,3,5,3,-3,-8.333333333333334
+dtd,3,new,adk_probability_fusion,4,pitted,36,4,3,2,1,2,31,11,-1,-2.7777777777777777
+dtd,3,new,adk_probability_fusion,5,pleated,36,23,25,22,3,1,10,6,2,5.555555555555555
+dtd,3,new,adk_probability_fusion,6,polka-dotted,36,31,34,31,3,0,2,3,3,8.333333333333334
+dtd,3,new,adk_probability_fusion,7,porous,36,13,16,12,4,1,19,11,3,8.333333333333334
+dtd,3,new,adk_probability_fusion,8,potholed,36,5,33,5,28,0,3,28,28,77.77777777777777
+dtd,3,new,adk_probability_fusion,9,scaly,36,5,25,5,20,0,11,21,20,55.55555555555556
+dtd,3,new,adk_probability_fusion,10,smeared,36,16,17,15,2,1,18,8,1,2.7777777777777777
+dtd,3,new,adk_probability_fusion,11,spiralled,36,21,19,19,0,2,15,5,-2,-5.555555555555555
+dtd,3,new,adk_probability_fusion,12,sprinkled,36,11,16,11,5,0,20,8,5,13.88888888888889
+dtd,3,new,adk_probability_fusion,13,stained,36,8,13,8,5,0,23,7,5,13.88888888888889
+dtd,3,new,adk_probability_fusion,14,stratified,36,26,27,25,2,1,8,6,1,2.7777777777777777
+dtd,3,new,adk_probability_fusion,15,striped,36,29,30,29,1,0,6,1,1,2.7777777777777777
+dtd,3,new,adk_probability_fusion,16,studded,36,31,32,31,1,0,4,2,1,2.7777777777777777
+dtd,3,new,adk_probability_fusion,17,swirly,36,29,31,29,2,0,5,2,2,5.555555555555555
+dtd,3,new,adk_probability_fusion,18,veined,36,1,19,1,18,0,17,18,18,50.0
+dtd,3,new,adk_probability_fusion,19,waffled,36,28,29,28,1,0,7,6,1,2.7777777777777777
+dtd,3,new,adk_probability_fusion,20,woven,36,24,27,24,3,0,9,3,3,8.333333333333334
+dtd,3,new,adk_probability_fusion,21,wrinkled,36,26,26,26,0,0,10,2,0,0.0
+dtd,3,new,adk_probability_fusion,22,zigzagged,36,28,29,27,2,1,6,3,1,2.7777777777777777
+fgvc_aircraft,1,base,simple_fusion,0,707-320,33,17,14,14,0,3,16,9,-3,-9.090909090909092
+fgvc_aircraft,1,base,simple_fusion,1,727-200,33,20,21,20,1,0,12,6,1,3.0303030303030303
+fgvc_aircraft,1,base,simple_fusion,2,737-200,34,12,8,7,1,5,21,13,-4,-11.764705882352942
+fgvc_aircraft,1,base,simple_fusion,3,737-300,33,1,2,1,1,0,31,18,1,3.0303030303030303
+fgvc_aircraft,1,base,simple_fusion,4,737-400,33,0,3,0,3,0,30,13,3,9.090909090909092
+fgvc_aircraft,1,base,simple_fusion,5,737-500,34,5,1,1,0,4,29,14,-4,-11.764705882352942
+fgvc_aircraft,1,base,simple_fusion,6,737-600,33,0,0,0,0,0,33,11,0,0.0
+fgvc_aircraft,1,base,simple_fusion,7,737-700,33,2,2,1,1,1,30,13,0,0.0
+fgvc_aircraft,1,base,simple_fusion,8,737-800,34,0,0,0,0,0,34,13,0,0.0
+fgvc_aircraft,1,base,simple_fusion,9,737-900,33,12,14,11,3,1,18,13,2,6.0606060606060606
+fgvc_aircraft,1,base,simple_fusion,10,747-100,33,20,22,19,3,1,10,5,2,6.0606060606060606
+fgvc_aircraft,1,base,simple_fusion,11,747-200,34,5,4,2,2,3,27,12,-1,-2.9411764705882355
+fgvc_aircraft,1,base,simple_fusion,12,747-300,33,3,1,0,1,3,29,15,-2,-6.0606060606060606
+fgvc_aircraft,1,base,simple_fusion,13,747-400,33,14,12,11,1,3,18,9,-2,-6.0606060606060606
+fgvc_aircraft,1,base,simple_fusion,14,757-200,34,7,7,6,1,1,26,11,0,0.0
+fgvc_aircraft,1,base,simple_fusion,15,757-300,33,11,13,11,2,0,20,5,2,6.0606060606060606
+fgvc_aircraft,1,base,simple_fusion,16,767-200,33,4,4,3,1,1,28,8,0,0.0
+fgvc_aircraft,1,base,simple_fusion,17,767-300,34,0,0,0,0,0,34,10,0,0.0
+fgvc_aircraft,1,base,simple_fusion,18,767-400,33,19,21,19,2,0,12,5,2,6.0606060606060606
+fgvc_aircraft,1,base,simple_fusion,19,777-200,33,6,4,3,1,3,26,10,-2,-6.0606060606060606
+fgvc_aircraft,1,base,simple_fusion,20,777-300,34,18,15,14,1,4,15,8,-3,-8.823529411764707
+fgvc_aircraft,1,base,simple_fusion,21,A300B4,33,9,6,6,0,3,24,8,-3,-9.090909090909092
+fgvc_aircraft,1,base,simple_fusion,22,A310,33,7,10,6,4,1,22,12,3,9.090909090909092
+fgvc_aircraft,1,base,simple_fusion,23,A318,34,14,15,14,1,0,19,9,1,2.9411764705882355
+fgvc_aircraft,1,base,simple_fusion,24,A319,33,13,9,9,0,4,20,13,-4,-12.121212121212121
+fgvc_aircraft,1,base,simple_fusion,25,A320,33,19,16,13,3,6,11,12,-3,-9.090909090909092
+fgvc_aircraft,1,base,simple_fusion,26,A321,34,9,6,6,0,3,25,6,-3,-8.823529411764707
+fgvc_aircraft,1,base,simple_fusion,27,A330-200,33,4,8,4,4,0,25,12,4,12.121212121212121
+fgvc_aircraft,1,base,simple_fusion,28,A330-300,33,17,15,14,1,3,15,8,-2,-6.0606060606060606
+fgvc_aircraft,1,base,simple_fusion,29,A340-200,34,0,4,0,4,0,30,21,4,11.764705882352942
+fgvc_aircraft,1,base,simple_fusion,30,A340-300,33,1,6,1,5,0,27,17,5,15.151515151515152
+fgvc_aircraft,1,base,simple_fusion,31,A340-500,33,1,2,1,1,0,31,9,1,3.0303030303030303
+fgvc_aircraft,1,base,simple_fusion,32,A340-600,34,7,6,1,5,6,22,25,-1,-2.9411764705882355
+fgvc_aircraft,1,base,simple_fusion,33,A380,33,28,24,24,0,4,5,6,-4,-12.121212121212121
+fgvc_aircraft,1,base,simple_fusion,34,ATR-42,33,13,21,13,8,0,12,8,8,24.242424242424242
+fgvc_aircraft,1,base,simple_fusion,35,ATR-72,34,27,21,21,0,6,7,6,-6,-17.647058823529413
+fgvc_aircraft,1,base,simple_fusion,36,An-12,33,30,31,29,2,1,1,3,1,3.0303030303030303
+fgvc_aircraft,1,base,simple_fusion,37,BAE 146-200,33,6,6,3,3,3,24,11,0,0.0
+fgvc_aircraft,1,base,simple_fusion,38,BAE 146-300,34,15,11,10,1,5,18,10,-4,-11.764705882352942
+fgvc_aircraft,1,base,simple_fusion,39,BAE-125,33,19,1,1,0,18,14,19,-18,-54.54545454545455
+fgvc_aircraft,1,base,simple_fusion,40,Beechcraft 1900,33,27,24,23,1,4,5,6,-3,-9.090909090909092
+fgvc_aircraft,1,base,simple_fusion,41,Boeing 717,34,21,22,20,2,1,11,5,1,2.9411764705882355
+fgvc_aircraft,1,base,simple_fusion,42,C-130,33,29,29,28,1,1,3,2,0,0.0
+fgvc_aircraft,1,base,simple_fusion,43,C-47,33,32,32,32,0,0,1,0,0,0.0
+fgvc_aircraft,1,base,simple_fusion,44,CRJ-200,34,19,18,16,2,3,13,8,-1,-2.9411764705882355
+fgvc_aircraft,1,base,simple_fusion,45,CRJ-700,33,2,3,1,2,1,29,11,1,3.0303030303030303
+fgvc_aircraft,1,base,simple_fusion,46,CRJ-900,33,10,4,4,0,6,23,6,-6,-18.181818181818183
+fgvc_aircraft,1,base,simple_fusion,47,Cessna 172,34,32,32,32,0,0,2,0,0,0.0
+fgvc_aircraft,1,base,simple_fusion,48,Cessna 208,33,25,31,25,6,0,2,6,6,18.181818181818183
+fgvc_aircraft,1,base,simple_fusion,49,Cessna 525,33,31,33,31,2,0,0,2,2,6.0606060606060606
+fgvc_aircraft,1,base,mean_probability_fusion,0,707-320,33,17,15,15,0,2,16,7,-2,-6.0606060606060606
+fgvc_aircraft,1,base,mean_probability_fusion,1,727-200,33,20,21,20,1,0,12,5,1,3.0303030303030303
+fgvc_aircraft,1,base,mean_probability_fusion,2,737-200,34,12,9,8,1,4,21,11,-3,-8.823529411764707
+fgvc_aircraft,1,base,mean_probability_fusion,3,737-300,33,1,1,1,0,0,32,16,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,4,737-400,33,0,3,0,3,0,30,12,3,9.090909090909092
+fgvc_aircraft,1,base,mean_probability_fusion,5,737-500,34,5,1,1,0,4,29,14,-4,-11.764705882352942
+fgvc_aircraft,1,base,mean_probability_fusion,6,737-600,33,0,0,0,0,0,33,10,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,7,737-700,33,2,2,1,1,1,30,12,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,8,737-800,34,0,0,0,0,0,34,13,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,9,737-900,33,12,14,11,3,1,18,12,2,6.0606060606060606
+fgvc_aircraft,1,base,mean_probability_fusion,10,747-100,33,20,22,19,3,1,10,5,2,6.0606060606060606
+fgvc_aircraft,1,base,mean_probability_fusion,11,747-200,34,5,3,2,1,3,28,9,-2,-5.882352941176471
+fgvc_aircraft,1,base,mean_probability_fusion,12,747-300,33,3,1,1,0,2,30,11,-2,-6.0606060606060606
+fgvc_aircraft,1,base,mean_probability_fusion,13,747-400,33,14,14,14,0,0,19,6,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,14,757-200,34,7,7,5,2,2,25,12,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,15,757-300,33,11,13,11,2,0,20,4,2,6.0606060606060606
+fgvc_aircraft,1,base,mean_probability_fusion,16,767-200,33,4,4,3,1,1,28,7,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,17,767-300,34,0,0,0,0,0,34,9,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,18,767-400,33,19,20,19,1,0,13,4,1,3.0303030303030303
+fgvc_aircraft,1,base,mean_probability_fusion,19,777-200,33,6,5,4,1,2,26,9,-1,-3.0303030303030303
+fgvc_aircraft,1,base,mean_probability_fusion,20,777-300,34,18,14,14,0,4,16,7,-4,-11.764705882352942
+fgvc_aircraft,1,base,mean_probability_fusion,21,A300B4,33,9,7,7,0,2,24,7,-2,-6.0606060606060606
+fgvc_aircraft,1,base,mean_probability_fusion,22,A310,33,7,10,6,4,1,22,11,3,9.090909090909092
+fgvc_aircraft,1,base,mean_probability_fusion,23,A318,34,14,15,14,1,0,19,8,1,2.9411764705882355
+fgvc_aircraft,1,base,mean_probability_fusion,24,A319,33,13,10,9,1,4,19,13,-3,-9.090909090909092
+fgvc_aircraft,1,base,mean_probability_fusion,25,A320,33,19,17,14,3,5,11,10,-2,-6.0606060606060606
+fgvc_aircraft,1,base,mean_probability_fusion,26,A321,34,9,6,6,0,3,25,6,-3,-8.823529411764707
+fgvc_aircraft,1,base,mean_probability_fusion,27,A330-200,33,4,9,4,5,0,24,11,5,15.151515151515152
+fgvc_aircraft,1,base,mean_probability_fusion,28,A330-300,33,17,17,16,1,1,15,4,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,29,A340-200,34,0,3,0,3,0,31,20,3,8.823529411764707
+fgvc_aircraft,1,base,mean_probability_fusion,30,A340-300,33,1,5,1,4,0,28,12,4,12.121212121212121
+fgvc_aircraft,1,base,mean_probability_fusion,31,A340-500,33,1,1,1,0,0,32,5,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,32,A340-600,34,7,5,1,4,6,23,21,-2,-5.882352941176471
+fgvc_aircraft,1,base,mean_probability_fusion,33,A380,33,28,26,26,0,2,5,4,-2,-6.0606060606060606
+fgvc_aircraft,1,base,mean_probability_fusion,34,ATR-42,33,13,21,13,8,0,12,8,8,24.242424242424242
+fgvc_aircraft,1,base,mean_probability_fusion,35,ATR-72,34,27,21,21,0,6,7,6,-6,-17.647058823529413
+fgvc_aircraft,1,base,mean_probability_fusion,36,An-12,33,30,31,29,2,1,1,3,1,3.0303030303030303
+fgvc_aircraft,1,base,mean_probability_fusion,37,BAE 146-200,33,6,6,3,3,3,24,9,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,38,BAE 146-300,34,15,12,11,1,4,18,8,-3,-8.823529411764707
+fgvc_aircraft,1,base,mean_probability_fusion,39,BAE-125,33,19,4,4,0,15,14,16,-15,-45.45454545454545
+fgvc_aircraft,1,base,mean_probability_fusion,40,Beechcraft 1900,33,27,23,23,0,4,6,4,-4,-12.121212121212121
+fgvc_aircraft,1,base,mean_probability_fusion,41,Boeing 717,34,21,23,20,3,1,10,6,2,5.882352941176471
+fgvc_aircraft,1,base,mean_probability_fusion,42,C-130,33,29,29,28,1,1,3,2,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,43,C-47,33,32,32,32,0,0,1,0,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,44,CRJ-200,34,19,18,17,1,2,14,5,-1,-2.9411764705882355
+fgvc_aircraft,1,base,mean_probability_fusion,45,CRJ-700,33,2,3,1,2,1,29,8,1,3.0303030303030303
+fgvc_aircraft,1,base,mean_probability_fusion,46,CRJ-900,33,10,5,5,0,5,23,5,-5,-15.151515151515152
+fgvc_aircraft,1,base,mean_probability_fusion,47,Cessna 172,34,32,32,32,0,0,2,0,0,0.0
+fgvc_aircraft,1,base,mean_probability_fusion,48,Cessna 208,33,25,31,25,6,0,2,6,6,18.181818181818183
+fgvc_aircraft,1,base,mean_probability_fusion,49,Cessna 525,33,31,33,31,2,0,0,2,2,6.0606060606060606
+fgvc_aircraft,1,base,adk_probability_fusion,0,707-320,33,17,14,14,0,3,16,6,-3,-9.090909090909092
+fgvc_aircraft,1,base,adk_probability_fusion,1,727-200,33,20,21,20,1,0,12,5,1,3.0303030303030303
+fgvc_aircraft,1,base,adk_probability_fusion,2,737-200,34,12,11,9,2,3,20,10,-1,-2.9411764705882355
+fgvc_aircraft,1,base,adk_probability_fusion,3,737-300,33,1,2,1,1,0,31,13,1,3.0303030303030303
+fgvc_aircraft,1,base,adk_probability_fusion,4,737-400,33,0,3,0,3,0,30,13,3,9.090909090909092
+fgvc_aircraft,1,base,adk_probability_fusion,5,737-500,34,5,1,1,0,4,29,13,-4,-11.764705882352942
+fgvc_aircraft,1,base,adk_probability_fusion,6,737-600,33,0,0,0,0,0,33,10,0,0.0
+fgvc_aircraft,1,base,adk_probability_fusion,7,737-700,33,2,1,1,0,1,31,12,-1,-3.0303030303030303
+fgvc_aircraft,1,base,adk_probability_fusion,8,737-800,34,0,0,0,0,0,34,10,0,0.0
+fgvc_aircraft,1,base,adk_probability_fusion,9,737-900,33,12,14,11,3,1,18,12,2,6.0606060606060606
+fgvc_aircraft,1,base,adk_probability_fusion,10,747-100,33,20,21,19,2,1,11,3,1,3.0303030303030303
+fgvc_aircraft,1,base,adk_probability_fusion,11,747-200,34,5,3,2,1,3,28,8,-2,-5.882352941176471
+fgvc_aircraft,1,base,adk_probability_fusion,12,747-300,33,3,0,0,0,3,30,11,-3,-9.090909090909092
+fgvc_aircraft,1,base,adk_probability_fusion,13,747-400,33,14,14,14,0,0,19,5,0,0.0
+fgvc_aircraft,1,base,adk_probability_fusion,14,757-200,34,7,6,5,1,2,26,11,-1,-2.9411764705882355
+fgvc_aircraft,1,base,adk_probability_fusion,15,757-300,33,11,13,11,2,0,20,5,2,6.0606060606060606
+fgvc_aircraft,1,base,adk_probability_fusion,16,767-200,33,4,3,2,1,2,28,9,-1,-3.0303030303030303
+fgvc_aircraft,1,base,adk_probability_fusion,17,767-300,34,0,0,0,0,0,34,7,0,0.0
+fgvc_aircraft,1,base,adk_probability_fusion,18,767-400,33,19,20,19,1,0,13,4,1,3.0303030303030303
+fgvc_aircraft,1,base,adk_probability_fusion,19,777-200,33,6,7,4,3,2,24,11,1,3.0303030303030303
+fgvc_aircraft,1,base,adk_probability_fusion,20,777-300,34,18,14,14,0,4,16,6,-4,-11.764705882352942
+fgvc_aircraft,1,base,adk_probability_fusion,21,A300B4,33,9,7,7,0,2,24,7,-2,-6.0606060606060606
+fgvc_aircraft,1,base,adk_probability_fusion,22,A310,33,7,10,6,4,1,22,11,3,9.090909090909092
+fgvc_aircraft,1,base,adk_probability_fusion,23,A318,34,14,15,14,1,0,19,6,1,2.9411764705882355
+fgvc_aircraft,1,base,adk_probability_fusion,24,A319,33,13,10,9,1,4,19,12,-3,-9.090909090909092
+fgvc_aircraft,1,base,adk_probability_fusion,25,A320,33,19,15,13,2,6,12,12,-4,-12.121212121212121
+fgvc_aircraft,1,base,adk_probability_fusion,26,A321,34,9,7,6,1,3,24,6,-2,-5.882352941176471
+fgvc_aircraft,1,base,adk_probability_fusion,27,A330-200,33,4,10,4,6,0,23,13,6,18.181818181818183
+fgvc_aircraft,1,base,adk_probability_fusion,28,A330-300,33,17,17,15,2,2,14,6,0,0.0
+fgvc_aircraft,1,base,adk_probability_fusion,29,A340-200,34,0,4,0,4,0,30,21,4,11.764705882352942
+fgvc_aircraft,1,base,adk_probability_fusion,30,A340-300,33,1,4,1,3,0,29,12,3,9.090909090909092
+fgvc_aircraft,1,base,adk_probability_fusion,31,A340-500,33,1,1,1,0,0,32,6,0,0.0
+fgvc_aircraft,1,base,adk_probability_fusion,32,A340-600,34,7,2,0,2,7,25,22,-5,-14.705882352941176
+fgvc_aircraft,1,base,adk_probability_fusion,33,A380,33,28,25,25,0,3,5,5,-3,-9.090909090909092
+fgvc_aircraft,1,base,adk_probability_fusion,34,ATR-42,33,13,19,13,6,0,14,6,6,18.181818181818183
+fgvc_aircraft,1,base,adk_probability_fusion,35,ATR-72,34,27,22,22,0,5,7,5,-5,-14.705882352941176
+fgvc_aircraft,1,base,adk_probability_fusion,36,An-12,33,30,31,29,2,1,1,3,1,3.0303030303030303
+fgvc_aircraft,1,base,adk_probability_fusion,37,BAE 146-200,33,6,6,3,3,3,24,10,0,0.0
+fgvc_aircraft,1,base,adk_probability_fusion,38,BAE 146-300,34,15,13,12,1,3,18,7,-2,-5.882352941176471
+fgvc_aircraft,1,base,adk_probability_fusion,39,BAE-125,33,19,5,5,0,14,14,14,-14,-42.42424242424242
+fgvc_aircraft,1,base,adk_probability_fusion,40,Beechcraft 1900,33,27,23,23,0,4,6,4,-4,-12.121212121212121
+fgvc_aircraft,1,base,adk_probability_fusion,41,Boeing 717,34,21,22,20,2,1,11,5,1,2.9411764705882355
+fgvc_aircraft,1,base,adk_probability_fusion,42,C-130,33,29,29,28,1,1,3,2,0,0.0
+fgvc_aircraft,1,base,adk_probability_fusion,43,C-47,33,32,32,32,0,0,1,0,0,0.0
+fgvc_aircraft,1,base,adk_probability_fusion,44,CRJ-200,34,19,18,17,1,2,14,5,-1,-2.9411764705882355
+fgvc_aircraft,1,base,adk_probability_fusion,45,CRJ-700,33,2,4,2,2,0,29,5,2,6.0606060606060606
+fgvc_aircraft,1,base,adk_probability_fusion,46,CRJ-900,33,10,5,5,0,5,23,6,-5,-15.151515151515152
+fgvc_aircraft,1,base,adk_probability_fusion,47,Cessna 172,34,32,32,32,0,0,2,0,0,0.0
+fgvc_aircraft,1,base,adk_probability_fusion,48,Cessna 208,33,25,31,25,6,0,2,6,6,18.181818181818183
+fgvc_aircraft,1,base,adk_probability_fusion,49,Cessna 525,33,31,32,31,1,0,1,1,1,3.0303030303030303
+fgvc_aircraft,1,new,simple_fusion,0,Cessna 560,34,22,24,22,2,0,10,3,2,5.882352941176471
+fgvc_aircraft,1,new,simple_fusion,1,Challenger 600,33,15,12,12,0,3,18,8,-3,-9.090909090909092
+fgvc_aircraft,1,new,simple_fusion,2,DC-10,33,7,9,7,2,0,24,5,2,6.0606060606060606
+fgvc_aircraft,1,new,simple_fusion,3,DC-3,34,30,30,30,0,0,4,1,0,0.0
+fgvc_aircraft,1,new,simple_fusion,4,DC-6,33,12,14,8,6,4,15,14,2,6.0606060606060606
+fgvc_aircraft,1,new,simple_fusion,5,DC-8,33,12,13,10,3,2,18,11,1,3.0303030303030303
+fgvc_aircraft,1,new,simple_fusion,6,DC-9-30,34,9,10,8,2,1,23,15,1,2.9411764705882355
+fgvc_aircraft,1,new,simple_fusion,7,DH-82,33,10,25,10,15,0,8,22,15,45.45454545454545
+fgvc_aircraft,1,new,simple_fusion,8,DHC-1,33,0,0,0,0,0,33,15,0,0.0
+fgvc_aircraft,1,new,simple_fusion,9,DHC-6,34,0,25,0,25,0,9,28,25,73.52941176470588
+fgvc_aircraft,1,new,simple_fusion,10,DHC-8-100,33,4,16,4,12,0,17,21,12,36.36363636363637
+fgvc_aircraft,1,new,simple_fusion,11,DHC-8-300,33,1,1,0,1,1,31,17,0,0.0
+fgvc_aircraft,1,new,simple_fusion,12,DR-400,34,24,20,18,2,6,8,9,-4,-11.764705882352942
+fgvc_aircraft,1,new,simple_fusion,13,Dornier 328,33,17,18,15,3,2,13,14,1,3.0303030303030303
+fgvc_aircraft,1,new,simple_fusion,14,E-170,33,0,2,0,2,0,31,13,2,6.0606060606060606
+fgvc_aircraft,1,new,simple_fusion,15,E-190,34,12,8,8,0,4,22,12,-4,-11.764705882352942
+fgvc_aircraft,1,new,simple_fusion,16,E-195,33,0,0,0,0,0,33,10,0,0.0
+fgvc_aircraft,1,new,simple_fusion,17,EMB-120,33,3,7,2,5,1,25,18,4,12.121212121212121
+fgvc_aircraft,1,new,simple_fusion,18,ERJ 135,34,0,0,0,0,0,34,14,0,0.0
+fgvc_aircraft,1,new,simple_fusion,19,ERJ 145,33,7,12,6,6,1,20,13,5,15.151515151515152
+fgvc_aircraft,1,new,simple_fusion,20,Embraer Legacy 600,33,9,9,8,1,1,23,8,0,0.0
+fgvc_aircraft,1,new,simple_fusion,21,Eurofighter Typhoon,34,29,32,29,3,0,2,3,3,8.823529411764707
+fgvc_aircraft,1,new,simple_fusion,22,F-16A/B,33,33,33,33,0,0,0,0,0,0.0
+fgvc_aircraft,1,new,simple_fusion,23,F/A-18,33,30,30,30,0,0,3,0,0,0.0
+fgvc_aircraft,1,new,simple_fusion,24,Falcon 2000,34,3,6,3,3,0,28,3,3,8.823529411764707
+fgvc_aircraft,1,new,simple_fusion,25,Falcon 900,33,1,1,1,0,0,32,7,0,0.0
+fgvc_aircraft,1,new,simple_fusion,26,Fokker 100,33,13,13,11,2,2,18,11,0,0.0
+fgvc_aircraft,1,new,simple_fusion,27,Fokker 50,34,17,20,16,4,1,13,14,3,8.823529411764707
+fgvc_aircraft,1,new,simple_fusion,28,Fokker 70,33,1,3,1,2,0,30,11,2,6.0606060606060606
+fgvc_aircraft,1,new,simple_fusion,29,Global Express,33,0,2,0,2,0,31,12,2,6.0606060606060606
+fgvc_aircraft,1,new,simple_fusion,30,Gulfstream IV,34,23,17,16,1,7,10,8,-6,-17.647058823529413
+fgvc_aircraft,1,new,simple_fusion,31,Gulfstream V,33,10,12,10,2,0,21,2,2,6.0606060606060606
+fgvc_aircraft,1,new,simple_fusion,32,Hawk T1,33,8,30,8,22,0,3,23,22,66.66666666666667
+fgvc_aircraft,1,new,simple_fusion,33,Il-76,34,31,32,31,1,0,2,1,1,2.9411764705882355
+fgvc_aircraft,1,new,simple_fusion,34,L-1011,33,17,20,17,3,0,13,5,3,9.090909090909092
+fgvc_aircraft,1,new,simple_fusion,35,MD-11,33,5,14,5,9,0,19,10,9,27.272727272727273
+fgvc_aircraft,1,new,simple_fusion,36,MD-80,34,4,2,2,0,2,30,12,-2,-5.882352941176471
+fgvc_aircraft,1,new,simple_fusion,37,MD-87,33,6,4,2,2,4,25,16,-2,-6.0606060606060606
+fgvc_aircraft,1,new,simple_fusion,38,MD-90,33,1,4,1,3,0,29,15,3,9.090909090909092
+fgvc_aircraft,1,new,simple_fusion,39,Metroliner,34,12,14,10,4,2,18,11,2,5.882352941176471
+fgvc_aircraft,1,new,simple_fusion,40,Model B200,33,0,0,0,0,0,33,15,0,0.0
+fgvc_aircraft,1,new,simple_fusion,41,PA-28,33,11,23,11,12,0,10,14,12,36.36363636363637
+fgvc_aircraft,1,new,simple_fusion,42,SR-20,34,0,0,0,0,0,34,8,0,0.0
+fgvc_aircraft,1,new,simple_fusion,43,Saab 2000,33,20,17,16,1,4,12,11,-3,-9.090909090909092
+fgvc_aircraft,1,new,simple_fusion,44,Saab 340,33,8,6,3,3,5,22,20,-2,-6.0606060606060606
+fgvc_aircraft,1,new,simple_fusion,45,Spitfire,34,33,33,33,0,0,1,1,0,0.0
+fgvc_aircraft,1,new,simple_fusion,46,Tornado,33,26,31,26,5,0,2,5,5,15.151515151515152
+fgvc_aircraft,1,new,simple_fusion,47,Tu-134,33,0,2,0,2,0,31,12,2,6.0606060606060606
+fgvc_aircraft,1,new,simple_fusion,48,Tu-154,34,5,6,5,1,0,28,12,1,2.9411764705882355
+fgvc_aircraft,1,new,simple_fusion,49,Yak-42,33,3,3,2,1,1,29,12,0,0.0
+fgvc_aircraft,1,new,mean_probability_fusion,0,Cessna 560,34,22,23,22,1,0,11,1,1,2.9411764705882355
+fgvc_aircraft,1,new,mean_probability_fusion,1,Challenger 600,33,15,13,13,0,2,18,8,-2,-6.0606060606060606
+fgvc_aircraft,1,new,mean_probability_fusion,2,DC-10,33,7,8,7,1,0,25,4,1,3.0303030303030303
+fgvc_aircraft,1,new,mean_probability_fusion,3,DC-3,34,30,30,30,0,0,4,1,0,0.0
+fgvc_aircraft,1,new,mean_probability_fusion,4,DC-6,33,12,12,8,4,4,17,12,0,0.0
+fgvc_aircraft,1,new,mean_probability_fusion,5,DC-8,33,12,12,10,2,2,19,10,0,0.0
+fgvc_aircraft,1,new,mean_probability_fusion,6,DC-9-30,34,9,11,8,3,1,22,12,2,5.882352941176471
+fgvc_aircraft,1,new,mean_probability_fusion,7,DH-82,33,10,11,10,1,0,22,12,1,3.0303030303030303
+fgvc_aircraft,1,new,mean_probability_fusion,8,DHC-1,33,0,16,0,16,0,17,22,16,48.484848484848484
+fgvc_aircraft,1,new,mean_probability_fusion,9,DHC-6,34,0,19,0,19,0,15,20,19,55.88235294117647
+fgvc_aircraft,1,new,mean_probability_fusion,10,DHC-8-100,33,4,15,4,11,0,18,20,11,33.333333333333336
+fgvc_aircraft,1,new,mean_probability_fusion,11,DHC-8-300,33,1,2,0,2,1,30,17,1,3.0303030303030303
+fgvc_aircraft,1,new,mean_probability_fusion,12,DR-400,34,24,18,17,1,7,9,10,-6,-17.647058823529413
+fgvc_aircraft,1,new,mean_probability_fusion,13,Dornier 328,33,17,15,15,0,2,16,12,-2,-6.0606060606060606
+fgvc_aircraft,1,new,mean_probability_fusion,14,E-170,33,0,1,0,1,0,32,9,1,3.0303030303030303
+fgvc_aircraft,1,new,mean_probability_fusion,15,E-190,34,12,8,8,0,4,22,11,-4,-11.764705882352942
+fgvc_aircraft,1,new,mean_probability_fusion,16,E-195,33,0,0,0,0,0,33,9,0,0.0
+fgvc_aircraft,1,new,mean_probability_fusion,17,EMB-120,33,3,9,2,7,1,23,19,6,18.181818181818183
+fgvc_aircraft,1,new,mean_probability_fusion,18,ERJ 135,34,0,4,0,4,0,30,14,4,11.764705882352942
+fgvc_aircraft,1,new,mean_probability_fusion,19,ERJ 145,33,7,9,5,4,2,22,13,2,6.0606060606060606
+fgvc_aircraft,1,new,mean_probability_fusion,20,Embraer Legacy 600,33,9,9,8,1,1,23,8,0,0.0
+fgvc_aircraft,1,new,mean_probability_fusion,21,Eurofighter Typhoon,34,29,32,29,3,0,2,3,3,8.823529411764707
+fgvc_aircraft,1,new,mean_probability_fusion,22,F-16A/B,33,33,33,33,0,0,0,0,0,0.0
+fgvc_aircraft,1,new,mean_probability_fusion,23,F/A-18,33,30,31,30,1,0,2,1,1,3.0303030303030303
+fgvc_aircraft,1,new,mean_probability_fusion,24,Falcon 2000,34,3,6,3,3,0,28,4,3,8.823529411764707
+fgvc_aircraft,1,new,mean_probability_fusion,25,Falcon 900,33,1,0,0,0,1,32,7,-1,-3.0303030303030303
+fgvc_aircraft,1,new,mean_probability_fusion,26,Fokker 100,33,13,12,11,1,2,19,9,-1,-3.0303030303030303
+fgvc_aircraft,1,new,mean_probability_fusion,27,Fokker 50,34,17,19,15,4,2,13,15,2,5.882352941176471
+fgvc_aircraft,1,new,mean_probability_fusion,28,Fokker 70,33,1,4,1,3,0,29,14,3,9.090909090909092
+fgvc_aircraft,1,new,mean_probability_fusion,29,Global Express,33,0,2,0,2,0,31,13,2,6.0606060606060606
+fgvc_aircraft,1,new,mean_probability_fusion,30,Gulfstream IV,34,23,18,17,1,6,10,7,-5,-14.705882352941176
+fgvc_aircraft,1,new,mean_probability_fusion,31,Gulfstream V,33,10,12,10,2,0,21,2,2,6.0606060606060606
+fgvc_aircraft,1,new,mean_probability_fusion,32,Hawk T1,33,8,31,8,23,0,2,25,23,69.6969696969697
+fgvc_aircraft,1,new,mean_probability_fusion,33,Il-76,34,31,32,31,1,0,2,1,1,2.9411764705882355
+fgvc_aircraft,1,new,mean_probability_fusion,34,L-1011,33,17,20,16,4,1,12,7,3,9.090909090909092
+fgvc_aircraft,1,new,mean_probability_fusion,35,MD-11,33,5,15,5,10,0,18,11,10,30.303030303030305
+fgvc_aircraft,1,new,mean_probability_fusion,36,MD-80,34,4,2,2,0,2,30,14,-2,-5.882352941176471
+fgvc_aircraft,1,new,mean_probability_fusion,37,MD-87,33,6,4,2,2,4,25,17,-2,-6.0606060606060606
+fgvc_aircraft,1,new,mean_probability_fusion,38,MD-90,33,1,5,1,4,0,28,13,4,12.121212121212121
+fgvc_aircraft,1,new,mean_probability_fusion,39,Metroliner,34,12,12,9,3,3,19,13,0,0.0
+fgvc_aircraft,1,new,mean_probability_fusion,40,Model B200,33,0,2,0,2,0,31,9,2,6.0606060606060606
+fgvc_aircraft,1,new,mean_probability_fusion,41,PA-28,33,11,24,11,13,0,9,15,13,39.39393939393939
+fgvc_aircraft,1,new,mean_probability_fusion,42,SR-20,34,0,12,0,12,0,22,12,12,35.294117647058826
+fgvc_aircraft,1,new,mean_probability_fusion,43,Saab 2000,33,20,18,17,1,3,12,11,-2,-6.0606060606060606
+fgvc_aircraft,1,new,mean_probability_fusion,44,Saab 340,33,8,5,3,2,5,23,17,-3,-9.090909090909092
+fgvc_aircraft,1,new,mean_probability_fusion,45,Spitfire,34,33,33,33,0,0,1,1,0,0.0
+fgvc_aircraft,1,new,mean_probability_fusion,46,Tornado,33,26,30,26,4,0,3,4,4,12.121212121212121
+fgvc_aircraft,1,new,mean_probability_fusion,47,Tu-134,33,0,1,0,1,0,32,11,1,3.0303030303030303
+fgvc_aircraft,1,new,mean_probability_fusion,48,Tu-154,34,5,7,5,2,0,27,11,2,5.882352941176471
+fgvc_aircraft,1,new,mean_probability_fusion,49,Yak-42,33,3,5,3,2,0,28,13,2,6.0606060606060606
+fgvc_aircraft,1,new,adk_probability_fusion,0,Cessna 560,34,22,23,22,1,0,11,1,1,2.9411764705882355
+fgvc_aircraft,1,new,adk_probability_fusion,1,Challenger 600,33,15,13,13,0,2,18,8,-2,-6.0606060606060606
+fgvc_aircraft,1,new,adk_probability_fusion,2,DC-10,33,7,8,7,1,0,25,4,1,3.0303030303030303
+fgvc_aircraft,1,new,adk_probability_fusion,3,DC-3,34,30,30,30,0,0,4,1,0,0.0
+fgvc_aircraft,1,new,adk_probability_fusion,4,DC-6,33,12,12,8,4,4,17,12,0,0.0
+fgvc_aircraft,1,new,adk_probability_fusion,5,DC-8,33,12,12,10,2,2,19,9,0,0.0
+fgvc_aircraft,1,new,adk_probability_fusion,6,DC-9-30,34,9,11,8,3,1,22,12,2,5.882352941176471
+fgvc_aircraft,1,new,adk_probability_fusion,7,DH-82,33,10,23,10,13,0,10,14,13,39.39393939393939
+fgvc_aircraft,1,new,adk_probability_fusion,8,DHC-1,33,0,16,0,16,0,17,21,16,48.484848484848484
+fgvc_aircraft,1,new,adk_probability_fusion,9,DHC-6,34,0,14,0,14,0,20,14,14,41.1764705882353
+fgvc_aircraft,1,new,adk_probability_fusion,10,DHC-8-100,33,4,8,2,6,2,23,16,4,12.121212121212121
+fgvc_aircraft,1,new,adk_probability_fusion,11,DHC-8-300,33,1,3,0,3,1,29,15,2,6.0606060606060606
+fgvc_aircraft,1,new,adk_probability_fusion,12,DR-400,34,24,19,18,1,6,9,8,-5,-14.705882352941176
+fgvc_aircraft,1,new,adk_probability_fusion,13,Dornier 328,33,17,16,16,0,1,16,8,-1,-3.0303030303030303
+fgvc_aircraft,1,new,adk_probability_fusion,14,E-170,33,0,1,0,1,0,32,12,1,3.0303030303030303
+fgvc_aircraft,1,new,adk_probability_fusion,15,E-190,34,12,10,9,1,3,21,11,-2,-5.882352941176471
+fgvc_aircraft,1,new,adk_probability_fusion,16,E-195,33,0,0,0,0,0,33,9,0,0.0
+fgvc_aircraft,1,new,adk_probability_fusion,17,EMB-120,33,3,10,2,8,1,22,18,7,21.21212121212121
+fgvc_aircraft,1,new,adk_probability_fusion,18,ERJ 135,34,0,4,0,4,0,30,13,4,11.764705882352942
+fgvc_aircraft,1,new,adk_probability_fusion,19,ERJ 145,33,7,10,6,4,1,22,11,3,9.090909090909092
+fgvc_aircraft,1,new,adk_probability_fusion,20,Embraer Legacy 600,33,9,9,8,1,1,23,8,0,0.0
+fgvc_aircraft,1,new,adk_probability_fusion,21,Eurofighter Typhoon,34,29,32,29,3,0,2,3,3,8.823529411764707
+fgvc_aircraft,1,new,adk_probability_fusion,22,F-16A/B,33,33,33,33,0,0,0,0,0,0.0
+fgvc_aircraft,1,new,adk_probability_fusion,23,F/A-18,33,30,32,30,2,0,1,2,2,6.0606060606060606
+fgvc_aircraft,1,new,adk_probability_fusion,24,Falcon 2000,34,3,6,3,3,0,28,4,3,8.823529411764707
+fgvc_aircraft,1,new,adk_probability_fusion,25,Falcon 900,33,1,0,0,0,1,32,6,-1,-3.0303030303030303
+fgvc_aircraft,1,new,adk_probability_fusion,26,Fokker 100,33,13,12,11,1,2,19,9,-1,-3.0303030303030303
+fgvc_aircraft,1,new,adk_probability_fusion,27,Fokker 50,34,17,20,15,5,2,12,16,3,8.823529411764707
+fgvc_aircraft,1,new,adk_probability_fusion,28,Fokker 70,33,1,4,1,3,0,29,11,3,9.090909090909092
+fgvc_aircraft,1,new,adk_probability_fusion,29,Global Express,33,0,2,0,2,0,31,13,2,6.0606060606060606
+fgvc_aircraft,1,new,adk_probability_fusion,30,Gulfstream IV,34,23,18,17,1,6,10,7,-5,-14.705882352941176
+fgvc_aircraft,1,new,adk_probability_fusion,31,Gulfstream V,33,10,12,10,2,0,21,2,2,6.0606060606060606
+fgvc_aircraft,1,new,adk_probability_fusion,32,Hawk T1,33,8,31,8,23,0,2,25,23,69.6969696969697
+fgvc_aircraft,1,new,adk_probability_fusion,33,Il-76,34,31,32,31,1,0,2,1,1,2.9411764705882355
+fgvc_aircraft,1,new,adk_probability_fusion,34,L-1011,33,17,21,17,4,0,12,6,4,12.121212121212121
+fgvc_aircraft,1,new,adk_probability_fusion,35,MD-11,33,5,15,5,10,0,18,11,10,30.303030303030305
+fgvc_aircraft,1,new,adk_probability_fusion,36,MD-80,34,4,2,2,0,2,30,12,-2,-5.882352941176471
+fgvc_aircraft,1,new,adk_probability_fusion,37,MD-87,33,6,4,2,2,4,25,16,-2,-6.0606060606060606
+fgvc_aircraft,1,new,adk_probability_fusion,38,MD-90,33,1,4,1,3,0,29,13,3,9.090909090909092
+fgvc_aircraft,1,new,adk_probability_fusion,39,Metroliner,34,12,12,9,3,3,19,13,0,0.0
+fgvc_aircraft,1,new,adk_probability_fusion,40,Model B200,33,0,2,0,2,0,31,12,2,6.0606060606060606
+fgvc_aircraft,1,new,adk_probability_fusion,41,PA-28,33,11,23,11,12,0,10,14,12,36.36363636363637
+fgvc_aircraft,1,new,adk_probability_fusion,42,SR-20,34,0,12,0,12,0,22,12,12,35.294117647058826
+fgvc_aircraft,1,new,adk_probability_fusion,43,Saab 2000,33,20,19,18,1,2,12,10,-1,-3.0303030303030303
+fgvc_aircraft,1,new,adk_probability_fusion,44,Saab 340,33,8,5,2,3,6,22,19,-3,-9.090909090909092
+fgvc_aircraft,1,new,adk_probability_fusion,45,Spitfire,34,33,33,33,0,0,1,1,0,0.0
+fgvc_aircraft,1,new,adk_probability_fusion,46,Tornado,33,26,31,26,5,0,2,5,5,15.151515151515152
+fgvc_aircraft,1,new,adk_probability_fusion,47,Tu-134,33,0,2,0,2,0,31,11,2,6.0606060606060606
+fgvc_aircraft,1,new,adk_probability_fusion,48,Tu-154,34,5,7,5,2,0,27,13,2,5.882352941176471
+fgvc_aircraft,1,new,adk_probability_fusion,49,Yak-42,33,3,5,3,2,0,28,13,2,6.0606060606060606
+fgvc_aircraft,2,base,simple_fusion,0,707-320,33,16,17,14,3,2,14,8,1,3.0303030303030303
+fgvc_aircraft,2,base,simple_fusion,1,727-200,33,18,19,18,1,0,14,4,1,3.0303030303030303
+fgvc_aircraft,2,base,simple_fusion,2,737-200,34,12,10,10,0,2,22,7,-2,-5.882352941176471
+fgvc_aircraft,2,base,simple_fusion,3,737-300,33,1,0,0,0,1,32,12,-1,-3.0303030303030303
+fgvc_aircraft,2,base,simple_fusion,4,737-400,33,4,4,2,2,2,27,12,0,0.0
+fgvc_aircraft,2,base,simple_fusion,5,737-500,34,2,1,1,0,1,32,12,-1,-2.9411764705882355
+fgvc_aircraft,2,base,simple_fusion,6,737-600,33,2,1,0,1,2,30,18,-1,-3.0303030303030303
+fgvc_aircraft,2,base,simple_fusion,7,737-700,33,1,2,0,2,1,30,12,1,3.0303030303030303
+fgvc_aircraft,2,base,simple_fusion,8,737-800,34,1,0,0,0,1,33,14,-1,-2.9411764705882355
+fgvc_aircraft,2,base,simple_fusion,9,737-900,33,6,7,5,2,1,25,15,1,3.0303030303030303
+fgvc_aircraft,2,base,simple_fusion,10,747-100,33,21,23,21,2,0,10,5,2,6.0606060606060606
+fgvc_aircraft,2,base,simple_fusion,11,747-200,34,4,4,3,1,1,29,6,0,0.0
+fgvc_aircraft,2,base,simple_fusion,12,747-300,33,6,4,4,0,2,27,7,-2,-6.0606060606060606
+fgvc_aircraft,2,base,simple_fusion,13,747-400,33,11,12,10,2,1,20,10,1,3.0303030303030303
+fgvc_aircraft,2,base,simple_fusion,14,757-200,34,5,5,4,1,1,28,15,0,0.0
+fgvc_aircraft,2,base,simple_fusion,15,757-300,33,10,14,8,6,2,17,16,4,12.121212121212121
+fgvc_aircraft,2,base,simple_fusion,16,767-200,33,4,6,3,3,1,26,10,2,6.0606060606060606
+fgvc_aircraft,2,base,simple_fusion,17,767-300,34,1,1,0,1,1,32,17,0,0.0
+fgvc_aircraft,2,base,simple_fusion,18,767-400,33,22,20,20,0,2,11,5,-2,-6.0606060606060606
+fgvc_aircraft,2,base,simple_fusion,19,777-200,33,7,5,3,2,4,24,13,-2,-6.0606060606060606
+fgvc_aircraft,2,base,simple_fusion,20,777-300,34,24,19,19,0,5,10,9,-5,-14.705882352941176
+fgvc_aircraft,2,base,simple_fusion,21,A300B4,33,6,4,3,1,3,26,11,-2,-6.0606060606060606
+fgvc_aircraft,2,base,simple_fusion,22,A310,33,7,10,7,3,0,23,6,3,9.090909090909092
+fgvc_aircraft,2,base,simple_fusion,23,A318,34,19,19,17,2,2,13,8,0,0.0
+fgvc_aircraft,2,base,simple_fusion,24,A319,33,5,6,4,2,1,26,11,1,3.0303030303030303
+fgvc_aircraft,2,base,simple_fusion,25,A320,33,5,8,4,4,1,24,11,3,9.090909090909092
+fgvc_aircraft,2,base,simple_fusion,26,A321,34,8,8,6,2,2,24,12,0,0.0
+fgvc_aircraft,2,base,simple_fusion,27,A330-200,33,2,8,2,6,0,25,16,6,18.181818181818183
+fgvc_aircraft,2,base,simple_fusion,28,A330-300,33,13,12,10,2,3,18,9,-1,-3.0303030303030303
+fgvc_aircraft,2,base,simple_fusion,29,A340-200,34,3,6,3,3,0,28,18,3,8.823529411764707
+fgvc_aircraft,2,base,simple_fusion,30,A340-300,33,7,9,5,4,2,22,13,2,6.0606060606060606
+fgvc_aircraft,2,base,simple_fusion,31,A340-500,33,2,2,1,1,1,30,8,0,0.0
+fgvc_aircraft,2,base,simple_fusion,32,A340-600,34,4,5,3,2,1,28,17,1,2.9411764705882355
+fgvc_aircraft,2,base,simple_fusion,33,A380,33,24,24,24,0,0,9,3,0,0.0
+fgvc_aircraft,2,base,simple_fusion,34,ATR-42,33,26,29,24,5,2,2,7,3,9.090909090909092
+fgvc_aircraft,2,base,simple_fusion,35,ATR-72,34,11,10,7,3,4,20,8,-1,-2.9411764705882355
+fgvc_aircraft,2,base,simple_fusion,36,An-12,33,30,29,29,0,1,3,1,-1,-3.0303030303030303
+fgvc_aircraft,2,base,simple_fusion,37,BAE 146-200,33,15,9,8,1,7,17,12,-6,-18.181818181818183
+fgvc_aircraft,2,base,simple_fusion,38,BAE 146-300,34,10,12,5,7,5,17,16,2,5.882352941176471
+fgvc_aircraft,2,base,simple_fusion,39,BAE-125,33,23,1,1,0,22,10,23,-22,-66.66666666666667
+fgvc_aircraft,2,base,simple_fusion,40,Beechcraft 1900,33,26,24,21,3,5,4,9,-2,-6.0606060606060606
+fgvc_aircraft,2,base,simple_fusion,41,Boeing 717,34,23,24,21,3,2,8,6,1,2.9411764705882355
+fgvc_aircraft,2,base,simple_fusion,42,C-130,33,33,31,31,0,2,0,2,-2,-6.0606060606060606
+fgvc_aircraft,2,base,simple_fusion,43,C-47,33,32,31,31,0,1,1,1,-1,-3.0303030303030303
+fgvc_aircraft,2,base,simple_fusion,44,CRJ-200,34,13,20,13,7,0,14,14,7,20.58823529411765
+fgvc_aircraft,2,base,simple_fusion,45,CRJ-700,33,6,9,2,7,4,20,13,3,9.090909090909092
+fgvc_aircraft,2,base,simple_fusion,46,CRJ-900,33,5,3,3,0,2,28,6,-2,-6.0606060606060606
+fgvc_aircraft,2,base,simple_fusion,47,Cessna 172,34,33,33,33,0,0,1,0,0,0.0
+fgvc_aircraft,2,base,simple_fusion,48,Cessna 208,33,20,27,19,8,1,5,9,7,21.21212121212121
+fgvc_aircraft,2,base,simple_fusion,49,Cessna 525,33,29,32,29,3,0,1,3,3,9.090909090909092
+fgvc_aircraft,2,base,mean_probability_fusion,0,707-320,33,16,17,15,2,1,15,5,1,3.0303030303030303
+fgvc_aircraft,2,base,mean_probability_fusion,1,727-200,33,18,19,18,1,0,14,5,1,3.0303030303030303
+fgvc_aircraft,2,base,mean_probability_fusion,2,737-200,34,12,10,10,0,2,22,7,-2,-5.882352941176471
+fgvc_aircraft,2,base,mean_probability_fusion,3,737-300,33,1,1,1,0,0,32,13,0,0.0
+fgvc_aircraft,2,base,mean_probability_fusion,4,737-400,33,4,4,2,2,2,27,9,0,0.0
+fgvc_aircraft,2,base,mean_probability_fusion,5,737-500,34,2,1,1,0,1,32,11,-1,-2.9411764705882355
+fgvc_aircraft,2,base,mean_probability_fusion,6,737-600,33,2,0,0,0,2,31,17,-2,-6.0606060606060606
+fgvc_aircraft,2,base,mean_probability_fusion,7,737-700,33,1,3,1,2,0,30,8,2,6.0606060606060606
+fgvc_aircraft,2,base,mean_probability_fusion,8,737-800,34,1,0,0,0,1,33,11,-1,-2.9411764705882355
+fgvc_aircraft,2,base,mean_probability_fusion,9,737-900,33,6,7,5,2,1,25,11,1,3.0303030303030303
+fgvc_aircraft,2,base,mean_probability_fusion,10,747-100,33,21,23,21,2,0,10,4,2,6.0606060606060606
+fgvc_aircraft,2,base,mean_probability_fusion,11,747-200,34,4,5,4,1,0,29,3,1,2.9411764705882355
+fgvc_aircraft,2,base,mean_probability_fusion,12,747-300,33,6,4,4,0,2,27,7,-2,-6.0606060606060606
+fgvc_aircraft,2,base,mean_probability_fusion,13,747-400,33,11,11,10,1,1,21,6,0,0.0
+fgvc_aircraft,2,base,mean_probability_fusion,14,757-200,34,5,5,4,1,1,28,13,0,0.0
+fgvc_aircraft,2,base,mean_probability_fusion,15,757-300,33,10,12,9,3,1,20,10,2,6.0606060606060606
+fgvc_aircraft,2,base,mean_probability_fusion,16,767-200,33,4,5,3,2,1,27,8,1,3.0303030303030303
+fgvc_aircraft,2,base,mean_probability_fusion,17,767-300,34,1,1,1,0,0,33,12,0,0.0
+fgvc_aircraft,2,base,mean_probability_fusion,18,767-400,33,22,21,21,0,1,11,3,-1,-3.0303030303030303
+fgvc_aircraft,2,base,mean_probability_fusion,19,777-200,33,7,7,6,1,1,25,7,0,0.0
+fgvc_aircraft,2,base,mean_probability_fusion,20,777-300,34,24,21,21,0,3,10,5,-3,-8.823529411764707
+fgvc_aircraft,2,base,mean_probability_fusion,21,A300B4,33,6,4,3,1,3,26,10,-2,-6.0606060606060606
+fgvc_aircraft,2,base,mean_probability_fusion,22,A310,33,7,11,7,4,0,22,7,4,12.121212121212121
+fgvc_aircraft,2,base,mean_probability_fusion,23,A318,34,19,19,17,2,2,13,8,0,0.0
+fgvc_aircraft,2,base,mean_probability_fusion,24,A319,33,5,7,4,3,1,25,10,2,6.0606060606060606
+fgvc_aircraft,2,base,mean_probability_fusion,25,A320,33,5,7,4,3,1,25,10,2,6.0606060606060606
+fgvc_aircraft,2,base,mean_probability_fusion,26,A321,34,8,8,6,2,2,24,13,0,0.0
+fgvc_aircraft,2,base,mean_probability_fusion,27,A330-200,33,2,7,2,5,0,26,9,5,15.151515151515152
+fgvc_aircraft,2,base,mean_probability_fusion,28,A330-300,33,13,12,11,1,2,19,6,-1,-3.0303030303030303
+fgvc_aircraft,2,base,mean_probability_fusion,29,A340-200,34,3,5,3,2,0,29,14,2,5.882352941176471
+fgvc_aircraft,2,base,mean_probability_fusion,30,A340-300,33,7,9,5,4,2,22,12,2,6.0606060606060606
+fgvc_aircraft,2,base,mean_probability_fusion,31,A340-500,33,2,2,1,1,1,30,8,0,0.0
+fgvc_aircraft,2,base,mean_probability_fusion,32,A340-600,34,4,6,4,2,0,28,15,2,5.882352941176471
+fgvc_aircraft,2,base,mean_probability_fusion,33,A380,33,24,24,24,0,0,9,3,0,0.0
+fgvc_aircraft,2,base,mean_probability_fusion,34,ATR-42,33,26,28,24,4,2,3,6,2,6.0606060606060606
+fgvc_aircraft,2,base,mean_probability_fusion,35,ATR-72,34,11,9,7,2,4,21,7,-2,-5.882352941176471
+fgvc_aircraft,2,base,mean_probability_fusion,36,An-12,33,30,29,29,0,1,3,1,-1,-3.0303030303030303
+fgvc_aircraft,2,base,mean_probability_fusion,37,BAE 146-200,33,15,9,8,1,7,17,11,-6,-18.181818181818183
+fgvc_aircraft,2,base,mean_probability_fusion,38,BAE 146-300,34,10,11,6,5,4,19,12,1,2.9411764705882355
+fgvc_aircraft,2,base,mean_probability_fusion,39,BAE-125,33,23,9,9,0,14,10,14,-14,-42.42424242424242
+fgvc_aircraft,2,base,mean_probability_fusion,40,Beechcraft 1900,33,26,26,24,2,2,5,5,0,0.0
+fgvc_aircraft,2,base,mean_probability_fusion,41,Boeing 717,34,23,24,22,2,1,9,4,1,2.9411764705882355
+fgvc_aircraft,2,base,mean_probability_fusion,42,C-130,33,33,31,31,0,2,0,2,-2,-6.0606060606060606
+fgvc_aircraft,2,base,mean_probability_fusion,43,C-47,33,32,32,32,0,0,1,0,0,0.0
+fgvc_aircraft,2,base,mean_probability_fusion,44,CRJ-200,34,13,16,12,4,1,17,11,3,8.823529411764707
+fgvc_aircraft,2,base,mean_probability_fusion,45,CRJ-700,33,6,10,4,6,2,21,9,4,12.121212121212121
+fgvc_aircraft,2,base,mean_probability_fusion,46,CRJ-900,33,5,3,3,0,2,28,6,-2,-6.0606060606060606
+fgvc_aircraft,2,base,mean_probability_fusion,47,Cessna 172,34,33,33,33,0,0,1,0,0,0.0
+fgvc_aircraft,2,base,mean_probability_fusion,48,Cessna 208,33,20,27,19,8,1,5,9,7,21.21212121212121
+fgvc_aircraft,2,base,mean_probability_fusion,49,Cessna 525,33,29,31,29,2,0,2,2,2,6.0606060606060606
+fgvc_aircraft,2,base,adk_probability_fusion,0,707-320,33,16,17,15,2,1,15,6,1,3.0303030303030303
+fgvc_aircraft,2,base,adk_probability_fusion,1,727-200,33,18,19,18,1,0,14,4,1,3.0303030303030303
+fgvc_aircraft,2,base,adk_probability_fusion,2,737-200,34,12,10,10,0,2,22,7,-2,-5.882352941176471
+fgvc_aircraft,2,base,adk_probability_fusion,3,737-300,33,1,1,1,0,0,32,12,0,0.0
+fgvc_aircraft,2,base,adk_probability_fusion,4,737-400,33,4,6,3,3,1,26,9,2,6.0606060606060606
+fgvc_aircraft,2,base,adk_probability_fusion,5,737-500,34,2,1,1,0,1,32,10,-1,-2.9411764705882355
+fgvc_aircraft,2,base,adk_probability_fusion,6,737-600,33,2,0,0,0,2,31,18,-2,-6.0606060606060606
+fgvc_aircraft,2,base,adk_probability_fusion,7,737-700,33,1,0,0,0,1,32,8,-1,-3.0303030303030303
+fgvc_aircraft,2,base,adk_probability_fusion,8,737-800,34,1,0,0,0,1,33,12,-1,-2.9411764705882355
+fgvc_aircraft,2,base,adk_probability_fusion,9,737-900,33,6,7,5,2,1,25,13,1,3.0303030303030303
+fgvc_aircraft,2,base,adk_probability_fusion,10,747-100,33,21,22,21,1,0,11,3,1,3.0303030303030303
+fgvc_aircraft,2,base,adk_probability_fusion,11,747-200,34,4,5,4,1,0,29,3,1,2.9411764705882355
+fgvc_aircraft,2,base,adk_probability_fusion,12,747-300,33,6,3,3,0,3,27,7,-3,-9.090909090909092
+fgvc_aircraft,2,base,adk_probability_fusion,13,747-400,33,11,12,10,2,1,20,7,1,3.0303030303030303
+fgvc_aircraft,2,base,adk_probability_fusion,14,757-200,34,5,5,4,1,1,28,14,0,0.0
+fgvc_aircraft,2,base,adk_probability_fusion,15,757-300,33,10,13,10,3,0,20,9,3,9.090909090909092
+fgvc_aircraft,2,base,adk_probability_fusion,16,767-200,33,4,4,3,1,1,28,7,0,0.0
+fgvc_aircraft,2,base,adk_probability_fusion,17,767-300,34,1,1,1,0,0,33,9,0,0.0
+fgvc_aircraft,2,base,adk_probability_fusion,18,767-400,33,22,21,21,0,1,11,3,-1,-3.0303030303030303
+fgvc_aircraft,2,base,adk_probability_fusion,19,777-200,33,7,7,6,1,1,25,7,0,0.0
+fgvc_aircraft,2,base,adk_probability_fusion,20,777-300,34,24,21,21,0,3,10,3,-3,-8.823529411764707
+fgvc_aircraft,2,base,adk_probability_fusion,21,A300B4,33,6,3,3,0,3,27,8,-3,-9.090909090909092
+fgvc_aircraft,2,base,adk_probability_fusion,22,A310,33,7,11,7,4,0,22,7,4,12.121212121212121
+fgvc_aircraft,2,base,adk_probability_fusion,23,A318,34,19,19,17,2,2,13,8,0,0.0
+fgvc_aircraft,2,base,adk_probability_fusion,24,A319,33,5,7,4,3,1,25,11,2,6.0606060606060606
+fgvc_aircraft,2,base,adk_probability_fusion,25,A320,33,5,7,4,3,1,25,10,2,6.0606060606060606
+fgvc_aircraft,2,base,adk_probability_fusion,26,A321,34,8,8,6,2,2,24,13,0,0.0
+fgvc_aircraft,2,base,adk_probability_fusion,27,A330-200,33,2,6,2,4,0,27,9,4,12.121212121212121
+fgvc_aircraft,2,base,adk_probability_fusion,28,A330-300,33,13,12,11,1,2,19,6,-1,-3.0303030303030303
+fgvc_aircraft,2,base,adk_probability_fusion,29,A340-200,34,3,5,3,2,0,29,15,2,5.882352941176471
+fgvc_aircraft,2,base,adk_probability_fusion,30,A340-300,33,7,8,4,4,3,22,13,1,3.0303030303030303
+fgvc_aircraft,2,base,adk_probability_fusion,31,A340-500,33,2,3,2,1,0,30,7,1,3.0303030303030303
+fgvc_aircraft,2,base,adk_probability_fusion,32,A340-600,34,4,5,4,1,0,29,16,1,2.9411764705882355
+fgvc_aircraft,2,base,adk_probability_fusion,33,A380,33,24,24,24,0,0,9,1,0,0.0
+fgvc_aircraft,2,base,adk_probability_fusion,34,ATR-42,33,26,28,24,4,2,3,6,2,6.0606060606060606
+fgvc_aircraft,2,base,adk_probability_fusion,35,ATR-72,34,11,12,8,4,3,19,8,1,2.9411764705882355
+fgvc_aircraft,2,base,adk_probability_fusion,36,An-12,33,30,29,29,0,1,3,1,-1,-3.0303030303030303
+fgvc_aircraft,2,base,adk_probability_fusion,37,BAE 146-200,33,15,9,9,0,6,18,8,-6,-18.181818181818183
+fgvc_aircraft,2,base,adk_probability_fusion,38,BAE 146-300,34,10,13,8,5,2,19,10,3,8.823529411764707
+fgvc_aircraft,2,base,adk_probability_fusion,39,BAE-125,33,23,10,10,0,13,10,14,-13,-39.39393939393939
+fgvc_aircraft,2,base,adk_probability_fusion,40,Beechcraft 1900,33,26,24,23,1,3,6,5,-2,-6.0606060606060606
+fgvc_aircraft,2,base,adk_probability_fusion,41,Boeing 717,34,23,24,22,2,1,9,4,1,2.9411764705882355
+fgvc_aircraft,2,base,adk_probability_fusion,42,C-130,33,33,32,32,0,1,0,1,-1,-3.0303030303030303
+fgvc_aircraft,2,base,adk_probability_fusion,43,C-47,33,32,32,32,0,0,1,0,0,0.0
+fgvc_aircraft,2,base,adk_probability_fusion,44,CRJ-200,34,13,16,12,4,1,17,11,3,8.823529411764707
+fgvc_aircraft,2,base,adk_probability_fusion,45,CRJ-700,33,6,10,5,5,1,22,7,4,12.121212121212121
+fgvc_aircraft,2,base,adk_probability_fusion,46,CRJ-900,33,5,3,3,0,2,28,6,-2,-6.0606060606060606
+fgvc_aircraft,2,base,adk_probability_fusion,47,Cessna 172,34,33,33,33,0,0,1,0,0,0.0
+fgvc_aircraft,2,base,adk_probability_fusion,48,Cessna 208,33,20,27,19,8,1,5,9,7,21.21212121212121
+fgvc_aircraft,2,base,adk_probability_fusion,49,Cessna 525,33,29,31,29,2,0,2,2,2,6.0606060606060606
+fgvc_aircraft,2,new,simple_fusion,0,Cessna 560,34,22,25,22,3,0,9,6,3,8.823529411764707
+fgvc_aircraft,2,new,simple_fusion,1,Challenger 600,33,1,3,0,3,1,29,16,2,6.0606060606060606
+fgvc_aircraft,2,new,simple_fusion,2,DC-10,33,19,15,15,0,4,14,5,-4,-12.121212121212121
+fgvc_aircraft,2,new,simple_fusion,3,DC-3,34,10,19,9,10,1,14,15,9,26.470588235294116
+fgvc_aircraft,2,new,simple_fusion,4,DC-6,33,10,19,7,12,3,11,20,9,27.272727272727273
+fgvc_aircraft,2,new,simple_fusion,5,DC-8,33,10,11,9,2,1,21,11,1,3.0303030303030303
+fgvc_aircraft,2,new,simple_fusion,6,DC-9-30,34,7,9,6,3,1,24,16,2,5.882352941176471
+fgvc_aircraft,2,new,simple_fusion,7,DH-82,33,32,29,29,0,3,1,3,-3,-9.090909090909092
+fgvc_aircraft,2,new,simple_fusion,8,DHC-1,33,6,23,6,17,0,10,20,17,51.515151515151516
+fgvc_aircraft,2,new,simple_fusion,9,DHC-6,34,0,25,0,25,0,9,29,25,73.52941176470588
+fgvc_aircraft,2,new,simple_fusion,10,DHC-8-100,33,7,19,6,13,1,13,21,12,36.36363636363637
+fgvc_aircraft,2,new,simple_fusion,11,DHC-8-300,33,0,2,0,2,0,31,16,2,6.0606060606060606
+fgvc_aircraft,2,new,simple_fusion,12,DR-400,34,8,6,2,4,6,22,28,-2,-5.882352941176471
+fgvc_aircraft,2,new,simple_fusion,13,Dornier 328,33,1,6,0,6,1,26,20,5,15.151515151515152
+fgvc_aircraft,2,new,simple_fusion,14,E-170,33,0,2,0,2,0,31,20,2,6.0606060606060606
+fgvc_aircraft,2,new,simple_fusion,15,E-190,34,1,2,0,2,1,31,24,1,2.9411764705882355
+fgvc_aircraft,2,new,simple_fusion,16,E-195,33,0,0,0,0,0,33,24,0,0.0
+fgvc_aircraft,2,new,simple_fusion,17,EMB-120,33,3,9,2,7,1,23,18,6,18.181818181818183
+fgvc_aircraft,2,new,simple_fusion,18,ERJ 135,34,1,10,1,9,0,24,19,9,26.470588235294116
+fgvc_aircraft,2,new,simple_fusion,19,ERJ 145,33,1,0,0,0,1,32,19,-1,-3.0303030303030303
+fgvc_aircraft,2,new,simple_fusion,20,Embraer Legacy 600,33,5,11,4,7,1,21,13,6,18.181818181818183
+fgvc_aircraft,2,new,simple_fusion,21,Eurofighter Typhoon,34,32,34,32,2,0,0,2,2,5.882352941176471
+fgvc_aircraft,2,new,simple_fusion,22,F-16A/B,33,33,33,33,0,0,0,0,0,0.0
+fgvc_aircraft,2,new,simple_fusion,23,F/A-18,33,27,29,27,2,0,4,2,2,6.0606060606060606
+fgvc_aircraft,2,new,simple_fusion,24,Falcon 2000,34,2,2,2,0,0,32,14,0,0.0
+fgvc_aircraft,2,new,simple_fusion,25,Falcon 900,33,0,0,0,0,0,33,14,0,0.0
+fgvc_aircraft,2,new,simple_fusion,26,Fokker 100,33,16,20,16,4,0,13,12,4,12.121212121212121
+fgvc_aircraft,2,new,simple_fusion,27,Fokker 50,34,22,24,20,4,2,8,10,2,5.882352941176471
+fgvc_aircraft,2,new,simple_fusion,28,Fokker 70,33,0,1,0,1,0,32,14,1,3.0303030303030303
+fgvc_aircraft,2,new,simple_fusion,29,Global Express,33,2,4,2,2,0,29,15,2,6.0606060606060606
+fgvc_aircraft,2,new,simple_fusion,30,Gulfstream IV,34,11,10,10,0,1,23,4,-1,-2.9411764705882355
+fgvc_aircraft,2,new,simple_fusion,31,Gulfstream V,33,21,20,19,1,2,11,5,-1,-3.0303030303030303
+fgvc_aircraft,2,new,simple_fusion,32,Hawk T1,33,32,32,32,0,0,1,0,0,0.0
+fgvc_aircraft,2,new,simple_fusion,33,Il-76,34,29,32,28,4,1,1,5,3,8.823529411764707
+fgvc_aircraft,2,new,simple_fusion,34,L-1011,33,0,8,0,8,0,25,21,8,24.242424242424242
+fgvc_aircraft,2,new,simple_fusion,35,MD-11,33,11,19,10,9,1,13,14,8,24.242424242424242
+fgvc_aircraft,2,new,simple_fusion,36,MD-80,34,0,0,0,0,0,34,12,0,0.0
+fgvc_aircraft,2,new,simple_fusion,37,MD-87,33,3,3,2,1,1,29,13,0,0.0
+fgvc_aircraft,2,new,simple_fusion,38,MD-90,33,0,4,0,4,0,29,14,4,12.121212121212121
+fgvc_aircraft,2,new,simple_fusion,39,Metroliner,34,3,10,3,7,0,24,21,7,20.58823529411765
+fgvc_aircraft,2,new,simple_fusion,40,Model B200,33,0,1,0,1,0,32,14,1,3.0303030303030303
+fgvc_aircraft,2,new,simple_fusion,41,PA-28,33,0,4,0,4,0,29,25,4,12.121212121212121
+fgvc_aircraft,2,new,simple_fusion,42,SR-20,34,0,16,0,16,0,18,25,16,47.05882352941177
+fgvc_aircraft,2,new,simple_fusion,43,Saab 2000,33,27,23,21,2,6,4,9,-4,-12.121212121212121
+fgvc_aircraft,2,new,simple_fusion,44,Saab 340,33,0,1,0,1,0,32,20,1,3.0303030303030303
+fgvc_aircraft,2,new,simple_fusion,45,Spitfire,34,33,33,33,0,0,1,0,0,0.0
+fgvc_aircraft,2,new,simple_fusion,46,Tornado,33,33,33,33,0,0,0,0,0,0.0
+fgvc_aircraft,2,new,simple_fusion,47,Tu-134,33,0,1,0,1,0,32,17,1,3.0303030303030303
+fgvc_aircraft,2,new,simple_fusion,48,Tu-154,34,8,6,6,0,2,26,13,-2,-5.882352941176471
+fgvc_aircraft,2,new,simple_fusion,49,Yak-42,33,1,4,1,3,0,29,20,3,9.090909090909092
+fgvc_aircraft,2,new,mean_probability_fusion,0,Cessna 560,34,22,25,22,3,0,9,6,3,8.823529411764707
+fgvc_aircraft,2,new,mean_probability_fusion,1,Challenger 600,33,1,2,0,2,1,30,9,1,3.0303030303030303
+fgvc_aircraft,2,new,mean_probability_fusion,2,DC-10,33,19,11,11,0,8,14,11,-8,-24.242424242424242
+fgvc_aircraft,2,new,mean_probability_fusion,3,DC-3,34,10,21,10,11,0,13,16,11,32.35294117647059
+fgvc_aircraft,2,new,mean_probability_fusion,4,DC-6,33,10,18,6,12,4,11,21,8,24.242424242424242
+fgvc_aircraft,2,new,mean_probability_fusion,5,DC-8,33,10,11,9,2,1,21,9,1,3.0303030303030303
+fgvc_aircraft,2,new,mean_probability_fusion,6,DC-9-30,34,7,9,6,3,1,24,13,2,5.882352941176471
+fgvc_aircraft,2,new,mean_probability_fusion,7,DH-82,33,32,29,29,0,3,1,3,-3,-9.090909090909092
+fgvc_aircraft,2,new,mean_probability_fusion,8,DHC-1,33,6,16,6,10,0,17,11,10,30.303030303030305
+fgvc_aircraft,2,new,mean_probability_fusion,9,DHC-6,34,0,24,0,24,0,10,28,24,70.58823529411765
+fgvc_aircraft,2,new,mean_probability_fusion,10,DHC-8-100,33,7,17,6,11,1,15,18,10,30.303030303030305
+fgvc_aircraft,2,new,mean_probability_fusion,11,DHC-8-300,33,0,3,0,3,0,30,12,3,9.090909090909092
+fgvc_aircraft,2,new,mean_probability_fusion,12,DR-400,34,8,2,1,1,7,25,21,-6,-17.647058823529413
+fgvc_aircraft,2,new,mean_probability_fusion,13,Dornier 328,33,1,7,0,7,1,25,19,6,18.181818181818183
+fgvc_aircraft,2,new,mean_probability_fusion,14,E-170,33,0,1,0,1,0,32,13,1,3.0303030303030303
+fgvc_aircraft,2,new,mean_probability_fusion,15,E-190,34,1,2,0,2,1,31,20,1,2.9411764705882355
+fgvc_aircraft,2,new,mean_probability_fusion,16,E-195,33,0,1,0,1,0,32,13,1,3.0303030303030303
+fgvc_aircraft,2,new,mean_probability_fusion,17,EMB-120,33,3,6,1,5,2,25,14,3,9.090909090909092
+fgvc_aircraft,2,new,mean_probability_fusion,18,ERJ 135,34,1,5,0,5,1,28,11,4,11.764705882352942
+fgvc_aircraft,2,new,mean_probability_fusion,19,ERJ 145,33,1,2,0,2,1,30,16,1,3.0303030303030303
+fgvc_aircraft,2,new,mean_probability_fusion,20,Embraer Legacy 600,33,5,6,4,2,1,26,8,1,3.0303030303030303
+fgvc_aircraft,2,new,mean_probability_fusion,21,Eurofighter Typhoon,34,32,34,32,2,0,0,2,2,5.882352941176471
+fgvc_aircraft,2,new,mean_probability_fusion,22,F-16A/B,33,33,33,33,0,0,0,0,0,0.0
+fgvc_aircraft,2,new,mean_probability_fusion,23,F/A-18,33,27,29,27,2,0,4,2,2,6.0606060606060606
+fgvc_aircraft,2,new,mean_probability_fusion,24,Falcon 2000,34,2,6,2,4,0,28,12,4,11.764705882352942
+fgvc_aircraft,2,new,mean_probability_fusion,25,Falcon 900,33,0,0,0,0,0,33,11,0,0.0
+fgvc_aircraft,2,new,mean_probability_fusion,26,Fokker 100,33,16,19,16,3,0,14,9,3,9.090909090909092
+fgvc_aircraft,2,new,mean_probability_fusion,27,Fokker 50,34,22,21,19,2,3,10,9,-1,-2.9411764705882355
+fgvc_aircraft,2,new,mean_probability_fusion,28,Fokker 70,33,0,2,0,2,0,31,11,2,6.0606060606060606
+fgvc_aircraft,2,new,mean_probability_fusion,29,Global Express,33,2,3,2,1,0,30,8,1,3.0303030303030303
+fgvc_aircraft,2,new,mean_probability_fusion,30,Gulfstream IV,34,11,10,10,0,1,23,2,-1,-2.9411764705882355
+fgvc_aircraft,2,new,mean_probability_fusion,31,Gulfstream V,33,21,19,19,0,2,12,4,-2,-6.0606060606060606
+fgvc_aircraft,2,new,mean_probability_fusion,32,Hawk T1,33,32,32,32,0,0,1,0,0,0.0
+fgvc_aircraft,2,new,mean_probability_fusion,33,Il-76,34,29,33,29,4,0,1,4,4,11.764705882352942
+fgvc_aircraft,2,new,mean_probability_fusion,34,L-1011,33,0,13,0,13,0,20,23,13,39.39393939393939
+fgvc_aircraft,2,new,mean_probability_fusion,35,MD-11,33,11,20,9,11,2,11,16,9,27.272727272727273
+fgvc_aircraft,2,new,mean_probability_fusion,36,MD-80,34,0,0,0,0,0,34,10,0,0.0
+fgvc_aircraft,2,new,mean_probability_fusion,37,MD-87,33,3,2,2,0,1,30,8,-1,-3.0303030303030303
+fgvc_aircraft,2,new,mean_probability_fusion,38,MD-90,33,0,4,0,4,0,29,12,4,12.121212121212121
+fgvc_aircraft,2,new,mean_probability_fusion,39,Metroliner,34,3,11,3,8,0,23,19,8,23.529411764705884
+fgvc_aircraft,2,new,mean_probability_fusion,40,Model B200,33,0,2,0,2,0,31,6,2,6.0606060606060606
+fgvc_aircraft,2,new,mean_probability_fusion,41,PA-28,33,0,14,0,14,0,19,20,14,42.42424242424242
+fgvc_aircraft,2,new,mean_probability_fusion,42,SR-20,34,0,6,0,6,0,28,7,6,17.647058823529413
+fgvc_aircraft,2,new,mean_probability_fusion,43,Saab 2000,33,27,23,22,1,5,5,7,-4,-12.121212121212121
+fgvc_aircraft,2,new,mean_probability_fusion,44,Saab 340,33,0,0,0,0,0,33,13,0,0.0
+fgvc_aircraft,2,new,mean_probability_fusion,45,Spitfire,34,33,33,33,0,0,1,0,0,0.0
+fgvc_aircraft,2,new,mean_probability_fusion,46,Tornado,33,33,33,33,0,0,0,0,0,0.0
+fgvc_aircraft,2,new,mean_probability_fusion,47,Tu-134,33,0,0,0,0,0,33,15,0,0.0
+fgvc_aircraft,2,new,mean_probability_fusion,48,Tu-154,34,8,7,6,1,2,25,14,-1,-2.9411764705882355
+fgvc_aircraft,2,new,mean_probability_fusion,49,Yak-42,33,1,7,1,6,0,26,17,6,18.181818181818183
+fgvc_aircraft,2,new,adk_probability_fusion,0,Cessna 560,34,22,25,22,3,0,9,6,3,8.823529411764707
+fgvc_aircraft,2,new,adk_probability_fusion,1,Challenger 600,33,1,2,0,2,1,30,8,1,3.0303030303030303
+fgvc_aircraft,2,new,adk_probability_fusion,2,DC-10,33,19,12,11,1,8,13,12,-7,-21.21212121212121
+fgvc_aircraft,2,new,adk_probability_fusion,3,DC-3,34,10,19,9,10,1,14,16,9,26.470588235294116
+fgvc_aircraft,2,new,adk_probability_fusion,4,DC-6,33,10,18,6,12,4,11,21,8,24.242424242424242
+fgvc_aircraft,2,new,adk_probability_fusion,5,DC-8,33,10,11,9,2,1,21,10,1,3.0303030303030303
+fgvc_aircraft,2,new,adk_probability_fusion,6,DC-9-30,34,7,9,6,3,1,24,14,2,5.882352941176471
+fgvc_aircraft,2,new,adk_probability_fusion,7,DH-82,33,32,31,31,0,1,1,1,-1,-3.0303030303030303
+fgvc_aircraft,2,new,adk_probability_fusion,8,DHC-1,33,6,18,6,12,0,15,12,12,36.36363636363637
+fgvc_aircraft,2,new,adk_probability_fusion,9,DHC-6,34,0,19,0,19,0,15,22,19,55.88235294117647
+fgvc_aircraft,2,new,adk_probability_fusion,10,DHC-8-100,33,7,12,4,8,3,18,17,5,15.151515151515152
+fgvc_aircraft,2,new,adk_probability_fusion,11,DHC-8-300,33,0,2,0,2,0,31,10,2,6.0606060606060606
+fgvc_aircraft,2,new,adk_probability_fusion,12,DR-400,34,8,4,2,2,6,24,20,-4,-11.764705882352942
+fgvc_aircraft,2,new,adk_probability_fusion,13,Dornier 328,33,1,5,0,5,1,27,17,4,12.121212121212121
+fgvc_aircraft,2,new,adk_probability_fusion,14,E-170,33,0,1,0,1,0,32,11,1,3.0303030303030303
+fgvc_aircraft,2,new,adk_probability_fusion,15,E-190,34,1,3,0,3,1,30,17,2,5.882352941176471
+fgvc_aircraft,2,new,adk_probability_fusion,16,E-195,33,0,0,0,0,0,33,12,0,0.0
+fgvc_aircraft,2,new,adk_probability_fusion,17,EMB-120,33,3,9,2,7,1,23,13,6,18.181818181818183
+fgvc_aircraft,2,new,adk_probability_fusion,18,ERJ 135,34,1,5,0,5,1,28,11,4,11.764705882352942
+fgvc_aircraft,2,new,adk_probability_fusion,19,ERJ 145,33,1,2,0,2,1,30,15,1,3.0303030303030303
+fgvc_aircraft,2,new,adk_probability_fusion,20,Embraer Legacy 600,33,5,6,4,2,1,26,7,1,3.0303030303030303
+fgvc_aircraft,2,new,adk_probability_fusion,21,Eurofighter Typhoon,34,32,34,32,2,0,0,2,2,5.882352941176471
+fgvc_aircraft,2,new,adk_probability_fusion,22,F-16A/B,33,33,33,33,0,0,0,0,0,0.0
+fgvc_aircraft,2,new,adk_probability_fusion,23,F/A-18,33,27,29,27,2,0,4,2,2,6.0606060606060606
+fgvc_aircraft,2,new,adk_probability_fusion,24,Falcon 2000,34,2,7,2,5,0,27,12,5,14.705882352941176
+fgvc_aircraft,2,new,adk_probability_fusion,25,Falcon 900,33,0,0,0,0,0,33,10,0,0.0
+fgvc_aircraft,2,new,adk_probability_fusion,26,Fokker 100,33,16,18,15,3,1,14,10,2,6.0606060606060606
+fgvc_aircraft,2,new,adk_probability_fusion,27,Fokker 50,34,22,22,20,2,2,10,7,0,0.0
+fgvc_aircraft,2,new,adk_probability_fusion,28,Fokker 70,33,0,1,0,1,0,32,10,1,3.0303030303030303
+fgvc_aircraft,2,new,adk_probability_fusion,29,Global Express,33,2,3,2,1,0,30,8,1,3.0303030303030303
+fgvc_aircraft,2,new,adk_probability_fusion,30,Gulfstream IV,34,11,10,10,0,1,23,2,-1,-2.9411764705882355
+fgvc_aircraft,2,new,adk_probability_fusion,31,Gulfstream V,33,21,19,19,0,2,12,4,-2,-6.0606060606060606
+fgvc_aircraft,2,new,adk_probability_fusion,32,Hawk T1,33,32,32,32,0,0,1,0,0,0.0
+fgvc_aircraft,2,new,adk_probability_fusion,33,Il-76,34,29,33,29,4,0,1,4,4,11.764705882352942
+fgvc_aircraft,2,new,adk_probability_fusion,34,L-1011,33,0,15,0,15,0,18,23,15,45.45454545454545
+fgvc_aircraft,2,new,adk_probability_fusion,35,MD-11,33,11,19,9,10,2,12,15,8,24.242424242424242
+fgvc_aircraft,2,new,adk_probability_fusion,36,MD-80,34,0,1,0,1,0,33,9,1,2.9411764705882355
+fgvc_aircraft,2,new,adk_probability_fusion,37,MD-87,33,3,2,2,0,1,30,9,-1,-3.0303030303030303
+fgvc_aircraft,2,new,adk_probability_fusion,38,MD-90,33,0,4,0,4,0,29,12,4,12.121212121212121
+fgvc_aircraft,2,new,adk_probability_fusion,39,Metroliner,34,3,11,3,8,0,23,19,8,23.529411764705884
+fgvc_aircraft,2,new,adk_probability_fusion,40,Model B200,33,0,2,0,2,0,31,9,2,6.0606060606060606
+fgvc_aircraft,2,new,adk_probability_fusion,41,PA-28,33,0,14,0,14,0,19,19,14,42.42424242424242
+fgvc_aircraft,2,new,adk_probability_fusion,42,SR-20,34,0,4,0,4,0,30,5,4,11.764705882352942
+fgvc_aircraft,2,new,adk_probability_fusion,43,Saab 2000,33,27,23,22,1,5,5,7,-4,-12.121212121212121
+fgvc_aircraft,2,new,adk_probability_fusion,44,Saab 340,33,0,0,0,0,0,33,13,0,0.0
+fgvc_aircraft,2,new,adk_probability_fusion,45,Spitfire,34,33,33,33,0,0,1,0,0,0.0
+fgvc_aircraft,2,new,adk_probability_fusion,46,Tornado,33,33,33,33,0,0,0,0,0,0.0
+fgvc_aircraft,2,new,adk_probability_fusion,47,Tu-134,33,0,0,0,0,0,33,15,0,0.0
+fgvc_aircraft,2,new,adk_probability_fusion,48,Tu-154,34,8,6,5,1,3,25,15,-2,-5.882352941176471
+fgvc_aircraft,2,new,adk_probability_fusion,49,Yak-42,33,1,6,1,5,0,27,17,5,15.151515151515152
+fgvc_aircraft,3,base,simple_fusion,0,707-320,33,13,13,12,1,1,19,6,0,0.0
+fgvc_aircraft,3,base,simple_fusion,1,727-200,33,18,19,17,2,1,13,6,1,3.0303030303030303
+fgvc_aircraft,3,base,simple_fusion,2,737-200,34,8,11,6,5,2,21,13,3,8.823529411764707
+fgvc_aircraft,3,base,simple_fusion,3,737-300,33,2,1,1,0,1,31,15,-1,-3.0303030303030303
+fgvc_aircraft,3,base,simple_fusion,4,737-400,33,2,5,2,3,0,28,13,3,9.090909090909092
+fgvc_aircraft,3,base,simple_fusion,5,737-500,34,0,0,0,0,0,34,11,0,0.0
+fgvc_aircraft,3,base,simple_fusion,6,737-600,33,0,0,0,0,0,33,11,0,0.0
+fgvc_aircraft,3,base,simple_fusion,7,737-700,33,1,0,0,0,1,32,12,-1,-3.0303030303030303
+fgvc_aircraft,3,base,simple_fusion,8,737-800,34,2,0,0,0,2,32,8,-2,-5.882352941176471
+fgvc_aircraft,3,base,simple_fusion,9,737-900,33,18,15,14,1,4,14,9,-3,-9.090909090909092
+fgvc_aircraft,3,base,simple_fusion,10,747-100,33,19,25,19,6,0,8,8,6,18.181818181818183
+fgvc_aircraft,3,base,simple_fusion,11,747-200,34,6,5,3,2,3,26,6,-1,-2.9411764705882355
+fgvc_aircraft,3,base,simple_fusion,12,747-300,33,4,2,1,1,3,28,12,-2,-6.0606060606060606
+fgvc_aircraft,3,base,simple_fusion,13,747-400,33,19,18,17,1,2,13,5,-1,-3.0303030303030303
+fgvc_aircraft,3,base,simple_fusion,14,757-200,34,5,7,5,2,0,27,16,2,5.882352941176471
+fgvc_aircraft,3,base,simple_fusion,15,757-300,33,8,10,5,5,3,20,15,2,6.0606060606060606
+fgvc_aircraft,3,base,simple_fusion,16,767-200,33,3,4,2,2,1,28,11,1,3.0303030303030303
+fgvc_aircraft,3,base,simple_fusion,17,767-300,34,1,2,0,2,1,31,16,1,2.9411764705882355
+fgvc_aircraft,3,base,simple_fusion,18,767-400,33,13,17,11,6,2,14,15,4,12.121212121212121
+fgvc_aircraft,3,base,simple_fusion,19,777-200,33,13,8,8,0,5,20,11,-5,-15.151515151515152
+fgvc_aircraft,3,base,simple_fusion,20,777-300,34,17,13,13,0,4,17,7,-4,-11.764705882352942
+fgvc_aircraft,3,base,simple_fusion,21,A300B4,33,9,4,4,0,5,24,16,-5,-15.151515151515152
+fgvc_aircraft,3,base,simple_fusion,22,A310,33,6,10,6,4,0,23,10,4,12.121212121212121
+fgvc_aircraft,3,base,simple_fusion,23,A318,34,20,20,19,1,1,13,8,0,0.0
+fgvc_aircraft,3,base,simple_fusion,24,A319,33,8,8,6,2,2,23,13,0,0.0
+fgvc_aircraft,3,base,simple_fusion,25,A320,33,14,10,7,3,7,16,15,-4,-12.121212121212121
+fgvc_aircraft,3,base,simple_fusion,26,A321,34,10,11,8,3,2,21,12,1,2.9411764705882355
+fgvc_aircraft,3,base,simple_fusion,27,A330-200,33,8,13,8,5,0,20,10,5,15.151515151515152
+fgvc_aircraft,3,base,simple_fusion,28,A330-300,33,7,6,4,2,3,24,12,-1,-3.0303030303030303
+fgvc_aircraft,3,base,simple_fusion,29,A340-200,34,5,7,3,4,2,25,16,2,5.882352941176471
+fgvc_aircraft,3,base,simple_fusion,30,A340-300,33,2,4,1,3,1,28,17,2,6.0606060606060606
+fgvc_aircraft,3,base,simple_fusion,31,A340-500,33,4,2,2,0,2,29,8,-2,-6.0606060606060606
+fgvc_aircraft,3,base,simple_fusion,32,A340-600,34,1,2,1,1,0,32,13,1,2.9411764705882355
+fgvc_aircraft,3,base,simple_fusion,33,A380,33,21,22,20,2,1,10,5,1,3.0303030303030303
+fgvc_aircraft,3,base,simple_fusion,34,ATR-42,33,20,26,20,6,0,7,6,6,18.181818181818183
+fgvc_aircraft,3,base,simple_fusion,35,ATR-72,34,18,15,14,1,4,15,7,-3,-8.823529411764707
+fgvc_aircraft,3,base,simple_fusion,36,An-12,33,30,32,30,2,0,1,2,2,6.0606060606060606
+fgvc_aircraft,3,base,simple_fusion,37,BAE 146-200,33,20,10,10,0,10,13,14,-10,-30.303030303030305
+fgvc_aircraft,3,base,simple_fusion,38,BAE 146-300,34,4,10,2,8,2,22,15,6,17.647058823529413
+fgvc_aircraft,3,base,simple_fusion,39,BAE-125,33,20,1,1,0,19,13,21,-19,-57.57575757575758
+fgvc_aircraft,3,base,simple_fusion,40,Beechcraft 1900,33,23,22,20,2,3,8,8,-1,-3.0303030303030303
+fgvc_aircraft,3,base,simple_fusion,41,Boeing 717,34,22,25,21,4,1,8,5,3,8.823529411764707
+fgvc_aircraft,3,base,simple_fusion,42,C-130,33,31,30,30,0,1,2,1,-1,-3.0303030303030303
+fgvc_aircraft,3,base,simple_fusion,43,C-47,33,32,32,32,0,0,1,0,0,0.0
+fgvc_aircraft,3,base,simple_fusion,44,CRJ-200,34,18,18,16,2,2,14,7,0,0.0
+fgvc_aircraft,3,base,simple_fusion,45,CRJ-700,33,8,9,7,2,1,23,8,1,3.0303030303030303
+fgvc_aircraft,3,base,simple_fusion,46,CRJ-900,33,1,2,1,1,0,31,5,1,3.0303030303030303
+fgvc_aircraft,3,base,simple_fusion,47,Cessna 172,34,32,32,32,0,0,2,0,0,0.0
+fgvc_aircraft,3,base,simple_fusion,48,Cessna 208,33,18,29,18,11,0,4,11,11,33.333333333333336
+fgvc_aircraft,3,base,simple_fusion,49,Cessna 525,33,31,32,31,1,0,1,1,1,3.0303030303030303
+fgvc_aircraft,3,base,mean_probability_fusion,0,707-320,33,13,14,13,1,0,19,4,1,3.0303030303030303
+fgvc_aircraft,3,base,mean_probability_fusion,1,727-200,33,18,19,17,2,1,13,5,1,3.0303030303030303
+fgvc_aircraft,3,base,mean_probability_fusion,2,737-200,34,8,12,8,4,0,22,9,4,11.764705882352942
+fgvc_aircraft,3,base,mean_probability_fusion,3,737-300,33,2,1,1,0,1,31,14,-1,-3.0303030303030303
+fgvc_aircraft,3,base,mean_probability_fusion,4,737-400,33,2,5,2,3,0,28,11,3,9.090909090909092
+fgvc_aircraft,3,base,mean_probability_fusion,5,737-500,34,0,0,0,0,0,34,11,0,0.0
+fgvc_aircraft,3,base,mean_probability_fusion,6,737-600,33,0,0,0,0,0,33,12,0,0.0
+fgvc_aircraft,3,base,mean_probability_fusion,7,737-700,33,1,0,0,0,1,32,9,-1,-3.0303030303030303
+fgvc_aircraft,3,base,mean_probability_fusion,8,737-800,34,2,0,0,0,2,32,8,-2,-5.882352941176471
+fgvc_aircraft,3,base,mean_probability_fusion,9,737-900,33,18,15,14,1,4,14,9,-3,-9.090909090909092
+fgvc_aircraft,3,base,mean_probability_fusion,10,747-100,33,19,25,19,6,0,8,8,6,18.181818181818183
+fgvc_aircraft,3,base,mean_probability_fusion,11,747-200,34,6,5,3,2,3,26,5,-1,-2.9411764705882355
+fgvc_aircraft,3,base,mean_probability_fusion,12,747-300,33,4,2,1,1,3,28,10,-2,-6.0606060606060606
+fgvc_aircraft,3,base,mean_probability_fusion,13,747-400,33,19,17,17,0,2,14,3,-2,-6.0606060606060606
+fgvc_aircraft,3,base,mean_probability_fusion,14,757-200,34,5,6,5,1,0,28,12,1,2.9411764705882355
+fgvc_aircraft,3,base,mean_probability_fusion,15,757-300,33,8,10,5,5,3,20,13,2,6.0606060606060606
+fgvc_aircraft,3,base,mean_probability_fusion,16,767-200,33,3,5,3,2,0,28,10,2,6.0606060606060606
+fgvc_aircraft,3,base,mean_probability_fusion,17,767-300,34,1,2,1,1,0,32,8,1,2.9411764705882355
+fgvc_aircraft,3,base,mean_probability_fusion,18,767-400,33,13,17,13,4,0,16,9,4,12.121212121212121
+fgvc_aircraft,3,base,mean_probability_fusion,19,777-200,33,13,12,12,0,1,20,6,-1,-3.0303030303030303
+fgvc_aircraft,3,base,mean_probability_fusion,20,777-300,34,17,15,15,0,2,17,4,-2,-5.882352941176471
+fgvc_aircraft,3,base,mean_probability_fusion,21,A300B4,33,9,4,4,0,5,24,15,-5,-15.151515151515152
+fgvc_aircraft,3,base,mean_probability_fusion,22,A310,33,6,9,6,3,0,24,8,3,9.090909090909092
+fgvc_aircraft,3,base,mean_probability_fusion,23,A318,34,20,20,19,1,1,13,7,0,0.0
+fgvc_aircraft,3,base,mean_probability_fusion,24,A319,33,8,8,6,2,2,23,13,0,0.0
+fgvc_aircraft,3,base,mean_probability_fusion,25,A320,33,14,9,7,2,7,17,15,-5,-15.151515151515152
+fgvc_aircraft,3,base,mean_probability_fusion,26,A321,34,10,12,9,3,1,21,11,2,5.882352941176471
+fgvc_aircraft,3,base,mean_probability_fusion,27,A330-200,33,8,13,8,5,0,20,9,5,15.151515151515152
+fgvc_aircraft,3,base,mean_probability_fusion,28,A330-300,33,7,5,4,1,3,25,10,-2,-6.0606060606060606
+fgvc_aircraft,3,base,mean_probability_fusion,29,A340-200,34,5,6,3,3,2,26,15,1,2.9411764705882355
+fgvc_aircraft,3,base,mean_probability_fusion,30,A340-300,33,2,3,1,2,1,29,13,1,3.0303030303030303
+fgvc_aircraft,3,base,mean_probability_fusion,31,A340-500,33,4,3,3,0,1,29,7,-1,-3.0303030303030303
+fgvc_aircraft,3,base,mean_probability_fusion,32,A340-600,34,1,1,1,0,0,33,9,0,0.0
+fgvc_aircraft,3,base,mean_probability_fusion,33,A380,33,21,22,21,1,0,11,2,1,3.0303030303030303
+fgvc_aircraft,3,base,mean_probability_fusion,34,ATR-42,33,20,25,20,5,0,8,5,5,15.151515151515152
+fgvc_aircraft,3,base,mean_probability_fusion,35,ATR-72,34,18,15,14,1,4,15,6,-3,-8.823529411764707
+fgvc_aircraft,3,base,mean_probability_fusion,36,An-12,33,30,32,30,2,0,1,2,2,6.0606060606060606
+fgvc_aircraft,3,base,mean_probability_fusion,37,BAE 146-200,33,20,11,11,0,9,13,12,-9,-27.272727272727273
+fgvc_aircraft,3,base,mean_probability_fusion,38,BAE 146-300,34,4,7,2,5,2,25,10,3,8.823529411764707
+fgvc_aircraft,3,base,mean_probability_fusion,39,BAE-125,33,20,6,6,0,14,13,14,-14,-42.42424242424242
+fgvc_aircraft,3,base,mean_probability_fusion,40,Beechcraft 1900,33,23,21,20,1,3,9,7,-2,-6.0606060606060606
+fgvc_aircraft,3,base,mean_probability_fusion,41,Boeing 717,34,22,25,21,4,1,8,5,3,8.823529411764707
+fgvc_aircraft,3,base,mean_probability_fusion,42,C-130,33,31,31,31,0,0,2,0,0,0.0
+fgvc_aircraft,3,base,mean_probability_fusion,43,C-47,33,32,32,32,0,0,1,0,0,0.0
+fgvc_aircraft,3,base,mean_probability_fusion,44,CRJ-200,34,18,18,16,2,2,14,7,0,0.0
+fgvc_aircraft,3,base,mean_probability_fusion,45,CRJ-700,33,8,8,7,1,1,24,6,0,0.0
+fgvc_aircraft,3,base,mean_probability_fusion,46,CRJ-900,33,1,2,1,1,0,31,5,1,3.0303030303030303
+fgvc_aircraft,3,base,mean_probability_fusion,47,Cessna 172,34,32,32,32,0,0,2,0,0,0.0
+fgvc_aircraft,3,base,mean_probability_fusion,48,Cessna 208,33,18,29,18,11,0,4,11,11,33.333333333333336
+fgvc_aircraft,3,base,mean_probability_fusion,49,Cessna 525,33,31,32,31,1,0,1,1,1,3.0303030303030303
+fgvc_aircraft,3,base,adk_probability_fusion,0,707-320,33,13,14,13,1,0,19,5,1,3.0303030303030303
+fgvc_aircraft,3,base,adk_probability_fusion,1,727-200,33,18,19,17,2,1,13,5,1,3.0303030303030303
+fgvc_aircraft,3,base,adk_probability_fusion,2,737-200,34,8,12,8,4,0,22,10,4,11.764705882352942
+fgvc_aircraft,3,base,adk_probability_fusion,3,737-300,33,2,1,1,0,1,31,12,-1,-3.0303030303030303
+fgvc_aircraft,3,base,adk_probability_fusion,4,737-400,33,2,6,2,4,0,27,12,4,12.121212121212121
+fgvc_aircraft,3,base,adk_probability_fusion,5,737-500,34,0,0,0,0,0,34,13,0,0.0
+fgvc_aircraft,3,base,adk_probability_fusion,6,737-600,33,0,0,0,0,0,33,12,0,0.0
+fgvc_aircraft,3,base,adk_probability_fusion,7,737-700,33,1,0,0,0,1,32,9,-1,-3.0303030303030303
+fgvc_aircraft,3,base,adk_probability_fusion,8,737-800,34,2,0,0,0,2,32,7,-2,-5.882352941176471
+fgvc_aircraft,3,base,adk_probability_fusion,9,737-900,33,18,13,13,0,5,15,9,-5,-15.151515151515152
+fgvc_aircraft,3,base,adk_probability_fusion,10,747-100,33,19,23,19,4,0,10,6,4,12.121212121212121
+fgvc_aircraft,3,base,adk_probability_fusion,11,747-200,34,6,4,3,1,3,27,4,-2,-5.882352941176471
+fgvc_aircraft,3,base,adk_probability_fusion,12,747-300,33,4,1,1,0,3,29,9,-3,-9.090909090909092
+fgvc_aircraft,3,base,adk_probability_fusion,13,747-400,33,19,18,18,0,1,14,4,-1,-3.0303030303030303
+fgvc_aircraft,3,base,adk_probability_fusion,14,757-200,34,5,7,5,2,0,27,15,2,5.882352941176471
+fgvc_aircraft,3,base,adk_probability_fusion,15,757-300,33,8,9,6,3,2,22,11,1,3.0303030303030303
+fgvc_aircraft,3,base,adk_probability_fusion,16,767-200,33,3,5,3,2,0,28,9,2,6.0606060606060606
+fgvc_aircraft,3,base,adk_probability_fusion,17,767-300,34,1,0,0,0,1,33,8,-1,-2.9411764705882355
+fgvc_aircraft,3,base,adk_probability_fusion,18,767-400,33,13,18,13,5,0,15,10,5,15.151515151515152
+fgvc_aircraft,3,base,adk_probability_fusion,19,777-200,33,13,13,12,1,1,19,9,0,0.0
+fgvc_aircraft,3,base,adk_probability_fusion,20,777-300,34,17,16,16,0,1,17,3,-1,-2.9411764705882355
+fgvc_aircraft,3,base,adk_probability_fusion,21,A300B4,33,9,3,3,0,6,24,15,-6,-18.181818181818183
+fgvc_aircraft,3,base,adk_probability_fusion,22,A310,33,6,10,6,4,0,23,9,4,12.121212121212121
+fgvc_aircraft,3,base,adk_probability_fusion,23,A318,34,20,19,19,0,1,14,6,-1,-2.9411764705882355
+fgvc_aircraft,3,base,adk_probability_fusion,24,A319,33,8,8,6,2,2,23,12,0,0.0
+fgvc_aircraft,3,base,adk_probability_fusion,25,A320,33,14,10,8,2,6,17,14,-4,-12.121212121212121
+fgvc_aircraft,3,base,adk_probability_fusion,26,A321,34,10,13,9,4,1,20,12,3,8.823529411764707
+fgvc_aircraft,3,base,adk_probability_fusion,27,A330-200,33,8,13,7,6,1,19,10,5,15.151515151515152
+fgvc_aircraft,3,base,adk_probability_fusion,28,A330-300,33,7,7,4,3,3,23,10,0,0.0
+fgvc_aircraft,3,base,adk_probability_fusion,29,A340-200,34,5,8,3,5,2,24,17,3,8.823529411764707
+fgvc_aircraft,3,base,adk_probability_fusion,30,A340-300,33,2,3,1,2,1,29,12,1,3.0303030303030303
+fgvc_aircraft,3,base,adk_probability_fusion,31,A340-500,33,4,3,3,0,1,29,8,-1,-3.0303030303030303
+fgvc_aircraft,3,base,adk_probability_fusion,32,A340-600,34,1,1,1,0,0,33,10,0,0.0
+fgvc_aircraft,3,base,adk_probability_fusion,33,A380,33,21,22,21,1,0,11,2,1,3.0303030303030303
+fgvc_aircraft,3,base,adk_probability_fusion,34,ATR-42,33,20,23,19,4,1,9,5,3,9.090909090909092
+fgvc_aircraft,3,base,adk_probability_fusion,35,ATR-72,34,18,18,16,2,2,14,5,0,0.0
+fgvc_aircraft,3,base,adk_probability_fusion,36,An-12,33,30,32,30,2,0,1,2,2,6.0606060606060606
+fgvc_aircraft,3,base,adk_probability_fusion,37,BAE 146-200,33,20,11,11,0,9,13,12,-9,-27.272727272727273
+fgvc_aircraft,3,base,adk_probability_fusion,38,BAE 146-300,34,4,6,2,4,2,26,10,2,5.882352941176471
+fgvc_aircraft,3,base,adk_probability_fusion,39,BAE-125,33,20,7,7,0,13,13,14,-13,-39.39393939393939
+fgvc_aircraft,3,base,adk_probability_fusion,40,Beechcraft 1900,33,23,21,20,1,3,9,5,-2,-6.0606060606060606
+fgvc_aircraft,3,base,adk_probability_fusion,41,Boeing 717,34,22,24,21,3,1,9,4,2,5.882352941176471
+fgvc_aircraft,3,base,adk_probability_fusion,42,C-130,33,31,31,31,0,0,2,0,0,0.0
+fgvc_aircraft,3,base,adk_probability_fusion,43,C-47,33,32,32,32,0,0,1,0,0,0.0
+fgvc_aircraft,3,base,adk_probability_fusion,44,CRJ-200,34,18,18,15,3,3,13,9,0,0.0
+fgvc_aircraft,3,base,adk_probability_fusion,45,CRJ-700,33,8,9,8,1,0,24,3,1,3.0303030303030303
+fgvc_aircraft,3,base,adk_probability_fusion,46,CRJ-900,33,1,2,1,1,0,31,5,1,3.0303030303030303
+fgvc_aircraft,3,base,adk_probability_fusion,47,Cessna 172,34,32,32,32,0,0,2,0,0,0.0
+fgvc_aircraft,3,base,adk_probability_fusion,48,Cessna 208,33,18,29,18,11,0,4,11,11,33.333333333333336
+fgvc_aircraft,3,base,adk_probability_fusion,49,Cessna 525,33,31,32,31,1,0,1,1,1,3.0303030303030303
+fgvc_aircraft,3,new,simple_fusion,0,Cessna 560,34,10,19,10,9,0,15,16,9,26.470588235294116
+fgvc_aircraft,3,new,simple_fusion,1,Challenger 600,33,0,1,0,1,0,32,12,1,3.0303030303030303
+fgvc_aircraft,3,new,simple_fusion,2,DC-10,33,25,15,15,0,10,8,14,-10,-30.303030303030305
+fgvc_aircraft,3,new,simple_fusion,3,DC-3,34,30,28,28,0,2,4,5,-2,-5.882352941176471
+fgvc_aircraft,3,new,simple_fusion,4,DC-6,33,3,8,2,6,1,24,12,5,15.151515151515152
+fgvc_aircraft,3,new,simple_fusion,5,DC-8,33,5,7,3,4,2,24,18,2,6.0606060606060606
+fgvc_aircraft,3,new,simple_fusion,6,DC-9-30,34,1,7,0,7,1,26,25,6,17.647058823529413
+fgvc_aircraft,3,new,simple_fusion,7,DH-82,33,32,26,26,0,6,1,6,-6,-18.181818181818183
+fgvc_aircraft,3,new,simple_fusion,8,DHC-1,33,0,0,0,0,0,33,18,0,0.0
+fgvc_aircraft,3,new,simple_fusion,9,DHC-6,34,2,24,2,22,0,10,25,22,64.70588235294117
+fgvc_aircraft,3,new,simple_fusion,10,DHC-8-100,33,2,12,2,10,0,21,18,10,30.303030303030305
+fgvc_aircraft,3,new,simple_fusion,11,DHC-8-300,33,0,1,0,1,0,32,8,1,3.0303030303030303
+fgvc_aircraft,3,new,simple_fusion,12,DR-400,34,0,0,0,0,0,34,3,0,0.0
+fgvc_aircraft,3,new,simple_fusion,13,Dornier 328,33,10,18,9,9,1,14,13,8,24.242424242424242
+fgvc_aircraft,3,new,simple_fusion,14,E-170,33,1,1,1,0,0,32,9,0,0.0
+fgvc_aircraft,3,new,simple_fusion,15,E-190,34,0,0,0,0,0,34,5,0,0.0
+fgvc_aircraft,3,new,simple_fusion,16,E-195,33,0,0,0,0,0,33,6,0,0.0
+fgvc_aircraft,3,new,simple_fusion,17,EMB-120,33,12,16,10,6,2,15,13,4,12.121212121212121
+fgvc_aircraft,3,new,simple_fusion,18,ERJ 135,34,9,18,8,10,1,15,18,9,26.470588235294116
+fgvc_aircraft,3,new,simple_fusion,19,ERJ 145,33,0,1,0,1,0,32,10,1,3.0303030303030303
+fgvc_aircraft,3,new,simple_fusion,20,Embraer Legacy 600,33,14,14,13,1,1,18,8,0,0.0
+fgvc_aircraft,3,new,simple_fusion,21,Eurofighter Typhoon,34,34,34,34,0,0,0,0,0,0.0
+fgvc_aircraft,3,new,simple_fusion,22,F-16A/B,33,29,32,29,3,0,1,3,3,9.090909090909092
+fgvc_aircraft,3,new,simple_fusion,23,F/A-18,33,31,31,31,0,0,2,0,0,0.0
+fgvc_aircraft,3,new,simple_fusion,24,Falcon 2000,34,27,26,25,1,2,6,8,-1,-2.9411764705882355
+fgvc_aircraft,3,new,simple_fusion,25,Falcon 900,33,1,1,1,0,0,32,9,0,0.0
+fgvc_aircraft,3,new,simple_fusion,26,Fokker 100,33,15,16,14,2,1,16,10,1,3.0303030303030303
+fgvc_aircraft,3,new,simple_fusion,27,Fokker 50,34,26,27,25,2,1,6,7,1,2.9411764705882355
+fgvc_aircraft,3,new,simple_fusion,28,Fokker 70,33,1,2,1,1,0,31,11,1,3.0303030303030303
+fgvc_aircraft,3,new,simple_fusion,29,Global Express,33,3,3,3,0,0,30,11,0,0.0
+fgvc_aircraft,3,new,simple_fusion,30,Gulfstream IV,34,17,18,16,2,1,15,5,1,2.9411764705882355
+fgvc_aircraft,3,new,simple_fusion,31,Gulfstream V,33,7,10,7,3,0,23,5,3,9.090909090909092
+fgvc_aircraft,3,new,simple_fusion,32,Hawk T1,33,33,33,33,0,0,0,0,0,0.0
+fgvc_aircraft,3,new,simple_fusion,33,Il-76,34,22,26,22,4,0,8,7,4,11.764705882352942
+fgvc_aircraft,3,new,simple_fusion,34,L-1011,33,1,10,0,10,1,22,16,9,27.272727272727273
+fgvc_aircraft,3,new,simple_fusion,35,MD-11,33,6,15,5,10,1,17,13,9,27.272727272727273
+fgvc_aircraft,3,new,simple_fusion,36,MD-80,34,3,2,1,1,2,30,16,-1,-2.9411764705882355
+fgvc_aircraft,3,new,simple_fusion,37,MD-87,33,4,5,3,2,1,27,12,1,3.0303030303030303
+fgvc_aircraft,3,new,simple_fusion,38,MD-90,33,4,7,3,4,1,25,11,3,9.090909090909092
+fgvc_aircraft,3,new,simple_fusion,39,Metroliner,34,6,11,6,5,0,23,12,5,14.705882352941176
+fgvc_aircraft,3,new,simple_fusion,40,Model B200,33,0,1,0,1,0,32,17,1,3.0303030303030303
+fgvc_aircraft,3,new,simple_fusion,41,PA-28,33,6,20,6,14,0,13,14,14,42.42424242424242
+fgvc_aircraft,3,new,simple_fusion,42,SR-20,34,29,34,29,5,0,0,5,5,14.705882352941176
+fgvc_aircraft,3,new,simple_fusion,43,Saab 2000,33,11,12,8,4,3,18,13,1,3.0303030303030303
+fgvc_aircraft,3,new,simple_fusion,44,Saab 340,33,1,3,1,2,0,30,13,2,6.0606060606060606
+fgvc_aircraft,3,new,simple_fusion,45,Spitfire,34,32,33,32,1,0,1,1,1,2.9411764705882355
+fgvc_aircraft,3,new,simple_fusion,46,Tornado,33,26,29,26,3,0,4,3,3,9.090909090909092
+fgvc_aircraft,3,new,simple_fusion,47,Tu-134,33,8,4,4,0,4,25,14,-4,-12.121212121212121
+fgvc_aircraft,3,new,simple_fusion,48,Tu-154,34,3,5,0,5,3,26,12,2,5.882352941176471
+fgvc_aircraft,3,new,simple_fusion,49,Yak-42,33,0,0,0,0,0,33,14,0,0.0
+fgvc_aircraft,3,new,mean_probability_fusion,0,Cessna 560,34,10,17,10,7,0,17,11,7,20.58823529411765
+fgvc_aircraft,3,new,mean_probability_fusion,1,Challenger 600,33,0,1,0,1,0,32,11,1,3.0303030303030303
+fgvc_aircraft,3,new,mean_probability_fusion,2,DC-10,33,25,13,13,0,12,8,16,-12,-36.36363636363637
+fgvc_aircraft,3,new,mean_probability_fusion,3,DC-3,34,30,27,27,0,3,4,6,-3,-8.823529411764707
+fgvc_aircraft,3,new,mean_probability_fusion,4,DC-6,33,3,9,2,7,1,23,14,6,18.181818181818183
+fgvc_aircraft,3,new,mean_probability_fusion,5,DC-8,33,5,7,3,4,2,24,16,2,6.0606060606060606
+fgvc_aircraft,3,new,mean_probability_fusion,6,DC-9-30,34,1,7,0,7,1,26,24,6,17.647058823529413
+fgvc_aircraft,3,new,mean_probability_fusion,7,DH-82,33,32,28,28,0,4,1,4,-4,-12.121212121212121
+fgvc_aircraft,3,new,mean_probability_fusion,8,DHC-1,33,0,15,0,15,0,18,21,15,45.45454545454545
+fgvc_aircraft,3,new,mean_probability_fusion,9,DHC-6,34,2,25,2,23,0,9,25,23,67.6470588235294
+fgvc_aircraft,3,new,mean_probability_fusion,10,DHC-8-100,33,2,12,2,10,0,21,16,10,30.303030303030305
+fgvc_aircraft,3,new,mean_probability_fusion,11,DHC-8-300,33,0,2,0,2,0,31,6,2,6.0606060606060606
+fgvc_aircraft,3,new,mean_probability_fusion,12,DR-400,34,0,0,0,0,0,34,3,0,0.0
+fgvc_aircraft,3,new,mean_probability_fusion,13,Dornier 328,33,10,12,8,4,2,19,8,2,6.0606060606060606
+fgvc_aircraft,3,new,mean_probability_fusion,14,E-170,33,1,1,1,0,0,32,9,0,0.0
+fgvc_aircraft,3,new,mean_probability_fusion,15,E-190,34,0,0,0,0,0,34,5,0,0.0
+fgvc_aircraft,3,new,mean_probability_fusion,16,E-195,33,0,0,0,0,0,33,4,0,0.0
+fgvc_aircraft,3,new,mean_probability_fusion,17,EMB-120,33,12,15,9,6,3,15,15,3,9.090909090909092
+fgvc_aircraft,3,new,mean_probability_fusion,18,ERJ 135,34,9,15,8,7,1,18,11,6,17.647058823529413
+fgvc_aircraft,3,new,mean_probability_fusion,19,ERJ 145,33,0,0,0,0,0,33,10,0,0.0
+fgvc_aircraft,3,new,mean_probability_fusion,20,Embraer Legacy 600,33,14,14,13,1,1,18,6,0,0.0
+fgvc_aircraft,3,new,mean_probability_fusion,21,Eurofighter Typhoon,34,34,34,34,0,0,0,0,0,0.0
+fgvc_aircraft,3,new,mean_probability_fusion,22,F-16A/B,33,29,31,29,2,0,2,2,2,6.0606060606060606
+fgvc_aircraft,3,new,mean_probability_fusion,23,F/A-18,33,31,31,31,0,0,2,0,0,0.0
+fgvc_aircraft,3,new,mean_probability_fusion,24,Falcon 2000,34,27,26,25,1,2,6,8,-1,-2.9411764705882355
+fgvc_aircraft,3,new,mean_probability_fusion,25,Falcon 900,33,1,1,1,0,0,32,8,0,0.0
+fgvc_aircraft,3,new,mean_probability_fusion,26,Fokker 100,33,15,17,15,2,0,16,8,2,6.0606060606060606
+fgvc_aircraft,3,new,mean_probability_fusion,27,Fokker 50,34,26,27,25,2,1,6,8,1,2.9411764705882355
+fgvc_aircraft,3,new,mean_probability_fusion,28,Fokker 70,33,1,2,1,1,0,31,10,1,3.0303030303030303
+fgvc_aircraft,3,new,mean_probability_fusion,29,Global Express,33,3,3,3,0,0,30,8,0,0.0
+fgvc_aircraft,3,new,mean_probability_fusion,30,Gulfstream IV,34,17,18,16,2,1,15,5,1,2.9411764705882355
+fgvc_aircraft,3,new,mean_probability_fusion,31,Gulfstream V,33,7,10,7,3,0,23,5,3,9.090909090909092
+fgvc_aircraft,3,new,mean_probability_fusion,32,Hawk T1,33,33,32,32,0,1,0,1,-1,-3.0303030303030303
+fgvc_aircraft,3,new,mean_probability_fusion,33,Il-76,34,22,27,22,5,0,7,6,5,14.705882352941176
+fgvc_aircraft,3,new,mean_probability_fusion,34,L-1011,33,1,12,0,12,1,20,17,11,33.333333333333336
+fgvc_aircraft,3,new,mean_probability_fusion,35,MD-11,33,6,16,5,11,1,16,14,10,30.303030303030305
+fgvc_aircraft,3,new,mean_probability_fusion,36,MD-80,34,3,2,1,1,2,30,13,-1,-2.9411764705882355
+fgvc_aircraft,3,new,mean_probability_fusion,37,MD-87,33,4,4,3,1,1,28,10,0,0.0
+fgvc_aircraft,3,new,mean_probability_fusion,38,MD-90,33,4,7,3,4,1,25,9,3,9.090909090909092
+fgvc_aircraft,3,new,mean_probability_fusion,39,Metroliner,34,6,10,6,4,0,24,11,4,11.764705882352942
+fgvc_aircraft,3,new,mean_probability_fusion,40,Model B200,33,0,2,0,2,0,31,14,2,6.0606060606060606
+fgvc_aircraft,3,new,mean_probability_fusion,41,PA-28,33,6,19,6,13,0,14,13,13,39.39393939393939
+fgvc_aircraft,3,new,mean_probability_fusion,42,SR-20,34,29,34,29,5,0,0,5,5,14.705882352941176
+fgvc_aircraft,3,new,mean_probability_fusion,43,Saab 2000,33,11,10,8,2,3,20,11,-1,-3.0303030303030303
+fgvc_aircraft,3,new,mean_probability_fusion,44,Saab 340,33,1,3,1,2,0,30,12,2,6.0606060606060606
+fgvc_aircraft,3,new,mean_probability_fusion,45,Spitfire,34,32,33,32,1,0,1,1,1,2.9411764705882355
+fgvc_aircraft,3,new,mean_probability_fusion,46,Tornado,33,26,29,26,3,0,4,3,3,9.090909090909092
+fgvc_aircraft,3,new,mean_probability_fusion,47,Tu-134,33,8,4,4,0,4,25,11,-4,-12.121212121212121
+fgvc_aircraft,3,new,mean_probability_fusion,48,Tu-154,34,3,5,2,3,1,28,7,2,5.882352941176471
+fgvc_aircraft,3,new,mean_probability_fusion,49,Yak-42,33,0,0,0,0,0,33,8,0,0.0
+fgvc_aircraft,3,new,adk_probability_fusion,0,Cessna 560,34,10,16,10,6,0,18,10,6,17.647058823529413
+fgvc_aircraft,3,new,adk_probability_fusion,1,Challenger 600,33,0,1,0,1,0,32,10,1,3.0303030303030303
+fgvc_aircraft,3,new,adk_probability_fusion,2,DC-10,33,25,14,14,0,11,8,15,-11,-33.333333333333336
+fgvc_aircraft,3,new,adk_probability_fusion,3,DC-3,34,30,26,26,0,4,4,7,-4,-11.764705882352942
+fgvc_aircraft,3,new,adk_probability_fusion,4,DC-6,33,3,9,3,6,0,24,12,6,18.181818181818183
+fgvc_aircraft,3,new,adk_probability_fusion,5,DC-8,33,5,6,3,3,2,25,16,1,3.0303030303030303
+fgvc_aircraft,3,new,adk_probability_fusion,6,DC-9-30,34,1,6,0,6,1,27,23,5,14.705882352941176
+fgvc_aircraft,3,new,adk_probability_fusion,7,DH-82,33,32,31,31,0,1,1,1,-1,-3.0303030303030303
+fgvc_aircraft,3,new,adk_probability_fusion,8,DHC-1,33,0,15,0,15,0,18,19,15,45.45454545454545
+fgvc_aircraft,3,new,adk_probability_fusion,9,DHC-6,34,2,23,2,21,0,11,21,21,61.76470588235294
+fgvc_aircraft,3,new,adk_probability_fusion,10,DHC-8-100,33,2,9,2,7,0,24,13,7,21.21212121212121
+fgvc_aircraft,3,new,adk_probability_fusion,11,DHC-8-300,33,0,2,0,2,0,31,6,2,6.0606060606060606
+fgvc_aircraft,3,new,adk_probability_fusion,12,DR-400,34,0,1,0,1,0,33,4,1,2.9411764705882355
+fgvc_aircraft,3,new,adk_probability_fusion,13,Dornier 328,33,10,11,8,3,2,20,7,1,3.0303030303030303
+fgvc_aircraft,3,new,adk_probability_fusion,14,E-170,33,1,1,1,0,0,32,10,0,0.0
+fgvc_aircraft,3,new,adk_probability_fusion,15,E-190,34,0,1,0,1,0,33,6,1,2.9411764705882355
+fgvc_aircraft,3,new,adk_probability_fusion,16,E-195,33,0,0,0,0,0,33,5,0,0.0
+fgvc_aircraft,3,new,adk_probability_fusion,17,EMB-120,33,12,17,11,6,1,15,12,5,15.151515151515152
+fgvc_aircraft,3,new,adk_probability_fusion,18,ERJ 135,34,9,16,9,7,0,18,10,7,20.58823529411765
+fgvc_aircraft,3,new,adk_probability_fusion,19,ERJ 145,33,0,0,0,0,0,33,9,0,0.0
+fgvc_aircraft,3,new,adk_probability_fusion,20,Embraer Legacy 600,33,14,14,13,1,1,18,6,0,0.0
+fgvc_aircraft,3,new,adk_probability_fusion,21,Eurofighter Typhoon,34,34,34,34,0,0,0,0,0,0.0
+fgvc_aircraft,3,new,adk_probability_fusion,22,F-16A/B,33,29,31,29,2,0,2,2,2,6.0606060606060606
+fgvc_aircraft,3,new,adk_probability_fusion,23,F/A-18,33,31,31,31,0,0,2,0,0,0.0
+fgvc_aircraft,3,new,adk_probability_fusion,24,Falcon 2000,34,27,25,24,1,3,6,9,-2,-5.882352941176471
+fgvc_aircraft,3,new,adk_probability_fusion,25,Falcon 900,33,1,1,1,0,0,32,7,0,0.0
+fgvc_aircraft,3,new,adk_probability_fusion,26,Fokker 100,33,15,17,15,2,0,16,7,2,6.0606060606060606
+fgvc_aircraft,3,new,adk_probability_fusion,27,Fokker 50,34,26,28,26,2,0,6,7,2,5.882352941176471
+fgvc_aircraft,3,new,adk_probability_fusion,28,Fokker 70,33,1,1,0,1,1,31,11,0,0.0
+fgvc_aircraft,3,new,adk_probability_fusion,29,Global Express,33,3,3,3,0,0,30,8,0,0.0
+fgvc_aircraft,3,new,adk_probability_fusion,30,Gulfstream IV,34,17,18,16,2,1,15,4,1,2.9411764705882355
+fgvc_aircraft,3,new,adk_probability_fusion,31,Gulfstream V,33,7,10,7,3,0,23,5,3,9.090909090909092
+fgvc_aircraft,3,new,adk_probability_fusion,32,Hawk T1,33,33,32,32,0,1,0,1,-1,-3.0303030303030303
+fgvc_aircraft,3,new,adk_probability_fusion,33,Il-76,34,22,28,22,6,0,6,7,6,17.647058823529413
+fgvc_aircraft,3,new,adk_probability_fusion,34,L-1011,33,1,12,0,12,1,20,17,11,33.333333333333336
+fgvc_aircraft,3,new,adk_probability_fusion,35,MD-11,33,6,16,5,11,1,16,14,10,30.303030303030305
+fgvc_aircraft,3,new,adk_probability_fusion,36,MD-80,34,3,2,1,1,2,30,13,-1,-2.9411764705882355
+fgvc_aircraft,3,new,adk_probability_fusion,37,MD-87,33,4,3,3,0,1,29,8,-1,-3.0303030303030303
+fgvc_aircraft,3,new,adk_probability_fusion,38,MD-90,33,4,6,3,3,1,26,9,2,6.0606060606060606
+fgvc_aircraft,3,new,adk_probability_fusion,39,Metroliner,34,6,11,6,5,0,23,11,5,14.705882352941176
+fgvc_aircraft,3,new,adk_probability_fusion,40,Model B200,33,0,2,0,2,0,31,13,2,6.0606060606060606
+fgvc_aircraft,3,new,adk_probability_fusion,41,PA-28,33,6,19,6,13,0,14,14,13,39.39393939393939
+fgvc_aircraft,3,new,adk_probability_fusion,42,SR-20,34,29,32,27,5,2,0,7,3,8.823529411764707
+fgvc_aircraft,3,new,adk_probability_fusion,43,Saab 2000,33,11,10,8,2,3,20,10,-1,-3.0303030303030303
+fgvc_aircraft,3,new,adk_probability_fusion,44,Saab 340,33,1,3,1,2,0,30,12,2,6.0606060606060606
+fgvc_aircraft,3,new,adk_probability_fusion,45,Spitfire,34,32,33,32,1,0,1,1,1,2.9411764705882355
+fgvc_aircraft,3,new,adk_probability_fusion,46,Tornado,33,26,29,26,3,0,4,4,3,9.090909090909092
+fgvc_aircraft,3,new,adk_probability_fusion,47,Tu-134,33,8,5,5,0,3,25,9,-3,-9.090909090909092
+fgvc_aircraft,3,new,adk_probability_fusion,48,Tu-154,34,3,4,2,2,1,29,6,1,2.9411764705882355
+fgvc_aircraft,3,new,adk_probability_fusion,49,Yak-42,33,0,1,0,1,0,32,8,1,3.0303030303030303

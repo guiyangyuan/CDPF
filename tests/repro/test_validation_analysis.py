@@ -13,6 +13,12 @@ from scripts.repro import validation_probe as probe
 
 ROOT = Path(__file__).resolve().parents[2]
 PYTHON = ROOT.parents[1] / "tc-venv/bin/python"
+FIXED_INVENTORY = json.loads((
+    ROOT / "reports/diagnostics/error-analysis-20260911/evidence/proposed-probe-inputs.json"
+).read_text())
+FIXED_CASES = {
+    (case["dataset"], case["seed"]): case for case in FIXED_INVENTORY["cases"]
+}
 
 
 class ValidationAnalysisCli(unittest.TestCase):
@@ -47,14 +53,43 @@ def _synthetic_payload(dataset, seed):
     }
 
 
+def _guard_payload(dataset, seed):
+    """Three classes make equal-logit and equal-probability fusion disagree."""
+    return {
+        "logits": {
+            "C": np.array([[4, 0, 0]], dtype=np.float32),
+            "S0": np.array([[-6, 0, -6]], dtype=np.float32),
+            "S1": np.array([[-6, -4, -6]], dtype=np.float32),
+            "M": np.array([[1, -2, 0]], dtype=np.float32),
+            "T0": np.array([[1, -2, 0]], dtype=np.float32),
+            "T1": np.array([[1, -2, 0]], dtype=np.float32),
+        },
+        "labels": np.array([0], dtype=np.int64),
+        "sample_ids": [f"{dataset}-{seed}-guard"],
+        "classnames": ["zero", "one", "two"],
+        "teacher_exact_equal": True,
+        "forward_precision": "float32",
+    }
+
+
 def _provenance(dataset, seed):
+    fixed_case = FIXED_CASES[(dataset, seed)]
     return {
         "source_sha256": analysis.EXPECTED_SOURCES[dataset],
         "clip_sha256": probe.CLIP_SHA256,
         "template_sha256": analysis.EXPECTED_TEMPLATES[dataset],
         "config_sha256": "f" * 64,
-        "config_compatibility_sha256": dataset * 4,
-        "checkpoint_sha256": {role: f"{dataset}-{seed}-{role}" for role in probe.ROLES},
+        "config_compatibility_sha256": probe.json_digest({"dataset": dataset}),
+        "inventory_sha256": probe.FIXED_INVENTORY_SHA256,
+        "inventory_case_sha256": probe.json_digest(fixed_case),
+        "train_samples_sha256": fixed_case["train_samples_sha256"],
+        "val_samples_sha256": fixed_case["val_samples_sha256"],
+        "checkpoint_sha256": {
+            role: fixed_case["checkpoints"][role]["sha256"] for role in probe.ROLES
+        },
+        "manifest_sha256": {
+            role: fixed_case["checkpoints"][role]["manifest_sha256"] for role in probe.ROLES
+        },
     }
 
 
@@ -102,13 +137,15 @@ class ValidationAnalysisContracts(unittest.TestCase):
             for dataset in analysis.DATASETS:
                 for seed in (1, 2, 3):
                     export = root / f"export-{dataset}-{seed}"
-                    probe.write_export_artifact(export, _synthetic_payload(dataset, seed), {
+                    probe.write_export_artifact(export, _guard_payload(dataset, seed), {
                         "dataset_key": dataset, "seed": seed, "protocol": probe.PROTOCOL,
                         "provenance": _provenance(dataset, seed),
                     })
                     report = analysis.analyze_export(export / "export.json", root / f"analysis-{dataset}-{seed}")
                     self.assertEqual(len(report["combinations"]), 18)
                     self.assertEqual(len(report["predictions"]), 24)
+                    self.assertEqual(report["predictions"]["S1+M_logits"], [0])
+                    self.assertEqual(report["predictions"]["S1+M_probability"], [1])
                     reports.append(report)
             aggregate = analysis.aggregate_reports(reports)
             self.assertEqual(aggregate["case_count"], 9)
@@ -117,6 +154,7 @@ class ValidationAnalysisContracts(unittest.TestCase):
             self.assertIn("sample_sd", aggregate["macro"]["S1+M_logits"])
             self.assertEqual(len(aggregate["complete_macro_metrics"]), 24)
             self.assertIn("multiclass_brier", aggregate["complete_macro_metrics"]["T1"])
+            self.assertEqual(aggregate["deltas_pp"]["candidate_vs_C_probability_macro_pp"], 0.0)
 
     def test_aggregate_rejects_missing_duplicate_and_mixed_provenance(self):
         template = {
@@ -143,6 +181,23 @@ class ValidationAnalysisContracts(unittest.TestCase):
         cases[-1]["seed"] = 3; cases[-1]["provenance"]["clip_sha256"] = "different"
         with self.assertRaisesRegex(ValueError, "compatible"):
             analysis.aggregate_reports(cases)
+        uniformly_wrong = []
+        for dataset in analysis.DATASETS:
+            for seed in (1, 2, 3):
+                case = copy.deepcopy(template); case["dataset_key"] = dataset; case["seed"] = seed
+                case["provenance"] = _provenance(dataset, seed)
+                case["provenance"]["clip_sha256"] = "a" * 64
+                case["provenance"]["template_sha256"] = "b" * 64
+                case["provenance"]["inventory_sha256"] = "c" * 64
+                case["provenance"]["checkpoint_sha256"] = {
+                    role: f"uniformly-wrong-{dataset}-{seed}-{role}" for role in probe.ROLES
+                }
+                case["provenance"]["manifest_sha256"] = {
+                    role: f"uniformly-wrong-manifest-{dataset}-{seed}-{role}" for role in probe.ROLES
+                }
+                uniformly_wrong.append(case)
+        with self.assertRaisesRegex(ValueError, "trusted inventory"):
+            analysis.aggregate_reports(uniformly_wrong)
 
 
 if __name__ == "__main__":

@@ -28,6 +28,8 @@ EXPECTED_TEMPLATES = {
 }
 STUDENTS = ("C", "S0", "S1")
 TEACHERS = ("M", "T0", "T1")
+FIXED_INVENTORY_PATH = (Path(__file__).resolve().parents[2] /
+    "reports/diagnostics/error-analysis-20260911/evidence/proposed-probe-inputs.json")
 
 
 def _fresh_output(path: Path) -> Path:
@@ -108,6 +110,41 @@ def fixed_probability_fusion_metrics(student_logits: np.ndarray, teacher_logits:
             "probabilities": fused_probability}
 
 
+def _trusted_inventory_cases() -> dict[tuple[str, int], dict[str, Any]]:
+    if probe.sha256_file(FIXED_INVENTORY_PATH) != probe.FIXED_INVENTORY_SHA256:
+        raise ValueError("Authenticated fixed inventory hash mismatch")
+    inventory = json.loads(FIXED_INVENTORY_PATH.read_text())
+    cases = {}
+    for dataset in DATASETS:
+        for seed in (1, 2, 3):
+            cases[(dataset, seed)] = probe.validate_inventory(inventory, dataset, seed)
+    return cases
+
+
+def _validate_trusted_provenance(dataset: str, seed: int,
+                                 provenance: Mapping[str, Any]) -> dict[str, Any]:
+    case = _trusted_inventory_cases()[(dataset, seed)]
+    expected = {
+        "source_sha256": EXPECTED_SOURCES[dataset],
+        "clip_sha256": probe.CLIP_SHA256,
+        "template_sha256": EXPECTED_TEMPLATES[dataset],
+        "inventory_sha256": probe.FIXED_INVENTORY_SHA256,
+        "inventory_case_sha256": probe.json_digest(case),
+        "train_samples_sha256": case["train_samples_sha256"],
+        "val_samples_sha256": case["val_samples_sha256"],
+        "checkpoint_sha256": {role: case["checkpoints"][role]["sha256"] for role in probe.ROLES},
+        "manifest_sha256": {role: case["checkpoints"][role]["manifest_sha256"] for role in probe.ROLES},
+    }
+    differing = sorted(key for key, value in expected.items() if provenance.get(key) != value)
+    if differing:
+        raise ValueError(f"Artifact settings are not compatible with trusted inventory: {differing}")
+    for field in ("config_sha256", "config_compatibility_sha256"):
+        value = provenance.get(field)
+        if not isinstance(value, str) or len(value) != 64:
+            raise ValueError(f"Artifact provenance differs from trusted inventory chain: {field}")
+    return case
+
+
 def load_export(export_path: Path) -> tuple[dict[str, Any], dict[str, np.ndarray]]:
     path = Path(export_path).resolve()
     receipt = json.loads(path.read_text())
@@ -119,15 +156,7 @@ def load_export(export_path: Path) -> tuple[dict[str, Any], dict[str, np.ndarray
     if dataset not in DATASETS or seed not in (1, 2, 3):
         raise ValueError("Export dataset/seed is outside the fixed nine cases")
     provenance = receipt.get("provenance", {})
-    if provenance.get("source_sha256") != EXPECTED_SOURCES[dataset]:
-        raise ValueError("Export frozen source provenance mismatch")
-    if provenance.get("clip_sha256") != probe.CLIP_SHA256 or \
-            provenance.get("template_sha256") != EXPECTED_TEMPLATES[dataset]:
-        raise ValueError("Export frozen asset provenance mismatch")
-    checkpoint_hashes = provenance.get("checkpoint_sha256")
-    if not isinstance(checkpoint_hashes, dict) or set(checkpoint_hashes) != set(probe.ROLES) or \
-            any(not isinstance(value, str) or not value for value in checkpoint_hashes.values()):
-        raise ValueError("Export checkpoint provenance is incomplete")
+    _validate_trusted_provenance(dataset, seed, provenance)
     if receipt.get("prepared") is not None and \
             probe.sha256_file(Path(receipt["prepared"])) != receipt.get("prepared_sha256"):
         raise ValueError("Export prepared-receipt hash mismatch")
@@ -239,8 +268,11 @@ def aggregate_reports(reports: list[Mapping[str, Any]]) -> dict[str, Any]:
         raise ValueError("Aggregate is missing one or more fixed nine cases")
     if any(report.get("status") != "passed" or report.get("protocol") != probe.PROTOCOL for report in reports):
         raise ValueError("Aggregate contains incomplete or mixed protocol results")
+    for report in reports:
+        _validate_trusted_provenance(report["dataset_key"], report["seed"],
+                                     report.get("provenance", {}))
     clips = {report.get("provenance", {}).get("clip_sha256") for report in reports}
-    if len(clips) != 1:
+    if clips != {probe.CLIP_SHA256}:
         raise ValueError("Aggregate settings are not compatible: CLIP differs")
     for dataset in DATASETS:
         group = [report for report in reports if report["dataset_key"] == dataset]
@@ -248,7 +280,8 @@ def aggregate_reports(reports: list[Mapping[str, Any]]) -> dict[str, Any]:
         template = {report["provenance"].get("template_sha256") for report in group}
         compatibility = {report["provenance"].get("config_compatibility_sha256",
                                                   report["provenance"].get("config_sha256")) for report in group}
-        if source != {EXPECTED_SOURCES[dataset]} or len(template) != 1 or len(compatibility) != 1:
+        if source != {EXPECTED_SOURCES[dataset]} or template != {EXPECTED_TEMPLATES[dataset]} or \
+                len(compatibility) != 1:
             raise ValueError(f"Aggregate settings are not compatible for {dataset}")
     for role in probe.ROLES:
         hashes = [report["provenance"].get("checkpoint_sha256", {}).get(role) for report in reports]
@@ -285,11 +318,11 @@ def aggregate_reports(reports: list[Mapping[str, Any]]) -> dict[str, Any]:
             complete_macro_metrics[method][field] = _mean_sd(values)
     deltas = {
         "candidate_vs_C_logits_macro_pp": macro["S1+M_logits"]["mean"] - macro["C+M_logits"]["mean"],
-        "candidate_vs_C_probability_macro_pp": macro["S1+M_probability"]["mean"] - macro["C+M_probability"]["mean"],
+        "candidate_vs_C_probability_macro_pp": macro["S1+M_logits"]["mean"] - macro["C+M_probability"]["mean"],
         "candidate_vs_S0_logits_macro_pp": macro["S1+M_logits"]["mean"] - macro["S0+M_logits"]["mean"],
         "candidate_vs_C_logits_dataset_pp": {dataset: dataset_means[dataset]["S1+M_logits"]["mean"] -
                                                dataset_means[dataset]["C+M_logits"]["mean"] for dataset in DATASETS},
-        "candidate_vs_C_probability_dataset_pp": {dataset: dataset_means[dataset]["S1+M_probability"]["mean"] -
+        "candidate_vs_C_probability_dataset_pp": {dataset: dataset_means[dataset]["S1+M_logits"]["mean"] -
                                                     dataset_means[dataset]["C+M_probability"]["mean"] for dataset in DATASETS},
     }
     guards = {
@@ -301,6 +334,9 @@ def aggregate_reports(reports: list[Mapping[str, Any]]) -> dict[str, Any]:
     }
     guards["all_passed"] = all(guards.values())
     return {"status": "passed", "case_count": 9, "protocol": probe.PROTOCOL,
+            "fixed_candidate": "S1+M_logits",
+            "trusted_inventory": {"path": str(FIXED_INVENTORY_PATH),
+                                  "sha256": probe.FIXED_INVENTORY_SHA256},
             "weighting": "three-seed mean within dataset; equal mean across three datasets",
             "cases": [{"dataset_key": r["dataset_key"], "seed": r["seed"],
                        "branches": r["branches"], "combinations": r["combinations"]}

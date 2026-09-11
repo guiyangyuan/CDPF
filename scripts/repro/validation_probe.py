@@ -37,6 +37,7 @@ NEW_SOURCE_SHA256 = "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a
 EXPECTED_SOURCES = {"ucf101": OLD_SOURCE_SHA256, "dtd": NEW_SOURCE_SHA256,
                     "fgvc_aircraft": NEW_SOURCE_SHA256}
 CLIP_SHA256 = "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f"
+FIXED_INVENTORY_SHA256 = "858bfbf1f64d71e93c5ca89f706bd757ca69b1f6250b2cadb55a521dcda4d185"
 BRANCHES = ("C", "S0", "S1", "M", "T0", "T1")
 ROLES = ("coop", "kd0", "kd1")
 PROTOCOL = {
@@ -194,6 +195,25 @@ def validate_samples(train: list[Any], val: list[Any], test: list[Any], data_roo
     return result
 
 
+def _expected_model_signature(role: str, case: Mapping[str, Any]) -> dict[str, Any]:
+    is_coop = role == "coop"
+    signature = {
+        "format": 1 if case["dataset"] == "ucf101" else 2,
+        "trainer": "CoOp_TextConsistency_Ablation" if is_coop else "CoOp_TextConsistency_V2_FG",
+        "n_ctx": 4,
+        "aggregation": "none" if is_coop else "hierarchical",
+        "feature_adapter": not is_coop,
+        "n_groups": None if is_coop else 4,
+        "n_views": 20,
+        "ablation_group": "baseline" if is_coop else None,
+        "clip_sha256": case["clip_sha256"],
+        "template_sha256": None if is_coop else case["template_sha256"],
+    }
+    if signature["format"] == 2:
+        signature.update({"view_order": "contiguous", "order_seed": 0, "order_version": 1})
+    return signature
+
+
 def _assert_manifest(role: str, manifest: Mapping[str, Any], case: Mapping[str, Any]) -> None:
     expected_loss = {"coop": 0.0, "kd0": 0.0, "kd1": 1.0}[role]
     fixed = {"dataset": DATASETS[case["dataset"]][0], "seed": case["seed"], "shots": 16,
@@ -207,20 +227,15 @@ def _assert_manifest(role: str, manifest: Mapping[str, Any], case: Mapping[str, 
     if losses != {"kd": expected_loss, "adaptive_ce": 1.0, "diversity": 0.0, "contrastive": 0.0}:
         raise ValueError(f"{role} manifest has the wrong effective losses")
     signature = manifest.get("model_signature", {})
-    for key, value in {"n_ctx": 4, "n_views": 20, "clip_sha256": case["clip_sha256"]}.items():
-        if signature.get(key) != value:
-            raise ValueError(f"{role} model signature mismatch: {key}")
+    expected_signature = _expected_model_signature(role, case)
+    if signature != expected_signature:
+        differing = sorted(key for key in set(signature) | set(expected_signature)
+                           if signature.get(key) != expected_signature.get(key))
+        raise ValueError(f"{role} model signature mismatch: {differing}")
     if role == "coop":
-        expected = {"trainer": "CoOp_TextConsistency_Ablation", "aggregation": "none",
-                    "feature_adapter": False, "n_groups": None, "ablation_group": "baseline",
-                    "template_sha256": None}; expected_parameters = 2048
+        expected_parameters = 2048
     else:
-        expected = {"trainer": "CoOp_TextConsistency_V2_FG", "aggregation": "hierarchical",
-                    "feature_adapter": True, "n_groups": 4, "ablation_group": None,
-                    "template_sha256": case["template_sha256"]}; expected_parameters = 790018
-    for key, value in expected.items():
-        if signature.get(key) != value:
-            raise ValueError(f"{role} model signature mismatch: {key}")
+        expected_parameters = 790018
     if manifest.get("trainable_parameters") != expected_parameters:
         raise ValueError(f"{role} trainable parameter count mismatch")
 
@@ -330,6 +345,84 @@ def build_role_config(training: Any, config_path: Path, data_root: Path, output_
     return cfg
 
 
+def validate_effective_role_config(role: str, cfg: Any, manifest: Mapping[str, Any],
+                                   case: Mapping[str, Any], source_root: Path,
+                                   *, cuda: bool) -> dict[str, Any]:
+    """Bind every inference/validation-bearing config value to trusted evidence."""
+    if role not in ROLES:
+        raise ValueError(f"Unknown role effective config: {role}")
+    signature = manifest.get("model_signature")
+    if signature != _expected_model_signature(role, case):
+        raise ValueError(f"{role} effective config is paired with an unauthenticated signature")
+    is_coop = role == "coop"
+    tc = cfg.TRAINER.TEXTCONSISTENCY
+    expected_tc = {
+        "ABLATION_GROUP": "baseline" if is_coop else "full",
+        "ADAPTIVE_CE_WEIGHT": 1.0,
+        "AGGREGATION": "mean" if is_coop else signature["aggregation"],
+        "CONSISTENCY_TEMP": 1.0,
+        "CONSISTENCY_WEIGHT": 1.0,
+        "CONTRASTIVE_WEIGHT": 0.0,
+        "DEVICE": "cuda" if cuda else "cpu",
+        "DIVERSITY_WEIGHT": 0.0,
+        "ENSEMBLE_ALPHA": PROTOCOL["alpha"],
+        "INFERENCE_BRANCH": "student" if is_coop else "ensemble",
+        "KD_TEMP": 2.0,
+        "KD_WEIGHT": (1.0 if is_coop and case["dataset"] == "ucf101" else
+                      {"coop": 0.0, "kd0": 0.0, "kd1": 1.0}[role]),
+        "N_CTX": signature["n_ctx"],
+        "N_GROUPS": 4,
+        "N_VIEWS": signature["n_views"],
+        "PREC": "fp32",
+        "TEXT_BATCH_SIZE": 32,
+        "USE_FEATURE_ADAPTER": signature["feature_adapter"],
+    }
+    if signature["format"] == 2:
+        expected_tc.update({"VIEW_ORDER": signature["view_order"],
+                            "ORDER_SEED": signature["order_seed"]})
+    actual_tc = {key: getattr(tc, key, None) for key in expected_tc}
+    if actual_tc != expected_tc:
+        differing = sorted(key for key in expected_tc if actual_tc[key] != expected_tc[key])
+        raise ValueError(f"{role} effective config mismatch: {differing}")
+    expected_losses = manifest["effective_losses"]
+    config_losses = {
+        "kd": 0.0 if is_coop else float(tc.KD_WEIGHT),
+        "adaptive_ce": float(tc.ADAPTIVE_CE_WEIGHT),
+        "diversity": float(tc.DIVERSITY_WEIGHT),
+        "contrastive": float(tc.CONTRASTIVE_WEIGHT),
+    }
+    if config_losses != expected_losses:
+        raise ValueError(f"{role} effective config loss behavior differs from the manifest")
+    fixed = {
+        "seed": (int(cfg.SEED), int(case["seed"])),
+        "cuda": (bool(cfg.USE_CUDA), cuda),
+        "split": (cfg.TEST.SPLIT, PROTOCOL["split"]),
+        "dataset": (cfg.DATASET.NAME, DATASETS[case["dataset"]][0]),
+        "shots": (int(cfg.DATASET.NUM_SHOTS), PROTOCOL["shots"]),
+        "subsample": (cfg.DATASET.SUBSAMPLE_CLASSES, PROTOCOL["subsample_classes"]),
+        "workers": (int(cfg.DATALOADER.NUM_WORKERS), PROTOCOL["workers"]),
+        "sampler": (cfg.DATALOADER.TEST.SAMPLER, PROTOCOL["sampler"]),
+        "batch_size": (int(cfg.DATALOADER.TEST.BATCH_SIZE), 16),
+        "backbone": (cfg.MODEL.BACKBONE.NAME, "ViT-B/16"),
+        "input_size": (list(cfg.INPUT.SIZE), [224, 224]),
+        "interpolation": (cfg.INPUT.INTERPOLATION, "bicubic"),
+        "pixel_mean": (list(cfg.INPUT.PIXEL_MEAN), [0.48145466, 0.4578275, 0.40821073]),
+        "pixel_std": (list(cfg.INPUT.PIXEL_STD), [0.26862954, 0.26130258, 0.27577711]),
+        "no_transform": (bool(cfg.INPUT.NO_TRANSFORM), False),
+        "trainer": (cfg.TRAINER.NAME, signature["trainer"]),
+    }
+    differing = sorted(name for name, (actual, expected) in fixed.items() if actual != expected)
+    clip_path = Path(tc.CLIP_PATH).expanduser().resolve()
+    expected_clip = (Path(source_root).resolve() / "clip/ViT-B-16.pt").resolve()
+    if clip_path != expected_clip:
+        differing.append("clip_path")
+    if differing:
+        raise ValueError(f"{role} effective config protocol mismatch: {differing}")
+    return {"model_signature": copy.deepcopy(signature), "textconsistency": actual_tc,
+            "losses": config_losses, "protocol": {name: actual for name, (actual, _) in fixed.items()},
+            "clip_path": str(clip_path)}
+
+
 def rebuild_source_dataset(training: Any, cfg: Any, dataset_key: str):
     """Use source readers/samplers directly, never their cache-writing constructors."""
     random.seed(int(cfg.SEED))
@@ -378,15 +471,31 @@ def build_val_loader(cfg: Any, val: list[Any]):
 def _decode_evidence(loader: Any) -> dict[str, Any]:
     digest, count, shape, dtype = hashlib.sha256(), 0, None, None
     for batch in loader:
-        images, labels = batch["img"].detach().cpu().contiguous(), batch["label"].detach().cpu().contiguous()
-        if not torch.isfinite(images).all().item():
-            raise ValueError("Decoded validation transform produced non-finite pixels")
-        digest.update(images.numpy().tobytes()); digest.update(labels.numpy().tobytes())
-        for path in batch["impath"]: digest.update(str(path).encode())
-        count += int(labels.numel()); shape, dtype = list(images.shape[1:]), str(images.dtype)
+        batch_count, batch_shape, batch_dtype = _update_decode_digest(digest, batch)
+        count += batch_count; shape, dtype = batch_shape, batch_dtype
     if count == 0: raise ValueError("Validation loader decoded zero images")
     return {"count": count, "tensor_shape": shape, "tensor_dtype": dtype,
             "ordered_transform_sha256": digest.hexdigest()}
+
+
+def _update_decode_digest(digest: Any, batch: Mapping[str, Any]) -> tuple[int, list[int], str]:
+    images = batch["img"].detach().cpu().contiguous()
+    labels = batch["label"].detach().cpu().contiguous()
+    if not torch.is_tensor(images) or not torch.is_tensor(labels) or images.ndim < 2 or labels.ndim != 1:
+        raise ValueError("Decoded validation batch tensors are malformed")
+    if len(images) != len(labels) or len(batch["impath"]) != len(labels):
+        raise ValueError("Decoded validation batch paths/labels/tensors are not aligned")
+    if not torch.isfinite(images).all().item():
+        raise ValueError("Decoded validation transform produced non-finite pixels")
+    digest.update(images.numpy().tobytes()); digest.update(labels.numpy().tobytes())
+    for path in batch["impath"]: digest.update(str(path).encode())
+    return int(labels.numel()), list(images.shape[1:]), str(images.dtype)
+
+
+def validate_decoded_transform(actual: Mapping[str, Any], expected: Mapping[str, Any]) -> None:
+    required = {"count", "tensor_shape", "tensor_dtype", "ordered_transform_sha256"}
+    if set(actual) != required or set(expected) != required or dict(actual) != dict(expected):
+        raise ValueError("Validation transform digest differs from prepared evidence")
 
 
 def _metadata_receipt(paths: Iterable[Path]) -> list[dict[str, str]]:
@@ -396,6 +505,8 @@ def _metadata_receipt(paths: Iterable[Path]) -> list[dict[str, str]]:
 def prepare_case(args: argparse.Namespace) -> dict[str, Any]:
     inventory_path, workspace_root = Path(args.inventory).resolve(), Path(args.workspace_root).resolve()
     source_root, data_root = Path(args.source_root).resolve(), Path(args.data_root).resolve()
+    if sha256_file(inventory_path) != FIXED_INVENTORY_SHA256:
+        raise ValueError("Probe inventory differs from the authenticated fixed inventory")
     case = validate_inventory(_read_json(inventory_path), args.dataset, args.seed)
     checkpoint_inputs = [(workspace_root / case["checkpoints"][role]["workspace_relative_checkpoint"]).resolve()
                          for role in ROLES]
@@ -409,16 +520,10 @@ def prepare_case(args: argparse.Namespace) -> dict[str, Any]:
     training = _source_modules(source_root)
     configs = {role: build_role_config(training, Path(bundles[role]["effective_config"]), data_root,
                                        output, args.seed, source_root, cuda=False) for role in ROLES}
+    config_bindings = {role: validate_effective_role_config(
+        role, configs[role], bundles[role]["manifest_payload"], case, source_root, cuda=False)
+        for role in ROLES}
     cfg = configs["coop"]
-    if cfg.TRAINER.NAME != "CoOp_TextConsistency_Ablation" or \
-            cfg.TRAINER.TEXTCONSISTENCY.ABLATION_GROUP != "baseline":
-        raise ValueError("CoOp effective config has the wrong role schema")
-    for role, weight in (("kd0", 0.0), ("kd1", 1.0)):
-        role_cfg = configs[role]
-        if role_cfg.TRAINER.NAME != "CoOp_TextConsistency_V2_FG" or \
-                role_cfg.TRAINER.TEXTCONSISTENCY.KD_WEIGHT != weight or \
-                role_cfg.TRAINER.TEXTCONSISTENCY.AGGREGATION != "hierarchical":
-            raise ValueError(f"{role} effective config has the wrong role schema")
     train, val, test, classnames, metadata_paths = rebuild_source_dataset(training, cfg, args.dataset)
     samples = validate_samples(train, val, test, data_root, classnames)
     for name, items, expected in (("train", train, case["train_samples_sha256"]),
@@ -429,9 +534,11 @@ def prepare_case(args: argparse.Namespace) -> dict[str, Any]:
         raise ValueError("Rebuilt test metadata hash differs from role manifest")
     loader, transform = build_val_loader(cfg, val); decoded = _decode_evidence(loader)
     import yaml
-    effective_cfg = yaml.safe_load(cfg.dump())
-    compatible_cfg = copy.deepcopy(effective_cfg)
-    compatible_cfg["SEED"] = "<seed>"; compatible_cfg["OUTPUT_DIR"] = "<output>"
+    effective_configs = {role: yaml.safe_load(configs[role].dump()) for role in ROLES}
+    compatible_configs = copy.deepcopy(effective_configs)
+    for role in ROLES:
+        compatible_configs[role]["SEED"] = "<seed>"
+        compatible_configs[role]["OUTPUT_DIR"] = "<output>"
     receipt = {"status": "prepared", "dataset_key": args.dataset, "dataset": DATASETS[args.dataset][0],
         "seed": args.seed, "protocol": PROTOCOL,
         "inventory": {"path": str(inventory_path), "sha256": sha256_file(inventory_path), "case": case},
@@ -442,9 +549,11 @@ def prepare_case(args: argparse.Namespace) -> dict[str, Any]:
         "checkpoints": bundles, "teacher_tensor_exact_equal": bundles["teacher_tensor_exact_equal"],
         "samples": samples, "sample_hashes": {"train": sample_digest(train, data_root),
         "val": sample_digest(val, data_root), "test": test_sha},
-        "source_metadata": _metadata_receipt(metadata_paths), "effective_config": effective_cfg,
-        "effective_config_sha256": json_digest(effective_cfg),
-        "config_compatibility_sha256": json_digest(compatible_cfg),
+        "source_metadata": _metadata_receipt(metadata_paths),
+        "effective_config": effective_configs["coop"], "effective_configs": effective_configs,
+        "effective_config_bindings": config_bindings,
+        "effective_config_sha256": json_digest(effective_configs),
+        "config_compatibility_sha256": json_digest(compatible_configs),
         "config_compatibility": {"coop_declared_kd_weight": float(cfg.TRAINER.TEXTCONSISTENCY.KD_WEIGHT),
             "coop_effective_kd_weight": 0.0,
             "legacy_exception": "ucf101 baseline ablation disables declared KD=1" if
@@ -508,11 +617,14 @@ def export_batches(models: Mapping[str, torch.nn.Module], batches: Iterable[Mapp
     weights = mask.to(descriptions.dtype) / mask.sum(dim=1, keepdim=True)
     mean_features = F.normalize(torch.einsum("cv,cvd->cd", weights, descriptions), dim=-1)
     collected, labels, sample_ids = {name: [] for name in BRANCHES}, [], []
+    decoded_digest, decoded_count, decoded_shape, decoded_dtype = hashlib.sha256(), 0, None, None
     teacher_equal, precision = True, set()
     if device is None:
         device = next(models["coop"].parameters()).device
     with torch.inference_mode():
         for batch in batches:
+            batch_count, decoded_shape, decoded_dtype = _update_decode_digest(decoded_digest, batch)
+            decoded_count += batch_count
             images = batch["img"].to(device)
             outputs = {role: model(images, return_attn=False) for role, model in models.items()}
             coop_s, _, coop_f, _ = outputs["coop"]; s0, t0, f0, _ = outputs["kd0"]; s1, t1, f1, _ = outputs["kd1"]
@@ -543,6 +655,8 @@ def export_batches(models: Mapping[str, torch.nn.Module], batches: Iterable[Mapp
     return {"logits": {name: np.concatenate(values).astype(np.float32, copy=False)
                        for name, values in collected.items()}, "labels": label_array,
             "sample_ids": sample_ids, "classnames": list(classnames),
+            "decoded_val": {"count": decoded_count, "tensor_shape": decoded_shape,
+                "tensor_dtype": decoded_dtype, "ordered_transform_sha256": decoded_digest.hexdigest()},
             "teacher_logits_exact_equal": teacher_equal,
             "forward_precision": sorted(precision) if len(precision) != 1 else next(iter(precision))}
 
@@ -581,6 +695,24 @@ def write_export_artifact(output_dir: Path, payload: Mapping[str, Any], metadata
 def _revalidate_prepared(prepared: Mapping[str, Any]) -> None:
     if prepared.get("status") != "prepared" or prepared.get("protocol") != PROTOCOL:
         raise ValueError("Prepared receipt status/protocol mismatch")
+    inventory_record = prepared.get("inventory", {})
+    if inventory_record.get("sha256") != FIXED_INVENTORY_SHA256:
+        raise ValueError("Prepared receipt is not bound to the authenticated inventory")
+    inventory = _read_json(Path(inventory_record["path"]))
+    case = validate_inventory(inventory, prepared["dataset_key"], prepared["seed"])
+    if case != inventory_record.get("case"):
+        raise ValueError("Prepared inventory case differs from the authenticated inventory")
+    if prepared.get("source_sha256") != EXPECTED_SOURCES[prepared["dataset_key"]] or \
+            prepared.get("assets", {}).get("clip_sha256") != case["clip_sha256"] or \
+            prepared.get("assets", {}).get("template_sha256") != case["template_sha256"]:
+        raise ValueError("Prepared source/assets differ from the authenticated inventory")
+    if prepared.get("sample_hashes", {}).get("train") != case["train_samples_sha256"] or \
+            prepared.get("sample_hashes", {}).get("val") != case["val_samples_sha256"]:
+        raise ValueError("Prepared sample hashes differ from the authenticated inventory")
+    for role in ROLES:
+        if prepared["checkpoints"][role].get("checkpoint_sha256") != case["checkpoints"][role]["sha256"] or \
+                prepared["checkpoints"][role].get("manifest_sha256") != case["checkpoints"][role]["manifest_sha256"]:
+            raise ValueError(f"Prepared {role} bundle differs from the authenticated inventory")
     checks = [(prepared["inventory"]["path"], prepared["inventory"]["sha256"]),
               (prepared["assets"]["clip"], prepared["assets"]["clip_sha256"]),
               (prepared["assets"]["template"], prepared["assets"]["template_sha256"])]
@@ -610,12 +742,17 @@ def export_case(args: argparse.Namespace) -> dict[str, Any]:
         training = _source_modules(source_root)
         configs = {role: build_role_config(training, Path(prepared["checkpoints"][role]["effective_config"]),
                    data_root, output, prepared["seed"], source_root, cuda=True) for role in ROLES}
+        for role in ROLES:
+            validate_effective_role_config(role, configs[role],
+                prepared["checkpoints"][role]["manifest_payload"], prepared["inventory"]["case"],
+                source_root, cuda=True)
         train, val, test, classnames, _ = rebuild_source_dataset(training, configs["coop"], prepared["dataset_key"])
         if validate_samples(train, val, test, data_root, classnames) != prepared["samples"]:
             raise ValueError("Rebuilt source samples/classes differ from prepared receipt")
         loader, transform = build_val_loader(configs["coop"], val)
         if hashlib.sha256(repr(transform).encode()).hexdigest() != prepared["transform"]["repr_sha256"]:
             raise ValueError("Validation transform identity differs from prepare")
+        validate_decoded_transform(_decode_evidence(loader), prepared["transform"]["decoded_val"])
         common = importlib.import_module("trainers.textconsistency_common")
         clip_model = common.load_clip_checkpoint(configs["coop"])
         baseline_cls = importlib.import_module("trainers.coop_textconsistency_ablation").CustomCLIP
@@ -627,10 +764,17 @@ def export_case(args: argparse.Namespace) -> dict[str, Any]:
         encoder = models["kd1"].multiview_encoder
         result = export_batches(models, loader, encoder.get_view_features().to("cuda"),
                                 encoder.view_mask.to("cuda"), classnames, device="cuda")
+        validate_decoded_transform(result["decoded_val"], prepared["transform"]["decoded_val"])
         root = data_root.resolve(); result["sample_ids"] = [str(Path(p).resolve().relative_to(root)) for p in result["sample_ids"]]
         if result["sample_ids"] != [row["sample_id"] for row in prepared["samples"]["val"]] or \
                 result["labels"].tolist() != [row["label"] for row in prepared["samples"]["val"]]:
             raise ValueError("Export row order differs from prepared validation order")
+        if validate_samples(train, val, test, data_root, classnames) != prepared["samples"]:
+            raise ValueError("Validation samples changed during export")
+        post_loader, post_transform = build_val_loader(configs["coop"], val)
+        if hashlib.sha256(repr(post_transform).encode()).hexdigest() != prepared["transform"]["repr_sha256"]:
+            raise ValueError("Validation transform identity changed during export")
+        validate_decoded_transform(_decode_evidence(post_loader), prepared["transform"]["decoded_val"])
         _revalidate_prepared(prepared)
         metadata = {"dataset_key": prepared["dataset_key"], "dataset": prepared["dataset"], "seed": prepared["seed"],
             "protocol": PROTOCOL, "prepared": str(prepared_path), "prepared_sha256": sha256_file(prepared_path),
@@ -638,12 +782,18 @@ def export_case(args: argparse.Namespace) -> dict[str, Any]:
             "tool": {"validation_probe_sha256": sha256_file(Path(__file__).resolve())},
             "effective_config": prepared["effective_config"],
             "transform": prepared["transform"], "sample_hashes": prepared["sample_hashes"],
+            "evaluated_transform": result["decoded_val"],
             "sample_inventory_sha256": prepared["samples"]["inventory_sha256"],
             "provenance": {"source_sha256": prepared["source_sha256"],
                 "clip_sha256": prepared["assets"]["clip_sha256"], "template_sha256": prepared["assets"]["template_sha256"],
+                "inventory_sha256": prepared["inventory"]["sha256"],
+                "inventory_case_sha256": json_digest(prepared["inventory"]["case"]),
+                "train_samples_sha256": prepared["sample_hashes"]["train"],
+                "val_samples_sha256": prepared["sample_hashes"]["val"],
                 "config_sha256": prepared["effective_config_sha256"],
                 "config_compatibility_sha256": prepared["config_compatibility_sha256"],
-                "checkpoint_sha256": {role: prepared["checkpoints"][role]["checkpoint_sha256"] for role in ROLES}},
+                "checkpoint_sha256": {role: prepared["checkpoints"][role]["checkpoint_sha256"] for role in ROLES},
+                "manifest_sha256": {role: prepared["checkpoints"][role]["manifest_sha256"] for role in ROLES}},
             "environment": {"python": platform.python_version(), "torch": torch.__version__,
                 "cuda_runtime": torch.version.cuda, "gpu": torch.cuda.get_device_name(0), "device": "cuda"}}
         return write_export_artifact(output, result, metadata, existing_empty_ok=True)

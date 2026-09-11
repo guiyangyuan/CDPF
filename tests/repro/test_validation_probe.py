@@ -32,6 +32,65 @@ class ValidationProbeCli(unittest.TestCase):
 
 
 class ValidationProbeContracts(unittest.TestCase):
+    @staticmethod
+    def _role_config(role):
+        is_coop = role == "coop"
+        tc = SimpleNamespace(
+            ABLATION_GROUP="baseline" if is_coop else "full",
+            ADAPTIVE_CE_WEIGHT=1.0,
+            AGGREGATION="mean" if is_coop else "hierarchical",
+            CLIP_PATH="unused",
+            CONSISTENCY_TEMP=1.0,
+            CONSISTENCY_WEIGHT=1.0,
+            CONTRASTIVE_WEIGHT=0.0,
+            DEVICE="cpu",
+            DIVERSITY_WEIGHT=0.0,
+            ENSEMBLE_ALPHA=0.5,
+            INFERENCE_BRANCH="student" if is_coop else "ensemble",
+            KD_TEMP=2.0,
+            KD_WEIGHT={"coop": 0.0, "kd0": 0.0, "kd1": 1.0}[role],
+            N_CTX=4,
+            N_GROUPS=4,
+            N_VIEWS=20,
+            ORDER_SEED=0,
+            PREC="fp32",
+            TEXT_BATCH_SIZE=32,
+            USE_FEATURE_ADAPTER=not is_coop,
+            VIEW_ORDER="contiguous",
+        )
+        return SimpleNamespace(
+            SEED=1,
+            USE_CUDA=False,
+            TEST=SimpleNamespace(SPLIT="val"),
+            DATASET=SimpleNamespace(NAME="DescribableTextures", NUM_SHOTS=16,
+                                    SUBSAMPLE_CLASSES="base"),
+            DATALOADER=SimpleNamespace(NUM_WORKERS=0,
+                TEST=SimpleNamespace(SAMPLER="SequentialSampler", BATCH_SIZE=16)),
+            MODEL=SimpleNamespace(BACKBONE=SimpleNamespace(NAME="ViT-B/16")),
+            INPUT=SimpleNamespace(SIZE=(224, 224), INTERPOLATION="bicubic",
+                PIXEL_MEAN=(0.48145466, 0.4578275, 0.40821073),
+                PIXEL_STD=(0.26862954, 0.26130258, 0.27577711), NO_TRANSFORM=False),
+            TRAINER=SimpleNamespace(NAME="CoOp_TextConsistency_Ablation" if is_coop
+                else "CoOp_TextConsistency_V2_FG", TEXTCONSISTENCY=tc),
+        )
+
+    @staticmethod
+    def _role_manifest(role):
+        is_coop = role == "coop"
+        return {
+            "effective_losses": {"kd": {"coop": 0.0, "kd0": 0.0, "kd1": 1.0}[role],
+                "adaptive_ce": 1.0, "diversity": 0.0, "contrastive": 0.0},
+            "model_signature": {
+                "format": 2,
+                "trainer": "CoOp_TextConsistency_Ablation" if is_coop else "CoOp_TextConsistency_V2_FG",
+                "n_ctx": 4, "aggregation": "none" if is_coop else "hierarchical",
+                "feature_adapter": not is_coop, "n_groups": None if is_coop else 4,
+                "n_views": 20, "ablation_group": "baseline" if is_coop else None,
+                "clip_sha256": probe.CLIP_SHA256, "template_sha256": None if is_coop else "4" * 64,
+                "view_order": "contiguous", "order_seed": 0, "order_version": 1,
+            },
+        }
+
     def test_inventory_rejects_missing_role_parameters_and_wrong_protocol(self):
         case = {
             "dataset": "dtd", "seed": 1, "split": "val", "candidate_classes": "base",
@@ -93,6 +152,33 @@ class ValidationProbeContracts(unittest.TestCase):
             )
             self.assertNotEqual(probe.sample_digest(list(reversed(rows)), root), probe.sample_digest(rows, root))
 
+    def test_effective_config_is_bound_to_authenticated_signature_and_protocol(self):
+        with tempfile.TemporaryDirectory() as temp:
+            source = Path(temp)
+            (source / "clip").mkdir()
+            clip = source / "clip/ViT-B-16.pt"
+            clip.write_bytes(b"fixture")
+            case = {"dataset": "dtd", "seed": 1, "clip_sha256": probe.CLIP_SHA256,
+                    "template_sha256": "4" * 64}
+            for role in probe.ROLES:
+                cfg = self._role_config(role)
+                cfg.TRAINER.TEXTCONSISTENCY.CLIP_PATH = str(clip)
+                probe.validate_effective_role_config(
+                    role, cfg, self._role_manifest(role), case, source, cuda=False)
+            for role, field, changed in (
+                ("coop", "N_CTX", 8),
+                ("kd0", "N_VIEWS", 19),
+                ("kd0", "N_GROUPS", 5),
+                ("kd1", "USE_FEATURE_ADAPTER", False),
+            ):
+                with self.subTest(role=role, field=field):
+                    cfg = self._role_config(role)
+                    cfg.TRAINER.TEXTCONSISTENCY.CLIP_PATH = str(clip)
+                    setattr(cfg.TRAINER.TEXTCONSISTENCY, field, changed)
+                    with self.assertRaisesRegex(ValueError, "effective config"):
+                        probe.validate_effective_role_config(
+                            role, cfg, self._role_manifest(role), case, source, cuda=False)
+
     def test_strict_load_verifies_class_buffers_and_every_trainable_tensor(self):
         class Tiny(torch.nn.Module):
             def __init__(self):
@@ -141,6 +227,7 @@ class ValidationProbeContracts(unittest.TestCase):
         descriptions = torch.tensor([[[1.0, 0.0], [0.0, 1.0]], [[0.0, 1.0], [0.0, 9.0]]])
         mask = torch.tensor([[True, True], [True, False]])
         batches = [{"img": torch.ones(2, 1), "label": torch.tensor([0, 1]), "impath": ["a", "b"]}]
+        decoded = probe._decode_evidence(batches)
         with mock.patch("torch.optim.SGD", side_effect=AssertionError("optimizer created")), \
                 mock.patch.object(torch.Tensor, "backward", side_effect=AssertionError("backward called")):
             result = probe.export_batches(models, batches, descriptions, mask, ["zero", "one"])
@@ -148,6 +235,16 @@ class ValidationProbeContracts(unittest.TestCase):
         np.testing.assert_allclose(result["logits"]["M"], [[2 ** -0.5, 0.0], [2 ** -0.5, 1.0]], rtol=1e-6)
         np.testing.assert_array_equal(result["labels"], [0, 1])
         self.assertTrue(result["teacher_logits_exact_equal"] is False)
+        self.assertEqual(result["decoded_val"], decoded)
+        mutations = (
+            [{"img": torch.zeros(2, 1), "label": torch.tensor([0, 1]), "impath": ["a", "b"]}],
+            [{"img": torch.ones(2, 1), "label": torch.tensor([1, 0]), "impath": ["a", "b"]}],
+            [{"img": torch.ones(2, 1), "label": torch.tensor([0, 1]), "impath": ["b", "a"]}],
+        )
+        for mutated in mutations:
+            with self.subTest(mutated=mutated[0]["impath"]), \
+                    self.assertRaisesRegex(ValueError, "transform digest"):
+                probe.validate_decoded_transform(probe._decode_evidence(mutated), decoded)
 
     def test_write_export_rejects_collision_and_writes_no_object_arrays(self):
         payload = {
@@ -227,6 +324,9 @@ class ValidationProbeContracts(unittest.TestCase):
         moved = []
 
         class Images:
+            def detach(self):
+                return torch.ones(1, 1)
+
             def to(self, device):
                 moved.append(device)
                 return torch.ones(1, 1)

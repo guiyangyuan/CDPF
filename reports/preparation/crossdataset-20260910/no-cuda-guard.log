@@ -1,0 +1,71 @@
+Reading split from /root/autodl-tmp/textconsistency/data/dtd/split_zhou_DescribableTextures.json
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/dtd/split_fewshot/shot_16-seed_1.pkl
+SUBSAMPLE BASE CLASSES!
+Reading split from /root/autodl-tmp/textconsistency/data/dtd/split_zhou_DescribableTextures.json
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/dtd/split_fewshot/shot_16-seed_1.pkl
+SUBSAMPLE NEW CLASSES!
+Reading split from /root/autodl-tmp/textconsistency/data/dtd/split_zhou_DescribableTextures.json
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/dtd/split_fewshot/shot_16-seed_2.pkl
+SUBSAMPLE BASE CLASSES!
+Reading split from /root/autodl-tmp/textconsistency/data/dtd/split_zhou_DescribableTextures.json
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/dtd/split_fewshot/shot_16-seed_2.pkl
+SUBSAMPLE NEW CLASSES!
+Reading split from /root/autodl-tmp/textconsistency/data/dtd/split_zhou_DescribableTextures.json
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/dtd/split_fewshot/shot_16-seed_3.pkl
+SUBSAMPLE BASE CLASSES!
+Reading split from /root/autodl-tmp/textconsistency/data/dtd/split_zhou_DescribableTextures.json
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/dtd/split_fewshot/shot_16-seed_3.pkl
+SUBSAMPLE NEW CLASSES!
+Reading split from /root/autodl-tmp/textconsistency/data/dtd/split_zhou_DescribableTextures.json
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/dtd/split_fewshot/shot_16-seed_1.pkl
+SUBSAMPLE BASE CLASSES!
+Reading split from /root/autodl-tmp/textconsistency/data/dtd/split_zhou_DescribableTextures.json
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/dtd/split_fewshot/shot_16-seed_1.pkl
+SUBSAMPLE NEW CLASSES!
+Reading split from /root/autodl-tmp/textconsistency/data/dtd/split_zhou_DescribableTextures.json
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/dtd/split_fewshot/shot_16-seed_2.pkl
+SUBSAMPLE BASE CLASSES!
+Reading split from /root/autodl-tmp/textconsistency/data/dtd/split_zhou_DescribableTextures.json
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/dtd/split_fewshot/shot_16-seed_2.pkl
+SUBSAMPLE NEW CLASSES!
+Reading split from /root/autodl-tmp/textconsistency/data/dtd/split_zhou_DescribableTextures.json
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/dtd/split_fewshot/shot_16-seed_3.pkl
+SUBSAMPLE BASE CLASSES!
+Reading split from /root/autodl-tmp/textconsistency/data/dtd/split_zhou_DescribableTextures.json
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/dtd/split_fewshot/shot_16-seed_3.pkl
+SUBSAMPLE NEW CLASSES!
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_1.pkl
+SUBSAMPLE BASE CLASSES!
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_1.pkl
+SUBSAMPLE NEW CLASSES!
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_2.pkl
+SUBSAMPLE BASE CLASSES!
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_2.pkl
+SUBSAMPLE NEW CLASSES!
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_3.pkl
+SUBSAMPLE BASE CLASSES!
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_3.pkl
+SUBSAMPLE NEW CLASSES!
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_1.pkl
+SUBSAMPLE BASE CLASSES!
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_1.pkl
+SUBSAMPLE NEW CLASSES!
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_2.pkl
+SUBSAMPLE BASE CLASSES!
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_2.pkl
+SUBSAMPLE NEW CLASSES!
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_3.pkl
+SUBSAMPLE BASE CLASSES!
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_3.pkl
+SUBSAMPLE NEW CLASSES!
+Traceback (most recent call last):
+  File "/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260910-f20795c/scripts/repro/cross_dataset_study.py", line 314, in <module>
+    main()
+  File "/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260910-f20795c/scripts/repro/cross_dataset_study.py", line 306, in main
+    execute(plan, args.preparation_dir); return
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260910-f20795c/scripts/repro/cross_dataset_study.py", line 273, in execute
+    assert_gpus_idle(torch)
+  File "/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260910-f20795c/scripts/repro/cross_dataset_study.py", line 186, in assert_gpus_idle
+    raise RuntimeError("CUDA with at least one visible GPU is required for execution")
+RuntimeError: CUDA with at least one visible GPU is required for execution

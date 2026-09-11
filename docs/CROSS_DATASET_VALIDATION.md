@@ -30,6 +30,7 @@
 - DTD使用固定Zhou划分，24个Base类、23个Novel类，每seed训练384张；Aircraft使用固定官方train/val/test划分，50个Base类、50个Novel类，每seed训练800张。训练和评估类按现有数据加载器划分，禁止更换划分。
 - CPU准备阶段验证压缩包/分割元数据、实际图像存在、训练/验证/测试不重叠、描述覆盖、每类16-shot以及三个独立采样seed。固定各seed及Base/Novel分别对应的train/val/test样本哈希、实际数量和类别列表；Novel采样不能直接与Base训练记录比较。允许数据加载器生成/复用固定seed的split_fewshot派生缓存，原图、划分元数据和描述文件保持不变。
 - 复用`run_pilot.build_commands`生成原训练/重载命令，由本轮独立控制器记录协议、执行及审计：普通模式的`summarize.collect`原本没有强制完整测试哈希和参数匹配核验，不能只凭它成功就认定全部受控。
+- 用原train.setup_cfg按真实默认值、扩展、YAML、CLI及override顺序生成每条命令的完整有效配置，准备时冻结，训练/评估时精确比对并独立核对seed；不能仅依赖同seed变体相互一致，以防共享超参数漂移。
 - 核对每个实际checkpoint的SHA256、epoch、保存来源、结构签名、实际参数总数和有限性；核对每次独立评估加载同一指定模型，测试样本与准备记录相符，correct/total与accuracy一致。
 - 分数据集输出全部种子及分支、Base/Novel均值和标准差、均值的HM、每seed HM统计。主配对分别为原层级−参数匹配平面、原方法−基线，不能把不同数据集或分支混到一个最佳分数中。
 

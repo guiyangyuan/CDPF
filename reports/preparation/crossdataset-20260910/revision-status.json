@@ -1,0 +1,12 @@
+{
+  "initial_cpu_preparation": "completed",
+  "initial_ops_commit": "f20795cd2f296ba2540b1cdd2ebed32a448b3a08",
+  "initial_preparation_report": "ready.json",
+  "current_gate": "cpu_preparation_complete_awaiting_user_gpu",
+  "active_ops_commit": "6ce9c6e2770c6359dcd1f8dfea326e3755aaa79c",
+  "active_preparation_report": "final-v2/ready.json",
+  "active_gpu_launch_script": "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260911-v2/run_gpu_study.sh",
+  "gpu_training_started": false,
+  "final_review": "review/final-rereview.md",
+  "reason": "Freeze all full effective configs to reject shared or cross-seed hyperparameter drift; new independent CPU preparation passed."
+}

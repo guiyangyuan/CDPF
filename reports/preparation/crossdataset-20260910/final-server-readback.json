@@ -1,0 +1,13 @@
+{
+  "checked_utc": "2026-09-11T02:29:54.653984+00:00",
+  "ready_state": "cpu_preparation_complete",
+  "driver_state": "completed",
+  "new_study_exists": false,
+  "free_bytes": 41498087424,
+  "active_experiment_processes": [],
+  "gpu_launch_script_sha256": "be7bc3bf13ba52d41422303dc5bce57df90f97d0cf1e06d621e49db4d90c384a",
+  "operational_scripts_sha256": {
+    "cross_dataset_study.py": "366b15dee53f921bb180bf93551bb7f6f63e01f0009fab35c8afa6039821a868",
+    "cross_dataset_audit.py": "5273afe002e3e482ba7a493baea27d88aaa84d6fea63cad399e9a1dd1f2c5e9b"
+  }
+}

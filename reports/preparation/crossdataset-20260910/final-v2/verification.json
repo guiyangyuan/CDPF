@@ -1,0 +1,18 @@
+{
+  "checked_utc": "2026-09-11T02:36:30.810063+00:00",
+  "local_final_preparation_complete": true,
+  "server_final_preparation_complete": true,
+  "datasets_equal_excluding_location_specific_inventory": {
+    "dtd": true,
+    "fgvc_aircraft": true
+  },
+  "model_source_equal": true,
+  "frozen_files_equal": true,
+  "operational_scripts_equal": true,
+  "clip_sha256_equal": true,
+  "expected_effective_configurations": 136,
+  "server_tests_passed": 59,
+  "server_study_created": false,
+  "gpu_launch_script_sha256": "78b40681dc230b51e4203f3ac2c82e0b7d75ae1b7bcd5c7488685bcd8526efca",
+  "server_evidence_archive_sha256": "26a6ba1d8cb5c18453a3f55a4233cad656f8279662266c3a807b3bc961f885a3"
+}

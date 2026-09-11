@@ -25,6 +25,7 @@ from torch.nn import functional as F
 EPOCH = 20
 ALPHA = 0.5
 TRAINABLE_PARAMETERS = 2048
+ALLOWED_SEEDS = (1, 2, 3)
 DATASETS = {
     "ucf101": ("UCF101", "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f"),
     "dtd": ("DescribableTextures", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
@@ -177,6 +178,11 @@ def _same_value(actual: Any, expected: Any, message: str) -> None:
         raise ValueError(message)
 
 
+def _validate_seed(seed: int) -> None:
+    if seed not in ALLOWED_SEEDS:
+        raise ValueError("Seed must be one of 1, 2, or 3")
+
+
 def _expected_signature(dataset: str) -> dict[str, Any]:
     if dataset == "ucf101":
         return {field: value for field, value in EXPECTED_SIGNATURE.items()
@@ -255,8 +261,7 @@ def validate_baseline_metadata(
     """Validate hashes and JSON/YAML/log evidence without loading a model."""
     if dataset not in DATASETS or split not in ("base", "new"):
         raise ValueError("Unknown dataset or split")
-    if seed < 0:
-        raise ValueError("Seed must be nonnegative")
+    _validate_seed(seed)
     dataset_name, pinned_source = DATASETS[dataset]
     if expected_source_sha256 != pinned_source:
         raise ValueError(f"{dataset} requires frozen source digest {pinned_source}")
@@ -463,6 +468,7 @@ def _atomic_json(path: Path, payload: Mapping[str, Any]) -> None:
 
 
 def evaluate(args: argparse.Namespace) -> dict[str, Any]:
+    _validate_seed(args.seed)
     source_root = args.source_root.resolve()
     baseline_dir = args.baseline_dir.resolve()
     data_root = args.data_root.resolve()
@@ -665,7 +671,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--source-root", type=Path, required=True)
     parser.add_argument("--baseline-dir", type=Path, required=True)
     parser.add_argument("--dataset", choices=tuple(DATASETS), required=True)
-    parser.add_argument("--seed", type=int, required=True)
+    parser.add_argument("--seed", type=int, choices=ALLOWED_SEEDS, required=True)
     parser.add_argument("--split", choices=("base", "new"), required=True)
     parser.add_argument("--data-root", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)

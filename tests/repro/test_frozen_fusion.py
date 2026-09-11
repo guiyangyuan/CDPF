@@ -143,6 +143,20 @@ def _baseline_fixture(root, dataset="dtd", seed=1, split="base"):
 
 
 class FrozenFusionMetadata(unittest.TestCase):
+    def test_metadata_accepts_exactly_the_three_frozen_study_seeds(self):
+        for seed in fusion.ALLOWED_SEEDS:
+            with self.subTest(seed=seed), tempfile.TemporaryDirectory() as temp:
+                baseline = _baseline_fixture(temp, seed=seed)
+                result = fusion.validate_baseline_metadata(
+                    baseline, "dtd", seed, "base", fusion.DATASETS["dtd"][1])
+                self.assertEqual(result["metric"]["seed"], seed)
+
+    def test_metadata_rejects_out_of_study_seeds_before_reading_model_files(self):
+        for seed in (-1, 0, 4):
+            with self.subTest(seed=seed), self.assertRaisesRegex(ValueError, "one of 1, 2, or 3"):
+                fusion.validate_baseline_metadata(
+                    Path("/does/not/exist"), "dtd", seed, "base", fusion.DATASETS["dtd"][1])
+
     def test_old_ucf_encoder_gets_explicit_contiguous_order_evidence(self):
         encoder = SimpleNamespace(description_counts=[2, 1])
         result = fusion.description_order_evidence(encoder, ["jump", "run"])
@@ -297,6 +311,28 @@ class FrozenFusionMetadata(unittest.TestCase):
 
 
 class FrozenFusionCLI(unittest.TestCase):
+    def test_evaluation_rejects_out_of_study_seeds_before_reads_or_output(self):
+        for seed in (-1, 0, 4):
+            with self.subTest(seed=seed), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                output = root / "output"
+                args = argparse.Namespace(
+                    source_root=root / "missing-source", baseline_dir=root / "missing-baseline",
+                    dataset="dtd", seed=seed, split="base", data_root=root / "missing-data",
+                    output_dir=output, expected_source_sha256=fusion.DATASETS["dtd"][1],
+                    validate_only=False,
+                )
+                with mock.patch.object(fusion, "model_source_digest",
+                                       side_effect=AssertionError("source/model files read")):
+                    with self.assertRaisesRegex(ValueError, "one of 1, 2, or 3"):
+                        fusion.evaluate(args)
+                self.assertFalse(output.exists())
+
+    def test_cli_seed_choices_are_exactly_the_frozen_study_set(self):
+        seed_action = next(action for action in fusion.build_parser()._actions
+                           if "--seed" in action.option_strings)
+        self.assertEqual(tuple(seed_action.choices), (1, 2, 3))
+
     def test_existing_or_nested_output_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

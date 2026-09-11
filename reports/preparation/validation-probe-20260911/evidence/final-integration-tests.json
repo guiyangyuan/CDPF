@@ -1,0 +1,22 @@
+{
+  "tested_commit": "8b1bd03f9a5cd39dfd580564d0fc739185d085f4",
+  "command": [
+    "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune/../../tc-venv/bin/python",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-v"
+  ],
+  "cwd": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune",
+  "one_thread": true,
+  "returncode": 0,
+  "test_count": 128,
+  "suite_seconds": 7.025,
+  "wall_seconds": 10.202871125075035,
+  "log_sha256": "c7d2e4f5640224b7d3c4d1e90c91f204ca4a9a3ac54f72ab9e4f79b764d6abc8",
+  "real_cuda_verified": false,
+  "gpu_export_run": false
+}

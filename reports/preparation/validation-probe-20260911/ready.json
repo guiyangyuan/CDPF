@@ -33,5 +33,7 @@
     "verdict": "all_findings_addressed_no_new_critical_or_important"
   },
   "evidence_receipt": "evidence/ce31832-evidence-receipt.json",
-  "next_step": "Deploy immutable inputs and tools to no-GPU server, rerun prepare at destination; then user-enabled GPU inference with existing checkpoints"
+  "next_step": "Deploy immutable inputs and tools to no-GPU server, rerun prepare at destination; then user-enabled GPU inference with existing checkpoints",
+  "integration_tests": "evidence/final-integration-tests.json",
+  "integration_verified_commit": "8b1bd03f9a5cd39dfd580564d0fc739185d085f4"
 }

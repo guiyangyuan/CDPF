@@ -26,9 +26,27 @@ Ownership: 新增scripts/repro/evaluate_frozen_fusion.py及tests/repro/test_froz
 
 ## Task 2: DTD/Aircraft KD开关固定队列及独立审计
 
-Ownership: scripts/repro/attribution_study.py、scripts/repro/attribution_audit.py、tests/repro/test_attribution.py。只新增操作代码；借用旧run_pilot.build_commands、cross_dataset_study和cross_dataset_audit的可复用纯函数，不修改既有模型。具体任务在Task1接口审查完成后补充冻结。
+Ownership: scripts/repro/attribution_study.py、scripts/repro/attribution_audit.py、tests/repro/test_attribution.py。只新增操作代码；借用旧run_pilot.build_commands、cross_dataset_study和cross_dataset_audit的可复用函数，不修改既有模型。你不独占工作区，不回退他人修改，不生成子代理。工作Python为/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/tc-venv/bin/python。
 
-计划使用历史六个KD1模型对照新训练六个KD0完整层级+MLP模型；固定额外DTD/Aircraft seed1各一次KD1重复训练作为跨批次重现检查，重现不符先停查原因。所有训练使用同一旧source及固定配置；短测试和正式结果分开。完整模型报告student/teacher/ensemble。prepare核对旧输入和真实loader、冻结完整命令实际cfg；execute无GPU拒绝、全新目录、逐阶段失败即停，不自动重试。Task1的18次baseline重载融合评估与KD阶段分离保存。
+输入接口：--source-root指定旧structure源码，--data-root、--output-root、--input-receipt指定父代理已核实的JSON。receipt.fusion_baselines为9行(dataset,seed,baseline_dir,source_root,source_sha256,checkpoint_sha256,historical)，historical含base/new的metrics_sha256/test_sha256/accuracy；receipt.historical_kd1为6行(dataset,seed,model_dir,checkpoint_sha256,source_sha256)。所有checkpoint固定epoch20，source digest与原manifest一致。UCF source旧d74版本，DTD/Aircraft新9bd版本，必须逐进程加载避免模块缓存混用。receipt还含恢复UCF压缩包SHA等普通收据，不改变训练语义。
+
+CLI互斥plan-only / prepare-only / execute / audit-only，--preparation-dir单独目录。plan不需GPU/数据，不能创建study；prepare只创建新准备目录、运行真实loader和CPU元数据核验，不加载完整CLIP；execute无CUDA先拒绝且不创建study。GPU必须空闲，不控制电源。固定source digest9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba、CLIP SHA5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f，原train.py/trainers/datasets/clip/Dassl/configs只读。新增操作代码与所依赖旧编排/审计函数均hash冻结，prepare后变更要拒绝。
+
+固定执行阶段（各阶段审计通过才继续，任一失败停止、不自动重试）：
+1. smoke_dtd_kd0、smoke_fgvc_aircraft_kd0，各完整hierarchical_adapter/seed1/KD0/1epoch训练+6个Base/Novel三分支重载；短测试不计正式结果。
+2. anchor_dtd_kd1、anchor_fgvc_aircraft_kd1，各同模型seed1/KD1/20epoch训练+6重载。各分支Base/Novel正确数与历史seed1必须完全相同，否则停止调查，不能悄悄放宽阈值或改称新基准。
+3. fusion_ucf101、fusion_dtd、fusion_fgvc_aircraft，各原baseline三个seed×base/new共6次Task1独立评估；只做评估，不训练，全部三个分支都记录，主要对照为固定simple_fusion。
+4. formal_dtd_kd0、formal_fgvc_aircraft_kd0，各完整hierarchical_adapter三个seed/KD0/20epoch训练+18次重载。
+5. historical_dtd_kd1、historical_fgvc_aircraft_kd1，各历史3seed×Base/Novel×student/teacher/ensemble共18次独立重载到新输出目录，不能覆盖旧目录；与历史正确数/测试哈希/模型SHA核对。
+合计2次短训练/12短重载、8次正式训练(含2anchor)/84个完整模型正式重载(含12anchor)、18次融合独立评估；旧模型不修改。训练/评估普通命令总数124；阶段审计及最终审计另计。新正式处理模型为6个KD0，anchor不是额外统计种子，旧KD1仍用于配对。KD只改权重0/1，其他训练cfg完全相同。
+
+复用run_pilot.build_commands构造训练/普通评估，通过实际旧train.setup_cfg冻结每条完整cfg；重用历史模型eval时准确重定位--model-dir而非训练目录。prepare记录真实loader的train/val/test采样hash及计数/类别、模板sha和顺序、当前图像inventory、历史config/manifest/metrics/log/checkpoint及sidecar文件hash、操作脚本和源依赖sha、完整CLIPsha。不能只互相比较同轮cfg而漏过共同漂移。执行前后核对immutable输入，缓存split_fewshot属于允许的派生输出。
+
+状态原子写status.json，含stage/state/PID、每条命令开始结束码、已完成阶段；raw stdout/stderr独立保存；训练开始前保存protocol/data_preflight，未齐全不能passed。所有子进程设置PYTHONPATH使用各自源码、CPU线程4、CUBLAS_WORKSPACE_CONFIG=:4096:8，去掉TORCH_FORCE_NO_WEIGHTS_ONLY_LOAD。无卡prepare线程1。所有新输出必须与source/data/baseline/历史model隔离；输入若缺失、错seed/错数据/重复条目/路径混用均拒绝。GPU要求仅在execute验证。
+
+独立audit检查普通重载metrics与actualcfg、实际checkpoint SHA/sidecar/epoch/signature/provenance/参数790018有限性；日志correct/total与accuracy、真实样本数/采样哈希、类别及描述顺序一致；同seed KD0/1完整训练cfg仅允许KD_WEIGHT和输出位置不同；三分支和两split同checkpoint。所有正式KD0/KD1×2datasets×3seeds×3branches共36行seed-branch，Base/Novel合为一行。融合3datasets×3seeds×3branches共27行，均校验Task1指标和逐样本预测文件SHA及计数。anchor独立报告不进入正式配对。最终分析分别给出全部seed/branch Base/Novel/HM、均值和样本SD、HMofmeans与meanSeedHM分开；KD1-KD0逐seed差，simple_fusion-baseline逐seed差，以及完整原方法ensemble-simple_fusion（DTD/Aircraft用旧KD1，UCF由父代理后续补已有完整结果来源）。未齐全或任何失败拒绝最终passed，禁止选择最优分支。
+
+有针对性的CPU测试：124条命令/阶段结构；无副作用plan；拒绝无GPU与已有目录；冻结cfg和seed错误/统一漂移；输入checkpoint或模板SHA篡改；不完整/重复结果；错误correct/total、KD方向、anchor差异；CLI import/plan不需完整CLIP。小型真实JSON/checkpoint fixture优先，不能下载权重或跑GPU。Task1已经测试过的细节无需重复测试。focused和既有repro tests一次，记录输出并仅提交拥有文件。控制者负责真实服务器验证和备份。
 
 ## Task 3: 接近方法核对、部署和记录（控制者）
 

@@ -11,3 +11,5 @@
 - 本地新worktree基线59项测试通过。首次测试调用少了`-t .`导致相对导入错误，修正调用后通过，未改测试或源码来消除错误。
 
 GPU开关由用户操作。正式新输出计划为`/root/autodl-tmp/textconsistency/runs/attribution-study-20260911-v1`，当前未创建；准备目录为`setup-logs/attribution-prep-20260911-v1`。融合/ADK评估入口已实现，21项新测试与59项既有测试通过，旧UCF seed1的Base/Novel元数据实际验证通过；种子域限制修复后25项focused通过，独立任务审查和复审已通过，见[审查记录](review/task-1-rereview.md)。KD固定队列正在实现，仍待审查，尚未形成可执行就绪结论。所有旧批次结果和备份保持可用。
+
+已审查的独立评估脚本92b01a1已部署到准备目录，脚本SHA `e964e035e39844d566a39924366d0322a5bf10c669f343403de41db7984f3e56`。服务器按两个源码版本分进程验证，UCF101六组和DTD/Aircraft十二组全部通过；[UCF记录](fusion-metadata-ucf101.json)、[跨数据集记录](fusion-metadata-crossdataset.json)、[部署包收据](fusion-evaluator-package.json)。均为元数据检查，未加载完整CLIP、未做新GPU评估、未创建正式study。

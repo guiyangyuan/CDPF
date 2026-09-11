@@ -1,0 +1,132 @@
+{
+  "state": "cpu_preparation_complete",
+  "created_unix": 1789093532.7654698,
+  "code_commit": "f20795cd2f296ba2540b1cdd2ebed32a448b3a08",
+  "model_code_commit": "13b34978eeb8b23532b53abd1066af4719a0f909",
+  "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+  "operational_release": "/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260910-f20795c",
+  "model_source_release": "/root/autodl-tmp/textconsistency/releases/structure-20260910-v1",
+  "preparation_directory": "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/prepared-v1",
+  "planned_study_directory": "/root/autodl-tmp/textconsistency/runs/crossdataset-study-20260910-v1",
+  "environment": {
+    "python": "3.12.3",
+    "torch": "2.8.0+cu128",
+    "cuda_runtime": "12.8",
+    "cuda_available": false,
+    "cpu_threads_required": 4
+  },
+  "tests_passed": 58,
+  "step_records": [
+    {
+      "name": "plan-only",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260910-f20795c/scripts/repro/cross_dataset_study.py",
+        "--source-root",
+        "/root/autodl-tmp/textconsistency/releases/structure-20260910-v1",
+        "--data-root",
+        "/root/autodl-tmp/textconsistency/data",
+        "--output-root",
+        "/root/autodl-tmp/textconsistency/runs/crossdataset-study-20260910-v1",
+        "--preparation-dir",
+        "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/prepared-v1",
+        "--clip-path",
+        "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+        "--plan-only"
+      ],
+      "started_unix": 1789093475.7896738,
+      "expected_returncode": 0,
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/plan-only.log",
+      "returncode": 0,
+      "seconds": 0.19432854652404785
+    },
+    {
+      "name": "server-tests",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.repro.test_assets",
+        "tests.repro.test_components",
+        "tests.repro.test_preflight",
+        "tests.repro.test_regressions",
+        "tests.repro.test_runner",
+        "tests.repro.test_runtime_compatibility",
+        "tests.repro.test_structure",
+        "tests.repro.test_trainers",
+        "tests.repro.test_cross_dataset",
+        "-v"
+      ],
+      "started_unix": 1789093475.9872975,
+      "expected_returncode": 0,
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/server-tests.log",
+      "returncode": 0,
+      "seconds": 11.67876410484314
+    },
+    {
+      "name": "prepare-only",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260910-f20795c/scripts/repro/cross_dataset_study.py",
+        "--source-root",
+        "/root/autodl-tmp/textconsistency/releases/structure-20260910-v1",
+        "--data-root",
+        "/root/autodl-tmp/textconsistency/data",
+        "--output-root",
+        "/root/autodl-tmp/textconsistency/runs/crossdataset-study-20260910-v1",
+        "--preparation-dir",
+        "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/prepared-v1",
+        "--clip-path",
+        "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+        "--prepare-only"
+      ],
+      "started_unix": 1789093487.666928,
+      "expected_returncode": 0,
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/prepare-only.log",
+      "returncode": 0,
+      "seconds": 19.596065759658813
+    },
+    {
+      "name": "no-cuda-guard",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260910-f20795c/scripts/repro/cross_dataset_study.py",
+        "--source-root",
+        "/root/autodl-tmp/textconsistency/releases/structure-20260910-v1",
+        "--data-root",
+        "/root/autodl-tmp/textconsistency/data",
+        "--output-root",
+        "/root/autodl-tmp/textconsistency/runs/crossdataset-study-20260910-v1",
+        "--preparation-dir",
+        "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/prepared-v1",
+        "--clip-path",
+        "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+        "--execute"
+      ],
+      "started_unix": 1789093507.2665799,
+      "expected_returncode": 1,
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/no-cuda-guard.log",
+      "returncode": 1,
+      "seconds": 25.49793839454651
+    }
+  ],
+  "no_gpu_guard_passed": true,
+  "gpu_smoke_executed": false,
+  "gpu_formal_executed": false,
+  "phase_command_counts": [
+    17,
+    17,
+    51,
+    51
+  ],
+  "smoke_training_count": 6,
+  "smoke_evaluation_count": 28,
+  "formal_training_count": 18,
+  "formal_evaluation_count": 84,
+  "driver_sha256": "21d076cbf7269dfb8d4f2af55921cdabda0a115c05f4e21819d48cd6ee1d20a6",
+  "image_evidence_scope": "path/size/mtime inventory; not per-image content SHA256"
+}

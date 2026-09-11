@@ -1,0 +1,13 @@
+{
+  "code_commit": "f20795cd2f296ba2540b1cdd2ebed32a448b3a08",
+  "archive_sha256": "508d42d41496063157eaf8a33a067d27e6c0a65760c59f6d6098c5c3acfd22c3",
+  "archive_bytes": 7097775,
+  "operational_release": "/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260910-f20795c",
+  "immutable_model_source": "/root/autodl-tmp/textconsistency/releases/structure-20260910-v1",
+  "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+  "source_clip_points_to_verified_asset": true,
+  "operational_files": {
+    "cross_dataset_study.py": "366b15dee53f921bb180bf93551bb7f6f63e01f0009fab35c8afa6039821a868",
+    "cross_dataset_audit.py": "5273afe002e3e482ba7a493baea27d88aaa84d6fea63cad399e9a1dd1f2c5e9b"
+  }
+}

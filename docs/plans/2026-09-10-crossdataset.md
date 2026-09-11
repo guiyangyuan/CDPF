@@ -2,7 +2,9 @@
 
 ## Spec / Global Constraints
 
-用户已授权执行下一步并持续保存进度到其 GitHub。最新服务器旧入口拒绝连接，等待用户提供当前入口；本地准备继续。不得关闭实例、保存凭据、覆盖或删除旧模型/实验。不开额外的调参批次。
+用户已授权执行下一步并持续保存进度到其 GitHub。首次服务器接入失败已解决：用户随后明确无卡开机，同一入口现已连接；本轮完成CPU准备，GPU训练等待用户开卡。不得关闭实例、保存凭据、覆盖或删除旧模型/实验。不开额外的调参批次。
+
+准备边界澄清：原图、固定划分元数据及描述文件保持不变；数据加载器按固定seed生成或复用`split_fewshot`派生缓存属于已授权的数据准备，允许并应记录。prepare-only把协议和审计证据写入明确的准备目录，不创建训练study目录。该限制不禁止标准数据加载器的派生缓存，也不要求改写数据加载器。
 
 本批只运行DTD和FGVC Aircraft，使用已验证的原训练源码，SHA256为`9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba`，对应训练代码commit`13b34978eeb8b23532b53abd1066af4719a0f909`。不修改train.py、trainers、datasets、clip、Dassl或原数据/训练配置。允许新增独立的实验编排/审计脚本。
 
@@ -31,3 +33,7 @@ Ownership: 新增`scripts/repro/cross_dataset_study.py`、`scripts/repro/cross_d
 新的正式study目录拟为`/root/autodl-tmp/textconsistency/runs/crossdataset-study-20260910-v1`；启动前核实不存在。source根目录沿用只读`releases/structure-20260910-v1`，操作脚本单独部署，禁止把脚本命名为queue.py以免遮蔽Python标准库。
 
 Task1和Task2接口为计划JSON、CPU准备证据、分阶段status、最终analysis；必须记录执行过的操作脚本SHA，版本快照和日志随备份保留。旧source model SHA保持不变，操作脚本版本另记录。
+
+## 2026-09-11 实际阶段状态
+
+Task1已实现并通过针对性审查；Task2本轮CPU范围已完成：操作代码f20795c独立部署，服务器58项测试通过，本机与服务器实际loader的样本/类别证据一致，无CUDA拒绝训练检查通过。新study目录未创建；开卡脚本已保存、仅做语法检查。GPU短测试、正式训练、结果分析及完整模型备份留待用户开卡后执行，不能将本轮准备证据当作训练结果。详见[准备报告](../../reports/preparation/crossdataset-20260910/README.md)。

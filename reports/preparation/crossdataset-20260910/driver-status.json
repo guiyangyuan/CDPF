@@ -1,0 +1,107 @@
+{
+  "state": "completed",
+  "pid": 4014,
+  "started_unix": 1789093475.7893636,
+  "steps": [
+    {
+      "name": "plan-only",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260910-f20795c/scripts/repro/cross_dataset_study.py",
+        "--source-root",
+        "/root/autodl-tmp/textconsistency/releases/structure-20260910-v1",
+        "--data-root",
+        "/root/autodl-tmp/textconsistency/data",
+        "--output-root",
+        "/root/autodl-tmp/textconsistency/runs/crossdataset-study-20260910-v1",
+        "--preparation-dir",
+        "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/prepared-v1",
+        "--clip-path",
+        "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+        "--plan-only"
+      ],
+      "started_unix": 1789093475.7896738,
+      "expected_returncode": 0,
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/plan-only.log",
+      "returncode": 0,
+      "seconds": 0.19432854652404785
+    },
+    {
+      "name": "server-tests",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "-m",
+        "unittest",
+        "tests.repro.test_assets",
+        "tests.repro.test_components",
+        "tests.repro.test_preflight",
+        "tests.repro.test_regressions",
+        "tests.repro.test_runner",
+        "tests.repro.test_runtime_compatibility",
+        "tests.repro.test_structure",
+        "tests.repro.test_trainers",
+        "tests.repro.test_cross_dataset",
+        "-v"
+      ],
+      "started_unix": 1789093475.9872975,
+      "expected_returncode": 0,
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/server-tests.log",
+      "returncode": 0,
+      "seconds": 11.67876410484314
+    },
+    {
+      "name": "prepare-only",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260910-f20795c/scripts/repro/cross_dataset_study.py",
+        "--source-root",
+        "/root/autodl-tmp/textconsistency/releases/structure-20260910-v1",
+        "--data-root",
+        "/root/autodl-tmp/textconsistency/data",
+        "--output-root",
+        "/root/autodl-tmp/textconsistency/runs/crossdataset-study-20260910-v1",
+        "--preparation-dir",
+        "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/prepared-v1",
+        "--clip-path",
+        "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+        "--prepare-only"
+      ],
+      "started_unix": 1789093487.666928,
+      "expected_returncode": 0,
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/prepare-only.log",
+      "returncode": 0,
+      "seconds": 19.596065759658813
+    },
+    {
+      "name": "no-cuda-guard",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260910-f20795c/scripts/repro/cross_dataset_study.py",
+        "--source-root",
+        "/root/autodl-tmp/textconsistency/releases/structure-20260910-v1",
+        "--data-root",
+        "/root/autodl-tmp/textconsistency/data",
+        "--output-root",
+        "/root/autodl-tmp/textconsistency/runs/crossdataset-study-20260910-v1",
+        "--preparation-dir",
+        "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/prepared-v1",
+        "--clip-path",
+        "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+        "--execute"
+      ],
+      "started_unix": 1789093507.2665799,
+      "expected_returncode": 1,
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/no-cuda-guard.log",
+      "returncode": 1,
+      "seconds": 25.49793839454651
+    }
+  ],
+  "mode": "cpu_preparation_only",
+  "gpu_training_started": false,
+  "stage": "awaiting_user_gpu",
+  "finished_unix": 1789093532.7661715
+}

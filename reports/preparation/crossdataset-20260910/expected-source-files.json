@@ -1,0 +1,18 @@
+{
+  "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+  "model_code_commit": "13b34978eeb8b23532b53abd1066af4719a0f909",
+  "base_report_commit": "f5a739d395b2256bc69c6ff3b61cbd30c5edcaae",
+  "files": {
+    "scripts/repro/run_pilot.py": "951f918457f4bcd4eb2f15ceb2c15455bf0d139ebc7d72ad20d923d4f80e186a",
+    "scripts/repro/summarize.py": "64eeb104311a4fe167bb03a1a6e5ba14385be33e41836975595014f2cef52369",
+    "scripts/repro/preflight.py": "6f02d1ec4b4aadb18d7d5b88c3489d7e96da47cf77d6928353d79cdc785b771b",
+    "scripts/repro/structure_spec.py": "f77a1c99ac5d0e583c12c9003209886147110b173eb416f9625570a8aa3106a2",
+    "configs/repro/dtd.yaml": "0e4a18ac96d25f64422d612decff71e70db54c505b74df470312d6b2674b9df8",
+    "configs/repro/fgvc_aircraft.yaml": "0e4a18ac96d25f64422d612decff71e70db54c505b74df470312d6b2674b9df8",
+    "configs/datasets/dtd.yaml": "04945b4621c88bd7b4e15e46dc2b7c9e6d0fe7148f458d576c01ab6fffb7d809",
+    "configs/datasets/fgvc_aircraft.yaml": "2853829da10a89ad7d4b54b55c9bad542f0d6bdeeb273bdee0551fa486ec53a5",
+    "templates/texture_prompts_full.json": "dabdcafded7babd67046d0f90abeb510b648bdaaf397b884f265f3460a7942a9",
+    "templates/airplane_prompts_full.json": "d86833c2483c1d12907abeb6198412f1d0a020bd12999a3f170967a7f549e3b8"
+  },
+  "note": "Expected immutable source/config/template hashes before remote preparation; this is not proof of a current server connection."
+}

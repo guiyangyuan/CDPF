@@ -1,0 +1,7 @@
+{
+  "local_weight": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/textConsistency-repro/clip/ViT-B-16.pt",
+  "sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+  "size": 350837078,
+  "verified": true,
+  "mode": "CPU preparation only, no GPU training"
+}

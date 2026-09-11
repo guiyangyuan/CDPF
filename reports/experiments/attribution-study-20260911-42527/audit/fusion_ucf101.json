@@ -1,0 +1,329 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "branch": "student",
+      "base": 83.04033092037228,
+      "novel": 64.30502974580854,
+      "hm": 72.48156203620407,
+      "counts": {
+        "base": {
+          "correct": 1606,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1189,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "branch": "description_mean",
+      "base": 73.83660806618407,
+      "novel": 79.28610059491618,
+      "hm": 76.46438318538041,
+      "counts": {
+        "base": {
+          "correct": 1428,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1466,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "branch": "simple_fusion",
+      "base": 82.62668045501552,
+      "novel": 74.14818820984316,
+      "hm": 78.15817299939924,
+      "counts": {
+        "base": {
+          "correct": 1598,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1371,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "branch": "description_instance",
+      "base": 69.49327817993795,
+      "novel": 76.74418604651163,
+      "hm": 72.93897084217278,
+      "counts": {
+        "base": {
+          "correct": 1344,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1419,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "branch": "mean_probability_fusion",
+      "base": 82.41985522233712,
+      "novel": 75.50027041644132,
+      "hm": 78.80846512500952,
+      "counts": {
+        "base": {
+          "correct": 1594,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1396,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "branch": "adk_probability_fusion",
+      "base": 82.6783867631851,
+      "novel": 75.22985397512169,
+      "hm": 78.77844669805347,
+      "counts": {
+        "base": {
+          "correct": 1599,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1391,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "branch": "student",
+      "base": 83.86763185108583,
+      "novel": 70.09194159004868,
+      "hm": 76.36348973452567,
+      "counts": {
+        "base": {
+          "correct": 1622,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1296,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "branch": "description_mean",
+      "base": 73.83660806618407,
+      "novel": 79.28610059491618,
+      "hm": 76.46438318538041,
+      "counts": {
+        "base": {
+          "correct": 1428,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1466,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "branch": "simple_fusion",
+      "base": 83.19544984488108,
+      "novel": 77.06868577609518,
+      "hm": 80.01495727353262,
+      "counts": {
+        "base": {
+          "correct": 1609,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1425,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "branch": "description_instance",
+      "base": 69.49327817993795,
+      "novel": 76.74418604651163,
+      "hm": 72.93897084217278,
+      "counts": {
+        "base": {
+          "correct": 1344,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1419,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "branch": "mean_probability_fusion",
+      "base": 83.19544984488108,
+      "novel": 77.71768523526231,
+      "hm": 80.3633311951846,
+      "counts": {
+        "base": {
+          "correct": 1609,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1437,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "branch": "adk_probability_fusion",
+      "base": 83.29886246122027,
+      "novel": 77.71768523526231,
+      "hm": 80.41154609052576,
+      "counts": {
+        "base": {
+          "correct": 1611,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1437,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "branch": "student",
+      "base": 83.76421923474663,
+      "novel": 66.84694429421309,
+      "hm": 74.35547227489155,
+      "counts": {
+        "base": {
+          "correct": 1620,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1236,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "branch": "description_mean",
+      "base": 73.83660806618407,
+      "novel": 79.28610059491618,
+      "hm": 76.46438318538041,
+      "counts": {
+        "base": {
+          "correct": 1428,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1466,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "branch": "simple_fusion",
+      "base": 82.21302998965874,
+      "novel": 74.36452136289887,
+      "hm": 78.09207095350017,
+      "counts": {
+        "base": {
+          "correct": 1590,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1375,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "branch": "description_instance",
+      "base": 69.49327817993795,
+      "novel": 76.74418604651163,
+      "hm": 72.93897084217278,
+      "counts": {
+        "base": {
+          "correct": 1344,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1419,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "branch": "mean_probability_fusion",
+      "base": 82.47156153050672,
+      "novel": 76.25743645213629,
+      "hm": 79.24285974776673,
+      "counts": {
+        "base": {
+          "correct": 1595,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1410,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "branch": "adk_probability_fusion",
+      "base": 82.16132368148914,
+      "novel": 76.14926987560844,
+      "hm": 79.04113893808889,
+      "counts": {
+        "base": {
+          "correct": 1589,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1408,
+          "total": 1849
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,329 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "student",
+      "base": 78.125,
+      "novel": 53.6231884057971,
+      "hm": 63.59573736679272,
+      "counts": {
+        "base": {
+          "correct": 675,
+          "total": 864
+        },
+        "new": {
+          "correct": 444,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "description_mean",
+      "base": 60.06944444444444,
+      "novel": 66.90821256038647,
+      "hm": 63.3046671686548,
+      "counts": {
+        "base": {
+          "correct": 519,
+          "total": 864
+        },
+        "new": {
+          "correct": 554,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "simple_fusion",
+      "base": 77.19907407407408,
+      "novel": 63.28502415458937,
+      "hm": 69.55300036218473,
+      "counts": {
+        "base": {
+          "correct": 667,
+          "total": 864
+        },
+        "new": {
+          "correct": 524,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "description_instance",
+      "base": 57.754629629629626,
+      "novel": 66.78743961352657,
+      "hm": 61.943467974014666,
+      "counts": {
+        "base": {
+          "correct": 499,
+          "total": 864
+        },
+        "new": {
+          "correct": 553,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "mean_probability_fusion",
+      "base": 77.54629629629629,
+      "novel": 64.2512077294686,
+      "hm": 70.27547101363552,
+      "counts": {
+        "base": {
+          "correct": 670,
+          "total": 864
+        },
+        "new": {
+          "correct": 532,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "adk_probability_fusion",
+      "base": 78.00925925925925,
+      "novel": 65.57971014492753,
+      "hm": 71.25651269830142,
+      "counts": {
+        "base": {
+          "correct": 674,
+          "total": 864
+        },
+        "new": {
+          "correct": 543,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "student",
+      "base": 76.73611111111111,
+      "novel": 53.6231884057971,
+      "hm": 63.13066975487359,
+      "counts": {
+        "base": {
+          "correct": 663,
+          "total": 864
+        },
+        "new": {
+          "correct": 444,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "description_mean",
+      "base": 60.06944444444444,
+      "novel": 66.90821256038647,
+      "hm": 63.3046671686548,
+      "counts": {
+        "base": {
+          "correct": 519,
+          "total": 864
+        },
+        "new": {
+          "correct": 554,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "simple_fusion",
+      "base": 78.24074074074075,
+      "novel": 64.97584541062803,
+      "hm": 70.9939876629968,
+      "counts": {
+        "base": {
+          "correct": 676,
+          "total": 864
+        },
+        "new": {
+          "correct": 538,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "description_instance",
+      "base": 57.754629629629626,
+      "novel": 66.78743961352657,
+      "hm": 61.943467974014666,
+      "counts": {
+        "base": {
+          "correct": 499,
+          "total": 864
+        },
+        "new": {
+          "correct": 553,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "mean_probability_fusion",
+      "base": 78.47222222222223,
+      "novel": 64.00966183574879,
+      "hm": 70.5069341432978,
+      "counts": {
+        "base": {
+          "correct": 678,
+          "total": 864
+        },
+        "new": {
+          "correct": 530,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "adk_probability_fusion",
+      "base": 78.93518518518519,
+      "novel": 64.97584541062803,
+      "hm": 71.27848878320941,
+      "counts": {
+        "base": {
+          "correct": 682,
+          "total": 864
+        },
+        "new": {
+          "correct": 538,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "student",
+      "base": 78.47222222222223,
+      "novel": 54.95169082125604,
+      "hm": 64.6388071710543,
+      "counts": {
+        "base": {
+          "correct": 678,
+          "total": 864
+        },
+        "new": {
+          "correct": 455,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "description_mean",
+      "base": 60.06944444444444,
+      "novel": 66.90821256038647,
+      "hm": 63.3046671686548,
+      "counts": {
+        "base": {
+          "correct": 519,
+          "total": 864
+        },
+        "new": {
+          "correct": 554,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "simple_fusion",
+      "base": 77.66203703703704,
+      "novel": 66.54589371980677,
+      "hm": 71.67552624334563,
+      "counts": {
+        "base": {
+          "correct": 671,
+          "total": 864
+        },
+        "new": {
+          "correct": 551,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "description_instance",
+      "base": 57.754629629629626,
+      "novel": 66.78743961352657,
+      "hm": 61.943467974014666,
+      "counts": {
+        "base": {
+          "correct": 499,
+          "total": 864
+        },
+        "new": {
+          "correct": 553,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "mean_probability_fusion",
+      "base": 77.77777777777777,
+      "novel": 67.27053140096618,
+      "hm": 72.14358405032843,
+      "counts": {
+        "base": {
+          "correct": 672,
+          "total": 864
+        },
+        "new": {
+          "correct": 557,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "adk_probability_fusion",
+      "base": 77.54629629629629,
+      "novel": 67.3913043478261,
+      "hm": 72.11304770502049,
+      "counts": {
+        "base": {
+          "correct": 670,
+          "total": 864
+        },
+        "new": {
+          "correct": 558,
+          "total": 828
+        }
+      }
+    }
+  ]
+}

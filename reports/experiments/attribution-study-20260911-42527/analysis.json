@@ -1,0 +1,3068 @@
+{
+  "passed": true,
+  "full_seed_branch_rows": [
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "student",
+      "base": 78.24074074074075,
+      "novel": 53.5024154589372,
+      "hm": 63.54893472540532,
+      "counts": {
+        "base": {
+          "correct": 676,
+          "total": 864
+        },
+        "new": {
+          "correct": 443,
+          "total": 828
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "teacher",
+      "base": 69.21296296296296,
+      "novel": 63.28502415458937,
+      "hm": 66.11638604042706,
+      "counts": {
+        "base": {
+          "correct": 598,
+          "total": 864
+        },
+        "new": {
+          "correct": 524,
+          "total": 828
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "ensemble",
+      "base": 79.16666666666667,
+      "novel": 68.59903381642512,
+      "hm": 73.50497207464923,
+      "counts": {
+        "base": {
+          "correct": 684,
+          "total": 864
+        },
+        "new": {
+          "correct": 568,
+          "total": 828
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "student",
+      "base": 76.85185185185185,
+      "novel": 50.60386473429951,
+      "hm": 61.025128097143245,
+      "counts": {
+        "base": {
+          "correct": 664,
+          "total": 864
+        },
+        "new": {
+          "correct": 419,
+          "total": 828
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "teacher",
+      "base": 69.67592592592592,
+      "novel": 63.28502415458937,
+      "hm": 66.32688248008814,
+      "counts": {
+        "base": {
+          "correct": 602,
+          "total": 864
+        },
+        "new": {
+          "correct": 524,
+          "total": 828
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "ensemble",
+      "base": 79.39814814814815,
+      "novel": 62.31884057971015,
+      "hm": 69.82932083422106,
+      "counts": {
+        "base": {
+          "correct": 686,
+          "total": 864
+        },
+        "new": {
+          "correct": 516,
+          "total": 828
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "student",
+      "base": 79.74537037037037,
+      "novel": 45.410628019323674,
+      "hm": 57.868378611412666,
+      "counts": {
+        "base": {
+          "correct": 689,
+          "total": 864
+        },
+        "new": {
+          "correct": 376,
+          "total": 828
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "teacher",
+      "base": 70.37037037037037,
+      "novel": 56.03864734299517,
+      "hm": 62.39207360226469,
+      "counts": {
+        "base": {
+          "correct": 608,
+          "total": 864
+        },
+        "new": {
+          "correct": 464,
+          "total": 828
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "ensemble",
+      "base": 79.86111111111111,
+      "novel": 57.00483091787439,
+      "hm": 66.52449935044244,
+      "counts": {
+        "base": {
+          "correct": 690,
+          "total": 864
+        },
+        "new": {
+          "correct": 472,
+          "total": 828
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "student",
+      "base": 38.41536614645858,
+      "novel": 30.17396520695861,
+      "hm": 33.799539918041994,
+      "counts": {
+        "base": {
+          "correct": 640,
+          "total": 1666
+        },
+        "new": {
+          "correct": 503,
+          "total": 1667
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "teacher",
+      "base": 33.25330132052821,
+      "novel": 38.27234553089382,
+      "hm": 35.58672711694268,
+      "counts": {
+        "base": {
+          "correct": 554,
+          "total": 1666
+        },
+        "new": {
+          "correct": 638,
+          "total": 1667
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "ensemble",
+      "base": 37.5750300120048,
+      "novel": 37.13257348530294,
+      "hm": 37.352491522058074,
+      "counts": {
+        "base": {
+          "correct": 626,
+          "total": 1666
+        },
+        "new": {
+          "correct": 619,
+          "total": 1667
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "student",
+      "base": 38.475390156062424,
+      "novel": 32.09358128374325,
+      "hm": 34.99592062073916,
+      "counts": {
+        "base": {
+          "correct": 641,
+          "total": 1666
+        },
+        "new": {
+          "correct": 535,
+          "total": 1667
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "teacher",
+      "base": 32.472989195678274,
+      "novel": 39.052189562087584,
+      "hm": 35.45999749296848,
+      "counts": {
+        "base": {
+          "correct": 541,
+          "total": 1666
+        },
+        "new": {
+          "correct": 651,
+          "total": 1667
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "ensemble",
+      "base": 37.27490996398559,
+      "novel": 36.832633473305336,
+      "hm": 37.05245195762563,
+      "counts": {
+        "base": {
+          "correct": 621,
+          "total": 1666
+        },
+        "new": {
+          "correct": 614,
+          "total": 1667
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "student",
+      "base": 37.755102040816325,
+      "novel": 34.313137372525496,
+      "hm": 35.95192593536332,
+      "counts": {
+        "base": {
+          "correct": 629,
+          "total": 1666
+        },
+        "new": {
+          "correct": 572,
+          "total": 1667
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "teacher",
+      "base": 32.23289315726291,
+      "novel": 39.7120575884823,
+      "hm": 35.583720498420725,
+      "counts": {
+        "base": {
+          "correct": 537,
+          "total": 1666
+        },
+        "new": {
+          "correct": 662,
+          "total": 1667
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "ensemble",
+      "base": 36.67466986794718,
+      "novel": 38.8122375524895,
+      "hm": 37.71318888839599,
+      "counts": {
+        "base": {
+          "correct": 611,
+          "total": 1666
+        },
+        "new": {
+          "correct": 647,
+          "total": 1667
+        }
+      },
+      "kd_weight": 0
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "student",
+      "base": 74.30555555555556,
+      "novel": 58.57487922705314,
+      "hm": 65.50910146683835,
+      "counts": {
+        "base": {
+          "correct": 642,
+          "total": 864
+        },
+        "new": {
+          "correct": 485,
+          "total": 828
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "teacher",
+      "base": 69.21296296296296,
+      "novel": 63.28502415458937,
+      "hm": 66.11638604042706,
+      "counts": {
+        "base": {
+          "correct": 598,
+          "total": 864
+        },
+        "new": {
+          "correct": 524,
+          "total": 828
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "ensemble",
+      "base": 75.46296296296296,
+      "novel": 68.35748792270532,
+      "hm": 71.73470181167873,
+      "counts": {
+        "base": {
+          "correct": 652,
+          "total": 864
+        },
+        "new": {
+          "correct": 566,
+          "total": 828
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "student",
+      "base": 74.18981481481481,
+      "novel": 56.64251207729468,
+      "hm": 64.23943655952579,
+      "counts": {
+        "base": {
+          "correct": 641,
+          "total": 864
+        },
+        "new": {
+          "correct": 469,
+          "total": 828
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "teacher",
+      "base": 69.67592592592592,
+      "novel": 63.28502415458937,
+      "hm": 66.32688248008814,
+      "counts": {
+        "base": {
+          "correct": 602,
+          "total": 864
+        },
+        "new": {
+          "correct": 524,
+          "total": 828
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "ensemble",
+      "base": 75.69444444444444,
+      "novel": 64.2512077294686,
+      "hm": 69.50497422989332,
+      "counts": {
+        "base": {
+          "correct": 654,
+          "total": 864
+        },
+        "new": {
+          "correct": 532,
+          "total": 828
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "student",
+      "base": 74.18981481481481,
+      "novel": 56.03864734299517,
+      "hm": 63.849281485202496,
+      "counts": {
+        "base": {
+          "correct": 641,
+          "total": 864
+        },
+        "new": {
+          "correct": 464,
+          "total": 828
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "teacher",
+      "base": 70.37037037037037,
+      "novel": 56.03864734299517,
+      "hm": 62.39207360226469,
+      "counts": {
+        "base": {
+          "correct": 608,
+          "total": 864
+        },
+        "new": {
+          "correct": 464,
+          "total": 828
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "ensemble",
+      "base": 76.1574074074074,
+      "novel": 60.02415458937198,
+      "hm": 67.13513824222568,
+      "counts": {
+        "base": {
+          "correct": 658,
+          "total": 864
+        },
+        "new": {
+          "correct": 497,
+          "total": 828
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "student",
+      "base": 37.034813925570226,
+      "novel": 36.53269346130774,
+      "hm": 36.78204013150392,
+      "counts": {
+        "base": {
+          "correct": 617,
+          "total": 1666
+        },
+        "new": {
+          "correct": 609,
+          "total": 1667
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "teacher",
+      "base": 33.25330132052821,
+      "novel": 38.27234553089382,
+      "hm": 35.58672711694268,
+      "counts": {
+        "base": {
+          "correct": 554,
+          "total": 1666
+        },
+        "new": {
+          "correct": 638,
+          "total": 1667
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "ensemble",
+      "base": 35.95438175270108,
+      "novel": 38.332333533293344,
+      "hm": 37.105297980182314,
+      "counts": {
+        "base": {
+          "correct": 599,
+          "total": 1666
+        },
+        "new": {
+          "correct": 639,
+          "total": 1667
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "student",
+      "base": 34.63385354141656,
+      "novel": 34.673065386922616,
+      "hm": 34.65344837170688,
+      "counts": {
+        "base": {
+          "correct": 577,
+          "total": 1666
+        },
+        "new": {
+          "correct": 578,
+          "total": 1667
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "teacher",
+      "base": 32.472989195678274,
+      "novel": 39.052189562087584,
+      "hm": 35.45999749296848,
+      "counts": {
+        "base": {
+          "correct": 541,
+          "total": 1666
+        },
+        "new": {
+          "correct": 651,
+          "total": 1667
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "ensemble",
+      "base": 33.91356542617047,
+      "novel": 38.03239352129574,
+      "hm": 35.855080253781225,
+      "counts": {
+        "base": {
+          "correct": 565,
+          "total": 1666
+        },
+        "new": {
+          "correct": 634,
+          "total": 1667
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "student",
+      "base": 36.07442977190876,
+      "novel": 33.77324535092981,
+      "hm": 34.88593043186885,
+      "counts": {
+        "base": {
+          "correct": 601,
+          "total": 1666
+        },
+        "new": {
+          "correct": 563,
+          "total": 1667
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "teacher",
+      "base": 32.23289315726291,
+      "novel": 39.7120575884823,
+      "hm": 35.583720498420725,
+      "counts": {
+        "base": {
+          "correct": 537,
+          "total": 1666
+        },
+        "new": {
+          "correct": 662,
+          "total": 1667
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "ensemble",
+      "base": 34.69387755102041,
+      "novel": 36.7126574685063,
+      "hm": 35.67473039930049,
+      "counts": {
+        "base": {
+          "correct": 578,
+          "total": 1666
+        },
+        "new": {
+          "correct": 612,
+          "total": 1667
+        }
+      },
+      "kd_weight": 1
+    }
+  ],
+  "fusion_seed_branch_rows": [
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "branch": "student",
+      "base": 83.04033092037228,
+      "novel": 64.30502974580854,
+      "hm": 72.48156203620407,
+      "counts": {
+        "base": {
+          "correct": 1606,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1189,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "branch": "description_mean",
+      "base": 73.83660806618407,
+      "novel": 79.28610059491618,
+      "hm": 76.46438318538041,
+      "counts": {
+        "base": {
+          "correct": 1428,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1466,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "branch": "simple_fusion",
+      "base": 82.62668045501552,
+      "novel": 74.14818820984316,
+      "hm": 78.15817299939924,
+      "counts": {
+        "base": {
+          "correct": 1598,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1371,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "branch": "description_instance",
+      "base": 69.49327817993795,
+      "novel": 76.74418604651163,
+      "hm": 72.93897084217278,
+      "counts": {
+        "base": {
+          "correct": 1344,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1419,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "branch": "mean_probability_fusion",
+      "base": 82.41985522233712,
+      "novel": 75.50027041644132,
+      "hm": 78.80846512500952,
+      "counts": {
+        "base": {
+          "correct": 1594,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1396,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "branch": "adk_probability_fusion",
+      "base": 82.6783867631851,
+      "novel": 75.22985397512169,
+      "hm": 78.77844669805347,
+      "counts": {
+        "base": {
+          "correct": 1599,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1391,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "branch": "student",
+      "base": 83.86763185108583,
+      "novel": 70.09194159004868,
+      "hm": 76.36348973452567,
+      "counts": {
+        "base": {
+          "correct": 1622,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1296,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "branch": "description_mean",
+      "base": 73.83660806618407,
+      "novel": 79.28610059491618,
+      "hm": 76.46438318538041,
+      "counts": {
+        "base": {
+          "correct": 1428,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1466,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "branch": "simple_fusion",
+      "base": 83.19544984488108,
+      "novel": 77.06868577609518,
+      "hm": 80.01495727353262,
+      "counts": {
+        "base": {
+          "correct": 1609,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1425,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "branch": "description_instance",
+      "base": 69.49327817993795,
+      "novel": 76.74418604651163,
+      "hm": 72.93897084217278,
+      "counts": {
+        "base": {
+          "correct": 1344,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1419,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "branch": "mean_probability_fusion",
+      "base": 83.19544984488108,
+      "novel": 77.71768523526231,
+      "hm": 80.3633311951846,
+      "counts": {
+        "base": {
+          "correct": 1609,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1437,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "branch": "adk_probability_fusion",
+      "base": 83.29886246122027,
+      "novel": 77.71768523526231,
+      "hm": 80.41154609052576,
+      "counts": {
+        "base": {
+          "correct": 1611,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1437,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "branch": "student",
+      "base": 83.76421923474663,
+      "novel": 66.84694429421309,
+      "hm": 74.35547227489155,
+      "counts": {
+        "base": {
+          "correct": 1620,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1236,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "branch": "description_mean",
+      "base": 73.83660806618407,
+      "novel": 79.28610059491618,
+      "hm": 76.46438318538041,
+      "counts": {
+        "base": {
+          "correct": 1428,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1466,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "branch": "simple_fusion",
+      "base": 82.21302998965874,
+      "novel": 74.36452136289887,
+      "hm": 78.09207095350017,
+      "counts": {
+        "base": {
+          "correct": 1590,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1375,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "branch": "description_instance",
+      "base": 69.49327817993795,
+      "novel": 76.74418604651163,
+      "hm": 72.93897084217278,
+      "counts": {
+        "base": {
+          "correct": 1344,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1419,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "branch": "mean_probability_fusion",
+      "base": 82.47156153050672,
+      "novel": 76.25743645213629,
+      "hm": 79.24285974776673,
+      "counts": {
+        "base": {
+          "correct": 1595,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1410,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "branch": "adk_probability_fusion",
+      "base": 82.16132368148914,
+      "novel": 76.14926987560844,
+      "hm": 79.04113893808889,
+      "counts": {
+        "base": {
+          "correct": 1589,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1408,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "student",
+      "base": 78.125,
+      "novel": 53.6231884057971,
+      "hm": 63.59573736679272,
+      "counts": {
+        "base": {
+          "correct": 675,
+          "total": 864
+        },
+        "new": {
+          "correct": 444,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "description_mean",
+      "base": 60.06944444444444,
+      "novel": 66.90821256038647,
+      "hm": 63.3046671686548,
+      "counts": {
+        "base": {
+          "correct": 519,
+          "total": 864
+        },
+        "new": {
+          "correct": 554,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "simple_fusion",
+      "base": 77.19907407407408,
+      "novel": 63.28502415458937,
+      "hm": 69.55300036218473,
+      "counts": {
+        "base": {
+          "correct": 667,
+          "total": 864
+        },
+        "new": {
+          "correct": 524,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "description_instance",
+      "base": 57.754629629629626,
+      "novel": 66.78743961352657,
+      "hm": 61.943467974014666,
+      "counts": {
+        "base": {
+          "correct": 499,
+          "total": 864
+        },
+        "new": {
+          "correct": 553,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "mean_probability_fusion",
+      "base": 77.54629629629629,
+      "novel": 64.2512077294686,
+      "hm": 70.27547101363552,
+      "counts": {
+        "base": {
+          "correct": 670,
+          "total": 864
+        },
+        "new": {
+          "correct": 532,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "adk_probability_fusion",
+      "base": 78.00925925925925,
+      "novel": 65.57971014492753,
+      "hm": 71.25651269830142,
+      "counts": {
+        "base": {
+          "correct": 674,
+          "total": 864
+        },
+        "new": {
+          "correct": 543,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "student",
+      "base": 76.73611111111111,
+      "novel": 53.6231884057971,
+      "hm": 63.13066975487359,
+      "counts": {
+        "base": {
+          "correct": 663,
+          "total": 864
+        },
+        "new": {
+          "correct": 444,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "description_mean",
+      "base": 60.06944444444444,
+      "novel": 66.90821256038647,
+      "hm": 63.3046671686548,
+      "counts": {
+        "base": {
+          "correct": 519,
+          "total": 864
+        },
+        "new": {
+          "correct": 554,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "simple_fusion",
+      "base": 78.24074074074075,
+      "novel": 64.97584541062803,
+      "hm": 70.9939876629968,
+      "counts": {
+        "base": {
+          "correct": 676,
+          "total": 864
+        },
+        "new": {
+          "correct": 538,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "description_instance",
+      "base": 57.754629629629626,
+      "novel": 66.78743961352657,
+      "hm": 61.943467974014666,
+      "counts": {
+        "base": {
+          "correct": 499,
+          "total": 864
+        },
+        "new": {
+          "correct": 553,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "mean_probability_fusion",
+      "base": 78.47222222222223,
+      "novel": 64.00966183574879,
+      "hm": 70.5069341432978,
+      "counts": {
+        "base": {
+          "correct": 678,
+          "total": 864
+        },
+        "new": {
+          "correct": 530,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "branch": "adk_probability_fusion",
+      "base": 78.93518518518519,
+      "novel": 64.97584541062803,
+      "hm": 71.27848878320941,
+      "counts": {
+        "base": {
+          "correct": 682,
+          "total": 864
+        },
+        "new": {
+          "correct": 538,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "student",
+      "base": 78.47222222222223,
+      "novel": 54.95169082125604,
+      "hm": 64.6388071710543,
+      "counts": {
+        "base": {
+          "correct": 678,
+          "total": 864
+        },
+        "new": {
+          "correct": 455,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "description_mean",
+      "base": 60.06944444444444,
+      "novel": 66.90821256038647,
+      "hm": 63.3046671686548,
+      "counts": {
+        "base": {
+          "correct": 519,
+          "total": 864
+        },
+        "new": {
+          "correct": 554,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "simple_fusion",
+      "base": 77.66203703703704,
+      "novel": 66.54589371980677,
+      "hm": 71.67552624334563,
+      "counts": {
+        "base": {
+          "correct": 671,
+          "total": 864
+        },
+        "new": {
+          "correct": 551,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "description_instance",
+      "base": 57.754629629629626,
+      "novel": 66.78743961352657,
+      "hm": 61.943467974014666,
+      "counts": {
+        "base": {
+          "correct": 499,
+          "total": 864
+        },
+        "new": {
+          "correct": 553,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "mean_probability_fusion",
+      "base": 77.77777777777777,
+      "novel": 67.27053140096618,
+      "hm": 72.14358405032843,
+      "counts": {
+        "base": {
+          "correct": 672,
+          "total": 864
+        },
+        "new": {
+          "correct": 557,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "branch": "adk_probability_fusion",
+      "base": 77.54629629629629,
+      "novel": 67.3913043478261,
+      "hm": 72.11304770502049,
+      "counts": {
+        "base": {
+          "correct": 670,
+          "total": 864
+        },
+        "new": {
+          "correct": 558,
+          "total": 828
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "student",
+      "base": 38.59543817527011,
+      "novel": 32.63347330533893,
+      "hm": 35.364943117049215,
+      "counts": {
+        "base": {
+          "correct": 643,
+          "total": 1666
+        },
+        "new": {
+          "correct": 544,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "description_mean",
+      "base": 30.4921968787515,
+      "novel": 40.611877624475106,
+      "hm": 34.83191017654167,
+      "counts": {
+        "base": {
+          "correct": 508,
+          "total": 1666
+        },
+        "new": {
+          "correct": 677,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "simple_fusion",
+      "base": 36.8547418967587,
+      "novel": 39.892021595680866,
+      "hm": 38.31328104913701,
+      "counts": {
+        "base": {
+          "correct": 614,
+          "total": 1666
+        },
+        "new": {
+          "correct": 665,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "description_instance",
+      "base": 30.972388955582232,
+      "novel": 42.23155368926215,
+      "hm": 35.73611091982632,
+      "counts": {
+        "base": {
+          "correct": 516,
+          "total": 1666
+        },
+        "new": {
+          "correct": 704,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "mean_probability_fusion",
+      "base": 37.454981992797116,
+      "novel": 40.31193761247751,
+      "hm": 38.83098122013557,
+      "counts": {
+        "base": {
+          "correct": 624,
+          "total": 1666
+        },
+        "new": {
+          "correct": 672,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "adk_probability_fusion",
+      "base": 37.15486194477791,
+      "novel": 40.971805638872226,
+      "hm": 38.97009380339034,
+      "counts": {
+        "base": {
+          "correct": 619,
+          "total": 1666
+        },
+        "new": {
+          "correct": 683,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "student",
+      "base": 37.09483793517407,
+      "novel": 29.394121175764848,
+      "hm": 32.79853304493904,
+      "counts": {
+        "base": {
+          "correct": 618,
+          "total": 1666
+        },
+        "new": {
+          "correct": 490,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "description_mean",
+      "base": 30.4921968787515,
+      "novel": 40.611877624475106,
+      "hm": 34.83191017654167,
+      "counts": {
+        "base": {
+          "correct": 508,
+          "total": 1666
+        },
+        "new": {
+          "correct": 677,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "simple_fusion",
+      "base": 37.15486194477791,
+      "novel": 39.112177564487105,
+      "hm": 38.1084035021871,
+      "counts": {
+        "base": {
+          "correct": 619,
+          "total": 1666
+        },
+        "new": {
+          "correct": 652,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "description_instance",
+      "base": 30.972388955582232,
+      "novel": 42.23155368926215,
+      "hm": 35.73611091982632,
+      "counts": {
+        "base": {
+          "correct": 516,
+          "total": 1666
+        },
+        "new": {
+          "correct": 704,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "mean_probability_fusion",
+      "base": 37.5750300120048,
+      "novel": 38.03239352129574,
+      "hm": 37.80232842775407,
+      "counts": {
+        "base": {
+          "correct": 626,
+          "total": 1666
+        },
+        "new": {
+          "correct": 634,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "branch": "adk_probability_fusion",
+      "base": 37.5750300120048,
+      "novel": 37.6124775044991,
+      "hm": 37.593744432801884,
+      "counts": {
+        "base": {
+          "correct": 626,
+          "total": 1666
+        },
+        "new": {
+          "correct": 627,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "student",
+      "base": 36.91476590636255,
+      "novel": 32.51349730053989,
+      "hm": 34.57462670698799,
+      "counts": {
+        "base": {
+          "correct": 615,
+          "total": 1666
+        },
+        "new": {
+          "correct": 542,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "description_mean",
+      "base": 30.4921968787515,
+      "novel": 40.611877624475106,
+      "hm": 34.83191017654167,
+      "counts": {
+        "base": {
+          "correct": 508,
+          "total": 1666
+        },
+        "new": {
+          "correct": 677,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "simple_fusion",
+      "base": 37.15486194477791,
+      "novel": 39.95200959808039,
+      "hm": 38.50270076663761,
+      "counts": {
+        "base": {
+          "correct": 619,
+          "total": 1666
+        },
+        "new": {
+          "correct": 666,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "description_instance",
+      "base": 30.972388955582232,
+      "novel": 42.23155368926215,
+      "hm": 35.73611091982632,
+      "counts": {
+        "base": {
+          "correct": 516,
+          "total": 1666
+        },
+        "new": {
+          "correct": 704,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "mean_probability_fusion",
+      "base": 37.39495798319328,
+      "novel": 40.131973605278944,
+      "hm": 38.71515190922835,
+      "counts": {
+        "base": {
+          "correct": 623,
+          "total": 1666
+        },
+        "new": {
+          "correct": 669,
+          "total": 1667
+        }
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "branch": "adk_probability_fusion",
+      "base": 37.5750300120048,
+      "novel": 39.95200959808039,
+      "hm": 38.72708069953156,
+      "counts": {
+        "base": {
+          "correct": 626,
+          "total": 1666
+        },
+        "new": {
+          "correct": 666,
+          "total": 1667
+        }
+      }
+    }
+  ],
+  "ucf_historical_ensemble_rows": [
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "branch": "ensemble",
+      "base": 82.7300930713547,
+      "novel": 80.20551649540292,
+      "hm": 81.448246483923,
+      "counts": {
+        "base": {
+          "correct": 1600,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1483,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "branch": "ensemble",
+      "base": 82.52326783867632,
+      "novel": 76.31151974040021,
+      "hm": 79.29592853931018,
+      "counts": {
+        "base": {
+          "correct": 1596,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1411,
+          "total": 1849
+        }
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "branch": "ensemble",
+      "base": 81.43743536711479,
+      "novel": 80.90859924283396,
+      "hm": 81.17215597304528,
+      "counts": {
+        "base": {
+          "correct": 1575,
+          "total": 1934
+        },
+        "new": {
+          "correct": 1496,
+          "total": 1849
+        }
+      }
+    }
+  ],
+  "full_summaries": [
+    {
+      "dataset": "dtd",
+      "kd_weight": 0,
+      "branch": "student",
+      "mean": {
+        "base": 78.27932098765432,
+        "novel": 49.8389694041868,
+        "hm": 60.814147144653745
+      },
+      "sample_sd": {
+        "base": 1.447145010301779,
+        "novel": 4.099762754293593,
+        "hm": 2.846149005725079
+      },
+      "hm_of_means": 60.90247804200592,
+      "mean_seed_hm": 60.814147144653745
+    },
+    {
+      "dataset": "dtd",
+      "kd_weight": 0,
+      "branch": "teacher",
+      "mean": {
+        "base": 69.75308641975309,
+        "novel": 60.869565217391305,
+        "hm": 64.94511404092663
+      },
+      "sample_sd": {
+        "base": 0.5825489533387911,
+        "novel": 4.183697602823376,
+        "hm": 2.2135014792992282
+      },
+      "hm_of_means": 65.00924594205875,
+      "mean_seed_hm": 64.94511404092663
+    },
+    {
+      "dataset": "dtd",
+      "kd_weight": 0,
+      "branch": "ensemble",
+      "mean": {
+        "base": 79.47530864197532,
+        "novel": 62.64090177133655,
+        "hm": 69.95293075310424
+      },
+      "sample_sd": {
+        "base": 0.353593803623135,
+        "novel": 5.803807179046732,
+        "hm": 3.491877635654416
+      },
+      "hm_of_means": 70.0610435278298,
+      "mean_seed_hm": 69.95293075310424
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "kd_weight": 0,
+      "branch": "student",
+      "mean": {
+        "base": 38.215286114445775,
+        "novel": 32.193561287742455,
+        "hm": 34.915795491381495
+      },
+      "sample_sd": {
+        "base": 0.3996595509291351,
+        "novel": 2.0713965228682505,
+        "hm": 1.0784277533316862
+      },
+      "hm_of_means": 34.946919344564854,
+      "mean_seed_hm": 34.915795491381495
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "kd_weight": 0,
+      "branch": "teacher",
+      "mean": {
+        "base": 32.6530612244898,
+        "novel": 39.012197560487905,
+        "hm": 35.5434817027773
+      },
+      "sample_sd": {
+        "base": 0.533505067065759,
+        "novel": 0.7206887138948238,
+        "hm": 0.0723150738386241
+      },
+      "hm_of_means": 35.55049397830481,
+      "mean_seed_hm": 35.5434817027773
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "kd_weight": 0,
+      "branch": "ensemble",
+      "mean": {
+        "base": 37.17486994797919,
+        "novel": 37.59248150369926,
+        "hm": 37.3727107893599
+      },
+      "sample_sd": {
+        "base": 0.45844094587393275,
+        "novel": 1.0669323392884693,
+        "hm": 0.330832188576968
+      },
+      "hm_of_means": 37.38250944531648,
+      "mean_seed_hm": 37.3727107893599
+    },
+    {
+      "dataset": "dtd",
+      "kd_weight": 1,
+      "branch": "student",
+      "mean": {
+        "base": 74.22839506172839,
+        "novel": 57.085346215780994,
+        "hm": 64.53260650385555
+      },
+      "sample_sd": {
+        "base": 0.0668229478228773,
+        "novel": 1.3248375742274014,
+        "hm": 0.867877903309643
+      },
+      "hm_of_means": 64.53785551940985,
+      "mean_seed_hm": 64.53260650385555
+    },
+    {
+      "dataset": "dtd",
+      "kd_weight": 1,
+      "branch": "teacher",
+      "mean": {
+        "base": 69.75308641975309,
+        "novel": 60.869565217391305,
+        "hm": 64.94511404092663
+      },
+      "sample_sd": {
+        "base": 0.5825489533387911,
+        "novel": 4.183697602823376,
+        "hm": 2.2135014792992282
+      },
+      "hm_of_means": 65.00924594205875,
+      "mean_seed_hm": 64.94511404092663
+    },
+    {
+      "dataset": "dtd",
+      "kd_weight": 1,
+      "branch": "ensemble",
+      "mean": {
+        "base": 75.77160493827161,
+        "novel": 64.2109500805153,
+        "hm": 69.45827142793257
+      },
+      "sample_sd": {
+        "base": 0.353593803623135,
+        "novel": 4.166812525160636,
+        "hm": 2.300137413534932
+      },
+      "hm_of_means": 69.51390109373142,
+      "mean_seed_hm": 69.45827142793257
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "kd_weight": 1,
+      "branch": "student",
+      "mean": {
+        "base": 35.914365746298515,
+        "novel": 34.99300139972006,
+        "hm": 35.440472978359885
+      },
+      "sample_sd": {
+        "base": 1.208456892400281,
+        "novel": 1.4072696108708582,
+        "hm": 1.1676317042931534
+      },
+      "hm_of_means": 35.44769750771513,
+      "mean_seed_hm": 35.440472978359885
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "kd_weight": 1,
+      "branch": "teacher",
+      "mean": {
+        "base": 32.6530612244898,
+        "novel": 39.012197560487905,
+        "hm": 35.5434817027773
+      },
+      "sample_sd": {
+        "base": 0.533505067065759,
+        "novel": 0.7206887138948238,
+        "hm": 0.0723150738386241
+      },
+      "hm_of_means": 35.55049397830481,
+      "mean_seed_hm": 35.5434817027773
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "kd_weight": 1,
+      "branch": "ensemble",
+      "mean": {
+        "base": 34.85394157663065,
+        "novel": 37.69246150769846,
+        "hm": 36.211702877754675
+      },
+      "sample_sd": {
+        "base": 1.0297806508569636,
+        "novel": 0.8616861198326426,
+        "hm": 0.779112105421806
+      },
+      "hm_of_means": 36.21767021975217,
+      "mean_seed_hm": 36.211702877754675
+    }
+  ],
+  "fusion_summaries": [
+    {
+      "dataset": "ucf101",
+      "branch": "student",
+      "mean": {
+        "base": 83.55739400206825,
+        "novel": 67.08130521002343,
+        "hm": 74.40017468187376
+      },
+      "sample_sd": {
+        "base": 0.4507651441096864,
+        "novel": 2.9005656262867583,
+        "hm": 1.9413498892887957
+      },
+      "hm_of_means": 74.418314535698,
+      "mean_seed_hm": 74.40017468187376
+    },
+    {
+      "dataset": "ucf101",
+      "branch": "description_mean",
+      "mean": {
+        "base": 73.83660806618407,
+        "novel": 79.28610059491618,
+        "hm": 76.46438318538041
+      },
+      "sample_sd": {
+        "base": 0.0,
+        "novel": 0.0,
+        "hm": 0.0
+      },
+      "hm_of_means": 76.46438318538041,
+      "mean_seed_hm": 76.46438318538041
+    },
+    {
+      "dataset": "ucf101",
+      "branch": "simple_fusion",
+      "mean": {
+        "base": 82.67838676318512,
+        "novel": 75.1937984496124,
+        "hm": 78.75506707547734
+      },
+      "sample_sd": {
+        "base": 0.4932467432352401,
+        "novel": 1.627298950264536,
+        "hm": 1.0915973861661765
+      },
+      "hm_of_means": 78.75867356913085,
+      "mean_seed_hm": 78.75506707547734
+    },
+    {
+      "dataset": "ucf101",
+      "branch": "description_instance",
+      "mean": {
+        "base": 69.49327817993795,
+        "novel": 76.74418604651163,
+        "hm": 72.93897084217278
+      },
+      "sample_sd": {
+        "base": 0.0,
+        "novel": 0.0,
+        "hm": 0.0
+      },
+      "hm_of_means": 72.93897084217278,
+      "mean_seed_hm": 72.93897084217278
+    },
+    {
+      "dataset": "ucf101",
+      "branch": "mean_probability_fusion",
+      "mean": {
+        "base": 82.69562219924164,
+        "novel": 76.49179736794665,
+        "hm": 79.47155202265361
+      },
+      "sample_sd": {
+        "base": 0.43363480266836657,
+        "novel": 1.1271317131667995,
+        "hm": 0.8022638228725817
+      },
+      "hm_of_means": 79.47282258458672,
+      "mean_seed_hm": 79.47155202265361
+    },
+    {
+      "dataset": "ucf101",
+      "branch": "adk_probability_fusion",
+      "mean": {
+        "base": 82.71285763529816,
+        "novel": 76.36560302866414,
+        "hm": 79.41037724222271
+      },
+      "sample_sd": {
+        "base": 0.5695522799675408,
+        "novel": 1.2579451973621458,
+        "hm": 0.8769299289869471
+      },
+      "hm_of_means": 79.41260212325547,
+      "mean_seed_hm": 79.41037724222271
+    },
+    {
+      "dataset": "dtd",
+      "branch": "student",
+      "mean": {
+        "base": 77.77777777777779,
+        "novel": 54.06602254428341,
+        "hm": 63.7884047642402
+      },
+      "sample_sd": {
+        "base": 0.9186636496752056,
+        "novel": 0.7670112271842843,
+        "hm": 0.7723083328894269
+      },
+      "hm_of_means": 63.78965224766751,
+      "mean_seed_hm": 63.7884047642402
+    },
+    {
+      "dataset": "dtd",
+      "branch": "description_mean",
+      "mean": {
+        "base": 60.06944444444444,
+        "novel": 66.90821256038647,
+        "hm": 63.3046671686548
+      },
+      "sample_sd": {
+        "base": 0.0,
+        "novel": 0.0,
+        "hm": 0.0
+      },
+      "hm_of_means": 63.3046671686548,
+      "mean_seed_hm": 63.3046671686548
+    },
+    {
+      "dataset": "dtd",
+      "branch": "simple_fusion",
+      "mean": {
+        "base": 77.70061728395062,
+        "novel": 64.93558776167473,
+        "hm": 70.74083808950905
+      },
+      "sample_sd": {
+        "base": 0.5219039065767264,
+        "novel": 1.6308074960168386,
+        "hm": 1.0836708720673593
+      },
+      "hm_of_means": 70.74690820839422,
+      "mean_seed_hm": 70.74083808950905
+    },
+    {
+      "dataset": "dtd",
+      "branch": "description_instance",
+      "mean": {
+        "base": 57.754629629629626,
+        "novel": 66.78743961352657,
+        "hm": 61.943467974014666
+      },
+      "sample_sd": {
+        "base": 0.0,
+        "novel": 0.0,
+        "hm": 0.0
+      },
+      "hm_of_means": 61.943467974014666,
+      "mean_seed_hm": 61.943467974014666
+    },
+    {
+      "dataset": "dtd",
+      "branch": "mean_probability_fusion",
+      "mean": {
+        "base": 77.9320987654321,
+        "novel": 65.17713365539453,
+        "hm": 70.97532973575392
+      },
+      "sample_sd": {
+        "base": 0.4818671295060561,
+        "novel": 1.8169539607724219,
+        "hm": 1.0183356041795528
+      },
+      "hm_of_means": 70.98620726779572,
+      "mean_seed_hm": 70.97532973575392
+    },
+    {
+      "dataset": "dtd",
+      "branch": "adk_probability_fusion",
+      "mean": {
+        "base": 78.16358024691358,
+        "novel": 65.98228663446055,
+        "hm": 71.54934972884378
+      },
+      "sample_sd": {
+        "base": 0.7071876072462777,
+        "novel": 1.2570446856679562,
+        "hm": 0.48830041300030225
+      },
+      "hm_of_means": 71.55823289018532,
+      "mean_seed_hm": 71.54934972884378
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "branch": "student",
+      "mean": {
+        "base": 37.53501400560224,
+        "novel": 31.51369726054789,
+        "hm": 34.24603428965875
+      },
+      "sample_sd": {
+        "base": 0.9227573075310299,
+        "novel": 1.8365866831761686,
+        "hm": 1.3143800428726247
+      },
+      "hm_of_means": 34.26181448871886,
+      "mean_seed_hm": 34.24603428965875
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "branch": "description_mean",
+      "mean": {
+        "base": 30.4921968787515,
+        "novel": 40.611877624475106,
+        "hm": 34.83191017654167
+      },
+      "sample_sd": {
+        "base": 0.0,
+        "novel": 0.0,
+        "hm": 0.0
+      },
+      "hm_of_means": 34.83191017654167,
+      "mean_seed_hm": 34.83191017654167
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "branch": "simple_fusion",
+      "mean": {
+        "base": 37.05482192877151,
+        "novel": 39.65206958608279,
+        "hm": 38.308128439320576
+      },
+      "sample_sd": {
+        "base": 0.1732743905130941,
+        "novel": 0.4685212762991397,
+        "hm": 0.19719912583282087
+      },
+      "hm_of_means": 38.30947516195528,
+      "mean_seed_hm": 38.308128439320576
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "branch": "description_instance",
+      "mean": {
+        "base": 30.972388955582232,
+        "novel": 42.23155368926215,
+        "hm": 35.73611091982632
+      },
+      "sample_sd": {
+        "base": 0.0,
+        "novel": 0.0,
+        "hm": 0.0
+      },
+      "hm_of_means": 35.73611091982632,
+      "mean_seed_hm": 35.73611091982632
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "branch": "mean_probability_fusion",
+      "mean": {
+        "base": 37.4749899959984,
+        "novel": 39.49210157968406,
+        "hm": 38.449487185706
+      },
+      "sample_sd": {
+        "base": 0.09168818917478638,
+        "novel": 1.2673426816629358,
+        "hm": 0.5634402814954925
+      },
+      "hm_of_means": 38.45711410738051,
+      "mean_seed_hm": 38.449487185706
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "branch": "adk_probability_fusion",
+      "mean": {
+        "base": 37.43497398959584,
+        "novel": 39.5120975804839,
+        "hm": 38.43030631190793
+      },
+      "sample_sd": {
+        "base": 0.24258414671832929,
+        "novel": 1.7223278770365034,
+        "hm": 0.73460239268726
+      },
+      "hm_of_means": 38.44550065437285,
+      "mean_seed_hm": 38.43030631190793
+    }
+  ],
+  "comparisons": [
+    {
+      "dataset": "dtd",
+      "comparison": "KD1-KD0",
+      "branch": "student",
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": -3.9351851851851904,
+          "novel": 5.072463768115938,
+          "hm": 1.960166741433028
+        },
+        {
+          "seed": 2,
+          "base": -2.662037037037038,
+          "novel": 6.038647342995169,
+          "hm": 3.21430846238254
+        },
+        {
+          "seed": 3,
+          "base": -5.555555555555557,
+          "novel": 10.628019323671495,
+          "hm": 5.98090287378983
+        }
+      ],
+      "mean": {
+        "base": -4.050925925925928,
+        "novel": 7.2463768115942,
+        "hm": 3.7184593592017996
+      },
+      "sample_sd": {
+        "base": 1.4502273247849153,
+        "novel": 2.968165634648432,
+        "hm": 2.0572325723122877
+      }
+    },
+    {
+      "dataset": "dtd",
+      "comparison": "KD1-KD0",
+      "branch": "teacher",
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": 0.0,
+          "novel": 0.0,
+          "hm": 0.0
+        },
+        {
+          "seed": 2,
+          "base": 0.0,
+          "novel": 0.0,
+          "hm": 0.0
+        },
+        {
+          "seed": 3,
+          "base": 0.0,
+          "novel": 0.0,
+          "hm": 0.0
+        }
+      ],
+      "mean": {
+        "base": 0.0,
+        "novel": 0.0,
+        "hm": 0.0
+      },
+      "sample_sd": {
+        "base": 0.0,
+        "novel": 0.0,
+        "hm": 0.0
+      }
+    },
+    {
+      "dataset": "dtd",
+      "comparison": "KD1-KD0",
+      "branch": "ensemble",
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": -3.7037037037037095,
+          "novel": -0.2415458937198025,
+          "hm": -1.7702702629704987
+        },
+        {
+          "seed": 2,
+          "base": -3.7037037037037095,
+          "novel": 1.9323671497584556,
+          "hm": -0.32434660432774365
+        },
+        {
+          "seed": 3,
+          "base": -3.7037037037037095,
+          "novel": 3.019323671497588,
+          "hm": 0.610638891783239
+        }
+      ],
+      "mean": {
+        "base": -3.7037037037037095,
+        "novel": 1.5700483091787472,
+        "hm": -0.4946593251716678
+      },
+      "sample_sd": {
+        "base": 0.0,
+        "novel": 1.660353512665159,
+        "hm": 1.1995569673669044
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "comparison": "KD1-KD0",
+      "branch": "student",
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": -1.3805522208883545,
+          "novel": 6.358728254349128,
+          "hm": 2.9825002134619254
+        },
+        {
+          "seed": 2,
+          "base": -3.841536614645861,
+          "novel": 2.579484103179368,
+          "hm": -0.34247224903228357
+        },
+        {
+          "seed": 3,
+          "base": -1.6806722689075642,
+          "novel": -0.5398920215956835,
+          "hm": -1.0659955034944701
+        }
+      ],
+      "mean": {
+        "base": -2.30092036814726,
+        "novel": 2.7994401119776042,
+        "hm": 0.5246774869783906
+      },
+      "sample_sd": {
+        "base": 1.3426249755748407,
+        "novel": 3.4545659513568494,
+        "hm": 2.159060186991346
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "comparison": "KD1-KD0",
+      "branch": "teacher",
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": 0.0,
+          "novel": 0.0,
+          "hm": 0.0
+        },
+        {
+          "seed": 2,
+          "base": 0.0,
+          "novel": 0.0,
+          "hm": 0.0
+        },
+        {
+          "seed": 3,
+          "base": 0.0,
+          "novel": 0.0,
+          "hm": 0.0
+        }
+      ],
+      "mean": {
+        "base": 0.0,
+        "novel": 0.0,
+        "hm": 0.0
+      },
+      "sample_sd": {
+        "base": 0.0,
+        "novel": 0.0,
+        "hm": 0.0
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "comparison": "KD1-KD0",
+      "branch": "ensemble",
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": -1.6206482593037208,
+          "novel": 1.1997600479904023,
+          "hm": -0.2471935418757596
+        },
+        {
+          "seed": 2,
+          "base": -3.361344537815121,
+          "novel": 1.1997600479904023,
+          "hm": -1.1973717038444036
+        },
+        {
+          "seed": 3,
+          "base": -1.9807923169267738,
+          "novel": -2.0995800839831986,
+          "hm": -2.038458489095497
+        }
+      ],
+      "mean": {
+        "base": -2.3209283713485385,
+        "novel": 0.09998000399920197,
+        "hm": -1.16100791160522
+      },
+      "sample_sd": {
+        "base": 0.9188445380716284,
+        "novel": 1.9048749133430938,
+        "hm": 0.8961859582832366
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "comparison": "simple_fusion-baseline",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": -0.41365046535676697,
+          "novel": 9.843158464034616,
+          "hm": 5.6766109631951736
+        },
+        {
+          "seed": 2,
+          "base": -0.6721820062047499,
+          "novel": 6.976744186046503,
+          "hm": 3.651467539006944
+        },
+        {
+          "seed": 3,
+          "base": -1.5511892450878975,
+          "novel": 7.517577068685782,
+          "hm": 3.7365986786086154
+        }
+      ],
+      "mean": {
+        "base": -0.8790072388831381,
+        "novel": 8.112493239588966,
+        "hm": 4.354892393603578
+      },
+      "sample_sd": {
+        "base": 0.5963062355052138,
+        "novel": 1.5229992255628726,
+        "hm": 1.1454330231990477
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "comparison": "mean_probability_fusion-simple_fusion",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": -0.2068252326783977,
+          "novel": 1.352082206598169,
+          "hm": 0.650292125610278
+        },
+        {
+          "seed": 2,
+          "base": 0.0,
+          "novel": 0.6489994591671291,
+          "hm": 0.34837392165198366
+        },
+        {
+          "seed": 3,
+          "base": 0.2585315408479829,
+          "novel": 1.8929150892374196,
+          "hm": 1.1507887942665604
+        }
+      ],
+      "mean": {
+        "base": 0.017235436056528403,
+        "novel": 1.2979989183342393,
+        "hm": 0.7164849471762741
+      },
+      "sample_sd": {
+        "base": 0.23315665733314325,
+        "novel": 0.6237189072293475,
+        "hm": 0.4052820304040357
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "comparison": "adk_probability_fusion-mean_probability_fusion",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": 0.2585315408479829,
+          "novel": -0.2704164413196395,
+          "hm": -0.030018426956047506
+        },
+        {
+          "seed": 2,
+          "base": 0.10341261633918464,
+          "novel": 0.0,
+          "hm": 0.04821489534116097
+        },
+        {
+          "seed": 3,
+          "base": -0.31023784901758233,
+          "novel": -0.10816657652785011,
+          "hm": -0.20172080967783756
+        }
+      ],
+      "mean": {
+        "base": 0.017235436056528403,
+        "novel": -0.12619433928249654,
+        "hm": -0.061174780430908036
+      },
+      "sample_sd": {
+        "base": 0.29401451411982016,
+        "novel": 0.1361066240358928,
+        "hm": 0.12784757695092935
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "comparison": "full_ensemble-simple_fusion",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": 0.10341261633918464,
+          "novel": 6.0573282855597625,
+          "hm": 3.2900734845237594
+        },
+        {
+          "seed": 2,
+          "base": -0.6721820062047641,
+          "novel": -0.757166035694965,
+          "hm": -0.7190287342224337
+        },
+        {
+          "seed": 3,
+          "base": -0.7755946225439487,
+          "novel": 6.544077879935088,
+          "hm": 3.080085019545109
+        }
+      ],
+      "mean": {
+        "base": -0.44812133746984273,
+        "novel": 3.9480800432666285,
+        "hm": 1.8837099232821448
+      },
+      "sample_sd": {
+        "base": 0.48043294949211446,
+        "novel": 4.0821240536752095,
+        "hm": 2.256481814309075
+      }
+    },
+    {
+      "dataset": "ucf101",
+      "comparison": "full_ensemble-adk_probability_fusion",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": 0.051706308169599424,
+          "novel": 4.975662520281233,
+          "hm": 2.669799785869529
+        },
+        {
+          "seed": 2,
+          "base": -0.7755946225439487,
+          "novel": -1.406165494862094,
+          "hm": -1.1156175512155784
+        },
+        {
+          "seed": 3,
+          "base": -0.7238883143743493,
+          "novel": 4.759329367225519,
+          "hm": 2.131017034956386
+        }
+      ],
+      "mean": {
+        "base": -0.48259220958289956,
+        "novel": 2.7762754642148857,
+        "hm": 1.2283997565367788
+      },
+      "sample_sd": {
+        "base": 0.4634377683470786,
+        "novel": 3.623714846728607,
+        "hm": 2.0477755168602685
+      }
+    },
+    {
+      "dataset": "dtd",
+      "comparison": "simple_fusion-baseline",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": -0.9259259259259238,
+          "novel": 9.66183574879227,
+          "hm": 5.957262995392014
+        },
+        {
+          "seed": 2,
+          "base": 1.5046296296296333,
+          "novel": 11.352657004830924,
+          "hm": 7.863317908123214
+        },
+        {
+          "seed": 3,
+          "base": -0.8101851851851904,
+          "novel": 11.594202898550733,
+          "hm": 7.0367190722913335
+        }
+      ],
+      "mean": {
+        "base": -0.07716049382716032,
+        "novel": 10.86956521739131,
+        "hm": 6.952433325268854
+      },
+      "sample_sd": {
+        "base": 1.3710922564750694,
+        "novel": 1.0528741409518578,
+        "hm": 0.955818705587016
+      }
+    },
+    {
+      "dataset": "dtd",
+      "comparison": "mean_probability_fusion-simple_fusion",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": 0.3472222222222143,
+          "novel": 0.9661835748792313,
+          "hm": 0.7224706514507915
+        },
+        {
+          "seed": 2,
+          "base": 0.23148148148148096,
+          "novel": -0.9661835748792384,
+          "hm": -0.48705351969900335
+        },
+        {
+          "seed": 3,
+          "base": 0.11574074074073337,
+          "novel": 0.7246376811594075,
+          "hm": 0.46805780698279875
+        }
+      ],
+      "mean": {
+        "base": 0.2314814814814762,
+        "novel": 0.24154589371980015,
+        "hm": 0.2344916462448623
+      },
+      "sample_sd": {
+        "base": 0.11574074074074048,
+        "novel": 1.0528741409518585,
+        "hm": 0.6376927502569668
+      }
+    },
+    {
+      "dataset": "dtd",
+      "comparison": "adk_probability_fusion-mean_probability_fusion",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": 0.4629629629629619,
+          "novel": 1.328502415458928,
+          "hm": 0.9810416846658967
+        },
+        {
+          "seed": 2,
+          "base": 0.4629629629629619,
+          "novel": 0.9661835748792384,
+          "hm": 0.7715546399116135
+        },
+        {
+          "seed": 3,
+          "base": -0.23148148148148096,
+          "novel": 0.12077294685991546,
+          "hm": -0.030536345307936585
+        }
+      ],
+      "mean": {
+        "base": 0.23148148148148096,
+        "novel": 0.8051529790660273,
+        "hm": 0.5740199930898578
+      },
+      "sample_sd": {
+        "base": 0.4009376869372392,
+        "novel": 0.6197586279525131,
+        "hm": 0.5339358390318842
+      }
+    },
+    {
+      "dataset": "dtd",
+      "comparison": "full_ensemble-simple_fusion",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": -1.7361111111111143,
+          "novel": 5.072463768115945,
+          "hm": 2.1817014494939997
+        },
+        {
+          "seed": 2,
+          "base": -2.5462962962963047,
+          "novel": -0.7246376811594217,
+          "hm": -1.48901343310348
+        },
+        {
+          "seed": 3,
+          "base": -1.5046296296296333,
+          "novel": -6.5217391304347885,
+          "hm": -4.5403880011199504
+        }
+      ],
+      "mean": {
+        "base": -1.9290123456790174,
+        "novel": -0.7246376811594217,
+        "hm": -1.282566661576477
+      },
+      "sample_sd": {
+        "base": 0.5469694011866473,
+        "novel": 5.797101449275367,
+        "hm": 3.365796614119647
+      }
+    },
+    {
+      "dataset": "dtd",
+      "comparison": "full_ensemble-adk_probability_fusion",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": -2.5462962962962905,
+          "novel": 2.7777777777777857,
+          "hm": 0.4781891133773115
+        },
+        {
+          "seed": 2,
+          "base": -3.2407407407407476,
+          "novel": -0.7246376811594217,
+          "hm": -1.7735145533160903
+        },
+        {
+          "seed": 3,
+          "base": -1.3888888888888857,
+          "novel": -7.3671497584541115,
+          "hm": -4.977909462794813
+        }
+      ],
+      "mean": {
+        "base": -2.3919753086419746,
+        "novel": -1.7713365539452492,
+        "hm": -2.0910783009111973
+      },
+      "sample_sd": {
+        "base": 0.9355212695202313,
+        "novel": 5.15282180718171,
+        "hm": 2.741876723809234
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "comparison": "simple_fusion-baseline",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": -1.7406962785114075,
+          "novel": 7.258548290341935,
+          "hm": 2.948337932087796
+        },
+        {
+          "seed": 2,
+          "base": 0.060024009603843353,
+          "novel": 9.718056388722257,
+          "hm": 5.30987045724806
+        },
+        {
+          "seed": 3,
+          "base": 0.2400960384153663,
+          "novel": 7.438512297540498,
+          "hm": 3.9280740596496173
+        }
+      ],
+      "mean": {
+        "base": -0.4801920768307326,
+        "novel": 8.138372325534897,
+        "hm": 4.062094149661824
+      },
+      "sample_sd": {
+        "base": 1.0953353896095255,
+        "novel": 1.3710025767983944,
+        "hm": 1.1864569125099376
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "comparison": "mean_probability_fusion-simple_fusion",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": 0.6002400960384122,
+          "novel": 0.41991601679664114,
+          "hm": 0.5177001709985589
+        },
+        {
+          "seed": 2,
+          "base": 0.42016806722688926,
+          "novel": -1.079784043191367,
+          "hm": -0.30607507443303206
+        },
+        {
+          "seed": 3,
+          "base": 0.2400960384153663,
+          "novel": 0.17996400719855643,
+          "hm": 0.21245114259073716
+        }
+      ],
+      "mean": {
+        "base": 0.42016806722688926,
+        "novel": -0.15996800639872313,
+        "hm": 0.14135874638542134
+      },
+      "sample_sd": {
+        "base": 0.18007202881152296,
+        "novel": 0.8055683694654567,
+        "hm": 0.41646369631113067
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "comparison": "adk_probability_fusion-mean_probability_fusion",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": -0.30012004801920256,
+          "novel": 0.6598680263947188,
+          "hm": 0.1391125832547715
+        },
+        {
+          "seed": 2,
+          "base": 0.0,
+          "novel": -0.41991601679664114,
+          "hm": -0.2085839949521855
+        },
+        {
+          "seed": 3,
+          "base": 0.18007202881152296,
+          "novel": -0.17996400719855643,
+          "hm": 0.01192879030321592
+        }
+      ],
+      "mean": {
+        "base": -0.04001600640255987,
+        "novel": 0.01999600079984039,
+        "hm": -0.019180873798066028
+      },
+      "sample_sd": {
+        "base": 0.24258414671832665,
+        "novel": 0.5669844782546603,
+        "hm": 0.175923523226934
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "comparison": "full_ensemble-simple_fusion",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": -0.9003601440576219,
+          "novel": -1.5596880623875222,
+          "hm": -1.2079830689546966
+        },
+        {
+          "seed": 2,
+          "base": -3.2412965186074416,
+          "novel": -1.079784043191367,
+          "hm": -2.253323248405877
+        },
+        {
+          "seed": 3,
+          "base": -2.4609843937575064,
+          "novel": -3.239352129574087,
+          "hm": -2.827970367337116
+        }
+      ],
+      "mean": {
+        "base": -2.2008803521408566,
+        "novel": -1.9596080783843253,
+        "hm": -2.0964255615658964
+      },
+      "sample_sd": {
+        "base": 1.1919464592722278,
+        "novel": 1.1339689565093232,
+        "hm": 0.8213113750776223
+      }
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "comparison": "full_ensemble-adk_probability_fusion",
+      "branch": null,
+      "per_seed": [
+        {
+          "seed": 1,
+          "base": -1.2004801920768315,
+          "novel": -2.639472105578882,
+          "hm": -1.864795823208027
+        },
+        {
+          "seed": 2,
+          "base": -3.661464585834331,
+          "novel": 0.41991601679664114,
+          "hm": -1.7386641790206596
+        },
+        {
+          "seed": 3,
+          "base": -2.8811524609843957,
+          "novel": -3.239352129574087,
+          "hm": -3.052350300231069
+        }
+      ],
+      "mean": {
+        "base": -2.581032412965186,
+        "novel": -1.8196360727854426,
+        "hm": -2.218603434153252
+      },
+      "sample_sd": {
+        "base": 1.2576426674523973,
+        "novel": 1.9625644402823388,
+        "hm": 0.7247949195719354
+      }
+    }
+  ],
+  "anchor_rows_excluded_from_formal_pairs": [
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "student",
+      "base": 74.30555555555556,
+      "novel": 58.57487922705314,
+      "hm": 65.50910146683835,
+      "counts": {
+        "base": {
+          "correct": 642,
+          "total": 864
+        },
+        "new": {
+          "correct": 485,
+          "total": 828
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "teacher",
+      "base": 69.21296296296296,
+      "novel": 63.28502415458937,
+      "hm": 66.11638604042706,
+      "counts": {
+        "base": {
+          "correct": 598,
+          "total": 864
+        },
+        "new": {
+          "correct": 524,
+          "total": 828
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "branch": "ensemble",
+      "base": 75.46296296296296,
+      "novel": 68.35748792270532,
+      "hm": 71.73470181167873,
+      "counts": {
+        "base": {
+          "correct": 652,
+          "total": 864
+        },
+        "new": {
+          "correct": 566,
+          "total": 828
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "student",
+      "base": 37.034813925570226,
+      "novel": 36.53269346130774,
+      "hm": 36.78204013150392,
+      "counts": {
+        "base": {
+          "correct": 617,
+          "total": 1666
+        },
+        "new": {
+          "correct": 609,
+          "total": 1667
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "teacher",
+      "base": 33.25330132052821,
+      "novel": 38.27234553089382,
+      "hm": 35.58672711694268,
+      "counts": {
+        "base": {
+          "correct": 554,
+          "total": 1666
+        },
+        "new": {
+          "correct": 638,
+          "total": 1667
+        }
+      },
+      "kd_weight": 1
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "branch": "ensemble",
+      "base": 35.95438175270108,
+      "novel": 38.332333533293344,
+      "hm": 37.105297980182314,
+      "counts": {
+        "base": {
+          "correct": 599,
+          "total": 1666
+        },
+        "new": {
+          "correct": 639,
+          "total": 1667
+        }
+      },
+      "kd_weight": 1
+    }
+  ]
+}

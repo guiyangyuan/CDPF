@@ -1,0 +1,13 @@
+{
+  "state": "launched",
+  "pid": 1479,
+  "command": [
+    "bash",
+    "/root/autodl-tmp/textconsistency/setup-logs/attribution-prep-20260911-v1/run_gpu_study.sh"
+  ],
+  "started_utc": "2026-09-11T07:54:22Z",
+  "started_epoch": 1789113262.7151937,
+  "stdout": "/root/autodl-tmp/textconsistency/setup-logs/attribution-gpu-20260911-42527/launcher.log",
+  "study_root": "/root/autodl-tmp/textconsistency/runs/attribution-study-20260911-v1",
+  "operational_commit": "43e537c"
+}

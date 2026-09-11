@@ -1,14 +1,14 @@
 # TextConsistency：工作计划与当前进度
 
-最后更新：2026-09-11（DTD/Aircraft无卡准备完成，等待用户开卡；北京时间）。本文件是后续接手和恢复工作的第一入口。每完成一批工作，先更新此处的状态、证据和下一步，再提交 GitHub。**准备完成、训练完成、贡献被验证是三个不同状态。**
+最后更新：2026-09-11（DTD/Aircraft GPU队列已启动；北京时间）。本文件是后续接手和恢复工作的第一入口。每完成一批工作，先更新此处的状态、证据和下一步，再提交 GitHub。**准备完成、训练完成、贡献被验证是三个不同状态。**
 
 **当前工作：DTD/Aircraft固定三种子验证。** 用户已明确要求开始下一步，协议为本仓库CoOp、原层级方法、参数匹配双头平面，共18次正式训练/84次独立重载；先做6次单轮短测试/28次重载。模型代码保持不变，新增独立编排及更严格的数据/配置/模型审计。见[固定协议](docs/CROSS_DATASET_VALIDATION.md)及[准备报告](reports/preparation/crossdataset-20260910/README.md)。本机两个数据集ZIP和CLIP权重已核对SHA，实际图像/划分/三种子16-shot预检通过，与上轮服务器记录完全一致。
 
-**接入状态：用户已无卡开机，同一bjb2:27946现已连接。** 实测0.5CPU/2GiB内存，Python3.12.3、torch2.8.0+cu128、torchvision0.23.0+cu128可导入，CUDA不可用；旧数据/模型保留，训练源码及10个关键配置/脚本/描述文件SHA与本机一致。本机和服务器完整CPU准备通过，服务器59项测试通过，无CUDA拒绝训练检查通过，预留study目录未创建。两个数据集的实际loader样本/类别哈希与本机逐项一致；136条命令的完整有效配置已冻结，最终复审通过。当前未启动新GPU训练；开卡后执行固定队列，电源由用户控制。
+**接入状态：用户已开卡，新入口bjb1:55424已连接。** RTX5090 32GB、驱动595.71.05，torch2.8.0+cu128，CUDA前后向检查通过。原数据及准备文件保留，源码/操作脚本/启动脚本哈希一致。固定队列PID1576已经启动；先做DTD和Aircraft短测试，通过后自动进入正式阶段。当前结果尚未齐全，不作方法有效性的结论。见[本批运行记录](reports/experiments/crossdataset-study-20260911-55424/README.md)。服务器电源由用户控制。
 
-**最新批次：结构对照已完成、审计通过、完整模型已备份。** 共15次正式训练/90次独立重载，另外5次单轮验证/30次重载不计入正式结果。原层级融合HM **80.66**，参数匹配双头平面 **80.38**；原层级平均配对优势仅 **+0.26个百分点（SD1.18，2/3种子提升）**，层级结构的独立收益尚不稳定。交错、随机17、随机29的HM分别为79.86、81.20、80.49，全部保留，不能挑选最佳Novel成绩改称最终方法。原结构全部3seed/3分支的18个Base/Novel准确率精确复现历史结果。详见 [完整结构对照报告](reports/experiments/ucf101-structure-study-20260910/README.md)。本批没有仍在运行的训练；下一步是固定协议的DTD/Aircraft验证，不继续用UCF101 Novel调参。
+**上一批次：结构对照已完成、审计通过、完整模型已备份。** 共15次正式训练/90次独立重载，另外5次单轮验证/30次重载不计入正式结果。原层级融合HM **80.66**，参数匹配双头平面 **80.38**；原层级平均配对优势仅 **+0.26个百分点（SD1.18，2/3种子提升）**，层级结构的独立收益尚不稳定。交错、随机17、随机29的HM分别为79.86、81.20、80.49，全部保留，不能挑选最佳Novel成绩改称最终方法。原结构全部3seed/3分支的18个Base/Novel准确率精确复现历史结果。详见 [完整结构对照报告](reports/experiments/ucf101-structure-study-20260910/README.md)。本批没有仍在运行的训练；下一步是固定协议的DTD/Aircraft验证，不继续用UCF101 Novel调参。
 
-结构批次开卡时入口 `connect.bjb2.seetacloud.com:27946`；当时RTX5090 32GB、90GiB内存、驱动580.76.05。当前无卡状态见顶部。实验目录 `/root/autodl-tmp/textconsistency/runs/structure-study-20260910-27946-v2`；PID1553/1574/3154仅为历史记录。队列完成时GPU显存/利用率均为0。原始status.json的`awaiting_analysis_and_backup`是执行器结束时快照；后续分析与本机备份均已完成，以本批analysis.json和backup-receipt.json为证。服务器电源仍由用户控制。
+结构批次开卡时入口 `connect.bjb2.seetacloud.com:27946`；当时RTX5090 32GB、90GiB内存、驱动580.76.05。当前GPU批次见顶部。实验目录 `/root/autodl-tmp/textconsistency/runs/structure-study-20260910-27946-v2`；PID1553/1574/3154仅为历史记录。队列完成时GPU显存/利用率均为0。原始status.json的`awaiting_analysis_and_backup`是执行器结束时快照；后续分析与本机备份均已完成，以本批analysis.json和backup-receipt.json为证。服务器电源仍由用户控制。
 
 **本批 GPU 基线与 KD 对照已完成并备份。** 共15次正式训练、78次独立重载评估，完整审计通过。官方 CoOp matched20 与旧基线的三个种子准确率完全一致；本轮KD1也逐种子复现历史结果。完整方法KD0→KD1的融合HM为79.50→80.66，3/3种子提高；普通层级为79.91→80.19，仅2/3种子提高。详见 [完整报告](reports/experiments/ucf101-kd-study-20260910/README.md)。三个数据集仍已准备好，DTD/Aircraft正式训练尚未执行。
 
@@ -47,7 +47,7 @@
 |---|---|---|
 | 修复训练/保存/评估与记录 | 已完成 | 原 23 项测试 + 三种子审计 |
 | UCF101 三种子实验 | 已完成 | 上述报告；禁止当成所有数据集结论 |
-| 服务器连接与环境检查 | 当前无卡入口已核实 | bjb2:27946，0.5CPU/2GiB，torch2.8.0+cu128可导入，CUDA=false；历史GPU检查见旧批次 |
+| 服务器连接与环境检查 | 新GPU入口已核实 | bjb1:55424，5090 32GB，驱动595.71.05，CUDA前后向通过；准备目录保留 |
 | DTD / Aircraft ZIP 本机校验 | 已完成 | reports/preparation/dataset-archives.json |
 | UCF101 / DTD / Aircraft 服务器部署与预检 | 已完成 | ZIP 校验、固定划分、图像/描述覆盖、每类 16-shot、三种子采样均通过；见 ready.json |
 | 官方 CoOp 差异核查与独立诊断 | 本机、开卡后服务器均通过 | 无卡时期 SIGKILL 保留；开卡后完整模型诊断 logits/梯度/更新差均为0，见本批 start-evidence |
@@ -57,13 +57,13 @@
 | 独立官方 CoOp GPU 训练 | matched20 三种子已完成 | Base/Novel 各种子准确率与历史基线完全一致；HM 74.42。200轮参考配置未启动 |
 | 层级分组/参数量对照 | 已完成并审计、备份 | 15正式训练/90独立重载；五变体均790018参数；原层级对参数匹配平面平均配对HM仅+0.26，2/3正向；分组存在敏感性；不是语义分组 |
 | DTD / Aircraft 固定验证准备 | 本机及服务器无卡准备已完成 | 服务器59项测试、实际数据loader校验、无CUDA拒绝训练通过；操作脚本6ce9c6e独立部署，原模型源码不变；见本轮ready.json |
-| DTD / Aircraft 三种子正式训练 | 等待用户开卡，尚未启动 | 固定18正式训练/84重载；先做6次单轮短测试/28重载，全部审计通过再启动正式阶段 |
+| DTD / Aircraft 三种子正式训练 | 队列已启动，先执行短测试 | 固定18正式训练/84重载；先做6次单轮短测试/28重载，全部审计通过再启动正式阶段 |
 | AAPE / ADK 接近方法比较 | 待适配和执行 | 先核对官方实现与协议，不能用跨协议分数直接比较 |
 | 投稿实验定稿及论文修改 | 待上述证据 | 用户当前要求暂不处理论文 |
 
 ## 实验顺序和判断规则
 
-KD批次及结构批次均已完成，模型和评估齐全，已备份到本机；恢复时先阅读报告和备份收据，避免重复启动。结构代码的固定协议见 [结构协议](docs/STRUCTURE_CONTROLS.md)。DTD/Aircraft的CoOp、原方法及参数匹配平面对照协议现已固定，保留三个seed和统一主分支；独立操作脚本已部署，CPU准备完成。开卡后启动器再次检查CUDA空闲、代码版本、数据及新输出目录。当前未启动下一批GPU训练。
+KD批次及结构批次均已完成，模型和评估齐全，已备份到本机；恢复时先阅读报告和备份收据，避免重复启动。结构代码的固定协议见 [结构协议](docs/STRUCTURE_CONTROLS.md)。DTD/Aircraft的CoOp、原方法及参数匹配平面对照协议现已固定，保留三个seed和统一主分支；独立操作脚本已部署，CPU准备完成。开卡后启动器再次检查CUDA空闲、代码版本、数据及新输出目录。当前固定队列已启动，先执行两个数据集短测试。
 
 1. 已完成matched20基线核验：本仓库基线与官方 CoOp 的模型计算是否一致；配置是否一致。这与“官方论文指标已复现”不同。
 2. 已完成UCF101 KD=0/1 成对实验：同一个模型结构、teacher CE、seed/采样、训练轮数、融合权重，只改变 KD。分别报告 student、teacher、ensemble。
@@ -92,8 +92,8 @@ KD批次及结构批次均已完成，模型和评估齐全，已备份到本机
 
 - 操作代码commit：`6ce9c6e2770c6359dcd1f8dfea326e3755aaa79c`；release：`/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260911-6ce9c6e`。模型仍使用`releases/structure-20260910-v1`及原SHA，后续文档提交不改变已校验脚本。
 - 准备证据：`/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260911-v2/prepared-v2/`；同级`ready.json`为`cpu_preparation_complete`，59项测试通过，GPU短测试/正式训练均为false。
-- 用户开卡且重新核实SSH及实例后执行：`bash /root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260911-v2/run_gpu_study.sh`。本轮仅保存脚本并通过`bash -n`，没有启动它。
-- 预留输出：`/root/autodl-tmp/textconsistency/runs/crossdataset-study-20260910-v1`，准备结束时不存在。若后续目录已存在，先读`status.json`和日志；不得覆盖或直接重启。
+- 用户开卡且重新核实SSH及实例后执行：`bash /root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260911-v2/run_gpu_study.sh`。用户开卡后已从此入口启动PID1576；不可再次执行，恢复时先读取study/status.json。
+- 预留输出：`/root/autodl-tmp/textconsistency/runs/crossdataset-study-20260910-v1`，准备结束时不存在，当前队列已创建。若恢复时目录已存在，先读`status.json`和日志；不得覆盖或直接重启。
 - 固定顺序：DTD短测试→Aircraft短测试→DTD正式→Aircraft正式。无GPU、设备非空闲、源码/数据证据漂移或任何审计失败都会停止，不自动重试。
 - [准备报告](reports/preparation/crossdataset-20260910/README.md)保存真实日志、数据采样证据、完整命令计划、版本收据和启动脚本。图像清单记录路径/大小/mtime，未逐图计算内容SHA；完整ZIP、CLIP与代码文件已核对SHA。
 

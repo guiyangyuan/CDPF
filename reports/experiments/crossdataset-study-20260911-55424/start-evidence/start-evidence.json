@@ -1,0 +1,27 @@
+{
+  "checked_unix": 1789094709.62972,
+  "hostname": "autodl-container-552540b067-9e3cce87",
+  "python": "3.12.3",
+  "torch": "2.8.0+cu128",
+  "torchvision": "0.23.0+cu128",
+  "cuda_runtime": "12.8",
+  "cuda_available": true,
+  "cuda_forward_backward_finite": true,
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "gpu_properties": {
+    "total_memory": 33670758400,
+    "capability": [
+      12,
+      0
+    ]
+  },
+  "gpu_before_probe": "NVIDIA GeForce RTX 5090, 32607 MiB, 595.71.05",
+  "free_disk_bytes": 41464897536,
+  "operational_commit": "6ce9c6e2770c6359dcd1f8dfea326e3755aaa79c",
+  "documentation_commit": "bf4b3b0e9c980d6a3e2ed72015004ab2c757c222",
+  "source_root": "/root/autodl-tmp/textconsistency/releases/structure-20260910-v1",
+  "ops_root": "/root/autodl-tmp/textconsistency/releases/crossdataset-ops-20260911-6ce9c6e",
+  "prepared_directory": "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260911-v2/prepared-v2",
+  "study_directory": "/root/autodl-tmp/textconsistency/runs/crossdataset-study-20260910-v1",
+  "endpoint": "connect.bjb1.seetacloud.com:55424"
+}

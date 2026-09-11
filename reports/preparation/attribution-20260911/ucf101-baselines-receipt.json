@@ -1,0 +1,28 @@
+{
+  "archive": "ucf101-baselines.tar.gz",
+  "bytes": 1442120,
+  "sha256": "a18262644ab7970d41e8ce22f2b2ccd35e11ca8f9dedad1305dd218664b0f9f5",
+  "models": [
+    {
+      "seed": 1,
+      "local_original": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/textconsistency-ucf101-s123-20260910-163256/runs/ucf101-pilot-20260910-160746/baseline/seed1",
+      "restored_relative": "ucf101/baseline/seed1",
+      "checkpoint_sha256": "84cc4b8201232832949cda3585a989d11f3089984639addb1409ec27f7ea89df",
+      "source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f"
+    },
+    {
+      "seed": 2,
+      "local_original": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/textconsistency-ucf101-s123-20260910-163256/runs/ucf101-pilot-20260910-163256-seed2/baseline/seed2",
+      "restored_relative": "ucf101/baseline/seed2",
+      "checkpoint_sha256": "d0aa4b4e1ba39c91577415c93eb89e278928d08000a3e4dfe2a14d2311b09248",
+      "source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f"
+    },
+    {
+      "seed": 3,
+      "local_original": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/textconsistency-ucf101-s123-20260910-163256/runs/ucf101-pilot-20260910-163256-seed3/baseline/seed3",
+      "restored_relative": "ucf101/baseline/seed3",
+      "checkpoint_sha256": "67e4520dc1f000d220541f876afe5015d7538009d278cb48d5e91a3503139516",
+      "source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f"
+    }
+  ]
+}

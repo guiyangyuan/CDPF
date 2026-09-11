@@ -13,3 +13,5 @@
 GPU开关由用户操作。正式新输出计划为`/root/autodl-tmp/textconsistency/runs/attribution-study-20260911-v1`，当前未创建；准备目录为`setup-logs/attribution-prep-20260911-v1`。融合/ADK评估入口已实现，21项新测试与59项既有测试通过，旧UCF seed1的Base/Novel元数据实际验证通过；种子域限制修复后25项focused通过，独立任务审查和复审已通过，见[审查记录](review/task-1-rereview.md)。KD固定队列正在实现，仍待审查，尚未形成可执行就绪结论。所有旧批次结果和备份保持可用。
 
 已审查的独立评估脚本92b01a1已部署到准备目录，脚本SHA `e964e035e39844d566a39924366d0322a5bf10c669f343403de41db7984f3e56`。服务器按两个源码版本分进程验证，UCF101六组和DTD/Aircraft十二组全部通过；[UCF记录](fusion-metadata-ucf101.json)、[跨数据集记录](fusion-metadata-crossdataset.json)、[部署包收据](fusion-evaluator-package.json)。均为元数据检查，未加载完整CLIP、未做新GPU评估、未创建正式study。
+
+固定124条队列与独立审计已实现（Task2 commit7e02cb1），本机/服务器均104项测试通过。首轮真实CPU准备在历史Aircraft Novel描述计数核对处停止，未创建正式study或准备完成证据；失败计划、日志和部署收据见[首轮记录](attempt-7e02cb1/validation-7e02cb1.json)。原因是准备脚本缺少原encoder的分词去重，修复778d9d0完全沿用原语义并冻结分词词表，同时修复source路径替换范围。23项focused及36份真实历史指标的有效描述计数/完整顺序核对通过，见[复审](review/task-2-rereview.md)。778d9d0已独立部署，新的真实CPU准备正在执行；完整分支审查和最终ready收据仍待完成。

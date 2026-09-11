@@ -1,0 +1,8 @@
+{
+  "code_commit": "7e02cb1",
+  "release": "/root/autodl-tmp/textconsistency/releases/attribution-ops-20260911-7e02cb1",
+  "archive": "/root/autodl-tmp/textconsistency/backups/attribution-ops-7e02cb1.tar.gz",
+  "archive_sha256": "510031d965c7a802522cb826cc2488892e7351aca50e6f74e9e36621ee48b012",
+  "archive_bytes": 7454821,
+  "gpu_run": false
+}

@@ -1,0 +1,161 @@
+{
+  "passed": true,
+  "rows": [
+    {
+      "dataset": "fgvc_aircraft",
+      "variant": "baseline",
+      "seed": 1,
+      "branch": "student",
+      "base": 27.671068427370948,
+      "novel": 31.43371325734853,
+      "hm": 29.432624761570565
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "branch": "student",
+      "base": 29.35174069627851,
+      "novel": 33.41331733653269,
+      "hm": 31.251115095016136
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "branch": "teacher",
+      "base": 31.2124849939976,
+      "novel": 40.79184163167366,
+      "hm": 35.36495109315304
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "variant": "hierarchical_adapter",
+      "seed": 1,
+      "branch": "ensemble",
+      "base": 33.43337334933974,
+      "novel": 39.112177564487105,
+      "hm": 36.05050946742302
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "variant": "flat_dual_adapter",
+      "seed": 1,
+      "branch": "student",
+      "base": 29.29171668667467,
+      "novel": 33.593281343731256,
+      "hm": 31.29537761042935
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "variant": "flat_dual_adapter",
+      "seed": 1,
+      "branch": "teacher",
+      "base": 30.732292917166866,
+      "novel": 40.611877624475106,
+      "hm": 34.988033628984965
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "variant": "flat_dual_adapter",
+      "seed": 1,
+      "branch": "ensemble",
+      "base": 33.01320528211284,
+      "novel": 39.772045590881824,
+      "hm": 36.078812392154376
+    }
+  ],
+  "summaries": [
+    {
+      "variant": "baseline",
+      "branch": "student",
+      "seeds": 1,
+      "base_mean": 27.671068427370948,
+      "novel_mean": 31.43371325734853,
+      "hm_of_means": 29.432624761570565,
+      "base_std": null,
+      "novel_std": null,
+      "mean_seed_hm": 29.432624761570565,
+      "seed_hm_std": null,
+      "dataset": "fgvc_aircraft"
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "branch": "student",
+      "seeds": 1,
+      "base_mean": 29.35174069627851,
+      "novel_mean": 33.41331733653269,
+      "hm_of_means": 31.251115095016136,
+      "base_std": null,
+      "novel_std": null,
+      "mean_seed_hm": 31.251115095016136,
+      "seed_hm_std": null,
+      "dataset": "fgvc_aircraft"
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "branch": "teacher",
+      "seeds": 1,
+      "base_mean": 31.2124849939976,
+      "novel_mean": 40.79184163167366,
+      "hm_of_means": 35.36495109315304,
+      "base_std": null,
+      "novel_std": null,
+      "mean_seed_hm": 35.36495109315304,
+      "seed_hm_std": null,
+      "dataset": "fgvc_aircraft"
+    },
+    {
+      "variant": "hierarchical_adapter",
+      "branch": "ensemble",
+      "seeds": 1,
+      "base_mean": 33.43337334933974,
+      "novel_mean": 39.112177564487105,
+      "hm_of_means": 36.05050946742302,
+      "base_std": null,
+      "novel_std": null,
+      "mean_seed_hm": 36.05050946742302,
+      "seed_hm_std": null,
+      "dataset": "fgvc_aircraft"
+    },
+    {
+      "variant": "flat_dual_adapter",
+      "branch": "student",
+      "seeds": 1,
+      "base_mean": 29.29171668667467,
+      "novel_mean": 33.593281343731256,
+      "hm_of_means": 31.29537761042935,
+      "base_std": null,
+      "novel_std": null,
+      "mean_seed_hm": 31.29537761042935,
+      "seed_hm_std": null,
+      "dataset": "fgvc_aircraft"
+    },
+    {
+      "variant": "flat_dual_adapter",
+      "branch": "teacher",
+      "seeds": 1,
+      "base_mean": 30.732292917166866,
+      "novel_mean": 40.611877624475106,
+      "hm_of_means": 34.988033628984965,
+      "base_std": null,
+      "novel_std": null,
+      "mean_seed_hm": 34.988033628984965,
+      "seed_hm_std": null,
+      "dataset": "fgvc_aircraft"
+    },
+    {
+      "variant": "flat_dual_adapter",
+      "branch": "ensemble",
+      "seeds": 1,
+      "base_mean": 33.01320528211284,
+      "novel_mean": 39.772045590881824,
+      "hm_of_means": 36.078812392154376,
+      "base_std": null,
+      "novel_std": null,
+      "mean_seed_hm": 36.078812392154376,
+      "seed_hm_std": null,
+      "dataset": "fgvc_aircraft"
+    }
+  ]
+}

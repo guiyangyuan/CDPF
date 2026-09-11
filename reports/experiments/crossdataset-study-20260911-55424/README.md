@@ -1,6 +1,6 @@
-# DTD / Aircraft 固定三种子实验：已启动
+# DTD / Aircraft 固定三种子实验：正式阶段运行中
 
-启动时间：2026-09-11 10:45:27 +08:00。用户开卡并提供新入口后，在`connect.bjb1.seetacloud.com:55424`启动固定队列。当前是运行记录，**尚未宣称正式实验完成或方法有效**。
+启动时间：2026-09-11 10:45:27 +08:00。用户开卡并提供新入口后，在`connect.bjb1.seetacloud.com:55424`启动固定队列。两套短测试审计已通过，正式DTD阶段已启动。当前是运行记录，**尚未宣称正式实验完成或方法有效**。
 
 - 实测RTX5090 32GB，驱动595.71.05，torch2.8.0+cu128；CUDA前后向有限性检查通过。数据/准备目录保留，操作代码和启动脚本SHA与无卡准备逐项一致。
 - 队列PID`1576`；启动时新study目录不存在，GPU无其他计算进程。
@@ -11,3 +11,5 @@
 - [GPU环境证据](start-evidence/start-evidence.json)、[启动收据](start-evidence/launch.json)、[已完成准备](../../preparation/crossdataset-20260910/README.md)、[固定协议](../../../docs/CROSS_DATASET_VALIDATION.md)。
 
 全部正式结果通过后再给出跨数据集结论，并备份原始日志及全部模型；服务器电源由用户控制。
+
+短测试证据：[DTD](audit/smoke_dtd.json)、[Aircraft](audit/smoke_fgvc_aircraft.json)。其单轮分数不纳入正式统计。

@@ -1,4 +1,5 @@
 import subprocess
+import sys
 import hashlib
 import json
 import tempfile
@@ -14,7 +15,7 @@ from scripts.repro import validation_probe as probe
 
 
 ROOT = Path(__file__).resolve().parents[2]
-PYTHON = ROOT.parents[1] / "tc-venv/bin/python"
+PYTHON = Path(sys.executable)
 
 
 class ValidationProbeCli(unittest.TestCase):

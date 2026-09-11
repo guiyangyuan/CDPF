@@ -1,4 +1,5 @@
 import subprocess
+import sys
 import copy
 import hashlib
 import json
@@ -13,7 +14,7 @@ from scripts.repro import validation_probe as probe
 
 
 ROOT = Path(__file__).resolve().parents[2]
-PYTHON = ROOT.parents[1] / "tc-venv/bin/python"
+PYTHON = Path(sys.executable)
 FIXED_INVENTORY = json.loads((
     ROOT / "reports/diagnostics/error-analysis-20260911/evidence/proposed-probe-inputs.json"
 ).read_text())

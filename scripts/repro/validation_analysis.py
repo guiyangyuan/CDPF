@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import hashlib
 import json
 import math
 import statistics
@@ -110,10 +111,14 @@ def fixed_probability_fusion_metrics(student_logits: np.ndarray, teacher_logits:
             "probabilities": fused_probability}
 
 
-def _trusted_inventory_cases() -> dict[tuple[str, int], dict[str, Any]]:
-    if probe.sha256_file(FIXED_INVENTORY_PATH) != probe.FIXED_INVENTORY_SHA256:
+def _trusted_inventory_cases(
+        trusted_inventory_path: Path = FIXED_INVENTORY_PATH,
+        trusted_inventory_sha256: str = probe.FIXED_INVENTORY_SHA256,
+) -> dict[tuple[str, int], dict[str, Any]]:
+    path = Path(trusted_inventory_path).resolve()
+    if probe.sha256_file(path) != trusted_inventory_sha256:
         raise ValueError("Authenticated fixed inventory hash mismatch")
-    inventory = json.loads(FIXED_INVENTORY_PATH.read_text())
+    inventory = json.loads(path.read_text())
     cases = {}
     for dataset in DATASETS:
         for seed in (1, 2, 3):
@@ -121,14 +126,15 @@ def _trusted_inventory_cases() -> dict[tuple[str, int], dict[str, Any]]:
     return cases
 
 
-def _validate_trusted_provenance(dataset: str, seed: int,
-                                 provenance: Mapping[str, Any]) -> dict[str, Any]:
-    case = _trusted_inventory_cases()[(dataset, seed)]
+def _validate_trusted_provenance(dataset: str, seed: int, provenance: Mapping[str, Any],
+                                 trusted_cases: Mapping[tuple[str, int], Mapping[str, Any]],
+                                 trusted_inventory_sha256: str) -> dict[str, Any]:
+    case = copy.deepcopy(dict(trusted_cases[(dataset, seed)]))
     expected = {
         "source_sha256": EXPECTED_SOURCES[dataset],
         "clip_sha256": probe.CLIP_SHA256,
         "template_sha256": EXPECTED_TEMPLATES[dataset],
-        "inventory_sha256": probe.FIXED_INVENTORY_SHA256,
+        "inventory_sha256": trusted_inventory_sha256,
         "inventory_case_sha256": probe.json_digest(case),
         "train_samples_sha256": case["train_samples_sha256"],
         "val_samples_sha256": case["val_samples_sha256"],
@@ -145,7 +151,41 @@ def _validate_trusted_provenance(dataset: str, seed: int,
     return case
 
 
-def load_export(export_path: Path) -> tuple[dict[str, Any], dict[str, np.ndarray]]:
+def _historical_row_digest(rows: list[Mapping[str, Any]]) -> str:
+    values = [(row["sample_id"], int(row["label"]), row["classname"]) for row in rows]
+    return hashlib.sha256(json.dumps(values, ensure_ascii=False).encode()).hexdigest()
+
+
+def _validate_available_prepared_identity(export_path: Path, receipt: Mapping[str, Any],
+                                          case: Mapping[str, Any], rows: list[Mapping[str, Any]],
+                                          classes: list[str]) -> None:
+    reference = receipt.get("prepared")
+    if reference is None:
+        return
+    prepared_path = Path(reference)
+    if not prepared_path.is_absolute():
+        prepared_path = Path(export_path).parent / prepared_path
+    if not prepared_path.is_file():
+        return  # Trusted ordered rows keep relocated/downloaded exports self-contained.
+    if probe.sha256_file(prepared_path) != receipt.get("prepared_sha256"):
+        raise ValueError("Export prepared-receipt hash mismatch")
+    prepared = json.loads(prepared_path.read_text())
+    prepared_rows = [{key: row.get(key) for key in ("sample_id", "label", "classname")}
+                     for row in prepared.get("samples", {}).get("val", [])]
+    export_rows = [{key: row.get(key) for key in ("sample_id", "label", "classname")} for row in rows]
+    if prepared.get("status") != "prepared" or prepared.get("protocol") != probe.PROTOCOL or \
+            prepared.get("dataset_key") != receipt["dataset_key"] or prepared.get("seed") != receipt["seed"] or \
+            prepared.get("samples", {}).get("classes") != classes or prepared_rows != export_rows or \
+            prepared.get("sample_hashes", {}).get("val") != case["val_samples_sha256"] or \
+            probe.json_digest(prepared.get("inventory", {}).get("case")) != probe.json_digest(case):
+        raise ValueError("Export rows/classes differ from the prepared identity")
+
+
+def load_export(
+        export_path: Path, *,
+        trusted_inventory_path: Path = FIXED_INVENTORY_PATH,
+        trusted_inventory_sha256: str = probe.FIXED_INVENTORY_SHA256,
+) -> tuple[dict[str, Any], dict[str, np.ndarray]]:
     path = Path(export_path).resolve()
     receipt = json.loads(path.read_text())
     if receipt.get("status") != "passed" or receipt.get("schema_version") != 1:
@@ -155,14 +195,17 @@ def load_export(export_path: Path) -> tuple[dict[str, Any], dict[str, np.ndarray
     dataset, seed = receipt.get("dataset_key"), receipt.get("seed")
     if dataset not in DATASETS or seed not in (1, 2, 3):
         raise ValueError("Export dataset/seed is outside the fixed nine cases")
+    trusted_cases = _trusted_inventory_cases(trusted_inventory_path, trusted_inventory_sha256)
     provenance = receipt.get("provenance", {})
-    _validate_trusted_provenance(dataset, seed, provenance)
-    if receipt.get("prepared") is not None and \
-            probe.sha256_file(Path(receipt["prepared"])) != receipt.get("prepared_sha256"):
-        raise ValueError("Export prepared-receipt hash mismatch")
+    case = _validate_trusted_provenance(
+        dataset, seed, provenance, trusted_cases, trusted_inventory_sha256)
     npz = Path(receipt["npz"])
     if not npz.is_absolute():
         npz = path.parent / npz
+    elif not npz.is_file():
+        relocated = path.parent / npz.name
+        if relocated.is_file():
+            npz = relocated
     if probe.sha256_file(npz) != receipt.get("npz_sha256"):
         raise ValueError("Export NPZ hash mismatch")
     with np.load(npz, allow_pickle=False) as archive:
@@ -181,6 +224,11 @@ def load_export(export_path: Path) -> tuple[dict[str, Any], dict[str, np.ndarray
         raise ValueError("Export sample alignment differs from NPZ labels")
     if len({row.get("sample_id") for row in rows}) != len(rows):
         raise ValueError("Export sample IDs are duplicated")
+    if any(not isinstance(row.get("sample_id"), str) or not row["sample_id"] for row in rows) or \
+            set(labels.tolist()) != set(range(len(classes))) or \
+            _historical_row_digest(rows) != case["val_samples_sha256"]:
+        raise ValueError("Export rows/classes do not match the trusted validation rows")
+    _validate_available_prepared_identity(path, receipt, case, rows, classes)
     for name in probe.BRANCHES:
         if arrays[name].dtype != np.float32 or arrays[name].shape != (len(labels), len(classes)):
             raise ValueError(f"Export {name} dtype/shape mismatch")
@@ -209,9 +257,8 @@ def _paired_vs_c(candidate_prediction: np.ndarray, c_prediction: np.ndarray,
             "prediction_disagreement_vs_C": int(np.sum(candidate_prediction != c_prediction))}
 
 
-def analyze_export(export_path: Path, output_dir: Path) -> dict[str, Any]:
-    output = _fresh_output(output_dir)
-    receipt, arrays = load_export(export_path)
+def compute_analysis(receipt: Mapping[str, Any], arrays: Mapping[str, np.ndarray]) -> dict[str, Any]:
+    """Pure, deterministic analysis payload used by analyze and aggregate verification."""
     labels = arrays["labels"]
     branches, combinations, predictions, pair_audits, paired_vs_c = {}, {}, {}, {}, {}
     for name in probe.BRANCHES:
@@ -235,19 +282,32 @@ def analyze_export(export_path: Path, output_dir: Path) -> dict[str, Any]:
             probability_prediction = np.argmax(fused_probability, axis=1)
             predictions[probability_name] = probability_prediction.astype(int).tolist()
             paired_vs_c[probability_name] = _paired_vs_c(probability_prediction, c_prediction, labels)
-    report = {"status": "passed", "schema_version": 1, "dataset_key": receipt["dataset_key"],
-              "seed": receipt["seed"], "protocol": receipt["protocol"],
-              "provenance": copy.deepcopy(receipt.get("provenance", {})),
-              "export": str(Path(export_path).resolve()), "export_sha256": probe.sha256_file(Path(export_path)),
-              "sample_ids": [row["sample_id"] for row in receipt["rows"]],
-              "labels": labels.astype(int).tolist(), "class_order": receipt["class_order"],
-              "teacher_tensor_exact_equal": receipt["teacher_tensor_exact_equal"],
-              "teacher_logits_exact_equal": receipt.get("teacher_logits_exact_equal"),
-              "tool": {"validation_analysis_sha256": probe.sha256_file(Path(__file__).resolve())},
-              "branches": branches, "combinations": combinations, "student_teacher_audits": pair_audits,
-              "paired_comparisons_vs_C": paired_vs_c, "predictions": predictions,
-              "claims": {"split": "Base validation only", "novel_or_hm": False,
-                         "significance_test": False, "automatic_training_action": False}}
+    return {"status": "passed", "schema_version": 1, "dataset_key": receipt["dataset_key"],
+            "seed": receipt["seed"], "protocol": copy.deepcopy(receipt["protocol"]),
+            "provenance": copy.deepcopy(receipt.get("provenance", {})),
+            "sample_ids": [row["sample_id"] for row in receipt["rows"]],
+            "labels": labels.astype(int).tolist(), "class_order": list(receipt["class_order"]),
+            "teacher_tensor_exact_equal": receipt["teacher_tensor_exact_equal"],
+            "teacher_logits_exact_equal": receipt.get("teacher_logits_exact_equal"),
+            "branches": branches, "combinations": combinations, "student_teacher_audits": pair_audits,
+            "paired_comparisons_vs_C": paired_vs_c, "predictions": predictions,
+            "claims": {"split": "Base validation only", "novel_or_hm": False,
+                       "significance_test": False, "automatic_training_action": False}}
+
+
+def analyze_export(
+        export_path: Path, output_dir: Path, *,
+        trusted_inventory_path: Path = FIXED_INVENTORY_PATH,
+        trusted_inventory_sha256: str = probe.FIXED_INVENTORY_SHA256,
+) -> dict[str, Any]:
+    output = _fresh_output(output_dir)
+    receipt, arrays = load_export(
+        export_path, trusted_inventory_path=trusted_inventory_path,
+        trusted_inventory_sha256=trusted_inventory_sha256)
+    report = compute_analysis(receipt, arrays)
+    report.update({"export": str(Path(export_path).resolve()),
+                   "export_sha256": probe.sha256_file(Path(export_path)),
+                   "tool": {"validation_analysis_sha256": probe.sha256_file(Path(__file__).resolve())}})
     output.mkdir(parents=True); _atomic_json(output / "analysis.json", report)
     return report
 
@@ -257,7 +317,38 @@ def _mean_sd(values: list[float]) -> dict[str, Any]:
             "sample_sd": statistics.stdev(values) if len(values) > 1 else None}
 
 
-def aggregate_reports(reports: list[Mapping[str, Any]]) -> dict[str, Any]:
+def _validate_analysis_against_export(
+        report: Mapping[str, Any], *, trusted_inventory_path: Path,
+        trusted_inventory_sha256: str,
+) -> None:
+    if report.get("schema_version") != 1:
+        raise ValueError("Aggregate analysis schema is missing or unsupported")
+    reference = report.get("export")
+    if not isinstance(reference, str) or not Path(reference).is_file():
+        raise ValueError("Aggregate referenced export is missing")
+    export_path = Path(reference).resolve()
+    if probe.sha256_file(export_path) != report.get("export_sha256"):
+        raise ValueError("Aggregate referenced export hash mismatch")
+    try:
+        receipt, arrays = load_export(
+            export_path, trusted_inventory_path=trusted_inventory_path,
+            trusted_inventory_sha256=trusted_inventory_sha256)
+    except Exception as exc:
+        raise ValueError(f"Aggregate referenced export failed validation: {exc}") from exc
+    expected = compute_analysis(receipt, arrays)
+    differing = sorted(key for key, value in expected.items() if report.get(key) != value)
+    expected_tool = probe.sha256_file(Path(__file__).resolve())
+    if report.get("tool", {}).get("validation_analysis_sha256") != expected_tool:
+        differing.append("tool")
+    if differing:
+        raise ValueError(f"Aggregate analysis integrity mismatch: {sorted(set(differing))}")
+
+
+def aggregate_reports(
+        reports: list[Mapping[str, Any]], *,
+        trusted_inventory_path: Path = FIXED_INVENTORY_PATH,
+        trusted_inventory_sha256: str = probe.FIXED_INVENTORY_SHA256,
+) -> dict[str, Any]:
     if len(reports) != 9:
         raise ValueError("Aggregate requires exactly nine complete cases")
     expected = {(dataset, seed) for dataset in DATASETS for seed in (1, 2, 3)}
@@ -268,9 +359,11 @@ def aggregate_reports(reports: list[Mapping[str, Any]]) -> dict[str, Any]:
         raise ValueError("Aggregate is missing one or more fixed nine cases")
     if any(report.get("status") != "passed" or report.get("protocol") != probe.PROTOCOL for report in reports):
         raise ValueError("Aggregate contains incomplete or mixed protocol results")
+    trusted_cases = _trusted_inventory_cases(trusted_inventory_path, trusted_inventory_sha256)
     for report in reports:
         _validate_trusted_provenance(report["dataset_key"], report["seed"],
-                                     report.get("provenance", {}))
+                                     report.get("provenance", {}), trusted_cases,
+                                     trusted_inventory_sha256)
     clips = {report.get("provenance", {}).get("clip_sha256") for report in reports}
     if clips != {probe.CLIP_SHA256}:
         raise ValueError("Aggregate settings are not compatible: CLIP differs")
@@ -287,6 +380,10 @@ def aggregate_reports(reports: list[Mapping[str, Any]]) -> dict[str, Any]:
         hashes = [report["provenance"].get("checkpoint_sha256", {}).get(role) for report in reports]
         if any(not value for value in hashes) or len(set(hashes)) != 9:
             raise ValueError(f"Aggregate checkpoint provenance is missing or duplicated for {role}")
+    for report in reports:
+        _validate_analysis_against_export(
+            report, trusted_inventory_path=trusted_inventory_path,
+            trusted_inventory_sha256=trusted_inventory_sha256)
     selected = ("S1+M_logits", "C+M_logits", "S1+M_probability", "C+M_probability", "S0+M_logits")
     for report in reports:
         if any(name not in report.get("combinations", {}) for name in selected):
@@ -335,8 +432,8 @@ def aggregate_reports(reports: list[Mapping[str, Any]]) -> dict[str, Any]:
     guards["all_passed"] = all(guards.values())
     return {"status": "passed", "case_count": 9, "protocol": probe.PROTOCOL,
             "fixed_candidate": "S1+M_logits",
-            "trusted_inventory": {"path": str(FIXED_INVENTORY_PATH),
-                                  "sha256": probe.FIXED_INVENTORY_SHA256},
+            "trusted_inventory": {"path": str(Path(trusted_inventory_path).resolve()),
+                                  "sha256": trusted_inventory_sha256},
             "weighting": "three-seed mean within dataset; equal mean across three datasets",
             "cases": [{"dataset_key": r["dataset_key"], "seed": r["seed"],
                        "branches": r["branches"], "combinations": r["combinations"]}

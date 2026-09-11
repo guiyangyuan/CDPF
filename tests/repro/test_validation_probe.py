@@ -69,7 +69,8 @@ class ValidationProbeContracts(unittest.TestCase):
             MODEL=SimpleNamespace(BACKBONE=SimpleNamespace(NAME="ViT-B/16")),
             INPUT=SimpleNamespace(SIZE=(224, 224), INTERPOLATION="bicubic",
                 PIXEL_MEAN=(0.48145466, 0.4578275, 0.40821073),
-                PIXEL_STD=(0.26862954, 0.26130258, 0.27577711), NO_TRANSFORM=False),
+                PIXEL_STD=(0.26862954, 0.26130258, 0.27577711), NO_TRANSFORM=False,
+                TRANSFORMS=("random_resized_crop", "random_flip", "normalize")),
             TRAINER=SimpleNamespace(NAME="CoOp_TextConsistency_Ablation" if is_coop
                 else "CoOp_TextConsistency_V2_FG", TEXTCONSISTENCY=tc),
         )
@@ -178,6 +179,17 @@ class ValidationProbeContracts(unittest.TestCase):
                     with self.assertRaisesRegex(ValueError, "effective config"):
                         probe.validate_effective_role_config(
                             role, cfg, self._role_manifest(role), case, source, cuda=False)
+            for transforms in (
+                ("random_resized_crop", "random_flip"),
+                ("random_resized_crop", "random_flip", "normalize", "instance_norm"),
+            ):
+                with self.subTest(transforms=transforms):
+                    cfg = self._role_config("coop")
+                    cfg.TRAINER.TEXTCONSISTENCY.CLIP_PATH = str(clip)
+                    cfg.INPUT.TRANSFORMS = transforms
+                    with self.assertRaisesRegex(ValueError, "effective config"):
+                        probe.validate_effective_role_config(
+                            "coop", cfg, self._role_manifest("coop"), case, source, cuda=False)
 
     def test_strict_load_verifies_class_buffers_and_every_trainable_tensor(self):
         class Tiny(torch.nn.Module):

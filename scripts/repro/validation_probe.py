@@ -409,6 +409,8 @@ def validate_effective_role_config(role: str, cfg: Any, manifest: Mapping[str, A
         "pixel_mean": (list(cfg.INPUT.PIXEL_MEAN), [0.48145466, 0.4578275, 0.40821073]),
         "pixel_std": (list(cfg.INPUT.PIXEL_STD), [0.26862954, 0.26130258, 0.27577711]),
         "no_transform": (bool(cfg.INPUT.NO_TRANSFORM), False),
+        "transforms": (list(cfg.INPUT.TRANSFORMS),
+                       ["random_resized_crop", "random_flip", "normalize"]),
         "trainer": (cfg.TRAINER.NAME, signature["trainer"]),
     }
     differing = sorted(name for name, (actual, expected) in fixed.items() if actual != expected)

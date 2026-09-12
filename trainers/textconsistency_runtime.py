@@ -15,6 +15,23 @@ from .textconsistency_common import (
 )
 
 
+def _loss_identity(mode, temperature, effective_weight):
+    weighting = {
+        'full_kl': 'none_full_distribution_kl',
+        'weighted_nckd': 'teacher_probability_mass_outside_ground_truth',
+    }
+    if mode not in weighting:
+        raise ValueError(f'Unknown KD loss mode: {mode}')
+    return {
+        'format': 1,
+        'mode': mode,
+        'temperature': float(temperature),
+        'effective_weight': float(effective_weight),
+        'active': effective_weight > 0,
+        'non_target_weighting': weighting[mode],
+    }
+
+
 def sample_digest(items, root):
     records = []
     for item in items or []:
@@ -51,6 +68,8 @@ class ValidatedTrainer(TrainerX):
             raise ValueError('Description batch size, view count and group count must be positive')
         if tc.KD_TEMP <= 0 or min(tc.KD_WEIGHT, tc.ADAPTIVE_CE_WEIGHT, tc.DIVERSITY_WEIGHT) < 0:
             raise ValueError('Invalid loss configuration')
+        if tc.KD_LOSS_MODE not in ('full_kl', 'weighted_nckd'):
+            raise ValueError(f'Unknown KD loss mode: {tc.KD_LOSS_MODE}')
         description_permutation(tc.N_VIEWS, tc.VIEW_ORDER, tc.N_GROUPS, tc.ORDER_SEED)
         if tc.VIEW_ORDER != 'contiguous' and (tc.AGGREGATION != 'hierarchical' or tc.ABLATION_GROUP != 'full'):
             raise ValueError('Description order controls require the full hierarchical model')
@@ -81,6 +100,7 @@ class ValidatedTrainer(TrainerX):
         if any(p.requires_grad for p in self.model.view_aggregator.parameters()) and self.adaptive_ce_weight <= 0:
             raise ValueError('A trainable aggregator requires positive ADAPTIVE_CE_WEIGHT')
         encoder = self.model.multiview_encoder
+        loss_identity = _loss_identity(tc.KD_LOSS_MODE, tc.KD_TEMP, self.kd_weight)
         self.repro_signature = {
             'format': 2, 'trainer': cfg.TRAINER.NAME, 'n_ctx': tc.N_CTX,
             'aggregation': getattr(self.model.view_aggregator, 'mode', 'none'),
@@ -90,6 +110,7 @@ class ValidatedTrainer(TrainerX):
             'clip_sha256': clip_model._repro_sha256,
             'template_sha256': getattr(encoder, 'template_sha256', None),
             'view_order': tc.VIEW_ORDER, 'order_seed': tc.ORDER_SEED, 'order_version': 1,
+            'loss_identity': dict(loss_identity),
         }
         self.run_provenance = {
             'seed': cfg.SEED, 'dataset': cfg.DATASET.NAME, 'shots': cfg.DATASET.NUM_SHOTS,
@@ -97,6 +118,7 @@ class ValidatedTrainer(TrainerX):
             'code_sha256': source_digest(), 'torch': torch.__version__, 'python': platform.python_version(),
             'device': str(self.device), 'cuda_runtime': torch.version.cuda,
             'gpu': torch.cuda.get_device_name(self.device) if self.device.type == 'cuda' else None,
+            'loss_identity': dict(loss_identity),
             'effective_losses': {'kd': self.kd_weight, 'adaptive_ce': self.adaptive_ce_weight,
                                  'diversity': self.diversity_weight, 'contrastive': 0.},
             'train_samples_sha256': sample_digest(self.dm.dataset.train_x, cfg.DATASET.ROOT),
@@ -122,7 +144,8 @@ class ValidatedTrainer(TrainerX):
         logits, teacher, _, attention = self.model(image, return_attn=True)
         loss, pieces = training_losses(logits, teacher, label, attention, self.kd_weight,
                                        self.cfg.TRAINER.TEXTCONSISTENCY.KD_TEMP,
-                                       self.adaptive_ce_weight, self.diversity_weight)
+                                       self.adaptive_ce_weight, self.diversity_weight,
+                                       kd_loss_mode=self.cfg.TRAINER.TEXTCONSISTENCY.KD_LOSS_MODE)
         self.model_backward_and_update(loss)
         if self.batch_idx + 1 == self.num_batches:
             self.update_lr()

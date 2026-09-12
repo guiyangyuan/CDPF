@@ -121,6 +121,7 @@ def extend_cfg(cfg):
     cfg.TRAINER.TEXTCONSISTENCY.CONSISTENCY_TEMP = 1.0    # 一致性损失温度
     cfg.TRAINER.TEXTCONSISTENCY.KD_WEIGHT = 0.0       # KD损失权重
     cfg.TRAINER.TEXTCONSISTENCY.KD_TEMP = 2.0         # KD温度
+    cfg.TRAINER.TEXTCONSISTENCY.KD_LOSS_MODE = "full_kl"
     cfg.TRAINER.TEXTCONSISTENCY.ADAPTIVE_CE_WEIGHT = 1.0  # 自适应分支分类损失权重
     cfg.TRAINER.TEXTCONSISTENCY.DIVERSITY_WEIGHT = 0.0    # V2: attention多样性正则化权重
     cfg.TRAINER.TEXTCONSISTENCY.CONTRASTIVE_WEIGHT = 0.0  # FG: 对比学习权重
@@ -163,6 +164,14 @@ def setup_cfg(args):
 
 def main(args):
     cfg = setup_cfg(args)
+    kd_mode_trainers = {
+        "CoOp_TextConsistency_V2_FG",
+        "CoCoOp_TextConsistency_V2_FG",
+        "CoOp_TextConsistency_Ablation",
+    }
+    if (cfg.TRAINER.TEXTCONSISTENCY.KD_LOSS_MODE != "full_kl"
+            and cfg.TRAINER.NAME not in kd_mode_trainers):
+        raise ValueError("A non-default KD loss mode is only supported by validated TextConsistency trainers")
     legacy_trainers = {"CoOp_TextConsistency", "CoOp_TextConsistency_Avg", "CoOp_TextConsistency_V2"}
     if cfg.TRAINER.NAME in legacy_trainers:
         raise ValueError("Legacy trainer is not validated; use CoOp_TextConsistency_V2_FG with AGGREGATION mean/flat/hierarchical")

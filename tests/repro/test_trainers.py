@@ -15,6 +15,7 @@ from clip.model import CLIP
 from dassl.config import get_cfg_default
 from dassl.engine.trainer import TrainerBase
 from train import extend_cfg
+from trainers.textconsistency_common import training_losses
 from trainers.coop_textconsistency_v2_fg import CoOp_TextConsistency_V2_FG
 from trainers.cocoop_textconsistency_v2_fg import CoCoOp_TextConsistency_V2_FG
 from trainers.coop_textconsistency_ablation import CoOp_TextConsistency_Ablation
@@ -31,7 +32,7 @@ def tiny_clip(cfg):
 
 
 def make_trainer(trainer_cls, output, mode='hierarchical', adapter=True, group='full',
-                 view_order='contiguous', order_seed=0):
+                 view_order='contiguous', order_seed=0, kd_mode='full_kl'):
     cfg = get_cfg_default(); extend_cfg(cfg)
     cfg.SEED = 1; cfg.USE_CUDA = False; cfg.DATASET.ROOT = str(output)
     cfg.DATASET.NAME = 'Caltech101'; cfg.DATASET.SUBSAMPLE_CLASSES = 'base'
@@ -41,7 +42,7 @@ def make_trainer(trainer_cls, output, mode='hierarchical', adapter=True, group='
     cfg.OPTIM.MAX_EPOCH = 2; cfg.OPTIM.WARMUP_EPOCH = 0
     tc = cfg.TRAINER.TEXTCONSISTENCY
     tc.N_VIEWS = 5; tc.N_GROUPS = 2; tc.N_CTX = 4
-    tc.KD_WEIGHT = 1.; tc.DEVICE = 'cpu'; tc.AGGREGATION = mode
+    tc.KD_WEIGHT = 1.; tc.KD_LOSS_MODE = kd_mode; tc.DEVICE = 'cpu'; tc.AGGREGATION = mode
     tc.USE_FEATURE_ADAPTER = adapter; tc.ABLATION_GROUP = group
     tc.VIEW_ORDER = view_order; tc.ORDER_SEED = order_seed
     if group == 'baseline': tc.INFERENCE_BRANCH = 'student'
@@ -71,27 +72,105 @@ class TrainerIntegration(unittest.TestCase):
                 model = trainer.model
                 before = model.prompt_learner.ctx.detach().clone()
                 adapter_before = model.view_aggregator.fine_grained_proj[0].weight.detach().clone()
+                frozen_before = {name: value.detach().clone() for name, value in model.image_encoder.named_parameters()}
                 trainer.forward_backward({'img': torch.randn(3, 3, 32, 32), 'label': torch.tensor([0, 1, 2])})
                 self.assertFalse(torch.equal(before, model.prompt_learner.ctx))
                 self.assertFalse(torch.equal(adapter_before, model.view_aggregator.fine_grained_proj[0].weight))
                 self.assertTrue(all(not p.requires_grad and p.grad is None for p in model.image_encoder.parameters()))
                 self.assertTrue(all(not p.requires_grad and p.grad is None for p in model.text_encoder.parameters()))
+                for name, value in model.image_encoder.named_parameters():
+                    torch.testing.assert_close(value, frozen_before[name], rtol=0, atol=0)
 
     def test_save_reload_reproduces_all_prediction_branches(self):
+        for kd_mode in ('full_kl', 'weighted_nckd'):
+            with self.subTest(kd_mode=kd_mode), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                first = make_trainer(CoOp_TextConsistency_V2_FG, root / 'first', kd_mode=kd_mode)
+                images = torch.randn(3, 3, 32, 32)
+                first.forward_backward({'img': images, 'label': torch.tensor([0, 1, 2])})
+                first.save_model(0, root / 'first')
+                second = make_trainer(CoOp_TextConsistency_V2_FG, root / 'second', kd_mode=kd_mode)
+                second.load_model(root / 'first', 1)
+                for branch in ('student', 'teacher', 'ensemble'):
+                    for trainer in (first, second):
+                        trainer.cfg.TRAINER.TEXTCONSISTENCY.INFERENCE_BRANCH = branch
+                        trainer.model.eval()
+                    torch.testing.assert_close(first.model_inference(images), second.model_inference(images), rtol=0, atol=0)
+                self.assertEqual(second.loaded_checkpoints[0]['epoch'], 1)
+
+    def test_weighted_mode_selects_weighted_loss_and_records_complete_identity(self):
+        with tempfile.TemporaryDirectory() as temp:
+            trainer = make_trainer(CoOp_TextConsistency_V2_FG, Path(temp), kd_mode='weighted_nckd')
+            images = torch.randn(3, 3, 32, 32)
+            labels = torch.tensor([0, 1, 2])
+            logits, teacher, _, attention = trainer.model(images, return_attn=True)
+            _, expected = training_losses(logits, teacher, labels, attention, 1., 2., 1., 0.,
+                                          kd_loss_mode='weighted_nckd')
+            teacher_before = trainer.model.view_aggregator.fine_grained_proj[0].weight.detach().clone()
+            result = trainer.forward_backward({'img': images, 'label': labels})
+            self.assertAlmostEqual(result['loss_kd'], expected['loss_kd'].item(), places=6)
+            self.assertFalse(torch.equal(teacher_before,
+                                         trainer.model.view_aggregator.fine_grained_proj[0].weight))
+            self.assertEqual(trainer.run_provenance['loss_identity'], {
+                'format': 1,
+                'mode': 'weighted_nckd',
+                'temperature': 2.0,
+                'effective_weight': 1.0,
+                'active': True,
+                'non_target_weighting': 'teacher_probability_mass_outside_ground_truth',
+            })
+            self.assertEqual(trainer.repro_signature['loss_identity'], trainer.run_provenance['loss_identity'])
+            manifest = json.loads((Path(temp) / 'run_manifest.json').read_text())
+            self.assertEqual(manifest['loss_identity'], trainer.run_provenance['loss_identity'])
+            trainer.test_loader = []
+            trainer.val_loader = None
+            trainer.evaluator = SimpleNamespace(reset=lambda: None, evaluate=lambda: {'accuracy': 0.0})
+            trainer.test(split='test')
+            metrics = json.loads((Path(temp) / 'metrics.json').read_text())
+            self.assertEqual(metrics['loss_identity'], trainer.run_provenance['loss_identity'])
+
+    def test_checkpoint_loss_identity_mismatch_rejects_before_parameter_mutation(self):
+        for mutation in ('change', 'remove'):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                first = make_trainer(CoOp_TextConsistency_V2_FG, root / 'first', kd_mode='weighted_nckd')
+                first.save_model(0, root / 'first')
+                path = root / 'first/textconsistency/model.pth.tar-1'
+                checkpoint = torch.load(path, map_location='cpu', weights_only=False)
+                self.assertIn('loss_identity', checkpoint['run_provenance'])
+                if mutation == 'change':
+                    checkpoint['run_provenance']['loss_identity']['temperature'] = 3.0
+                else:
+                    checkpoint['run_provenance']['loss_identity'].pop('non_target_weighting')
+                torch.save(checkpoint, path)
+                second = make_trainer(CoOp_TextConsistency_V2_FG, root / 'second', kd_mode='weighted_nckd')
+                before = {name: value.detach().clone() for name, value in second.trainable_modules.state_dict().items()}
+                with self.assertRaisesRegex(ValueError, 'loss_identity'):
+                    second.load_model(root / 'first', 1)
+                for name, value in second.trainable_modules.state_dict().items():
+                    torch.testing.assert_close(value, before[name], rtol=0, atol=0)
+
+    def test_checkpoint_rejects_same_shape_different_declared_mode(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            first = make_trainer(CoOp_TextConsistency_V2_FG, root / 'first')
-            images = torch.randn(3, 3, 32, 32)
-            first.forward_backward({'img': images, 'label': torch.tensor([0, 1, 2])})
+            first = make_trainer(CoOp_TextConsistency_V2_FG, root / 'first', kd_mode='full_kl')
             first.save_model(0, root / 'first')
-            second = make_trainer(CoOp_TextConsistency_V2_FG, root / 'second')
-            second.load_model(root / 'first', 1)
-            for branch in ('student', 'teacher', 'ensemble'):
-                for trainer in (first, second):
-                    trainer.cfg.TRAINER.TEXTCONSISTENCY.INFERENCE_BRANCH = branch
-                    trainer.model.eval()
-                torch.testing.assert_close(first.model_inference(images), second.model_inference(images), rtol=0, atol=0)
-            self.assertEqual(second.loaded_checkpoints[0]['epoch'], 1)
+            second = make_trainer(CoOp_TextConsistency_V2_FG, root / 'second', kd_mode='weighted_nckd')
+            with self.assertRaisesRegex(ValueError, 'signature'):
+                second.load_model(root / 'first', 1)
+
+    def test_unknown_mode_is_rejected_before_clip_asset_loading(self):
+        with tempfile.TemporaryDirectory() as temp:
+            cfg = get_cfg_default(); extend_cfg(cfg)
+            cfg.SEED = 1; cfg.USE_CUDA = False; cfg.DATASET.ROOT = temp
+            cfg.TRAINER.NAME = 'CoOp_TextConsistency_V2_FG'
+            cfg.TRAINER.TEXTCONSISTENCY.KD_LOSS_MODE = 'unknown'
+            trainer = CoOp_TextConsistency_V2_FG.__new__(CoOp_TextConsistency_V2_FG)
+            TrainerBase.__init__(trainer); trainer.cfg = cfg
+            with patch('trainers.textconsistency_runtime.load_clip_checkpoint') as loader:
+                with self.assertRaisesRegex(ValueError, 'KD loss mode'):
+                    trainer.check_cfg(cfg)
+                loader.assert_not_called()
 
     def test_checkpoint_rejects_different_grouping_even_when_tensor_shapes_match(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -123,6 +202,14 @@ class TrainerIntegration(unittest.TestCase):
             result = trainer.forward_backward({'img': images, 'label': torch.tensor([0, 1, 2])})
             self.assertEqual(result['loss_adaptive_ce'], 0.)
             self.assertEqual(tuple(trainer.model_inference(images).shape), (3, 3))
+
+    def test_teacherless_baseline_never_records_weighted_kd_as_active(self):
+        with tempfile.TemporaryDirectory() as temp:
+            trainer = make_trainer(CoOp_TextConsistency_Ablation, Path(temp), group='baseline',
+                                   kd_mode='weighted_nckd')
+            self.assertEqual(trainer.run_provenance['loss_identity']['mode'], 'weighted_nckd')
+            self.assertEqual(trainer.run_provenance['loss_identity']['effective_weight'], 0.)
+            self.assertFalse(trainer.run_provenance['loss_identity']['active'])
 
 if __name__ == '__main__':
     unittest.main()

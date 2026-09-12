@@ -97,7 +97,7 @@ def load_complete_checkpoint(trainer, directory, epoch=None):
         current_provenance = getattr(trainer, 'run_provenance', None)
         if current_provenance is not None:
             saved_provenance = checkpoint.get('run_provenance', {})
-            for field in ('code_sha256', 'seed', 'shots', 'effective_losses'):
+            for field in ('code_sha256', 'seed', 'shots', 'effective_losses', 'loss_identity'):
                 if saved_provenance.get(field) != current_provenance[field]:
                     raise ValueError(f'Checkpoint training provenance mismatch: {field}')
             source_dataset, target_dataset = saved_provenance.get('dataset'), current_provenance['dataset']

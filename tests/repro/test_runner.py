@@ -14,13 +14,27 @@ def module(name):
     return result
 
 
-def write_new_run(root, variants=('baseline',), sample_by_variant=None):
+def loss_identity(mode, temperature, effective_weight):
+    return {
+        'format': 1,
+        'mode': mode,
+        'temperature': temperature,
+        'effective_weight': effective_weight,
+        'active': effective_weight > 0,
+        'non_target_weighting': ('teacher_probability_mass_outside_ground_truth'
+                                 if mode == 'weighted_nckd' else 'none_full_distribution_kl'),
+    }
+
+
+def write_new_run(root, variants=('baseline',), sample_by_variant=None, kd_loss_mode=None):
     fixed = {'n_ctx': 4, 'n_views': 20, 'n_groups': 4, 'kd_temp': 2.0,
              'adaptive_ce_weight': 1.0, 'contrastive_weight': 0.0,
              'diversity_weight': 0.0, 'ensemble_alpha': 0.5}
-    (root / 'protocol.json').write_text(json.dumps(
-        {'dataset': 'UCF101', 'seeds': [1], 'epochs': 20, 'variants': list(variants),
-         'shots': 16, 'kd_weight': 1.0, 'code_sha256': 'code', 'fixed_settings': fixed}))
+    protocol = {'dataset': 'UCF101', 'seeds': [1], 'epochs': 20, 'variants': list(variants),
+                'shots': 16, 'kd_weight': 1.0, 'code_sha256': 'code', 'fixed_settings': fixed}
+    if kd_loss_mode is not None:
+        protocol['kd_loss_mode'] = kd_loss_mode
+    (root / 'protocol.json').write_text(json.dumps(protocol))
     for variant in variants:
         aggregation = {'baseline': 'none', 'mean': 'mean', 'flat': 'flat',
                        'flat_adapter': 'flat', 'hierarchical': 'hierarchical',
@@ -37,6 +51,9 @@ def write_new_run(root, variants=('baseline',), sample_by_variant=None):
         manifest = {'dataset': 'UCF101', 'seed': 1, 'shots': 16, 'code_sha256': 'code',
                     'train_samples_sha256': sample, 'effective_losses': {'kd': kd},
                     'model_signature': signature}
+        if kd_loss_mode is not None:
+            manifest['loss_identity'] = loss_identity(kd_loss_mode, 2.0, kd)
+            signature['loss_identity'] = manifest['loss_identity']
         (directory / 'run_manifest.json').write_text(json.dumps(manifest))
         config = {'DATASET': {'NAME': 'UCF101', 'NUM_SHOTS': 16, 'SUBSAMPLE_CLASSES': 'base'},
                   'OPTIM': {'MAX_EPOCH': 20},
@@ -46,6 +63,8 @@ def write_new_run(root, variants=('baseline',), sample_by_variant=None):
                       'ENSEMBLE_ALPHA': 0.5, 'AGGREGATION': 'mean' if variant == 'baseline' else aggregation,
                       'USE_FEATURE_ADAPTER': adapter, 'ABLATION_GROUP': 'baseline' if variant == 'baseline' else 'full',
                       'INFERENCE_BRANCH': 'student' if variant == 'baseline' else 'ensemble'}}}
+        if kd_loss_mode is not None:
+            config['TRAINER']['TEXTCONSISTENCY']['KD_LOSS_MODE'] = kd_loss_mode
         import yaml
         (directory / 'effective_config.yaml').write_text(yaml.safe_dump(config))
         branches = ('student',) if variant == 'baseline' else ('student', 'teacher', 'ensemble')
@@ -68,6 +87,53 @@ class RunnerBehavior(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temp:
             rows = module('summarize').collect(write_new_run(Path(temp)))
             self.assertEqual(rows[0]['variant'], 'baseline')
+
+    def test_weighted_protocol_with_complete_identity_collects(self):
+        with tempfile.TemporaryDirectory() as temp:
+            rows = module('summarize').collect(
+                write_new_run(Path(temp), ('flat',), kd_loss_mode='weighted_nckd'))
+            self.assertEqual(rows[0]['variant'], 'flat')
+
+    def test_default_full_kl_audit_rejects_weighted_identity_in_each_record(self):
+        mutations = ('config', 'manifest', 'metric')
+        for location in mutations:
+            with self.subTest(location=location), tempfile.TemporaryDirectory() as temp:
+                root = write_new_run(Path(temp), ('flat',))
+                directory = root / 'flat/seed1'
+                if location == 'config':
+                    import yaml
+                    path = directory / 'effective_config.yaml'
+                    data = yaml.safe_load(path.read_text())
+                    data['TRAINER']['TEXTCONSISTENCY']['KD_LOSS_MODE'] = 'weighted_nckd'
+                    path.write_text(yaml.safe_dump(data))
+                else:
+                    path = (directory / 'run_manifest.json' if location == 'manifest'
+                            else directory / 'eval_base_student/metrics.json')
+                    data = json.loads(path.read_text())
+                    data['loss_identity'] = loss_identity('weighted_nckd', 2.0, 1.0)
+                    path.write_text(json.dumps(data))
+                with self.assertRaisesRegex(ValueError, 'loss identity|KD loss mode'):
+                    module('summarize').collect(root)
+
+    def test_weighted_audit_rejects_missing_identity_field_in_each_record(self):
+        for location in ('config', 'manifest', 'metric'):
+            with self.subTest(location=location), tempfile.TemporaryDirectory() as temp:
+                root = write_new_run(Path(temp), ('flat',), kd_loss_mode='weighted_nckd')
+                directory = root / 'flat/seed1'
+                if location == 'config':
+                    import yaml
+                    path = directory / 'effective_config.yaml'
+                    data = yaml.safe_load(path.read_text())
+                    data['TRAINER']['TEXTCONSISTENCY'].pop('KD_LOSS_MODE')
+                    path.write_text(yaml.safe_dump(data))
+                else:
+                    path = (directory / 'run_manifest.json' if location == 'manifest'
+                            else directory / 'eval_base_student/metrics.json')
+                    data = json.loads(path.read_text())
+                    data['loss_identity'].pop('non_target_weighting')
+                    path.write_text(json.dumps(data))
+                with self.assertRaisesRegex(ValueError, 'loss identity|KD loss mode'):
+                    module('summarize').collect(root)
 
     def test_new_protocol_rejects_variant_kd_temp_and_eval_config_drift(self):
         import yaml

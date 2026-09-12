@@ -26,6 +26,31 @@ VARIANTS.update({name: ('CoOp_TextConsistency_V2_FG', mode, adapter, 4, None)
                  for name, (mode, adapter) in EXTRA_VARIANTS.items()})
 
 
+def _expected_loss_identity(mode, temperature, effective_weight):
+    weighting = {
+        'full_kl': 'none_full_distribution_kl',
+        'weighted_nckd': 'teacher_probability_mass_outside_ground_truth',
+    }
+    if mode not in weighting:
+        raise ValueError(f'Unknown protocol KD loss mode: {mode}')
+    return {
+        'format': 1,
+        'mode': mode,
+        'temperature': float(temperature),
+        'effective_weight': float(effective_weight),
+        'active': effective_weight > 0,
+        'non_target_weighting': weighting[mode],
+    }
+
+
+def _validate_loss_identity(data, expected, path):
+    identities = (data.get('loss_identity'), data.get('model_signature', {}).get('loss_identity'))
+    if identities == (None, None) and expected['mode'] == 'full_kl':
+        return
+    if any(identity != expected for identity in identities):
+        raise ValueError(f'KD loss identity differs from protocol: {path}')
+
+
 def _read_config(path):
     data = yaml.safe_load(path.read_text())
     if not isinstance(data, dict):
@@ -42,7 +67,7 @@ def _comparable_config(data):
     return data
 
 
-def _validate_config(data, variant, kd, fixed, dataset, shots, epochs, path, order=None):
+def _validate_config(data, variant, kd, kd_mode, fixed, dataset, shots, epochs, path, order=None):
     trainer, aggregation, adapter, _, _ = VARIANTS[variant]
     tc = data.get('TRAINER', {}).get('TEXTCONSISTENCY', {})
     expected = {'N_CTX': fixed['n_ctx'], 'N_VIEWS': fixed['n_views'], 'N_GROUPS': fixed['n_groups'],
@@ -61,6 +86,12 @@ def _validate_config(data, variant, kd, fixed, dataset, shots, epochs, path, ord
         raise ValueError(f'Dataset configuration differs from protocol: {path}')
     if data.get('OPTIM', {}).get('MAX_EPOCH') != epochs:
         raise ValueError(f'Training epoch configuration differs from protocol: {path}')
+    configured_mode = tc.get('KD_LOSS_MODE')
+    if configured_mode is None:
+        if kd_mode != 'full_kl':
+            raise ValueError(f'Missing KD loss mode in effective configuration: {path}')
+    elif configured_mode != kd_mode:
+        raise ValueError(f'Effective configuration KD loss mode differs from protocol: {path}')
     for field, value in expected.items():
         if tc.get(field) != value:
             raise ValueError(f'Effective configuration differs from protocol: {field} in {path}')
@@ -90,7 +121,7 @@ def validate_order_evidence(data, order, groups, views, matched_capacity=False):
 
 
 def read_metric(path, seed, split, branch, epochs, dataset='UCF101', kd_weight=None,
-                code_sha256=None, shots=16, fixed_settings=None):
+                code_sha256=None, shots=16, fixed_settings=None, kd_loss_mode='full_kl'):
     data = json.loads(path.read_text())
     if (data['seed'], data['subsample'], data['branch'], data['dataset']) != (seed, split, branch, dataset):
         raise ValueError(f'Actual evaluation protocol differs from its directory label: {path}')
@@ -102,6 +133,9 @@ def read_metric(path, seed, split, branch, epochs, dataset='UCF101', kd_weight=N
         raise ValueError(f'Wrong checkpoint epoch: {path}')
     if kd_weight is not None and data.get('effective_losses', {}).get('kd') != kd_weight:
         raise ValueError(f'Effective KD weight differs from protocol: {path}')
+    if kd_weight is not None and fixed_settings is not None:
+        expected_identity = _expected_loss_identity(kd_loss_mode, fixed_settings['kd_temp'], kd_weight)
+        _validate_loss_identity(data, expected_identity, path)
     if code_sha256 is not None and data.get('code_sha256') != code_sha256:
         raise ValueError(f'Source hash differs from protocol: {path}')
     if fixed_settings:
@@ -125,6 +159,7 @@ def collect(root):
     shots = protocol.get('shots', 16)
     expected_code = protocol.get('code_sha256')
     fixed_settings = protocol.get('fixed_settings')
+    kd_loss_mode = protocol.get('kd_loss_mode', 'full_kl')
     orders = protocol.get('view_orders')
     structure = protocol.get('structure_study', False)
     if structure and (protocol['variants'] != list(STRUCTURE_VARIANTS) or protocol['seeds'] != [1, 2, 3]
@@ -151,9 +186,11 @@ def collect(root):
                 kd = ((0.0 if variant == 'baseline' else protocol['kd_weight'])
                       if 'kd_weight' in protocol else None)
                 base = read_metric(directory / f'eval_base_{branch}/metrics.json', seed, 'base', branch,
-                                   protocol['epochs'], dataset, kd, expected_code, shots, fixed_settings)
+                                   protocol['epochs'], dataset, kd, expected_code, shots, fixed_settings,
+                                   kd_loss_mode)
                 novel = read_metric(directory / f'eval_new_{branch}/metrics.json', seed, 'new', branch,
-                                    protocol['epochs'], dataset, kd, expected_code, shots, fixed_settings)
+                                    protocol['epochs'], dataset, kd, expected_code, shots, fixed_settings,
+                                    kd_loss_mode)
                 if base['checkpoints'] != novel['checkpoints']:
                     raise ValueError('Base and novel results came from different checkpoints')
                 checkpoint_key = (variant, seed)
@@ -175,6 +212,9 @@ def collect(root):
                         raise ValueError(f'Training manifest identity mismatch: {manifest_path}')
                     if manifest.get('effective_losses', {}).get('kd') != kd:
                         raise ValueError(f'Training manifest KD mismatch: {manifest_path}')
+                    _validate_loss_identity(
+                        manifest, _expected_loss_identity(kd_loss_mode, fixed_settings['kd_temp'], kd),
+                        manifest_path)
                     if manifest.get('model_signature') != base.get('model_signature'):
                         raise ValueError(f'Training/evaluation model signature mismatch: {manifest_path}')
                     signature = manifest['model_signature']
@@ -203,7 +243,7 @@ def collect(root):
                         raise ValueError('The same seed used different training samples across variants')
                     seed_samples[seed] = sample
                     train_config = _read_config(directory / 'effective_config.yaml')
-                    _validate_config(train_config, variant, kd, fixed_settings, dataset, shots,
+                    _validate_config(train_config, variant, kd, kd_loss_mode, fixed_settings, dataset, shots,
                                      protocol['epochs'], directory / 'effective_config.yaml',
                                      orders[variant] if orders is not None else None)
                     if structure:
@@ -242,7 +282,7 @@ def collect(root):
                     for metric, split_name, branch_name in ((base, 'base', branch), (novel, 'new', branch)):
                         eval_path = directory / f'eval_{split_name}_{branch_name}/effective_config.yaml'
                         eval_config = _read_config(eval_path)
-                        _validate_config(eval_config, variant, kd, fixed_settings, dataset, shots,
+                        _validate_config(eval_config, variant, kd, kd_loss_mode, fixed_settings, dataset, shots,
                                          protocol['epochs'], eval_path, orders[variant] if orders is not None else None)
                         if _comparable_config(eval_config) != _comparable_config(train_config):
                             raise ValueError(f'Train/evaluation non-runtime settings differ: {eval_path}')

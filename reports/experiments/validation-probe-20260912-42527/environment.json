@@ -1,0 +1,11 @@
+{
+  "torch": "2.8.0+cu128",
+  "numpy": "2.2.6",
+  "cuda_runtime": "12.8",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "cuda_available": true,
+  "python": "3.12.3",
+  "hostname": "autodl-container-a03b4fb96c-09b042f2",
+  "gpu_query": "NVIDIA GeForce RTX 5090, 32607 MiB, 0 MiB, 0 %, 580.76.05",
+  "memory_max": "96636764160"
+}

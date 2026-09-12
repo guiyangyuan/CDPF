@@ -1,0 +1,54 @@
+{
+  "state": "gpu_validation_results_and_local_backup_verified",
+  "verified_date": "2026-09-12",
+  "archive_sha256": "ef6e9c401f0acf6c4206ba51dac30a2f4b9cd70a730f62fbd6be5b01d82c7386",
+  "archive_bytes": 2439202,
+  "files_verified": 53,
+  "remote_commands_passed": 19,
+  "local_reanalysis_commands_passed": 10,
+  "cases": 9,
+  "models_reused": 27,
+  "validation_records": 1500,
+  "unique_images": 1280,
+  "methods_per_case": 24,
+  "method_seed_rows": 216,
+  "all_inputs_unchanged": true,
+  "all_validation_image_hashes_equal_cpu": true,
+  "all_export_identities_and_tensors_verified": true,
+  "raw_logits_independent_accuracy_check_passed": true,
+  "all_analysis_fields_and_aggregate_match_with_metric_roundoff_tolerance": true,
+  "accuracy_predictions_counts_and_guards_exact_equal_remote": true,
+  "cross_machine_derived_metric_absolute_tolerance": 1e-12,
+  "cross_machine_roundoff_count": 86,
+  "cross_machine_roundoff_max_absolute": 1.1102230246251565e-16,
+  "fixed_guards_independently_recomputed": true,
+  "guards": {
+    "S1+M_vs_C+M_logits": false,
+    "S1+M_vs_C+M_probability": false,
+    "S1+M_vs_S0+M_logits": false,
+    "all_passed": false
+  },
+  "deltas_pp": {
+    "candidate_vs_C_logits_macro_pp": -4.162581699346411,
+    "candidate_vs_C_probability_macro_pp": -4.541122004357298,
+    "candidate_vs_S0_logits_macro_pp": -4.440087145969507,
+    "candidate_vs_C_logits_dataset_pp": {
+      "ucf101": -4.084967320261441,
+      "dtd": -5.902777777777786,
+      "fgvc_aircraft": -2.5
+    },
+    "candidate_vs_C_probability_dataset_pp": {
+      "ucf101": -4.248366013071902,
+      "dtd": -5.208333333333343,
+      "fgvc_aircraft": -4.166666666666664
+    }
+  },
+  "teacher_weights_and_logits_equal_pairs": 9,
+  "gpu_export_run": true,
+  "new_training_runs": 0,
+  "limitations": [
+    "Base validation only, no new Novel/HM scores",
+    "Screening rules are not significance or publication criteria",
+    "No independent confirmation dataset in this batch"
+  ]
+}

@@ -1,0 +1,526 @@
+{
+  "allowed_fields": [
+    "nll",
+    "multiclass_brier",
+    "probability_top1_top2_margin"
+  ],
+  "absolute_tolerance": 1e-12,
+  "differences": [
+    {
+      "path": "dtd-seed1.combinations.S1+T0_logits.multiclass_brier",
+      "local": 0.3843791637247813,
+      "remote": 0.38437916372478126,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "dtd-seed1.combinations.S1+T0_probability.multiclass_brier",
+      "local": 0.38714469204989793,
+      "remote": 0.3871446920498978,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "dtd-seed1.combinations.S1+T1_logits.multiclass_brier",
+      "local": 0.3843791637247813,
+      "remote": 0.38437916372478126,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "dtd-seed1.combinations.S1+T1_probability.multiclass_brier",
+      "local": 0.38714469204989793,
+      "remote": 0.3871446920498978,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "dtd-seed2.combinations.S1+T0_probability.probability_top1_top2_margin",
+      "local": 0.53063561067244,
+      "remote": 0.5306356106724399,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "dtd-seed2.combinations.S1+T1_probability.probability_top1_top2_margin",
+      "local": 0.53063561067244,
+      "remote": 0.5306356106724399,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "dtd-seed3.branches.S1.probability_top1_top2_margin",
+      "local": 0.5661386339722158,
+      "remote": 0.5661386339722159,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "dtd-seed3.combinations.C+T0_logits.multiclass_brier",
+      "local": 0.30749940075386695,
+      "remote": 0.3074994007538669,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "dtd-seed3.combinations.C+T1_logits.multiclass_brier",
+      "local": 0.30749940075386695,
+      "remote": 0.3074994007538669,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "fgvc_aircraft-seed2.combinations.S0+T0_probability.probability_top1_top2_margin",
+      "local": 0.15216273799433175,
+      "remote": 0.15216273799433172,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "fgvc_aircraft-seed2.combinations.S0+T1_probability.probability_top1_top2_margin",
+      "local": 0.15216273799433175,
+      "remote": 0.15216273799433172,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "fgvc_aircraft-seed3.combinations.C+M_probability.probability_top1_top2_margin",
+      "local": 0.14341921626863754,
+      "remote": 0.14341921626863757,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "ucf101-seed1.combinations.S1+M_logits.probability_top1_top2_margin",
+      "local": 0.6454268671294038,
+      "remote": 0.6454268671294039,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "ucf101-seed2.combinations.S0+T0_probability.multiclass_brier",
+      "local": 0.18068022453023794,
+      "remote": 0.1806802245302379,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "ucf101-seed2.combinations.S0+T1_probability.multiclass_brier",
+      "local": 0.18068022453023794,
+      "remote": 0.1806802245302379,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "ucf101-seed2.combinations.S1+T0_probability.multiclass_brier",
+      "local": 0.22615662342290466,
+      "remote": 0.22615662342290468,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "ucf101-seed2.combinations.S1+T1_probability.multiclass_brier",
+      "local": 0.22615662342290466,
+      "remote": 0.22615662342290468,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "ucf101-seed3.combinations.S0+T0_probability.multiclass_brier",
+      "local": 0.16770117019633532,
+      "remote": 0.1677011701963353,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "ucf101-seed3.combinations.S0+T1_probability.multiclass_brier",
+      "local": 0.16770117019633532,
+      "remote": 0.1677011701963353,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.cases[0].combinations.S1+M_logits.probability_top1_top2_margin",
+      "local": 0.6454268671294038,
+      "remote": 0.6454268671294039,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "aggregate.cases[1].combinations.S0+T0_probability.multiclass_brier",
+      "local": 0.18068022453023794,
+      "remote": 0.1806802245302379,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.cases[1].combinations.S0+T1_probability.multiclass_brier",
+      "local": 0.18068022453023794,
+      "remote": 0.1806802245302379,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.cases[1].combinations.S1+T0_probability.multiclass_brier",
+      "local": 0.22615662342290466,
+      "remote": 0.22615662342290468,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.cases[1].combinations.S1+T1_probability.multiclass_brier",
+      "local": 0.22615662342290466,
+      "remote": 0.22615662342290468,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.cases[2].combinations.S0+T0_probability.multiclass_brier",
+      "local": 0.16770117019633532,
+      "remote": 0.1677011701963353,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.cases[2].combinations.S0+T1_probability.multiclass_brier",
+      "local": 0.16770117019633532,
+      "remote": 0.1677011701963353,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.cases[3].combinations.S1+T0_logits.multiclass_brier",
+      "local": 0.3843791637247813,
+      "remote": 0.38437916372478126,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "aggregate.cases[3].combinations.S1+T0_probability.multiclass_brier",
+      "local": 0.38714469204989793,
+      "remote": 0.3871446920498978,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "aggregate.cases[3].combinations.S1+T1_logits.multiclass_brier",
+      "local": 0.3843791637247813,
+      "remote": 0.38437916372478126,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "aggregate.cases[3].combinations.S1+T1_probability.multiclass_brier",
+      "local": 0.38714469204989793,
+      "remote": 0.3871446920498978,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "aggregate.cases[4].combinations.S1+T0_probability.probability_top1_top2_margin",
+      "local": 0.53063561067244,
+      "remote": 0.5306356106724399,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "aggregate.cases[4].combinations.S1+T1_probability.probability_top1_top2_margin",
+      "local": 0.53063561067244,
+      "remote": 0.5306356106724399,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "aggregate.cases[5].branches.S1.probability_top1_top2_margin",
+      "local": 0.5661386339722158,
+      "remote": 0.5661386339722159,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "aggregate.cases[5].combinations.C+T0_logits.multiclass_brier",
+      "local": 0.30749940075386695,
+      "remote": 0.3074994007538669,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "aggregate.cases[5].combinations.C+T1_logits.multiclass_brier",
+      "local": 0.30749940075386695,
+      "remote": 0.3074994007538669,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "aggregate.cases[7].combinations.S0+T0_probability.probability_top1_top2_margin",
+      "local": 0.15216273799433175,
+      "remote": 0.15216273799433172,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.cases[7].combinations.S0+T1_probability.probability_top1_top2_margin",
+      "local": 0.15216273799433175,
+      "remote": 0.15216273799433172,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.cases[8].combinations.C+M_probability.probability_top1_top2_margin",
+      "local": 0.14341921626863754,
+      "remote": 0.14341921626863757,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.ucf101.S0+T0_probability.multiclass_brier.values[1]",
+      "local": 0.18068022453023794,
+      "remote": 0.1806802245302379,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.ucf101.S0+T0_probability.multiclass_brier.values[2]",
+      "local": 0.16770117019633532,
+      "remote": 0.1677011701963353,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.ucf101.S0+T0_probability.multiclass_brier.sample_sd",
+      "local": 0.01991443525318847,
+      "remote": 0.019914435253188485,
+      "absolute_difference": 1.3877787807814457e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.ucf101.S0+T1_probability.multiclass_brier.values[1]",
+      "local": 0.18068022453023794,
+      "remote": 0.1806802245302379,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.ucf101.S0+T1_probability.multiclass_brier.values[2]",
+      "local": 0.16770117019633532,
+      "remote": 0.1677011701963353,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.ucf101.S0+T1_probability.multiclass_brier.sample_sd",
+      "local": 0.01991443525318847,
+      "remote": 0.019914435253188485,
+      "absolute_difference": 1.3877787807814457e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.ucf101.S1+M_logits.probability_top1_top2_margin.values[0]",
+      "local": 0.6454268671294038,
+      "remote": 0.6454268671294039,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.ucf101.S1+M_logits.probability_top1_top2_margin.sample_sd",
+      "local": 0.00930535639954088,
+      "remote": 0.009305356399540934,
+      "absolute_difference": 5.377642775528102e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.ucf101.S1+T0_probability.multiclass_brier.values[1]",
+      "local": 0.22615662342290466,
+      "remote": 0.22615662342290468,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.ucf101.S1+T0_probability.multiclass_brier.mean",
+      "local": 0.2270230362089785,
+      "remote": 0.22702303620897854,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.ucf101.S1+T1_probability.multiclass_brier.values[1]",
+      "local": 0.22615662342290466,
+      "remote": 0.22615662342290468,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.ucf101.S1+T1_probability.multiclass_brier.mean",
+      "local": 0.2270230362089785,
+      "remote": 0.22702303620897854,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1.probability_top1_top2_margin.values[2]",
+      "local": 0.5661386339722158,
+      "remote": 0.5661386339722159,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1.probability_top1_top2_margin.sample_sd",
+      "local": 0.030552930508812828,
+      "remote": 0.030552930508812814,
+      "absolute_difference": 1.3877787807814457e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.C+T0_logits.multiclass_brier.values[2]",
+      "local": 0.30749940075386695,
+      "remote": 0.3074994007538669,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.C+T0_logits.multiclass_brier.sample_sd",
+      "local": 0.016645034160778085,
+      "remote": 0.016645034160778116,
+      "absolute_difference": 3.122502256758253e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.C+T1_logits.multiclass_brier.values[2]",
+      "local": 0.30749940075386695,
+      "remote": 0.3074994007538669,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.C+T1_logits.multiclass_brier.sample_sd",
+      "local": 0.016645034160778085,
+      "remote": 0.016645034160778116,
+      "absolute_difference": 3.122502256758253e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T0_logits.multiclass_brier.values[0]",
+      "local": 0.3843791637247813,
+      "remote": 0.38437916372478126,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T0_logits.multiclass_brier.sample_sd",
+      "local": 0.014785808759719589,
+      "remote": 0.014785808759719559,
+      "absolute_difference": 2.949029909160572e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T0_probability.multiclass_brier.values[0]",
+      "local": 0.38714469204989793,
+      "remote": 0.3871446920498978,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T0_probability.multiclass_brier.mean",
+      "local": 0.3709481863319774,
+      "remote": 0.37094818633197735,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T0_probability.multiclass_brier.sample_sd",
+      "local": 0.01460657758201377,
+      "remote": 0.014606577582013707,
+      "absolute_difference": 6.245004513516506e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T0_probability.probability_top1_top2_margin.values[1]",
+      "local": 0.53063561067244,
+      "remote": 0.5306356106724399,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T0_probability.probability_top1_top2_margin.sample_sd",
+      "local": 0.013189090982760263,
+      "remote": 0.013189090982760325,
+      "absolute_difference": 6.245004513516506e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T1_logits.multiclass_brier.values[0]",
+      "local": 0.3843791637247813,
+      "remote": 0.38437916372478126,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T1_logits.multiclass_brier.sample_sd",
+      "local": 0.014785808759719589,
+      "remote": 0.014785808759719559,
+      "absolute_difference": 2.949029909160572e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T1_probability.multiclass_brier.values[0]",
+      "local": 0.38714469204989793,
+      "remote": 0.3871446920498978,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T1_probability.multiclass_brier.mean",
+      "local": 0.3709481863319774,
+      "remote": 0.37094818633197735,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T1_probability.multiclass_brier.sample_sd",
+      "local": 0.01460657758201377,
+      "remote": 0.014606577582013707,
+      "absolute_difference": 6.245004513516506e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T1_probability.probability_top1_top2_margin.values[1]",
+      "local": 0.53063561067244,
+      "remote": 0.5306356106724399,
+      "absolute_difference": 1.1102230246251565e-16
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.dtd.S1+T1_probability.probability_top1_top2_margin.sample_sd",
+      "local": 0.013189090982760263,
+      "remote": 0.013189090982760325,
+      "absolute_difference": 6.245004513516506e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.fgvc_aircraft.C+M_probability.probability_top1_top2_margin.values[2]",
+      "local": 0.14341921626863754,
+      "remote": 0.14341921626863757,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.fgvc_aircraft.C+M_probability.probability_top1_top2_margin.sample_sd",
+      "local": 0.008480022605680046,
+      "remote": 0.008480022605680041,
+      "absolute_difference": 5.204170427930421e-18
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.fgvc_aircraft.S0+T0_probability.probability_top1_top2_margin.values[1]",
+      "local": 0.15216273799433175,
+      "remote": 0.15216273799433172,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.fgvc_aircraft.S0+T0_probability.probability_top1_top2_margin.mean",
+      "local": 0.14407827637660298,
+      "remote": 0.14407827637660295,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.fgvc_aircraft.S0+T0_probability.probability_top1_top2_margin.sample_sd",
+      "local": 0.007235100924548321,
+      "remote": 0.0072351009245483055,
+      "absolute_difference": 1.5612511283791264e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.fgvc_aircraft.S0+T1_probability.probability_top1_top2_margin.values[1]",
+      "local": 0.15216273799433175,
+      "remote": 0.15216273799433172,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.fgvc_aircraft.S0+T1_probability.probability_top1_top2_margin.mean",
+      "local": 0.14407827637660298,
+      "remote": 0.14407827637660295,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_dataset_metrics.fgvc_aircraft.S0+T1_probability.probability_top1_top2_margin.sample_sd",
+      "local": 0.007235100924548321,
+      "remote": 0.0072351009245483055,
+      "absolute_difference": 1.5612511283791264e-17
+    },
+    {
+      "path": "aggregate.complete_macro_metrics.S0+T0_probability.probability_top1_top2_margin.values[2]",
+      "local": 0.14407827637660298,
+      "remote": 0.14407827637660295,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_macro_metrics.S0+T1_probability.probability_top1_top2_margin.values[2]",
+      "local": 0.14407827637660298,
+      "remote": 0.14407827637660295,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_macro_metrics.S1+T0_probability.multiclass_brier.values[0]",
+      "local": 0.2270230362089785,
+      "remote": 0.22702303620897854,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_macro_metrics.S1+T0_probability.multiclass_brier.values[1]",
+      "local": 0.3709481863319774,
+      "remote": 0.37094818633197735,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "aggregate.complete_macro_metrics.S1+T0_probability.multiclass_brier.mean",
+      "local": 0.4485246998962448,
+      "remote": 0.44852469989624477,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "aggregate.complete_macro_metrics.S1+T1_probability.multiclass_brier.values[0]",
+      "local": 0.2270230362089785,
+      "remote": 0.22702303620897854,
+      "absolute_difference": 2.7755575615628914e-17
+    },
+    {
+      "path": "aggregate.complete_macro_metrics.S1+T1_probability.multiclass_brier.values[1]",
+      "local": 0.3709481863319774,
+      "remote": 0.37094818633197735,
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "path": "aggregate.complete_macro_metrics.S1+T1_probability.multiclass_brier.mean",
+      "local": 0.4485246998962448,
+      "remote": 0.44852469989624477,
+      "absolute_difference": 5.551115123125783e-17
+    }
+  ]
+}

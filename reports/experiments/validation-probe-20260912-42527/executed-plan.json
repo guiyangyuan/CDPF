@@ -1,0 +1,242 @@
+{
+  "state": "not_executed",
+  "new_training_runs": 0,
+  "cwd": "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd",
+  "pythonpath": "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd:/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/Dassl.pytorch",
+  "cases": [
+    {
+      "dataset": "ucf101",
+      "seed": 1,
+      "export": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/ucf101-seed1/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/ucf101-seed1"
+      ],
+      "analyze": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/ucf101-seed1/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/ucf101-seed1"
+      ]
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 2,
+      "export": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/ucf101-seed2/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/ucf101-seed2"
+      ],
+      "analyze": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/ucf101-seed2/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/ucf101-seed2"
+      ]
+    },
+    {
+      "dataset": "ucf101",
+      "seed": 3,
+      "export": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/ucf101-seed3/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/ucf101-seed3"
+      ],
+      "analyze": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/ucf101-seed3/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/ucf101-seed3"
+      ]
+    },
+    {
+      "dataset": "dtd",
+      "seed": 1,
+      "export": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/dtd-seed1/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/dtd-seed1"
+      ],
+      "analyze": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/dtd-seed1/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/dtd-seed1"
+      ]
+    },
+    {
+      "dataset": "dtd",
+      "seed": 2,
+      "export": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/dtd-seed2/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/dtd-seed2"
+      ],
+      "analyze": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/dtd-seed2/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/dtd-seed2"
+      ]
+    },
+    {
+      "dataset": "dtd",
+      "seed": 3,
+      "export": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/dtd-seed3/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/dtd-seed3"
+      ],
+      "analyze": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/dtd-seed3/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/dtd-seed3"
+      ]
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "export": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/fgvc_aircraft-seed1/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/fgvc_aircraft-seed1"
+      ],
+      "analyze": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/fgvc_aircraft-seed1/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/fgvc_aircraft-seed1"
+      ]
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "export": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-cache/prepared/fgvc_aircraft-seed2/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/fgvc_aircraft-seed2"
+      ],
+      "analyze": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/fgvc_aircraft-seed2/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/fgvc_aircraft-seed2"
+      ]
+    },
+    {
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "export": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-final/prepared/fgvc_aircraft-seed3/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/fgvc_aircraft-seed3"
+      ],
+      "analyze": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/fgvc_aircraft-seed3/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/fgvc_aircraft-seed3"
+      ]
+    }
+  ],
+  "aggregate": [
+    "/root/autodl-tmp/textconsistency/.venv/bin/python",
+    "-B",
+    "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+    "aggregate",
+    "--analyses",
+    "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/ucf101-seed1/analysis.json",
+    "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/ucf101-seed2/analysis.json",
+    "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/ucf101-seed3/analysis.json",
+    "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/dtd-seed1/analysis.json",
+    "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/dtd-seed2/analysis.json",
+    "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/dtd-seed3/analysis.json",
+    "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/fgvc_aircraft-seed1/analysis.json",
+    "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/fgvc_aircraft-seed2/analysis.json",
+    "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/fgvc_aircraft-seed3/analysis.json",
+    "--output-dir",
+    "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/aggregate"
+  ]
+}

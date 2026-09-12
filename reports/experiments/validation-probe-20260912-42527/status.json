@@ -1,0 +1,435 @@
+{
+  "state": "gpu_execution_and_audit_passed_local_backup_pending",
+  "started_at": "2026-09-12T10:04:44.665018+00:00",
+  "pid": 1502,
+  "code_commit": "de57efd7452e4feab3fd361ef9acac27a6dee4ef",
+  "tools_sha256": {
+    "validation_analysis.py": "2f81606db887c84b73038c6220afd2fb1295198286cbc665d716bad58f34d92b",
+    "validation_probe.py": "d852e909d6b970136fe234f25c2a15ad4622af1e22ebf1cf0abeae584b7c5b57"
+  },
+  "runner_sha256": "afbb1a15eb6866df6b8c63dd8c3decd9e113962a55bdc2fd70122d903f8eba92",
+  "expected_preparation_sha256": {
+    "ready.json": "cd035e02efc2614a6b936531fad8f2c4e3b7d26e5373e72a35e0dfd73103342c",
+    "gpu-plan.json": "994f42245d351fdb20a328f17c2ba3a2d56243268e6ebb83c808c8f9a371b94b"
+  },
+  "records": [
+    {
+      "name": "ucf101-seed1-export",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/ucf101-seed1/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/ucf101-seed1"
+      ],
+      "started_at": "2026-09-12T10:04:49.340938+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/ucf101-seed1-export.log",
+      "pid": 1515,
+      "returncode": 0,
+      "seconds": 11.832673769444227,
+      "ended_at": "2026-09-12T10:05:01.173921+00:00",
+      "log_sha256": "741147b5f502351b4e4b8ed0e724d8d0baebadc614092462942cf9417f560c33"
+    },
+    {
+      "name": "ucf101-seed1-analyze",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/ucf101-seed1/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/ucf101-seed1"
+      ],
+      "started_at": "2026-09-12T10:05:01.176135+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/ucf101-seed1-analyze.log",
+      "pid": 1529,
+      "returncode": 0,
+      "seconds": 1.3854615837335587,
+      "ended_at": "2026-09-12T10:05:02.562083+00:00",
+      "log_sha256": "882a759b123701d772c9dbfc27bf0621a9d507ecf941afc135bea69d8c17b323"
+    },
+    {
+      "name": "ucf101-seed2-export",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/ucf101-seed2/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/ucf101-seed2"
+      ],
+      "started_at": "2026-09-12T10:05:02.563114+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/ucf101-seed2-export.log",
+      "pid": 1530,
+      "returncode": 0,
+      "seconds": 11.669592712074518,
+      "ended_at": "2026-09-12T10:05:14.233074+00:00",
+      "log_sha256": "d4c8c3ec435c5f8263d4df5bc03e52876eb761f9f1d927c6a98a3dbf103deeaf"
+    },
+    {
+      "name": "ucf101-seed2-analyze",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/ucf101-seed2/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/ucf101-seed2"
+      ],
+      "started_at": "2026-09-12T10:05:14.235471+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/ucf101-seed2-analyze.log",
+      "pid": 1545,
+      "returncode": 0,
+      "seconds": 1.3504987433552742,
+      "ended_at": "2026-09-12T10:05:15.586591+00:00",
+      "log_sha256": "53b62a02e635bd05c95817c44cf01f2aecffca970d17f345d0ed2708fc715540"
+    },
+    {
+      "name": "ucf101-seed3-export",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/ucf101-seed3/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/ucf101-seed3"
+      ],
+      "started_at": "2026-09-12T10:05:15.587993+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/ucf101-seed3-export.log",
+      "pid": 1548,
+      "returncode": 0,
+      "seconds": 11.546084068715572,
+      "ended_at": "2026-09-12T10:05:27.134650+00:00",
+      "log_sha256": "21ab89916834c969c7156ea9a55c545617ad134532fda79a2f35bbe555bf750c"
+    },
+    {
+      "name": "ucf101-seed3-analyze",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/ucf101-seed3/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/ucf101-seed3"
+      ],
+      "started_at": "2026-09-12T10:05:27.137112+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/ucf101-seed3-analyze.log",
+      "pid": 1560,
+      "returncode": 0,
+      "seconds": 1.3473820611834526,
+      "ended_at": "2026-09-12T10:05:28.485159+00:00",
+      "log_sha256": "20e66630df26229a195de6c177ab69467070047c7f57f444ce39787f5883565c"
+    },
+    {
+      "name": "dtd-seed1-export",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/dtd-seed1/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/dtd-seed1"
+      ],
+      "started_at": "2026-09-12T10:05:28.486611+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/dtd-seed1-export.log",
+      "pid": 1561,
+      "returncode": 0,
+      "seconds": 10.069291099905968,
+      "ended_at": "2026-09-12T10:05:38.556518+00:00",
+      "log_sha256": "5d0d0a932f1d70263ccd7c04ffdaa3113903116bfcf96d3efa14df8043ed4239"
+    },
+    {
+      "name": "dtd-seed1-analyze",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/dtd-seed1/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/dtd-seed1"
+      ],
+      "started_at": "2026-09-12T10:05:38.558761+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/dtd-seed1-analyze.log",
+      "pid": 1573,
+      "returncode": 0,
+      "seconds": 1.3377953916788101,
+      "ended_at": "2026-09-12T10:05:39.897286+00:00",
+      "log_sha256": "116fe7271e83509b92d2e3e87f5759440088301e4efe4a2390f294a666516749"
+    },
+    {
+      "name": "dtd-seed2-export",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/dtd-seed2/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/dtd-seed2"
+      ],
+      "started_at": "2026-09-12T10:05:39.898424+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/dtd-seed2-export.log",
+      "pid": 1574,
+      "returncode": 0,
+      "seconds": 10.024973064661026,
+      "ended_at": "2026-09-12T10:05:49.924126+00:00",
+      "log_sha256": "7e352162bf92eddeaf1377e55d1d8dfd28d44e4a2b364804702078f6a86b4324"
+    },
+    {
+      "name": "dtd-seed2-analyze",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/dtd-seed2/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/dtd-seed2"
+      ],
+      "started_at": "2026-09-12T10:05:49.926423+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/dtd-seed2-analyze.log",
+      "pid": 1586,
+      "returncode": 0,
+      "seconds": 1.344264816492796,
+      "ended_at": "2026-09-12T10:05:51.271505+00:00",
+      "log_sha256": "074e1dba4984e26f77a11270b1ad0849146f864913790b2e9c1d7f1ef8b488e6"
+    },
+    {
+      "name": "dtd-seed3-export",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/dtd-seed3/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/dtd-seed3"
+      ],
+      "started_at": "2026-09-12T10:05:51.272964+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/dtd-seed3-export.log",
+      "pid": 1599,
+      "returncode": 0,
+      "seconds": 10.21153387799859,
+      "ended_at": "2026-09-12T10:06:01.485674+00:00",
+      "log_sha256": "c75c9a63a0d94f7415a5e3890a73c6fd584d4c8f23c8f05d366cea977e316dcf"
+    },
+    {
+      "name": "dtd-seed3-analyze",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/dtd-seed3/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/dtd-seed3"
+      ],
+      "started_at": "2026-09-12T10:06:01.487906+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/dtd-seed3-analyze.log",
+      "pid": 1611,
+      "returncode": 0,
+      "seconds": 1.374995417892933,
+      "ended_at": "2026-09-12T10:06:02.863723+00:00",
+      "log_sha256": "c937e32126c953c4939bec2c1449f143864963078c10789b73dd1e905451d046"
+    },
+    {
+      "name": "fgvc_aircraft-seed1-export",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-v2/prepared/fgvc_aircraft-seed1/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/fgvc_aircraft-seed1"
+      ],
+      "started_at": "2026-09-12T10:06:02.865248+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/fgvc_aircraft-seed1-export.log",
+      "pid": 1612,
+      "returncode": 0,
+      "seconds": 18.063496101647615,
+      "ended_at": "2026-09-12T10:06:20.929578+00:00",
+      "log_sha256": "8c031959bd5426f92b685ee818a12416c7eca2af8f61643891e033319bbce83f"
+    },
+    {
+      "name": "fgvc_aircraft-seed1-analyze",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/fgvc_aircraft-seed1/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/fgvc_aircraft-seed1"
+      ],
+      "started_at": "2026-09-12T10:06:20.932274+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/fgvc_aircraft-seed1-analyze.log",
+      "pid": 1628,
+      "returncode": 0,
+      "seconds": 1.379094809293747,
+      "ended_at": "2026-09-12T10:06:22.312295+00:00",
+      "log_sha256": "6bc50639e8b5529f2060c86f0bfb55e13a9a70f3556382b803bf57ce68c26ba4"
+    },
+    {
+      "name": "fgvc_aircraft-seed2-export",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-cache/prepared/fgvc_aircraft-seed2/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/fgvc_aircraft-seed2"
+      ],
+      "started_at": "2026-09-12T10:06:22.314035+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/fgvc_aircraft-seed2-export.log",
+      "pid": 1629,
+      "returncode": 0,
+      "seconds": 18.184112690389156,
+      "ended_at": "2026-09-12T10:06:40.499033+00:00",
+      "log_sha256": "ef29d5820745986115a5c37d481ecea2e639eb84b68100607d61ed74063c2dca"
+    },
+    {
+      "name": "fgvc_aircraft-seed2-analyze",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/fgvc_aircraft-seed2/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/fgvc_aircraft-seed2"
+      ],
+      "started_at": "2026-09-12T10:06:40.501810+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/fgvc_aircraft-seed2-analyze.log",
+      "pid": 1650,
+      "returncode": 0,
+      "seconds": 1.3902110531926155,
+      "ended_at": "2026-09-12T10:06:41.893069+00:00",
+      "log_sha256": "cd0e7ec8e58fc669900d8bb5c22a82e00296fcfab5a306c2096a974e3d70e315"
+    },
+    {
+      "name": "fgvc_aircraft-seed3-export",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_probe.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/validation-prep-20260911-42527-final/prepared/fgvc_aircraft-seed3/prepared.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/fgvc_aircraft-seed3"
+      ],
+      "started_at": "2026-09-12T10:06:41.894850+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/fgvc_aircraft-seed3-export.log",
+      "pid": 1651,
+      "returncode": 0,
+      "seconds": 17.744769629091024,
+      "ended_at": "2026-09-12T10:06:59.640556+00:00",
+      "log_sha256": "319aee5a623a0870b6bd019d296c2081ec2531d5113c9e86d2d9c19e770ca76e"
+    },
+    {
+      "name": "fgvc_aircraft-seed3-analyze",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "analyze",
+        "--export",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/exports/fgvc_aircraft-seed3/export.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/fgvc_aircraft-seed3"
+      ],
+      "started_at": "2026-09-12T10:06:59.643613+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/fgvc_aircraft-seed3-analyze.log",
+      "pid": 1670,
+      "returncode": 0,
+      "seconds": 1.3548632450401783,
+      "ended_at": "2026-09-12T10:07:00.999495+00:00",
+      "log_sha256": "ed38854e67b930e8e2e367d34bf9c85de1a9cfca0fd92256321cbe54c664af04"
+    },
+    {
+      "name": "aggregate",
+      "command": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-B",
+        "/root/autodl-tmp/textconsistency/releases/validation-ops-20260911-de57efd/scripts/repro/validation_analysis.py",
+        "aggregate",
+        "--analyses",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/ucf101-seed1/analysis.json",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/ucf101-seed2/analysis.json",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/ucf101-seed3/analysis.json",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/dtd-seed1/analysis.json",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/dtd-seed2/analysis.json",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/dtd-seed3/analysis.json",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/fgvc_aircraft-seed1/analysis.json",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/fgvc_aircraft-seed2/analysis.json",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/analysis/fgvc_aircraft-seed3/analysis.json",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/aggregate"
+      ],
+      "started_at": "2026-09-12T10:07:01.001343+00:00",
+      "log": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1/logs/aggregate.log",
+      "pid": 1673,
+      "returncode": 0,
+      "seconds": 1.4640268571674824,
+      "ended_at": "2026-09-12T10:07:02.466459+00:00",
+      "log_sha256": "9fb3553aabbca4732aa815331ef5c49314eb7b1b66bdcceb0429680a3249ad73"
+    }
+  ],
+  "active": null,
+  "new_training_runs": 0,
+  "updated_at": "2026-09-12T10:07:05.261557+00:00",
+  "ended_at": "2026-09-12T10:07:05.207712+00:00",
+  "wall_seconds": 140.54229628667235,
+  "inputs_unchanged": true,
+  "validation_image_hashes_unchanged": true,
+  "fixed_candidate": "S1+M_logits",
+  "guards": {
+    "S1+M_vs_C+M_logits": false,
+    "S1+M_vs_C+M_probability": false,
+    "S1+M_vs_S0+M_logits": false,
+    "all_passed": false
+  },
+  "deltas_pp": {
+    "candidate_vs_C_logits_macro_pp": -4.162581699346411,
+    "candidate_vs_C_probability_macro_pp": -4.541122004357298,
+    "candidate_vs_S0_logits_macro_pp": -4.440087145969507,
+    "candidate_vs_C_logits_dataset_pp": {
+      "ucf101": -4.084967320261441,
+      "dtd": -5.902777777777786,
+      "fgvc_aircraft": -2.5
+    },
+    "candidate_vs_C_probability_dataset_pp": {
+      "ucf101": -4.248366013071902,
+      "dtd": -5.208333333333343,
+      "fgvc_aircraft": -4.166666666666664
+    }
+  },
+  "gpu_final": "NVIDIA GeForce RTX 5090, 32607 MiB, 0 MiB, 0 %, 580.76.05"
+}

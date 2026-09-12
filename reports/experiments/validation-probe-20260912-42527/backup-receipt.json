@@ -1,0 +1,274 @@
+{
+  "archive": "/root/autodl-tmp/textconsistency/backups/validation-gpu-20260912-42527.tar.gz",
+  "sha256": "ef6e9c401f0acf6c4206ba51dac30a2f4b9cd70a730f62fbd6be5b01d82c7386",
+  "bytes": 2439202,
+  "files": [
+    {
+      "path": "validation-probe-20260911-v1/aggregate/aggregate.json",
+      "bytes": 163812,
+      "sha256": "9fb3553aabbca4732aa815331ef5c49314eb7b1b66bdcceb0429680a3249ad73"
+    },
+    {
+      "path": "validation-probe-20260911-v1/analysis/dtd-seed1/analysis.json",
+      "bytes": 41303,
+      "sha256": "116fe7271e83509b92d2e3e87f5759440088301e4efe4a2390f294a666516749"
+    },
+    {
+      "path": "validation-probe-20260911-v1/analysis/dtd-seed2/analysis.json",
+      "bytes": 41275,
+      "sha256": "074e1dba4984e26f77a11270b1ad0849146f864913790b2e9c1d7f1ef8b488e6"
+    },
+    {
+      "path": "validation-probe-20260911-v1/analysis/dtd-seed3/analysis.json",
+      "bytes": 41279,
+      "sha256": "c937e32126c953c4939bec2c1449f143864963078c10789b73dd1e905451d046"
+    },
+    {
+      "path": "validation-probe-20260911-v1/analysis/fgvc_aircraft-seed1/analysis.json",
+      "bytes": 71514,
+      "sha256": "6bc50639e8b5529f2060c86f0bfb55e13a9a70f3556382b803bf57ce68c26ba4"
+    },
+    {
+      "path": "validation-probe-20260911-v1/analysis/fgvc_aircraft-seed2/analysis.json",
+      "bytes": 71316,
+      "sha256": "cd0e7ec8e58fc669900d8bb5c22a82e00296fcfab5a306c2096a974e3d70e315"
+    },
+    {
+      "path": "validation-probe-20260911-v1/analysis/fgvc_aircraft-seed3/analysis.json",
+      "bytes": 71289,
+      "sha256": "ed38854e67b930e8e2e367d34bf9c85de1a9cfca0fd92256321cbe54c664af04"
+    },
+    {
+      "path": "validation-probe-20260911-v1/analysis/ucf101-seed1/analysis.json",
+      "bytes": 79163,
+      "sha256": "882a759b123701d772c9dbfc27bf0621a9d507ecf941afc135bea69d8c17b323"
+    },
+    {
+      "path": "validation-probe-20260911-v1/analysis/ucf101-seed2/analysis.json",
+      "bytes": 79296,
+      "sha256": "53b62a02e635bd05c95817c44cf01f2aecffca970d17f345d0ed2708fc715540"
+    },
+    {
+      "path": "validation-probe-20260911-v1/analysis/ucf101-seed3/analysis.json",
+      "bytes": 79271,
+      "sha256": "20e66630df26229a195de6c177ab69467070047c7f57f444ce39787f5883565c"
+    },
+    {
+      "path": "validation-probe-20260911-v1/environment.json",
+      "bytes": 320,
+      "sha256": "8cd43291149ad2d845f827fd7b87f17b655b29ebf3febfab91c5b146f6555b22"
+    },
+    {
+      "path": "validation-probe-20260911-v1/executed-plan.json",
+      "bytes": 11311,
+      "sha256": "994f42245d351fdb20a328f17c2ba3a2d56243268e6ebb83c808c8f9a371b94b"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/dtd-seed1/export.json",
+      "bytes": 23388,
+      "sha256": "a298b41a7d306bcf23a8ad12e8095ace8254d551cd8eadd843f2b7dbe246f2b1"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/dtd-seed1/logits.npz",
+      "bytes": 57742,
+      "sha256": "fb6637e7dfc21356dafe645b21d730502e2bef5aa432d60feac32634963cf2f3"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/dtd-seed2/export.json",
+      "bytes": 23388,
+      "sha256": "8d197caf93a3d083f61ca9d9d31754a6374aa7d662360b65509e286625f8dfe7"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/dtd-seed2/logits.npz",
+      "bytes": 57742,
+      "sha256": "2d9f4f3cc83c6d53fbc585df296e6a7bdff171ba84af9a970b1ef42bfab685a7"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/dtd-seed3/export.json",
+      "bytes": 23388,
+      "sha256": "9dacdfd25bf04db42e55ab9738f4ae7bd118068e730965bfadb44bd3d495153e"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/dtd-seed3/logits.npz",
+      "bytes": 57742,
+      "sha256": "e11ca8e6d70ff5e0dbd72ed4e98afacf86d18a68cde4dd4ba191e7103bec24b8"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/fgvc_aircraft-seed1/export.json",
+      "bytes": 37363,
+      "sha256": "78ba21847802d51aeb437e9b1b830a09bb4afe2dd378ae4f55a4a497bd54e132"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/fgvc_aircraft-seed1/logits.npz",
+      "bytes": 243278,
+      "sha256": "ed3392861c6ced2e91c5645c8de72a8ef0659597a259db69bff31f43688ce8d5"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/fgvc_aircraft-seed2/export.json",
+      "bytes": 37369,
+      "sha256": "67d5b3ac3f61775519625b605693d5d444c2cdce8b51e45739e6b2cfa4f26e0c"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/fgvc_aircraft-seed2/logits.npz",
+      "bytes": 243278,
+      "sha256": "9ee50562a59aad0b8382590cd4352ed559c9c72d733fb62a3380e812e8cd2b5b"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/fgvc_aircraft-seed3/export.json",
+      "bytes": 37369,
+      "sha256": "878f36880bdd6f10e135e5f5e2d84f72fec257e6494552cbb82c6a9846e4b40e"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/fgvc_aircraft-seed3/logits.npz",
+      "bytes": 243278,
+      "sha256": "f475ed43134c30c3daf0c9c15688db45b9e63c60f161cf7f6dd71e7cdcf1343a"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/ucf101-seed1/export.json",
+      "bytes": 45410,
+      "sha256": "8bba9bbd1231705844c038ec9d35aa8933700b45d8f88c975b38557c2a7d50b2"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/ucf101-seed1/logits.npz",
+      "bytes": 253006,
+      "sha256": "bc400974c03f7b2a584571bc8c254e74b91c1c1be1b46792ee0d6a181b7ca5ab"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/ucf101-seed2/export.json",
+      "bytes": 45410,
+      "sha256": "287d20bab202e0a22592993990fed1fab149776c6f776cf233c7ec84151be293"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/ucf101-seed2/logits.npz",
+      "bytes": 253006,
+      "sha256": "ab5d4efdd5270954d7140e3d0fc51b97d4149bcc76f85204d17f1b47436e4f2b"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/ucf101-seed3/export.json",
+      "bytes": 45410,
+      "sha256": "63a8adf6dab94d2869dd783ffdaba525ece92f0db612e39e2b46bf84d6207df1"
+    },
+    {
+      "path": "validation-probe-20260911-v1/exports/ucf101-seed3/logits.npz",
+      "bytes": 253006,
+      "sha256": "29443c13136126f35b5737d314258db2385edfb8c0d155f5de2bc49ddc4fdbd5"
+    },
+    {
+      "path": "validation-probe-20260911-v1/inputs-after.json",
+      "bytes": 4320276,
+      "sha256": "5a3bcc01917992ee2020559fd595ddf3bd4d1bf979176d152d8940c66631a2f9"
+    },
+    {
+      "path": "validation-probe-20260911-v1/inputs-before.json",
+      "bytes": 4320276,
+      "sha256": "5a3bcc01917992ee2020559fd595ddf3bd4d1bf979176d152d8940c66631a2f9"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/aggregate.log",
+      "bytes": 163812,
+      "sha256": "9fb3553aabbca4732aa815331ef5c49314eb7b1b66bdcceb0429680a3249ad73"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/dtd-seed1-analyze.log",
+      "bytes": 41303,
+      "sha256": "116fe7271e83509b92d2e3e87f5759440088301e4efe4a2390f294a666516749"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/dtd-seed1-export.log",
+      "bytes": 24814,
+      "sha256": "5d0d0a932f1d70263ccd7c04ffdaa3113903116bfcf96d3efa14df8043ed4239"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/dtd-seed2-analyze.log",
+      "bytes": 41275,
+      "sha256": "074e1dba4984e26f77a11270b1ad0849146f864913790b2e9c1d7f1ef8b488e6"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/dtd-seed2-export.log",
+      "bytes": 24814,
+      "sha256": "7e352162bf92eddeaf1377e55d1d8dfd28d44e4a2b364804702078f6a86b4324"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/dtd-seed3-analyze.log",
+      "bytes": 41279,
+      "sha256": "c937e32126c953c4939bec2c1449f143864963078c10789b73dd1e905451d046"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/dtd-seed3-export.log",
+      "bytes": 24814,
+      "sha256": "c75c9a63a0d94f7415a5e3890a73c6fd584d4c8f23c8f05d366cea977e316dcf"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/fgvc_aircraft-seed1-analyze.log",
+      "bytes": 71514,
+      "sha256": "6bc50639e8b5529f2060c86f0bfb55e13a9a70f3556382b803bf57ce68c26ba4"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/fgvc_aircraft-seed1-export.log",
+      "bytes": 39462,
+      "sha256": "8c031959bd5426f92b685ee818a12416c7eca2af8f61643891e033319bbce83f"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/fgvc_aircraft-seed2-analyze.log",
+      "bytes": 71316,
+      "sha256": "cd0e7ec8e58fc669900d8bb5c22a82e00296fcfab5a306c2096a974e3d70e315"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/fgvc_aircraft-seed2-export.log",
+      "bytes": 39468,
+      "sha256": "ef29d5820745986115a5c37d481ecea2e639eb84b68100607d61ed74063c2dca"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/fgvc_aircraft-seed3-analyze.log",
+      "bytes": 71289,
+      "sha256": "ed38854e67b930e8e2e367d34bf9c85de1a9cfca0fd92256321cbe54c664af04"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/fgvc_aircraft-seed3-export.log",
+      "bytes": 39468,
+      "sha256": "319aee5a623a0870b6bd019d296c2081ec2531d5113c9e86d2d9c19e770ca76e"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/ucf101-seed1-analyze.log",
+      "bytes": 79163,
+      "sha256": "882a759b123701d772c9dbfc27bf0621a9d507ecf941afc135bea69d8c17b323"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/ucf101-seed1-export.log",
+      "bytes": 48134,
+      "sha256": "741147b5f502351b4e4b8ed0e724d8d0baebadc614092462942cf9417f560c33"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/ucf101-seed2-analyze.log",
+      "bytes": 79296,
+      "sha256": "53b62a02e635bd05c95817c44cf01f2aecffca970d17f345d0ed2708fc715540"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/ucf101-seed2-export.log",
+      "bytes": 48134,
+      "sha256": "d4c8c3ec435c5f8263d4df5bc03e52876eb761f9f1d927c6a98a3dbf103deeaf"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/ucf101-seed3-analyze.log",
+      "bytes": 79271,
+      "sha256": "20e66630df26229a195de6c177ab69467070047c7f57f444ce39787f5883565c"
+    },
+    {
+      "path": "validation-probe-20260911-v1/logs/ucf101-seed3-export.log",
+      "bytes": 48134,
+      "sha256": "21ab89916834c969c7156ea9a55c545617ad134532fda79a2f35bbe555bf750c"
+    },
+    {
+      "path": "validation-probe-20260911-v1/status.json",
+      "bytes": 20661,
+      "sha256": "005abf0cdadc4222ebf1135d7fc5dd3d2cf18ebec12c1ddf8522b3a27b7a8c0a"
+    },
+    {
+      "path": "validation-probe-20260911-v1/validation-image-hashes.json",
+      "bytes": 203748,
+      "sha256": "975174e48d304d0d1a90d6af7138c082e02321d2b1113a72e97ac13b0a36ba89"
+    }
+  ],
+  "new_training_runs": 0,
+  "contains": "all nine six-branch logits, all analyses, aggregate, commands/logs and input audit; no images or model weights"
+}

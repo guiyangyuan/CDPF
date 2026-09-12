@@ -1,0 +1,25 @@
+{
+  "state": "completed_audited_and_backed_up",
+  "completed_at": "2026-09-12T10:10:29.460266+00:00",
+  "execution_passed": true,
+  "remote_execution_records": 19,
+  "local_reanalysis_records": 10,
+  "new_training_runs": 0,
+  "gpu_export_run": true,
+  "candidate": "S1+M_logits",
+  "screening_passed": false,
+  "guards": {
+    "S1+M_vs_C+M_logits": false,
+    "S1+M_vs_C+M_probability": false,
+    "S1+M_vs_S0+M_logits": false,
+    "all_passed": false
+  },
+  "decision": "Stop expansion of this fixed candidate under the predeclared Base-validation rules. No alpha/temperature/seed selection or additional training. Novel/HM and independent confirmation not measured.",
+  "remote_study": "/root/autodl-tmp/textconsistency/runs/validation-probe-20260911-v1",
+  "runner_pid_historical": 1502,
+  "archive_sha256": "ef6e9c401f0acf6c4206ba51dac30a2f4b9cd70a730f62fbd6be5b01d82c7386",
+  "archive_bytes": 2439202,
+  "local_audit_sha256": "bed6a1ca882dc0200264d24c8fe034032ff011024077165173a3192a703fc230",
+  "server_status_note": "Original status.json is the immutable pre-download snapshot; this receipt confirms subsequent local verification.",
+  "gpu_final_observation": "NVIDIA GeForce RTX 5090, 32607 MiB, 0 MiB, 0 %, 580.76.05"
+}

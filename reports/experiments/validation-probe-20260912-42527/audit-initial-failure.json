@@ -1,0 +1,23 @@
+{
+  "stage": "first local/remote full JSON exact equality",
+  "case": "dtd-seed1",
+  "underlying_analyze_returncode": 0,
+  "differences": [
+    {
+      "metrics": [
+        "S1+T0_logits.multiclass_brier",
+        "S1+T1_logits.multiclass_brier"
+      ],
+      "absolute_difference": 5.551115123125783e-17
+    },
+    {
+      "metrics": [
+        "S1+T0_probability.multiclass_brier",
+        "S1+T1_probability.multiclass_brier"
+      ],
+      "absolute_difference": 1.1102230246251565e-16
+    }
+  ],
+  "discrete_fields_and_accuracy_exact_equal": true,
+  "resolution": "Preserve first successful analyze and raw artifacts. Permit absolute <=1e-12 only for NLL/Brier/probability margin derived floating values across machines, logging every difference. Accuracy, identities, predictions, counts and guards remain exact; no product-tool change."
+}

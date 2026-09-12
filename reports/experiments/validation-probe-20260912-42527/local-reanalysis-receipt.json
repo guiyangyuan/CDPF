@@ -1,0 +1,8 @@
+{
+  "archive": "local-reanalysis-evidence.tar.gz",
+  "bytes": 150471,
+  "sha256": "e51d0d7721a8e717ead2f3a0105aeed1ad731fec8c28d838b7e1d6c935b47747",
+  "local_reanalysis_commands": 10,
+  "initial_audit_comparison_interruption_retained": true,
+  "model_and_analysis_tool_changes": false
+}

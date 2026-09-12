@@ -2,6 +2,8 @@
 
 2026-09-12 核实完成。**服务器九组 CPU 准备、128 项测试、下载备份与本机独立核对全部通过；GPU 推理尚未执行，没有新增方法成绩。** 用户开启无卡实例后，沿用已授权的 bjb1:42527 连接。本报告承接[本机准备](../validation-probe-20260911/README.md)，研究协议仍为[固定筛查与停止规则](../../diagnostics/error-analysis-20260911/MINIMAL_NEXT_STEP.md)。
 
+> 后续完成更新（2026-09-12）：[九组GPU验证已完成并备份](../../experiments/validation-probe-20260912-42527/README.md)，固定候选三个数值条件均未通过，停止扩量。以下保留准备阶段的历史步骤，不能重复启动。
+
 ## 已完成与证据
 
 - [最终服务器状态](ready.json)、[本机独立审计](local-audit.json)、[逐组清单](cases.csv)。实际操作代码为 `de57efd7452e4feab3fd361ef9acac27a6dee4ef`；两份推理/分析工具的 SHA 与已审查版本完全一致。

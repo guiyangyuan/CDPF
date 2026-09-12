@@ -316,17 +316,45 @@ class CachedMultiViewTextEncoder(nn.Module):
 
 
 def training_losses(student, teacher, labels, attention, kd_weight, kd_temp,
-                    adaptive_ce_weight, diversity_weight, contrastive_weight=0.):
+                    adaptive_ce_weight, diversity_weight, contrastive_weight=0., *,
+                    kd_loss_mode='full_kl'):
+    if kd_loss_mode not in ('full_kl', 'weighted_nckd'):
+        raise ValueError(f'Unknown KD loss mode: {kd_loss_mode}')
+    loss_weights = (kd_weight, adaptive_ce_weight, diversity_weight, contrastive_weight)
+    if (not math.isfinite(float(kd_temp)) or kd_temp <= 0
+            or any(not math.isfinite(float(weight)) or weight < 0 for weight in loss_weights)):
+        raise ValueError('Invalid loss weights or KD temperature')
     if contrastive_weight != 0:
         raise ValueError('CONTRASTIVE_WEIGHT must be 0: the previous frozen-feature loss is disabled')
-    if kd_temp <= 0 or min(kd_weight, adaptive_ce_weight, diversity_weight) < 0:
-        raise ValueError('Invalid loss weights or KD temperature')
+    if kd_loss_mode == 'weighted_nckd' and kd_weight:
+        valid_shapes = (teacher is not None and student.ndim == 2 and teacher.ndim == 2
+                        and student.shape == teacher.shape and student.shape[1] >= 2
+                        and student.shape[0] > 0 and labels.ndim == 1
+                        and labels.shape[0] == student.shape[0])
+        valid_labels = (valid_shapes and labels.dtype == torch.long
+                        and bool(((labels >= 0) & (labels < student.shape[1])).all()))
+        if not valid_labels:
+            raise ValueError('Weighted non-target KD requires compatible logits and valid class labels')
     ce = F.cross_entropy(student, labels)
     zero = ce.new_zeros(())
     adaptive_ce = F.cross_entropy(teacher, labels) if teacher is not None else zero
-    kd = (F.kl_div(F.log_softmax(student / kd_temp, dim=-1),
-                   F.softmax(teacher.detach() / kd_temp, dim=-1), reduction='batchmean') * kd_temp**2
-          if teacher is not None and kd_weight else zero)
+    if teacher is not None and kd_weight:
+        if kd_loss_mode == 'full_kl':
+            kd = (F.kl_div(F.log_softmax(student / kd_temp, dim=-1),
+                           F.softmax(teacher.detach() / kd_temp, dim=-1), reduction='batchmean') * kd_temp**2)
+        else:
+            mask = torch.ones_like(student, dtype=torch.bool)
+            mask.scatter_(1, labels[:, None], False)
+            student_non_target = (student / kd_temp)[mask].reshape(student.shape[0], -1)
+            teacher_scaled = teacher.detach() / kd_temp
+            teacher_non_target = teacher_scaled[mask].reshape(student.shape[0], -1)
+            teacher_mass = (F.softmax(teacher_scaled, dim=-1) * mask).sum(dim=-1).detach()
+            conditional_kl = F.kl_div(F.log_softmax(student_non_target, dim=-1),
+                                      F.softmax(teacher_non_target, dim=-1),
+                                      reduction='none').sum(dim=-1)
+            kd = (teacher_mass * conditional_kl).mean() * kd_temp**2
+    else:
+        kd = zero
     neg_entropy = zero
     for name in ('attn', 'intra_attn', 'inter_attn'):
         if attention is not None and name in attention:

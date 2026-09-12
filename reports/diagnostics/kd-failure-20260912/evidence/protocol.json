@@ -1,0 +1,27 @@
+{
+  "scope": "Existing nine Base-validation endpoints only",
+  "temperature": "read fixed training configs, expected 2",
+  "kd_weight": 1,
+  "confidence_bins": [
+    0.0,
+    0.5,
+    0.8,
+    0.95,
+    1.0000000001
+  ],
+  "numeric_sign_tolerance": 1e-12,
+  "endpoints": [
+    "S0",
+    "S1"
+  ],
+  "teacher": "T0, asserted exactly equal to T1",
+  "losses": "CE and T^2 KL(q_teacher_T || p_student_T); non-target-only known control",
+  "do_not_claim": [
+    "parameter-gradient conflict",
+    "training trajectory causality",
+    "training outcome of selective/DKD variants",
+    "Novel/HM improvement"
+  ],
+  "new_training_runs": 0,
+  "optimizer_steps": 0
+}

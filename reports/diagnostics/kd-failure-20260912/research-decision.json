@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-12",
+  "state": "cpu_diagnosis_and_research_decision_complete",
+  "scope": "Existing Base-validation endpoint evidence; no server connection, training, or paper edits",
+  "student_transitions": {
+    "new_wrong": 124,
+    "corrected": 75,
+    "new_wrong_with_teacher_wrong": 92,
+    "corrected_with_teacher_wrong": 35
+  },
+  "records": 1500,
+  "unique_images": 1280,
+  "cases": 9,
+  "confirmed_novel_algorithm": false,
+  "old_candidate_expansion": "stopped",
+  "retained_question": "Does removing target binary KL while retaining the original weighted non-target component reduce student deterioration?",
+  "proposed_control": "CE(student,y)+CE(teacher,y)+(1-q_teacher_T[y])*T^2*KL(q_teacher_non_target_T||p_student_non_target_T)",
+  "temperature": 2,
+  "global_kd_coefficient": 1,
+  "teacher_kd_detached": true,
+  "teacher_training": "original online teacher CE",
+  "known_prior": "https://arxiv.org/abs/2203.08679",
+  "novelty_claim": false,
+  "product_implementation_done": false,
+  "new_training_runs": 0,
+  "optimizer_steps": 0,
+  "server_connected": false,
+  "gpu_queue_created": false,
+  "next_action": "CPU-only implementation and verification of the single ablation, if continuing code work",
+  "future_gpu_cap_proposed_only": {
+    "historical_full_kl_anchors": 1,
+    "candidate_seed1_models": 3,
+    "automatic_expansion": false
+  },
+  "limitations": [
+    "Endpoint association is not training-trajectory causality",
+    "Logit derivatives are not model parameter gradients",
+    "Known NCKD decomposition is not a new algorithm",
+    "Unweighted NCKD diagnostic gradients are not trained weighted-ablation outcomes",
+    "Repeated images across seeds are not independent observations",
+    "No new Novel or HM result"
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "state": "ready_for_user_to_enable_gpu",
+  "time_utc": "2026-09-13T13:51:58.793408+00:00",
+  "source_commit": "153953a32a74e7dbf1c8784465b8b41cc769a5e8",
+  "source": "/root/autodl-tmp/textconsistency/releases/visual-adapter-pilot-20260913-153953a",
+  "plan": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/future-plan/plan.json",
+  "future_output": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-20260913-153953a",
+  "plan_sha256": "89833a45d30d44bec2f104f9edeb5ec8455aa30840d8ff92d0ebbc5ed69b1ec1",
+  "plan_identity_sha256": "30667ae2bc363bf3d2fd8850f62113436696bf60a6b5760259ef1abbc9297747",
+  "operations_compared_to_local_source": {
+    "train.py": "616f5f502e744ce3c7801d176bf03644c9f2a762b60991cee2190b7467dee705",
+    "scripts/repro/visual_adapter_validation.py": "919001abde1e9392bc01a8a8aeea6cce50ad5e6c22936cf9cec6b03332b76915",
+    "scripts/repro/visual_adapter_study.py": "455d3a38383b1192ff4e2bb842b5b1e5ba423694711e2de47377ebd8461b9b96"
+  },
+  "local_cpu_tests": 234,
+  "server_cpu_tests": 234,
+  "independent_study_review_tests": 19,
+  "cross_machine_verification": "passed",
+  "cross_machine_receipt_sha256": "3bb7eff23b819ce2a67265174853fb40a489d1de5a695548ba835602e4c1a828",
+  "backup_receipt": {
+    "state": "verified",
+    "archive_sha256": "6a5c69830551abd52df395ac0febf92b0c957223383f9b2e5f7eac9b7a2e22b5",
+    "archive_bytes": 137640,
+    "archive_files": 19,
+    "manifest_files_checked": 18,
+    "extracted": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/visual-adapter-server-20260913/server-evidence",
+    "extraction_note": "System Python3.9 lacked tar filter; extraction completed using project Python3.12 after verifying the destination remained empty."
+  },
+  "server_environment": {
+    "hostname": "autodl-container-a03b4fb96c-09b042f2",
+    "python": "3.12.3 | packaged by Anaconda, Inc. | (main, May  6 2024, 19:46:43) [GCC 11.2.0]",
+    "executable": "/root/autodl-tmp/textconsistency/.venv/bin/python",
+    "torch": "2.8.0+cu128",
+    "torchvision": "0.23.0+cu128",
+    "cuda_runtime": "12.8",
+    "cuda_available": false,
+    "memory_limit": "2147483648",
+    "data_disk_free": 39851335680
+  },
+  "gpu_training_started": false,
+  "accuracy_results": false,
+  "user_action": "Enable GPU on the same instance and confirm current SSH. Do not run historical plans.",
+  "next_execution_environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "raw_server_ready_pending_comparison_is_historical_snapshot": true
+}

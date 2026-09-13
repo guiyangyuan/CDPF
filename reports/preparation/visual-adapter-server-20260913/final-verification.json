@@ -1,0 +1,23 @@
+{
+  "state": "verified",
+  "source_commit": "153953a32a74e7dbf1c8784465b8b41cc769a5e8",
+  "handoff_sha256": "0c2dc0787bcce92781c6cb731a26361b6f7baae5e81d8ff4d4ed7f9424b1c801",
+  "plan_unchanged_at_server_final_check": true,
+  "run_output_exists_at_server_final_check": false,
+  "gpu_query_at_server_final_check": "No devices were found",
+  "report_files_sha256": {
+    "README.md": "9c87d551308f89e9bed943c5a837c189789b0f7fa242911b12c4ceb661add03d",
+    "backup-receipt.json": "810b997ac5cf86cbeafd65a008882d897105bffd11994314e4583a52a0d2f331",
+    "compare_evidence.py": "d3aa556beee07ea109365f77c288f3292473135d4e152ed62c5a4411aa41132d",
+    "cross-machine-verification.json": "3bb7eff23b819ce2a67265174853fb40a489d1de5a695548ba835602e4c1a828",
+    "handoff-ready.json": "0c2dc0787bcce92781c6cb731a26361b6f7baae5e81d8ff4d4ed7f9424b1c801",
+    "initial-failure-evidence.tar.gz": "20ae66f53da1d8aff3794e899fe8f2bd12d810434db349f033e4135c00e2b05d",
+    "initial-failure-sha256.json": "6200b5c25385d90af8f94e74e44c0c85171a6275178c19378c3db8251df619ad",
+    "local-tests.txt": "a333818d1588473288e45ad751de4594c3c9650775e3854e41a4cdc65d03bf64",
+    "server-cpu-status.json": "1c3c1da859d1cccf356428d4cf55438ec6cd7e3ce1a53832dbcbd2e8df96a2fb",
+    "server-evidence.tar.gz": "6a5c69830551abd52df395ac0febf92b0c957223383f9b2e5f7eac9b7a2e22b5",
+    "server-plan.json": "89833a45d30d44bec2f104f9edeb5ec8455aa30840d8ff92d0ebbc5ed69b1ec1",
+    "server-ready-snapshot.json": "4ded87be2e4255bb2ab12c62f28bde6873705cb2f283f2078ada34dabe22a27e",
+    "source-package.json": "ae2917f744ebf48f777691eb42ce976c5b6fd8f83ec3bdf9713270ff2189564a"
+  }
+}

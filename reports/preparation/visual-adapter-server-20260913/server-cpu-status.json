@@ -1,0 +1,107 @@
+{
+  "state": "server_cpu_prepared_awaiting_local_comparison",
+  "started_at": "2026-09-13T13:47:37.063779+00:00",
+  "source": "/root/autodl-tmp/textconsistency/releases/visual-adapter-pilot-20260913-153953a",
+  "gpu_training_started": false,
+  "stages": [
+    {
+      "name": "environment",
+      "argv": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-c",
+        "import sys,torch,torchvision,platform,json,shutil\nfrom pathlib import Path\nassert not torch.cuda.is_available(), 'Expected no-card preparation; stop if instance mode differs'\nv={'hostname':platform.node(),'python':sys.version,'executable':sys.executable,'torch':torch.__version__,\n'torchvision':torchvision.__version__,'cuda_runtime':torch.version.cuda,'cuda_available':torch.cuda.is_available(),\n'memory_limit':Path('/sys/fs/cgroup/memory.max').read_text().strip(),'data_disk_free':shutil.disk_usage('/root/autodl-tmp').free}\nPath(sys.argv[1]).write_text(json.dumps(v,indent=2)+'\\n')\nprint(json.dumps(v,indent=2))",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/environment.json"
+      ],
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/environment.log",
+      "state": "passed",
+      "returncode": 0,
+      "seconds": 6.022413901984692
+    },
+    {
+      "name": "cpu-tests",
+      "argv": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/cpu-tests.log",
+      "state": "passed",
+      "returncode": 0,
+      "seconds": 61.798947885632515
+    },
+    {
+      "name": "prepare",
+      "argv": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "scripts/repro/visual_adapter_validation.py",
+        "prepare",
+        "--data-root",
+        "/root/autodl-tmp/textconsistency/data",
+        "--clip-path",
+        "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/prepared"
+      ],
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/prepare.log",
+      "state": "passed",
+      "returncode": 0,
+      "seconds": 36.93271040543914
+    },
+    {
+      "name": "plan",
+      "argv": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "scripts/repro/visual_adapter_study.py",
+        "plan",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/prepared/prepared.json",
+        "--plan-dir",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/future-plan",
+        "--output-root",
+        "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-20260913-153953a",
+        "--python",
+        "/root/autodl-tmp/textconsistency/.venv/bin/python"
+      ],
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/plan.log",
+      "state": "passed",
+      "returncode": 0,
+      "seconds": 14.991973392665386
+    },
+    {
+      "name": "no-cuda-rejection",
+      "argv": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "scripts/repro/visual_adapter_study.py",
+        "run",
+        "--plan",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/future-plan/plan.json"
+      ],
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/no-cuda-rejection.log",
+      "state": "passed",
+      "returncode": 1,
+      "seconds": 12.80272475630045
+    },
+    {
+      "name": "portable-transform",
+      "argv": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/portable_transform.py",
+        "--source",
+        "/root/autodl-tmp/textconsistency/releases/visual-adapter-pilot-20260913-153953a",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/prepared/prepared.json",
+        "--output",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/portable-transform.json"
+      ],
+      "log": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-20260913-153953a/portable-transform.log",
+      "state": "passed",
+      "returncode": 0,
+      "seconds": 19.79719503968954
+    }
+  ],
+  "finished_at": "2026-09-13T13:50:09.427994+00:00"
+}

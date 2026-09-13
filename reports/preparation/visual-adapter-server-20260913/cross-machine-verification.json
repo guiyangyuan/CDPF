@@ -1,0 +1,60 @@
+{
+  "state": "passed",
+  "checks": {
+    "protocol": true,
+    "source_sha256": true,
+    "class_order": true,
+    "samples": true,
+    "sample_hashes": true,
+    "image_content": true,
+    "description_counts": true,
+    "operation_and_config_files": true,
+    "simple_fusion_model_signature": true,
+    "simple_fusion_effective_config": true,
+    "visual_only_model_signature": true,
+    "visual_only_effective_config": true,
+    "visual_description_model_signature": true,
+    "visual_description_effective_config": true,
+    "input_coverage": true,
+    "all_noncache_input_bytes": true,
+    "actual_cpu_validation_tensors_labels_relative_ids": true,
+    "decoded_count": true,
+    "decoded_tensor_shape": true,
+    "decoded_tensor_dtype": true,
+    "six_cpu_stages": true,
+    "cpu_stages_passed": true,
+    "no_cuda_guard_exit": true,
+    "tests": true,
+    "no_real_training": true,
+    "no_run_output": true
+  },
+  "local_prepared_sha256": "30b908827a0c226c7e82c08b13dc24e09e6a72bf14fa5b72ec432a487c565438",
+  "server_prepared_sha256": "0065829c1d451782c71ff62adb667360797d8fa24f6bd1ba278237c10af8bdba",
+  "input_count_each": 1007,
+  "noncache_bytes_equal_files": 1006,
+  "cache": {
+    "local_sha256": "9e69b8f5329981a7aa4633a7a17be816924554dc935f1182cf0c82e9f3e62686",
+    "server_sha256": "ede51e816f27fe43e5142277349414badbb64c6d94dcfdb99ae3dd617bb959a2",
+    "normalized_cached_rows_match_official_samples_on_each_machine": true
+  },
+  "portable_transform": {
+    "kind": "CPU validation tensors/labels/relative sample IDs",
+    "count": 200,
+    "tensor_shape": [
+      3,
+      224,
+      224
+    ],
+    "tensor_dtype": "torch.float32",
+    "portable_transform_sha256": "62aec63e10f8f72231357e9eb8c4b3036c0797f40d930a2739a4ecf658e94769",
+    "helper_sha256": "cf01c1ed4c5cd726de6b6dd80db9c2a09dfe6ac8ec7196d9a0fd30daba5ec762",
+    "model_loaded": false,
+    "gpu_used": false
+  },
+  "absolute_path_transform_hashes_are_machine_specific": true,
+  "server_plan_sha256": "89833a45d30d44bec2f104f9edeb5ec8455aa30840d8ff92d0ebbc5ed69b1ec1",
+  "server_plan_identity_sha256": "30667ae2bc363bf3d2fd8850f62113436696bf60a6b5760259ef1abbc9297747",
+  "training_started": false,
+  "gpu_used": false,
+  "accuracy_results": false
+}

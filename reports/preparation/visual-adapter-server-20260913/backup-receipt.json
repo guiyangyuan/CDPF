@@ -1,0 +1,9 @@
+{
+  "state": "verified",
+  "archive_sha256": "6a5c69830551abd52df395ac0febf92b0c957223383f9b2e5f7eac9b7a2e22b5",
+  "archive_bytes": 137640,
+  "archive_files": 19,
+  "manifest_files_checked": 18,
+  "extracted": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/visual-adapter-server-20260913/server-evidence",
+  "extraction_note": "System Python3.9 lacked tar filter; extraction completed using project Python3.12 after verifying the destination remained empty."
+}

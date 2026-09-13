@@ -75,6 +75,43 @@ def _fresh_output(path: Path, protected: tuple[Path, ...] = ()) -> Path:
     return probe._fresh_output(Path(path), protected)
 
 
+def _export_protected_paths(
+        prepared_path: Path, model_dir: Path, prepared: Mapping[str, Any],
+) -> tuple[Path, ...]:
+    paths = [Path(prepared_path).resolve(), Path(prepared_path).resolve().parent,
+             Path(model_dir).resolve(), FIXED_REFERENCE_PATH.resolve(), FIXED_INVENTORY_PATH.resolve()]
+
+    def add(value: Any) -> None:
+        if isinstance(value, (str, Path)) and str(value):
+            paths.append(Path(value).resolve())
+
+    for key in ("source_root", "data_root", "future_config_path"):
+        add(prepared.get(key))
+    for section, keys in (("inventory", ("path",)), ("reference", ("path",)),
+                          ("historical", ("export", "npz")),
+                          ("historical_config", ("path",)),
+                          ("assets", ("clip", "template")),
+                          ("fewshot_cache", ("path",))):
+        record = prepared.get(section, {})
+        if isinstance(record, Mapping):
+            for key in keys:
+                add(record.get(key))
+    metadata = prepared.get("source_metadata", [])
+    if isinstance(metadata, list):
+        for record in metadata:
+            if isinstance(record, Mapping):
+                add(record.get("path"))
+    return tuple(dict.fromkeys(paths))
+
+
+def _validate_output_disjoint(path: Path, protected: tuple[Path, ...]) -> None:
+    target = Path(path).resolve()
+    for item in protected:
+        immutable = Path(item).resolve()
+        if target == immutable or target in immutable.parents or immutable in target.parents:
+            raise ValueError(f"Output must be disjoint from immutable input: {immutable}")
+
+
 def loss_identity(mode: str) -> dict[str, Any]:
     weighting = {
         "full_kl": "none_full_distribution_kl",
@@ -1046,12 +1083,16 @@ def validate_new_checkpoint(prepared: Mapping[str, Any], model_dir: Path) -> tup
 def export_case(args: argparse.Namespace) -> dict[str, Any]:
     prepared_path = Path(args.prepared).resolve()
     model_dir = Path(args.model_dir).resolve()
-    output = _fresh_output(Path(args.output_dir), (prepared_path, model_dir))
+    unvalidated_prepared = _read_json(prepared_path)
+    protected = _export_protected_paths(prepared_path, model_dir, unvalidated_prepared)
+    output = _fresh_output(Path(args.output_dir), protected)
     output.mkdir(parents=True)
     try:
         if not torch.cuda.is_available():
             raise RuntimeError("CUDA is required for H1 export; CPU fallback is forbidden")
         prepared = load_prepared(prepared_path)
+        _validate_output_disjoint(
+            output, _export_protected_paths(prepared_path, model_dir, prepared))
         checkpoint_record, checkpoint = validate_new_checkpoint(prepared, model_dir)
         source_root, data_root = Path(prepared["source_root"]), Path(prepared["data_root"])
         training = probe._source_modules(source_root)

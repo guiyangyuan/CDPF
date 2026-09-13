@@ -354,7 +354,8 @@ class ExportContracts(unittest.TestCase):
     def test_cuda_cli_guard_records_failure_without_loading_prepared_or_model(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            prepared = root / "prepared.json"; prepared.write_text("{}")
+            prepared = root / "prepared/prepared.json"; prepared.parent.mkdir()
+            prepared.write_text("{}")
             output = root / "export"
             with mock.patch("torch.cuda.is_available", return_value=False), \
                     mock.patch.object(h1, "load_prepared", side_effect=AssertionError("loaded prepared")), \
@@ -362,6 +363,26 @@ class ExportContracts(unittest.TestCase):
                 h1.export_case(SimpleNamespace(prepared=prepared, model_dir=root / "model",
                                                output_dir=output))
             self.assertEqual(json.loads((output / "failure.json").read_text())["status"], "failed")
+
+    def test_export_rejects_fresh_output_nested_in_source_or_data_before_any_write(self):
+        for protected_name in ("source", "data"):
+            with self.subTest(protected_name=protected_name), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp).resolve()
+                source = root / "source"; source.mkdir()
+                data = root / "data"; data.mkdir()
+                prepared = root / "prepared/prepared.json"; prepared.parent.mkdir()
+                prepared.write_text(json.dumps({
+                    "source_root": str(source),
+                    "data_root": str(data),
+                }))
+                output = {"source": source, "data": data}[protected_name] / "fresh-export"
+                with mock.patch("torch.cuda.is_available", return_value=True), \
+                        mock.patch.object(h1, "load_prepared",
+                                          side_effect=AssertionError("validated after output write")), \
+                        self.assertRaisesRegex(ValueError, "immutable input"):
+                    h1.export_case(SimpleNamespace(
+                        prepared=prepared, model_dir=root / "model", output_dir=output))
+                self.assertFalse(output.exists())
 
 
 class TinyCurrentModelIntegration(unittest.TestCase):

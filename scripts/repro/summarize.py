@@ -71,6 +71,21 @@ def _validate_loss_identity(data, expected, path):
     _validate_declared_loss_identity(data, expected['mode'], path, expected)
 
 
+def _has_modern_loss_identity(data):
+    return (data.get('loss_identity') is not None
+            or data.get('model_signature', {}).get('loss_identity') is not None)
+
+
+def _has_expected_loss_context(kd_weight, fixed_settings):
+    return (kd_weight is not None and isinstance(fixed_settings, dict)
+            and 'kd_temp' in fixed_settings)
+
+
+def _require_modern_loss_context(data, kd_weight, fixed_settings, path):
+    if _has_modern_loss_identity(data) and not _has_expected_loss_context(kd_weight, fixed_settings):
+        raise ValueError(f'Modern loss identity requires expected KD weight and temperature: {path}')
+
+
 def _validate_config_loss_mode(data, kd_mode, path):
     if kd_mode not in ('full_kl', 'weighted_nckd'):
         raise ValueError(f'Unknown protocol KD loss mode: {kd_mode}')
@@ -152,9 +167,9 @@ def read_metric(path, seed, split, branch, epochs, dataset='UCF101', kd_weight=N
     if kd_loss_mode not in ('full_kl', 'weighted_nckd'):
         raise ValueError(f'Unknown protocol KD loss mode: {kd_loss_mode}')
     if (kd_loss_mode == 'weighted_nckd'
-            and (kd_weight is None or not isinstance(fixed_settings, dict)
-                 or 'kd_temp' not in fixed_settings)):
+            and not _has_expected_loss_context(kd_weight, fixed_settings)):
         raise ValueError('weighted_nckd audit requires expected KD weight and temperature')
+    _require_modern_loss_context(data, kd_weight, fixed_settings, path)
     if (data['seed'], data['subsample'], data['branch'], data['dataset']) != (seed, split, branch, dataset):
         raise ValueError(f'Actual evaluation protocol differs from its directory label: {path}')
     if data.get('shots') != shots:
@@ -203,6 +218,9 @@ def collect(root):
             and ('kd_weight' not in protocol or not isinstance(fixed_settings, dict)
                  or not required_weighted_settings.issubset(fixed_settings))):
         raise ValueError('weighted_nckd protocol requires KD weight and complete fixed settings')
+    if ('kd_loss_mode' in protocol
+            and not _has_expected_loss_context(protocol.get('kd_weight'), fixed_settings)):
+        raise ValueError('Modern loss identity requires expected KD weight and temperature in protocol')
     orders = protocol.get('view_orders')
     structure = protocol.get('structure_study', False)
     if structure and (protocol['variants'] != list(STRUCTURE_VARIANTS) or protocol['seeds'] != [1, 2, 3]
@@ -247,19 +265,29 @@ def collect(root):
                 elif base['code_sha256'] != observed_code:
                     raise ValueError('Runs from different source hashes were mixed')
                 manifest_path = directory / 'run_manifest.json'
+                if manifest_path.is_file():
+                    manifest_record = json.loads(manifest_path.read_text())
+                    _require_modern_loss_context(
+                        manifest_record, protocol.get('kd_weight'), fixed_settings, manifest_path)
                 if 'kd_weight' not in protocol:
                     if manifest_path.is_file():
                         _validate_declared_loss_identity(
-                            json.loads(manifest_path.read_text()), kd_loss_mode, manifest_path)
+                            manifest_record, kd_loss_mode, manifest_path)
                     sparse_config_path = directory / 'effective_config.yaml'
                     if sparse_config_path.is_file():
-                        _validate_config_loss_mode(
-                            _read_config(sparse_config_path), kd_loss_mode, sparse_config_path)
+                        sparse_config = _read_config(sparse_config_path)
+                        if sparse_config.get('TRAINER', {}).get('TEXTCONSISTENCY', {}).get('KD_LOSS_MODE') is not None:
+                            raise ValueError(
+                                f'Modern loss identity requires expected KD weight and temperature: {sparse_config_path}')
+                        _validate_config_loss_mode(sparse_config, kd_loss_mode, sparse_config_path)
                     for split_name, branch_name in (('base', branch), ('new', branch)):
                         sparse_eval_path = directory / f'eval_{split_name}_{branch_name}/effective_config.yaml'
                         if sparse_eval_path.is_file():
-                            _validate_config_loss_mode(
-                                _read_config(sparse_eval_path), kd_loss_mode, sparse_eval_path)
+                            sparse_eval = _read_config(sparse_eval_path)
+                            if sparse_eval.get('TRAINER', {}).get('TEXTCONSISTENCY', {}).get('KD_LOSS_MODE') is not None:
+                                raise ValueError(
+                                    f'Modern loss identity requires expected KD weight and temperature: {sparse_eval_path}')
+                            _validate_config_loss_mode(sparse_eval, kd_loss_mode, sparse_eval_path)
                 if 'kd_weight' in protocol:
                     manifest = json.loads(manifest_path.read_text())
                     identity = (manifest.get('dataset'), manifest.get('seed'), manifest.get('shots'),

@@ -157,7 +157,8 @@ class RunnerBehavior(unittest.TestCase):
 
     def test_sparse_default_full_kl_rejects_weighted_metadata_in_every_available_record(self):
         import yaml
-        for location in ('metric', 'manifest', 'config', 'eval_config'):
+        for location in ('metric', 'manifest', 'config', 'eval_config',
+                         'full_manifest', 'full_config'):
             with self.subTest(location=location), tempfile.TemporaryDirectory() as temp:
                 root = Path(temp)
                 (root / 'protocol.json').write_text(json.dumps({
@@ -178,14 +179,16 @@ class RunnerBehavior(unittest.TestCase):
                         payload['loss_identity'] = identity
                         payload['model_signature']['loss_identity'] = identity
                     (directory / 'metrics.json').write_text(json.dumps(payload))
-                if location == 'manifest':
-                    identity = loss_identity('weighted_nckd', 2.0, 0.0)
+                if location in ('manifest', 'full_manifest'):
+                    mode = 'weighted_nckd' if location == 'manifest' else 'full_kl'
+                    identity = loss_identity(mode, 2.0, 0.0)
                     (run / 'run_manifest.json').write_text(json.dumps({
                         'loss_identity': identity, 'model_signature': {'loss_identity': identity},
                     }))
-                if location == 'config':
+                if location in ('config', 'full_config'):
+                    mode = 'weighted_nckd' if location == 'config' else 'full_kl'
                     (run / 'effective_config.yaml').write_text(yaml.safe_dump({
-                        'TRAINER': {'TEXTCONSISTENCY': {'KD_LOSS_MODE': 'weighted_nckd'}},
+                        'TRAINER': {'TEXTCONSISTENCY': {'KD_LOSS_MODE': mode}},
                     }))
                 if location == 'eval_config':
                     (run / 'eval_base_student/effective_config.yaml').write_text(yaml.safe_dump({
@@ -210,6 +213,13 @@ class RunnerBehavior(unittest.TestCase):
             }))
             with self.assertRaisesRegex(ValueError, 'loss identity'):
                 summary.read_metric(path, 1, 'base', 'student', 20)
+            full_identity = loss_identity('full_kl', 2.0, 1.0)
+            path.write_text(json.dumps({
+                **payload, 'loss_identity': full_identity,
+                'model_signature': {'loss_identity': full_identity},
+            }))
+            with self.assertRaisesRegex(ValueError, 'Modern loss identity requires'):
+                summary.read_metric(path, 1, 'base', 'student', 20)
             path.write_text(json.dumps(payload))
             with self.assertRaisesRegex(ValueError, 'weighted.*requires'):
                 summary.read_metric(path, 1, 'base', 'student', 20,
@@ -217,6 +227,30 @@ class RunnerBehavior(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'Unknown protocol KD loss mode'):
                 summary.read_metric(path, 1, 'base', 'student', 20, kd_loss_mode='unknown')
             self.assertEqual(summary.read_metric(path, 1, 'base', 'student', 20), payload)
+
+    def test_sparse_modern_full_kl_cannot_disagree_without_expected_context(self):
+        import yaml
+        with tempfile.TemporaryDirectory() as temp:
+            root = write_new_run(Path(temp), ('flat',), kd_loss_mode='full_kl')
+            protocol_path = root / 'protocol.json'
+            protocol = json.loads(protocol_path.read_text())
+            protocol.pop('kd_weight')
+            protocol_path.write_text(json.dumps(protocol))
+
+            run = root / 'flat/seed1'
+            manifest_path = run / 'run_manifest.json'
+            manifest = json.loads(manifest_path.read_text())
+            manifest['loss_identity']['temperature'] = 9.0
+            manifest['model_signature']['loss_identity']['temperature'] = 9.0
+            manifest_path.write_text(json.dumps(manifest))
+
+            config_path = run / 'effective_config.yaml'
+            config = yaml.safe_load(config_path.read_text())
+            config['TRAINER']['TEXTCONSISTENCY']['KD_TEMP'] = 7.0
+            config_path.write_text(yaml.safe_dump(config))
+
+            with self.assertRaisesRegex(ValueError, 'Modern loss identity requires'):
+                module('summarize').collect(root)
 
     def test_new_protocol_rejects_variant_kd_temp_and_eval_config_drift(self):
         import yaml

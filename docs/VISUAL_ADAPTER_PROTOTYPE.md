@@ -1,6 +1,6 @@
 # 描述监督视觉适配：本机原型
 
-状态：**原型未训练；没有精度、泛化或新颖性结论。** 本文对应[模型改进候选](plans/2026-09-13-model-improvement.md)，只提供 A/B/C 配置和 CPU 准备方法。GPU 实验矩阵、继续标准和阈值仍待另行冻结；本原型没有创建或启动训练队列，旧 H1 不再扩展。
+状态：**原型未训练；没有精度、泛化或新颖性结论。** 本文对应[模型改进候选](plans/2026-09-13-model-improvement.md)，解释 A/B/C 模型与配置。后续已冻结 [Aircraft seed 1 先导协议](plans/2026-09-13-visual-adapter-pilot.md)：三次训练、20 轮、Base 验证、C 对 A/B 均至少 +1.0pp 才作为继续信号。专用准备/执行/导出入口已补齐；本机检查与服务器部署状态见[准备记录](../reports/preparation/visual-adapter-pilot-20260913/README.md)。尚未启动 GPU，旧 H1 不再扩展。
 
 ## 三组对照
 
@@ -22,7 +22,7 @@ B/C 使用类别共享的 64 维瓶颈、残差系数 0.2；固定描述 CE 通�
 
 ## CPU 配置检查
 
-在源码根目录使用已安装依赖的 Python；以下检查只合并并校验配置，不加载图像、CLIP 权重，不训练或评估。诊断中的 `SEED=1` 仅满足配置检查，不代表已冻结 GPU 种子矩阵。
+在源码根目录使用已安装依赖的 Python；以下检查只合并并校验原型配置，不加载图像、CLIP 权重，不训练或评估。先导实验已在独立协议中固定 seed 1；其准备器生成完整 GPU 配置，原始 YAML 保留 CPU 默认值。
 
 ```bash
 PYTHONPATH=.:Dassl.pytorch python -B - <<'PY'
@@ -47,7 +47,7 @@ for path in sorted(Path("configs/repro/visual_adapter").glob("*.yaml")):
 PY
 ```
 
-`train.py` 的 `--no-train` 会构建数据集、加载本地 CLIP 和类别描述并写入 manifest；它不是仅解析配置的 dry-run。若需要检查真实资源初始化，可用下面的 **CPU 初始化示例**，先将数据根目录、CLIP 路径和全新输出目录替换为本机实际路径。该命令不调用训练，也不产生验证准确率：
+`train.py` 的 `--no-train` 会构建数据集、加载本地 CLIP 和类别描述并写入 manifest；它不是仅解析配置的 dry-run。无卡准备应优先使用新协议中的 `visual_adapter_validation.py prepare`，不构建完整模型。以下仅为内存充足时的 **CPU 初始化示例**，不用于此前只有 2 GiB 内存的无卡实例。先将数据根目录、CLIP 路径和全新输出目录替换为实际路径；该命令不调用训练，也不产生验证准确率：
 
 ```bash
 PYTHONPATH=.:Dassl.pytorch python -B train.py \
@@ -65,6 +65,6 @@ CLI 按“数据集配置 → 方法配置 → CLI 参数 → 末尾配置覆盖
 
 模型 `forward` 的第三个返回张量是**实际用于分类的归一化视觉特征**：A 为冻结 CLIP 特征，B/C 为适配后特征。CoOp 和描述分类分支都必须使用同一个适配后特征；不能把这个张量仍当作原始冻结 CLIP 特征用于交叉推理分析。
 
-`scripts/repro/validation_probe.py` 及 H1 导出/分析链属于历史协议，依赖冻结图像特征等假设，**不得用于本原型**。旧 `run_pilot.py` 和历史 Base/Novel 汇总也不是本原型的运行入口；新实验计划与导出需单独核对身份和特征语义后准备。
+`scripts/repro/validation_probe.py` 及 H1 导出/分析链属于历史协议，依赖冻结图像特征等假设，**不得用于本原型的模型导出**。新 `visual_adapter_validation.py` 仅复用其中与模型无关的数据核验帮助函数，直接从真实模型输出保存 S/D/F；`visual_adapter_study.py` 负责固定队列及判断。旧 `run_pilot.py` 和历史 Base/Novel 汇总不是本原型的运行入口。
 
 完整 checkpoint 应保存 CoOp 和视觉适配器的训练参数以及匹配的模型签名、损失、输入和代码身份。启用视觉适配器的 B/C 使用 format 3 签名，包含适配器配置及 `description_ce_weight`。Base→Novel 重载时仅重建类别相关文本，不能丢弃适配器权重或把 B 的 checkpoint 改为 C。现有严格 `code_sha256` 校验继续生效：历史模型仍需各自冻结的源码 release；保留默认旧行为不表示新源码可以加载具有旧代码哈希的 checkpoint。A 的旧结果是否可复用仍须逐项核对结构、输入、预算和身份，不能自动归入本次对照。

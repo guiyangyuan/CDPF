@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "date": "2026-09-13",
+  "state": "local_prepared_remote_deployment_pending",
+  "training_started": false,
+  "real_model_loaded": false,
+  "gpu_used": false,
+  "new_accuracy_results": false,
+  "remote": {
+    "host": "connect.bjb1.seetacloud.com",
+    "port": 42527,
+    "ssh_exit_code": 255,
+    "result": "Connection refused",
+    "deployment_completed": false,
+    "next_step": "User starts server in no-card mode and provides current SSH; GPU not required yet"
+  },
+  "training_source_sha256": "38d9afc3cdc0440695cb5eca5c59069f73ace1aba4478d5afc5b656050911840",
+  "operation_files": {
+    "scripts/repro/visual_adapter_validation.py": "919001abde1e9392bc01a8a8aeea6cce50ad5e6c22936cf9cec6b03332b76915",
+    "scripts/repro/visual_adapter_study.py": "c5167104219bd37c71cfb33338d12ca3b47c3e467b7c15c33a5e61b80a59ddb4",
+    "tests/repro/test_visual_adapter_validation.py": "bb0f59003832bb5038ecb26266c87d46b202a794c322550bd81877d4f110aa6b",
+    "tests/repro/test_visual_adapter_study.py": "bbb934839827c0c6e6c0f9234149c879988cdf1c25f065d5fff5fec7b2768f27"
+  },
+  "fixed_config_hashes": {
+    "configs/datasets/fgvc_aircraft.yaml": "2853829da10a89ad7d4b54b55c9bad542f0d6bdeeb273bdee0551fa486ec53a5",
+    "configs/repro/visual_adapter/simple_fusion.yaml": "926e5d788274b2689c707aae5336974399dcd6ab170c0700d3a9eb7faa44b088",
+    "configs/repro/visual_adapter/visual_only.yaml": "ba1b8ad0aef6a0f2014fdebd14b8620dad9784fb320687059e62fa48a73c6792",
+    "configs/repro/visual_adapter/visual_description.yaml": "dac47a0de618c7c11ef32ad5ae2a5b74669d8592f84de24fd1e05373eea12263"
+  },
+  "prepared_identity_sha256": "b8b6a52676936ec055017b0c4f940b0202f069605eece248abc1cb862c7873d1",
+  "plan_identity_sha256": "783438428db8addb25449bb848e7ffdeeff03feb80383ccd3b6de0ff61570327",
+  "protocol": {
+    "kind": "visual_adapter_aircraft_pilot",
+    "version": 1,
+    "seed": 1,
+    "shots": 16,
+    "epochs": 20,
+    "split": "val",
+    "subsample_classes": "base",
+    "dataset": "FGVCAircraft",
+    "backbone": "ViT-B/16",
+    "precision": "fp32",
+    "alpha": 0.5,
+    "variants": [
+      "simple_fusion",
+      "visual_only",
+      "visual_description"
+    ],
+    "max_training_runs": 3,
+    "wallclock_cap_seconds": 3600,
+    "minimum_C_minus_A_pp": 1.0,
+    "minimum_C_minus_B_pp": 1.0
+  },
+  "sample_hashes": {
+    "train": "ae5851085ef5e74b7cb612cda7454fde300601ef14ad21b707bbbfbbd3c85e9a",
+    "val": "7ac44ab40ea24086902991743d3b51720e467204034efd2b5a98352416fd02bb",
+    "test": "78dd9ed86b8d2d13c40d88fac9b778ec450b322707c44347521c07e7db9b714a"
+  },
+  "counts": {
+    "train": 800,
+    "val": 200,
+    "test": 1666
+  },
+  "input_files": 1007,
+  "decoded_val": {
+    "count": 200,
+    "tensor_shape": [
+      3,
+      224,
+      224
+    ],
+    "tensor_dtype": "torch.float32",
+    "ordered_transform_sha256": "6d851253be34377a30c3f5bc9fdabf3e5c5cbdcc17ddb4d92baeaace26b27830"
+  },
+  "class_count": 50,
+  "description_counts": [
+    20,
+    20,
+    19,
+    19,
+    16,
+    19,
+    20,
+    19,
+    19,
+    18,
+    20,
+    17,
+    20,
+    18,
+    20,
+    20,
+    18,
+    18,
+    18,
+    19,
+    18,
+    20,
+    20,
+    16,
+    19,
+    18,
+    20,
+    16,
+    18,
+    19,
+    20,
+    20,
+    19,
+    19,
+    17,
+    15,
+    9,
+    20,
+    19,
+    20,
+    19,
+    16,
+    8,
+    19,
+    20,
+    18,
+    20,
+    12,
+    19,
+    19
+  ],
+  "tests": {
+    "full": 233,
+    "new_validation": 10,
+    "new_study": 18,
+    "independent_review_test_count": 28,
+    "passed": true
+  },
+  "independent_review": {
+    "blocking_findings_remaining": 0,
+    "fixed_findings": [
+      "P1 CLI default seed override",
+      "P2 mutable source YAML before prepare"
+    ]
+  },
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 13:50:33) [Clang 22.1.3 ]",
+    "executable": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/tc-venv/bin/python",
+    "platform": "macOS-15.7.3-arm64-arm-64bit",
+    "torch": "2.8.0"
+  },
+  "evidence_sha256": {
+    "README.md": "80d375cdad207216dd036d5309b40551397844dac0e13730d37206a8e33d9e40",
+    "cli-seed-green.txt": "7d7b8c7893ef3e80f428db02b924875e8b4745832b745fb44670231336b6f078",
+    "cli-seed-red.txt": "08c034e75fafe904aef2811d7500ac036dd5b7a52e2de8406abb76643cb53a6d",
+    "config-anchor-green.txt": "d7437d7d6b4c7e5cf9fb116992b7f1faf064600a9acc79b639144ee42e080611",
+    "config-anchor-red.txt": "902c3b6d9f19c9a9e463eee52fad2b4ba567db02e95e8ae4d45e4c2d7167c411",
+    "no-cuda.json": "0d903f49fd83297e648fe19e8bac8d038d21048f6b2481dc803a2ad0e448294f",
+    "no-cuda.txt": "cccc68f79310fc7f74bfd6d1764611e9f8a55c7387032cd0e48abcd2ac41516f",
+    "plan-local-v2.json": "5a91cdf8cafb6a7f54f6a23686094ad14ae1e64c566308802839c93566841bf2",
+    "prepare.txt": "f9110450e8c68061a9f448aa00df3416115d402b91b03f44d994a794384c7b48",
+    "prepared-local-v2.json": "30b908827a0c226c7e82c08b13dc24e09e6a72bf14fa5b72ec432a487c565438",
+    "tests.txt": "a29bf8c20653b13524aa745d5cba9398364f24c376882188af28e1d8d55144cc"
+  },
+  "superseded_local_artifacts": [
+    "prepared-v1",
+    "plan-local-v1"
+  ],
+  "next_step": "Deploy current source to independent server release in no-card mode; regenerate server-specific receipts/plan; verify before requesting GPU.",
+  "text_log_normalization": "Trailing whitespace trimmed in config-anchor-red.txt; original local process log retained."
+}

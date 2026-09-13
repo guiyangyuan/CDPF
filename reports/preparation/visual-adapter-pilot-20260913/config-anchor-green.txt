@@ -1,0 +1,6 @@
+test_configuration_drift_before_preparation_is_rejected (repro.test_visual_adapter_validation.VisualValidationTests.test_configuration_drift_before_preparation_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.911s
+
+OK

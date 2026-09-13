@@ -1,0 +1,46 @@
+test_configuration_drift_before_preparation_is_rejected (repro.test_visual_adapter_validation.VisualValidationTests.test_configuration_drift_before_preparation_is_rejected) ...
+  test_configuration_drift_before_preparation_is_rejected (repro.test_visual_adapter_validation.VisualValidationTests.test_configuration_drift_before_preparation_is_rejected) (config='configs/datasets/fgvc_aircraft.yaml') ... FAIL
+  test_configuration_drift_before_preparation_is_rejected (repro.test_visual_adapter_validation.VisualValidationTests.test_configuration_drift_before_preparation_is_rejected) (config='configs/repro/visual_adapter/simple_fusion.yaml') ... FAIL
+  test_configuration_drift_before_preparation_is_rejected (repro.test_visual_adapter_validation.VisualValidationTests.test_configuration_drift_before_preparation_is_rejected) (config='configs/repro/visual_adapter/visual_only.yaml') ... FAIL
+  test_configuration_drift_before_preparation_is_rejected (repro.test_visual_adapter_validation.VisualValidationTests.test_configuration_drift_before_preparation_is_rejected) (config='configs/repro/visual_adapter/visual_description.yaml') ... FAIL
+
+======================================================================
+FAIL: test_configuration_drift_before_preparation_is_rejected (repro.test_visual_adapter_validation.VisualValidationTests.test_configuration_drift_before_preparation_is_rejected) (config='configs/datasets/fgvc_aircraft.yaml')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/visual-adapter-pilot-20260913/source/tests/repro/test_visual_adapter_validation.py", line 205, in test_configuration_drift_before_preparation_is_rejected
+    with self.subTest(config=name),mock.patch.object(v,'ROOT',source),self.assertRaises(ValueError):
+                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_configuration_drift_before_preparation_is_rejected (repro.test_visual_adapter_validation.VisualValidationTests.test_configuration_drift_before_preparation_is_rejected) (config='configs/repro/visual_adapter/simple_fusion.yaml')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/visual-adapter-pilot-20260913/source/tests/repro/test_visual_adapter_validation.py", line 205, in test_configuration_drift_before_preparation_is_rejected
+    with self.subTest(config=name),mock.patch.object(v,'ROOT',source),self.assertRaises(ValueError):
+                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_configuration_drift_before_preparation_is_rejected (repro.test_visual_adapter_validation.VisualValidationTests.test_configuration_drift_before_preparation_is_rejected) (config='configs/repro/visual_adapter/visual_only.yaml')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/visual-adapter-pilot-20260913/source/tests/repro/test_visual_adapter_validation.py", line 205, in test_configuration_drift_before_preparation_is_rejected
+    with self.subTest(config=name),mock.patch.object(v,'ROOT',source),self.assertRaises(ValueError):
+                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_configuration_drift_before_preparation_is_rejected (repro.test_visual_adapter_validation.VisualValidationTests.test_configuration_drift_before_preparation_is_rejected) (config='configs/repro/visual_adapter/visual_description.yaml')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/visual-adapter-pilot-20260913/source/tests/repro/test_visual_adapter_validation.py", line 205, in test_configuration_drift_before_preparation_is_rejected
+    with self.subTest(config=name),mock.patch.object(v,'ROOT',source),self.assertRaises(ValueError):
+                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 1.917s
+
+FAILED (failures=4)

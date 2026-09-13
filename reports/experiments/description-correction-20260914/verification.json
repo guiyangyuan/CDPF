@@ -1,0 +1,90 @@
+{
+  "status": "verified",
+  "verified_file_count": 42,
+  "correct": {
+    "student": {
+      "S": 64,
+      "M": 48,
+      "D0": 48,
+      "Da": 48,
+      "Z": 64,
+      "F": 61
+    },
+    "classname": {
+      "S": 64,
+      "M": 48,
+      "D0": 61,
+      "Da": 61,
+      "Z": 64,
+      "F": 61
+    },
+    "description": {
+      "S": 64,
+      "M": 48,
+      "D0": 48,
+      "Da": 49,
+      "Z": 65,
+      "F": 61
+    }
+  },
+  "accuracy_pct": {
+    "student": {
+      "S": 32.0,
+      "M": 24.0,
+      "D0": 24.0,
+      "Da": 24.0,
+      "Z": 32.0,
+      "F": 30.5
+    },
+    "classname": {
+      "S": 32.0,
+      "M": 24.0,
+      "D0": 30.5,
+      "Da": 30.5,
+      "Z": 32.0,
+      "F": 30.5
+    },
+    "description": {
+      "S": 32.0,
+      "M": 24.0,
+      "D0": 24.0,
+      "Da": 24.5,
+      "Z": 32.5,
+      "F": 30.5
+    }
+  },
+  "comparisons": {
+    "description.Z - student.S": {
+      "gain_pp": 0.5,
+      "corrected": 1,
+      "harmed": 0,
+      "passes_1pp": false
+    },
+    "description.Z - student.F": {
+      "gain_pp": 2.0,
+      "corrected": 16,
+      "harmed": 12,
+      "passes_1pp": true
+    },
+    "description.Z - classname.Z": {
+      "gain_pp": 0.5,
+      "corrected": 1,
+      "harmed": 0,
+      "passes_1pp": false
+    }
+  },
+  "continuation_signal": false,
+  "student_preservation_observed": {
+    "classname": {
+      "max_abs_logit_diff": 0.0,
+      "max_abs_prompt_diff": 0.0
+    },
+    "description": {
+      "max_abs_logit_diff": 0.0,
+      "max_abs_prompt_diff": 0.0
+    }
+  },
+  "checkpoint_count": 3,
+  "new_training_or_gpu_inference": 0,
+  "scope": "Aircraft seed1 Base validation only"
+}

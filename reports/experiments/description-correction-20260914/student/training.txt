@@ -1,0 +1,354 @@
+Setting fixed seed: 1
+***************
+** Arguments **
+***************
+backbone: 
+config_file: /root/autodl-tmp/textconsistency/releases/description-correction-20260914-ff4aa5e/configs/repro/description_correction/student.yaml
+dataset_config_file: /root/autodl-tmp/textconsistency/releases/description-correction-20260914-ff4aa5e/configs/datasets/fgvc_aircraft.yaml
+eval_only: False
+head: 
+load_epoch: None
+model_dir: 
+no_train: False
+opts: ['USE_CUDA', 'True', 'TRAINER.TEXTCONSISTENCY.DEVICE', 'cuda', 'TRAINER.TEXTCONSISTENCY.CLIP_PATH', '/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt', 'TEST.NO_TEST', 'True']
+output_dir: /root/autodl-tmp/textconsistency/runs/description-correction-20260914-ff4aa5e/student/model
+resume: 
+root: /root/autodl-tmp/textconsistency/data
+seed: 1
+source_domains: None
+target_domains: None
+trainer: 
+transforms: None
+************
+** Config **
+************
+DATALOADER:
+  K_TRANSFORMS: 1
+  NUM_WORKERS: 0
+  RETURN_IMG0: False
+  TEST:
+    BATCH_SIZE: 16
+    SAMPLER: SequentialSampler
+  TRAIN_U:
+    BATCH_SIZE: 32
+    N_DOMAIN: 0
+    N_INS: 16
+    SAME_AS_X: True
+    SAMPLER: RandomSampler
+  TRAIN_X:
+    BATCH_SIZE: 16
+    N_DOMAIN: 0
+    N_INS: 16
+    SAMPLER: RandomSampler
+DATASET:
+  ALL_AS_UNLABELED: False
+  CIFAR_C_LEVEL: 1
+  CIFAR_C_TYPE: 
+  NAME: FGVCAircraft
+  NUM_LABELED: -1
+  NUM_SHOTS: 16
+  ROOT: /root/autodl-tmp/textconsistency/data
+  SOURCE_DOMAINS: ()
+  STL10_FOLD: -1
+  SUBSAMPLE_CLASSES: base
+  TARGET_DOMAINS: ()
+  VAL_PERCENT: 0.1
+INPUT:
+  COLORJITTER_B: 0.4
+  COLORJITTER_C: 0.4
+  COLORJITTER_H: 0.1
+  COLORJITTER_S: 0.4
+  CROP_PADDING: 4
+  CUTOUT_LEN: 16
+  CUTOUT_N: 1
+  GB_K: 21
+  GB_P: 0.5
+  GN_MEAN: 0.0
+  GN_STD: 0.15
+  INTERPOLATION: bicubic
+  NO_TRANSFORM: False
+  PIXEL_MEAN: [0.48145466, 0.4578275, 0.40821073]
+  PIXEL_STD: [0.26862954, 0.26130258, 0.27577711]
+  RANDAUGMENT_M: 10
+  RANDAUGMENT_N: 2
+  RGS_P: 0.2
+  RRCROP_SCALE: (0.08, 1.0)
+  SIZE: (224, 224)
+  TRANSFORMS: ('random_resized_crop', 'random_flip', 'normalize')
+MODEL:
+  BACKBONE:
+    NAME: ViT-B/16
+    PRETRAINED: True
+  HEAD:
+    ACTIVATION: relu
+    BN: True
+    DROPOUT: 0.0
+    HIDDEN_LAYERS: ()
+    NAME: 
+  INIT_WEIGHTS: 
+OPTIM:
+  ADAM_BETA1: 0.9
+  ADAM_BETA2: 0.999
+  BASE_LR_MULT: 0.1
+  GAMMA: 0.1
+  LR: 0.002
+  LR_SCHEDULER: cosine
+  MAX_EPOCH: 20
+  MOMENTUM: 0.9
+  NAME: sgd
+  NEW_LAYERS: ()
+  RMSPROP_ALPHA: 0.99
+  SGD_DAMPNING: 0
+  SGD_NESTEROV: False
+  STAGED_LR: False
+  STEPSIZE: (-1,)
+  WARMUP_CONS_LR: 1e-05
+  WARMUP_EPOCH: 1
+  WARMUP_MIN_LR: 1e-05
+  WARMUP_RECOUNT: True
+  WARMUP_TYPE: constant
+  WEIGHT_DECAY: 0.0005
+OUTPUT_DIR: /root/autodl-tmp/textconsistency/runs/description-correction-20260914-ff4aa5e/student/model
+RESUME: 
+SEED: 1
+TEST:
+  COMPUTE_CMAT: False
+  EVALUATOR: Classification
+  FINAL_MODEL: last_step
+  NO_TEST: True
+  PER_CLASS_RESULT: False
+  SPLIT: val
+TRAIN:
+  CHECKPOINT_FREQ: 0
+  COUNT_ITER: train_x
+  PRINT_FREQ: 10
+TRAINER:
+  CDAC:
+    CLASS_LR_MULTI: 10
+    P_THRESH: 0.95
+    RAMPUP_COEF: 30
+    RAMPUP_ITRS: 1000
+    STRONG_TRANSFORMS: ()
+    TOPK_MATCH: 5
+  COCOOP:
+    CTX_INIT: 
+    N_CTX: 16
+    PREC: fp16
+  COOP:
+    CLASS_TOKEN_POSITION: end
+    CSC: False
+    CTX_INIT: False
+    N_CTX: 16
+    PREC: fp16
+    W: 2.0
+  CROSSGRAD:
+    ALPHA_D: 0.5
+    ALPHA_F: 0.5
+    EPS_D: 1.0
+    EPS_F: 1.0
+  DAEL:
+    CONF_THRE: 0.95
+    STRONG_TRANSFORMS: ()
+    WEIGHT_U: 0.5
+  DAELDG:
+    CONF_THRE: 0.95
+    STRONG_TRANSFORMS: ()
+    WEIGHT_U: 0.5
+  DDAIG:
+    ALPHA: 0.5
+    CLAMP: False
+    CLAMP_MAX: 1.0
+    CLAMP_MIN: -1.0
+    G_ARCH: 
+    LMDA: 0.3
+    WARMUP: 0
+  DOMAINMIX:
+    ALPHA: 1.0
+    BETA: 1.0
+    TYPE: crossdomain
+  ENTMIN:
+    LMDA: 0.001
+  FIXMATCH:
+    CONF_THRE: 0.95
+    STRONG_TRANSFORMS: ()
+    WEIGHT_U: 1.0
+  M3SDA:
+    LMDA: 0.5
+    N_STEP_F: 4
+  MCD:
+    N_STEP_F: 4
+  MEANTEACHER:
+    EMA_ALPHA: 0.999
+    RAMPUP: 5
+    WEIGHT_U: 1.0
+  MIXMATCH:
+    MIXUP_BETA: 0.75
+    RAMPUP: 20000
+    TEMP: 2.0
+    WEIGHT_U: 100.0
+  MME:
+    LMDA: 0.1
+  NAME: CoOp_TextConsistency_Correction
+  SE:
+    CONF_THRE: 0.95
+    EMA_ALPHA: 0.999
+    RAMPUP: 300
+  TEXTCONSISTENCY:
+    ABLATION_GROUP: full
+    ADAPTIVE_CE_WEIGHT: 0.0
+    AGGREGATION: mean
+    CLIP_PATH: /root/autodl-tmp/textconsistency/assets/ViT-B-16.pt
+    CONSISTENCY_TEMP: 1.0
+    CONSISTENCY_WEIGHT: 1.0
+    CONTRASTIVE_WEIGHT: 0.0
+    CORRECTION_TEXT: description
+    DEVICE: cuda
+    DIVERSITY_WEIGHT: 0.0
+    ENSEMBLE_ALPHA: 0.5
+    INFERENCE_BRANCH: student
+    KD_LOSS_MODE: full_kl
+    KD_TEMP: 2.0
+    KD_WEIGHT: 0.0
+    N_CTX: 4
+    N_GROUPS: 4
+    N_VIEWS: 20
+    ORDER_SEED: 0
+    PREC: fp32
+    TEXT_BATCH_SIZE: 32
+    USE_FEATURE_ADAPTER: False
+    USE_VISUAL_ADAPTER: False
+    VIEW_ORDER: contiguous
+    VISUAL_ADAPTER_DIM: 64
+    VISUAL_ADAPTER_SCALE: 0.2
+USE_CUDA: True
+VERBOSE: True
+VERSION: 1
+Loading trainer: CoOp_TextConsistency_Correction
+Loading dataset: FGVCAircraft
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_1.pkl
+SUBSAMPLE BASE CLASSES!
+Building transform_train
++ random resized crop (size=(224, 224), scale=(0.08, 1.0))
++ random flip
++ to torch tensor of range [0, 1]
++ normalization (mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711])
+Building transform_test
++ resize the smaller edge to 224
++ 224x224 center crop
++ to torch tensor of range [0, 1]
++ normalization (mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711])
+---------  ------------
+Dataset    FGVCAircraft
+# classes  50
+# train_x  800
+# val      200
+# test     1,666
+---------  ------------
+build model vit is True
+Effective description counts: {"707-320": 20, "727-200": 20, "737-200": 19, "737-300": 19, "737-400": 16, "737-500": 19, "737-600": 20, "737-700": 19, "737-800": 19, "737-900": 18, "747-100": 20, "747-200": 17, "747-300": 20, "747-400": 18, "757-200": 20, "757-300": 20, "767-200": 18, "767-300": 18, "767-400": 18, "777-200": 19, "777-300": 18, "A300B4": 20, "A310": 20, "A318": 16, "A319": 19, "A320": 18, "A321": 20, "A330-200": 16, "A330-300": 18, "A340-200": 19, "A340-300": 20, "A340-500": 20, "A340-600": 19, "A380": 19, "ATR-42": 17, "ATR-72": 15, "An-12": 9, "BAE 146-200": 20, "BAE 146-300": 19, "BAE-125": 20, "Beechcraft 1900": 19, "Boeing 717": 16, "C-130": 8, "C-47": 19, "CRJ-200": 20, "CRJ-700": 18, "CRJ-900": 20, "Cessna 172": 12, "Cessna 208": 19, "Cessna 525": 19}
+Effective protocol: {"code_sha256": "84c7fa79d54a03edf4549cabd128080dfd648d9e0e34cd7a522dd06fe2fd4ddc", "cuda_runtime": "12.8", "dataset": "FGVCAircraft", "description_counts": [20, 20, 19, 19, 16, 19, 20, 19, 19, 18, 20, 17, 20, 18, 20, 20, 18, 18, 18, 19, 18, 20, 20, 16, 19, 18, 20, 16, 18, 19, 20, 20, 19, 19, 17, 15, 9, 20, 19, 20, 19, 16, 8, 19, 20, 18, 20, 12, 19, 19], "device": "cuda", "effective_losses": {"adaptive_ce": 0.0, "contrastive": 0.0, "correction_ce": 0.0, "diversity": 0.0, "kd": 0.0}, "gpu": "NVIDIA GeForce RTX 4090", "loss_identity": {"active": false, "effective_weight": 0.0, "format": 1, "mode": "full_kl", "non_target_weighting": "none_full_distribution_kl", "temperature": 2.0}, "model_signature": {"ablation_group": null, "aggregation": "mean", "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f", "correction": {"classname_template": null, "coefficient": 1.0, "enabled": false, "inference": "S+R", "objective": "CE(S,y)", "reference_feature": "renormalized_unit_clip_image_for_exact_zero_residual", "residual": "Da-D0", "student_feature": "original_unit_clip_image", "text_source": "description", "version": 1}, "feature_adapter": false, "format": 4, "loss_identity": {"active": false, "effective_weight": 0.0, "format": 1, "mode": "full_kl", "non_target_weighting": "none_full_distribution_kl", "temperature": 2.0}, "n_ctx": 4, "n_groups": 4, "n_views": 20, "order_seed": 0, "order_version": 1, "template_sha256": "d86833c2483c1d12907abeb6198412f1d0a020bd12999a3f170967a7f549e3b8", "trainer": "CoOp_TextConsistency_Correction", "view_order": "contiguous"}, "python": "3.12.3", "seed": 1, "shots": 16, "subsample": "base", "test_samples_sha256": "78dd9ed86b8d2d13c40d88fac9b778ec450b322707c44347521c07e7db9b714a", "torch": "2.8.0+cu128", "train_samples_sha256": "ae5851085ef5e74b7cb612cda7454fde300601ef14ad21b707bbbfbbd3c85e9a", "trainable_parameters": 2048, "val_samples_sha256": "7ac44ab40ea24086902991743d3b51720e467204034efd2b5a98352416fd02bb", "view_order_manifest": {"classes": [{"classname": "707-320", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "727-200", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "737-200", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-300", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-400", "count": 16, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}, {"classname": "737-500", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-600", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "737-700", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-800", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-900", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "747-100", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "747-200", "count": 17, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]}, {"classname": "747-300", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "747-400", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "757-200", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "757-300", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "767-200", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "767-300", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "767-400", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "777-200", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "777-300", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "A300B4", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A310", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A318", "count": 16, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}, {"classname": "A319", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "A320", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "A321", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A330-200", "count": 16, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}, {"classname": "A330-300", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "A340-200", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "A340-300", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A340-500", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A340-600", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "A380", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "ATR-42", "count": 17, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]}, {"classname": "ATR-72", "count": 15, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]}, {"classname": "An-12", "count": 9, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8]}, {"classname": "BAE 146-200", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "BAE 146-300", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "BAE-125", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "Beechcraft 1900", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "Boeing 717", "count": 16, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}, {"classname": "C-130", "count": 8, "order": [0, 1, 2, 3, 4, 5, 6, 7]}, {"classname": "C-47", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "CRJ-200", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "CRJ-700", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "CRJ-900", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "Cessna 172", "count": 12, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}, {"classname": "Cessna 208", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "Cessna 525", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}], "n_groups": 4, "policy": "contiguous", "seed": 0, "sha256": "85e521430b8c8de02c7401994a69bcfd8d5c06ab804803a988bcba3359cc9a6a", "version": 1}}
+Loading evaluator: Classification
+No checkpoint found, train from scratch
+epoch [1/20] batch [10/50] time 0.285 (0.336) data 0.226 (0.245) loss 2.3408 (3.1785) loss_student 2.3408 (3.1785) loss_correction 0.0000 (0.0000) acc 25.0000 (19.3750) lr 1.0000e-05 eta 0:05:32
+epoch [1/20] batch [20/50] time 0.244 (0.307) data 0.175 (0.229) loss 2.9269 (2.9412) loss_student 2.9269 (2.9412) loss_correction 0.0000 (0.0000) acc 12.5000 (17.5000) lr 1.0000e-05 eta 0:05:00
+epoch [1/20] batch [30/50] time 0.242 (0.290) data 0.174 (0.216) loss 2.0393 (2.8268) loss_student 2.0393 (2.8268) loss_correction 0.0000 (0.0000) acc 43.7500 (18.7500) lr 1.0000e-05 eta 0:04:41
+epoch [1/20] batch [40/50] time 0.283 (0.282) data 0.219 (0.210) loss 2.4433 (2.6969) loss_student 2.4433 (2.6969) loss_correction 0.0000 (0.0000) acc 25.0000 (20.9375) lr 1.0000e-05 eta 0:04:30
+epoch [1/20] batch [50/50] time 0.255 (0.275) data 0.192 (0.204) loss 2.2595 (2.6373) loss_student 2.2595 (2.6373) loss_correction 0.0000 (0.0000) acc 12.5000 (21.6250) lr 2.0000e-03 eta 0:04:21
+epoch [2/20] batch [10/50] time 0.257 (0.252) data 0.194 (0.185) loss 2.5976 (2.5166) loss_student 2.5976 (2.5166) loss_correction 0.0000 (0.0000) acc 12.5000 (22.5000) lr 2.0000e-03 eta 0:03:56
+epoch [2/20] batch [20/50] time 0.234 (0.252) data 0.174 (0.185) loss 2.7499 (2.4819) loss_student 2.7499 (2.4819) loss_correction 0.0000 (0.0000) acc 18.7500 (24.3750) lr 2.0000e-03 eta 0:03:54
+epoch [2/20] batch [30/50] time 0.262 (0.255) data 0.191 (0.188) loss 2.3725 (2.4268) loss_student 2.3725 (2.4268) loss_correction 0.0000 (0.0000) acc 31.2500 (26.2500) lr 2.0000e-03 eta 0:03:54
+epoch [2/20] batch [40/50] time 0.291 (0.258) data 0.233 (0.190) loss 2.0067 (2.3632) loss_student 2.0067 (2.3632) loss_correction 0.0000 (0.0000) acc 31.2500 (26.5625) lr 2.0000e-03 eta 0:03:54
+epoch [2/20] batch [50/50] time 0.234 (0.257) data 0.167 (0.190) loss 2.4480 (2.3753) loss_student 2.4480 (2.3753) loss_correction 0.0000 (0.0000) acc 31.2500 (26.1250) lr 1.9877e-03 eta 0:03:51
+epoch [3/20] batch [10/50] time 0.278 (0.258) data 0.207 (0.189) loss 2.5614 (2.3202) loss_student 2.5614 (2.3202) loss_correction 0.0000 (0.0000) acc 6.2500 (18.1250) lr 1.9877e-03 eta 0:03:49
+epoch [3/20] batch [20/50] time 0.260 (0.254) data 0.194 (0.186) loss 1.7562 (2.3258) loss_student 1.7562 (2.3258) loss_correction 0.0000 (0.0000) acc 37.5000 (21.2500) lr 1.9877e-03 eta 0:03:43
+epoch [3/20] batch [30/50] time 0.257 (0.254) data 0.197 (0.186) loss 2.3273 (2.2611) loss_student 2.3273 (2.2611) loss_correction 0.0000 (0.0000) acc 12.5000 (24.7917) lr 1.9877e-03 eta 0:03:40
+epoch [3/20] batch [40/50] time 0.259 (0.257) data 0.188 (0.189) loss 2.5084 (2.2506) loss_student 2.5084 (2.2506) loss_correction 0.0000 (0.0000) acc 25.0000 (27.5000) lr 1.9877e-03 eta 0:03:41
+epoch [3/20] batch [50/50] time 0.245 (0.261) data 0.173 (0.192) loss 2.4385 (2.2230) loss_student 2.4385 (2.2230) loss_correction 0.0000 (0.0000) acc 31.2500 (28.6250) lr 1.9511e-03 eta 0:03:42
+epoch [4/20] batch [10/50] time 0.295 (0.290) data 0.224 (0.218) loss 2.1195 (2.2156) loss_student 2.1195 (2.2156) loss_correction 0.0000 (0.0000) acc 31.2500 (25.6250) lr 1.9511e-03 eta 0:04:03
+epoch [4/20] batch [20/50] time 0.261 (0.287) data 0.189 (0.215) loss 2.8948 (2.2518) loss_student 2.8948 (2.2518) loss_correction 0.0000 (0.0000) acc 25.0000 (31.2500) lr 1.9511e-03 eta 0:03:58
+epoch [4/20] batch [30/50] time 0.259 (0.282) data 0.197 (0.212) loss 1.9150 (2.2243) loss_student 1.9150 (2.2243) loss_correction 0.0000 (0.0000) acc 50.0000 (32.5000) lr 1.9511e-03 eta 0:03:51
+epoch [4/20] batch [40/50] time 0.284 (0.278) data 0.213 (0.208) loss 1.8944 (2.2072) loss_student 1.8944 (2.2072) loss_correction 0.0000 (0.0000) acc 50.0000 (32.9688) lr 1.9511e-03 eta 0:03:45
+epoch [4/20] batch [50/50] time 0.261 (0.274) data 0.190 (0.204) loss 2.2617 (2.2614) loss_student 2.2617 (2.2614) loss_correction 0.0000 (0.0000) acc 37.5000 (32.0000) lr 1.8910e-03 eta 0:03:39
+epoch [5/20] batch [10/50] time 0.242 (0.271) data 0.174 (0.203) loss 2.5374 (2.1288) loss_student 2.5374 (2.1288) loss_correction 0.0000 (0.0000) acc 18.7500 (30.6250) lr 1.8910e-03 eta 0:03:34
+epoch [5/20] batch [20/50] time 0.274 (0.271) data 0.202 (0.204) loss 2.2248 (2.1123) loss_student 2.2248 (2.1123) loss_correction 0.0000 (0.0000) acc 18.7500 (30.6250) lr 1.8910e-03 eta 0:03:31
+epoch [5/20] batch [30/50] time 0.290 (0.270) data 0.222 (0.203) loss 1.8938 (2.1155) loss_student 1.8938 (2.1155) loss_correction 0.0000 (0.0000) acc 31.2500 (30.6250) lr 1.8910e-03 eta 0:03:27
+epoch [5/20] batch [40/50] time 0.291 (0.269) data 0.223 (0.202) loss 2.0941 (2.1188) loss_student 2.0941 (2.1188) loss_correction 0.0000 (0.0000) acc 43.7500 (31.0938) lr 1.8910e-03 eta 0:03:24
+epoch [5/20] batch [50/50] time 0.264 (0.269) data 0.193 (0.202) loss 2.7871 (2.1556) loss_student 2.7871 (2.1556) loss_correction 0.0000 (0.0000) acc 0.0000 (30.5000) lr 1.8090e-03 eta 0:03:21
+epoch [6/20] batch [10/50] time 0.240 (0.261) data 0.172 (0.194) loss 2.2205 (2.1665) loss_student 2.2205 (2.1665) loss_correction 0.0000 (0.0000) acc 43.7500 (26.2500) lr 1.8090e-03 eta 0:03:12
+epoch [6/20] batch [20/50] time 0.262 (0.263) data 0.194 (0.196) loss 2.3914 (2.1508) loss_student 2.3914 (2.1508) loss_correction 0.0000 (0.0000) acc 25.0000 (28.7500) lr 1.8090e-03 eta 0:03:11
+epoch [6/20] batch [30/50] time 0.272 (0.266) data 0.204 (0.199) loss 1.7294 (2.1473) loss_student 1.7294 (2.1473) loss_correction 0.0000 (0.0000) acc 50.0000 (31.8750) lr 1.8090e-03 eta 0:03:11
+epoch [6/20] batch [40/50] time 0.299 (0.271) data 0.234 (0.203) loss 1.9642 (2.1468) loss_student 1.9642 (2.1468) loss_correction 0.0000 (0.0000) acc 43.7500 (32.0312) lr 1.8090e-03 eta 0:03:12
+epoch [6/20] batch [50/50] time 0.257 (0.270) data 0.189 (0.201) loss 2.6159 (2.1589) loss_student 2.6159 (2.1589) loss_correction 0.0000 (0.0000) acc 18.7500 (32.2500) lr 1.7071e-03 eta 0:03:08
+epoch [7/20] batch [10/50] time 0.370 (0.302) data 0.298 (0.230) loss 2.2181 (2.0835) loss_student 2.2181 (2.0835) loss_correction 0.0000 (0.0000) acc 31.2500 (33.1250) lr 1.7071e-03 eta 0:03:28
+epoch [7/20] batch [20/50] time 0.266 (0.304) data 0.195 (0.233) loss 2.5133 (2.0996) loss_student 2.5133 (2.0996) loss_correction 0.0000 (0.0000) acc 12.5000 (32.8125) lr 1.7071e-03 eta 0:03:26
+epoch [7/20] batch [30/50] time 0.249 (0.288) data 0.177 (0.218) loss 2.3311 (2.1113) loss_student 2.3311 (2.1113) loss_correction 0.0000 (0.0000) acc 31.2500 (33.7500) lr 1.7071e-03 eta 0:03:13
+epoch [7/20] batch [40/50] time 0.258 (0.293) data 0.186 (0.222) loss 2.0745 (2.1524) loss_student 2.0745 (2.1524) loss_correction 0.0000 (0.0000) acc 25.0000 (31.5625) lr 1.7071e-03 eta 0:03:13
+epoch [7/20] batch [50/50] time 0.274 (0.288) data 0.203 (0.218) loss 2.6055 (2.1644) loss_student 2.6055 (2.1644) loss_correction 0.0000 (0.0000) acc 12.5000 (32.1250) lr 1.5878e-03 eta 0:03:07
+epoch [8/20] batch [10/50] time 0.261 (0.260) data 0.189 (0.189) loss 2.2969 (2.1098) loss_student 2.2969 (2.1098) loss_correction 0.0000 (0.0000) acc 18.7500 (31.2500) lr 1.5878e-03 eta 0:02:46
+epoch [8/20] batch [20/50] time 0.276 (0.265) data 0.204 (0.193) loss 1.7013 (2.0230) loss_student 1.7013 (2.0230) loss_correction 0.0000 (0.0000) acc 56.2500 (34.3750) lr 1.5878e-03 eta 0:02:46
+epoch [8/20] batch [30/50] time 0.302 (0.264) data 0.231 (0.192) loss 1.9478 (2.0503) loss_student 1.9478 (2.0503) loss_correction 0.0000 (0.0000) acc 43.7500 (33.3333) lr 1.5878e-03 eta 0:02:43
+epoch [8/20] batch [40/50] time 0.224 (0.264) data 0.153 (0.193) loss 2.0730 (2.0729) loss_student 2.0730 (2.0729) loss_correction 0.0000 (0.0000) acc 31.2500 (32.8125) lr 1.5878e-03 eta 0:02:41
+epoch [8/20] batch [50/50] time 0.280 (0.264) data 0.209 (0.192) loss 2.3501 (2.1077) loss_student 2.3501 (2.1077) loss_correction 0.0000 (0.0000) acc 18.7500 (32.5000) lr 1.4540e-03 eta 0:02:38
+epoch [9/20] batch [10/50] time 0.294 (0.263) data 0.223 (0.192) loss 1.9726 (2.1033) loss_student 1.9726 (2.1033) loss_correction 0.0000 (0.0000) acc 37.5000 (36.8750) lr 1.4540e-03 eta 0:02:35
+epoch [9/20] batch [20/50] time 0.270 (0.261) data 0.198 (0.190) loss 2.3646 (2.1308) loss_student 2.3646 (2.1308) loss_correction 0.0000 (0.0000) acc 25.0000 (35.3125) lr 1.4540e-03 eta 0:02:31
+epoch [9/20] batch [30/50] time 0.276 (0.260) data 0.206 (0.189) loss 2.2729 (2.1524) loss_student 2.2729 (2.1524) loss_correction 0.0000 (0.0000) acc 31.2500 (33.9583) lr 1.4540e-03 eta 0:02:28
+epoch [9/20] batch [40/50] time 0.265 (0.259) data 0.194 (0.188) loss 2.2743 (2.1338) loss_student 2.2743 (2.1338) loss_correction 0.0000 (0.0000) acc 25.0000 (33.7500) lr 1.4540e-03 eta 0:02:24
+epoch [9/20] batch [50/50] time 0.242 (0.263) data 0.174 (0.192) loss 2.0173 (2.0957) loss_student 2.0173 (2.0957) loss_correction 0.0000 (0.0000) acc 37.5000 (35.2500) lr 1.3090e-03 eta 0:02:24
+epoch [10/20] batch [10/50] time 0.313 (0.295) data 0.241 (0.225) loss 1.7292 (2.0760) loss_student 1.7292 (2.0760) loss_correction 0.0000 (0.0000) acc 43.7500 (33.7500) lr 1.3090e-03 eta 0:02:39
+epoch [10/20] batch [20/50] time 0.248 (0.284) data 0.177 (0.213) loss 1.3719 (2.0474) loss_student 1.3719 (2.0474) loss_correction 0.0000 (0.0000) acc 75.0000 (37.1875) lr 1.3090e-03 eta 0:02:30
+epoch [10/20] batch [30/50] time 0.295 (0.277) data 0.223 (0.206) loss 1.9158 (2.1006) loss_student 1.9158 (2.1006) loss_correction 0.0000 (0.0000) acc 56.2500 (35.2083) lr 1.3090e-03 eta 0:02:24
+epoch [10/20] batch [40/50] time 0.235 (0.271) data 0.163 (0.200) loss 1.8917 (2.0904) loss_student 1.8917 (2.0904) loss_correction 0.0000 (0.0000) acc 18.7500 (34.5312) lr 1.3090e-03 eta 0:02:18
+epoch [10/20] batch [50/50] time 0.272 (0.271) data 0.200 (0.200) loss 1.8917 (2.1029) loss_student 1.8917 (2.1029) loss_correction 0.0000 (0.0000) acc 43.7500 (34.3750) lr 1.1564e-03 eta 0:02:15
+epoch [11/20] batch [10/50] time 0.271 (0.268) data 0.200 (0.197) loss 1.5791 (1.9855) loss_student 1.5791 (1.9855) loss_correction 0.0000 (0.0000) acc 56.2500 (38.7500) lr 1.1564e-03 eta 0:02:11
+epoch [11/20] batch [20/50] time 0.309 (0.270) data 0.238 (0.199) loss 2.2894 (1.9986) loss_student 2.2894 (1.9986) loss_correction 0.0000 (0.0000) acc 18.7500 (37.8125) lr 1.1564e-03 eta 0:02:09
+epoch [11/20] batch [30/50] time 0.239 (0.268) data 0.169 (0.197) loss 2.0869 (2.0282) loss_student 2.0869 (2.0282) loss_correction 0.0000 (0.0000) acc 37.5000 (38.7500) lr 1.1564e-03 eta 0:02:06
+epoch [11/20] batch [40/50] time 0.246 (0.267) data 0.175 (0.197) loss 2.7931 (2.0551) loss_student 2.7931 (2.0551) loss_correction 0.0000 (0.0000) acc 31.2500 (37.6562) lr 1.1564e-03 eta 0:02:02
+epoch [11/20] batch [50/50] time 0.251 (0.268) data 0.179 (0.197) loss 2.4272 (2.0627) loss_student 2.4272 (2.0627) loss_correction 0.0000 (0.0000) acc 25.0000 (37.6250) lr 1.0000e-03 eta 0:02:00
+epoch [12/20] batch [10/50] time 0.275 (0.263) data 0.204 (0.191) loss 2.2300 (2.0979) loss_student 2.2300 (2.0979) loss_correction 0.0000 (0.0000) acc 31.2500 (38.7500) lr 1.0000e-03 eta 0:01:55
+epoch [12/20] batch [20/50] time 0.264 (0.264) data 0.196 (0.196) loss 1.8060 (2.0223) loss_student 1.8060 (2.0223) loss_correction 0.0000 (0.0000) acc 43.7500 (37.1875) lr 1.0000e-03 eta 0:01:53
+epoch [12/20] batch [30/50] time 0.250 (0.265) data 0.179 (0.196) loss 1.7689 (2.0571) loss_student 1.7689 (2.0571) loss_correction 0.0000 (0.0000) acc 56.2500 (36.6667) lr 1.0000e-03 eta 0:01:51
+epoch [12/20] batch [40/50] time 0.275 (0.265) data 0.204 (0.195) loss 1.9243 (2.0384) loss_student 1.9243 (2.0384) loss_correction 0.0000 (0.0000) acc 43.7500 (36.0938) lr 1.0000e-03 eta 0:01:48
+epoch [12/20] batch [50/50] time 0.233 (0.266) data 0.175 (0.196) loss 1.9946 (2.0444) loss_student 1.9946 (2.0444) loss_correction 0.0000 (0.0000) acc 31.2500 (35.6250) lr 8.4357e-04 eta 0:01:46
+epoch [13/20] batch [10/50] time 0.304 (0.274) data 0.235 (0.204) loss 1.9064 (1.9163) loss_student 1.9064 (1.9163) loss_correction 0.0000 (0.0000) acc 25.0000 (39.3750) lr 8.4357e-04 eta 0:01:46
+epoch [13/20] batch [20/50] time 0.239 (0.267) data 0.169 (0.197) loss 1.9237 (1.9667) loss_student 1.9237 (1.9667) loss_correction 0.0000 (0.0000) acc 37.5000 (36.8750) lr 8.4357e-04 eta 0:01:41
+epoch [13/20] batch [30/50] time 0.246 (0.263) data 0.176 (0.192) loss 2.5821 (1.9934) loss_student 2.5821 (1.9934) loss_correction 0.0000 (0.0000) acc 12.5000 (37.5000) lr 8.4357e-04 eta 0:01:37
+epoch [13/20] batch [40/50] time 0.249 (0.259) data 0.179 (0.189) loss 2.6506 (2.0198) loss_student 2.6506 (2.0198) loss_correction 0.0000 (0.0000) acc 25.0000 (37.6562) lr 8.4357e-04 eta 0:01:33
+epoch [13/20] batch [50/50] time 0.259 (0.259) data 0.189 (0.188) loss 1.9047 (2.0493) loss_student 1.9047 (2.0493) loss_correction 0.0000 (0.0000) acc 50.0000 (37.5000) lr 6.9098e-04 eta 0:01:30
+epoch [14/20] batch [10/50] time 0.350 (0.277) data 0.275 (0.205) loss 2.3934 (2.0894) loss_student 2.3934 (2.0894) loss_correction 0.0000 (0.0000) acc 37.5000 (35.0000) lr 6.9098e-04 eta 0:01:34
+epoch [14/20] batch [20/50] time 0.245 (0.272) data 0.174 (0.201) loss 1.7101 (2.0645) loss_student 1.7101 (2.0645) loss_correction 0.0000 (0.0000) acc 43.7500 (34.0625) lr 6.9098e-04 eta 0:01:29
+epoch [14/20] batch [30/50] time 0.232 (0.266) data 0.160 (0.196) loss 2.0957 (2.1204) loss_student 2.0957 (2.1204) loss_correction 0.0000 (0.0000) acc 50.0000 (35.0000) lr 6.9098e-04 eta 0:01:25
+epoch [14/20] batch [40/50] time 0.243 (0.263) data 0.175 (0.193) loss 2.4941 (2.0712) loss_student 2.4941 (2.0712) loss_correction 0.0000 (0.0000) acc 12.5000 (34.8438) lr 6.9098e-04 eta 0:01:21
+epoch [14/20] batch [50/50] time 0.243 (0.263) data 0.172 (0.193) loss 2.4291 (2.0396) loss_student 2.4291 (2.0396) loss_correction 0.0000 (0.0000) acc 37.5000 (35.6250) lr 5.4601e-04 eta 0:01:18
+epoch [15/20] batch [10/50] time 0.248 (0.266) data 0.177 (0.195) loss 2.1007 (1.9977) loss_student 2.1007 (1.9977) loss_correction 0.0000 (0.0000) acc 31.2500 (36.2500) lr 5.4601e-04 eta 0:01:17
+epoch [15/20] batch [20/50] time 0.259 (0.266) data 0.188 (0.196) loss 1.7614 (2.0266) loss_student 1.7614 (2.0266) loss_correction 0.0000 (0.0000) acc 50.0000 (37.5000) lr 5.4601e-04 eta 0:01:14
+epoch [15/20] batch [30/50] time 0.265 (0.269) data 0.194 (0.198) loss 1.4228 (1.9946) loss_student 1.4228 (1.9946) loss_correction 0.0000 (0.0000) acc 43.7500 (37.0833) lr 5.4601e-04 eta 0:01:12
+epoch [15/20] batch [40/50] time 0.273 (0.270) data 0.200 (0.200) loss 1.7576 (2.0166) loss_student 1.7576 (2.0166) loss_correction 0.0000 (0.0000) acc 25.0000 (35.3125) lr 5.4601e-04 eta 0:01:10
+epoch [15/20] batch [50/50] time 0.289 (0.272) data 0.218 (0.201) loss 2.6739 (2.0343) loss_student 2.6739 (2.0343) loss_correction 0.0000 (0.0000) acc 18.7500 (34.8750) lr 4.1221e-04 eta 0:01:08
+epoch [16/20] batch [10/50] time 0.367 (0.324) data 0.293 (0.252) loss 2.0056 (2.0664) loss_student 2.0056 (2.0664) loss_correction 0.0000 (0.0000) acc 43.7500 (43.7500) lr 4.1221e-04 eta 0:01:17
+epoch [16/20] batch [20/50] time 0.277 (0.294) data 0.206 (0.222) loss 1.8028 (1.9818) loss_student 1.8028 (1.9818) loss_correction 0.0000 (0.0000) acc 31.2500 (42.1875) lr 4.1221e-04 eta 0:01:07
+epoch [16/20] batch [30/50] time 0.286 (0.287) data 0.215 (0.216) loss 2.5241 (2.0252) loss_student 2.5241 (2.0252) loss_correction 0.0000 (0.0000) acc 31.2500 (39.3750) lr 4.1221e-04 eta 0:01:03
+epoch [16/20] batch [40/50] time 0.291 (0.281) data 0.210 (0.210) loss 2.1360 (2.0061) loss_student 2.1360 (2.0061) loss_correction 0.0000 (0.0000) acc 31.2500 (40.0000) lr 4.1221e-04 eta 0:00:59
+epoch [16/20] batch [50/50] time 0.257 (0.279) data 0.188 (0.208) loss 2.4473 (2.0409) loss_student 2.4473 (2.0409) loss_correction 0.0000 (0.0000) acc 18.7500 (38.3750) lr 2.9289e-04 eta 0:00:55
+epoch [17/20] batch [10/50] time 0.295 (0.268) data 0.223 (0.197) loss 1.9260 (1.9367) loss_student 1.9260 (1.9367) loss_correction 0.0000 (0.0000) acc 56.2500 (41.8750) lr 2.9289e-04 eta 0:00:50
+epoch [17/20] batch [20/50] time 0.236 (0.270) data 0.171 (0.201) loss 2.0925 (1.9362) loss_student 2.0925 (1.9362) loss_correction 0.0000 (0.0000) acc 31.2500 (39.3750) lr 2.9289e-04 eta 0:00:48
+epoch [17/20] batch [30/50] time 0.209 (0.265) data 0.142 (0.196) loss 2.5069 (1.9979) loss_student 2.5069 (1.9979) loss_correction 0.0000 (0.0000) acc 25.0000 (38.1250) lr 2.9289e-04 eta 0:00:44
+epoch [17/20] batch [40/50] time 0.244 (0.265) data 0.168 (0.197) loss 2.6635 (1.9891) loss_student 2.6635 (1.9891) loss_correction 0.0000 (0.0000) acc 37.5000 (38.1250) lr 2.9289e-04 eta 0:00:42
+epoch [17/20] batch [50/50] time 0.252 (0.264) data 0.181 (0.196) loss 1.9957 (2.0196) loss_student 1.9957 (2.0196) loss_correction 0.0000 (0.0000) acc 43.7500 (38.2500) lr 1.9098e-04 eta 0:00:39
+epoch [18/20] batch [10/50] time 0.263 (0.266) data 0.192 (0.196) loss 2.1133 (2.1615) loss_student 2.1133 (2.1615) loss_correction 0.0000 (0.0000) acc 25.0000 (31.2500) lr 1.9098e-04 eta 0:00:37
+epoch [18/20] batch [20/50] time 0.283 (0.269) data 0.212 (0.198) loss 2.9043 (2.1005) loss_student 2.9043 (2.1005) loss_correction 0.0000 (0.0000) acc 6.2500 (33.4375) lr 1.9098e-04 eta 0:00:34
+epoch [18/20] batch [30/50] time 0.268 (0.268) data 0.195 (0.197) loss 1.7690 (2.0544) loss_student 1.7690 (2.0544) loss_correction 0.0000 (0.0000) acc 50.0000 (35.6250) lr 1.9098e-04 eta 0:00:32
+epoch [18/20] batch [40/50] time 0.276 (0.267) data 0.218 (0.196) loss 2.2542 (2.0589) loss_student 2.2542 (2.0589) loss_correction 0.0000 (0.0000) acc 18.7500 (34.8438) lr 1.9098e-04 eta 0:00:29
+epoch [18/20] batch [50/50] time 0.305 (0.270) data 0.233 (0.200) loss 1.8561 (2.0109) loss_student 1.8561 (2.0109) loss_correction 0.0000 (0.0000) acc 43.7500 (35.8750) lr 1.0899e-04 eta 0:00:27
+epoch [19/20] batch [10/50] time 0.247 (0.276) data 0.179 (0.208) loss 2.2106 (1.8006) loss_student 2.2106 (1.8006) loss_correction 0.0000 (0.0000) acc 43.7500 (43.1250) lr 1.0899e-04 eta 0:00:24
+epoch [19/20] batch [20/50] time 0.264 (0.293) data 0.197 (0.224) loss 2.2497 (1.9289) loss_student 2.2497 (1.9289) loss_correction 0.0000 (0.0000) acc 31.2500 (38.4375) lr 1.0899e-04 eta 0:00:23
+epoch [19/20] batch [30/50] time 0.261 (0.284) data 0.190 (0.215) loss 2.5387 (1.9808) loss_student 2.5387 (1.9808) loss_correction 0.0000 (0.0000) acc 25.0000 (35.8333) lr 1.0899e-04 eta 0:00:19
+epoch [19/20] batch [40/50] time 0.242 (0.279) data 0.171 (0.209) loss 1.8832 (1.9806) loss_student 1.8832 (1.9806) loss_correction 0.0000 (0.0000) acc 37.5000 (36.0938) lr 1.0899e-04 eta 0:00:16
+epoch [19/20] batch [50/50] time 0.281 (0.278) data 0.210 (0.208) loss 2.0275 (1.9726) loss_student 2.0275 (1.9726) loss_correction 0.0000 (0.0000) acc 31.2500 (37.0000) lr 4.8943e-05 eta 0:00:13
+epoch [20/20] batch [10/50] time 0.284 (0.263) data 0.213 (0.192) loss 1.8180 (1.9341) loss_student 1.8180 (1.9341) loss_correction 0.0000 (0.0000) acc 31.2500 (36.2500) lr 4.8943e-05 eta 0:00:10
+epoch [20/20] batch [20/50] time 0.263 (0.266) data 0.192 (0.195) loss 2.1181 (1.9343) loss_student 2.1181 (1.9343) loss_correction 0.0000 (0.0000) acc 12.5000 (36.2500) lr 4.8943e-05 eta 0:00:07
+epoch [20/20] batch [30/50] time 0.288 (0.262) data 0.216 (0.191) loss 1.7389 (1.8902) loss_student 1.7389 (1.8902) loss_correction 0.0000 (0.0000) acc 50.0000 (38.5417) lr 4.8943e-05 eta 0:00:05
+epoch [20/20] batch [40/50] time 0.250 (0.263) data 0.180 (0.192) loss 2.1673 (1.9264) loss_student 2.1673 (1.9264) loss_correction 0.0000 (0.0000) acc 50.0000 (38.2812) lr 4.8943e-05 eta 0:00:02
+epoch [20/20] batch [50/50] time 0.250 (0.259) data 0.180 (0.188) loss 1.8178 (1.9504) loss_student 1.8178 (1.9504) loss_correction 0.0000 (0.0000) acc 56.2500 (38.0000) lr 1.2312e-05 eta 0:00:00
+Checkpoint saved to /root/autodl-tmp/textconsistency/runs/description-correction-20260914-ff4aa5e/student/model/textconsistency/model.pth.tar-20
+Finish training
+Elapsed: 0:04:29

@@ -1,0 +1,23 @@
+{
+  "state": "launched",
+  "pid": 1287,
+  "started_utc": "2026-09-13T16:51:41.760188+00:00",
+  "hostname": "autodl-container-a5904787c3-600682b1",
+  "source_commit": "ff4aa5e58fdbaf6751ea40349075d7ed4f925c6c",
+  "source_package_sha256": "b05642b3c03c3782778c5ca74f9bfd5267ddd0735070c8233559847e85dcf519",
+  "source": "/root/autodl-tmp/textconsistency/releases/description-correction-20260914-ff4aa5e",
+  "output": "/root/autodl-tmp/textconsistency/runs/description-correction-20260914-ff4aa5e",
+  "command": [
+    "/root/autodl-tmp/textconsistency/.venv/bin/python",
+    "-u",
+    "/root/autodl-tmp/textconsistency/releases/description-correction-20260914-ff4aa5e/scripts/repro/description_correction_pilot.py",
+    "run",
+    "--data-root",
+    "/root/autodl-tmp/textconsistency/data",
+    "--clip-path",
+    "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+    "--output-root",
+    "/root/autodl-tmp/textconsistency/runs/description-correction-20260914-ff4aa5e"
+  ],
+  "power_authorization": "User authorized browser startup and shutdown after result/weight backup."
+}

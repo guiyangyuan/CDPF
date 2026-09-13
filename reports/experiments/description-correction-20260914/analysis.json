@@ -1,0 +1,53 @@
+{
+  "status": "completed",
+  "scope": "Aircraft seed1 Base validation development only",
+  "correct": {
+    "student": {
+      "S": 64,
+      "M": 48,
+      "D0": 48,
+      "Da": 48,
+      "Z": 64,
+      "F": 61
+    },
+    "classname": {
+      "S": 64,
+      "M": 48,
+      "D0": 61,
+      "Da": 61,
+      "Z": 64,
+      "F": 61
+    },
+    "description": {
+      "S": 64,
+      "M": 48,
+      "D0": 48,
+      "Da": 49,
+      "Z": 65,
+      "F": 61
+    }
+  },
+  "n": 200,
+  "comparisons": {
+    "description.Z - student.S": {
+      "gain_pp": 0.5,
+      "corrected": 1,
+      "harmed": 0,
+      "passes_1pp": false
+    },
+    "description.Z - student.F": {
+      "gain_pp": 2.0,
+      "corrected": 16,
+      "harmed": 12,
+      "passes_1pp": true
+    },
+    "description.Z - classname.Z": {
+      "gain_pp": 0.5,
+      "corrected": 1,
+      "harmed": 0,
+      "passes_1pp": false
+    }
+  },
+  "continuation_signal": false,
+  "automatic_expansion": false
+}

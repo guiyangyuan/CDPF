@@ -1,10 +1,10 @@
 {
-  "state": "screening_and_design_complete",
+  "state": "superseded_by_user_method_improvement_goal",
   "candidate_count": 2,
-  "preferred_route": "B_controlled_empirical_study",
+  "preferred_route": "method_improvement",
   "candidate_A": "do_not_implement_without_distinct_mechanism",
-  "candidate_B": "conditional_research_candidate",
-  "school_requires_new_algorithm": "pending_user_reply",
+  "candidate_B": "rejected_as_current_topic_by_user",
+  "school_requires_new_algorithm": "not_needed_to_choose_route_user_explicitly_wants_method_improvement",
   "final_topic_approved": false,
   "new_algorithm_novelty_validated": false,
   "new_dataset_candidates": [
@@ -20,5 +20,10 @@
   "gpu_queue_created": false,
   "new_training_runs": 0,
   "h1_weighted_nckd_remains_stopped": true,
-  "next_action": "Local asset/split verification, external-code/protocol audit, and cost instrumentation design; clarify eligibility of empirical-paper route before GPU expenditure."
+  "next_action": "Develop a shared visual-residual adapter prototype with matched no-description-supervision control; verify CPU gradients, checkpoint identity and Base-to-Novel reload. No GPU queue yet.",
+  "current_route": false,
+  "historical_preferred_route": "B_controlled_empirical_study",
+  "pilot_plan_status": "cancelled",
+  "complete_matrix_plan_status": "cancelled",
+  "superseded_by": "docs/plans/2026-09-13-model-improvement.md"
 }

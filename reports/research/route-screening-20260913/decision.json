@@ -1,0 +1,24 @@
+{
+  "state": "screening_and_design_complete",
+  "candidate_count": 2,
+  "preferred_route": "B_controlled_empirical_study",
+  "candidate_A": "do_not_implement_without_distinct_mechanism",
+  "candidate_B": "conditional_research_candidate",
+  "school_requires_new_algorithm": "pending_user_reply",
+  "final_topic_approved": false,
+  "new_algorithm_novelty_validated": false,
+  "new_dataset_candidates": [
+    "oxford_pets",
+    "eurosat"
+  ],
+  "new_dataset_images_validated": false,
+  "pilot_training_runs_proposed": 8,
+  "pilot_gpu_hours_cap_proposed": 2,
+  "complete_matrix_training_runs_proposed": 24,
+  "complete_matrix_includes_pilot": true,
+  "gpu_execution_authorized_for_this_plan": false,
+  "gpu_queue_created": false,
+  "new_training_runs": 0,
+  "h1_weighted_nckd_remains_stopped": true,
+  "next_action": "Local asset/split verification, external-code/protocol audit, and cost instrumentation design; clarify eligibility of empirical-paper route before GPU expenditure."
+}

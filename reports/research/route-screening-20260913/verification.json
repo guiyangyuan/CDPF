@@ -1,0 +1,13 @@
+{
+  "state": "passed",
+  "original_input_files_unchanged": 24,
+  "relative_links_checked": 53,
+  "candidate_count": 2,
+  "pilot_and_total_run_counts_consistent": true,
+  "new_training_runs": 0,
+  "new_inference_runs": 0,
+  "model_source_changed": false,
+  "paper_changed": false,
+  "school_requirement_pending": true,
+  "route_is_conditional": true
+}

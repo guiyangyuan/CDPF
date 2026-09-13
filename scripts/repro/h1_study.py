@@ -269,7 +269,51 @@ def _validate_plan_for_run(path: Path) -> dict[str, Any]:
     return plan
 
 
-def _input_snapshot(plan: Mapping[str, Any]) -> dict[str, Any]:
+def _stage_for(plan: Mapping[str, Any], case_id: str, kind: str) -> Mapping[str, Any]:
+    matches = [stage for stage in plan.get("stages", [])
+               if stage.get("case_id") == case_id and stage.get("kind") == kind]
+    if len(matches) != 1:
+        raise ValueError(f"Plan must contain exactly one {kind} stage for {case_id}")
+    return matches[0]
+
+
+def _dynamic_input_snapshot(
+        stage: Mapping[str, Any], plan: Mapping[str, Any],
+        completed_evidence: Mapping[str, Mapping[str, Any]],
+) -> dict[str, Any]:
+    dependencies = []
+    if stage["kind"] == "export":
+        dependencies = [_stage_for(plan, stage["case_id"], "train")]
+    elif stage["kind"] in ("anchor_audit", "candidate_analysis"):
+        dependencies = [_stage_for(plan, stage["case_id"], "export")]
+    elif stage["kind"] == "aggregate":
+        dependencies = [_stage_for(plan, case_id, "candidate_analysis")
+                        for case_id in ("candidate-ucf101", "candidate-dtd",
+                                        "candidate-fgvc_aircraft")]
+    records = []
+    for dependency in dependencies:
+        evidence = completed_evidence.get(dependency["stage_id"])
+        if not isinstance(evidence, Mapping) or not isinstance(evidence.get("output"), Mapping):
+            raise ValueError(
+                f"Dynamic input lacks validated prior-stage evidence: {dependency['stage_id']}")
+        actual = _directory_manifest(Path(dependency["output_dir"]))
+        expected = copy.deepcopy(evidence["output"])
+        records.append({
+            "stage_id": dependency["stage_id"],
+            "kind": dependency["kind"],
+            "path": str(Path(dependency["output_dir"]).resolve()),
+            "actual": actual,
+            "validated_prior_evidence": expected,
+            "matches_validated_prior_evidence": actual == expected,
+        })
+    return {"dependencies": records,
+            "all_match": all(record["matches_validated_prior_evidence"] for record in records)}
+
+
+def _input_snapshot(
+        plan: Mapping[str, Any], stage: Mapping[str, Any] | None = None,
+        completed_evidence: Mapping[str, Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
     cases = []
     for expected in plan.get("cases", []):
         prepared_path = Path(expected["prepared"])
@@ -292,7 +336,10 @@ def _input_snapshot(plan: Mapping[str, Any]) -> dict[str, Any]:
         if saved != plan or saved.get("plan_identity_sha256") != plan_digest(saved):
             raise ValueError("Immutable command plan changed during execution")
         plan_file = {"path": str(path.resolve()), "sha256": _sha256(path)}
-    payload = {"cases": cases, "operations": operations, "plan_file": plan_file}
+    dynamic = (_dynamic_input_snapshot(stage, plan, completed_evidence or {})
+               if stage is not None else {"dependencies": [], "all_match": True})
+    payload = {"cases": cases, "operations": operations, "plan_file": plan_file,
+               "dynamic_inputs": dynamic}
     return {**payload, "digest": _canonical_digest(payload)}
 
 
@@ -309,7 +356,11 @@ def _directory_manifest(path: Path) -> dict[str, Any]:
     return {"files": files, "tree_sha256": _canonical_digest(files)}
 
 
-def _validate_stage_output(stage: Mapping[str, Any], plan: Mapping[str, Any]) -> dict[str, Any]:
+def _validate_stage_output(
+        stage: Mapping[str, Any], plan: Mapping[str, Any],
+        completed_evidence: Mapping[str, Mapping[str, Any]] | None = None,
+) -> dict[str, Any]:
+    completed = completed_evidence or {}
     case = next((value for value in plan["cases"]
                  if value["case_id"] == stage["case_id"]), None)
     kind, output = stage["kind"], Path(stage["output_dir"])
@@ -319,22 +370,68 @@ def _validate_stage_output(stage: Mapping[str, Any], plan: Mapping[str, Any]) ->
         return {"checkpoint": checkpoint, "output": _directory_manifest(output)}
     if kind == "export":
         receipt, _ = load_export(Path(stage["result_path"]))
-        if receipt.get("dataset_key") != case["dataset_key"] or receipt.get("mode") != case["mode"]:
+        identity = {
+            "dataset_key": receipt.get("dataset_key"), "seed": receipt.get("seed"),
+            "mode": receipt.get("mode"), "prepared": str(Path(receipt.get("prepared", "")).resolve()),
+            "prepared_sha256": receipt.get("prepared_sha256"),
+            "prepared_identity_sha256": receipt.get("prepared_identity_sha256"),
+            "source_sha256": receipt.get("source_sha256"),
+        }
+        expected_identity = {
+            "dataset_key": case["dataset_key"], "seed": case["seed"], "mode": case["mode"],
+            "prepared": str(Path(case["prepared"]).resolve()),
+            "prepared_sha256": case["prepared_sha256"],
+            "prepared_identity_sha256": case["prepared_identity_sha256"],
+            "source_sha256": case["source_sha256"],
+        }
+        if identity != expected_identity:
             raise ValueError("Export identity differs from the planned case")
+        train_stage = _stage_for(plan, stage["case_id"], "train")
+        checkpoint = receipt.get("checkpoint", {})
+        if str(Path(checkpoint.get("model_dir", "")).resolve()) != \
+                str(Path(train_stage["output_dir"]).resolve()):
+            raise ValueError("Export checkpoint model directory differs from planned training")
+        train_evidence = completed.get(train_stage["stage_id"])
+        if train_evidence is not None and checkpoint != train_evidence.get("checkpoint"):
+            raise ValueError("Export checkpoint hashes differ from validated train evidence")
         return {"export_sha256": _sha256(Path(stage["result_path"])),
+                "receipt_identity": identity, "checkpoint": copy.deepcopy(checkpoint),
                 "output": _directory_manifest(output)}
-    payload = json.loads(Path(stage["result_path"]).read_text())
-    if payload.get("status") != "passed":
-        raise ValueError(f"{kind} did not pass")
     if kind in ("anchor_audit", "candidate_analysis"):
-        expected_kind = "anchor_audit" if kind == "anchor_audit" else "candidate"
-        if payload.get("analysis_kind") != expected_kind or \
-                payload.get("dataset_key") != case["dataset_key"]:
-            raise ValueError("Analysis identity differs from the planned case")
+        payload = json.loads(Path(stage["result_path"]).read_text())
+        export_stage = _stage_for(plan, stage["case_id"], "export")
+        export_path = Path(export_stage["result_path"]).resolve()
+        historical_path = Path(case["historical_export"]).resolve()
+        current_receipt, current = load_export(export_path)
+        historical_receipt, historical = h1_analysis.historical_analysis.load_export(
+            historical_path)
+        compute = (h1_analysis.compute_anchor_audit if kind == "anchor_audit"
+                   else h1_analysis.compute_candidate_analysis)
+        expected = compute(current_receipt, current, historical_receipt, historical)
+        expected.update({
+            "current_export": str(export_path),
+            "current_export_sha256": _sha256(export_path),
+            "historical_export": str(historical_path),
+            "historical_export_sha256": _sha256(historical_path),
+        })
+        if payload != expected:
+            raise ValueError(f"{kind} report is forged, partial, or differs from recomputation")
     elif kind == "aggregate":
-        if payload.get("analysis_kind") != "aggregate" or payload.get("case_count") != 3:
-            raise ValueError("Aggregate is incomplete or mixed")
+        payload = json.loads(Path(stage["result_path"]).read_text())
+        analysis_stages = [_stage_for(plan, case_id, "candidate_analysis")
+                           for case_id in ("candidate-ucf101", "candidate-dtd",
+                                           "candidate-fgvc_aircraft")]
+        analysis_paths = [Path(value["result_path"]).resolve() for value in analysis_stages]
+        reports = [h1_analysis._reload_candidate(path) for path in analysis_paths]
+        expected = h1_analysis.aggregate_candidates(reports)
+        expected["analysis_inputs"] = [
+            {"path": str(path), "sha256": _sha256(path)} for path in analysis_paths]
+        if payload != expected:
+            raise ValueError("Aggregate report is forged, partial, mixed, or differs from recomputation")
+    else:
+        raise ValueError(f"Unknown fixed H1 stage kind: {kind}")
     return {"result_sha256": _sha256(Path(stage["result_path"])),
+            "report": copy.deepcopy(payload),
             "output": _directory_manifest(output)}
 
 
@@ -366,19 +463,23 @@ def execute_plan(
         "commands": [],
     }
     _atomic_json(root / "status.json", status)
+    completed_evidence: dict[str, Mapping[str, Any]] = {}
     try:
         if not cuda_available():
             raise RuntimeError("CUDA is required for H1 study execution; no command was spawned")
         for stage in plan["stages"]:
             if Path(stage["output_dir"]).exists():
                 raise FileExistsError(f"Planned stage output already exists: {stage['output_dir']}")
-            before = _input_snapshot(plan)
+            before = _input_snapshot(plan, stage, completed_evidence)
+            if not before["dynamic_inputs"]["all_match"]:
+                raise ValueError(
+                    f"Dynamic prior-stage input changed before {stage['stage_id']} could spawn")
             started = _now()
             command_log = {
                 "stage_id": stage["stage_id"], "case_id": stage["case_id"],
                 "kind": stage["kind"], "argv": stage["argv"],
                 "argv_sha256": _canonical_digest(stage["argv"]), "started_at": started,
-                "input_snapshot_before": before["digest"],
+                "input_snapshot_before": before,
             }
             try:
                 completed = subprocess.run(stage["argv"], text=True, capture_output=True,
@@ -399,16 +500,16 @@ def execute_plan(
             command_log.update({"finished_at": _now(), "returncode": completed.returncode,
                                 "stdout": completed.stdout, "stderr": completed.stderr})
             try:
-                after = _input_snapshot(plan)
-                command_log["input_snapshot_after"] = after["digest"]
+                after = _input_snapshot(plan, stage, completed_evidence)
+                command_log["input_snapshot_after"] = after
                 command_log["inputs_immutable"] = before == after
-                if before != after:
+                if before != after or not after["dynamic_inputs"]["all_match"]:
                     raise ValueError("Authenticated inputs changed during stage execution")
                 if completed.returncode != 0:
                     raise RuntimeError(
                         f"Stage {stage['stage_id']} {stage['case_id']} {stage['kind']} failed "
                         f"with exit {completed.returncode}")
-                evidence = stage_validator(stage, plan)
+                evidence = stage_validator(stage, plan, completed_evidence)
                 command_log["evidence"] = evidence
                 command_log["status"] = "passed"
             except Exception as exc:
@@ -424,6 +525,7 @@ def execute_plan(
                 _atomic_json(root / "status.json", status)
                 raise
             _atomic_json(logs / f"{stage['stage_id']}.json", command_log)
+            completed_evidence[stage["stage_id"]] = evidence or {}
             status["commands"].append({"stage_id": stage["stage_id"], "status": "passed",
                                         "log": str(logs / f"{stage['stage_id']}.json")})
             _atomic_json(root / "status.json", status)

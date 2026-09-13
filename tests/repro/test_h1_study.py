@@ -7,6 +7,8 @@ import tempfile
 import unittest
 from unittest import mock
 
+import numpy as np
+
 from scripts.repro import h1_study as study
 from scripts.repro import h1_validation
 
@@ -153,11 +155,22 @@ class ExecutorTests(unittest.TestCase):
                 f"raise SystemExit({exit_code})")
         return [sys.executable, "-c", code]
 
+    def accept_stage(self, stage, *_):
+        return {"output": study._directory_manifest(Path(stage["output_dir"]))}
+
     def test_executor_runs_anchor_before_candidates_and_writes_auditable_status(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp); marker = root / "order.txt"
             specs = [("anchor-dtd", "train"), ("anchor-dtd", "export"),
-                     ("anchor-dtd", "anchor_audit"), ("candidate-ucf101", "train")]
+                     ("anchor-dtd", "anchor_audit"),
+                     ("candidate-ucf101", "train"), ("candidate-ucf101", "export"),
+                     ("candidate-ucf101", "candidate_analysis"),
+                     ("candidate-dtd", "train"), ("candidate-dtd", "export"),
+                     ("candidate-dtd", "candidate_analysis"),
+                     ("candidate-fgvc_aircraft", "train"),
+                     ("candidate-fgvc_aircraft", "export"),
+                     ("candidate-fgvc_aircraft", "candidate_analysis"),
+                     ("all-candidates", "aggregate")]
             commands = []
             for index, (case_id, kind) in enumerate(specs):
                 output = root / "study" / f"stage-{index}"
@@ -166,11 +179,10 @@ class ExecutorTests(unittest.TestCase):
             plan_path.write_text(json.dumps(plan))
             result = study.execute_plan(
                 plan_path, cuda_available=lambda: True,
-                plan_validator=lambda _: plan, stage_validator=lambda *_: None)
+                plan_validator=lambda _: plan, stage_validator=self.accept_stage)
             self.assertEqual(result["state"], "passed")
-            self.assertEqual(marker.read_text().splitlines(),
-                             ["train", "export", "anchor_audit", "train"])
-            self.assertEqual(len(result["commands"]), 4)
+            self.assertEqual(marker.read_text().splitlines(), [kind for _, kind in specs])
+            self.assertEqual(len(result["commands"]), 13)
             self.assertTrue((root / "study" / "status.json").is_file())
 
     def test_executor_refuses_no_cuda_before_spawning_any_command(self):
@@ -190,7 +202,8 @@ class ExecutorTests(unittest.TestCase):
             root = Path(temp); marker = root / "order.txt"
             commands = []
             for index, (case_id, kind, exit_code) in enumerate((
-                    ("anchor-dtd", "train", 0), ("anchor-dtd", "anchor_audit", 7),
+                    ("anchor-dtd", "train", 0), ("anchor-dtd", "export", 0),
+                    ("anchor-dtd", "anchor_audit", 7),
                     ("candidate-ucf101", "train", 0))):
                 output = root / "study" / f"stage-{index}"
                 commands.append((case_id, kind, self.command(marker, kind, output, exit_code)))
@@ -198,13 +211,13 @@ class ExecutorTests(unittest.TestCase):
             path.write_text(json.dumps(plan))
             with self.assertRaisesRegex(RuntimeError, "anchor_audit"):
                 study.execute_plan(path, cuda_available=lambda: True,
-                                   plan_validator=lambda _: plan, stage_validator=lambda *_: None)
-            self.assertEqual(marker.read_text().splitlines(), ["train", "anchor_audit"])
+                                   plan_validator=lambda _: plan, stage_validator=self.accept_stage)
+            self.assertEqual(marker.read_text().splitlines(), ["train", "export", "anchor_audit"])
             status = json.loads((root / "study/status.json").read_text())
             self.assertEqual(status["state"], "stopped")
             with self.assertRaises(FileExistsError):
                 study.execute_plan(path, cuda_available=lambda: True,
-                                   plan_validator=lambda _: plan, stage_validator=lambda *_: None)
+                                   plan_validator=lambda _: plan, stage_validator=self.accept_stage)
 
     def test_candidate_failure_is_fail_fast_and_preserves_command_log(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -218,7 +231,7 @@ class ExecutorTests(unittest.TestCase):
             path.write_text(json.dumps(plan))
             with self.assertRaisesRegex(RuntimeError, "candidate-ucf101"):
                 study.execute_plan(path, cuda_available=lambda: True,
-                                   plan_validator=lambda _: plan, stage_validator=lambda *_: None)
+                                   plan_validator=lambda _: plan, stage_validator=self.accept_stage)
             self.assertEqual(marker.read_text().splitlines(), ["anchor-dtd", "candidate-ucf101"])
             logs = sorted((root / "study/logs").glob("*.json"))
             self.assertEqual(len(logs), 2)
@@ -235,6 +248,101 @@ class ExecutorTests(unittest.TestCase):
             logs = list((root / "study/logs").glob("*.json"))
             self.assertEqual(len(logs), 1)
             self.assertEqual(json.loads(logs[0].read_text())["status"], "failed")
+
+    def test_later_stage_mutating_prior_stage_file_fails_dynamic_snapshot(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp); marker = root / "order.txt"
+            model = root / "study/stage-0"
+            export = root / "study/stage-1"
+            train = self.command(marker, "train", model)
+            mutate_code = (
+                "from pathlib import Path; "
+                f"Path({str(marker)!r}).open('a').write('export\\n'); "
+                f"Path({str(model / 'artifact.json')!r}).write_text('mutated'); "
+                f"Path({str(export)!r}).mkdir(parents=True); "
+                f"Path({str(export / 'artifact.json')!r}).write_text('export')")
+            plan = self.fake_plan(root, [
+                ("anchor-dtd", "train", train),
+                ("anchor-dtd", "export", [sys.executable, "-c", mutate_code]),
+            ])
+            path = root / "plan.json"; path.write_text(json.dumps(plan))
+
+            with self.assertRaisesRegex(ValueError, "changed during|dynamic"):
+                study.execute_plan(path, cuda_available=lambda: True,
+                                   plan_validator=lambda _: plan,
+                                   stage_validator=self.accept_stage)
+
+            log = json.loads((root / "study/logs/01-export.json").read_text())
+            self.assertFalse(log["inputs_immutable"])
+
+
+class StageEvidenceTests(unittest.TestCase):
+    def test_export_rejects_same_dataset_mode_from_different_checkpoint(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            model = root / "study/model"; model.mkdir(parents=True)
+            (model / "checkpoint.bin").write_bytes(b"checkpoint")
+            export = root / "study/export"; export.mkdir()
+            result = export / "export.json"; result.write_text("{}")
+            prepared = root / "prepared.json"; prepared.write_text("{}")
+            train_stage = {"stage_id": "01-train", "case_id": "candidate-dtd",
+                           "kind": "train", "output_dir": str(model)}
+            export_stage = {"stage_id": "02-export", "case_id": "candidate-dtd",
+                            "kind": "export", "output_dir": str(export),
+                            "result_path": str(result)}
+            case = {"case_id": "candidate-dtd", "dataset_key": "dtd", "seed": 1,
+                    "mode": "weighted_nckd", "prepared": str(prepared.resolve()),
+                    "prepared_sha256": study._sha256(prepared),
+                    "prepared_identity_sha256": "p" * 64,
+                    "source_sha256": "s" * 64}
+            plan = {"cases": [case], "stages": [train_stage, export_stage]}
+            checkpoint = {"model_dir": str(model.resolve()), "checkpoint_sha256": "x" * 64}
+            receipt = {**case, "prepared": str(prepared.resolve()), "checkpoint": checkpoint}
+            completed = {"01-train": {
+                "checkpoint": {**checkpoint, "checkpoint_sha256": "y" * 64},
+                "output": study._directory_manifest(model),
+            }}
+
+            with mock.patch.object(study, "load_export", return_value=(receipt, {})):
+                with self.assertRaisesRegex(ValueError, "checkpoint|model"):
+                    study._validate_stage_output(export_stage, plan, completed)
+
+    def test_minimal_passed_anchor_cannot_release_candidates(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            export_dir = root / "export"; export_dir.mkdir()
+            export_path = export_dir / "export.json"; export_path.write_text("{}")
+            historical_path = root / "historical.json"; historical_path.write_text("{}")
+            analysis_dir = root / "analysis"; analysis_dir.mkdir()
+            result_path = analysis_dir / "analysis.json"
+            result_path.write_text(json.dumps({
+                "status": "passed", "analysis_kind": "anchor_audit", "dataset_key": "dtd",
+            }))
+            rows = [{"row": 0, "sample_id": "a", "label": 0, "classname": "zero"},
+                    {"row": 1, "sample_id": "b", "label": 1, "classname": "one"}]
+            receipt = {"dataset_key": "dtd", "seed": 1, "mode": "full_kl",
+                       "rows": rows, "class_order": ["zero", "one"]}
+            s = np.array([[2, 0], [0, 2]], dtype=np.float32)
+            m = np.array([[1, 0], [0, 1]], dtype=np.float32)
+            current = {"labels": np.array([0, 1], dtype=np.int64), "S": s, "T": s,
+                       "M": m, "ensemble": s.copy()}
+            historical = {"labels": current["labels"].copy(), "C": s, "S0": s,
+                          "S1": s, "M": m, "T0": s, "T1": s}
+            case = {"case_id": "anchor-dtd", "dataset_key": "dtd", "seed": 1,
+                    "mode": "full_kl", "historical_export": str(historical_path.resolve())}
+            export_stage = {"stage_id": "02-export", "case_id": "anchor-dtd",
+                            "kind": "export", "output_dir": str(export_dir),
+                            "result_path": str(export_path)}
+            anchor_stage = {"stage_id": "03-anchor", "case_id": "anchor-dtd",
+                            "kind": "anchor_audit", "output_dir": str(analysis_dir),
+                            "result_path": str(result_path)}
+            plan = {"cases": [case], "stages": [export_stage, anchor_stage]}
+
+            with mock.patch.object(study, "load_export", return_value=(receipt, current)), \
+                    mock.patch.object(study.h1_analysis.historical_analysis, "load_export",
+                                      return_value=(receipt, historical)):
+                with self.assertRaisesRegex(ValueError, "differs|forged|complete"):
+                    study._validate_stage_output(anchor_stage, plan)
 
 
 if __name__ == "__main__":

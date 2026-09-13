@@ -70,14 +70,24 @@ no-CUDA host receives `study-root/status.json` with `state: failed`; no train
 or export command is spawned.
 
 Each stage revalidates authenticated inputs immediately before and after its
-subprocess. Training outputs are checked with Task 1
+subprocess. An export snapshots the complete validated training directory; a
+case analysis snapshots its complete validated export directory; aggregation
+snapshots all three complete validated candidate-analysis directories. Each
+snapshot hashes the actual files and must exactly match the prior stage's
+recorded evidence before the next subprocess can start and after it exits.
+Training outputs are checked with Task 1
 `validate_new_checkpoint`, including the epoch-20 checkpoint, run manifest,
 effective config, source, mode, and parameter state. Exports are reloaded by
-Task 1 `load_export`. Analysis commands reload both the current Task 1 export
-and the original authenticated historical export. A per-stage JSON file under
-`study-root/logs/` records argv, return code, stdout/stderr, before/after input
-snapshot hashes, and output evidence hashes. `status.json` is replaced
-atomically after each stage.
+Task 1 `load_export` and must match the planned receipt, seed, source, model
+directory, and every checkpoint field recorded by the train stage. After an
+analysis command exits, the executor independently reloads its authenticated
+current and historical exports and recomputes the entire anchor or candidate
+report. It similarly reloads all three candidates and recomputes the complete
+aggregate; a partial or forged `passed` JSON cannot release the next stage. A
+per-stage JSON file under `study-root/logs/` records argv, return code,
+stdout/stderr, full before/after input manifests, their hashes, immutability,
+and validated output evidence. `status.json` is replaced atomically after each
+stage.
 
 The final state is:
 

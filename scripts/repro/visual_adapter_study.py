@@ -256,9 +256,12 @@ def _queue_guard(seconds: float):
     previous = {}
     state = {'subprocess_critical': False, 'pending': None}
     def terminate(signum, frame):
-        if state['subprocess_critical']:
+        if state['subprocess_critical'] or sys.exc_info()[0] is not None:
             # Popen creation must return its handle; wait/poll must release CPython's
             # internal waitpid lock before an asynchronous exception can unwind.
+            # An alarm can also arrive after a synchronous deadline/error has
+            # entered cleanup but before it disarms the timer. Never replace
+            # that active exception and bypass its child-reaping handler.
             state['pending'] = signum
             return
         raise _interruption(signum)
@@ -376,6 +379,7 @@ def run_plan(plan_path: Path) -> dict[str, Any]:
                                                env.get('PYTHONPATH', '')])
             for stage in plan['stages']:
                 prepared = _check_inputs(plan, plan_path, plan_file_sha)
+                _pending_interruption(guard)
                 if time.monotonic() >= deadline:
                     raise TimeoutError('Pilot full-queue wallclock cap reached before next stage')
                 if Path(stage['output_dir']).exists():
@@ -416,6 +420,7 @@ def run_plan(plan_path: Path) -> dict[str, Any]:
             analysis = analyze_exports([Path(s['result_path']) for s in plan['stages']
                                         if s['kind'] == 'export'], Path(plan['prepared_path']))
             _check_inputs(plan, plan_path, plan_file_sha)
+            _pending_interruption(guard)
             validation.atomic_json(Path(plan['analysis_path']), analysis)
             status['analysis_path'] = plan['analysis_path']
             status['continuation'] = analysis['continuation']

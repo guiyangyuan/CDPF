@@ -1,0 +1,516 @@
+{
+  "state": "passed",
+  "study_state": "stopped",
+  "source_commit": "efcd3dbb7d5515dde3a708d4093bc503f66eba0b",
+  "case_results": [
+    {
+      "case_id": "anchor-dtd",
+      "mode": "full_kl",
+      "dataset": "dtd",
+      "status": "passed",
+      "comparisons": {
+        "S": {
+          "predictions_equal": true,
+          "allclose": true,
+          "max_abs_error": 0.0
+        },
+        "T": {
+          "predictions_equal": true,
+          "allclose": true,
+          "max_abs_error": 0.0
+        },
+        "M": {
+          "predictions_equal": true,
+          "allclose": true,
+          "max_abs_error": 0.0
+        }
+      },
+      "metrics": {
+        "S": {
+          "correct": 70,
+          "total": 96,
+          "accuracy_pct": 72.91666666666667,
+          "nll": 0.9310842008551795,
+          "multiclass_brier": 0.3791204496284957,
+          "probability_top1_top2_margin": 0.6086438436481459
+        },
+        "T": {
+          "correct": 64,
+          "total": 96,
+          "accuracy_pct": 66.66666666666667,
+          "nll": 1.0497036920882155,
+          "multiclass_brier": 0.4270064474069204,
+          "probability_top1_top2_margin": 0.5323126413239391
+        },
+        "M": {
+          "correct": 57,
+          "total": 96,
+          "accuracy_pct": 59.375,
+          "nll": 1.297477520999591,
+          "multiclass_brier": 0.5030740792310838,
+          "probability_top1_top2_margin": 0.47669221461635614
+        },
+        "ensemble": {
+          "correct": 70,
+          "total": 96,
+          "accuracy_pct": 72.91666666666667,
+          "nll": 0.9340697483044863,
+          "multiclass_brier": 0.38437913525756257,
+          "probability_top1_top2_margin": 0.5640413461378762
+        },
+        "S+M_logits": {
+          "correct": 68,
+          "total": 96,
+          "accuracy_pct": 70.83333333333333,
+          "nll": 1.0266560750236013,
+          "multiclass_brier": 0.4136743730418629,
+          "probability_top1_top2_margin": 0.550382160654381
+        }
+      }
+    },
+    {
+      "case_id": "candidate-ucf101",
+      "mode": "weighted_nckd",
+      "dataset": "ucf101",
+      "status": "passed",
+      "metrics": {
+        "S": {
+          "correct": 174,
+          "total": 204,
+          "accuracy_pct": 85.29411764705883,
+          "nll": 0.4040215710374163,
+          "multiclass_brier": 0.20765493922182598,
+          "probability_top1_top2_margin": 0.6757283323913461
+        },
+        "T": {
+          "correct": 166,
+          "total": 204,
+          "accuracy_pct": 81.37254901960785,
+          "nll": 0.5295624566495396,
+          "multiclass_brier": 0.27128752371703324,
+          "probability_top1_top2_margin": 0.6651118298621439
+        },
+        "M": {
+          "correct": 154,
+          "total": 204,
+          "accuracy_pct": 75.49019607843137,
+          "nll": 0.6469387794270691,
+          "multiclass_brier": 0.3393600865807313,
+          "probability_top1_top2_margin": 0.6231882483111271
+        },
+        "ensemble": {
+          "correct": 170,
+          "total": 204,
+          "accuracy_pct": 83.33333333333333,
+          "nll": 0.4390408480900045,
+          "multiclass_brier": 0.23008101285368288,
+          "probability_top1_top2_margin": 0.6808723279744362
+        },
+        "S+M_logits": {
+          "correct": 171,
+          "total": 204,
+          "accuracy_pct": 83.82352941176471,
+          "nll": 0.4788080506303089,
+          "multiclass_brier": 0.2527300185541152,
+          "probability_top1_top2_margin": 0.6523079377775783
+        }
+      },
+      "comparators": {
+        "C+M_logits": {
+          "correct": 171,
+          "total": 204,
+          "accuracy_pct": 83.82352941176471,
+          "nll": 0.4079532249564717,
+          "multiclass_brier": 0.21924042729509133,
+          "probability_top1_top2_margin": 0.7026953615772601
+        },
+        "C+M_probability": {
+          "correct": 170,
+          "total": 204,
+          "accuracy_pct": 83.33333333333333,
+          "nll": 0.4360088252193557,
+          "multiclass_brier": 0.22851499502020572,
+          "probability_top1_top2_margin": 0.6411669046993765
+        },
+        "S0+M_logits": {
+          "correct": 173,
+          "total": 204,
+          "accuracy_pct": 84.80392156862744,
+          "nll": 0.4079434199790554,
+          "multiclass_brier": 0.21625864042421036,
+          "probability_top1_top2_margin": 0.6972611719017753
+        }
+      },
+      "historical_S1_plus_M": {
+        "correct": 165,
+        "total": 204,
+        "accuracy_pct": 80.88235294117646,
+        "nll": 0.5009536162894136,
+        "multiclass_brier": 0.26811029884396553,
+        "probability_top1_top2_margin": 0.6454268671294042
+      },
+      "teacher_vs_historical_T1": {
+        "predictions_equal": true,
+        "max_abs_error": 0.0
+      }
+    },
+    {
+      "case_id": "candidate-dtd",
+      "mode": "weighted_nckd",
+      "dataset": "dtd",
+      "status": "passed",
+      "metrics": {
+        "S": {
+          "correct": 70,
+          "total": 96,
+          "accuracy_pct": 72.91666666666667,
+          "nll": 0.8700227283424988,
+          "multiclass_brier": 0.35588834266323044,
+          "probability_top1_top2_margin": 0.6492772147065198
+        },
+        "T": {
+          "correct": 64,
+          "total": 96,
+          "accuracy_pct": 66.66666666666667,
+          "nll": 1.0497036920882155,
+          "multiclass_brier": 0.4270064474069204,
+          "probability_top1_top2_margin": 0.5323126413239391
+        },
+        "M": {
+          "correct": 57,
+          "total": 96,
+          "accuracy_pct": 59.375,
+          "nll": 1.297477520999591,
+          "multiclass_brier": 0.5030740792310838,
+          "probability_top1_top2_margin": 0.47669221461635614
+        },
+        "ensemble": {
+          "correct": 68,
+          "total": 96,
+          "accuracy_pct": 70.83333333333333,
+          "nll": 0.8803209334467798,
+          "multiclass_brier": 0.35880033491676394,
+          "probability_top1_top2_margin": 0.6003088589069764
+        },
+        "S+M_logits": {
+          "correct": 70,
+          "total": 96,
+          "accuracy_pct": 72.91666666666667,
+          "nll": 0.9527790805669979,
+          "multiclass_brier": 0.3820298507627413,
+          "probability_top1_top2_margin": 0.5767759366773477
+        }
+      },
+      "comparators": {
+        "C+M_logits": {
+          "correct": 70,
+          "total": 96,
+          "accuracy_pct": 72.91666666666667,
+          "nll": 0.8685227210618395,
+          "multiclass_brier": 0.36077392457426877,
+          "probability_top1_top2_margin": 0.6245747983962946
+        },
+        "C+M_probability": {
+          "correct": 70,
+          "total": 96,
+          "accuracy_pct": 72.91666666666667,
+          "nll": 0.9441081991629003,
+          "multiclass_brier": 0.3806000313728894,
+          "probability_top1_top2_margin": 0.5544185420329062
+        },
+        "S0+M_logits": {
+          "correct": 71,
+          "total": 96,
+          "accuracy_pct": 73.95833333333333,
+          "nll": 0.8056616440610916,
+          "multiclass_brier": 0.3502059623685949,
+          "probability_top1_top2_margin": 0.6704066226045599
+        }
+      },
+      "historical_S1_plus_M": {
+        "correct": 68,
+        "total": 96,
+        "accuracy_pct": 70.83333333333333,
+        "nll": 1.0266560750236013,
+        "multiclass_brier": 0.4136743730418629,
+        "probability_top1_top2_margin": 0.550382160654381
+      },
+      "teacher_vs_historical_T1": {
+        "predictions_equal": true,
+        "max_abs_error": 0.0
+      }
+    },
+    {
+      "case_id": "candidate-fgvc_aircraft",
+      "mode": "weighted_nckd",
+      "dataset": "fgvc_aircraft",
+      "status": "passed",
+      "metrics": {
+        "S": {
+          "correct": 66,
+          "total": 200,
+          "accuracy_pct": 33.0,
+          "nll": 1.9578203550816409,
+          "multiclass_brier": 0.7457382661540073,
+          "probability_top1_top2_margin": 0.15027294166109034
+        },
+        "T": {
+          "correct": 55,
+          "total": 200,
+          "accuracy_pct": 27.5,
+          "nll": 2.125438246161614,
+          "multiclass_brier": 0.7900457690899052,
+          "probability_top1_top2_margin": 0.13974271315991524
+        },
+        "M": {
+          "correct": 48,
+          "total": 200,
+          "accuracy_pct": 24.0,
+          "nll": 2.2369807766924854,
+          "multiclass_brier": 0.8053123524859004,
+          "probability_top1_top2_margin": 0.13059348253220968
+        },
+        "ensemble": {
+          "correct": 60,
+          "total": 200,
+          "accuracy_pct": 30.0,
+          "nll": 2.010069739116368,
+          "multiclass_brier": 0.7604669500327824,
+          "probability_top1_top2_margin": 0.13764782236655843
+        },
+        "S+M_logits": {
+          "correct": 58,
+          "total": 200,
+          "accuracy_pct": 29.0,
+          "nll": 2.049019617606886,
+          "multiclass_brier": 0.7675529969403345,
+          "probability_top1_top2_margin": 0.13617311607099802
+        }
+      },
+      "comparators": {
+        "C+M_logits": {
+          "correct": 64,
+          "total": 200,
+          "accuracy_pct": 32.0,
+          "nll": 1.9772367066118317,
+          "multiclass_brier": 0.7533583085806207,
+          "probability_top1_top2_margin": 0.15515034527454025
+        },
+        "C+M_probability": {
+          "correct": 65,
+          "total": 200,
+          "accuracy_pct": 32.5,
+          "nll": 1.9967818767141738,
+          "multiclass_brier": 0.7511339397701613,
+          "probability_top1_top2_margin": 0.13951074448309483
+        },
+        "S0+M_logits": {
+          "correct": 65,
+          "total": 200,
+          "accuracy_pct": 32.5,
+          "nll": 1.9861932734494434,
+          "multiclass_brier": 0.7508821077912757,
+          "probability_top1_top2_margin": 0.14959108394303638
+        }
+      },
+      "historical_S1_plus_M": {
+        "correct": 60,
+        "total": 200,
+        "accuracy_pct": 30.0,
+        "nll": 2.054822045044943,
+        "multiclass_brier": 0.771079091537008,
+        "probability_top1_top2_margin": 0.1332457051401477
+      },
+      "teacher_vs_historical_T1": {
+        "predictions_equal": true,
+        "max_abs_error": 0.0
+      }
+    }
+  ],
+  "aggregate": {
+    "status": "stopped",
+    "macro_accuracy_pct": {
+      "S+M_logits": 61.91339869281046,
+      "C+M_logits": 62.91339869281046,
+      "C+M_probability": 62.916666666666664,
+      "S0+M_logits": 63.75408496732026
+    },
+    "deltas_pp": {
+      "vs_C+M_logits": {
+        "datasets": {
+          "ucf101": 0.0,
+          "dtd": 0.0,
+          "fgvc_aircraft": -3.0
+        },
+        "macro": -1.0,
+        "exact_macro": "-1"
+      },
+      "vs_C+M_probability": {
+        "datasets": {
+          "ucf101": 0.49019607843137253,
+          "dtd": 0.0,
+          "fgvc_aircraft": -3.5
+        },
+        "macro": -1.0032679738562091,
+        "exact_macro": "-307/306"
+      },
+      "vs_S0+M_logits": {
+        "datasets": {
+          "ucf101": -0.9803921568627451,
+          "dtd": -1.0416666666666667,
+          "fgvc_aircraft": -3.5
+        },
+        "macro": -1.8406862745098038,
+        "exact_macro": "-751/408"
+      }
+    },
+    "guards": {
+      "vs_C+M_logits": false,
+      "vs_C+M_probability": false,
+      "vs_S0+M_logits": false,
+      "all_passed": false
+    }
+  },
+  "stages": [
+    {
+      "stage_id": "01-train",
+      "kind": "train",
+      "case_id": "anchor-dtd",
+      "status": "passed",
+      "returncode": 0,
+      "started_at": "2026-09-13T05:32:02.073368+00:00",
+      "finished_at": "2026-09-13T05:32:50.564651+00:00",
+      "inputs_immutable": true
+    },
+    {
+      "stage_id": "02-export",
+      "kind": "export",
+      "case_id": "anchor-dtd",
+      "status": "passed",
+      "returncode": 0,
+      "started_at": "2026-09-13T05:33:24.044156+00:00",
+      "finished_at": "2026-09-13T05:33:37.231289+00:00",
+      "inputs_immutable": true
+    },
+    {
+      "stage_id": "03-anchor_audit",
+      "kind": "anchor_audit",
+      "case_id": "anchor-dtd",
+      "status": "passed",
+      "returncode": 0,
+      "started_at": "2026-09-13T05:34:11.126906+00:00",
+      "finished_at": "2026-09-13T05:34:17.430591+00:00",
+      "inputs_immutable": true
+    },
+    {
+      "stage_id": "04-train",
+      "kind": "train",
+      "case_id": "candidate-ucf101",
+      "status": "passed",
+      "returncode": 0,
+      "started_at": "2026-09-13T05:34:51.115479+00:00",
+      "finished_at": "2026-09-13T05:36:20.496035+00:00",
+      "inputs_immutable": true
+    },
+    {
+      "stage_id": "05-export",
+      "kind": "export",
+      "case_id": "candidate-ucf101",
+      "status": "passed",
+      "returncode": 0,
+      "started_at": "2026-09-13T05:36:54.504027+00:00",
+      "finished_at": "2026-09-13T05:37:08.908770+00:00",
+      "inputs_immutable": true
+    },
+    {
+      "stage_id": "06-candidate_analysis",
+      "kind": "candidate_analysis",
+      "case_id": "candidate-ucf101",
+      "status": "passed",
+      "returncode": 0,
+      "started_at": "2026-09-13T05:37:43.197222+00:00",
+      "finished_at": "2026-09-13T05:37:49.940661+00:00",
+      "inputs_immutable": true
+    },
+    {
+      "stage_id": "07-train",
+      "kind": "train",
+      "case_id": "candidate-dtd",
+      "status": "passed",
+      "returncode": 0,
+      "started_at": "2026-09-13T05:38:23.546697+00:00",
+      "finished_at": "2026-09-13T05:39:12.108855+00:00",
+      "inputs_immutable": true
+    },
+    {
+      "stage_id": "08-export",
+      "kind": "export",
+      "case_id": "candidate-dtd",
+      "status": "passed",
+      "returncode": 0,
+      "started_at": "2026-09-13T05:39:45.888633+00:00",
+      "finished_at": "2026-09-13T05:39:59.268988+00:00",
+      "inputs_immutable": true
+    },
+    {
+      "stage_id": "09-candidate_analysis",
+      "kind": "candidate_analysis",
+      "case_id": "candidate-dtd",
+      "status": "passed",
+      "returncode": 0,
+      "started_at": "2026-09-13T05:40:33.304947+00:00",
+      "finished_at": "2026-09-13T05:40:39.653306+00:00",
+      "inputs_immutable": true
+    },
+    {
+      "stage_id": "10-train",
+      "kind": "train",
+      "case_id": "candidate-fgvc_aircraft",
+      "status": "passed",
+      "returncode": 0,
+      "started_at": "2026-09-13T05:41:13.210934+00:00",
+      "finished_at": "2026-09-13T05:42:46.150005+00:00",
+      "inputs_immutable": true
+    },
+    {
+      "stage_id": "11-export",
+      "kind": "export",
+      "case_id": "candidate-fgvc_aircraft",
+      "status": "passed",
+      "returncode": 0,
+      "started_at": "2026-09-13T05:43:25.849330+00:00",
+      "finished_at": "2026-09-13T05:43:58.052679+00:00",
+      "inputs_immutable": true
+    },
+    {
+      "stage_id": "12-candidate_analysis",
+      "kind": "candidate_analysis",
+      "case_id": "candidate-fgvc_aircraft",
+      "status": "passed",
+      "returncode": 0,
+      "started_at": "2026-09-13T05:44:38.368089+00:00",
+      "finished_at": "2026-09-13T05:44:52.001004+00:00",
+      "inputs_immutable": true
+    },
+    {
+      "stage_id": "13-aggregate",
+      "kind": "aggregate",
+      "case_id": "all-candidates",
+      "status": "failed",
+      "returncode": 2,
+      "started_at": "2026-09-13T05:45:31.919483+00:00",
+      "finished_at": "2026-09-13T05:45:50.231826+00:00",
+      "inputs_immutable": true
+    }
+  ],
+  "formal_train_commands": 4,
+  "export_commands": 4,
+  "checked_metric_groups": 29,
+  "metric_count_accuracy_match_exact": true,
+  "max_continuous_metric_roundoff": 1.3877787807814457e-15,
+  "continuous_metric_tolerance": 1e-10,
+  "checkpoint_and_export_hash_bindings_verified": true,
+  "analysis_uses_independent_numpy_fraction_math": true,
+  "raw_export_files_modified": false,
+  "novel_or_hm": false
+}

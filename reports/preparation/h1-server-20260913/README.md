@@ -1,5 +1,7 @@
 # H1 无卡准备与独立验证队列
 
+**后续GPU批次已完成并备份，H1数值条件未通过，停止扩量。** 见[实际实验报告](../../experiments/h1-validation-20260913-42527/README.md)。下文是无卡准备时的历史记录，预留目录现已使用；不得再次执行所列启动命令。
+
 2026-09-13：**本机与服务器准备均已完成；没有新增真实数据训练，尚无 H1 准确率。**
 
 此前已经实现 `weighted_nckd` 训练损失。本轮新增可核验的训练配置、独立导出、固定分析和有次数上限的执行队列，部署了已审查的版本 `efcd3db`。模型结构、在线教师训练和训练源码未改变。改过损失不等于已经涨点，也不代表创新或录用条件得到验证。
@@ -37,7 +39,7 @@
 
 本机原始材料保存在工作区 `work/h1-prep-20260913/`，下载副本在其中的 `server-evidence-efcd3db/`。Git 保存源码、计划、准备记录和轻量证据包，不重复放数据集或权重。
 
-## 下一步：用户开卡后执行固定小规模对照
+## 历史启动入口（已执行，不得重跑）
 
 先重新确认当前 SSH 对应同一实例、GPU 可用，以及预留输出和锁不存在。如已有输出，先读状态，不重跑。使用服务器本地计划，不复制本机绝对路径计划。
 
@@ -48,7 +50,7 @@ PYTHONPATH=.:Dassl.pytorch:tests OMP_NUM_THREADS=1 PYTHONDONTWRITEBYTECODE=1 \
   --plan /root/autodl-tmp/textconsistency/setup-logs/h1-validation-20260913-efcd3db/future-plan/plan.json
 ```
 
-此命令**本轮未执行**。固定顺序为一次 DTD full_kl 20 轮 anchor；只有 S/T/M 预测完全一致、logits 满足事前固定 `rtol=1e-5, atol=1e-4`，才运行 UCF101、DTD、Aircraft 各 seed1 一次 weighted_nckd。固定16-shot、ViT-B/16、fp32、T2、KD1、teacher CE1、alpha=.5，不重试、不改温度/权重/融合规则挽回。
+此命令在**无卡准备阶段未执行，后续GPU批次已经执行完毕**。固定顺序为一次 DTD full_kl 20 轮 anchor；只有 S/T/M 预测完全一致、logits 满足事前固定 `rtol=1e-5, atol=1e-4`，才运行 UCF101、DTD、Aircraft 各 seed1 一次 weighted_nckd。固定16-shot、ViT-B/16、fp32、T2、KD1、teacher CE1、alpha=.5，不重试、不改温度/权重/融合规则挽回。
 
 主候选为 SN+M logits，三个数据集等权。相对两种 C+M 对照均要求宏平均差≥0且每数据集≥−1个百分点；相对 S0+M 要求宏平均差>0。门槛用正确数/总数的有理数计算，避免浮点零误判。失败即停，成功也只是探索性门槛；没有 Novel/HM 或三种子稳定性结论。
 

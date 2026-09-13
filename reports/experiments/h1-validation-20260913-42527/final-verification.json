@@ -1,0 +1,23 @@
+{
+  "state": "completed_and_backed_up",
+  "study_state": "stopped",
+  "method_gate_passed": false,
+  "training_runs": 4,
+  "training_runs_all_passed": true,
+  "exports": 4,
+  "exports_all_passed": true,
+  "stage_count": 13,
+  "first_twelve_stages_passed": true,
+  "final_stage_exit_code": 2,
+  "final_stage_reason": "All three predefined numerical guards failed; controlled stop, no retry.",
+  "original_input_file_count": 2516,
+  "original_inputs_unchanged": true,
+  "independent_audit_passed": true,
+  "full_backup_file_count": 73,
+  "full_backup_checkpoint_count": 4,
+  "full_backup_archive_sha256": "50ebdc89960d400d7b16d44664292c9fa57522e0eebf24ffdfe34a14f0fb355b",
+  "gpu_compute_processes_after": [],
+  "server_power_unchanged": true,
+  "novel_or_hm": false,
+  "source_code_changed_this_gpu_turn": false
+}

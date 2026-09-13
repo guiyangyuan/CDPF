@@ -1,0 +1,253 @@
+{
+  "files": {
+    "run/analysis.json": {
+      "sha256": "29550fcd329010a0784df6af269b503bf439dc95c51a5815c1aa940560d6bcb7",
+      "bytes": 30494,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/analysis.json"
+    },
+    "run/logs/01-simple_fusion-train.log": {
+      "sha256": "8307688eb355d2eaaa6d9cc68206d76f831a6e12cb01b5742559055f5c7c3ed0",
+      "bytes": 39131,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/logs/01-simple_fusion-train.log"
+    },
+    "run/logs/02-simple_fusion-export.log": {
+      "sha256": "1017c26875cd6089f61eb5bfd014c5e5303ac3e62f9140cc3f79bcab4638380c",
+      "bytes": 9590,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/logs/02-simple_fusion-export.log"
+    },
+    "run/logs/03-visual_only-train.log": {
+      "sha256": "2a2baea14bd462163fc81eb2e078786863ad80f7585edf658988b586e91d08d6",
+      "bytes": 39406,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/logs/03-visual_only-train.log"
+    },
+    "run/logs/04-visual_only-export.log": {
+      "sha256": "ab20a8ea7d0fb1c8138b2621cea52857ef8e95d8e67b453a009178a148472649",
+      "bytes": 9872,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/logs/04-visual_only-export.log"
+    },
+    "run/logs/05-visual_description-train.log": {
+      "sha256": "448cedfef25de24137538249644cc11f88e58c359d77bc924343cca81e2c6ab9",
+      "bytes": 39433,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/logs/05-visual_description-train.log"
+    },
+    "run/logs/06-visual_description-export.log": {
+      "sha256": "70af6d272449d47354ff7108517ad68eb50128be5cf44141ae19023a6a1fcd17",
+      "bytes": 9879,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/logs/06-visual_description-export.log"
+    },
+    "run/simple_fusion/export/export.json": {
+      "sha256": "20406b51323c9fd56271bea1a63e827d5f8242578b1640de649b301100d10c8d",
+      "bytes": 25867,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/export/export.json"
+    },
+    "run/simple_fusion/export/logits.npz": {
+      "sha256": "60934b890deb83cb57f3bbf2fb93656fbdb87855f054824f6b8b33e742143eda",
+      "bytes": 103208,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/export/logits.npz"
+    },
+    "run/simple_fusion/export/runtime/effective_config.yaml": {
+      "sha256": "3d68b7a7eaa9646ffb798a2cf8d1eb4b90631595d42b813e486de58d34501574",
+      "bytes": 3911,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/export/runtime/effective_config.yaml"
+    },
+    "run/simple_fusion/export/runtime/run_manifest.json": {
+      "sha256": "e8fef088b9f2dc4324199a3c894cef3b70d35234f226b15b2df19655900f7bc5",
+      "bytes": 19389,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/export/runtime/run_manifest.json"
+    },
+    "run/simple_fusion/model/effective_config.yaml": {
+      "sha256": "15d662215ab1491f5af6883c62e5905a68d6c97784dbc4427d068619bcc89682",
+      "bytes": 3902,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/model/effective_config.yaml"
+    },
+    "run/simple_fusion/model/log.txt": {
+      "sha256": "a3c12de12d134a6c49405286c6da648f1cbfabe3f4eaf0d01ccdd41aeec46f9d",
+      "bytes": 39109,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/model/log.txt"
+    },
+    "run/simple_fusion/model/run_manifest.json": {
+      "sha256": "e8fef088b9f2dc4324199a3c894cef3b70d35234f226b15b2df19655900f7bc5",
+      "bytes": 19389,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/model/run_manifest.json"
+    },
+    "run/simple_fusion/model/textconsistency/checkpoint": {
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e",
+      "bytes": 16,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/model/textconsistency/checkpoint"
+    },
+    "run/simple_fusion/model/textconsistency/model.pth.tar-20": {
+      "sha256": "3dfd11d910ed5c28a56bbf171358a857894b4b7532a4a9e5bb635a8632b2ddba",
+      "bytes": 7500919,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/model/textconsistency/model.pth.tar-20"
+    },
+    "run/simple_fusion/model/textconsistency/model.pth.tar-20.sha256": {
+      "sha256": "81e0cc36476952a36de43c99bdc6fb5f2625769f795d19958769c8a692d0d138",
+      "bytes": 65,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/model/textconsistency/model.pth.tar-20.sha256"
+    },
+    "run/status.json": {
+      "sha256": "40208ecfec801c687a0877e48873ff64c60746ec3cd207e7d6567f9c22a657e5",
+      "bytes": 11258,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/status.json"
+    },
+    "run/visual_description/export/export.json": {
+      "sha256": "26d21a0959ffc2b7fd700d0867be88a5cafcb2460f9f793c9e67843db4bbd832",
+      "bytes": 25877,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/export/export.json"
+    },
+    "run/visual_description/export/logits.npz": {
+      "sha256": "a5526c72ca150dbc893fdc68693e4dc5473ae24802eb920c05e38ca1cbed880d",
+      "bytes": 103015,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/export/logits.npz"
+    },
+    "run/visual_description/export/runtime/effective_config.yaml": {
+      "sha256": "28db90627ac72c685cf1d43f83b37bd8dec3f8f40ff1cdac63e197f054f7c0fc",
+      "bytes": 3915,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/export/runtime/effective_config.yaml"
+    },
+    "run/visual_description/export/runtime/run_manifest.json": {
+      "sha256": "9c0dce3935c48a42176dfa071611a205810fa7380f637e5fa7db15d6188a1c35",
+      "bytes": 19743,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/export/runtime/run_manifest.json"
+    },
+    "run/visual_description/model/effective_config.yaml": {
+      "sha256": "bd78e1b3f1881465e82caa54279d90071bf858bba8195c84293c4ccd6bf6f0b8",
+      "bytes": 3906,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/model/effective_config.yaml"
+    },
+    "run/visual_description/model/log.txt": {
+      "sha256": "48c8f626d4c8e78d18a33c8223be1b596c10afad6f8680a018e195c2f6d1e20d",
+      "bytes": 39411,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/model/log.txt"
+    },
+    "run/visual_description/model/run_manifest.json": {
+      "sha256": "9c0dce3935c48a42176dfa071611a205810fa7380f637e5fa7db15d6188a1c35",
+      "bytes": 19743,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/model/run_manifest.json"
+    },
+    "run/visual_description/model/textconsistency/checkpoint": {
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e",
+      "bytes": 16,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/model/textconsistency/checkpoint"
+    },
+    "run/visual_description/model/textconsistency/model.pth.tar-20": {
+      "sha256": "f3c7ffec4d8484fe63c5356af86af50cc27d2959c0658ea98dfff0dc832e514c",
+      "bytes": 8027595,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/model/textconsistency/model.pth.tar-20"
+    },
+    "run/visual_description/model/textconsistency/model.pth.tar-20.sha256": {
+      "sha256": "d99284a575809ff7b25170c02145b8c70e53c100850a95c12fc679e15154ae09",
+      "bytes": 65,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/model/textconsistency/model.pth.tar-20.sha256"
+    },
+    "run/visual_only/export/export.json": {
+      "sha256": "e2edfcca8f215a41cb8990e544fb6cf367e096209ba035a73dd2cea4d5b78183",
+      "bytes": 25863,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/export/export.json"
+    },
+    "run/visual_only/export/logits.npz": {
+      "sha256": "00c255028149f10cbd2027838fc84a201fb1d6028818905eae8d74d17a566df9",
+      "bytes": 103179,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/export/logits.npz"
+    },
+    "run/visual_only/export/runtime/effective_config.yaml": {
+      "sha256": "a2254e437f985027bd86dbf5f61b4efd7573ab999be759b5c155b3f57362dd33",
+      "bytes": 3908,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/export/runtime/effective_config.yaml"
+    },
+    "run/visual_only/export/runtime/run_manifest.json": {
+      "sha256": "1b24fd7cd2fe6fbfbafff491c8a20a739e525c1978d2c9d07b02ffa24b8666ed",
+      "bytes": 19743,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/export/runtime/run_manifest.json"
+    },
+    "run/visual_only/model/effective_config.yaml": {
+      "sha256": "7d1e8f268e62709ce62ff99f619bd26f7a0abd9b1e82d5297c901804adb99e35",
+      "bytes": 3899,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/model/effective_config.yaml"
+    },
+    "run/visual_only/model/log.txt": {
+      "sha256": "940fa53d93db20e120484c9e84418e2372f59b793c8bd8caab02a88fbd1f9a4e",
+      "bytes": 39384,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/model/log.txt"
+    },
+    "run/visual_only/model/run_manifest.json": {
+      "sha256": "1b24fd7cd2fe6fbfbafff491c8a20a739e525c1978d2c9d07b02ffa24b8666ed",
+      "bytes": 19743,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/model/run_manifest.json"
+    },
+    "run/visual_only/model/textconsistency/checkpoint": {
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e",
+      "bytes": 16,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/model/textconsistency/checkpoint"
+    },
+    "run/visual_only/model/textconsistency/model.pth.tar-20": {
+      "sha256": "b24894c7deb49fb2d4d5c86e3f38d8f516ae77e4e60dc2d2ec13ffd4336a473c",
+      "bytes": 8027595,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/model/textconsistency/model.pth.tar-20"
+    },
+    "run/visual_only/model/textconsistency/model.pth.tar-20.sha256": {
+      "sha256": "2d7ac8f0e0db7857cc799b390cd90b8cdc2d4ad0c6faf59a540678cb8e430906",
+      "bytes": 65,
+      "original_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/model/textconsistency/model.pth.tar-20.sha256"
+    },
+    "context/plan.json": {
+      "sha256": "8f2c65b4130021d62b66e0c33920c1110b0e8af293c58d69167bdd2928eebc5c",
+      "bytes": 8713,
+      "original_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/future-plan/plan.json"
+    },
+    "context/prepared.json": {
+      "sha256": "7571fbd63ef08801c1520bf7c66d411f3adfc0d1d6f5e3b84ce1c9348cd3c699",
+      "bytes": 720968,
+      "original_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/prepared/prepared.json"
+    },
+    "context/launch.json": {
+      "sha256": "c777f3a08bfc06cecdd64eff330542681e8a780f2a30c29de55180245a3d012f",
+      "bytes": 1389,
+      "original_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/gpu-launch-20260914/launch.json"
+    },
+    "context/runner.log": {
+      "sha256": "d6ac00139b9f65dceb5dd59e65c12dededcddcfc82ced9283faf6e262cf04244",
+      "bytes": 13379,
+      "original_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/gpu-launch-20260914/runner.log"
+    },
+    "context/completion-check.json": {
+      "sha256": "b0c54edd56dcf7398959e7122acb8e3fad35d8e11612c9debfdaaab218dd5b32",
+      "bytes": 397,
+      "original_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/gpu-launch-20260914/completion-check.json"
+    },
+    "context/handoff-ready.json": {
+      "sha256": "10fe21934671fbdb5cbab1cc3b3b70be33f821d1193aaa8ea8558f46bce55820",
+      "bytes": 3368,
+      "original_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/handoff-ready.json"
+    },
+    "context/environment.freeze.txt": {
+      "sha256": "e5e766a2bf2b65ac6a2d0b19fe0e53f84c1192e2fc588973253578cc2828d974",
+      "bytes": 4882,
+      "original_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/environment.freeze.txt"
+    },
+    "context/assets-ready.json": {
+      "sha256": "f17dbcffe244b6f8679bf5bfb47d15807eae77587116e1c024d3d6521d595b0d",
+      "bytes": 950,
+      "original_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/assets-ready.json"
+    },
+    "context/simple_fusion.yaml": {
+      "sha256": "3240c6ab0fc5aa53f4a891a2d3e7d858d37851aab66db1f2f7a838f9208778b8",
+      "bytes": 3910,
+      "original_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/prepared/simple_fusion.yaml"
+    },
+    "context/visual_only.yaml": {
+      "sha256": "70a370760ff6c9b1dda075563e595b9813fc85b047ced5994021ba664ce31c51",
+      "bytes": 3909,
+      "original_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/prepared/visual_only.yaml"
+    },
+    "context/visual_description.yaml": {
+      "sha256": "9428c62f115dd0dba6837bc0d09aa042fc14ec3385e099aeea67953d7cb8075a",
+      "bytes": 3909,
+      "original_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/prepared/visual_description.yaml"
+    }
+  },
+  "created_at": "2026-09-13T16:22:55.585295+00:00",
+  "source_commit": "1a3830754dbffa87f06348e842e68a07fb4054c7",
+  "complete_models_included": 3,
+  "run_status": "completed"
+}

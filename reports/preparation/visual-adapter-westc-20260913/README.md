@@ -1,5 +1,7 @@
 # westc 新实例：Aircraft A/B/C 准备完成
 
+> 后续GPU计划已执行、复核和备份完成，见[实验结果](../../experiments/visual-adapter-westc-20260914/README.md)。下文为准备阶段记录，启动命令不可重复执行。
+
 2026-09-13 发起迁移；完成时间（北京时间）：2026-09-14T00:01:01+08:00。**代码、依赖、数据、固定运行计划和无卡预检已完成，可以开卡。** 没有 GPU 训练或新准确率。最新状态见 [handoff-ready.json](handoff-ready.json)。
 
 ## 已准备内容

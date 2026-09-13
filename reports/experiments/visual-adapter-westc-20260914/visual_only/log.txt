@@ -1,0 +1,352 @@
+***************
+** Arguments **
+***************
+backbone: 
+config_file: /root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/prepared/visual_only.yaml
+dataset_config_file: 
+eval_only: False
+head: 
+load_epoch: None
+model_dir: 
+no_train: False
+opts: []
+output_dir: /root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/model
+resume: 
+root: 
+seed: 1
+source_domains: None
+target_domains: None
+trainer: 
+transforms: None
+************
+** Config **
+************
+DATALOADER:
+  K_TRANSFORMS: 1
+  NUM_WORKERS: 0
+  RETURN_IMG0: False
+  TEST:
+    BATCH_SIZE: 16
+    SAMPLER: SequentialSampler
+  TRAIN_U:
+    BATCH_SIZE: 32
+    N_DOMAIN: 0
+    N_INS: 16
+    SAME_AS_X: True
+    SAMPLER: RandomSampler
+  TRAIN_X:
+    BATCH_SIZE: 16
+    N_DOMAIN: 0
+    N_INS: 16
+    SAMPLER: RandomSampler
+DATASET:
+  ALL_AS_UNLABELED: False
+  CIFAR_C_LEVEL: 1
+  CIFAR_C_TYPE: 
+  NAME: FGVCAircraft
+  NUM_LABELED: -1
+  NUM_SHOTS: 16
+  ROOT: /root/autodl-tmp/textconsistency/data
+  SOURCE_DOMAINS: ()
+  STL10_FOLD: -1
+  SUBSAMPLE_CLASSES: base
+  TARGET_DOMAINS: ()
+  VAL_PERCENT: 0.1
+INPUT:
+  COLORJITTER_B: 0.4
+  COLORJITTER_C: 0.4
+  COLORJITTER_H: 0.1
+  COLORJITTER_S: 0.4
+  CROP_PADDING: 4
+  CUTOUT_LEN: 16
+  CUTOUT_N: 1
+  GB_K: 21
+  GB_P: 0.5
+  GN_MEAN: 0.0
+  GN_STD: 0.15
+  INTERPOLATION: bicubic
+  NO_TRANSFORM: False
+  PIXEL_MEAN: [0.48145466, 0.4578275, 0.40821073]
+  PIXEL_STD: [0.26862954, 0.26130258, 0.27577711]
+  RANDAUGMENT_M: 10
+  RANDAUGMENT_N: 2
+  RGS_P: 0.2
+  RRCROP_SCALE: (0.08, 1.0)
+  SIZE: (224, 224)
+  TRANSFORMS: ('random_resized_crop', 'random_flip', 'normalize')
+MODEL:
+  BACKBONE:
+    NAME: ViT-B/16
+    PRETRAINED: True
+  HEAD:
+    ACTIVATION: relu
+    BN: True
+    DROPOUT: 0.0
+    HIDDEN_LAYERS: ()
+    NAME: 
+  INIT_WEIGHTS: 
+OPTIM:
+  ADAM_BETA1: 0.9
+  ADAM_BETA2: 0.999
+  BASE_LR_MULT: 0.1
+  GAMMA: 0.1
+  LR: 0.002
+  LR_SCHEDULER: cosine
+  MAX_EPOCH: 20
+  MOMENTUM: 0.9
+  NAME: sgd
+  NEW_LAYERS: ()
+  RMSPROP_ALPHA: 0.99
+  SGD_DAMPNING: 0
+  SGD_NESTEROV: False
+  STAGED_LR: False
+  STEPSIZE: (-1,)
+  WARMUP_CONS_LR: 1e-05
+  WARMUP_EPOCH: 1
+  WARMUP_MIN_LR: 1e-05
+  WARMUP_RECOUNT: True
+  WARMUP_TYPE: constant
+  WEIGHT_DECAY: 0.0005
+OUTPUT_DIR: /root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/model
+RESUME: 
+SEED: 1
+TEST:
+  COMPUTE_CMAT: False
+  EVALUATOR: Classification
+  FINAL_MODEL: last_step
+  NO_TEST: True
+  PER_CLASS_RESULT: False
+  SPLIT: val
+TRAIN:
+  CHECKPOINT_FREQ: 0
+  COUNT_ITER: train_x
+  PRINT_FREQ: 10
+TRAINER:
+  CDAC:
+    CLASS_LR_MULTI: 10
+    P_THRESH: 0.95
+    RAMPUP_COEF: 30
+    RAMPUP_ITRS: 1000
+    STRONG_TRANSFORMS: ()
+    TOPK_MATCH: 5
+  COCOOP:
+    CTX_INIT: 
+    N_CTX: 16
+    PREC: fp16
+  COOP:
+    CLASS_TOKEN_POSITION: end
+    CSC: False
+    CTX_INIT: False
+    N_CTX: 16
+    PREC: fp16
+    W: 2.0
+  CROSSGRAD:
+    ALPHA_D: 0.5
+    ALPHA_F: 0.5
+    EPS_D: 1.0
+    EPS_F: 1.0
+  DAEL:
+    CONF_THRE: 0.95
+    STRONG_TRANSFORMS: ()
+    WEIGHT_U: 0.5
+  DAELDG:
+    CONF_THRE: 0.95
+    STRONG_TRANSFORMS: ()
+    WEIGHT_U: 0.5
+  DDAIG:
+    ALPHA: 0.5
+    CLAMP: False
+    CLAMP_MAX: 1.0
+    CLAMP_MIN: -1.0
+    G_ARCH: 
+    LMDA: 0.3
+    WARMUP: 0
+  DOMAINMIX:
+    ALPHA: 1.0
+    BETA: 1.0
+    TYPE: crossdomain
+  ENTMIN:
+    LMDA: 0.001
+  FIXMATCH:
+    CONF_THRE: 0.95
+    STRONG_TRANSFORMS: ()
+    WEIGHT_U: 1.0
+  M3SDA:
+    LMDA: 0.5
+    N_STEP_F: 4
+  MCD:
+    N_STEP_F: 4
+  MEANTEACHER:
+    EMA_ALPHA: 0.999
+    RAMPUP: 5
+    WEIGHT_U: 1.0
+  MIXMATCH:
+    MIXUP_BETA: 0.75
+    RAMPUP: 20000
+    TEMP: 2.0
+    WEIGHT_U: 100.0
+  MME:
+    LMDA: 0.1
+  NAME: CoOp_TextConsistency_V2_FG
+  SE:
+    CONF_THRE: 0.95
+    EMA_ALPHA: 0.999
+    RAMPUP: 300
+  TEXTCONSISTENCY:
+    ABLATION_GROUP: full
+    ADAPTIVE_CE_WEIGHT: 0.0
+    AGGREGATION: mean
+    CLIP_PATH: /root/autodl-tmp/textconsistency/assets/ViT-B-16.pt
+    CONSISTENCY_TEMP: 1.0
+    CONSISTENCY_WEIGHT: 1.0
+    CONTRASTIVE_WEIGHT: 0.0
+    DEVICE: cuda
+    DIVERSITY_WEIGHT: 0.0
+    ENSEMBLE_ALPHA: 0.5
+    INFERENCE_BRANCH: ensemble
+    KD_LOSS_MODE: full_kl
+    KD_TEMP: 2.0
+    KD_WEIGHT: 0.0
+    N_CTX: 4
+    N_GROUPS: 4
+    N_VIEWS: 20
+    ORDER_SEED: 0
+    PREC: fp32
+    TEXT_BATCH_SIZE: 32
+    USE_FEATURE_ADAPTER: False
+    USE_VISUAL_ADAPTER: True
+    VIEW_ORDER: contiguous
+    VISUAL_ADAPTER_DIM: 64
+    VISUAL_ADAPTER_SCALE: 0.2
+USE_CUDA: True
+VERBOSE: True
+VERSION: 1
+Loading trainer: CoOp_TextConsistency_V2_FG
+Loading dataset: FGVCAircraft
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_1.pkl
+SUBSAMPLE BASE CLASSES!
+Building transform_train
++ random resized crop (size=(224, 224), scale=(0.08, 1.0))
++ random flip
++ to torch tensor of range [0, 1]
++ normalization (mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711])
+Building transform_test
++ resize the smaller edge to 224
++ 224x224 center crop
++ to torch tensor of range [0, 1]
++ normalization (mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711])
+---------  ------------
+Dataset    FGVCAircraft
+# classes  50
+# train_x  800
+# val      200
+# test     1,666
+---------  ------------
+build model vit is True
+Effective description counts: {"707-320": 20, "727-200": 20, "737-200": 19, "737-300": 19, "737-400": 16, "737-500": 19, "737-600": 20, "737-700": 19, "737-800": 19, "737-900": 18, "747-100": 20, "747-200": 17, "747-300": 20, "747-400": 18, "757-200": 20, "757-300": 20, "767-200": 18, "767-300": 18, "767-400": 18, "777-200": 19, "777-300": 18, "A300B4": 20, "A310": 20, "A318": 16, "A319": 19, "A320": 18, "A321": 20, "A330-200": 16, "A330-300": 18, "A340-200": 19, "A340-300": 20, "A340-500": 20, "A340-600": 19, "A380": 19, "ATR-42": 17, "ATR-72": 15, "An-12": 9, "BAE 146-200": 20, "BAE 146-300": 19, "BAE-125": 20, "Beechcraft 1900": 19, "Boeing 717": 16, "C-130": 8, "C-47": 19, "CRJ-200": 20, "CRJ-700": 18, "CRJ-900": 20, "Cessna 172": 12, "Cessna 208": 19, "Cessna 525": 19}
+Effective protocol: {"code_sha256": "38d9afc3cdc0440695cb5eca5c59069f73ace1aba4478d5afc5b656050911840", "cuda_runtime": "12.8", "dataset": "FGVCAircraft", "description_counts": [20, 20, 19, 19, 16, 19, 20, 19, 19, 18, 20, 17, 20, 18, 20, 20, 18, 18, 18, 19, 18, 20, 20, 16, 19, 18, 20, 16, 18, 19, 20, 20, 19, 19, 17, 15, 9, 20, 19, 20, 19, 16, 8, 19, 20, 18, 20, 12, 19, 19], "device": "cuda", "effective_losses": {"adaptive_ce": 0.0, "contrastive": 0.0, "diversity": 0.0, "kd": 0.0}, "gpu": "NVIDIA GeForce RTX 4090", "loss_identity": {"active": false, "effective_weight": 0.0, "format": 1, "mode": "full_kl", "non_target_weighting": "none_full_distribution_kl", "temperature": 2.0}, "model_signature": {"ablation_group": null, "aggregation": "mean", "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f", "feature_adapter": false, "format": 3, "loss_identity": {"active": false, "effective_weight": 0.0, "format": 1, "mode": "full_kl", "non_target_weighting": "none_full_distribution_kl", "temperature": 2.0}, "n_ctx": 4, "n_groups": 4, "n_views": 20, "order_seed": 0, "order_version": 1, "template_sha256": "d86833c2483c1d12907abeb6198412f1d0a020bd12999a3f170967a7f549e3b8", "trainer": "CoOp_TextConsistency_V2_FG", "view_order": "contiguous", "visual_adapter": {"bias": false, "description_ce_weight": 0.0, "format": 1, "hidden_dim": 64, "init": "kaiming_down_zero_up", "input": "unit_clip_image", "kind": "shared_residual_mlp", "output": "unit_residual_feature", "placement": "student_and_description_logits", "scale": 0.2}}, "python": "3.12.3", "seed": 1, "shots": 16, "subsample": "base", "test_samples_sha256": "78dd9ed86b8d2d13c40d88fac9b778ec450b322707c44347521c07e7db9b714a", "torch": "2.8.0+cu128", "train_samples_sha256": "ae5851085ef5e74b7cb612cda7454fde300601ef14ad21b707bbbfbbd3c85e9a", "trainable_parameters": 67584, "val_samples_sha256": "7ac44ab40ea24086902991743d3b51720e467204034efd2b5a98352416fd02bb", "view_order_manifest": {"classes": [{"classname": "707-320", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "727-200", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "737-200", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-300", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-400", "count": 16, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}, {"classname": "737-500", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-600", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "737-700", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-800", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-900", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "747-100", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "747-200", "count": 17, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]}, {"classname": "747-300", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "747-400", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "757-200", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "757-300", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "767-200", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "767-300", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "767-400", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "777-200", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "777-300", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "A300B4", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A310", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A318", "count": 16, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}, {"classname": "A319", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "A320", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "A321", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A330-200", "count": 16, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}, {"classname": "A330-300", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "A340-200", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "A340-300", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A340-500", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A340-600", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "A380", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "ATR-42", "count": 17, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]}, {"classname": "ATR-72", "count": 15, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]}, {"classname": "An-12", "count": 9, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8]}, {"classname": "BAE 146-200", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "BAE 146-300", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "BAE-125", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "Beechcraft 1900", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "Boeing 717", "count": 16, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}, {"classname": "C-130", "count": 8, "order": [0, 1, 2, 3, 4, 5, 6, 7]}, {"classname": "C-47", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "CRJ-200", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "CRJ-700", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "CRJ-900", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "Cessna 172", "count": 12, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}, {"classname": "Cessna 208", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "Cessna 525", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}], "n_groups": 4, "policy": "contiguous", "seed": 0, "sha256": "85e521430b8c8de02c7401994a69bcfd8d5c06ab804803a988bcba3359cc9a6a", "version": 1}}
+Loading evaluator: Classification
+No checkpoint found, train from scratch
+epoch [1/20] batch [10/50] time 0.287 (0.299) data 0.223 (0.211) loss 2.3408 (3.1785) loss_ce 2.3408 (3.1785) loss_adaptive_ce 2.1070 (2.3952) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (19.3750) lr 1.0000e-05 eta 0:04:56
+epoch [1/20] batch [20/50] time 0.265 (0.290) data 0.195 (0.212) loss 2.9269 (2.9412) loss_ce 2.9269 (2.9412) loss_adaptive_ce 2.2526 (2.4279) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 12.5000 (17.5000) lr 1.0000e-05 eta 0:04:44
+epoch [1/20] batch [30/50] time 0.278 (0.300) data 0.208 (0.224) loss 2.0393 (2.8268) loss_ce 2.0393 (2.8268) loss_adaptive_ce 2.2443 (2.4345) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (18.7500) lr 1.0000e-05 eta 0:04:50
+epoch [1/20] batch [40/50] time 0.312 (0.309) data 0.242 (0.234) loss 2.4433 (2.6969) loss_ce 2.4433 (2.6969) loss_adaptive_ce 2.3546 (2.4210) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (20.9375) lr 1.0000e-05 eta 0:04:56
+epoch [1/20] batch [50/50] time 0.277 (0.301) data 0.207 (0.227) loss 2.2595 (2.6373) loss_ce 2.2595 (2.6373) loss_adaptive_ce 2.0765 (2.4020) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 12.5000 (21.6250) lr 2.0000e-03 eta 0:04:45
+epoch [2/20] batch [10/50] time 0.274 (0.271) data 0.205 (0.200) loss 2.5977 (2.5166) loss_ce 2.5977 (2.5166) loss_adaptive_ce 2.4093 (2.4221) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 12.5000 (22.5000) lr 2.0000e-03 eta 0:04:14
+epoch [2/20] batch [20/50] time 0.266 (0.271) data 0.192 (0.200) loss 2.7491 (2.4818) loss_ce 2.7491 (2.4818) loss_adaptive_ce 2.8638 (2.4045) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 18.7500 (24.3750) lr 2.0000e-03 eta 0:04:12
+epoch [2/20] batch [30/50] time 0.367 (0.286) data 0.290 (0.214) loss 2.3722 (2.4266) loss_ce 2.3722 (2.4266) loss_adaptive_ce 2.9116 (2.4247) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (26.2500) lr 2.0000e-03 eta 0:04:23
+epoch [2/20] batch [40/50] time 0.297 (0.287) data 0.224 (0.215) loss 2.0051 (2.3630) loss_ce 2.0051 (2.3630) loss_adaptive_ce 2.0288 (2.3938) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (26.5625) lr 2.0000e-03 eta 0:04:21
+epoch [2/20] batch [50/50] time 0.253 (0.282) data 0.183 (0.210) loss 2.4458 (2.3749) loss_ce 2.4458 (2.3749) loss_adaptive_ce 2.6643 (2.4278) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (26.1250) lr 1.9877e-03 eta 0:04:14
+epoch [3/20] batch [10/50] time 0.304 (0.282) data 0.234 (0.214) loss 2.5610 (2.3199) loss_ce 2.5610 (2.3199) loss_adaptive_ce 2.3374 (2.4433) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 6.2500 (18.1250) lr 1.9877e-03 eta 0:04:11
+epoch [3/20] batch [20/50] time 0.310 (0.279) data 0.239 (0.210) loss 1.7563 (2.3255) loss_ce 1.7563 (2.3255) loss_adaptive_ce 2.1485 (2.4565) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 37.5000 (21.5625) lr 1.9877e-03 eta 0:04:05
+epoch [3/20] batch [30/50] time 0.238 (0.273) data 0.173 (0.204) loss 2.3278 (2.2608) loss_ce 2.3278 (2.2608) loss_adaptive_ce 2.3938 (2.4175) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 12.5000 (25.0000) lr 1.9877e-03 eta 0:03:57
+epoch [3/20] batch [40/50] time 0.342 (0.285) data 0.271 (0.216) loss 2.5071 (2.2503) loss_ce 2.5071 (2.2503) loss_adaptive_ce 2.6828 (2.4413) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (27.6562) lr 1.9877e-03 eta 0:04:04
+epoch [3/20] batch [50/50] time 0.218 (0.290) data 0.147 (0.221) loss 2.4377 (2.2226) loss_ce 2.4377 (2.2226) loss_adaptive_ce 2.8499 (2.4119) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (28.7500) lr 1.9511e-03 eta 0:04:06
+epoch [4/20] batch [10/50] time 0.284 (0.309) data 0.213 (0.239) loss 2.1206 (2.2152) loss_ce 2.1206 (2.2152) loss_adaptive_ce 2.2077 (2.3979) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (25.6250) lr 1.9511e-03 eta 0:04:19
+epoch [4/20] batch [20/50] time 0.326 (0.295) data 0.255 (0.226) loss 2.8897 (2.2510) loss_ce 2.8897 (2.2510) loss_adaptive_ce 2.8880 (2.4633) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (31.5625) lr 1.9511e-03 eta 0:04:04
+epoch [4/20] batch [30/50] time 0.248 (0.284) data 0.190 (0.215) loss 1.9142 (2.2228) loss_ce 1.9142 (2.2228) loss_adaptive_ce 1.9716 (2.4174) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 50.0000 (32.7083) lr 1.9511e-03 eta 0:03:52
+epoch [4/20] batch [40/50] time 0.270 (0.279) data 0.200 (0.209) loss 1.8930 (2.2058) loss_ce 1.8930 (2.2058) loss_adaptive_ce 2.1388 (2.4141) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 50.0000 (33.1250) lr 1.9511e-03 eta 0:03:45
+epoch [4/20] batch [50/50] time 0.254 (0.275) data 0.184 (0.205) loss 2.2593 (2.2601) loss_ce 2.2593 (2.2601) loss_adaptive_ce 2.3976 (2.4668) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 37.5000 (32.1250) lr 1.8910e-03 eta 0:03:40
+epoch [5/20] batch [10/50] time 0.254 (0.271) data 0.192 (0.203) loss 2.5348 (2.1269) loss_ce 2.5348 (2.1269) loss_adaptive_ce 2.6860 (2.3274) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 18.7500 (30.6250) lr 1.8910e-03 eta 0:03:34
+epoch [5/20] batch [20/50] time 0.294 (0.280) data 0.209 (0.210) loss 2.2244 (2.1109) loss_ce 2.2244 (2.1109) loss_adaptive_ce 2.3369 (2.3627) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 18.7500 (30.3125) lr 1.8910e-03 eta 0:03:38
+epoch [5/20] batch [30/50] time 0.288 (0.278) data 0.218 (0.208) loss 1.8903 (2.1141) loss_ce 1.8903 (2.1141) loss_adaptive_ce 2.0184 (2.3778) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (30.4167) lr 1.8910e-03 eta 0:03:33
+epoch [5/20] batch [40/50] time 0.293 (0.276) data 0.226 (0.207) loss 2.0912 (2.1171) loss_ce 2.0912 (2.1171) loss_adaptive_ce 2.0969 (2.3522) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (30.9375) lr 1.8910e-03 eta 0:03:29
+epoch [5/20] batch [50/50] time 0.290 (0.277) data 0.223 (0.208) loss 2.7868 (2.1540) loss_ce 2.7868 (2.1540) loss_adaptive_ce 2.9883 (2.3732) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 0.0000 (30.3750) lr 1.8090e-03 eta 0:03:27
+epoch [6/20] batch [10/50] time 0.260 (0.283) data 0.195 (0.213) loss 2.2164 (2.1634) loss_ce 2.2164 (2.1634) loss_adaptive_ce 2.2717 (2.4709) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (25.6250) lr 1.8090e-03 eta 0:03:29
+epoch [6/20] batch [20/50] time 0.281 (0.281) data 0.211 (0.212) loss 2.3944 (2.1485) loss_ce 2.3944 (2.1485) loss_adaptive_ce 2.8207 (2.4523) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (28.7500) lr 1.8090e-03 eta 0:03:25
+epoch [6/20] batch [30/50] time 0.295 (0.279) data 0.232 (0.210) loss 1.7197 (2.1452) loss_ce 1.7197 (2.1452) loss_adaptive_ce 2.2441 (2.4760) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 50.0000 (31.8750) lr 1.8090e-03 eta 0:03:20
+epoch [6/20] batch [40/50] time 0.275 (0.279) data 0.214 (0.211) loss 1.9615 (2.1448) loss_ce 1.9615 (2.1448) loss_adaptive_ce 2.1395 (2.4434) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (32.0312) lr 1.8090e-03 eta 0:03:18
+epoch [6/20] batch [50/50] time 0.263 (0.277) data 0.192 (0.209) loss 2.6189 (2.1575) loss_ce 2.6189 (2.1575) loss_adaptive_ce 2.8426 (2.4367) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 18.7500 (31.8750) lr 1.7071e-03 eta 0:03:13
+epoch [7/20] batch [10/50] time 0.279 (0.281) data 0.217 (0.212) loss 2.2119 (2.0830) loss_ce 2.2119 (2.0830) loss_adaptive_ce 2.4866 (2.3637) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (33.7500) lr 1.7071e-03 eta 0:03:13
+epoch [7/20] batch [20/50] time 0.272 (0.279) data 0.207 (0.211) loss 2.5127 (2.0987) loss_ce 2.5127 (2.0987) loss_adaptive_ce 2.7683 (2.3186) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 12.5000 (32.8125) lr 1.7071e-03 eta 0:03:09
+epoch [7/20] batch [30/50] time 0.243 (0.278) data 0.174 (0.210) loss 2.3260 (2.1105) loss_ce 2.3260 (2.1105) loss_adaptive_ce 2.6076 (2.3508) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (33.7500) lr 1.7071e-03 eta 0:03:06
+epoch [7/20] batch [40/50] time 0.281 (0.279) data 0.209 (0.211) loss 2.0777 (2.1511) loss_ce 2.0777 (2.1511) loss_adaptive_ce 2.5005 (2.4099) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (31.7188) lr 1.7071e-03 eta 0:03:03
+epoch [7/20] batch [50/50] time 0.302 (0.278) data 0.235 (0.211) loss 2.6027 (2.1631) loss_ce 2.6027 (2.1631) loss_adaptive_ce 2.8076 (2.4076) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 12.5000 (32.3750) lr 1.5878e-03 eta 0:03:00
+epoch [8/20] batch [10/50] time 0.280 (0.281) data 0.221 (0.219) loss 2.2891 (2.1085) loss_ce 2.2891 (2.1085) loss_adaptive_ce 2.5177 (2.4434) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 18.7500 (32.5000) lr 1.5878e-03 eta 0:02:59
+epoch [8/20] batch [20/50] time 0.296 (0.278) data 0.234 (0.216) loss 1.7007 (2.0238) loss_ce 1.7007 (2.0238) loss_adaptive_ce 1.8205 (2.3692) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 56.2500 (35.0000) lr 1.5878e-03 eta 0:02:55
+epoch [8/20] batch [30/50] time 0.312 (0.278) data 0.241 (0.214) loss 1.9473 (2.0517) loss_ce 1.9473 (2.0517) loss_adaptive_ce 2.7576 (2.3436) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (33.7500) lr 1.5878e-03 eta 0:02:52
+epoch [8/20] batch [40/50] time 0.295 (0.286) data 0.227 (0.221) loss 2.0616 (2.0730) loss_ce 2.0616 (2.0730) loss_adaptive_ce 2.2493 (2.3677) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (32.9688) lr 1.5878e-03 eta 0:02:54
+epoch [8/20] batch [50/50] time 0.300 (0.293) data 0.230 (0.227) loss 2.3623 (2.1072) loss_ce 2.3623 (2.1072) loss_adaptive_ce 2.5995 (2.3916) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 18.7500 (32.6250) lr 1.4540e-03 eta 0:02:55
+epoch [9/20] batch [10/50] time 0.324 (0.291) data 0.255 (0.220) loss 1.9642 (2.1026) loss_ce 1.9642 (2.1026) loss_adaptive_ce 2.4977 (2.4529) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 37.5000 (35.6250) lr 1.4540e-03 eta 0:02:51
+epoch [9/20] batch [20/50] time 0.303 (0.288) data 0.229 (0.217) loss 2.3594 (2.1281) loss_ce 2.3594 (2.1281) loss_adaptive_ce 2.7953 (2.4318) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (34.3750) lr 1.4540e-03 eta 0:02:47
+epoch [9/20] batch [30/50] time 0.275 (0.287) data 0.206 (0.216) loss 2.2760 (2.1522) loss_ce 2.2760 (2.1522) loss_adaptive_ce 2.7587 (2.4491) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (33.5417) lr 1.4540e-03 eta 0:02:43
+epoch [9/20] batch [40/50] time 0.304 (0.286) data 0.231 (0.214) loss 2.3170 (2.1372) loss_ce 2.3170 (2.1372) loss_adaptive_ce 2.3152 (2.4591) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (33.5938) lr 1.4540e-03 eta 0:02:40
+epoch [9/20] batch [50/50] time 0.270 (0.285) data 0.201 (0.214) loss 2.0673 (2.1011) loss_ce 2.0673 (2.1011) loss_adaptive_ce 2.2446 (2.4294) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (34.7500) lr 1.3090e-03 eta 0:02:36
+epoch [10/20] batch [10/50] time 0.295 (0.286) data 0.226 (0.215) loss 1.7103 (2.0634) loss_ce 1.7103 (2.0634) loss_adaptive_ce 2.0521 (2.3545) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (33.7500) lr 1.3090e-03 eta 0:02:34
+epoch [10/20] batch [20/50] time 0.279 (0.282) data 0.207 (0.211) loss 1.3600 (2.0345) loss_ce 1.3600 (2.0345) loss_adaptive_ce 1.6696 (2.3561) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 75.0000 (36.2500) lr 1.3090e-03 eta 0:02:29
+epoch [10/20] batch [30/50] time 0.297 (0.280) data 0.225 (0.209) loss 1.8973 (2.0880) loss_ce 1.8973 (2.0880) loss_adaptive_ce 2.1981 (2.4094) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 56.2500 (34.5833) lr 1.3090e-03 eta 0:02:25
+epoch [10/20] batch [40/50] time 0.250 (0.276) data 0.181 (0.205) loss 1.8899 (2.0820) loss_ce 1.8899 (2.0820) loss_adaptive_ce 2.5052 (2.4252) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 18.7500 (34.0625) lr 1.3090e-03 eta 0:02:20
+epoch [10/20] batch [50/50] time 0.281 (0.279) data 0.211 (0.208) loss 1.9014 (2.0967) loss_ce 1.9014 (2.0967) loss_adaptive_ce 1.9845 (2.4362) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (34.0000) lr 1.1564e-03 eta 0:02:19
+epoch [11/20] batch [10/50] time 0.297 (0.276) data 0.225 (0.206) loss 1.5909 (1.9834) loss_ce 1.5909 (1.9834) loss_adaptive_ce 2.2097 (2.5214) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 62.5000 (39.3750) lr 1.1564e-03 eta 0:02:15
+epoch [11/20] batch [20/50] time 0.264 (0.272) data 0.192 (0.201) loss 2.2903 (1.9979) loss_ce 2.2903 (1.9979) loss_adaptive_ce 2.7468 (2.4183) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (38.4375) lr 1.1564e-03 eta 0:02:10
+epoch [11/20] batch [30/50] time 0.283 (0.276) data 0.210 (0.205) loss 2.0872 (2.0272) loss_ce 2.0872 (2.0272) loss_adaptive_ce 2.3510 (2.4334) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 37.5000 (39.1667) lr 1.1564e-03 eta 0:02:09
+epoch [11/20] batch [40/50] time 0.255 (0.279) data 0.185 (0.207) loss 2.8600 (2.0575) loss_ce 2.8600 (2.0575) loss_adaptive_ce 2.7375 (2.4060) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (37.9688) lr 1.1564e-03 eta 0:02:08
+epoch [11/20] batch [50/50] time 0.262 (0.280) data 0.193 (0.209) loss 2.4831 (2.0665) loss_ce 2.4831 (2.0665) loss_adaptive_ce 2.4309 (2.4070) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (37.0000) lr 1.0000e-03 eta 0:02:06
+epoch [12/20] batch [10/50] time 0.311 (0.294) data 0.240 (0.223) loss 2.2408 (2.1028) loss_ce 2.2408 (2.1028) loss_adaptive_ce 2.5065 (2.3759) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (36.8750) lr 1.0000e-03 eta 0:02:09
+epoch [12/20] batch [20/50] time 0.280 (0.291) data 0.215 (0.221) loss 1.7923 (2.0202) loss_ce 1.7923 (2.0202) loss_adaptive_ce 2.2498 (2.3600) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (35.3125) lr 1.0000e-03 eta 0:02:05
+epoch [12/20] batch [30/50] time 0.274 (0.301) data 0.206 (0.232) loss 1.7775 (2.0534) loss_ce 1.7775 (2.0534) loss_adaptive_ce 2.2914 (2.4018) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 37.5000 (34.1667) lr 1.0000e-03 eta 0:02:06
+epoch [12/20] batch [40/50] time 0.316 (0.296) data 0.245 (0.228) loss 1.8992 (2.0335) loss_ce 1.8992 (2.0335) loss_adaptive_ce 2.3494 (2.4166) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (34.2188) lr 1.0000e-03 eta 0:02:01
+epoch [12/20] batch [50/50] time 0.310 (0.301) data 0.251 (0.233) loss 2.0179 (2.0397) loss_ce 2.0179 (2.0397) loss_adaptive_ce 1.9108 (2.3970) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (34.0000) lr 8.4357e-04 eta 0:02:00
+epoch [13/20] batch [10/50] time 0.292 (0.287) data 0.219 (0.216) loss 1.9046 (1.9185) loss_ce 1.9046 (1.9185) loss_adaptive_ce 2.3201 (2.3019) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (38.7500) lr 8.4357e-04 eta 0:01:51
+epoch [13/20] batch [20/50] time 0.284 (0.292) data 0.215 (0.220) loss 1.9057 (1.9670) loss_ce 1.9057 (1.9670) loss_adaptive_ce 2.0422 (2.3522) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (37.5000) lr 8.4357e-04 eta 0:01:50
+epoch [13/20] batch [30/50] time 0.279 (0.292) data 0.211 (0.220) loss 2.5641 (1.9925) loss_ce 2.5641 (1.9925) loss_adaptive_ce 3.0135 (2.3837) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 18.7500 (37.2917) lr 8.4357e-04 eta 0:01:47
+epoch [13/20] batch [40/50] time 0.290 (0.291) data 0.220 (0.220) loss 2.6289 (2.0163) loss_ce 2.6289 (2.0163) loss_adaptive_ce 3.2075 (2.3934) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (37.9688) lr 8.4357e-04 eta 0:01:44
+epoch [13/20] batch [50/50] time 0.296 (0.291) data 0.224 (0.220) loss 1.8917 (2.0461) loss_ce 1.8917 (2.0461) loss_adaptive_ce 2.4777 (2.4250) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 50.0000 (37.8750) lr 6.9098e-04 eta 0:01:41
+epoch [14/20] batch [10/50] time 0.300 (0.288) data 0.230 (0.218) loss 2.4056 (2.0952) loss_ce 2.4056 (2.0952) loss_adaptive_ce 2.7399 (2.5318) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 37.5000 (36.8750) lr 6.9098e-04 eta 0:01:37
+epoch [14/20] batch [20/50] time 0.274 (0.289) data 0.204 (0.220) loss 1.7063 (2.0643) loss_ce 1.7063 (2.0643) loss_adaptive_ce 2.1405 (2.5163) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (34.0625) lr 6.9098e-04 eta 0:01:35
+epoch [14/20] batch [30/50] time 0.265 (0.291) data 0.194 (0.221) loss 2.1002 (2.1192) loss_ce 2.1002 (2.1192) loss_adaptive_ce 2.8049 (2.5795) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 50.0000 (35.2083) lr 6.9098e-04 eta 0:01:32
+epoch [14/20] batch [40/50] time 0.250 (0.291) data 0.182 (0.221) loss 2.4974 (2.0702) loss_ce 2.4974 (2.0702) loss_adaptive_ce 2.8051 (2.5092) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 12.5000 (35.0000) lr 6.9098e-04 eta 0:01:30
+epoch [14/20] batch [50/50] time 0.262 (0.291) data 0.192 (0.221) loss 2.4073 (2.0386) loss_ce 2.4073 (2.0386) loss_adaptive_ce 2.4953 (2.4848) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 37.5000 (35.7500) lr 5.4601e-04 eta 0:01:27
+epoch [15/20] batch [10/50] time 0.275 (0.282) data 0.206 (0.212) loss 2.0959 (1.9907) loss_ce 2.0959 (1.9907) loss_adaptive_ce 2.5624 (2.4322) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (37.5000) lr 5.4601e-04 eta 0:01:21
+epoch [15/20] batch [20/50] time 0.276 (0.284) data 0.206 (0.213) loss 1.7574 (2.0243) loss_ce 1.7574 (2.0243) loss_adaptive_ce 2.1220 (2.4696) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 56.2500 (38.1250) lr 5.4601e-04 eta 0:01:19
+epoch [15/20] batch [30/50] time 0.290 (0.288) data 0.221 (0.217) loss 1.4197 (1.9937) loss_ce 1.4197 (1.9937) loss_adaptive_ce 1.8721 (2.3779) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (37.7083) lr 5.4601e-04 eta 0:01:17
+epoch [15/20] batch [40/50] time 0.309 (0.290) data 0.239 (0.220) loss 1.7528 (2.0153) loss_ce 1.7528 (2.0153) loss_adaptive_ce 2.6567 (2.4098) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 37.5000 (36.4062) lr 5.4601e-04 eta 0:01:15
+epoch [15/20] batch [50/50] time 0.333 (0.289) data 0.263 (0.220) loss 2.6553 (2.0333) loss_ce 2.6553 (2.0333) loss_adaptive_ce 3.1780 (2.4236) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 18.7500 (35.8750) lr 4.1221e-04 eta 0:01:12
+epoch [16/20] batch [10/50] time 0.296 (0.291) data 0.226 (0.221) loss 2.0200 (2.0704) loss_ce 2.0200 (2.0704) loss_adaptive_ce 2.5449 (2.5686) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (42.5000) lr 4.1221e-04 eta 0:01:09
+epoch [16/20] batch [20/50] time 0.280 (0.287) data 0.210 (0.217) loss 1.7883 (1.9851) loss_ce 1.7883 (1.9851) loss_adaptive_ce 2.4514 (2.4946) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (40.6250) lr 4.1221e-04 eta 0:01:05
+epoch [16/20] batch [30/50] time 0.305 (0.285) data 0.232 (0.215) loss 2.5148 (2.0254) loss_ce 2.5148 (2.0254) loss_adaptive_ce 2.8555 (2.4968) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (38.3333) lr 4.1221e-04 eta 0:01:02
+epoch [16/20] batch [40/50] time 0.279 (0.284) data 0.209 (0.214) loss 2.1356 (2.0049) loss_ce 2.1356 (2.0049) loss_adaptive_ce 2.3594 (2.4271) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (39.2188) lr 4.1221e-04 eta 0:00:59
+epoch [16/20] batch [50/50] time 0.273 (0.285) data 0.202 (0.215) loss 2.4480 (2.0405) loss_ce 2.4480 (2.0405) loss_adaptive_ce 2.6745 (2.4489) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 18.7500 (37.3750) lr 2.9289e-04 eta 0:00:57
+epoch [17/20] batch [10/50] time 0.326 (0.291) data 0.255 (0.222) loss 1.9247 (1.9360) loss_ce 1.9247 (1.9360) loss_adaptive_ce 2.3071 (2.3556) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 56.2500 (42.5000) lr 2.9289e-04 eta 0:00:55
+epoch [17/20] batch [20/50] time 0.287 (0.298) data 0.218 (0.228) loss 2.0943 (1.9380) loss_ce 2.0943 (1.9380) loss_adaptive_ce 2.5308 (2.4194) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (39.3750) lr 2.9289e-04 eta 0:00:53
+epoch [17/20] batch [30/50] time 0.242 (0.294) data 0.172 (0.225) loss 2.5027 (1.9988) loss_ce 2.5027 (1.9988) loss_adaptive_ce 2.7524 (2.4441) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (38.5417) lr 2.9289e-04 eta 0:00:49
+epoch [17/20] batch [40/50] time 0.259 (0.293) data 0.190 (0.224) loss 2.6503 (1.9903) loss_ce 2.6503 (1.9903) loss_adaptive_ce 2.5509 (2.3917) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 37.5000 (38.5938) lr 2.9289e-04 eta 0:00:46
+epoch [17/20] batch [50/50] time 0.271 (0.291) data 0.201 (0.221) loss 1.9787 (2.0188) loss_ce 1.9787 (2.0188) loss_adaptive_ce 2.4087 (2.4156) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (38.3750) lr 1.9098e-04 eta 0:00:43
+epoch [18/20] batch [10/50] time 0.294 (0.296) data 0.224 (0.226) loss 2.1113 (2.1602) loss_ce 2.1113 (2.1602) loss_adaptive_ce 2.3482 (2.4635) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (30.6250) lr 1.9098e-04 eta 0:00:41
+epoch [18/20] batch [20/50] time 0.313 (0.295) data 0.244 (0.225) loss 2.8856 (2.0984) loss_ce 2.8856 (2.0984) loss_adaptive_ce 3.0558 (2.4329) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 6.2500 (33.1250) lr 1.9098e-04 eta 0:00:38
+epoch [18/20] batch [30/50] time 0.276 (0.292) data 0.218 (0.223) loss 1.7750 (2.0546) loss_ce 1.7750 (2.0546) loss_adaptive_ce 2.2455 (2.4087) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 50.0000 (34.7917) lr 1.9098e-04 eta 0:00:35
+epoch [18/20] batch [40/50] time 0.284 (0.290) data 0.214 (0.221) loss 2.2467 (2.0585) loss_ce 2.2467 (2.0585) loss_adaptive_ce 2.6457 (2.4360) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 18.7500 (34.8438) lr 1.9098e-04 eta 0:00:31
+epoch [18/20] batch [50/50] time 0.294 (0.289) data 0.224 (0.219) loss 1.8317 (2.0098) loss_ce 1.8317 (2.0098) loss_adaptive_ce 2.5046 (2.4228) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 50.0000 (36.0000) lr 1.0899e-04 eta 0:00:28
+epoch [19/20] batch [10/50] time 0.272 (0.281) data 0.202 (0.211) loss 2.2157 (1.8010) loss_ce 2.2157 (1.8010) loss_adaptive_ce 2.5216 (2.2801) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (42.5000) lr 1.0899e-04 eta 0:00:25
+epoch [19/20] batch [20/50] time 0.360 (0.292) data 0.289 (0.222) loss 2.2311 (1.9250) loss_ce 2.2311 (1.9250) loss_adaptive_ce 2.5699 (2.3315) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (38.1250) lr 1.0899e-04 eta 0:00:23
+epoch [19/20] batch [30/50] time 0.365 (0.302) data 0.293 (0.231) loss 2.5402 (1.9782) loss_ce 2.5402 (1.9782) loss_adaptive_ce 3.1489 (2.4198) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 25.0000 (36.0417) lr 1.0899e-04 eta 0:00:21
+epoch [19/20] batch [40/50] time 0.273 (0.307) data 0.203 (0.237) loss 1.8841 (1.9783) loss_ce 1.8841 (1.9783) loss_adaptive_ce 2.3157 (2.3914) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 43.7500 (36.2500) lr 1.0899e-04 eta 0:00:18
+epoch [19/20] batch [50/50] time 0.312 (0.307) data 0.241 (0.237) loss 2.0081 (1.9686) loss_ce 2.0081 (1.9686) loss_adaptive_ce 2.5785 (2.3815) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (37.2500) lr 4.8943e-05 eta 0:00:15
+epoch [20/20] batch [10/50] time 0.294 (0.289) data 0.236 (0.222) loss 1.8184 (1.9328) loss_ce 1.8184 (1.9328) loss_adaptive_ce 2.5643 (2.3863) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 31.2500 (37.5000) lr 4.8943e-05 eta 0:00:11
+epoch [20/20] batch [20/50] time 0.287 (0.293) data 0.216 (0.224) loss 2.1081 (1.9352) loss_ce 2.1081 (1.9352) loss_adaptive_ce 2.5233 (2.3748) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 12.5000 (36.8750) lr 4.8943e-05 eta 0:00:08
+epoch [20/20] batch [30/50] time 0.375 (0.294) data 0.302 (0.224) loss 1.7606 (1.8897) loss_ce 1.7606 (1.8897) loss_adaptive_ce 2.1807 (2.3950) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 50.0000 (39.1667) lr 4.8943e-05 eta 0:00:05
+epoch [20/20] batch [40/50] time 0.369 (0.310) data 0.297 (0.239) loss 2.1904 (1.9259) loss_ce 2.1904 (1.9259) loss_adaptive_ce 2.5221 (2.3934) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 50.0000 (38.9062) lr 4.8943e-05 eta 0:00:03
+epoch [20/20] batch [50/50] time 0.274 (0.302) data 0.201 (0.232) loss 1.8251 (1.9505) loss_ce 1.8251 (1.9505) loss_adaptive_ce 2.4894 (2.4126) loss_kd 0.0000 (0.0000) loss_negative_entropy 0.0000 (0.0000) acc 56.2500 (38.6250) lr 1.2312e-05 eta 0:00:00
+Checkpoint saved to /root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/model/textconsistency/model.pth.tar-20
+Finish training
+Elapsed: 0:04:48

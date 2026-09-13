@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "state": "planned_not_executed",
+  "study": "Aircraft seed1 visual-adapter pilot",
+  "plan_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/future-plan/plan.json",
+  "output_root": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307",
+  "python": "/root/autodl-tmp/textconsistency/.venv/bin/python",
+  "python_sha256": "0c05a22b0b180580a76437114a95cf138f67c8f46245acad26017c803b42b8c1",
+  "prepared_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/prepared/prepared.json",
+  "prepared_sha256": "7571fbd63ef08801c1520bf7c66d411f3adfc0d1d6f5e3b84ce1c9348cd3c699",
+  "prepared_identity_sha256": "3a681431aea60bf233d1e0329b09f64838e9103d694d9212c7bf66b61144418f",
+  "source_sha256": "38d9afc3cdc0440695cb5eca5c59069f73ace1aba4478d5afc5b656050911840",
+  "protocol": {
+    "kind": "visual_adapter_aircraft_pilot",
+    "version": 1,
+    "seed": 1,
+    "shots": 16,
+    "epochs": 20,
+    "split": "val",
+    "subsample_classes": "base",
+    "dataset": "FGVCAircraft",
+    "backbone": "ViT-B/16",
+    "precision": "fp32",
+    "alpha": 0.5,
+    "variants": [
+      "simple_fusion",
+      "visual_only",
+      "visual_description"
+    ],
+    "max_training_runs": 3,
+    "wallclock_cap_seconds": 3600,
+    "minimum_C_minus_A_pp": 1.0,
+    "minimum_C_minus_B_pp": 1.0
+  },
+  "training_budget": {
+    "planned": 3,
+    "maximum": 3,
+    "retries": 0
+  },
+  "wallclock_seconds": 3600,
+  "continuation_rule": {
+    "metric": "final_epoch20_base_val_F_accuracy",
+    "minimum_gain_pp": 1.0,
+    "comparisons": [
+      "C-A",
+      "C-B"
+    ],
+    "automatic_expansion": false
+  },
+  "operations": {
+    "train": {
+      "path": "/root/autodl-tmp/textconsistency/releases/visual-adapter-pilot-westc-20260913-1a38307/train.py",
+      "sha256": "616f5f502e744ce3c7801d176bf03644c9f2a762b60991cee2190b7467dee705"
+    },
+    "validation": {
+      "path": "/root/autodl-tmp/textconsistency/releases/visual-adapter-pilot-westc-20260913-1a38307/scripts/repro/visual_adapter_validation.py",
+      "sha256": "919001abde1e9392bc01a8a8aeea6cce50ad5e6c22936cf9cec6b03332b76915"
+    },
+    "study": {
+      "path": "/root/autodl-tmp/textconsistency/releases/visual-adapter-pilot-westc-20260913-1a38307/scripts/repro/visual_adapter_study.py",
+      "sha256": "c97391de0a18101b124c3ba18f7a915029eafba41fa87257ba7366b647e6a27d"
+    }
+  },
+  "stages": [
+    {
+      "stage_id": "01-simple_fusion-train",
+      "variant": "simple_fusion",
+      "kind": "train",
+      "argv": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "/root/autodl-tmp/textconsistency/releases/visual-adapter-pilot-westc-20260913-1a38307/train.py",
+        "--config-file",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/prepared/simple_fusion.yaml",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/model",
+        "--seed",
+        "1"
+      ],
+      "output_dir": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/model",
+      "result_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/model/textconsistency/model.pth.tar-20"
+    },
+    {
+      "stage_id": "02-simple_fusion-export",
+      "variant": "simple_fusion",
+      "kind": "export",
+      "argv": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "/root/autodl-tmp/textconsistency/releases/visual-adapter-pilot-westc-20260913-1a38307/scripts/repro/visual_adapter_validation.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/prepared/prepared.json",
+        "--variant",
+        "simple_fusion",
+        "--model-dir",
+        "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/model",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/export"
+      ],
+      "output_dir": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/export",
+      "result_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/export/export.json"
+    },
+    {
+      "stage_id": "03-visual_only-train",
+      "variant": "visual_only",
+      "kind": "train",
+      "argv": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "/root/autodl-tmp/textconsistency/releases/visual-adapter-pilot-westc-20260913-1a38307/train.py",
+        "--config-file",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/prepared/visual_only.yaml",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/model",
+        "--seed",
+        "1"
+      ],
+      "output_dir": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/model",
+      "result_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/model/textconsistency/model.pth.tar-20"
+    },
+    {
+      "stage_id": "04-visual_only-export",
+      "variant": "visual_only",
+      "kind": "export",
+      "argv": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "/root/autodl-tmp/textconsistency/releases/visual-adapter-pilot-westc-20260913-1a38307/scripts/repro/visual_adapter_validation.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/prepared/prepared.json",
+        "--variant",
+        "visual_only",
+        "--model-dir",
+        "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/model",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/export"
+      ],
+      "output_dir": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/export",
+      "result_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_only/export/export.json"
+    },
+    {
+      "stage_id": "05-visual_description-train",
+      "variant": "visual_description",
+      "kind": "train",
+      "argv": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "/root/autodl-tmp/textconsistency/releases/visual-adapter-pilot-westc-20260913-1a38307/train.py",
+        "--config-file",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/prepared/visual_description.yaml",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/model",
+        "--seed",
+        "1"
+      ],
+      "output_dir": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/model",
+      "result_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/model/textconsistency/model.pth.tar-20"
+    },
+    {
+      "stage_id": "06-visual_description-export",
+      "variant": "visual_description",
+      "kind": "export",
+      "argv": [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "/root/autodl-tmp/textconsistency/releases/visual-adapter-pilot-westc-20260913-1a38307/scripts/repro/visual_adapter_validation.py",
+        "export",
+        "--prepared",
+        "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/prepared/prepared.json",
+        "--variant",
+        "visual_description",
+        "--model-dir",
+        "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/model",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/export"
+      ],
+      "output_dir": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/export",
+      "result_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/visual_description/export/export.json"
+    }
+  ],
+  "analysis_path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/analysis.json",
+  "plan_identity_sha256": "bda189da059554323c91f4e0b796425b22e0ab644f54c060b8b95fc13791ef9d"
+}

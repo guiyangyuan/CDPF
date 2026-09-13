@@ -1,0 +1,1105 @@
+{
+  "schema_version": 1,
+  "status": "exported",
+  "variant": "simple_fusion",
+  "protocol": {
+    "kind": "visual_adapter_aircraft_pilot",
+    "version": 1,
+    "seed": 1,
+    "shots": 16,
+    "epochs": 20,
+    "split": "val",
+    "subsample_classes": "base",
+    "dataset": "FGVCAircraft",
+    "backbone": "ViT-B/16",
+    "precision": "fp32",
+    "alpha": 0.5,
+    "variants": [
+      "simple_fusion",
+      "visual_only",
+      "visual_description"
+    ],
+    "max_training_runs": 3,
+    "wallclock_cap_seconds": 3600,
+    "minimum_C_minus_A_pp": 1.0,
+    "minimum_C_minus_B_pp": 1.0
+  },
+  "prepared_path": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/prepared/prepared.json",
+  "prepared_identity_sha256": "3a681431aea60bf233d1e0329b09f64838e9103d694d9212c7bf66b61144418f",
+  "source_sha256": "38d9afc3cdc0440695cb5eca5c59069f73ace1aba4478d5afc5b656050911840",
+  "class_order": [
+    "707-320",
+    "727-200",
+    "737-200",
+    "737-300",
+    "737-400",
+    "737-500",
+    "737-600",
+    "737-700",
+    "737-800",
+    "737-900",
+    "747-100",
+    "747-200",
+    "747-300",
+    "747-400",
+    "757-200",
+    "757-300",
+    "767-200",
+    "767-300",
+    "767-400",
+    "777-200",
+    "777-300",
+    "A300B4",
+    "A310",
+    "A318",
+    "A319",
+    "A320",
+    "A321",
+    "A330-200",
+    "A330-300",
+    "A340-200",
+    "A340-300",
+    "A340-500",
+    "A340-600",
+    "A380",
+    "ATR-42",
+    "ATR-72",
+    "An-12",
+    "BAE 146-200",
+    "BAE 146-300",
+    "BAE-125",
+    "Beechcraft 1900",
+    "Boeing 717",
+    "C-130",
+    "C-47",
+    "CRJ-200",
+    "CRJ-700",
+    "CRJ-900",
+    "Cessna 172",
+    "Cessna 208",
+    "Cessna 525"
+  ],
+  "rows": [
+    {
+      "sample_id": "fgvc_aircraft/images/0869692.jpg",
+      "label": 0,
+      "classname": "707-320"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1514481.jpg",
+      "label": 0,
+      "classname": "707-320"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0481847.jpg",
+      "label": 0,
+      "classname": "707-320"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1148180.jpg",
+      "label": 0,
+      "classname": "707-320"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1446378.jpg",
+      "label": 1,
+      "classname": "727-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0048341.jpg",
+      "label": 1,
+      "classname": "727-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1036881.jpg",
+      "label": 1,
+      "classname": "727-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0063113.jpg",
+      "label": 1,
+      "classname": "727-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0522884.jpg",
+      "label": 2,
+      "classname": "737-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1884748.jpg",
+      "label": 2,
+      "classname": "737-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0109632.jpg",
+      "label": 2,
+      "classname": "737-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0981301.jpg",
+      "label": 2,
+      "classname": "737-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0248336.jpg",
+      "label": 3,
+      "classname": "737-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1955376.jpg",
+      "label": 3,
+      "classname": "737-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2031394.jpg",
+      "label": 3,
+      "classname": "737-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0944166.jpg",
+      "label": 3,
+      "classname": "737-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1474251.jpg",
+      "label": 4,
+      "classname": "737-400"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0939537.jpg",
+      "label": 4,
+      "classname": "737-400"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1334567.jpg",
+      "label": 4,
+      "classname": "737-400"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0523220.jpg",
+      "label": 4,
+      "classname": "737-400"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1313891.jpg",
+      "label": 5,
+      "classname": "737-500"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1033079.jpg",
+      "label": 5,
+      "classname": "737-500"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1405447.jpg",
+      "label": 5,
+      "classname": "737-500"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2230107.jpg",
+      "label": 5,
+      "classname": "737-500"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1225644.jpg",
+      "label": 6,
+      "classname": "737-600"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0428665.jpg",
+      "label": 6,
+      "classname": "737-600"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0562553.jpg",
+      "label": 6,
+      "classname": "737-600"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0959047.jpg",
+      "label": 6,
+      "classname": "737-600"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0209211.jpg",
+      "label": 7,
+      "classname": "737-700"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2201377.jpg",
+      "label": 7,
+      "classname": "737-700"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1319791.jpg",
+      "label": 7,
+      "classname": "737-700"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1569052.jpg",
+      "label": 7,
+      "classname": "737-700"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1190718.jpg",
+      "label": 8,
+      "classname": "737-800"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0097108.jpg",
+      "label": 8,
+      "classname": "737-800"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0684565.jpg",
+      "label": 8,
+      "classname": "737-800"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1236463.jpg",
+      "label": 8,
+      "classname": "737-800"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0837340.jpg",
+      "label": 9,
+      "classname": "737-900"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0179021.jpg",
+      "label": 9,
+      "classname": "737-900"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1718867.jpg",
+      "label": 9,
+      "classname": "737-900"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0331279.jpg",
+      "label": 9,
+      "classname": "737-900"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0808930.jpg",
+      "label": 10,
+      "classname": "747-100"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0558306.jpg",
+      "label": 10,
+      "classname": "747-100"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1318175.jpg",
+      "label": 10,
+      "classname": "747-100"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1033308.jpg",
+      "label": 10,
+      "classname": "747-100"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0993945.jpg",
+      "label": 11,
+      "classname": "747-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0447170.jpg",
+      "label": 11,
+      "classname": "747-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1094667.jpg",
+      "label": 11,
+      "classname": "747-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0233756.jpg",
+      "label": 11,
+      "classname": "747-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1256683.jpg",
+      "label": 12,
+      "classname": "747-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0167090.jpg",
+      "label": 12,
+      "classname": "747-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0981462.jpg",
+      "label": 12,
+      "classname": "747-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0569010.jpg",
+      "label": 12,
+      "classname": "747-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1291092.jpg",
+      "label": 13,
+      "classname": "747-400"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1173801.jpg",
+      "label": 13,
+      "classname": "747-400"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0127504.jpg",
+      "label": 13,
+      "classname": "747-400"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1662017.jpg",
+      "label": 13,
+      "classname": "747-400"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0090862.jpg",
+      "label": 14,
+      "classname": "757-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1175264.jpg",
+      "label": 14,
+      "classname": "757-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0684607.jpg",
+      "label": 14,
+      "classname": "757-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1073024.jpg",
+      "label": 14,
+      "classname": "757-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0658111.jpg",
+      "label": 15,
+      "classname": "757-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1334472.jpg",
+      "label": 15,
+      "classname": "757-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0985968.jpg",
+      "label": 15,
+      "classname": "757-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2099420.jpg",
+      "label": 15,
+      "classname": "757-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1514289.jpg",
+      "label": 16,
+      "classname": "767-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0127507.jpg",
+      "label": 16,
+      "classname": "767-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0062766.jpg",
+      "label": 16,
+      "classname": "767-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1291080.jpg",
+      "label": 16,
+      "classname": "767-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1700379.jpg",
+      "label": 17,
+      "classname": "767-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1838649.jpg",
+      "label": 17,
+      "classname": "767-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2031399.jpg",
+      "label": 17,
+      "classname": "767-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1518619.jpg",
+      "label": 17,
+      "classname": "767-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1134122.jpg",
+      "label": 18,
+      "classname": "767-400"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1103084.jpg",
+      "label": 18,
+      "classname": "767-400"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0248710.jpg",
+      "label": 18,
+      "classname": "767-400"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0870232.jpg",
+      "label": 18,
+      "classname": "767-400"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1014374.jpg",
+      "label": 19,
+      "classname": "777-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2084802.jpg",
+      "label": 19,
+      "classname": "777-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2230359.jpg",
+      "label": 19,
+      "classname": "777-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1992904.jpg",
+      "label": 19,
+      "classname": "777-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1545067.jpg",
+      "label": 20,
+      "classname": "777-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1650311.jpg",
+      "label": 20,
+      "classname": "777-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1429301.jpg",
+      "label": 20,
+      "classname": "777-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1864995.jpg",
+      "label": 20,
+      "classname": "777-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0901374.jpg",
+      "label": 21,
+      "classname": "A300B4"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0489932.jpg",
+      "label": 21,
+      "classname": "A300B4"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0939485.jpg",
+      "label": 21,
+      "classname": "A300B4"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0901516.jpg",
+      "label": 21,
+      "classname": "A300B4"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1514483.jpg",
+      "label": 22,
+      "classname": "A310"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2230428.jpg",
+      "label": 22,
+      "classname": "A310"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0225215.jpg",
+      "label": 22,
+      "classname": "A310"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0737639.jpg",
+      "label": 22,
+      "classname": "A310"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1277619.jpg",
+      "label": 23,
+      "classname": "A318"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1503763.jpg",
+      "label": 23,
+      "classname": "A318"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1375490.jpg",
+      "label": 23,
+      "classname": "A318"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2260089.jpg",
+      "label": 23,
+      "classname": "A318"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0257377.jpg",
+      "label": 24,
+      "classname": "A319"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1548486.jpg",
+      "label": 24,
+      "classname": "A319"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0143381.jpg",
+      "label": 24,
+      "classname": "A319"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2195569.jpg",
+      "label": 24,
+      "classname": "A319"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0792199.jpg",
+      "label": 25,
+      "classname": "A320"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0324847.jpg",
+      "label": 25,
+      "classname": "A320"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1176949.jpg",
+      "label": 25,
+      "classname": "A320"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0501890.jpg",
+      "label": 25,
+      "classname": "A320"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2117303.jpg",
+      "label": 26,
+      "classname": "A321"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2088378.jpg",
+      "label": 26,
+      "classname": "A321"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0757707.jpg",
+      "label": 26,
+      "classname": "A321"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1386619.jpg",
+      "label": 26,
+      "classname": "A321"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2019053.jpg",
+      "label": 27,
+      "classname": "A330-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2259876.jpg",
+      "label": 27,
+      "classname": "A330-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1910721.jpg",
+      "label": 27,
+      "classname": "A330-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1647809.jpg",
+      "label": 27,
+      "classname": "A330-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1182369.jpg",
+      "label": 28,
+      "classname": "A330-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2157387.jpg",
+      "label": 28,
+      "classname": "A330-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1211875.jpg",
+      "label": 28,
+      "classname": "A330-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1840140.jpg",
+      "label": 28,
+      "classname": "A330-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0950435.jpg",
+      "label": 29,
+      "classname": "A340-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1961237.jpg",
+      "label": 29,
+      "classname": "A340-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0849197.jpg",
+      "label": 29,
+      "classname": "A340-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1223334.jpg",
+      "label": 29,
+      "classname": "A340-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0710668.jpg",
+      "label": 30,
+      "classname": "A340-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1540149.jpg",
+      "label": 30,
+      "classname": "A340-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2175375.jpg",
+      "label": 30,
+      "classname": "A340-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1586136.jpg",
+      "label": 30,
+      "classname": "A340-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0968259.jpg",
+      "label": 31,
+      "classname": "A340-500"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0896575.jpg",
+      "label": 31,
+      "classname": "A340-500"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1900368.jpg",
+      "label": 31,
+      "classname": "A340-500"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1708096.jpg",
+      "label": 31,
+      "classname": "A340-500"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1567838.jpg",
+      "label": 32,
+      "classname": "A340-600"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1790504.jpg",
+      "label": 32,
+      "classname": "A340-600"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1008043.jpg",
+      "label": 32,
+      "classname": "A340-600"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1230250.jpg",
+      "label": 32,
+      "classname": "A340-600"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1979055.jpg",
+      "label": 33,
+      "classname": "A380"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1659447.jpg",
+      "label": 33,
+      "classname": "A380"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1790439.jpg",
+      "label": 33,
+      "classname": "A380"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2046689.jpg",
+      "label": 33,
+      "classname": "A380"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0522941.jpg",
+      "label": 34,
+      "classname": "ATR-42"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1844997.jpg",
+      "label": 34,
+      "classname": "ATR-42"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1018467.jpg",
+      "label": 34,
+      "classname": "ATR-42"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1095701.jpg",
+      "label": 34,
+      "classname": "ATR-42"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1088361.jpg",
+      "label": 35,
+      "classname": "ATR-72"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1157334.jpg",
+      "label": 35,
+      "classname": "ATR-72"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1102455.jpg",
+      "label": 35,
+      "classname": "ATR-72"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1354666.jpg",
+      "label": 35,
+      "classname": "ATR-72"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1291069.jpg",
+      "label": 36,
+      "classname": "An-12"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1545983.jpg",
+      "label": 36,
+      "classname": "An-12"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1198418.jpg",
+      "label": 36,
+      "classname": "An-12"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0522933.jpg",
+      "label": 36,
+      "classname": "An-12"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1277982.jpg",
+      "label": 37,
+      "classname": "BAE 146-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0514108.jpg",
+      "label": 37,
+      "classname": "BAE 146-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1111339.jpg",
+      "label": 37,
+      "classname": "BAE 146-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0950440.jpg",
+      "label": 37,
+      "classname": "BAE 146-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1902199.jpg",
+      "label": 38,
+      "classname": "BAE 146-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0273090.jpg",
+      "label": 38,
+      "classname": "BAE 146-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1223418.jpg",
+      "label": 38,
+      "classname": "BAE 146-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1549188.jpg",
+      "label": 38,
+      "classname": "BAE 146-300"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0451431.jpg",
+      "label": 39,
+      "classname": "BAE-125"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1243688.jpg",
+      "label": 39,
+      "classname": "BAE-125"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0741746.jpg",
+      "label": 39,
+      "classname": "BAE-125"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1538799.jpg",
+      "label": 39,
+      "classname": "BAE-125"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1192657.jpg",
+      "label": 40,
+      "classname": "Beechcraft 1900"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0091405.jpg",
+      "label": 40,
+      "classname": "Beechcraft 1900"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2141016.jpg",
+      "label": 40,
+      "classname": "Beechcraft 1900"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1018464.jpg",
+      "label": 40,
+      "classname": "Beechcraft 1900"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2188374.jpg",
+      "label": 41,
+      "classname": "Boeing 717"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0958138.jpg",
+      "label": 41,
+      "classname": "Boeing 717"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0181712.jpg",
+      "label": 41,
+      "classname": "Boeing 717"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1385089.jpg",
+      "label": 41,
+      "classname": "Boeing 717"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2014678.jpg",
+      "label": 42,
+      "classname": "C-130"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1017178.jpg",
+      "label": 42,
+      "classname": "C-130"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1584757.jpg",
+      "label": 42,
+      "classname": "C-130"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0771794.jpg",
+      "label": 42,
+      "classname": "C-130"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1539361.jpg",
+      "label": 43,
+      "classname": "C-47"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2115048.jpg",
+      "label": 43,
+      "classname": "C-47"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1517894.jpg",
+      "label": 43,
+      "classname": "C-47"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0704272.jpg",
+      "label": 43,
+      "classname": "C-47"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0200888.jpg",
+      "label": 44,
+      "classname": "CRJ-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1206413.jpg",
+      "label": 44,
+      "classname": "CRJ-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0488515.jpg",
+      "label": 44,
+      "classname": "CRJ-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1763290.jpg",
+      "label": 44,
+      "classname": "CRJ-200"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0303915.jpg",
+      "label": 45,
+      "classname": "CRJ-700"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0924100.jpg",
+      "label": 45,
+      "classname": "CRJ-700"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0445396.jpg",
+      "label": 45,
+      "classname": "CRJ-700"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1631148.jpg",
+      "label": 45,
+      "classname": "CRJ-700"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1204209.jpg",
+      "label": 46,
+      "classname": "CRJ-900"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1920543.jpg",
+      "label": 46,
+      "classname": "CRJ-900"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2101213.jpg",
+      "label": 46,
+      "classname": "CRJ-900"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1375147.jpg",
+      "label": 46,
+      "classname": "CRJ-900"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2212872.jpg",
+      "label": 47,
+      "classname": "Cessna 172"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1845164.jpg",
+      "label": 47,
+      "classname": "Cessna 172"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1418848.jpg",
+      "label": 47,
+      "classname": "Cessna 172"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1507992.jpg",
+      "label": 47,
+      "classname": "Cessna 172"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0155816.jpg",
+      "label": 48,
+      "classname": "Cessna 208"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0302294.jpg",
+      "label": 48,
+      "classname": "Cessna 208"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0488486.jpg",
+      "label": 48,
+      "classname": "Cessna 208"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1053453.jpg",
+      "label": 48,
+      "classname": "Cessna 208"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1849797.jpg",
+      "label": 49,
+      "classname": "Cessna 525"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/1468401.jpg",
+      "label": 49,
+      "classname": "Cessna 525"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/2030169.jpg",
+      "label": 49,
+      "classname": "Cessna 525"
+    },
+    {
+      "sample_id": "fgvc_aircraft/images/0820657.jpg",
+      "label": 49,
+      "classname": "Cessna 525"
+    }
+  ],
+  "checkpoint": {
+    "path": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307/simple_fusion/model/textconsistency/model.pth.tar-20",
+    "sha256": "3dfd11d910ed5c28a56bbf171358a857894b4b7532a4a9e5bb635a8632b2ddba",
+    "epoch": 20,
+    "manifest_sha256": "e8fef088b9f2dc4324199a3c894cef3b70d35234f226b15b2df19655900f7bc5",
+    "config_sha256": "15d662215ab1491f5af6883c62e5905a68d6c97784dbc4427d068619bcc89682"
+  },
+  "logits_sha256": "60934b890deb83cb57f3bbf2fb93656fbdb87855f054824f6b8b33e742143eda",
+  "feature_semantics": "S,D both use actual model classification feature; F=.5S+.5D",
+  "decoded_val": {
+    "count": 200,
+    "tensor_shape": [
+      3,
+      224,
+      224
+    ],
+    "tensor_dtype": "torch.float32",
+    "ordered_transform_sha256": "4a4cc9dac3cd12035a0332f096513a00825c923f501de2498d8b4338f6d8b5cd"
+  },
+  "device": "cuda",
+  "export_identity_sha256": "e2c3b9b04c9dc72ea64cf90f208ef6b678a35f75ab1477ca3cf0932e621551f5"
+}

@@ -31,6 +31,7 @@ import trainers.coop_textconsistency
 import trainers.coop_textconsistency_avg
 import trainers.coop_textconsistency_v2
 import trainers.coop_textconsistency_v2_fg
+import trainers.coop_textconsistency_correction
 import trainers.coop_textconsistency_ablation
 
 import trainers.cocoop
@@ -136,6 +137,7 @@ def extend_cfg(cfg):
     cfg.TRAINER.TEXTCONSISTENCY.USE_VISUAL_ADAPTER = False
     cfg.TRAINER.TEXTCONSISTENCY.VISUAL_ADAPTER_DIM = 64
     cfg.TRAINER.TEXTCONSISTENCY.VISUAL_ADAPTER_SCALE = 0.2
+    cfg.TRAINER.TEXTCONSISTENCY.CORRECTION_TEXT = "description"
     cfg.TRAINER.TEXTCONSISTENCY.INFERENCE_BRANCH = "ensemble"
     cfg.TRAINER.TEXTCONSISTENCY.ENSEMBLE_ALPHA = 0.5
     cfg.TRAINER.TEXTCONSISTENCY.DEVICE = "auto"

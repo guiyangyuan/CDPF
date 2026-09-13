@@ -13,8 +13,8 @@ def validate_visual_adapter_config(cfg):
         raise ValueError('USE_VISUAL_ADAPTER must be a boolean')
     if not enabled:
         return
-    if cfg.TRAINER.NAME != 'CoOp_TextConsistency_V2_FG':
-        raise ValueError('Visual adaptation is only supported by CoOp_TextConsistency_V2_FG')
+    if cfg.TRAINER.NAME not in ('CoOp_TextConsistency_V2_FG', 'CoOp_TextConsistency_Correction'):
+        raise ValueError('Visual adaptation requires a supported TextConsistency trainer')
     width, scale = tc.VISUAL_ADAPTER_DIM, tc.VISUAL_ADAPTER_SCALE
     if type(width) is not int or width < 1:
         raise ValueError('VISUAL_ADAPTER_DIM must be a positive integer')

@@ -126,6 +126,9 @@ class ValidatedTrainer(TrainerX):
         if visual_adapter is not None:
             self.repro_signature.update(format=3,
                 visual_adapter=visual_adapter.identity(self.adaptive_ce_weight))
+        correction = getattr(self.model, 'correction_identity', None)
+        if correction is not None:
+            self.repro_signature.update(format=4, correction=dict(correction))
         self.run_provenance = {
             'seed': cfg.SEED, 'dataset': cfg.DATASET.NAME, 'shots': cfg.DATASET.NUM_SHOTS,
             'subsample': cfg.DATASET.SUBSAMPLE_CLASSES, 'model_signature': self.repro_signature,
@@ -142,6 +145,8 @@ class ValidatedTrainer(TrainerX):
             'description_counts': getattr(encoder, 'description_counts', []),
             'view_order_manifest': getattr(encoder, 'view_order_manifest', None),
         }
+        if correction is not None:
+            self.run_provenance['effective_losses']['correction_ce'] = float(correction['enabled'])
         directory = Path(cfg.OUTPUT_DIR); directory.mkdir(parents=True, exist_ok=True)
         (directory / 'run_manifest.json').write_text(json.dumps(self.run_provenance, indent=2))
         (directory / 'effective_config.yaml').write_text(cfg.dump())

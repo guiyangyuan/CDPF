@@ -1,0 +1,32 @@
+{
+  "state": "launched",
+  "started_at": "2026-09-13T16:06:09.217703+00:00",
+  "instance": "autodl-container-a5904787c3-600682b1",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "gpu_bytes": 25250627584,
+  "memory_limit": "96636764160",
+  "torch": "2.8.0+cu128",
+  "cuda_runtime": "12.8",
+  "source_commit": "1a3830754dbffa87f06348e842e68a07fb4054c7",
+  "plan": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/future-plan/plan.json",
+  "plan_sha256": "8f2c65b4130021d62b66e0c33920c1110b0e8af293c58d69167bdd2928eebc5c",
+  "output": "/root/autodl-tmp/textconsistency/runs/visual-adapter-pilot-westc-20260913-1a38307",
+  "argv": [
+    "/root/autodl-tmp/textconsistency/.venv/bin/python",
+    "scripts/repro/visual_adapter_study.py",
+    "run",
+    "--plan",
+    "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/future-plan/plan.json"
+  ],
+  "cwd": "/root/autodl-tmp/textconsistency/releases/visual-adapter-pilot-westc-20260913-1a38307",
+  "environment_overrides": {
+    "PYTHONPATH": ".:Dassl.pytorch:tests",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1"
+  },
+  "cuda_smoke_passed": true,
+  "preexisting_gpu_processes": "",
+  "launch_log": "/root/autodl-tmp/textconsistency/setup-logs/visual-adapter-pilot-westc-20260913-1a38307/gpu-launch-20260914/runner.log",
+  "pid": 1269
+}

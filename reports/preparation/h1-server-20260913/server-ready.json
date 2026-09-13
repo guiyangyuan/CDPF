@@ -1,0 +1,40 @@
+{
+  "state": "cpu_preparation_complete",
+  "commit": "efcd3dbb7d5515dde3a708d4093bc503f66eba0b",
+  "release": "/root/autodl-tmp/textconsistency/releases/h1-validation-20260913-efcd3db",
+  "source_archive_sha256": "ab2cb0b7c0eb0338b0e151596ff96bc6bbcee60f7340c35dbea6fc824e28fab7",
+  "operation_sha256": {
+    "train.py": "6300a16139e2995da79b1ecffd55c5afd46185439630c855f0a5e793b0b2d927",
+    "scripts/repro/h1_validation.py": "b00cc3d35e3c9279e0f9a7e1ba7af621df3abf382076ae4f8ea6523edd89554b",
+    "scripts/repro/h1_study.py": "c494dba3661ce4e222793af7f84f1e5c90e66900d6f726362962c28c7b239a00",
+    "scripts/repro/h1_analysis.py": "79bd00013b1b9f023b8e7d3baf31b7b751bea49c1e693d50becff222a1f5fefc"
+  },
+  "prepared": [
+    {
+      "path": "/root/autodl-tmp/textconsistency/setup-logs/h1-validation-20260913-efcd3db/anchor-dtd/prepared.json",
+      "sha256": "20ef8472d1d77594e61a5bf32bb9b4c8e0d502f4b325a40d7ca94d9e0643515c"
+    },
+    {
+      "path": "/root/autodl-tmp/textconsistency/setup-logs/h1-validation-20260913-efcd3db/candidate-ucf101/prepared.json",
+      "sha256": "931e29f588aab08c6a93e9a9596d1294a66732fd1a30c0e21291a67e3929082b"
+    },
+    {
+      "path": "/root/autodl-tmp/textconsistency/setup-logs/h1-validation-20260913-efcd3db/candidate-dtd/prepared.json",
+      "sha256": "2ef2f987229586f76d013323fd9bba274ee302fe016224e87bff9e723e2ad388"
+    },
+    {
+      "path": "/root/autodl-tmp/textconsistency/setup-logs/h1-validation-20260913-efcd3db/candidate-fgvc_aircraft/prepared.json",
+      "sha256": "d3d6f6ede575955473ace354d5dcccda6bde0a9b8c82df39c3258dad3a1d2baf"
+    }
+  ],
+  "plan": "/root/autodl-tmp/textconsistency/setup-logs/h1-validation-20260913-efcd3db/future-plan/plan.json",
+  "plan_sha256": "684ae3b6c6649cec536efb048e116443b0d8df136806569c18a20108b9a2dde6",
+  "future_study_output": "/root/autodl-tmp/textconsistency/runs/h1-validation-20260913-efcd3db",
+  "study_output_absent": true,
+  "inputs_unchanged": true,
+  "gpu_training_started": false,
+  "formal_training_runs": 0,
+  "limitations": [
+    "No real GPU training/export occurred; GPU effect and anchor are unverified"
+  ]
+}

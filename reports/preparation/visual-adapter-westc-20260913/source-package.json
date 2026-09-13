@@ -1,0 +1,10 @@
+{
+  "source_commit": "1a3830754dbffa87f06348e842e68a07fb4054c7",
+  "sha256": "591cd4b0b75f093965d7454ee4d741b10847887f7f5ebf3c5a7850ab1484192e",
+  "bytes": 27609733,
+  "changed_from_153953a": [
+    "scripts/repro/visual_adapter_study.py",
+    "tests/repro/test_visual_adapter_study.py"
+  ],
+  "training_source_unchanged": true
+}

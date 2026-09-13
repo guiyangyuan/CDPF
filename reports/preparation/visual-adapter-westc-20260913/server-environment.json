@@ -1,0 +1,11 @@
+{
+  "hostname": "autodl-container-a5904787c3-600682b1",
+  "python": "3.12.3 | packaged by Anaconda, Inc. | (main, May  6 2024, 19:46:43) [GCC 11.2.0]",
+  "executable": "/root/autodl-tmp/textconsistency/.venv/bin/python",
+  "torch": "2.8.0+cu128",
+  "torchvision": "0.23.0+cu128",
+  "cuda_runtime": "12.8",
+  "cuda_available": false,
+  "memory_limit": "2147483648",
+  "data_disk_free": 47021596672
+}

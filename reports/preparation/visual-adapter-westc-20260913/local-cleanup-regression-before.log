@@ -1,0 +1,17 @@
+test_alarm_during_exception_cleanup_cannot_skip_child_reaping (repro.test_visual_adapter_study.ExecutorTests.test_alarm_during_exception_cleanup_cannot_skip_child_reaping) ... FAIL
+
+======================================================================
+FAIL: test_alarm_during_exception_cleanup_cannot_skip_child_reaping (repro.test_visual_adapter_study.ExecutorTests.test_alarm_during_exception_cleanup_cannot_skip_child_reaping)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/visual-adapter-pilot-20260913/source/tests/repro/test_visual_adapter_study.py", line 397, in test_alarm_during_exception_cleanup_cannot_skip_child_reaping
+    self.assertEqual(json.loads((self.root / 'output/status.json').read_text())['state'], 'timed_out')
+AssertionError: 'running' != 'timed_out'
+- running
++ timed_out
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.043s
+
+FAILED (failures=1)

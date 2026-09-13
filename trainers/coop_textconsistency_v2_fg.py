@@ -10,6 +10,7 @@ from .textconsistency_common import (
     prediction_logits, load_complete_checkpoint, load_clip_checkpoint,
 )
 from .textconsistency_runtime import ValidatedTrainer
+from .visual_adapter import ResidualVisualAdapter
 
 
 def load_clip_to_cpu(cfg):
@@ -87,10 +88,16 @@ class CustomCLIP(nn.Module):
         self.text_encoder = TextEncoder(clip_model)
         self.logit_scale = clip_model.logit_scale
         self.dtype = clip_model.dtype
+        tc = cfg.TRAINER.TEXTCONSISTENCY
+        self.visual_adapter = (ResidualVisualAdapter(clip_model.text_projection.shape[-1],
+                                                     tc.VISUAL_ADAPTER_DIM, tc.VISUAL_ADAPTER_SCALE)
+                               if tc.USE_VISUAL_ADAPTER else None)
 
     def forward(self, image, return_attn=False):
         with torch.no_grad():
             image_features = F.normalize(self.image_encoder(image.to(self.dtype)), dim=-1)
+        if self.visual_adapter is not None:
+            image_features = self.visual_adapter(image_features)
         prompts = self.prompt_learner()
         text = F.normalize(self.text_encoder(prompts, self.tokenized_prompts), dim=-1)
         logits = self.logit_scale.exp() * image_features @ text.t()

@@ -14,6 +14,7 @@ from .textconsistency_common import (
     PROJECT_ROOT, load_clip_checkpoint, select_device, training_losses, sha256_file,
     description_permutation,
 )
+from .visual_adapter import validate_visual_adapter_config
 
 
 def _loss_identity(mode, temperature, effective_weight):
@@ -58,6 +59,7 @@ def source_digest():
 
 class ValidatedTrainer(TrainerX):
     def check_cfg(self, cfg):
+        validate_visual_adapter_config(cfg)
         tc = cfg.TRAINER.TEXTCONSISTENCY
         if tc.PREC != 'fp32':
             raise ValueError('Use PREC fp32 for the validated reproduction; mixed precision is not yet validated')
@@ -86,12 +88,15 @@ class ValidatedTrainer(TrainerX):
         clip_model = load_clip_checkpoint(cfg)
         self.model = self.model_builder(cfg, self.dm.dataset.classnames, clip_model)
         for name, parameter in self.model.named_parameters():
-            parameter.requires_grad_(name.startswith(('prompt_learner.', 'view_aggregator.')))
+            parameter.requires_grad_(name.startswith(('prompt_learner.', 'view_aggregator.', 'visual_adapter.')))
         self.model.to(self.device)
         self.model.image_encoder.eval()
         self.model.text_encoder.eval()
         self.trainable_modules = nn.ModuleDict({'prompt_learner': self.model.prompt_learner,
                                                 'view_aggregator': self.model.view_aggregator})
+        visual_adapter = getattr(self.model, 'visual_adapter', None)
+        if visual_adapter is not None:
+            self.trainable_modules['visual_adapter'] = visual_adapter
         parameters = [p for p in self.trainable_modules.parameters() if p.requires_grad]
         self.optim = torch.optim.SGD(parameters, lr=cfg.OPTIM.LR, momentum=cfg.OPTIM.MOMENTUM,
                                      weight_decay=cfg.OPTIM.WEIGHT_DECAY)
@@ -118,6 +123,9 @@ class ValidatedTrainer(TrainerX):
             'view_order': tc.VIEW_ORDER, 'order_seed': tc.ORDER_SEED, 'order_version': 1,
             'loss_identity': dict(loss_identity),
         }
+        if visual_adapter is not None:
+            self.repro_signature.update(format=3,
+                visual_adapter=visual_adapter.identity(self.adaptive_ce_weight))
         self.run_provenance = {
             'seed': cfg.SEED, 'dataset': cfg.DATASET.NAME, 'shots': cfg.DATASET.NUM_SHOTS,
             'subsample': cfg.DATASET.SUBSAMPLE_CLASSES, 'model_signature': self.repro_signature,

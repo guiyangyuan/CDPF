@@ -172,6 +172,7 @@ class ValidationProbeContracts(unittest.TestCase):
                 ("kd0", "N_VIEWS", 19),
                 ("kd0", "N_GROUPS", 5),
                 ("kd1", "USE_FEATURE_ADAPTER", False),
+                ("kd1", "USE_VISUAL_ADAPTER", True),
             ):
                 with self.subTest(role=role, field=field):
                     cfg = self._role_config(role)

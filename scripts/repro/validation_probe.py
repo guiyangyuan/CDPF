@@ -356,6 +356,8 @@ def validate_effective_role_config(role: str, cfg: Any, manifest: Mapping[str, A
         raise ValueError(f"{role} effective config is paired with an unauthenticated signature")
     is_coop = role == "coop"
     tc = cfg.TRAINER.TEXTCONSISTENCY
+    if getattr(tc, "USE_VISUAL_ADAPTER", False):
+        raise ValueError("Visual adapter effective config is outside this frozen-feature protocol")
     expected_tc = {
         "ABLATION_GROUP": "baseline" if is_coop else "full",
         "ADAPTIVE_CE_WEIGHT": 1.0,
@@ -570,6 +572,8 @@ def prepare_case(args: argparse.Namespace) -> dict[str, Any]:
 
 
 def strict_load_trainable_modules(model: torch.nn.Module, checkpoint: Mapping[str, Any]) -> None:
+    if getattr(model, "visual_adapter", None) is not None:
+        raise ValueError("Visual adapter requires its own checkpoint/export protocol")
     modules = torch.nn.ModuleDict({"prompt_learner": model.prompt_learner,
                                    "view_aggregator": model.view_aggregator})
     expected, saved = modules.state_dict(), checkpoint.get("state_dict")
@@ -611,6 +615,8 @@ def export_batches(models: Mapping[str, torch.nn.Module], batches: Iterable[Mapp
                    description_features: torch.Tensor, view_mask: torch.Tensor,
                    classnames: list[str], *, device: Any | None = None) -> dict[str, Any]:
     if set(models) != set(ROLES): raise ValueError("Export requires exactly coop/kd0/kd1 models")
+    if any(getattr(model, "visual_adapter", None) is not None for model in models.values()):
+        raise ValueError("Visual adapter features are outside this frozen-feature export protocol")
     for model in models.values(): _freeze(model)
     descriptions = F.normalize(description_features.float(), dim=-1)
     mask = view_mask.to(device=descriptions.device, dtype=torch.bool)

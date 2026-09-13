@@ -785,6 +785,8 @@ def export_batches(
         model: torch.nn.Module, batches: Any, description_features: torch.Tensor,
         view_mask: torch.Tensor, classnames: list[str], *, device: Any | None = None,
 ) -> dict[str, Any]:
+    if getattr(model, "visual_adapter", None) is not None:
+        raise ValueError("Visual adapter features are outside the historical H1 export protocol")
     model.eval()
     for parameter in model.parameters():
         parameter.requires_grad_(False)

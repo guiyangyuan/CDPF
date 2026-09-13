@@ -37,6 +37,7 @@ import trainers.cocoop
 import trainers.cocoop_textconsistency_v2_fg
 
 import trainers.zsclip
+from trainers.visual_adapter import validate_visual_adapter_config
 
 def print_args(args, cfg):
     print("***************")
@@ -132,6 +133,9 @@ def extend_cfg(cfg):
     cfg.TRAINER.TEXTCONSISTENCY.VIEW_ORDER = "contiguous"
     cfg.TRAINER.TEXTCONSISTENCY.ORDER_SEED = 0
     cfg.TRAINER.TEXTCONSISTENCY.USE_FEATURE_ADAPTER = True
+    cfg.TRAINER.TEXTCONSISTENCY.USE_VISUAL_ADAPTER = False
+    cfg.TRAINER.TEXTCONSISTENCY.VISUAL_ADAPTER_DIM = 64
+    cfg.TRAINER.TEXTCONSISTENCY.VISUAL_ADAPTER_SCALE = 0.2
     cfg.TRAINER.TEXTCONSISTENCY.INFERENCE_BRANCH = "ensemble"
     cfg.TRAINER.TEXTCONSISTENCY.ENSEMBLE_ALPHA = 0.5
     cfg.TRAINER.TEXTCONSISTENCY.DEVICE = "auto"
@@ -164,6 +168,7 @@ def setup_cfg(args):
 
 def main(args):
     cfg = setup_cfg(args)
+    validate_visual_adapter_config(cfg)
     kd_mode_trainers = {
         "CoOp_TextConsistency_V2_FG",
         "CoCoOp_TextConsistency_V2_FG",

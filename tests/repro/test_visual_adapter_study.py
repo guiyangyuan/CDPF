@@ -222,7 +222,9 @@ class ExecutorTests(StudyFixture):
                     f"Path({stage['output_dir']!r}).mkdir(parents=True); ")
             if sleeping and index == 0:
                 grandchild = self.root / 'grandchild-alive'
-                child_code = f"import time; from pathlib import Path; time.sleep(1.5); Path({str(grandchild)!r}).touch(); time.sleep(20)"
+                ready = self.root / 'grandchild-ready'
+                child_code = (f"import time; from pathlib import Path; Path({str(ready)!r}).touch(); "
+                              f"time.sleep(1.5); Path({str(grandchild)!r}).touch(); time.sleep(20)")
                 code += (f"subprocess.Popen([sys.executable, '-c', {child_code!r}]); "
                          "time.sleep(20); ")
             code += f"raise SystemExit({7 if index == failing_stage else 0})"
@@ -299,11 +301,15 @@ class ExecutorTests(StudyFixture):
 
     def test_deadline_also_interrupts_cpu_artifact_validation(self):
         self.execution_fixture()
-        start = time.monotonic()
-        with mock.patch.object(study, 'WALLCLOCK_SECONDS', 0.3), \
-             mock.patch.object(study, '_validate_stage', side_effect=lambda *args: time.sleep(20)):
+        entered = []
+        def validating(*args):
+            entered.append(time.monotonic())
+            signal.setitimer(signal.ITIMER_REAL, 0.1)
+            time.sleep(20)
+        with mock.patch.object(study, '_validate_stage', side_effect=validating):
             with self.assertRaises(TimeoutError): study.run_plan(self.root / 'plan/plan.json')
-        self.assertLess(time.monotonic() - start, 1.0)
+        self.assertEqual(len(entered), 1)
+        self.assertLess(time.monotonic() - entered[0], 2.0)
         self.assertEqual((self.root / 'order.txt').read_text().splitlines(), ['0'])
         self.assertEqual(json.loads((self.root / 'output/status.json').read_text())['state'], 'timed_out')
 
@@ -371,12 +377,63 @@ class ExecutorTests(StudyFixture):
         self.assertEqual(json.loads((self.root / 'output/status.json').read_text())['state'], 'timed_out')
 
     @unittest.skipUnless(os.name == 'posix', 'POSIX process-group timeout')
+    def test_alarm_during_exception_cleanup_cannot_skip_child_reaping(self):
+        self.execution_fixture(sleeping=True)
+        real_popen, real_timer = study.subprocess.Popen, signal.setitimer
+        children = []
+        injected = False
+        def launch(*args, **kwargs):
+            process = real_popen(*args, **kwargs)
+            children.append(process)
+            return process
+        def timer(kind, seconds, *args):
+            nonlocal injected
+            if seconds == 0 and not injected:
+                injected = True
+                # A synchronous deadline can win just before SIGALRM is delivered
+                # while the exception handler is trying to disarm that alarm.
+                os.kill(os.getpid(), signal.SIGALRM)
+            return real_timer(kind, seconds, *args)
+        try:
+            with mock.patch.object(study.subprocess, 'Popen', side_effect=launch), \
+                 mock.patch.object(signal, 'setitimer', side_effect=timer), \
+                 mock.patch.object(study, '_wait_for_child', side_effect=TimeoutError('deadline')):
+                with self.assertRaises(TimeoutError): study.run_plan(self.root / 'plan/plan.json')
+            self.assertTrue(injected)
+            self.assertEqual(json.loads((self.root / 'output/status.json').read_text())['state'], 'timed_out')
+            self.assertEqual(len(children), 1)
+            self.assertIsNotNone(children[0].returncode, 'Direct child must be reaped')
+            self.assertFalse((self.root / 'output/analysis.json').exists())
+        finally:
+            for process in children:
+                try: os.killpg(process.pid, signal.SIGKILL)
+                except ProcessLookupError: pass
+                process.wait()
+
+    @unittest.skipUnless(os.name == 'posix', 'POSIX process-group timeout')
     def test_total_deadline_kills_sleeping_child_and_grandchild(self):
         self.execution_fixture(sleeping=True)
-        start = time.monotonic()
-        with mock.patch.object(study, 'WALLCLOCK_SECONDS', 0.3):
+        real_popen = study.subprocess.Popen
+        children, armed = [], []
+        def launch(*args, **kwargs):
+            process = real_popen(*args, **kwargs)
+            children.append(process)
+            # Wait for actual child + grandchild startup before arming the short
+            # real alarm. A throttled no-GPU CPU must not make this test vacuous.
+            until = time.monotonic() + 10
+            while not (self.root / 'grandchild-ready').exists():
+                if time.monotonic() >= until:
+                    os.killpg(process.pid, signal.SIGKILL); process.wait()
+                    self.fail('Child/grandchild did not become ready')
+                time.sleep(0.01)
+            armed.append(time.monotonic())
+            signal.setitimer(signal.ITIMER_REAL, 0.1)
+            return process
+        with mock.patch.object(study.subprocess, 'Popen', side_effect=launch):
             with self.assertRaises(TimeoutError): study.run_plan(self.root / 'plan/plan.json')
-        self.assertLess(time.monotonic() - start, 1.2)
+        self.assertEqual(len(armed), 1)
+        self.assertLess(time.monotonic() - armed[0], 2.0)
+        self.assertIsNotNone(children[0].returncode)
         status = json.loads((self.root / 'output/status.json').read_text())
         self.assertEqual(status['state'], 'timed_out')
         self.assertEqual((self.root / 'order.txt').read_text().splitlines(), ['0'])

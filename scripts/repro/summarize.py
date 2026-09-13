@@ -33,6 +33,9 @@ def _expected_loss_identity(mode, temperature, effective_weight):
     }
     if mode not in weighting:
         raise ValueError(f'Unknown protocol KD loss mode: {mode}')
+    if (not math.isfinite(float(temperature)) or float(temperature) <= 0
+            or not math.isfinite(float(effective_weight)) or float(effective_weight) < 0):
+        raise ValueError('Invalid KD loss identity scalars')
     return {
         'format': 1,
         'mode': mode,
@@ -43,12 +46,40 @@ def _expected_loss_identity(mode, temperature, effective_weight):
     }
 
 
-def _validate_loss_identity(data, expected, path):
+def _validate_declared_loss_identity(data, mode, path, expected=None):
+    if mode not in ('full_kl', 'weighted_nckd'):
+        raise ValueError(f'Unknown protocol KD loss mode: {mode}')
     identities = (data.get('loss_identity'), data.get('model_signature', {}).get('loss_identity'))
-    if identities == (None, None) and expected['mode'] == 'full_kl':
+    if identities == (None, None) and mode == 'full_kl':
         return
-    if any(identity != expected for identity in identities):
+    if any(not isinstance(identity, dict) for identity in identities):
         raise ValueError(f'KD loss identity differs from protocol: {path}')
+    try:
+        normalized = tuple(_expected_loss_identity(identity['mode'], identity['temperature'],
+                                                   identity['effective_weight'])
+                           for identity in identities)
+    except (KeyError, TypeError, ValueError):
+        raise ValueError(f'KD loss identity differs from protocol: {path}') from None
+    if (any(identity != canonical for identity, canonical in zip(identities, normalized))
+            or identities[0] != identities[1]
+            or any(identity['mode'] != mode for identity in identities)
+            or (expected is not None and any(identity != expected for identity in identities))):
+        raise ValueError(f'KD loss identity differs from protocol: {path}')
+
+
+def _validate_loss_identity(data, expected, path):
+    _validate_declared_loss_identity(data, expected['mode'], path, expected)
+
+
+def _validate_config_loss_mode(data, kd_mode, path):
+    if kd_mode not in ('full_kl', 'weighted_nckd'):
+        raise ValueError(f'Unknown protocol KD loss mode: {kd_mode}')
+    configured_mode = data.get('TRAINER', {}).get('TEXTCONSISTENCY', {}).get('KD_LOSS_MODE')
+    if configured_mode is None:
+        if kd_mode != 'full_kl':
+            raise ValueError(f'Missing KD loss mode in effective configuration: {path}')
+    elif configured_mode != kd_mode:
+        raise ValueError(f'Effective configuration KD loss mode differs from protocol: {path}')
 
 
 def _read_config(path):
@@ -86,12 +117,7 @@ def _validate_config(data, variant, kd, kd_mode, fixed, dataset, shots, epochs, 
         raise ValueError(f'Dataset configuration differs from protocol: {path}')
     if data.get('OPTIM', {}).get('MAX_EPOCH') != epochs:
         raise ValueError(f'Training epoch configuration differs from protocol: {path}')
-    configured_mode = tc.get('KD_LOSS_MODE')
-    if configured_mode is None:
-        if kd_mode != 'full_kl':
-            raise ValueError(f'Missing KD loss mode in effective configuration: {path}')
-    elif configured_mode != kd_mode:
-        raise ValueError(f'Effective configuration KD loss mode differs from protocol: {path}')
+    _validate_config_loss_mode(data, kd_mode, path)
     for field, value in expected.items():
         if tc.get(field) != value:
             raise ValueError(f'Effective configuration differs from protocol: {field} in {path}')
@@ -123,6 +149,12 @@ def validate_order_evidence(data, order, groups, views, matched_capacity=False):
 def read_metric(path, seed, split, branch, epochs, dataset='UCF101', kd_weight=None,
                 code_sha256=None, shots=16, fixed_settings=None, kd_loss_mode='full_kl'):
     data = json.loads(path.read_text())
+    if kd_loss_mode not in ('full_kl', 'weighted_nckd'):
+        raise ValueError(f'Unknown protocol KD loss mode: {kd_loss_mode}')
+    if (kd_loss_mode == 'weighted_nckd'
+            and (kd_weight is None or not isinstance(fixed_settings, dict)
+                 or 'kd_temp' not in fixed_settings)):
+        raise ValueError('weighted_nckd audit requires expected KD weight and temperature')
     if (data['seed'], data['subsample'], data['branch'], data['dataset']) != (seed, split, branch, dataset):
         raise ValueError(f'Actual evaluation protocol differs from its directory label: {path}')
     if data.get('shots') != shots:
@@ -133,9 +165,10 @@ def read_metric(path, seed, split, branch, epochs, dataset='UCF101', kd_weight=N
         raise ValueError(f'Wrong checkpoint epoch: {path}')
     if kd_weight is not None and data.get('effective_losses', {}).get('kd') != kd_weight:
         raise ValueError(f'Effective KD weight differs from protocol: {path}')
-    if kd_weight is not None and fixed_settings is not None:
+    expected_identity = None
+    if kd_weight is not None and fixed_settings is not None and 'kd_temp' in fixed_settings:
         expected_identity = _expected_loss_identity(kd_loss_mode, fixed_settings['kd_temp'], kd_weight)
-        _validate_loss_identity(data, expected_identity, path)
+    _validate_declared_loss_identity(data, kd_loss_mode, path, expected_identity)
     if code_sha256 is not None and data.get('code_sha256') != code_sha256:
         raise ValueError(f'Source hash differs from protocol: {path}')
     if fixed_settings:
@@ -160,6 +193,16 @@ def collect(root):
     expected_code = protocol.get('code_sha256')
     fixed_settings = protocol.get('fixed_settings')
     kd_loss_mode = protocol.get('kd_loss_mode', 'full_kl')
+    if kd_loss_mode not in ('full_kl', 'weighted_nckd'):
+        raise ValueError(f'Unknown protocol KD loss mode: {kd_loss_mode}')
+    required_weighted_settings = {
+        'n_ctx', 'n_views', 'n_groups', 'kd_temp', 'adaptive_ce_weight',
+        'contrastive_weight', 'diversity_weight', 'ensemble_alpha',
+    }
+    if (kd_loss_mode == 'weighted_nckd'
+            and ('kd_weight' not in protocol or not isinstance(fixed_settings, dict)
+                 or not required_weighted_settings.issubset(fixed_settings))):
+        raise ValueError('weighted_nckd protocol requires KD weight and complete fixed settings')
     orders = protocol.get('view_orders')
     structure = protocol.get('structure_study', False)
     if structure and (protocol['variants'] != list(STRUCTURE_VARIANTS) or protocol['seeds'] != [1, 2, 3]
@@ -204,6 +247,19 @@ def collect(root):
                 elif base['code_sha256'] != observed_code:
                     raise ValueError('Runs from different source hashes were mixed')
                 manifest_path = directory / 'run_manifest.json'
+                if 'kd_weight' not in protocol:
+                    if manifest_path.is_file():
+                        _validate_declared_loss_identity(
+                            json.loads(manifest_path.read_text()), kd_loss_mode, manifest_path)
+                    sparse_config_path = directory / 'effective_config.yaml'
+                    if sparse_config_path.is_file():
+                        _validate_config_loss_mode(
+                            _read_config(sparse_config_path), kd_loss_mode, sparse_config_path)
+                    for split_name, branch_name in (('base', branch), ('new', branch)):
+                        sparse_eval_path = directory / f'eval_{split_name}_{branch_name}/effective_config.yaml'
+                        if sparse_eval_path.is_file():
+                            _validate_config_loss_mode(
+                                _read_config(sparse_eval_path), kd_loss_mode, sparse_eval_path)
                 if 'kd_weight' in protocol:
                     manifest = json.loads(manifest_path.read_text())
                     identity = (manifest.get('dataset'), manifest.get('seed'), manifest.get('shots'),

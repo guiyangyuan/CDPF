@@ -135,6 +135,89 @@ class RunnerBehavior(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'loss identity|KD loss mode'):
                     module('summarize').collect(root)
 
+    def test_sparse_protocol_cannot_authenticate_weighted_or_unknown_mode(self):
+        for mode in ('weighted_nckd', 'unknown'):
+            with self.subTest(mode=mode), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                (root / 'protocol.json').write_text(json.dumps({
+                    'seeds': [1], 'epochs': 20, 'variants': ['baseline'], 'kd_loss_mode': mode,
+                }))
+                for split in ('base', 'new'):
+                    directory = root / 'baseline' / 'seed1' / f'eval_{split}_student'
+                    directory.mkdir(parents=True)
+                    (directory / 'metrics.json').write_text(json.dumps({
+                        'seed': 1, 'subsample': split, 'branch': 'student', 'dataset': 'UCF101',
+                        'shots': 16, 'state': 'loaded_checkpoint',
+                        'checkpoints': [{'epoch': 20, 'sha256': 'checkpoint'}],
+                        'model_signature': {}, 'code_sha256': 'code',
+                        'train_samples_sha256': 'samples1', 'metrics': {'accuracy': 70.0},
+                    }))
+                with self.assertRaisesRegex(ValueError, 'KD loss mode|weighted.*requires'):
+                    module('summarize').collect(root)
+
+    def test_sparse_default_full_kl_rejects_weighted_metadata_in_every_available_record(self):
+        import yaml
+        for location in ('metric', 'manifest', 'config', 'eval_config'):
+            with self.subTest(location=location), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                (root / 'protocol.json').write_text(json.dumps({
+                    'seeds': [1], 'epochs': 20, 'variants': ['baseline'],
+                }))
+                run = root / 'baseline/seed1'
+                for split in ('base', 'new'):
+                    directory = run / f'eval_{split}_student'; directory.mkdir(parents=True)
+                    payload = {
+                        'seed': 1, 'subsample': split, 'branch': 'student', 'dataset': 'UCF101',
+                        'shots': 16, 'state': 'loaded_checkpoint',
+                        'checkpoints': [{'epoch': 20, 'sha256': 'checkpoint'}],
+                        'model_signature': {}, 'code_sha256': 'code',
+                        'train_samples_sha256': 'samples1', 'metrics': {'accuracy': 70.0},
+                    }
+                    if location == 'metric' and split == 'base':
+                        identity = loss_identity('weighted_nckd', 2.0, 0.0)
+                        payload['loss_identity'] = identity
+                        payload['model_signature']['loss_identity'] = identity
+                    (directory / 'metrics.json').write_text(json.dumps(payload))
+                if location == 'manifest':
+                    identity = loss_identity('weighted_nckd', 2.0, 0.0)
+                    (run / 'run_manifest.json').write_text(json.dumps({
+                        'loss_identity': identity, 'model_signature': {'loss_identity': identity},
+                    }))
+                if location == 'config':
+                    (run / 'effective_config.yaml').write_text(yaml.safe_dump({
+                        'TRAINER': {'TEXTCONSISTENCY': {'KD_LOSS_MODE': 'weighted_nckd'}},
+                    }))
+                if location == 'eval_config':
+                    (run / 'eval_base_student/effective_config.yaml').write_text(yaml.safe_dump({
+                        'TRAINER': {'TEXTCONSISTENCY': {'KD_LOSS_MODE': 'weighted_nckd'}},
+                    }))
+                with self.assertRaisesRegex(ValueError, 'loss identity|KD loss mode'):
+                    module('summarize').collect(root)
+
+    def test_read_metric_always_enforces_declared_mode_and_weighted_requirements(self):
+        summary = module('summarize')
+        payload = {
+            'seed': 1, 'subsample': 'base', 'branch': 'student', 'dataset': 'UCF101',
+            'shots': 16, 'state': 'loaded_checkpoint', 'checkpoints': [{'epoch': 20}],
+            'model_signature': {}, 'metrics': {'accuracy': 70.0},
+        }
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / 'metrics.json'
+            identity = loss_identity('weighted_nckd', 2.0, 1.0)
+            path.write_text(json.dumps({
+                **payload, 'loss_identity': identity,
+                'model_signature': {'loss_identity': identity},
+            }))
+            with self.assertRaisesRegex(ValueError, 'loss identity'):
+                summary.read_metric(path, 1, 'base', 'student', 20)
+            path.write_text(json.dumps(payload))
+            with self.assertRaisesRegex(ValueError, 'weighted.*requires'):
+                summary.read_metric(path, 1, 'base', 'student', 20,
+                                    kd_loss_mode='weighted_nckd')
+            with self.assertRaisesRegex(ValueError, 'Unknown protocol KD loss mode'):
+                summary.read_metric(path, 1, 'base', 'student', 20, kd_loss_mode='unknown')
+            self.assertEqual(summary.read_metric(path, 1, 'base', 'student', 20), payload)
+
     def test_new_protocol_rejects_variant_kd_temp_and_eval_config_drift(self):
         import yaml
         mutations = [('flat', 'signature', 'aggregation', 'hierarchical'),

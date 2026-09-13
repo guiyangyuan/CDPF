@@ -1,6 +1,7 @@
 """Training, checkpoint provenance and machine-readable evaluation for TC."""
 import hashlib
 import json
+import math
 import platform
 from pathlib import Path
 
@@ -60,14 +61,19 @@ class ValidatedTrainer(TrainerX):
         tc = cfg.TRAINER.TEXTCONSISTENCY
         if tc.PREC != 'fp32':
             raise ValueError('Use PREC fp32 for the validated reproduction; mixed precision is not yet validated')
+        loss_scalars = (tc.KD_TEMP, tc.KD_WEIGHT, tc.ADAPTIVE_CE_WEIGHT,
+                        tc.DIVERSITY_WEIGHT, tc.CONTRASTIVE_WEIGHT)
+        if (not all(math.isfinite(float(value)) for value in loss_scalars)
+                or tc.KD_TEMP <= 0
+                or min(tc.KD_WEIGHT, tc.ADAPTIVE_CE_WEIGHT,
+                       tc.DIVERSITY_WEIGHT, tc.CONTRASTIVE_WEIGHT) < 0):
+            raise ValueError('Invalid loss configuration')
         if tc.CONTRASTIVE_WEIGHT != 0:
             raise ValueError('Disable the old frozen-feature contrastive loss (CONTRASTIVE_WEIGHT=0)')
         if cfg.SEED < 0:
             raise ValueError('A nonnegative explicit SEED is required')
         if tc.TEXT_BATCH_SIZE < 1 or tc.N_VIEWS < 1 or tc.N_GROUPS < 1:
             raise ValueError('Description batch size, view count and group count must be positive')
-        if tc.KD_TEMP <= 0 or min(tc.KD_WEIGHT, tc.ADAPTIVE_CE_WEIGHT, tc.DIVERSITY_WEIGHT) < 0:
-            raise ValueError('Invalid loss configuration')
         if tc.KD_LOSS_MODE not in ('full_kl', 'weighted_nckd'):
             raise ValueError(f'Unknown KD loss mode: {tc.KD_LOSS_MODE}')
         description_permutation(tc.N_VIEWS, tc.VIEW_ORDER, tc.N_GROUPS, tc.ORDER_SEED)

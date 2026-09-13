@@ -172,6 +172,21 @@ class TrainerIntegration(unittest.TestCase):
                     trainer.check_cfg(cfg)
                 loader.assert_not_called()
 
+    def test_nonfinite_loss_scalars_are_rejected_before_clip_asset_loading(self):
+        for field in ('KD_TEMP', 'KD_WEIGHT', 'ADAPTIVE_CE_WEIGHT',
+                      'DIVERSITY_WEIGHT', 'CONTRASTIVE_WEIGHT'):
+            with self.subTest(field=field), tempfile.TemporaryDirectory() as temp:
+                cfg = get_cfg_default(); extend_cfg(cfg)
+                cfg.SEED = 1; cfg.USE_CUDA = False; cfg.DATASET.ROOT = temp
+                cfg.TRAINER.NAME = 'CoOp_TextConsistency_V2_FG'
+                setattr(cfg.TRAINER.TEXTCONSISTENCY, field, float('nan'))
+                trainer = CoOp_TextConsistency_V2_FG.__new__(CoOp_TextConsistency_V2_FG)
+                TrainerBase.__init__(trainer); trainer.cfg = cfg
+                with patch('trainers.textconsistency_runtime.load_clip_checkpoint') as loader:
+                    with self.assertRaisesRegex(ValueError, 'Invalid loss configuration'):
+                        trainer.check_cfg(cfg)
+                    loader.assert_not_called()
+
     def test_checkpoint_rejects_different_grouping_even_when_tensor_shapes_match(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

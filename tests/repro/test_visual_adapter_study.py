@@ -9,6 +9,7 @@ import signal
 import sys
 import tempfile
 import time
+from types import SimpleNamespace
 import unittest
 from unittest import mock
 
@@ -278,19 +279,23 @@ class ExecutorTests(StudyFixture):
         self.assertFalse((self.root / 'output/analysis.json').exists())
 
     def test_one_deadline_covers_the_entire_queue_not_each_child(self):
-        plan, _ = self.execution_fixture()
-        for stage in plan['stages']:
-            stage['argv'][2] = stage['argv'][2].replace('raise SystemExit(0)',
-                                                       'time.sleep(0.2); raise SystemExit(0)')
-        (self.root / 'plan/plan.json').write_text(json.dumps(plan))
-        start = time.monotonic()
-        with mock.patch.object(study, 'WALLCLOCK_SECONDS', 0.55):
+        self.execution_fixture()
+        # Child startup speed is not part of the deadline contract. Advance only
+        # the runner's clock after each real child has completed and been reaped.
+        # The separate alarm and child/grandchild tests exercise actual wall time.
+        clock = SimpleNamespace(value=100.0)
+        def validated(*args):
+            clock.value += 2000.0
+            return {'validated': True}
+        with mock.patch.object(study, 'time', SimpleNamespace(monotonic=lambda: clock.value)), \
+             mock.patch.object(study, '_validate_stage', side_effect=validated):
             with self.assertRaises(TimeoutError): study.run_plan(self.root / 'plan/plan.json')
-        self.assertLess(time.monotonic() - start, 1.1)
         launched = (self.root / 'order.txt').read_text().splitlines()
-        self.assertGreaterEqual(len(launched), 2)
-        self.assertLess(len(launched), 6)
-        self.assertEqual(json.loads((self.root / 'output/status.json').read_text())['state'], 'timed_out')
+        self.assertEqual(launched, ['0', '1'])
+        status = json.loads((self.root / 'output/status.json').read_text())
+        self.assertEqual(status['state'], 'timed_out')
+        self.assertEqual(status['elapsed_seconds'], 4000.0)
+        self.assertFalse((self.root / 'output/analysis.json').exists())
 
     def test_deadline_also_interrupts_cpu_artifact_validation(self):
         self.execution_fixture()

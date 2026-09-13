@@ -254,10 +254,11 @@ def _queue_guard(seconds: float):
     if os.name != 'posix' or threading.current_thread() is not threading.main_thread():
         raise RuntimeError('Pilot execution requires a POSIX main thread for deadline/process guards')
     previous = {}
-    state = {'launching': False, 'pending': None}
+    state = {'subprocess_critical': False, 'pending': None}
     def terminate(signum, frame):
-        if state['launching']:
-            # Let Popen return its child handle before unwinding and cleaning its group.
+        if state['subprocess_critical']:
+            # Popen creation must return its handle; wait/poll must release CPython's
+            # internal waitpid lock before an asynchronous exception can unwind.
             state['pending'] = signum
             return
         raise _interruption(signum)
@@ -302,6 +303,32 @@ def _kill_group(process: subprocess.Popen, deadline: float) -> None:
         except ProcessLookupError:
             pass
         process.wait()
+
+
+def _pending_interruption(guard):
+    if guard['pending'] is not None:
+        raise _interruption(guard['pending'])
+
+
+def _wait_for_child(process, deadline, guard):
+    """Defer asynchronous exceptions inside Popen.wait, checking signals every 0.2s."""
+    while True:
+        _pending_interruption(guard)
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise TimeoutError('Pilot exceeded its full-queue wallclock cap')
+        code = None
+        guard['subprocess_critical'] = True
+        try:
+            try:
+                code = process.wait(timeout=min(0.2, remaining))
+            except subprocess.TimeoutExpired:
+                pass
+        finally:
+            guard['subprocess_critical'] = False
+        _pending_interruption(guard)
+        if code is not None:
+            return code
 
 
 def _validate_stage(stage: Mapping[str, Any], prepared: Mapping[str, Any],
@@ -360,19 +387,23 @@ def run_plan(plan_path: Path) -> dict[str, Any]:
                 status['stages'].append(current)
                 validation.atomic_json(status_path, status)
                 with log.open('xb') as handle:
-                    guard['launching'] = True
+                    guard['subprocess_critical'] = True
                     try:
                         active = subprocess.Popen(stage['argv'], cwd=ROOT, env=env, stdout=handle,
                                                   stderr=subprocess.STDOUT, start_new_session=True)
                     finally:
-                        guard['launching'] = False
-                    if guard['pending'] is not None:
-                        raise _interruption(guard['pending'])
+                        guard['subprocess_critical'] = False
+                    _pending_interruption(guard)
                     current['pid'] = active.pid
                     validation.atomic_json(status_path, status)
-                    code = active.wait(timeout=max(0.001, deadline - time.monotonic()))
+                    code = _wait_for_child(active, deadline, guard)
                     current['returncode'] = code
-                    _kill_group(active, deadline)
+                    guard['subprocess_critical'] = True
+                    try:
+                        _kill_group(active, deadline)
+                    finally:
+                        guard['subprocess_critical'] = False
+                    _pending_interruption(guard)
                     active = None
                 if code != 0:
                     raise RuntimeError(f'Pilot stage {stage["stage_id"]} failed with exit code {code}')
@@ -393,11 +424,14 @@ def run_plan(plan_path: Path) -> dict[str, Any]:
             # Disable the alarm before cleanup so it cannot interrupt process-group termination.
             signal.setitimer(signal.ITIMER_REAL, 0)
             if active is not None:
+                guard['subprocess_critical'] = True
                 try:
                     _kill_group(active, deadline)
                 except OSError as cleanup_error:
                     status['cleanup_error'] = str(cleanup_error)
                     status['process_group_cleanup_confirmed'] = False
+                finally:
+                    guard['subprocess_critical'] = False
                 if current is not None:
                     current['returncode'] = active.returncode
             if isinstance(exc, (TimeoutError, subprocess.TimeoutExpired)):

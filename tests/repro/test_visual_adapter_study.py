@@ -335,6 +335,41 @@ class ExecutorTests(StudyFixture):
         self.assertFalse(leaked.exists())
         self.assertEqual(json.loads((self.root / 'output/status.json').read_text())['state'], 'stopped')
 
+    def test_deadline_signal_cannot_leak_the_subprocess_wait_lock(self):
+        self.execution_fixture(sleeping=True)
+        real_popen, real_cleanup = study.subprocess.Popen, study._kill_group
+        locks = []
+        class InterruptingLock:
+            def __init__(self, lock): self.lock, self.armed = lock, True
+            def acquire(self, *args, **kwargs):
+                acquired = self.lock.acquire(*args, **kwargs)
+                if acquired and self.armed:
+                    self.armed = False
+                    # CPython can receive SIGALRM after acquire succeeds but before
+                    # entering its try/finally release block. Reproduce that window.
+                    os.kill(os.getpid(), signal.SIGALRM)
+                return acquired
+            def release(self): return self.lock.release()
+            def __enter__(self): self.acquire(); return self
+            def __exit__(self, *args): self.release()
+        def launch(*args, **kwargs):
+            process = real_popen(*args, **kwargs)
+            proxy = InterruptingLock(process._waitpid_lock)
+            process._waitpid_lock = proxy; locks.append(proxy)
+            return process
+        def cleanup(process, deadline):
+            leaked = process._waitpid_lock.lock.locked()
+            # On an unfixed runner fail deterministically instead of hanging this test.
+            if leaked: process._waitpid_lock.release()
+            real_cleanup(process, deadline)
+            self.assertFalse(leaked, 'An asynchronous signal leaked Popen._waitpid_lock')
+        with mock.patch.object(study.subprocess, 'Popen', side_effect=launch), \
+             mock.patch.object(study, '_kill_group', side_effect=cleanup):
+            with self.assertRaises(TimeoutError): study.run_plan(self.root / 'plan/plan.json')
+        self.assertEqual(len(locks), 1)
+        self.assertFalse(locks[0].lock.locked())
+        self.assertEqual(json.loads((self.root / 'output/status.json').read_text())['state'], 'timed_out')
+
     @unittest.skipUnless(os.name == 'posix', 'POSIX process-group timeout')
     def test_total_deadline_kills_sleeping_child_and_grandchild(self):
         self.execution_fixture(sleeping=True)

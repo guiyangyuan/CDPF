@@ -20,6 +20,28 @@ def description_radii(views, mask):
     return ((squared_distances * weights).sum(-1) / counts.squeeze(-1)).sqrt()
 
 
+def description_tangent_basis(views, mask):
+    """Return an orthonormal basis for each centered description cloud."""
+    weights = mask.to(views.dtype)
+    counts = weights.sum(-1, keepdim=True)
+    means = (views * weights[..., None]).sum(1) / counts
+    centered = (views - means[:, None]) * weights[..., None]
+    work = centered.float()
+    _, singular_values, basis = torch.linalg.svd(work, full_matrices=False)
+    relative_tolerance = max(work.shape[-2:]) * torch.finfo(work.dtype).eps
+    tolerance = singular_values[:, :1] * relative_tolerance
+    basis_mask = singular_values > tolerance
+    return basis.to(views.dtype), basis_mask
+
+
+def project_onto_description_tangent(delta, basis, basis_mask):
+    """Keep only residual components supported by class descriptions."""
+    basis = basis.to(device=delta.device, dtype=delta.dtype)
+    coefficients = torch.einsum('bcd,cvd->bcv', delta, basis)
+    coefficients = coefficients * basis_mask.to(device=delta.device, dtype=delta.dtype)[None]
+    return torch.einsum('bcv,cvd->bcd', coefficients, basis)
+
+
 def bound_by_description_radius(delta, radii, eps=1e-6):
     """Smoothly bound each class delta while keeping unit derivative at zero."""
     radius = radii.to(device=delta.device, dtype=delta.dtype)[None, :, None]
@@ -150,6 +172,48 @@ class RadiusBoundedTextDetailCLIP(FusionAlignedTextDetailCLIP):
         return {'S': student, 'M': mean, 'R': residual, 'Z': fusion + residual, 'F': fusion}
 
 
+class SubspaceRadiusTextDetailCLIP(RadiusBoundedTextDetailCLIP):
+    """Restrict each residual to its class-description tangent directions."""
+    def __init__(self, cfg, classnames, clip_model):
+        super().__init__(cfg, classnames, clip_model)
+        basis, basis_mask = description_tangent_basis(
+            self.multiview_encoder.get_view_features(),
+            self.multiview_encoder.view_mask,
+        )
+        self.register_buffer('description_tangent_basis', basis, persistent=False)
+        self.register_buffer('description_basis_mask', basis_mask, persistent=False)
+        self.correction_identity.update(
+            version=6,
+            kind='description_subspace_radius_visual_text_detail',
+            inference='F+R_subspace_radius',
+            objective='CE(S,y)+CE(stopgrad(F)+R_subspace_radius,y)',
+            description_subspace='rowspan(description-mean_valid(description))',
+            rank_rule='max(rows,dimensions)*float32_epsilon*largest_singular_value',
+            operation_order='project_then_radius_bound',
+            residual='clip_scale*einsum(image,subspace_projected_radius_bounded_delta)',
+            fitted_hyperparameters=[],
+        )
+
+    def forward(self, image):
+        with torch.no_grad():
+            feature = F.normalize(self.image_encoder(image.to(self.dtype)), dim=-1)
+        text = F.normalize(self.text_encoder(self.prompt_learner(), self.tokenized_prompts), dim=-1)
+        scale = self.logit_scale.exp()
+        student = scale * feature @ text.T
+        views, mask = self.multiview_encoder.get_view_features(), self.multiview_encoder.view_mask
+        descriptions, _ = self.view_aggregator(feature, views, mask)
+        mean = scale * torch.einsum('bd,bcd->bc', feature, descriptions)
+        attention = description_weights(feature, views, mask, scale, self.detail_pooling)
+        delta = anchored_delta(self.text_residual, self.detail_names, views, mask, attention,
+                               self.detail_pooling == 'centered')
+        projected = project_onto_description_tangent(
+            delta, self.description_tangent_basis, self.description_basis_mask)
+        bounded_delta = bound_by_description_radius(projected, self.description_radii)
+        residual = scale * torch.einsum('bd,bcd->bc', feature, bounded_delta)
+        fusion = .5 * student + .5 * mean
+        return {'S': student, 'M': mean, 'R': residual, 'Z': fusion + residual, 'F': fusion}
+
+
 @TRAINER_REGISTRY.register()
 class CoOp_TextDetail(CoOp_TextResidual_AdamW):
     model_builder = TextDetailCLIP
@@ -175,3 +239,9 @@ class CoOp_TextDetail_FusionAligned(CoOp_TextDetail):
 class CoOp_TextDetail_RadiusBounded(CoOp_TextDetail_FusionAligned):
     """Use the frozen description cloud as a per-class residual trust region."""
     model_builder = RadiusBoundedTextDetailCLIP
+
+
+@TRAINER_REGISTRY.register()
+class CoOp_TextDetail_SubspaceRadius(CoOp_TextDetail_RadiusBounded):
+    """Project residuals into frozen class-description tangents before bounding."""
+    model_builder = SubspaceRadiusTextDetailCLIP

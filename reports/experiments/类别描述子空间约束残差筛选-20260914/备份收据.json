@@ -1,0 +1,12 @@
+{
+  "状态": "已下载并逐文件核验",
+  "本机归档": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/类别描述子空间约束残差-20260914/类别描述子空间约束残差-20260914-b5ba7c1.tar.gz",
+  "服务器归档": "/root/autodl-tmp/textconsistency/backups/类别描述子空间约束残差-20260914-b5ba7c1.tar.gz",
+  "归档SHA256": "bbdf382d47585a404aea33432f5d0b64b0e67e747bdde32f0e3b301606c17b5a",
+  "归档字节数": 714676,
+  "运行文件数": 12,
+  "运行文件全部通过SHA256": true,
+  "预测文件数": 2,
+  "新增模型数": 0,
+  "说明": "复用固定旧checkpoint，只保存新导出、日志和元数据；GitHub内另存原始结果副本。"
+}

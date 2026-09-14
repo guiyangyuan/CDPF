@@ -1,0 +1,29 @@
+{
+  "状态": "GPU筛选就绪",
+  "日期": "2026-09-14",
+  "实例": "a5904787c3-600682b1",
+  "准备模式": "无卡模式",
+  "最终电源状态": "已关机",
+  "服务器发布目录": "/root/autodl-tmp/textconsistency/releases/融合对齐残差-20260914-6e805cd",
+  "源码归档": {
+    "文件": "融合对齐残差-6e805cd.tar.gz",
+    "SHA256": "fc80aad35f7952fec2d4e5afadb3de1b33aed1ce269bfb12504b5782fdfa9d0a",
+    "GitHub提交": "6e805cd6002680ab302aa956c03e1d53b6b548d6",
+    "协议内源码提交": "183015ec828824f196c5fbe3b28984420eaca4be"
+  },
+  "检查": {
+    "针对性测试": "5项通过",
+    "协议与依赖哈希": "通过",
+    "DTD真实加载器": "通过，24个Base类、23个Novel类、每种子384个训练样本",
+    "UCF101真实加载器": "通过，51个Base类、50个Novel类、每种子816个训练样本",
+    "与上一轮数据身份对比": "两份预检JSON逐字段一致",
+    "无GPU保护": "按预期拒绝训练",
+    "正式输出目录": "未创建",
+    "下载证据": "6个列入服务器清单的日志或JSON逐SHA一致"
+  },
+  "数据根目录": "/root/autodl-tmp/textconsistency/data",
+  "CLIP权重": "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+  "固定协议": "/root/autodl-tmp/textconsistency/releases/融合对齐残差-20260914-6e805cd/reports/preparation/融合对齐残差-20260914/实验协议.json",
+  "计划输出": "/root/autodl-tmp/textconsistency/runs/融合对齐残差跨数据集-20260914-183015e",
+  "下一动作": "开GPU后从DTD seed1开始；未通过时自动停止，通过后才继续DTD多种子和UCF101。"
+}

@@ -1,0 +1,114 @@
+{
+  "status": "verified",
+  "verified_file_count": 42,
+  "correct": {
+    "classname": {
+      "S": 64,
+      "M": 48,
+      "Z": 77,
+      "F": 61
+    },
+    "description": {
+      "S": 64,
+      "M": 48,
+      "Z": 75,
+      "F": 61
+    },
+    "contrast": {
+      "S": 64,
+      "M": 48,
+      "Z": 75,
+      "F": 61
+    }
+  },
+  "accuracy_pct": {
+    "classname": {
+      "S": 32.0,
+      "M": 24.0,
+      "Z": 38.5,
+      "F": 30.5
+    },
+    "description": {
+      "S": 32.0,
+      "M": 24.0,
+      "Z": 37.5,
+      "F": 30.5
+    },
+    "contrast": {
+      "S": 32.0,
+      "M": 24.0,
+      "Z": 37.5,
+      "F": 30.5
+    }
+  },
+  "comparisons": {
+    "contrast.Z - classname.S": {
+      "gain_pp": 5.5,
+      "corrected": 24,
+      "harmed": 13,
+      "passes_1pp": true
+    },
+    "contrast.Z - classname.F": {
+      "gain_pp": 7.0,
+      "corrected": 26,
+      "harmed": 12,
+      "passes_1pp": true
+    },
+    "contrast.Z - classname.Z": {
+      "gain_pp": -1.0,
+      "corrected": 10,
+      "harmed": 12,
+      "passes_1pp": false
+    },
+    "contrast.Z - description.Z": {
+      "gain_pp": 0.0,
+      "corrected": 7,
+      "harmed": 7,
+      "passes_1pp": false
+    }
+  },
+  "continuation_signal": false,
+  "student_preservation_observed": {
+    "classname": {
+      "max_abs_logit_diff": 0.0,
+      "max_abs_prompt_diff": 0.0
+    },
+    "description": {
+      "max_abs_logit_diff": 0.0,
+      "max_abs_prompt_diff": 0.0
+    },
+    "contrast": {
+      "max_abs_logit_diff": 0.0,
+      "max_abs_prompt_diff": 0.0
+    }
+  },
+  "prediction_changes": {
+    "classname": 88,
+    "description": 91,
+    "contrast": 97
+  },
+  "description_comparisons": {
+    "description.Z - classname.S": {
+      "gain_pp": 5.5,
+      "corrected": 22,
+      "harmed": 11,
+      "passes_1pp": true
+    },
+    "description.Z - classname.F": {
+      "gain_pp": 7.0,
+      "corrected": 27,
+      "harmed": 13,
+      "passes_1pp": true
+    },
+    "description.Z - classname.Z": {
+      "gain_pp": -1.0,
+      "corrected": 10,
+      "harmed": 12,
+      "passes_1pp": false
+    }
+  },
+  "description_signal": false,
+  "checkpoint_count": 3,
+  "new_training_or_gpu_inference": 0,
+  "scope": "Aircraft seed1 Base validation only"
+}

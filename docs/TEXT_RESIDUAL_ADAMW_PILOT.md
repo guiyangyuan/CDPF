@@ -32,3 +32,7 @@
 执行入口：`PYTHONPATH=.:Dassl.pytorch python scripts/repro/text_residual_adamw_pilot.py run --data-root DATA --clip-path CLIP --output-root FRESH_OUTPUT`。
 
 部署独立release/output，禁止覆盖旧实验。启动、进度、结果、完整模型/优化器、原始logits/日志、源代码保存后关机。GitHub保存代码/协议/小结果/报告，完整权重另行备份，不保存登录凭证。
+
+## 执行结果（协议执行后追加，原判断规则未改）
+
+本固定队列已完成，禁止重复启动。3次20轮训练/3次最终重载共14.54分钟，S32.0%、F30.5%、classname.Z38.5%、description.Z37.5%、contrast.Z37.5%；主/次描述增量均未通过，未追加训练。42文件含3模型和优化器已完整备份核验，AutoDL网页确认已关机，备用定时关闭已取消。见[完整结果、预测与操作收据](../reports/experiments/text-adamw-20260914/README.md)。

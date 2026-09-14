@@ -1,0 +1,24 @@
+{
+  "started_utc": "2026-09-14T03:21:45.816336+00:00",
+  "pid": 1197,
+  "source_git": "e442f7512c5c28e8f2405ff0ff5f90bfb928d865",
+  "source_archive_sha256": "f3e14de5099947002ff314b25e59c986e3d8b97a973cc1c99632dc6a01ebc230",
+  "command": [
+    "timeout",
+    "--kill-after=10s",
+    "3600s",
+    "/root/autodl-tmp/textconsistency/.venv/bin/python",
+    "-u",
+    "/root/autodl-tmp/textconsistency/releases/text-adamw-20260914-e442f75/scripts/repro/text_residual_adamw_pilot.py",
+    "run",
+    "--data-root",
+    "/root/autodl-tmp/textconsistency/data",
+    "--clip-path",
+    "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+    "--output-root",
+    "/root/autodl-tmp/textconsistency/runs/text-adamw-20260914-e442f75"
+  ],
+  "max_training_runs": 3,
+  "max_seconds": 3600,
+  "automatic_expansion": false
+}

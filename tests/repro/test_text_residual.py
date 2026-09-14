@@ -32,8 +32,12 @@ def make_text(output, mode='contrast', novel=False, adamw=False, detail=None):
     cfg.TRAINER.TEXTCONSISTENCY.N_VIEWS = 5
     cfg.TRAINER.TEXTCONSISTENCY.TEXT_RESIDUAL_DIM = 8
     from trainers.coop_text_residual_adamw import CoOp_TextResidual_AdamW
-    from trainers.coop_text_detail import CoOp_TextDetail, CoOp_TextDetail_FusionAligned
-    cls = (CoOp_TextDetail_FusionAligned if detail == 'fusion_aligned_attentive'
+    from trainers.coop_text_detail import (
+        CoOp_TextDetail, CoOp_TextDetail_FusionAligned,
+        CoOp_TextDetail_RadiusBounded,
+    )
+    cls = (CoOp_TextDetail_RadiusBounded if detail == 'radius_bounded_attentive'
+           else CoOp_TextDetail_FusionAligned if detail == 'fusion_aligned_attentive'
            else CoOp_TextDetail if detail
            else CoOp_TextResidual_AdamW if adamw else CoOp_TextResidual)
     trainer = cls.__new__(cls)

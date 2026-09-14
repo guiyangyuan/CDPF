@@ -1,0 +1,22 @@
+{
+  "state": "stopped_by_preregistered_rule",
+  "protocol": "/root/autodl-tmp/textconsistency/releases/描述半径约束残差-20260914-bcd9aaf/reports/preparation/描述半径约束残差-20260914/实验协议.json",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "started": 1789383904.0623052,
+  "events": [
+    {
+      "phase": "旧检查点零训练重载",
+      "step": "基础测试集",
+      "status": "completed"
+    },
+    {
+      "phase": "旧检查点零训练重载",
+      "step": "新类别测试集",
+      "status": "completed"
+    }
+  ],
+  "current_phase": "旧检查点零训练重载",
+  "new_trainings_completed": 0,
+  "conclusion": "旧检查点零训练重载未通过",
+  "ended": 1789383927.8347857
+}

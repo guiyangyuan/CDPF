@@ -1,0 +1,4123 @@
+{
+  "status": "exported",
+  "dataset": "dtd",
+  "seed": 1,
+  "split": "novel",
+  "new_training": false,
+  "rows": [
+    {
+      "sample_id": "dtd/images/matted/matted_0105.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0090.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0067.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0154.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0109.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0037.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0106.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0123.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0058.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0042.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0127.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0136.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0103.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0031.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0134.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0102.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0146.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0155.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0124.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0038.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0153.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0161.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0166.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0100.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0132.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0121.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0165.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0053.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0030.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0089.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0076.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0138.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0156.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0120.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0088.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/matted/matted_0111.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0026.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0122.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0178.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0146.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0106.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0118.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0113.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0044.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0180.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0123.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0168.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0137.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0090.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0054.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0071.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0108.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0104.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0051.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0114.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0170.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0179.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0134.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0033.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0157.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0032.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0023.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0027.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0119.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0162.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0176.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0167.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0058.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0127.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0098.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0136.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/meshed/meshed_0076.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0099.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0061.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0029.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0129.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0079.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0021.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0125.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0020.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0024.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0091.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0012.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0067.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0115.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0035.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0113.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0068.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0030.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0088.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0004.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0009.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0002.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0126.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0007.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0023.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0011.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0128.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0016.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0106.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0089.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0084.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0071.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0036.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0057.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0025.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0018.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/paisley/paisley_0130.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0047.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0089.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0079.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0118.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0167.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0040.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0012.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0057.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0053.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0033.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0051.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0034.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0039.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0148.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0052.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0130.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0101.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0003.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0036.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0080.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0165.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0160.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0137.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0026.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0146.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0107.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0138.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0115.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0077.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0037.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0041.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0141.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0153.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0121.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0147.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/perforated/perforated_0023.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0124.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0077.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0006.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0135.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0031.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0052.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0123.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0062.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0137.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0115.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0004.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0151.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0012.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0130.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0142.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0128.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0102.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0106.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0147.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0108.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0081.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0161.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0070.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0009.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0090.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0120.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0159.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0100.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0069.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0037.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0036.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0139.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0110.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0060.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0122.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pitted/pitted_0101.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0165.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0120.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0060.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0082.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0113.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0079.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0058.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0087.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0085.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0083.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0140.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0121.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0115.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0135.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0059.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0092.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0044.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0103.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0133.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0139.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0090.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0162.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0112.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0137.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0070.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0142.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0168.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0063.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0100.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0127.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0163.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0147.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0152.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0128.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0136.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/pleated/pleated_0098.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0112.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0173.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0142.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0105.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0124.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0153.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0180.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0205.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0207.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0143.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0162.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0065.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0107.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0101.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0126.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0187.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0168.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0181.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0226.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0133.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0231.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0098.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0163.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0211.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0082.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0104.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0132.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0145.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0182.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0095.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0106.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0136.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0121.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0154.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0218.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/polka-dotted/polka-dotted_0151.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0116.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0144.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0088.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0150.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0069.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0090.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0040.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0052.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0159.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0135.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0140.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0125.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0122.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0079.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0145.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0114.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0103.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0045.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0077.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0124.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0151.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0092.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0105.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0171.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0059.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0130.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0134.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0146.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0093.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0075.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0111.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0132.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0071.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0141.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0173.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/porous/porous_0143.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0084.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0118.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0067.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0156.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0086.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0043.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0148.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0171.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0155.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0107.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0094.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0065.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0115.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0059.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0106.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0130.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0122.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0092.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0158.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0083.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0164.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0087.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0146.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0150.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0144.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0102.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0100.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0055.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0117.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0103.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0078.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0124.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0131.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0159.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0138.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/potholed/potholed_0040.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0165.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0125.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0174.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0170.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0157.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0167.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0218.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0121.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0120.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0192.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0185.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0114.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0113.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0208.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0210.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0183.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0190.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0223.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0144.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0139.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0197.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0133.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0169.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0145.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0213.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0164.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0156.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0106.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0107.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0196.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0221.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0112.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0201.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0163.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0135.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/scaly/scaly_0143.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0107.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0138.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0114.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0119.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0057.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0022.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0090.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0092.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0112.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0076.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0099.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0028.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0143.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0101.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0129.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0033.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0058.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0068.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0118.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0055.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0064.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0074.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0024.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0036.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0102.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0069.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0100.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0031.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0020.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0097.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0113.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0149.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0039.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0023.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0116.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/smeared/smeared_0041.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0076.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0110.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0113.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0088.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0054.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0038.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0086.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0075.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0091.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0115.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0133.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0132.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0055.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0135.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0116.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0137.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0126.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0123.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0058.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0067.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0037.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0071.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0019.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0017.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0105.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0128.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0108.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0118.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0077.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0069.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0120.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0082.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0136.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0044.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0009.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/spiralled/spiralled_0096.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0046.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0016.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0105.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0062.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0018.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0128.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0088.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0044.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0076.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0071.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0094.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0137.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0030.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0119.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0021.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0095.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0023.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0015.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0103.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0057.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0118.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0056.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0091.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0052.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0141.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0125.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0066.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0038.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0042.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0110.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0086.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0104.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0081.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0079.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0073.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/sprinkled/sprinkled_0114.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0034.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0134.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0113.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0037.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0136.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0068.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0062.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0129.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0111.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0089.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0038.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0047.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0084.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0121.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0061.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0140.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0105.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0065.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0139.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0115.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0031.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0058.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0063.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0082.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0025.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0049.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0103.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0024.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0124.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0028.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0107.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0056.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0030.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0095.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0076.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stained/stained_0069.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0087.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0130.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0077.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0117.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0143.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0172.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0057.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0142.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0136.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0108.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0162.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0047.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0045.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0078.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0071.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0110.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0158.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0146.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0065.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0089.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0063.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0083.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0053.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0090.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0132.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0104.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0127.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0103.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0079.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0101.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0113.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0107.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0046.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0055.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0125.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/stratified/stratified_0167.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0107.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0104.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0091.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0010.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0045.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0077.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0017.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0031.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0063.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0012.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0051.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0053.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0014.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0005.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0056.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0092.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0121.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0078.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0094.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0022.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0087.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0068.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0003.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0114.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0013.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0026.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0100.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0015.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0097.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0002.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0125.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0110.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0123.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0081.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0095.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/striped/striped_0096.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0146.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0154.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0137.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0204.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0072.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0184.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0206.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0150.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0139.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0177.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0133.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0106.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0157.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0161.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0098.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0163.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0152.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0024.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0195.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0159.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0153.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0176.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0062.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0111.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0178.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0105.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0129.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0113.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0101.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0166.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0201.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0182.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0188.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0165.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0186.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/studded/studded_0198.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0177.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0125.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0088.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0121.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0057.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0064.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0119.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0115.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0078.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0099.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0070.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0083.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0134.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0113.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0116.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0108.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0124.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0074.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0163.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0161.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0127.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0086.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0079.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0067.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0058.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0089.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0155.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0077.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0105.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0061.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0129.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0148.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0149.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0096.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0143.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/swirly/swirly_0097.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0064.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0124.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0103.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0185.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0163.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0170.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0081.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0160.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0114.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0075.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0168.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0135.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0131.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0187.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0177.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0090.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0116.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0176.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0174.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0184.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0140.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0162.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0189.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0117.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0169.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0157.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0115.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0139.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0078.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0093.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0079.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0155.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0145.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0091.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0126.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/veined/veined_0127.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0141.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0184.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0174.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0162.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0189.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0145.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0146.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0126.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0148.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0181.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0132.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0165.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0110.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0154.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0163.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0060.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0137.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0191.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0155.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0143.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0197.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0119.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0169.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0061.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0173.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0196.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0171.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0182.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0158.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0166.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0187.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0085.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0113.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0152.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0098.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/waffled/waffled_0123.jpg",
+      "label": 19
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0033.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0088.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0041.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0019.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0083.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0129.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0020.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0008.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0038.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0028.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0014.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0084.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0062.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0091.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0069.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0122.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0101.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0131.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0120.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0081.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0107.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0053.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0075.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0050.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0109.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0112.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0003.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0097.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0080.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0073.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0015.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0012.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0011.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0102.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0106.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/woven/woven_0005.jpg",
+      "label": 20
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0125.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0103.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0135.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0036.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0046.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0087.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0017.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0071.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0140.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0098.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0026.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0107.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0138.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0014.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0095.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0131.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0114.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0074.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0136.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0039.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0133.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0042.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0077.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0102.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0113.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0104.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0050.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0067.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0090.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0063.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0132.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0115.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0116.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0058.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0048.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/wrinkled/wrinkled_0088.jpg",
+      "label": 21
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0078.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0099.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0075.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0061.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0047.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0048.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0021.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0060.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0072.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0112.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0132.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0107.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0133.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0100.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0130.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0051.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0096.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0010.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0077.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0065.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0082.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0018.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0066.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0053.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0071.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0008.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0020.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0074.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0111.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0059.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0103.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0118.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0120.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0122.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0073.jpg",
+      "label": 22
+    },
+    {
+      "sample_id": "dtd/images/zigzagged/zigzagged_0092.jpg",
+      "label": 22
+    }
+  ],
+  "class_order": [
+    "matted",
+    "meshed",
+    "paisley",
+    "perforated",
+    "pitted",
+    "pleated",
+    "polka-dotted",
+    "porous",
+    "potholed",
+    "scaly",
+    "smeared",
+    "spiralled",
+    "sprinkled",
+    "stained",
+    "stratified",
+    "striped",
+    "studded",
+    "swirly",
+    "veined",
+    "waffled",
+    "woven",
+    "wrinkled",
+    "zigzagged"
+  ],
+  "provenance": {
+    "seed": 1,
+    "dataset": "DescribableTextures",
+    "shots": 16,
+    "subsample": "new",
+    "model_signature": {
+      "format": 5,
+      "trainer": "CoOp_TextDetail_RadiusBounded",
+      "n_ctx": 4,
+      "aggregation": "mean",
+      "feature_adapter": false,
+      "n_groups": 4,
+      "n_views": 20,
+      "ablation_group": null,
+      "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+      "template_sha256": "dabdcafded7babd67046d0f90abeb510b648bdaaf397b884f265f3460a7942a9",
+      "view_order": "contiguous",
+      "order_seed": 0,
+      "order_version": 1,
+      "loss_identity": {
+        "format": 1,
+        "mode": "full_kl",
+        "temperature": 2.0,
+        "effective_weight": 0.0,
+        "active": false,
+        "non_target_weighting": "none_full_distribution_kl"
+      },
+      "correction": {
+        "version": 5,
+        "enabled": true,
+        "kind": "description_radius_bounded_visual_text_detail",
+        "mode": "classname",
+        "hidden_dim": 64,
+        "scale": 0.2,
+        "neighbor_k": 5,
+        "classname_template": "{} texture.",
+        "init": "kaiming_down_zero_up_no_bias_rng_isolated",
+        "input": "classname_hidden_plus_image_weighted_description_hidden",
+        "pooling": "image_conditioned_after_relu_down",
+        "delta_normalization": false,
+        "residual": "clip_scale*einsum(image,radius_bounded_per_image_text_delta)",
+        "inference": "F+R_hat",
+        "coefficient": 1.0,
+        "objective": "CE(S,y)+CE(stopgrad(F)+R_hat,y)",
+        "detail_pooling": "attentive",
+        "attention": "masked_softmax(frozen_clip_scale*image@unit_views)",
+        "centering": "none",
+        "classname_training_preserved": false,
+        "fusion_anchor": "F=0.5*(S+M)",
+        "description_radius": "sqrt(mean_valid(||description-mean_valid(description)||^2))",
+        "bounding": "radius*tanh(||delta||/radius)*delta/(||delta||+eps)",
+        "fitted_hyperparameters": []
+      },
+      "optimization": {
+        "format": 1,
+        "student": {
+          "name": "sgd",
+          "lr": 0.002,
+          "momentum": 0.9,
+          "weight_decay": 0.0005,
+          "scheduler": "cosine",
+          "max_epoch": 20,
+          "warmup_epoch": 1,
+          "warmup_type": "constant",
+          "warmup_cons_lr": 1e-05
+        },
+        "residual": {
+          "name": "adamw",
+          "lr": 0.001,
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "eps": 1e-08,
+          "weight_decay": 0.0005,
+          "scheduler": "constant",
+          "warmup_epoch": 0
+        },
+        "student_gradient": "student_ce_only",
+        "residual_gradient": "correction_ce_only"
+      }
+    },
+    "code_sha256": "23691cfc1739ba1a8c840b41e70284d122c36db129788a9deda2df7588e86118",
+    "torch": "2.8.0+cu128",
+    "python": "3.12.3",
+    "device": "cuda",
+    "cuda_runtime": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "loss_identity": {
+      "format": 1,
+      "mode": "full_kl",
+      "temperature": 2.0,
+      "effective_weight": 0.0,
+      "active": false,
+      "non_target_weighting": "none_full_distribution_kl"
+    },
+    "effective_losses": {
+      "kd": 0.0,
+      "adaptive_ce": 0.0,
+      "diversity": 0.0,
+      "contrastive": 0.0,
+      "correction_ce": 1.0
+    },
+    "train_samples_sha256": "75c29e8cb7e31e1feec40f239d43126660b16fd0b216327a5e33617a067012b5",
+    "val_samples_sha256": "979508f3e8fe757f614a7d60b701d8f9aebf69f66ba943a6935bf9f7659e962b",
+    "test_samples_sha256": "a27e4feec3d054a0c011bff4484df3fb16b1c6442326aa9b1c0e252104125963",
+    "trainable_parameters": 67584,
+    "description_counts": [
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20,
+      20
+    ],
+    "view_order_manifest": {
+      "version": 1,
+      "policy": "contiguous",
+      "seed": 0,
+      "n_groups": 4,
+      "classes": [
+        {
+          "classname": "matted",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "meshed",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "paisley",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "perforated",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "pitted",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "pleated",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "polka-dotted",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "porous",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "potholed",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "scaly",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "smeared",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "spiralled",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "sprinkled",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "stained",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "stratified",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "striped",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "studded",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "swirly",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "veined",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "waffled",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "woven",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "wrinkled",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "zigzagged",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "sha256": "1ab7099c98bbc7b3002dcf8a10be1aabf511d733f7726da9fdde7557f5d83841"
+    }
+  },
+  "checkpoint": {
+    "checkpoint_sha256": "fb42b9b5e6ab336d0c951837e74352069837fd3fd10da9911474061b9f704be9",
+    "epoch": 20,
+    "source_trainer": "CoOp_TextDetail_FusionAligned",
+    "source_correction": {
+      "version": 4,
+      "enabled": true,
+      "kind": "fusion_aligned_visual_text_detail",
+      "mode": "classname",
+      "hidden_dim": 64,
+      "scale": 0.2,
+      "neighbor_k": 5,
+      "classname_template": "{} texture.",
+      "init": "kaiming_down_zero_up_no_bias_rng_isolated",
+      "input": "classname_hidden_plus_image_weighted_description_hidden",
+      "pooling": "image_conditioned_after_relu_down",
+      "delta_normalization": false,
+      "residual": "clip_scale*einsum(image,per_image_text_delta)",
+      "inference": "F+R",
+      "coefficient": 1.0,
+      "objective": "CE(S,y)+CE(stopgrad(F)+R,y)",
+      "detail_pooling": "attentive",
+      "attention": "masked_softmax(frozen_clip_scale*image@unit_views)",
+      "centering": "none",
+      "classname_training_preserved": false,
+      "fusion_anchor": "F=0.5*(S+M)"
+    },
+    "reinterpretation": "same learned tensors; apply frozen description-radius bound only",
+    "path": "/root/autodl-tmp/textconsistency/runs/融合对齐残差跨数据集-20260914-183015e/DTD/种子1/模型/textconsistency/model.pth.tar-20",
+    "target_trainer": "CoOp_TextDetail_RadiusBounded"
+  },
+  "predictions_sha256": "56699d7b01432e7bb5f9c4f6b049888299fcd9fe000013b048c9fb82832c57cc",
+  "branch_semantics": {
+    "Z": "F+R_hat",
+    "F": "0.5*(S+M)",
+    "R": "description-radius bounded residual logits"
+  }
+}

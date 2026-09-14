@@ -1,0 +1,5 @@
+2026-09-14T19:06:19+08:00
+NVIDIA GeForce RTX 4090, 580.76.05, 24564 MiB
+部署提交 bcd9aafc73b59257f4abf8e63453b79d354991a0
+fb42b9b5e6ab336d0c951837e74352069837fd3fd10da9911474061b9f704be9  /root/autodl-tmp/textconsistency/runs/融合对齐残差跨数据集-20260914-183015e/DTD/种子1/模型/textconsistency/model.pth.tar-20
+5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f  /root/autodl-tmp/textconsistency/assets/ViT-B-16.pt

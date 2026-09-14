@@ -1,0 +1,41 @@
+{
+  "dataset": "dtd",
+  "seeds": [
+    1
+  ],
+  "new_trainings": 0,
+  "formula": {
+    "description_radius": "r_c=sqrt(mean_valid(||d_cv-mean_valid(d_cv)||^2))",
+    "bounded_delta": "delta_hat=r_c*tanh(||delta||/r_c)*delta/(||delta||+epsilon)",
+    "simple_fusion": "F=0.5*(S+M)",
+    "corrected": "Z=F+R_hat",
+    "objective": "CE(S,y)+CE(stopgrad(F)+R_hat,y)",
+    "fitted_hyperparameters": []
+  },
+  "results": [
+    {
+      "base": {
+        "F": 76.62037037037037,
+        "Z": 81.71296296296296
+      },
+      "novel": {
+        "F": 68.71980676328504,
+        "Z": 66.30434782608695
+      },
+      "hm_F": 72.45535473843763,
+      "hm_Z": 73.20663629564153,
+      "hm_gain": 0.751281557203896,
+      "novel_gain": -2.415458937198082,
+      "seed": 1
+    }
+  ],
+  "decision": {
+    "passes": false,
+    "criteria": {
+      "HM增益为正": true,
+      "Novel下降不超过1个百分点": false
+    },
+    "HM增益": 0.751281557203896,
+    "Novel增益": -2.415458937198082
+  }
+}

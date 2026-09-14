@@ -88,7 +88,7 @@ class ValidatedTrainer(TrainerX):
         clip_model = load_clip_checkpoint(cfg)
         self.model = self.model_builder(cfg, self.dm.dataset.classnames, clip_model)
         for name, parameter in self.model.named_parameters():
-            parameter.requires_grad_(name.startswith(('prompt_learner.', 'view_aggregator.', 'visual_adapter.')))
+            parameter.requires_grad_(name.startswith(('prompt_learner.', 'view_aggregator.', 'visual_adapter.', 'text_residual.')))
         self.model.to(self.device)
         self.model.image_encoder.eval()
         self.model.text_encoder.eval()
@@ -97,6 +97,9 @@ class ValidatedTrainer(TrainerX):
         visual_adapter = getattr(self.model, 'visual_adapter', None)
         if visual_adapter is not None:
             self.trainable_modules['visual_adapter'] = visual_adapter
+        text_residual = getattr(self.model, 'text_residual', None)
+        if text_residual is not None:
+            self.trainable_modules['text_residual'] = text_residual
         parameters = [p for p in self.trainable_modules.parameters() if p.requires_grad]
         self.optim = torch.optim.SGD(parameters, lr=cfg.OPTIM.LR, momentum=cfg.OPTIM.MOMENTUM,
                                      weight_decay=cfg.OPTIM.WEIGHT_DECAY)

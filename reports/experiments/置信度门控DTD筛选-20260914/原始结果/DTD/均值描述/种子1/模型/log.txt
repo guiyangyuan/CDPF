@@ -1,0 +1,300 @@
+***************
+** Arguments **
+***************
+backbone: 
+config_file: /root/autodl-tmp/textconsistency/releases/置信度门控-20260914-43ebe6f/configs/repro/text_detail/uniform.yaml
+dataset_config_file: /root/autodl-tmp/textconsistency/releases/置信度门控-20260914-43ebe6f/configs/datasets/dtd.yaml
+eval_only: False
+head: 
+load_epoch: None
+model_dir: 
+no_train: False
+opts: ['DATASET.SUBSAMPLE_CLASSES', 'base', 'USE_CUDA', 'True', 'TRAINER.TEXTCONSISTENCY.DEVICE', 'cuda', 'TRAINER.TEXTCONSISTENCY.CLIP_PATH', '/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt', 'TEST.NO_TEST', 'True']
+output_dir: /root/autodl-tmp/textconsistency/runs/置信度门控跨数据集-20260914-7e56f47/DTD/均值描述/种子1/模型
+resume: 
+root: /root/autodl-tmp/textconsistency/data
+seed: 1
+source_domains: None
+target_domains: None
+trainer: CoOp_TextDetail
+transforms: None
+************
+** Config **
+************
+DATALOADER:
+  K_TRANSFORMS: 1
+  NUM_WORKERS: 0
+  RETURN_IMG0: False
+  TEST:
+    BATCH_SIZE: 16
+    SAMPLER: SequentialSampler
+  TRAIN_U:
+    BATCH_SIZE: 32
+    N_DOMAIN: 0
+    N_INS: 16
+    SAME_AS_X: True
+    SAMPLER: RandomSampler
+  TRAIN_X:
+    BATCH_SIZE: 16
+    N_DOMAIN: 0
+    N_INS: 16
+    SAMPLER: RandomSampler
+DATASET:
+  ALL_AS_UNLABELED: False
+  CIFAR_C_LEVEL: 1
+  CIFAR_C_TYPE: 
+  NAME: DescribableTextures
+  NUM_LABELED: -1
+  NUM_SHOTS: 16
+  ROOT: /root/autodl-tmp/textconsistency/data
+  SOURCE_DOMAINS: ()
+  STL10_FOLD: -1
+  SUBSAMPLE_CLASSES: base
+  TARGET_DOMAINS: ()
+  VAL_PERCENT: 0.1
+INPUT:
+  COLORJITTER_B: 0.4
+  COLORJITTER_C: 0.4
+  COLORJITTER_H: 0.1
+  COLORJITTER_S: 0.4
+  CROP_PADDING: 4
+  CUTOUT_LEN: 16
+  CUTOUT_N: 1
+  GB_K: 21
+  GB_P: 0.5
+  GN_MEAN: 0.0
+  GN_STD: 0.15
+  INTERPOLATION: bicubic
+  NO_TRANSFORM: False
+  PIXEL_MEAN: [0.48145466, 0.4578275, 0.40821073]
+  PIXEL_STD: [0.26862954, 0.26130258, 0.27577711]
+  RANDAUGMENT_M: 10
+  RANDAUGMENT_N: 2
+  RGS_P: 0.2
+  RRCROP_SCALE: (0.08, 1.0)
+  SIZE: (224, 224)
+  TRANSFORMS: ('random_resized_crop', 'random_flip', 'normalize')
+MODEL:
+  BACKBONE:
+    NAME: ViT-B/16
+    PRETRAINED: True
+  HEAD:
+    ACTIVATION: relu
+    BN: True
+    DROPOUT: 0.0
+    HIDDEN_LAYERS: ()
+    NAME: 
+  INIT_WEIGHTS: 
+OPTIM:
+  ADAM_BETA1: 0.9
+  ADAM_BETA2: 0.999
+  BASE_LR_MULT: 0.1
+  GAMMA: 0.1
+  LR: 0.002
+  LR_SCHEDULER: cosine
+  MAX_EPOCH: 20
+  MOMENTUM: 0.9
+  NAME: sgd
+  NEW_LAYERS: ()
+  RMSPROP_ALPHA: 0.99
+  SGD_DAMPNING: 0
+  SGD_NESTEROV: False
+  STAGED_LR: False
+  STEPSIZE: (-1,)
+  WARMUP_CONS_LR: 1e-05
+  WARMUP_EPOCH: 1
+  WARMUP_MIN_LR: 1e-05
+  WARMUP_RECOUNT: True
+  WARMUP_TYPE: constant
+  WEIGHT_DECAY: 0.0005
+OUTPUT_DIR: /root/autodl-tmp/textconsistency/runs/置信度门控跨数据集-20260914-7e56f47/DTD/均值描述/种子1/模型
+RESUME: 
+SEED: 1
+TEST:
+  COMPUTE_CMAT: False
+  EVALUATOR: Classification
+  FINAL_MODEL: last_step
+  NO_TEST: True
+  PER_CLASS_RESULT: False
+  SPLIT: val
+TRAIN:
+  CHECKPOINT_FREQ: 0
+  COUNT_ITER: train_x
+  PRINT_FREQ: 10
+TRAINER:
+  CDAC:
+    CLASS_LR_MULTI: 10
+    P_THRESH: 0.95
+    RAMPUP_COEF: 30
+    RAMPUP_ITRS: 1000
+    STRONG_TRANSFORMS: ()
+    TOPK_MATCH: 5
+  COCOOP:
+    CTX_INIT: 
+    N_CTX: 16
+    PREC: fp16
+  COOP:
+    CLASS_TOKEN_POSITION: end
+    CSC: False
+    CTX_INIT: False
+    N_CTX: 16
+    PREC: fp16
+    W: 2.0
+  CROSSGRAD:
+    ALPHA_D: 0.5
+    ALPHA_F: 0.5
+    EPS_D: 1.0
+    EPS_F: 1.0
+  DAEL:
+    CONF_THRE: 0.95
+    STRONG_TRANSFORMS: ()
+    WEIGHT_U: 0.5
+  DAELDG:
+    CONF_THRE: 0.95
+    STRONG_TRANSFORMS: ()
+    WEIGHT_U: 0.5
+  DDAIG:
+    ALPHA: 0.5
+    CLAMP: False
+    CLAMP_MAX: 1.0
+    CLAMP_MIN: -1.0
+    G_ARCH: 
+    LMDA: 0.3
+    WARMUP: 0
+  DOMAINMIX:
+    ALPHA: 1.0
+    BETA: 1.0
+    TYPE: crossdomain
+  ENTMIN:
+    LMDA: 0.001
+  FIXMATCH:
+    CONF_THRE: 0.95
+    STRONG_TRANSFORMS: ()
+    WEIGHT_U: 1.0
+  M3SDA:
+    LMDA: 0.5
+    N_STEP_F: 4
+  MCD:
+    N_STEP_F: 4
+  MEANTEACHER:
+    EMA_ALPHA: 0.999
+    RAMPUP: 5
+    WEIGHT_U: 1.0
+  MIXMATCH:
+    MIXUP_BETA: 0.75
+    RAMPUP: 20000
+    TEMP: 2.0
+    WEIGHT_U: 100.0
+  MME:
+    LMDA: 0.1
+  NAME: CoOp_TextDetail
+  SE:
+    CONF_THRE: 0.95
+    EMA_ALPHA: 0.999
+    RAMPUP: 300
+  TEXTCONSISTENCY:
+    ABLATION_GROUP: full
+    ADAPTIVE_CE_WEIGHT: 0.0
+    AGGREGATION: mean
+    CLIP_PATH: /root/autodl-tmp/textconsistency/assets/ViT-B-16.pt
+    CONSISTENCY_TEMP: 1.0
+    CONSISTENCY_WEIGHT: 1.0
+    CONTRASTIVE_WEIGHT: 0.0
+    CORRECTION_TEXT: description
+    DEVICE: cuda
+    DIVERSITY_WEIGHT: 0.0
+    ENSEMBLE_ALPHA: 0.5
+    INFERENCE_BRANCH: corrected
+    KD_LOSS_MODE: full_kl
+    KD_TEMP: 2.0
+    KD_WEIGHT: 0.0
+    N_CTX: 4
+    N_GROUPS: 4
+    N_VIEWS: 20
+    ORDER_SEED: 0
+    PREC: fp32
+    TEXT_BATCH_SIZE: 32
+    TEXT_DETAIL_POOLING: uniform
+    TEXT_RESIDUAL_ADAMW_LR: 0.001
+    TEXT_RESIDUAL_DIM: 64
+    TEXT_RESIDUAL_K: 5
+    TEXT_RESIDUAL_MODE: classname
+    TEXT_RESIDUAL_SCALE: 0.2
+    USE_FEATURE_ADAPTER: False
+    USE_VISUAL_ADAPTER: False
+    VIEW_ORDER: contiguous
+    VISUAL_ADAPTER_DIM: 64
+    VISUAL_ADAPTER_SCALE: 0.2
+USE_CUDA: True
+VERBOSE: True
+VERSION: 1
+Loading trainer: CoOp_TextDetail
+Loading dataset: DescribableTextures
+Reading split from /root/autodl-tmp/textconsistency/data/dtd/split_zhou_DescribableTextures.json
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/dtd/split_fewshot/shot_16-seed_1.pkl
+SUBSAMPLE BASE CLASSES!
+Building transform_train
++ random resized crop (size=(224, 224), scale=(0.08, 1.0))
++ random flip
++ to torch tensor of range [0, 1]
++ normalization (mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711])
+Building transform_test
++ resize the smaller edge to 224
++ 224x224 center crop
++ to torch tensor of range [0, 1]
++ normalization (mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711])
+---------  -------------------
+Dataset    DescribableTextures
+# classes  24
+# train_x  384
+# val      96
+# test     864
+---------  -------------------
+build model vit is True
+Effective description counts: {"banded": 20, "blotchy": 20, "braided": 20, "bubbly": 20, "bumpy": 20, "chequered": 20, "cobwebbed": 20, "cracked": 20, "crosshatched": 20, "crystalline": 20, "dotted": 20, "fibrous": 20, "flecked": 20, "freckled": 20, "frilly": 20, "gauzy": 20, "grid": 20, "grooved": 20, "honeycombed": 20, "interlaced": 20, "knitted": 20, "lacelike": 20, "lined": 20, "marbled": 20}
+Effective protocol: {"code_sha256": "f1d22f0bfc16cf1a754b990da12b5526325ab49f192c68877dcf8f13c6237ba1", "cuda_runtime": "12.8", "dataset": "DescribableTextures", "description_counts": [20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20], "device": "cuda", "effective_losses": {"adaptive_ce": 0.0, "contrastive": 0.0, "correction_ce": 1.0, "diversity": 0.0, "kd": 0.0}, "gpu": "NVIDIA GeForce RTX 4090", "loss_identity": {"active": false, "effective_weight": 0.0, "format": 1, "mode": "full_kl", "non_target_weighting": "none_full_distribution_kl", "temperature": 2.0}, "model_signature": {"ablation_group": null, "aggregation": "mean", "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f", "correction": {"attention": "uniform_valid_description_weights", "centering": "none", "classname_template": "{} texture.", "classname_training_preserved": false, "coefficient": 1.0, "delta_normalization": false, "detail_pooling": "uniform", "enabled": true, "hidden_dim": 64, "inference": "S+R", "init": "kaiming_down_zero_up_no_bias_rng_isolated", "input": "classname_hidden_plus_uniform_description_hidden", "kind": "classname_anchored_visual_text_detail", "mode": "classname", "neighbor_k": 5, "objective": "CE(S,y)+CE(stopgrad(S)+R,y)", "pooling": "uniform_after_relu_down", "residual": "clip_scale*einsum(image,per_image_text_delta)", "scale": 0.2, "version": 3}, "feature_adapter": false, "format": 5, "loss_identity": {"active": false, "effective_weight": 0.0, "format": 1, "mode": "full_kl", "non_target_weighting": "none_full_distribution_kl", "temperature": 2.0}, "n_ctx": 4, "n_groups": 4, "n_views": 20, "optimization": {"format": 1, "residual": {"betas": [0.9, 0.999], "eps": 1e-08, "lr": 0.001, "name": "adamw", "scheduler": "constant", "warmup_epoch": 0, "weight_decay": 0.0005}, "residual_gradient": "correction_ce_only", "student": {"lr": 0.002, "max_epoch": 20, "momentum": 0.9, "name": "sgd", "scheduler": "cosine", "warmup_cons_lr": 1e-05, "warmup_epoch": 1, "warmup_type": "constant", "weight_decay": 0.0005}, "student_gradient": "student_ce_only"}, "order_seed": 0, "order_version": 1, "template_sha256": "dabdcafded7babd67046d0f90abeb510b648bdaaf397b884f265f3460a7942a9", "trainer": "CoOp_TextDetail", "view_order": "contiguous"}, "python": "3.12.3", "seed": 1, "shots": 16, "subsample": "base", "test_samples_sha256": "cdffe9f91ff0d496160672fe417d2c2d6f2277831fb9df660e7ff194bcb8cf4a", "torch": "2.8.0+cu128", "train_samples_sha256": "53f6e0660e3ef7138005025ca17a8cb1a0c279d6f55ad3a193150b3f13a1ff49", "trainable_parameters": 67584, "val_samples_sha256": "28a600bf7140b5155e369de0eeaff9bf31e809f034f671e25568bed82fe54e4b", "view_order_manifest": {"classes": [{"classname": "banded", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "blotchy", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "braided", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "bubbly", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "bumpy", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "chequered", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "cobwebbed", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "cracked", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "crosshatched", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "crystalline", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "dotted", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "fibrous", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "flecked", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "freckled", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "frilly", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "gauzy", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "grid", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "grooved", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "honeycombed", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "interlaced", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "knitted", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "lacelike", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "lined", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "marbled", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}], "n_groups": 4, "policy": "contiguous", "seed": 0, "sha256": "2e9d0d1055133854654ef7312017cf087f7c3392b15cf28ac8912432027e29a2", "version": 1}}
+Loading evaluator: Classification
+No checkpoint found, train from scratch
+epoch [1/20] batch [10/24] time 0.150 (0.187) data 0.094 (0.108) loss 4.9510 (3.7751) loss_student 2.5201 (1.8993) loss_correction 2.4309 (1.8758) acc 50.0000 (49.3750) lr 1.0000e-05 eta 0:01:27
+epoch [1/20] batch [20/24] time 0.162 (0.179) data 0.098 (0.109) loss 4.4335 (3.7791) loss_student 2.2810 (1.9160) loss_correction 2.1525 (1.8631) acc 31.2500 (50.9375) lr 1.0000e-05 eta 0:01:22
+epoch [2/20] batch [10/24] time 0.149 (0.171) data 0.087 (0.105) loss 2.1804 (3.1133) loss_student 1.2676 (1.6689) loss_correction 0.9128 (1.4444) acc 81.2500 (60.0000) lr 2.0000e-03 eta 0:01:16
+epoch [2/20] batch [20/24] time 0.134 (0.155) data 0.075 (0.093) loss 2.5789 (2.9691) loss_student 1.2968 (1.6266) loss_correction 1.2822 (1.3424) acc 68.7500 (60.3125) lr 2.0000e-03 eta 0:01:07
+epoch [3/20] batch [10/24] time 0.138 (0.141) data 0.076 (0.079) loss 1.9628 (2.2430) loss_student 1.0509 (1.3603) loss_correction 0.9119 (0.8827) acc 56.2500 (73.1250) lr 1.9877e-03 eta 0:00:59
+epoch [3/20] batch [20/24] time 0.137 (0.141) data 0.075 (0.079) loss 1.7924 (2.0587) loss_student 0.9737 (1.2436) loss_correction 0.8187 (0.8151) acc 68.7500 (75.9375) lr 1.9877e-03 eta 0:00:58
+epoch [4/20] batch [10/24] time 0.130 (0.138) data 0.067 (0.076) loss 1.2520 (1.7044) loss_student 0.8145 (1.0762) loss_correction 0.4375 (0.6282) acc 87.5000 (84.3750) lr 1.9511e-03 eta 0:00:55
+epoch [4/20] batch [20/24] time 0.131 (0.143) data 0.069 (0.080) loss 1.7096 (1.7301) loss_student 1.2261 (1.1167) loss_correction 0.4835 (0.6133) acc 87.5000 (84.3750) lr 1.9511e-03 eta 0:00:55
+epoch [5/20] batch [10/24] time 0.147 (0.144) data 0.085 (0.082) loss 1.4649 (1.4509) loss_student 0.9368 (1.0169) loss_correction 0.5281 (0.4339) acc 81.2500 (88.1250) lr 1.8910e-03 eta 0:00:53
+epoch [5/20] batch [20/24] time 0.140 (0.139) data 0.079 (0.077) loss 1.6434 (1.5294) loss_student 1.1569 (1.0292) loss_correction 0.4865 (0.5002) acc 81.2500 (84.6875) lr 1.8910e-03 eta 0:00:50
+epoch [6/20] batch [10/24] time 0.152 (0.143) data 0.085 (0.080) loss 1.9324 (1.2896) loss_student 1.2749 (0.8602) loss_correction 0.6574 (0.4294) acc 75.0000 (86.8750) lr 1.8090e-03 eta 0:00:49
+epoch [6/20] batch [20/24] time 0.162 (0.152) data 0.094 (0.089) loss 1.1412 (1.2839) loss_student 0.8309 (0.8752) loss_correction 0.3103 (0.4087) acc 93.7500 (87.1875) lr 1.8090e-03 eta 0:00:51
+epoch [7/20] batch [10/24] time 0.134 (0.151) data 0.075 (0.088) loss 0.5558 (1.0340) loss_student 0.3598 (0.7337) loss_correction 0.1960 (0.3003) acc 93.7500 (90.6250) lr 1.7071e-03 eta 0:00:49
+epoch [7/20] batch [20/24] time 0.136 (0.145) data 0.069 (0.081) loss 1.1854 (1.0023) loss_student 0.7655 (0.7076) loss_correction 0.4199 (0.2946) acc 87.5000 (90.9375) lr 1.7071e-03 eta 0:00:45
+epoch [8/20] batch [10/24] time 0.128 (0.139) data 0.079 (0.085) loss 0.6772 (0.9079) loss_student 0.4906 (0.6511) loss_correction 0.1866 (0.2568) acc 93.7500 (90.6250) lr 1.5878e-03 eta 0:00:42
+epoch [8/20] batch [20/24] time 0.115 (0.139) data 0.069 (0.086) loss 0.8411 (0.9602) loss_student 0.6279 (0.6951) loss_correction 0.2132 (0.2650) acc 93.7500 (91.2500) lr 1.5878e-03 eta 0:00:40
+epoch [9/20] batch [10/24] time 0.137 (0.137) data 0.077 (0.080) loss 1.2819 (1.0466) loss_student 0.8506 (0.7415) loss_correction 0.4313 (0.3051) acc 81.2500 (90.0000) lr 1.4540e-03 eta 0:00:38
+epoch [9/20] batch [20/24] time 0.159 (0.148) data 0.099 (0.091) loss 1.0759 (0.9840) loss_student 0.6752 (0.6895) loss_correction 0.4007 (0.2945) acc 81.2500 (89.3750) lr 1.4540e-03 eta 0:00:39
+epoch [10/20] batch [10/24] time 0.193 (0.167) data 0.133 (0.108) loss 0.9359 (0.8339) loss_student 0.7671 (0.6294) loss_correction 0.1688 (0.2045) acc 93.7500 (91.8750) lr 1.3090e-03 eta 0:00:42
+epoch [10/20] batch [20/24] time 0.174 (0.167) data 0.114 (0.110) loss 0.6603 (0.8137) loss_student 0.4163 (0.6030) loss_correction 0.2441 (0.2107) acc 93.7500 (92.1875) lr 1.3090e-03 eta 0:00:40
+epoch [11/20] batch [10/24] time 0.170 (0.168) data 0.106 (0.105) loss 0.6570 (0.7609) loss_student 0.4875 (0.5691) loss_correction 0.1695 (0.1918) acc 93.7500 (95.6250) lr 1.1564e-03 eta 0:00:38
+epoch [11/20] batch [20/24] time 0.176 (0.171) data 0.112 (0.107) loss 1.5291 (0.7994) loss_student 0.9789 (0.5886) loss_correction 0.5502 (0.2108) acc 81.2500 (94.6875) lr 1.1564e-03 eta 0:00:37
+epoch [12/20] batch [10/24] time 0.133 (0.150) data 0.069 (0.092) loss 0.6215 (0.6785) loss_student 0.5070 (0.5131) loss_correction 0.1144 (0.1654) acc 100.0000 (95.6250) lr 1.0000e-03 eta 0:00:30
+epoch [12/20] batch [20/24] time 0.126 (0.144) data 0.064 (0.085) loss 0.7808 (0.7736) loss_student 0.6281 (0.5713) loss_correction 0.1527 (0.2023) acc 93.7500 (93.7500) lr 1.0000e-03 eta 0:00:28
+epoch [13/20] batch [10/24] time 0.143 (0.141) data 0.080 (0.080) loss 1.3909 (0.8498) loss_student 0.9384 (0.6614) loss_correction 0.4524 (0.1884) acc 87.5000 (95.6250) lr 8.4357e-04 eta 0:00:25
+epoch [13/20] batch [20/24] time 0.145 (0.147) data 0.083 (0.085) loss 0.4685 (0.7798) loss_student 0.3604 (0.5979) loss_correction 0.1081 (0.1820) acc 93.7500 (94.3750) lr 8.4357e-04 eta 0:00:25
+epoch [14/20] batch [10/24] time 0.166 (0.150) data 0.103 (0.086) loss 0.3879 (0.4828) loss_student 0.3357 (0.4062) loss_correction 0.0521 (0.0766) acc 100.0000 (98.1250) lr 6.9098e-04 eta 0:00:23
+epoch [14/20] batch [20/24] time 0.130 (0.147) data 0.068 (0.084) loss 0.3763 (0.5719) loss_student 0.2919 (0.4620) loss_correction 0.0844 (0.1099) acc 100.0000 (97.1875) lr 6.9098e-04 eta 0:00:21
+epoch [15/20] batch [10/24] time 0.140 (0.138) data 0.078 (0.076) loss 1.0175 (0.6496) loss_student 0.5962 (0.5020) loss_correction 0.4213 (0.1476) acc 93.7500 (97.5000) lr 5.4601e-04 eta 0:00:18
+epoch [15/20] batch [20/24] time 0.135 (0.141) data 0.077 (0.079) loss 0.4844 (0.6906) loss_student 0.3778 (0.5437) loss_correction 0.1066 (0.1469) acc 100.0000 (96.8750) lr 5.4601e-04 eta 0:00:17
+epoch [16/20] batch [10/24] time 0.141 (0.144) data 0.085 (0.084) loss 0.8095 (0.6170) loss_student 0.7547 (0.5101) loss_correction 0.0548 (0.1069) acc 100.0000 (96.8750) lr 4.1221e-04 eta 0:00:15
+epoch [16/20] batch [20/24] time 0.153 (0.155) data 0.086 (0.093) loss 0.7028 (0.6312) loss_student 0.6556 (0.5256) loss_correction 0.0472 (0.1055) acc 100.0000 (96.8750) lr 4.1221e-04 eta 0:00:15
+epoch [17/20] batch [10/24] time 0.183 (0.186) data 0.116 (0.121) loss 0.8604 (0.4983) loss_student 0.6585 (0.4313) loss_correction 0.2019 (0.0670) acc 87.5000 (97.5000) lr 2.9289e-04 eta 0:00:15
+epoch [17/20] batch [20/24] time 0.164 (0.178) data 0.098 (0.113) loss 0.5298 (0.5408) loss_student 0.4540 (0.4517) loss_correction 0.0757 (0.0892) acc 100.0000 (97.8125) lr 2.9289e-04 eta 0:00:13
+epoch [18/20] batch [10/24] time 0.149 (0.163) data 0.082 (0.101) loss 1.3178 (0.7399) loss_student 0.8919 (0.5544) loss_correction 0.4259 (0.1855) acc 87.5000 (94.3750) lr 1.9098e-04 eta 0:00:10
+epoch [18/20] batch [20/24] time 0.143 (0.164) data 0.080 (0.101) loss 0.3717 (0.6638) loss_student 0.2070 (0.4898) loss_correction 0.1647 (0.1740) acc 93.7500 (95.9375) lr 1.9098e-04 eta 0:00:08
+epoch [19/20] batch [10/24] time 0.148 (0.148) data 0.086 (0.086) loss 0.9577 (0.4691) loss_student 0.6472 (0.3908) loss_correction 0.3105 (0.0783) acc 93.7500 (98.7500) lr 1.0899e-04 eta 0:00:05
+epoch [19/20] batch [20/24] time 0.142 (0.147) data 0.080 (0.086) loss 0.1644 (0.5005) loss_student 0.1420 (0.4233) loss_correction 0.0224 (0.0773) acc 100.0000 (98.7500) lr 1.0899e-04 eta 0:00:04
+epoch [20/20] batch [10/24] time 0.126 (0.146) data 0.079 (0.087) loss 0.3935 (0.6027) loss_student 0.3229 (0.4941) loss_correction 0.0706 (0.1085) acc 100.0000 (96.2500) lr 4.8943e-05 eta 0:00:02
+epoch [20/20] batch [20/24] time 0.176 (0.157) data 0.119 (0.097) loss 0.4132 (0.5469) loss_student 0.3922 (0.4598) loss_correction 0.0211 (0.0871) acc 100.0000 (97.1875) lr 4.8943e-05 eta 0:00:00
+Checkpoint saved to /root/autodl-tmp/textconsistency/runs/置信度门控跨数据集-20260914-7e56f47/DTD/均值描述/种子1/模型/textconsistency/model.pth.tar-20
+Finish training
+Elapsed: 0:01:14

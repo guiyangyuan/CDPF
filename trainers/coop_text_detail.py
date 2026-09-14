@@ -71,6 +71,25 @@ class TextDetailCLIP(TextResidualCLIP):
                 'F': .5 * student + .5 * mean}
 
 
+class FusionAlignedTextDetailCLIP(TextDetailCLIP):
+    """Train and deploy the residual around the same multimodal anchor."""
+    def __init__(self, cfg, classnames, clip_model):
+        super().__init__(cfg, classnames, clip_model)
+        self.correction_identity.update(
+            version=4,
+            kind='fusion_aligned_visual_text_detail',
+            inference='F+R',
+            objective='CE(S,y)+CE(stopgrad(F)+R,y)',
+            fusion_anchor='F=0.5*(S+M)',
+            coefficient=1.0,
+        )
+
+    def forward(self, image):
+        outputs = super().forward(image)
+        outputs['Z'] = outputs['F'] + outputs['R']
+        return outputs
+
+
 @TRAINER_REGISTRY.register()
 class CoOp_TextDetail(CoOp_TextResidual_AdamW):
     model_builder = TextDetailCLIP
@@ -80,3 +99,13 @@ class CoOp_TextDetail(CoOp_TextResidual_AdamW):
         tc = cfg.TRAINER.TEXTCONSISTENCY
         if tc.TEXT_RESIDUAL_MODE != 'classname' or tc.TEXT_DETAIL_POOLING not in ('uniform', 'attentive', 'centered'):
             raise ValueError('Text detail requires classname anchor and uniform/attentive/centered pooling')
+
+
+@TRAINER_REGISTRY.register()
+class CoOp_TextDetail_FusionAligned(CoOp_TextDetail):
+    """Optimize the text residual on the exact fusion branch used at inference."""
+    model_builder = FusionAlignedTextDetailCLIP
+
+    def loss_terms(self, outputs, labels):
+        return (F.cross_entropy(outputs['S'], labels),
+                F.cross_entropy(outputs['F'].detach() + outputs['R'], labels))

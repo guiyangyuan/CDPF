@@ -209,6 +209,16 @@ def _collect_predictions(model, loader, device):
     return arrays, paths
 
 
+def prepare_export_directory(output_dir):
+    """Accept only the runtime subdirectory created while building the trainer."""
+    output_dir = Path(output_dir)
+    if not output_dir.exists():
+        output_dir.mkdir(parents=True)
+        return
+    if not output_dir.is_dir() or {path.name for path in output_dir.iterdir()} - {'运行信息'}:
+        raise ValueError(f'Unexpected files appeared in fresh export directory: {output_dir}')
+
+
 def export_checkpoint(dataset_key, seed, model_dir, split, data_root, clip_path, output_dir):
     import torch
     from dassl.config import get_cfg_default
@@ -243,7 +253,7 @@ def export_checkpoint(dataset_key, seed, model_dir, split, data_root, clip_path,
                       'label': int(item.label)} for item in items]
     if rows != expected_rows or arrays['S'].shape != (len(items), len(trainer.dm.dataset.classnames)):
         raise ValueError('Export rows/classes differ from the deterministic dataset loader')
-    output_dir.mkdir(parents=True)
+    prepare_export_directory(output_dir)
     archive_path = output_dir / '预测.npz'
     np.savez_compressed(archive_path, **arrays)
     record = {

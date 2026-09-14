@@ -1,6 +1,9 @@
 """Protocol checks for the staged cross-dataset gate study."""
 import unittest
+from pathlib import Path
+import tempfile
 
+from scripts.repro import confidence_gate_study as study
 from scripts.repro.confidence_gate_study import (
     confirmation_decision,
     planned_cases,
@@ -28,6 +31,15 @@ class ConfidenceGateStudyTest(unittest.TestCase):
         self.assertEqual(cases[0], {'phase': 'DTD单种子筛选', 'dataset': 'dtd', 'seed': 1, 'variant': 'uniform'})
         self.assertEqual(cases[-1], {'phase': 'UCF101三种子确认', 'dataset': 'ucf101', 'seed': 3, 'variant': 'attentive'})
         self.assertEqual(len({(c['dataset'], c['seed'], c['variant']) for c in cases}), 12)
+
+    def test_export_allows_trainer_created_runtime_subdirectory(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            output = Path(temporary) / '基础测试集'
+            (output / '运行信息').mkdir(parents=True)
+            prepare = getattr(study, 'prepare_export_directory', None)
+            self.assertIsNotNone(prepare, 'runner needs an explicit post-trainer directory step')
+            prepare(output)
+            self.assertTrue(output.is_dir())
 
 
 if __name__ == '__main__':

@@ -20,10 +20,11 @@ from scripts.repro.text_residual_pilot import collect_predictions
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def make_text(output, mode='contrast', novel=False, adamw=False):
+def make_text(output, mode='contrast', novel=False, adamw=False, detail=None):
     cfg = get_cfg_default(); train.extend_cfg(cfg)
     folder = 'text_residual_adamw' if adamw else 'text_residual'
-    cfg.merge_from_file(str(ROOT / f'configs/repro/{folder}/{mode}.yaml'))
+    config = f'text_detail/{detail}' if detail else f'{folder}/{mode}'
+    cfg.merge_from_file(str(ROOT / f'configs/repro/{config}.yaml'))
     cfg.SEED = 1; cfg.DATASET.NAME = 'Caltech101'
     cfg.DATASET.ROOT = str(output); cfg.OUTPUT_DIR = str(output)
     cfg.DATASET.SUBSAMPLE_CLASSES = 'new' if novel else 'base'
@@ -31,7 +32,8 @@ def make_text(output, mode='contrast', novel=False, adamw=False):
     cfg.TRAINER.TEXTCONSISTENCY.N_VIEWS = 5
     cfg.TRAINER.TEXTCONSISTENCY.TEXT_RESIDUAL_DIM = 8
     from trainers.coop_text_residual_adamw import CoOp_TextResidual_AdamW
-    cls = CoOp_TextResidual_AdamW if adamw else CoOp_TextResidual
+    from trainers.coop_text_detail import CoOp_TextDetail
+    cls = CoOp_TextDetail if detail else (CoOp_TextResidual_AdamW if adamw else CoOp_TextResidual)
     trainer = cls.__new__(cls)
     TrainerBase.__init__(trainer); trainer.cfg = cfg
     names = list(json.loads((ROOT / 'templates/cal_prompts_full.json').read_text()))

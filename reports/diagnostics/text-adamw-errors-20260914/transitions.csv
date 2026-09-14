@@ -1,0 +1,401 @@
+mode,index,sample_id,label,true_class,classname_prediction,description_prediction,transition,classname_top1_top2_margin
+description,0,fgvc_aircraft/images/0869692.jpg,0,707-320,747-200,747-100,both_wrong,0.21160888671875
+description,1,fgvc_aircraft/images/1514481.jpg,0,707-320,707-320,707-320,both_correct,0.6504440307617188
+description,2,fgvc_aircraft/images/0481847.jpg,0,707-320,707-320,707-320,both_correct,4.351036071777344
+description,3,fgvc_aircraft/images/1148180.jpg,0,707-320,707-320,747-100,harmed,0.1367034912109375
+description,4,fgvc_aircraft/images/1446378.jpg,1,727-200,707-320,707-320,both_wrong,0.8713588714599609
+description,5,fgvc_aircraft/images/0048341.jpg,1,727-200,727-200,727-200,both_correct,1.8584651947021484
+description,6,fgvc_aircraft/images/1036881.jpg,1,727-200,Boeing 717,Boeing 717,both_wrong,1.7278461456298828
+description,7,fgvc_aircraft/images/0063113.jpg,1,727-200,727-200,727-200,both_correct,0.5215187072753906
+description,8,fgvc_aircraft/images/0522884.jpg,2,737-200,737-200,737-200,both_correct,0.4172859191894531
+description,9,fgvc_aircraft/images/1884748.jpg,2,737-200,737-500,737-400,both_wrong,0.021350860595703125
+description,10,fgvc_aircraft/images/0109632.jpg,2,737-200,A300B4,A300B4,both_wrong,0.10608100891113281
+description,11,fgvc_aircraft/images/0981301.jpg,2,737-200,737-200,737-200,both_correct,0.7603988647460938
+description,12,fgvc_aircraft/images/0248336.jpg,3,737-300,757-300,757-300,both_wrong,0.6377487182617188
+description,13,fgvc_aircraft/images/1955376.jpg,3,737-300,737-900,737-900,both_wrong,0.09856033325195312
+description,14,fgvc_aircraft/images/2031394.jpg,3,737-300,Boeing 717,Boeing 717,both_wrong,2.102771759033203
+description,15,fgvc_aircraft/images/0944166.jpg,3,737-300,737-900,737-300,corrected,0.04821014404296875
+description,16,fgvc_aircraft/images/1474251.jpg,4,737-400,737-500,737-900,both_wrong,0.078094482421875
+description,17,fgvc_aircraft/images/0939537.jpg,4,737-400,A300B4,A300B4,both_wrong,1.0151329040527344
+description,18,fgvc_aircraft/images/1334567.jpg,4,737-400,737-600,737-300,both_wrong,0.031139373779296875
+description,19,fgvc_aircraft/images/0523220.jpg,4,737-400,Boeing 717,Boeing 717,both_wrong,0.18402099609375
+description,20,fgvc_aircraft/images/1313891.jpg,5,737-500,737-500,737-500,both_correct,0.1684112548828125
+description,21,fgvc_aircraft/images/1033079.jpg,5,737-500,A320,A320,both_wrong,0.9765167236328125
+description,22,fgvc_aircraft/images/1405447.jpg,5,737-500,A321,A321,both_wrong,0.4866905212402344
+description,23,fgvc_aircraft/images/2230107.jpg,5,737-500,737-900,737-800,both_wrong,0.1633930206298828
+description,24,fgvc_aircraft/images/1225644.jpg,6,737-600,737-300,737-600,corrected,0.1198272705078125
+description,25,fgvc_aircraft/images/0428665.jpg,6,737-600,737-500,737-900,both_wrong,0.17602157592773438
+description,26,fgvc_aircraft/images/0562553.jpg,6,737-600,A321,A321,both_wrong,0.384918212890625
+description,27,fgvc_aircraft/images/0959047.jpg,6,737-600,737-500,737-500,both_wrong,0.08698654174804688
+description,28,fgvc_aircraft/images/0209211.jpg,7,737-700,727-200,727-200,both_wrong,0.8365154266357422
+description,29,fgvc_aircraft/images/2201377.jpg,7,737-700,737-500,737-400,both_wrong,0.18999099731445312
+description,30,fgvc_aircraft/images/1319791.jpg,7,737-700,737-600,737-400,both_wrong,0.004795074462890625
+description,31,fgvc_aircraft/images/1569052.jpg,7,737-700,737-500,737-500,both_wrong,0.3007354736328125
+description,32,fgvc_aircraft/images/1190718.jpg,8,737-800,737-900,737-900,both_wrong,0.031093597412109375
+description,33,fgvc_aircraft/images/0097108.jpg,8,737-800,737-300,737-400,both_wrong,0.17540740966796875
+description,34,fgvc_aircraft/images/0684565.jpg,8,737-800,727-200,727-200,both_wrong,2.4290809631347656
+description,35,fgvc_aircraft/images/1236463.jpg,8,737-800,Boeing 717,Boeing 717,both_wrong,1.3163776397705078
+description,36,fgvc_aircraft/images/0837340.jpg,9,737-900,757-300,737-900,corrected,0.5855979919433594
+description,37,fgvc_aircraft/images/0179021.jpg,9,737-900,757-200,757-200,both_wrong,0.1364898681640625
+description,38,fgvc_aircraft/images/1718867.jpg,9,737-900,757-300,737-900,corrected,0.24179458618164062
+description,39,fgvc_aircraft/images/0331279.jpg,9,737-900,757-300,757-300,both_wrong,0.6233062744140625
+description,40,fgvc_aircraft/images/0808930.jpg,10,747-100,747-200,747-100,corrected,0.3329811096191406
+description,41,fgvc_aircraft/images/0558306.jpg,10,747-100,747-200,747-200,both_wrong,0.3173828125
+description,42,fgvc_aircraft/images/1318175.jpg,10,747-100,747-400,747-300,both_wrong,0.15344619750976562
+description,43,fgvc_aircraft/images/1033308.jpg,10,747-100,707-320,707-320,both_wrong,1.6670494079589844
+description,44,fgvc_aircraft/images/0993945.jpg,11,747-200,747-100,747-100,both_wrong,0.18235015869140625
+description,45,fgvc_aircraft/images/0447170.jpg,11,747-200,A380,747-300,both_wrong,0.08505630493164062
+description,46,fgvc_aircraft/images/1094667.jpg,11,747-200,747-400,747-300,both_wrong,0.16936874389648438
+description,47,fgvc_aircraft/images/0233756.jpg,11,747-200,747-200,747-100,harmed,0.23005294799804688
+description,48,fgvc_aircraft/images/1256683.jpg,12,747-300,A300B4,A340-600,both_wrong,0.5973796844482422
+description,49,fgvc_aircraft/images/0167090.jpg,12,747-300,747-200,747-300,corrected,0.0471954345703125
+description,50,fgvc_aircraft/images/0981462.jpg,12,747-300,747-400,747-400,both_wrong,0.6198501586914062
+description,51,fgvc_aircraft/images/0569010.jpg,12,747-300,747-400,747-400,both_wrong,0.22593307495117188
+description,52,fgvc_aircraft/images/1291092.jpg,13,747-400,747-400,747-300,harmed,0.027072906494140625
+description,53,fgvc_aircraft/images/1173801.jpg,13,747-400,747-400,747-400,both_correct,0.16709518432617188
+description,54,fgvc_aircraft/images/0127504.jpg,13,747-400,747-300,747-200,both_wrong,0.010822296142578125
+description,55,fgvc_aircraft/images/1662017.jpg,13,747-400,A340-600,A340-600,both_wrong,0.07683372497558594
+description,56,fgvc_aircraft/images/0090862.jpg,14,757-200,757-200,767-200,harmed,0.02044677734375
+description,57,fgvc_aircraft/images/1175264.jpg,14,757-200,757-300,757-300,both_wrong,0.6565475463867188
+description,58,fgvc_aircraft/images/0684607.jpg,14,757-200,757-300,767-300,both_wrong,0.0471649169921875
+description,59,fgvc_aircraft/images/1073024.jpg,14,757-200,Boeing 717,Boeing 717,both_wrong,0.8660964965820312
+description,60,fgvc_aircraft/images/0658111.jpg,15,757-300,A321,A321,both_wrong,0.18200302124023438
+description,61,fgvc_aircraft/images/1334472.jpg,15,757-300,757-300,757-300,both_correct,0.5899200439453125
+description,62,fgvc_aircraft/images/0985968.jpg,15,757-300,767-400,767-400,both_wrong,0.14013671875
+description,63,fgvc_aircraft/images/2099420.jpg,15,757-300,767-400,767-400,both_wrong,0.3655853271484375
+description,64,fgvc_aircraft/images/1514289.jpg,16,767-200,757-300,767-400,both_wrong,0.10129547119140625
+description,65,fgvc_aircraft/images/0127507.jpg,16,767-200,A330-200,767-200,corrected,0.05147552490234375
+description,66,fgvc_aircraft/images/0062766.jpg,16,767-200,747-200,A300B4,both_wrong,0.210174560546875
+description,67,fgvc_aircraft/images/1291080.jpg,16,767-200,A340-600,A340-600,both_wrong,0.157073974609375
+description,68,fgvc_aircraft/images/1700379.jpg,17,767-300,767-400,767-400,both_wrong,0.03753662109375
+description,69,fgvc_aircraft/images/1838649.jpg,17,767-300,777-300,777-300,both_wrong,0.2726249694824219
+description,70,fgvc_aircraft/images/2031399.jpg,17,767-300,A330-300,767-400,both_wrong,0.043109893798828125
+description,71,fgvc_aircraft/images/1518619.jpg,17,767-300,A340-200,A310,both_wrong,0.055286407470703125
+description,72,fgvc_aircraft/images/1134122.jpg,18,767-400,767-400,767-400,both_correct,0.2749977111816406
+description,73,fgvc_aircraft/images/1103084.jpg,18,767-400,767-400,767-400,both_correct,0.4848670959472656
+description,74,fgvc_aircraft/images/0248710.jpg,18,767-400,767-300,767-300,both_wrong,0.20786285400390625
+description,75,fgvc_aircraft/images/0870232.jpg,18,767-400,767-400,767-400,both_correct,0.7241096496582031
+description,76,fgvc_aircraft/images/1014374.jpg,19,777-200,777-300,777-300,both_wrong,0.39599609375
+description,77,fgvc_aircraft/images/2084802.jpg,19,777-200,A330-300,A330-300,both_wrong,0.6679229736328125
+description,78,fgvc_aircraft/images/2230359.jpg,19,777-200,767-400,767-400,both_wrong,0.0724334716796875
+description,79,fgvc_aircraft/images/1992904.jpg,19,777-200,A330-200,767-400,both_wrong,0.12992095947265625
+description,80,fgvc_aircraft/images/1545067.jpg,20,777-300,A330-300,A330-300,both_wrong,1.0135307312011719
+description,81,fgvc_aircraft/images/1650311.jpg,20,777-300,777-300,767-300,harmed,0.31276702880859375
+description,82,fgvc_aircraft/images/1429301.jpg,20,777-300,777-300,777-300,both_correct,0.4970970153808594
+description,83,fgvc_aircraft/images/1864995.jpg,20,777-300,777-300,777-300,both_correct,0.5295867919921875
+description,84,fgvc_aircraft/images/0901374.jpg,21,A300B4,A310,A310,both_wrong,0.7870903015136719
+description,85,fgvc_aircraft/images/0489932.jpg,21,A300B4,707-320,707-320,both_wrong,0.7144145965576172
+description,86,fgvc_aircraft/images/0939485.jpg,21,A300B4,A310,A310,both_wrong,0.051204681396484375
+description,87,fgvc_aircraft/images/0901516.jpg,21,A300B4,A340-200,A340-200,both_wrong,0.342010498046875
+description,88,fgvc_aircraft/images/1514483.jpg,22,A310,A300B4,A320,both_wrong,0.112518310546875
+description,89,fgvc_aircraft/images/2230428.jpg,22,A310,767-300,767-300,both_wrong,0.035381317138671875
+description,90,fgvc_aircraft/images/0225215.jpg,22,A310,A300B4,A300B4,both_wrong,1.1326904296875
+description,91,fgvc_aircraft/images/0737639.jpg,22,A310,A310,A310,both_correct,0.5956306457519531
+description,92,fgvc_aircraft/images/1277619.jpg,23,A318,A319,A319,both_wrong,0.2598075866699219
+description,93,fgvc_aircraft/images/1503763.jpg,23,A318,A318,A318,both_correct,1.7175331115722656
+description,94,fgvc_aircraft/images/1375490.jpg,23,A318,737-900,737-900,both_wrong,0.1749114990234375
+description,95,fgvc_aircraft/images/2260089.jpg,23,A318,A318,A318,both_correct,1.1977729797363281
+description,96,fgvc_aircraft/images/0257377.jpg,24,A319,A321,A320,both_wrong,0.33596038818359375
+description,97,fgvc_aircraft/images/1548486.jpg,24,A319,A319,A319,both_correct,0.7592697143554688
+description,98,fgvc_aircraft/images/0143381.jpg,24,A319,737-200,737-200,both_wrong,0.5625648498535156
+description,99,fgvc_aircraft/images/2195569.jpg,24,A319,A321,A320,both_wrong,0.19139480590820312
+description,100,fgvc_aircraft/images/0792199.jpg,25,A320,A320,A320,both_correct,0.20568084716796875
+description,101,fgvc_aircraft/images/0324847.jpg,25,A320,737-300,737-400,both_wrong,0.3067474365234375
+description,102,fgvc_aircraft/images/1176949.jpg,25,A320,A321,A321,both_wrong,0.9408187866210938
+description,103,fgvc_aircraft/images/0501890.jpg,25,A320,757-200,757-200,both_wrong,0.6522636413574219
+description,104,fgvc_aircraft/images/2117303.jpg,26,A321,737-900,737-900,both_wrong,0.028636932373046875
+description,105,fgvc_aircraft/images/2088378.jpg,26,A321,A330-300,A320,both_wrong,0.019466400146484375
+description,106,fgvc_aircraft/images/0757707.jpg,26,A321,A318,A318,both_wrong,0.4239387512207031
+description,107,fgvc_aircraft/images/1386619.jpg,26,A321,Boeing 717,Boeing 717,both_wrong,0.9102458953857422
+description,108,fgvc_aircraft/images/2019053.jpg,27,A330-200,767-400,767-400,both_wrong,0.4866180419921875
+description,109,fgvc_aircraft/images/2259876.jpg,27,A330-200,A330-300,A330-300,both_wrong,0.11208724975585938
+description,110,fgvc_aircraft/images/1910721.jpg,27,A330-200,A330-200,A330-200,both_correct,0.5841922760009766
+description,111,fgvc_aircraft/images/1647809.jpg,27,A330-200,A340-600,A340-600,both_wrong,0.037242889404296875
+description,112,fgvc_aircraft/images/1182369.jpg,28,A330-300,757-300,757-300,both_wrong,0.19680404663085938
+description,113,fgvc_aircraft/images/2157387.jpg,28,A330-300,A310,A310,both_wrong,0.1337261199951172
+description,114,fgvc_aircraft/images/1211875.jpg,28,A330-300,777-300,767-300,both_wrong,0.26187896728515625
+description,115,fgvc_aircraft/images/1840140.jpg,28,A330-300,767-400,767-400,both_wrong,0.15814971923828125
+description,116,fgvc_aircraft/images/0950435.jpg,29,A340-200,A340-600,A340-600,both_wrong,0.05098724365234375
+description,117,fgvc_aircraft/images/1961237.jpg,29,A340-200,A330-200,A330-200,both_wrong,0.0652618408203125
+description,118,fgvc_aircraft/images/0849197.jpg,29,A340-200,A340-200,A340-200,both_correct,0.14107131958007812
+description,119,fgvc_aircraft/images/1223334.jpg,29,A340-200,A340-500,A340-600,both_wrong,0.03548431396484375
+description,120,fgvc_aircraft/images/0710668.jpg,30,A340-300,A340-600,A340-600,both_wrong,0.020336151123046875
+description,121,fgvc_aircraft/images/1540149.jpg,30,A340-300,A340-500,A340-600,both_wrong,0.1540679931640625
+description,122,fgvc_aircraft/images/2175375.jpg,30,A340-300,A340-600,A340-600,both_wrong,0.12807464599609375
+description,123,fgvc_aircraft/images/1586136.jpg,30,A340-300,777-200,767-400,both_wrong,0.04144477844238281
+description,124,fgvc_aircraft/images/0968259.jpg,31,A340-500,A319,A319,both_wrong,0.24661827087402344
+description,125,fgvc_aircraft/images/0896575.jpg,31,A340-500,A380,A380,both_wrong,2.418262481689453
+description,126,fgvc_aircraft/images/1900368.jpg,31,A340-500,A340-500,A340-600,harmed,0.16215133666992188
+description,127,fgvc_aircraft/images/1708096.jpg,31,A340-500,A340-600,A340-600,both_wrong,0.23670578002929688
+description,128,fgvc_aircraft/images/1567838.jpg,32,A340-600,767-400,767-400,both_wrong,0.109619140625
+description,129,fgvc_aircraft/images/1790504.jpg,32,A340-600,A340-600,A340-600,both_correct,0.14531707763671875
+description,130,fgvc_aircraft/images/1008043.jpg,32,A340-600,A340-600,A340-600,both_correct,0.2899131774902344
+description,131,fgvc_aircraft/images/1230250.jpg,32,A340-600,A340-600,A340-600,both_correct,0.05352783203125
+description,132,fgvc_aircraft/images/1979055.jpg,33,A380,A380,A380,both_correct,4.7927398681640625
+description,133,fgvc_aircraft/images/1659447.jpg,33,A380,747-400,747-400,both_wrong,0.5257110595703125
+description,134,fgvc_aircraft/images/1790439.jpg,33,A380,A380,A380,both_correct,4.981304168701172
+description,135,fgvc_aircraft/images/2046689.jpg,33,A380,A380,A380,both_correct,2.179828643798828
+description,136,fgvc_aircraft/images/0522941.jpg,34,ATR-42,ATR-72,ATR-72,both_wrong,0.4902381896972656
+description,137,fgvc_aircraft/images/1844997.jpg,34,ATR-42,BAE 146-300,BAE 146-300,both_wrong,0.12417221069335938
+description,138,fgvc_aircraft/images/1018467.jpg,34,ATR-42,ATR-72,ATR-72,both_wrong,0.6039924621582031
+description,139,fgvc_aircraft/images/1095701.jpg,34,ATR-42,ATR-42,ATR-72,harmed,0.00421142578125
+description,140,fgvc_aircraft/images/1088361.jpg,35,ATR-72,ATR-72,ATR-72,both_correct,0.5048789978027344
+description,141,fgvc_aircraft/images/1157334.jpg,35,ATR-72,ATR-72,ATR-42,harmed,0.059326171875
+description,142,fgvc_aircraft/images/1102455.jpg,35,ATR-72,ATR-72,ATR-72,both_correct,0.2825775146484375
+description,143,fgvc_aircraft/images/1354666.jpg,35,ATR-72,ATR-72,ATR-72,both_correct,0.3491401672363281
+description,144,fgvc_aircraft/images/1291069.jpg,36,An-12,ATR-42,An-12,corrected,0.035343170166015625
+description,145,fgvc_aircraft/images/1545983.jpg,36,An-12,An-12,An-12,both_correct,4.12921142578125
+description,146,fgvc_aircraft/images/1198418.jpg,36,An-12,An-12,An-12,both_correct,3.6434783935546875
+description,147,fgvc_aircraft/images/0522933.jpg,36,An-12,An-12,An-12,both_correct,3.397754669189453
+description,148,fgvc_aircraft/images/1277982.jpg,37,BAE 146-200,BAE 146-300,BAE 146-300,both_wrong,0.2565650939941406
+description,149,fgvc_aircraft/images/0514108.jpg,37,BAE 146-200,BAE 146-300,BAE 146-300,both_wrong,0.0660552978515625
+description,150,fgvc_aircraft/images/1111339.jpg,37,BAE 146-200,BAE 146-300,BAE 146-300,both_wrong,0.24615097045898438
+description,151,fgvc_aircraft/images/0950440.jpg,37,BAE 146-200,BAE 146-200,BAE 146-300,harmed,0.031719207763671875
+description,152,fgvc_aircraft/images/1902199.jpg,38,BAE 146-300,BAE 146-300,BAE 146-300,both_correct,0.13494873046875
+description,153,fgvc_aircraft/images/0273090.jpg,38,BAE 146-300,BAE 146-300,BAE 146-300,both_correct,0.42999267578125
+description,154,fgvc_aircraft/images/1223418.jpg,38,BAE 146-300,BAE 146-300,BAE 146-300,both_correct,0.5745773315429688
+description,155,fgvc_aircraft/images/1549188.jpg,38,BAE 146-300,BAE 146-300,BAE 146-300,both_correct,0.13199615478515625
+description,156,fgvc_aircraft/images/0451431.jpg,39,BAE-125,BAE-125,BAE-125,both_correct,1.1414566040039062
+description,157,fgvc_aircraft/images/1243688.jpg,39,BAE-125,Cessna 525,Cessna 525,both_wrong,0.7585296630859375
+description,158,fgvc_aircraft/images/0741746.jpg,39,BAE-125,BAE-125,BAE-125,both_correct,2.9390716552734375
+description,159,fgvc_aircraft/images/1538799.jpg,39,BAE-125,BAE-125,BAE-125,both_correct,1.9459991455078125
+description,160,fgvc_aircraft/images/1192657.jpg,40,Beechcraft 1900,Beechcraft 1900,Beechcraft 1900,both_correct,1.7641925811767578
+description,161,fgvc_aircraft/images/0091405.jpg,40,Beechcraft 1900,Beechcraft 1900,Beechcraft 1900,both_correct,0.24000930786132812
+description,162,fgvc_aircraft/images/2141016.jpg,40,Beechcraft 1900,CRJ-200,CRJ-900,both_wrong,0.17097854614257812
+description,163,fgvc_aircraft/images/1018464.jpg,40,Beechcraft 1900,Cessna 208,Cessna 208,both_wrong,0.8208541870117188
+description,164,fgvc_aircraft/images/2188374.jpg,41,Boeing 717,A319,A319,both_wrong,0.7921810150146484
+description,165,fgvc_aircraft/images/0958138.jpg,41,Boeing 717,727-200,727-200,both_wrong,1.70220947265625
+description,166,fgvc_aircraft/images/0181712.jpg,41,Boeing 717,Boeing 717,Boeing 717,both_correct,0.319488525390625
+description,167,fgvc_aircraft/images/1385089.jpg,41,Boeing 717,Boeing 717,Boeing 717,both_correct,1.1698837280273438
+description,168,fgvc_aircraft/images/2014678.jpg,42,C-130,C-130,C-130,both_correct,2.7978458404541016
+description,169,fgvc_aircraft/images/1017178.jpg,42,C-130,C-130,C-130,both_correct,2.409992218017578
+description,170,fgvc_aircraft/images/1584757.jpg,42,C-130,C-130,C-130,both_correct,2.47698974609375
+description,171,fgvc_aircraft/images/0771794.jpg,42,C-130,C-130,C-130,both_correct,3.9585094451904297
+description,172,fgvc_aircraft/images/1539361.jpg,43,C-47,C-47,C-47,both_correct,8.647119522094727
+description,173,fgvc_aircraft/images/2115048.jpg,43,C-47,C-47,C-47,both_correct,8.88205337524414
+description,174,fgvc_aircraft/images/1517894.jpg,43,C-47,C-47,C-47,both_correct,5.412446975708008
+description,175,fgvc_aircraft/images/0704272.jpg,43,C-47,C-47,C-47,both_correct,9.60289192199707
+description,176,fgvc_aircraft/images/0200888.jpg,44,CRJ-200,CRJ-200,CRJ-200,both_correct,0.14082717895507812
+description,177,fgvc_aircraft/images/1206413.jpg,44,CRJ-200,CRJ-900,CRJ-900,both_wrong,0.8772239685058594
+description,178,fgvc_aircraft/images/0488515.jpg,44,CRJ-200,CRJ-200,CRJ-900,harmed,0.07594680786132812
+description,179,fgvc_aircraft/images/1763290.jpg,44,CRJ-200,ATR-72,CRJ-200,corrected,0.01363372802734375
+description,180,fgvc_aircraft/images/0303915.jpg,45,CRJ-700,CRJ-200,CRJ-200,both_wrong,0.9474945068359375
+description,181,fgvc_aircraft/images/0924100.jpg,45,CRJ-700,CRJ-200,CRJ-200,both_wrong,0.2072906494140625
+description,182,fgvc_aircraft/images/0445396.jpg,45,CRJ-700,Boeing 717,Boeing 717,both_wrong,0.9915847778320312
+description,183,fgvc_aircraft/images/1631148.jpg,45,CRJ-700,CRJ-900,CRJ-700,corrected,0.25002288818359375
+description,184,fgvc_aircraft/images/1204209.jpg,46,CRJ-900,CRJ-900,CRJ-700,harmed,0.16971969604492188
+description,185,fgvc_aircraft/images/1920543.jpg,46,CRJ-900,CRJ-900,CRJ-900,both_correct,0.5333709716796875
+description,186,fgvc_aircraft/images/2101213.jpg,46,CRJ-900,CRJ-900,CRJ-700,harmed,0.0786590576171875
+description,187,fgvc_aircraft/images/1375147.jpg,46,CRJ-900,CRJ-900,CRJ-900,both_correct,0.47072601318359375
+description,188,fgvc_aircraft/images/2212872.jpg,47,Cessna 172,Cessna 172,Cessna 172,both_correct,3.4143199920654297
+description,189,fgvc_aircraft/images/1845164.jpg,47,Cessna 172,Cessna 172,Cessna 172,both_correct,2.5937557220458984
+description,190,fgvc_aircraft/images/1418848.jpg,47,Cessna 172,Cessna 172,Cessna 172,both_correct,3.481901168823242
+description,191,fgvc_aircraft/images/1507992.jpg,47,Cessna 172,Cessna 172,Cessna 172,both_correct,5.160179138183594
+description,192,fgvc_aircraft/images/0155816.jpg,48,Cessna 208,Cessna 208,Cessna 208,both_correct,1.52197265625
+description,193,fgvc_aircraft/images/0302294.jpg,48,Cessna 208,Cessna 208,Cessna 208,both_correct,3.415973663330078
+description,194,fgvc_aircraft/images/0488486.jpg,48,Cessna 208,Cessna 208,Cessna 208,both_correct,2.718503952026367
+description,195,fgvc_aircraft/images/1053453.jpg,48,Cessna 208,Cessna 208,Cessna 208,both_correct,4.732860565185547
+description,196,fgvc_aircraft/images/1849797.jpg,49,Cessna 525,Cessna 525,Cessna 525,both_correct,2.4041500091552734
+description,197,fgvc_aircraft/images/1468401.jpg,49,Cessna 525,CRJ-200,CRJ-700,both_wrong,0.12580490112304688
+description,198,fgvc_aircraft/images/2030169.jpg,49,Cessna 525,Cessna 525,Cessna 525,both_correct,4.294944763183594
+description,199,fgvc_aircraft/images/0820657.jpg,49,Cessna 525,BAE-125,BAE-125,both_wrong,0.6436691284179688
+contrast,0,fgvc_aircraft/images/0869692.jpg,0,707-320,747-200,747-100,both_wrong,0.21160888671875
+contrast,1,fgvc_aircraft/images/1514481.jpg,0,707-320,707-320,707-320,both_correct,0.6504440307617188
+contrast,2,fgvc_aircraft/images/0481847.jpg,0,707-320,707-320,707-320,both_correct,4.351036071777344
+contrast,3,fgvc_aircraft/images/1148180.jpg,0,707-320,707-320,747-100,harmed,0.1367034912109375
+contrast,4,fgvc_aircraft/images/1446378.jpg,1,727-200,707-320,707-320,both_wrong,0.8713588714599609
+contrast,5,fgvc_aircraft/images/0048341.jpg,1,727-200,727-200,727-200,both_correct,1.8584651947021484
+contrast,6,fgvc_aircraft/images/1036881.jpg,1,727-200,Boeing 717,Boeing 717,both_wrong,1.7278461456298828
+contrast,7,fgvc_aircraft/images/0063113.jpg,1,727-200,727-200,727-200,both_correct,0.5215187072753906
+contrast,8,fgvc_aircraft/images/0522884.jpg,2,737-200,737-200,737-200,both_correct,0.4172859191894531
+contrast,9,fgvc_aircraft/images/1884748.jpg,2,737-200,737-500,737-400,both_wrong,0.021350860595703125
+contrast,10,fgvc_aircraft/images/0109632.jpg,2,737-200,A300B4,A300B4,both_wrong,0.10608100891113281
+contrast,11,fgvc_aircraft/images/0981301.jpg,2,737-200,737-200,737-400,harmed,0.7603988647460938
+contrast,12,fgvc_aircraft/images/0248336.jpg,3,737-300,757-300,757-300,both_wrong,0.6377487182617188
+contrast,13,fgvc_aircraft/images/1955376.jpg,3,737-300,737-900,737-500,both_wrong,0.09856033325195312
+contrast,14,fgvc_aircraft/images/2031394.jpg,3,737-300,Boeing 717,Boeing 717,both_wrong,2.102771759033203
+contrast,15,fgvc_aircraft/images/0944166.jpg,3,737-300,737-900,737-400,both_wrong,0.04821014404296875
+contrast,16,fgvc_aircraft/images/1474251.jpg,4,737-400,737-500,A321,both_wrong,0.078094482421875
+contrast,17,fgvc_aircraft/images/0939537.jpg,4,737-400,A300B4,A300B4,both_wrong,1.0151329040527344
+contrast,18,fgvc_aircraft/images/1334567.jpg,4,737-400,737-600,737-300,both_wrong,0.031139373779296875
+contrast,19,fgvc_aircraft/images/0523220.jpg,4,737-400,Boeing 717,Boeing 717,both_wrong,0.18402099609375
+contrast,20,fgvc_aircraft/images/1313891.jpg,5,737-500,737-500,737-500,both_correct,0.1684112548828125
+contrast,21,fgvc_aircraft/images/1033079.jpg,5,737-500,A320,A310,both_wrong,0.9765167236328125
+contrast,22,fgvc_aircraft/images/1405447.jpg,5,737-500,A321,A321,both_wrong,0.4866905212402344
+contrast,23,fgvc_aircraft/images/2230107.jpg,5,737-500,737-900,737-900,both_wrong,0.1633930206298828
+contrast,24,fgvc_aircraft/images/1225644.jpg,6,737-600,737-300,737-400,both_wrong,0.1198272705078125
+contrast,25,fgvc_aircraft/images/0428665.jpg,6,737-600,737-500,737-900,both_wrong,0.17602157592773438
+contrast,26,fgvc_aircraft/images/0562553.jpg,6,737-600,A321,A321,both_wrong,0.384918212890625
+contrast,27,fgvc_aircraft/images/0959047.jpg,6,737-600,737-500,737-400,both_wrong,0.08698654174804688
+contrast,28,fgvc_aircraft/images/0209211.jpg,7,737-700,727-200,727-200,both_wrong,0.8365154266357422
+contrast,29,fgvc_aircraft/images/2201377.jpg,7,737-700,737-500,737-400,both_wrong,0.18999099731445312
+contrast,30,fgvc_aircraft/images/1319791.jpg,7,737-700,737-600,737-400,both_wrong,0.004795074462890625
+contrast,31,fgvc_aircraft/images/1569052.jpg,7,737-700,737-500,737-600,both_wrong,0.3007354736328125
+contrast,32,fgvc_aircraft/images/1190718.jpg,8,737-800,737-900,Boeing 717,both_wrong,0.031093597412109375
+contrast,33,fgvc_aircraft/images/0097108.jpg,8,737-800,737-300,737-400,both_wrong,0.17540740966796875
+contrast,34,fgvc_aircraft/images/0684565.jpg,8,737-800,727-200,727-200,both_wrong,2.4290809631347656
+contrast,35,fgvc_aircraft/images/1236463.jpg,8,737-800,Boeing 717,Boeing 717,both_wrong,1.3163776397705078
+contrast,36,fgvc_aircraft/images/0837340.jpg,9,737-900,757-300,767-400,both_wrong,0.5855979919433594
+contrast,37,fgvc_aircraft/images/0179021.jpg,9,737-900,757-200,757-200,both_wrong,0.1364898681640625
+contrast,38,fgvc_aircraft/images/1718867.jpg,9,737-900,757-300,737-900,corrected,0.24179458618164062
+contrast,39,fgvc_aircraft/images/0331279.jpg,9,737-900,757-300,757-300,both_wrong,0.6233062744140625
+contrast,40,fgvc_aircraft/images/0808930.jpg,10,747-100,747-200,747-100,corrected,0.3329811096191406
+contrast,41,fgvc_aircraft/images/0558306.jpg,10,747-100,747-200,747-200,both_wrong,0.3173828125
+contrast,42,fgvc_aircraft/images/1318175.jpg,10,747-100,747-400,747-300,both_wrong,0.15344619750976562
+contrast,43,fgvc_aircraft/images/1033308.jpg,10,747-100,707-320,707-320,both_wrong,1.6670494079589844
+contrast,44,fgvc_aircraft/images/0993945.jpg,11,747-200,747-100,747-100,both_wrong,0.18235015869140625
+contrast,45,fgvc_aircraft/images/0447170.jpg,11,747-200,A380,747-300,both_wrong,0.08505630493164062
+contrast,46,fgvc_aircraft/images/1094667.jpg,11,747-200,747-400,747-300,both_wrong,0.16936874389648438
+contrast,47,fgvc_aircraft/images/0233756.jpg,11,747-200,747-200,747-100,harmed,0.23005294799804688
+contrast,48,fgvc_aircraft/images/1256683.jpg,12,747-300,A300B4,A340-600,both_wrong,0.5973796844482422
+contrast,49,fgvc_aircraft/images/0167090.jpg,12,747-300,747-200,747-300,corrected,0.0471954345703125
+contrast,50,fgvc_aircraft/images/0981462.jpg,12,747-300,747-400,747-400,both_wrong,0.6198501586914062
+contrast,51,fgvc_aircraft/images/0569010.jpg,12,747-300,747-400,747-300,corrected,0.22593307495117188
+contrast,52,fgvc_aircraft/images/1291092.jpg,13,747-400,747-400,747-400,both_correct,0.027072906494140625
+contrast,53,fgvc_aircraft/images/1173801.jpg,13,747-400,747-400,747-300,harmed,0.16709518432617188
+contrast,54,fgvc_aircraft/images/0127504.jpg,13,747-400,747-300,747-100,both_wrong,0.010822296142578125
+contrast,55,fgvc_aircraft/images/1662017.jpg,13,747-400,A340-600,A340-600,both_wrong,0.07683372497558594
+contrast,56,fgvc_aircraft/images/0090862.jpg,14,757-200,757-200,767-200,harmed,0.02044677734375
+contrast,57,fgvc_aircraft/images/1175264.jpg,14,757-200,757-300,757-300,both_wrong,0.6565475463867188
+contrast,58,fgvc_aircraft/images/0684607.jpg,14,757-200,757-300,767-300,both_wrong,0.0471649169921875
+contrast,59,fgvc_aircraft/images/1073024.jpg,14,757-200,Boeing 717,Boeing 717,both_wrong,0.8660964965820312
+contrast,60,fgvc_aircraft/images/0658111.jpg,15,757-300,A321,A321,both_wrong,0.18200302124023438
+contrast,61,fgvc_aircraft/images/1334472.jpg,15,757-300,757-300,757-300,both_correct,0.5899200439453125
+contrast,62,fgvc_aircraft/images/0985968.jpg,15,757-300,767-400,767-400,both_wrong,0.14013671875
+contrast,63,fgvc_aircraft/images/2099420.jpg,15,757-300,767-400,757-300,corrected,0.3655853271484375
+contrast,64,fgvc_aircraft/images/1514289.jpg,16,767-200,757-300,767-400,both_wrong,0.10129547119140625
+contrast,65,fgvc_aircraft/images/0127507.jpg,16,767-200,A330-200,767-200,corrected,0.05147552490234375
+contrast,66,fgvc_aircraft/images/0062766.jpg,16,767-200,747-200,747-100,both_wrong,0.210174560546875
+contrast,67,fgvc_aircraft/images/1291080.jpg,16,767-200,A340-600,A340-600,both_wrong,0.157073974609375
+contrast,68,fgvc_aircraft/images/1700379.jpg,17,767-300,767-400,767-400,both_wrong,0.03753662109375
+contrast,69,fgvc_aircraft/images/1838649.jpg,17,767-300,777-300,777-300,both_wrong,0.2726249694824219
+contrast,70,fgvc_aircraft/images/2031399.jpg,17,767-300,A330-300,767-400,both_wrong,0.043109893798828125
+contrast,71,fgvc_aircraft/images/1518619.jpg,17,767-300,A340-200,A340-200,both_wrong,0.055286407470703125
+contrast,72,fgvc_aircraft/images/1134122.jpg,18,767-400,767-400,767-400,both_correct,0.2749977111816406
+contrast,73,fgvc_aircraft/images/1103084.jpg,18,767-400,767-400,767-400,both_correct,0.4848670959472656
+contrast,74,fgvc_aircraft/images/0248710.jpg,18,767-400,767-300,767-300,both_wrong,0.20786285400390625
+contrast,75,fgvc_aircraft/images/0870232.jpg,18,767-400,767-400,767-400,both_correct,0.7241096496582031
+contrast,76,fgvc_aircraft/images/1014374.jpg,19,777-200,777-300,777-300,both_wrong,0.39599609375
+contrast,77,fgvc_aircraft/images/2084802.jpg,19,777-200,A330-300,A330-300,both_wrong,0.6679229736328125
+contrast,78,fgvc_aircraft/images/2230359.jpg,19,777-200,767-400,767-400,both_wrong,0.0724334716796875
+contrast,79,fgvc_aircraft/images/1992904.jpg,19,777-200,A330-200,767-400,both_wrong,0.12992095947265625
+contrast,80,fgvc_aircraft/images/1545067.jpg,20,777-300,A330-300,A330-300,both_wrong,1.0135307312011719
+contrast,81,fgvc_aircraft/images/1650311.jpg,20,777-300,777-300,767-400,harmed,0.31276702880859375
+contrast,82,fgvc_aircraft/images/1429301.jpg,20,777-300,777-300,777-300,both_correct,0.4970970153808594
+contrast,83,fgvc_aircraft/images/1864995.jpg,20,777-300,777-300,777-300,both_correct,0.5295867919921875
+contrast,84,fgvc_aircraft/images/0901374.jpg,21,A300B4,A310,A310,both_wrong,0.7870903015136719
+contrast,85,fgvc_aircraft/images/0489932.jpg,21,A300B4,707-320,707-320,both_wrong,0.7144145965576172
+contrast,86,fgvc_aircraft/images/0939485.jpg,21,A300B4,A310,A340-600,both_wrong,0.051204681396484375
+contrast,87,fgvc_aircraft/images/0901516.jpg,21,A300B4,A340-200,A340-200,both_wrong,0.342010498046875
+contrast,88,fgvc_aircraft/images/1514483.jpg,22,A310,A300B4,A320,both_wrong,0.112518310546875
+contrast,89,fgvc_aircraft/images/2230428.jpg,22,A310,767-300,767-300,both_wrong,0.035381317138671875
+contrast,90,fgvc_aircraft/images/0225215.jpg,22,A310,A300B4,A340-200,both_wrong,1.1326904296875
+contrast,91,fgvc_aircraft/images/0737639.jpg,22,A310,A310,A310,both_correct,0.5956306457519531
+contrast,92,fgvc_aircraft/images/1277619.jpg,23,A318,A319,A319,both_wrong,0.2598075866699219
+contrast,93,fgvc_aircraft/images/1503763.jpg,23,A318,A318,A318,both_correct,1.7175331115722656
+contrast,94,fgvc_aircraft/images/1375490.jpg,23,A318,737-900,737-400,both_wrong,0.1749114990234375
+contrast,95,fgvc_aircraft/images/2260089.jpg,23,A318,A318,A318,both_correct,1.1977729797363281
+contrast,96,fgvc_aircraft/images/0257377.jpg,24,A319,A321,A320,both_wrong,0.33596038818359375
+contrast,97,fgvc_aircraft/images/1548486.jpg,24,A319,A319,A319,both_correct,0.7592697143554688
+contrast,98,fgvc_aircraft/images/0143381.jpg,24,A319,737-200,737-200,both_wrong,0.5625648498535156
+contrast,99,fgvc_aircraft/images/2195569.jpg,24,A319,A321,A320,both_wrong,0.19139480590820312
+contrast,100,fgvc_aircraft/images/0792199.jpg,25,A320,A320,A320,both_correct,0.20568084716796875
+contrast,101,fgvc_aircraft/images/0324847.jpg,25,A320,737-300,737-400,both_wrong,0.3067474365234375
+contrast,102,fgvc_aircraft/images/1176949.jpg,25,A320,A321,A321,both_wrong,0.9408187866210938
+contrast,103,fgvc_aircraft/images/0501890.jpg,25,A320,757-200,757-200,both_wrong,0.6522636413574219
+contrast,104,fgvc_aircraft/images/2117303.jpg,26,A321,737-900,777-300,both_wrong,0.028636932373046875
+contrast,105,fgvc_aircraft/images/2088378.jpg,26,A321,A330-300,A320,both_wrong,0.019466400146484375
+contrast,106,fgvc_aircraft/images/0757707.jpg,26,A321,A318,A318,both_wrong,0.4239387512207031
+contrast,107,fgvc_aircraft/images/1386619.jpg,26,A321,Boeing 717,Boeing 717,both_wrong,0.9102458953857422
+contrast,108,fgvc_aircraft/images/2019053.jpg,27,A330-200,767-400,767-400,both_wrong,0.4866180419921875
+contrast,109,fgvc_aircraft/images/2259876.jpg,27,A330-200,A330-300,A340-600,both_wrong,0.11208724975585938
+contrast,110,fgvc_aircraft/images/1910721.jpg,27,A330-200,A330-200,A330-200,both_correct,0.5841922760009766
+contrast,111,fgvc_aircraft/images/1647809.jpg,27,A330-200,A340-600,A340-600,both_wrong,0.037242889404296875
+contrast,112,fgvc_aircraft/images/1182369.jpg,28,A330-300,757-300,757-300,both_wrong,0.19680404663085938
+contrast,113,fgvc_aircraft/images/2157387.jpg,28,A330-300,A310,A318,both_wrong,0.1337261199951172
+contrast,114,fgvc_aircraft/images/1211875.jpg,28,A330-300,777-300,777-300,both_wrong,0.26187896728515625
+contrast,115,fgvc_aircraft/images/1840140.jpg,28,A330-300,767-400,767-400,both_wrong,0.15814971923828125
+contrast,116,fgvc_aircraft/images/0950435.jpg,29,A340-200,A340-600,A340-600,both_wrong,0.05098724365234375
+contrast,117,fgvc_aircraft/images/1961237.jpg,29,A340-200,A330-200,A330-200,both_wrong,0.0652618408203125
+contrast,118,fgvc_aircraft/images/0849197.jpg,29,A340-200,A340-200,A340-200,both_correct,0.14107131958007812
+contrast,119,fgvc_aircraft/images/1223334.jpg,29,A340-200,A340-500,A340-600,both_wrong,0.03548431396484375
+contrast,120,fgvc_aircraft/images/0710668.jpg,30,A340-300,A340-600,A340-600,both_wrong,0.020336151123046875
+contrast,121,fgvc_aircraft/images/1540149.jpg,30,A340-300,A340-500,A340-500,both_wrong,0.1540679931640625
+contrast,122,fgvc_aircraft/images/2175375.jpg,30,A340-300,A340-600,A340-600,both_wrong,0.12807464599609375
+contrast,123,fgvc_aircraft/images/1586136.jpg,30,A340-300,777-200,767-300,both_wrong,0.04144477844238281
+contrast,124,fgvc_aircraft/images/0968259.jpg,31,A340-500,A319,A318,both_wrong,0.24661827087402344
+contrast,125,fgvc_aircraft/images/0896575.jpg,31,A340-500,A380,A380,both_wrong,2.418262481689453
+contrast,126,fgvc_aircraft/images/1900368.jpg,31,A340-500,A340-500,A340-600,harmed,0.16215133666992188
+contrast,127,fgvc_aircraft/images/1708096.jpg,31,A340-500,A340-600,A340-600,both_wrong,0.23670578002929688
+contrast,128,fgvc_aircraft/images/1567838.jpg,32,A340-600,767-400,757-300,both_wrong,0.109619140625
+contrast,129,fgvc_aircraft/images/1790504.jpg,32,A340-600,A340-600,A340-600,both_correct,0.14531707763671875
+contrast,130,fgvc_aircraft/images/1008043.jpg,32,A340-600,A340-600,A340-600,both_correct,0.2899131774902344
+contrast,131,fgvc_aircraft/images/1230250.jpg,32,A340-600,A340-600,A340-600,both_correct,0.05352783203125
+contrast,132,fgvc_aircraft/images/1979055.jpg,33,A380,A380,A380,both_correct,4.7927398681640625
+contrast,133,fgvc_aircraft/images/1659447.jpg,33,A380,747-400,747-400,both_wrong,0.5257110595703125
+contrast,134,fgvc_aircraft/images/1790439.jpg,33,A380,A380,A380,both_correct,4.981304168701172
+contrast,135,fgvc_aircraft/images/2046689.jpg,33,A380,A380,A380,both_correct,2.179828643798828
+contrast,136,fgvc_aircraft/images/0522941.jpg,34,ATR-42,ATR-72,ATR-72,both_wrong,0.4902381896972656
+contrast,137,fgvc_aircraft/images/1844997.jpg,34,ATR-42,BAE 146-300,BAE 146-200,both_wrong,0.12417221069335938
+contrast,138,fgvc_aircraft/images/1018467.jpg,34,ATR-42,ATR-72,ATR-72,both_wrong,0.6039924621582031
+contrast,139,fgvc_aircraft/images/1095701.jpg,34,ATR-42,ATR-42,ATR-72,harmed,0.00421142578125
+contrast,140,fgvc_aircraft/images/1088361.jpg,35,ATR-72,ATR-72,ATR-72,both_correct,0.5048789978027344
+contrast,141,fgvc_aircraft/images/1157334.jpg,35,ATR-72,ATR-72,ATR-72,both_correct,0.059326171875
+contrast,142,fgvc_aircraft/images/1102455.jpg,35,ATR-72,ATR-72,ATR-72,both_correct,0.2825775146484375
+contrast,143,fgvc_aircraft/images/1354666.jpg,35,ATR-72,ATR-72,ATR-72,both_correct,0.3491401672363281
+contrast,144,fgvc_aircraft/images/1291069.jpg,36,An-12,ATR-42,ATR-42,both_wrong,0.035343170166015625
+contrast,145,fgvc_aircraft/images/1545983.jpg,36,An-12,An-12,An-12,both_correct,4.12921142578125
+contrast,146,fgvc_aircraft/images/1198418.jpg,36,An-12,An-12,An-12,both_correct,3.6434783935546875
+contrast,147,fgvc_aircraft/images/0522933.jpg,36,An-12,An-12,An-12,both_correct,3.397754669189453
+contrast,148,fgvc_aircraft/images/1277982.jpg,37,BAE 146-200,BAE 146-300,BAE 146-300,both_wrong,0.2565650939941406
+contrast,149,fgvc_aircraft/images/0514108.jpg,37,BAE 146-200,BAE 146-300,BAE 146-300,both_wrong,0.0660552978515625
+contrast,150,fgvc_aircraft/images/1111339.jpg,37,BAE 146-200,BAE 146-300,BAE 146-300,both_wrong,0.24615097045898438
+contrast,151,fgvc_aircraft/images/0950440.jpg,37,BAE 146-200,BAE 146-200,BAE 146-300,harmed,0.031719207763671875
+contrast,152,fgvc_aircraft/images/1902199.jpg,38,BAE 146-300,BAE 146-300,BAE 146-300,both_correct,0.13494873046875
+contrast,153,fgvc_aircraft/images/0273090.jpg,38,BAE 146-300,BAE 146-300,BAE 146-300,both_correct,0.42999267578125
+contrast,154,fgvc_aircraft/images/1223418.jpg,38,BAE 146-300,BAE 146-300,BAE 146-300,both_correct,0.5745773315429688
+contrast,155,fgvc_aircraft/images/1549188.jpg,38,BAE 146-300,BAE 146-300,BAE 146-300,both_correct,0.13199615478515625
+contrast,156,fgvc_aircraft/images/0451431.jpg,39,BAE-125,BAE-125,BAE-125,both_correct,1.1414566040039062
+contrast,157,fgvc_aircraft/images/1243688.jpg,39,BAE-125,Cessna 525,Cessna 525,both_wrong,0.7585296630859375
+contrast,158,fgvc_aircraft/images/0741746.jpg,39,BAE-125,BAE-125,BAE-125,both_correct,2.9390716552734375
+contrast,159,fgvc_aircraft/images/1538799.jpg,39,BAE-125,BAE-125,BAE-125,both_correct,1.9459991455078125
+contrast,160,fgvc_aircraft/images/1192657.jpg,40,Beechcraft 1900,Beechcraft 1900,Beechcraft 1900,both_correct,1.7641925811767578
+contrast,161,fgvc_aircraft/images/0091405.jpg,40,Beechcraft 1900,Beechcraft 1900,Beechcraft 1900,both_correct,0.24000930786132812
+contrast,162,fgvc_aircraft/images/2141016.jpg,40,Beechcraft 1900,CRJ-200,Beechcraft 1900,corrected,0.17097854614257812
+contrast,163,fgvc_aircraft/images/1018464.jpg,40,Beechcraft 1900,Cessna 208,Cessna 208,both_wrong,0.8208541870117188
+contrast,164,fgvc_aircraft/images/2188374.jpg,41,Boeing 717,A319,A319,both_wrong,0.7921810150146484
+contrast,165,fgvc_aircraft/images/0958138.jpg,41,Boeing 717,727-200,727-200,both_wrong,1.70220947265625
+contrast,166,fgvc_aircraft/images/0181712.jpg,41,Boeing 717,Boeing 717,Boeing 717,both_correct,0.319488525390625
+contrast,167,fgvc_aircraft/images/1385089.jpg,41,Boeing 717,Boeing 717,Boeing 717,both_correct,1.1698837280273438
+contrast,168,fgvc_aircraft/images/2014678.jpg,42,C-130,C-130,C-130,both_correct,2.7978458404541016
+contrast,169,fgvc_aircraft/images/1017178.jpg,42,C-130,C-130,C-130,both_correct,2.409992218017578
+contrast,170,fgvc_aircraft/images/1584757.jpg,42,C-130,C-130,C-130,both_correct,2.47698974609375
+contrast,171,fgvc_aircraft/images/0771794.jpg,42,C-130,C-130,C-130,both_correct,3.9585094451904297
+contrast,172,fgvc_aircraft/images/1539361.jpg,43,C-47,C-47,C-47,both_correct,8.647119522094727
+contrast,173,fgvc_aircraft/images/2115048.jpg,43,C-47,C-47,C-47,both_correct,8.88205337524414
+contrast,174,fgvc_aircraft/images/1517894.jpg,43,C-47,C-47,C-47,both_correct,5.412446975708008
+contrast,175,fgvc_aircraft/images/0704272.jpg,43,C-47,C-47,C-47,both_correct,9.60289192199707
+contrast,176,fgvc_aircraft/images/0200888.jpg,44,CRJ-200,CRJ-200,CRJ-200,both_correct,0.14082717895507812
+contrast,177,fgvc_aircraft/images/1206413.jpg,44,CRJ-200,CRJ-900,CRJ-900,both_wrong,0.8772239685058594
+contrast,178,fgvc_aircraft/images/0488515.jpg,44,CRJ-200,CRJ-200,CRJ-900,harmed,0.07594680786132812
+contrast,179,fgvc_aircraft/images/1763290.jpg,44,CRJ-200,ATR-72,CRJ-200,corrected,0.01363372802734375
+contrast,180,fgvc_aircraft/images/0303915.jpg,45,CRJ-700,CRJ-200,CRJ-200,both_wrong,0.9474945068359375
+contrast,181,fgvc_aircraft/images/0924100.jpg,45,CRJ-700,CRJ-200,CRJ-200,both_wrong,0.2072906494140625
+contrast,182,fgvc_aircraft/images/0445396.jpg,45,CRJ-700,Boeing 717,Boeing 717,both_wrong,0.9915847778320312
+contrast,183,fgvc_aircraft/images/1631148.jpg,45,CRJ-700,CRJ-900,CRJ-700,corrected,0.25002288818359375
+contrast,184,fgvc_aircraft/images/1204209.jpg,46,CRJ-900,CRJ-900,CRJ-900,both_correct,0.16971969604492188
+contrast,185,fgvc_aircraft/images/1920543.jpg,46,CRJ-900,CRJ-900,CRJ-900,both_correct,0.5333709716796875
+contrast,186,fgvc_aircraft/images/2101213.jpg,46,CRJ-900,CRJ-900,CRJ-700,harmed,0.0786590576171875
+contrast,187,fgvc_aircraft/images/1375147.jpg,46,CRJ-900,CRJ-900,CRJ-700,harmed,0.47072601318359375
+contrast,188,fgvc_aircraft/images/2212872.jpg,47,Cessna 172,Cessna 172,Cessna 172,both_correct,3.4143199920654297
+contrast,189,fgvc_aircraft/images/1845164.jpg,47,Cessna 172,Cessna 172,Cessna 172,both_correct,2.5937557220458984
+contrast,190,fgvc_aircraft/images/1418848.jpg,47,Cessna 172,Cessna 172,Cessna 172,both_correct,3.481901168823242
+contrast,191,fgvc_aircraft/images/1507992.jpg,47,Cessna 172,Cessna 172,Cessna 172,both_correct,5.160179138183594
+contrast,192,fgvc_aircraft/images/0155816.jpg,48,Cessna 208,Cessna 208,Cessna 208,both_correct,1.52197265625
+contrast,193,fgvc_aircraft/images/0302294.jpg,48,Cessna 208,Cessna 208,Cessna 208,both_correct,3.415973663330078
+contrast,194,fgvc_aircraft/images/0488486.jpg,48,Cessna 208,Cessna 208,Cessna 208,both_correct,2.718503952026367
+contrast,195,fgvc_aircraft/images/1053453.jpg,48,Cessna 208,Cessna 208,Cessna 208,both_correct,4.732860565185547
+contrast,196,fgvc_aircraft/images/1849797.jpg,49,Cessna 525,Cessna 525,Cessna 525,both_correct,2.4041500091552734
+contrast,197,fgvc_aircraft/images/1468401.jpg,49,Cessna 525,CRJ-200,CRJ-700,both_wrong,0.12580490112304688
+contrast,198,fgvc_aircraft/images/2030169.jpg,49,Cessna 525,Cessna 525,Cessna 525,both_correct,4.294944763183594
+contrast,199,fgvc_aircraft/images/0820657.jpg,49,Cessna 525,BAE-125,Cessna 525,corrected,0.6436691284179688

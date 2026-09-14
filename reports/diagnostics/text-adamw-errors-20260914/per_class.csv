@@ -1,0 +1,101 @@
+mode,class,n,classname_correct,description_correct,corrected,harmed
+description,707-320,4,3,2,0,1
+description,727-200,4,2,2,0,0
+description,737-200,4,2,2,0,0
+description,737-300,4,0,1,1,0
+description,737-400,4,0,0,0,0
+description,737-500,4,1,1,0,0
+description,737-600,4,0,1,1,0
+description,737-700,4,0,0,0,0
+description,737-800,4,0,0,0,0
+description,737-900,4,0,2,2,0
+description,747-100,4,0,1,1,0
+description,747-200,4,1,0,0,1
+description,747-300,4,0,1,1,0
+description,747-400,4,2,1,0,1
+description,757-200,4,1,0,0,1
+description,757-300,4,1,1,0,0
+description,767-200,4,0,1,1,0
+description,767-300,4,0,0,0,0
+description,767-400,4,3,3,0,0
+description,777-200,4,0,0,0,0
+description,777-300,4,3,2,0,1
+description,A300B4,4,0,0,0,0
+description,A310,4,1,1,0,0
+description,A318,4,2,2,0,0
+description,A319,4,1,1,0,0
+description,A320,4,1,1,0,0
+description,A321,4,0,0,0,0
+description,A330-200,4,1,1,0,0
+description,A330-300,4,0,0,0,0
+description,A340-200,4,1,1,0,0
+description,A340-300,4,0,0,0,0
+description,A340-500,4,1,0,0,1
+description,A340-600,4,3,3,0,0
+description,A380,4,3,3,0,0
+description,ATR-42,4,1,0,0,1
+description,ATR-72,4,4,3,0,1
+description,An-12,4,3,4,1,0
+description,BAE 146-200,4,1,0,0,1
+description,BAE 146-300,4,4,4,0,0
+description,BAE-125,4,3,3,0,0
+description,Beechcraft 1900,4,2,2,0,0
+description,Boeing 717,4,2,2,0,0
+description,C-130,4,4,4,0,0
+description,C-47,4,4,4,0,0
+description,CRJ-200,4,2,2,1,1
+description,CRJ-700,4,0,1,1,0
+description,CRJ-900,4,4,2,0,2
+description,Cessna 172,4,4,4,0,0
+description,Cessna 208,4,4,4,0,0
+description,Cessna 525,4,2,2,0,0
+contrast,707-320,4,3,2,0,1
+contrast,727-200,4,2,2,0,0
+contrast,737-200,4,2,1,0,1
+contrast,737-300,4,0,0,0,0
+contrast,737-400,4,0,0,0,0
+contrast,737-500,4,1,1,0,0
+contrast,737-600,4,0,0,0,0
+contrast,737-700,4,0,0,0,0
+contrast,737-800,4,0,0,0,0
+contrast,737-900,4,0,1,1,0
+contrast,747-100,4,0,1,1,0
+contrast,747-200,4,1,0,0,1
+contrast,747-300,4,0,2,2,0
+contrast,747-400,4,2,1,0,1
+contrast,757-200,4,1,0,0,1
+contrast,757-300,4,1,2,1,0
+contrast,767-200,4,0,1,1,0
+contrast,767-300,4,0,0,0,0
+contrast,767-400,4,3,3,0,0
+contrast,777-200,4,0,0,0,0
+contrast,777-300,4,3,2,0,1
+contrast,A300B4,4,0,0,0,0
+contrast,A310,4,1,1,0,0
+contrast,A318,4,2,2,0,0
+contrast,A319,4,1,1,0,0
+contrast,A320,4,1,1,0,0
+contrast,A321,4,0,0,0,0
+contrast,A330-200,4,1,1,0,0
+contrast,A330-300,4,0,0,0,0
+contrast,A340-200,4,1,1,0,0
+contrast,A340-300,4,0,0,0,0
+contrast,A340-500,4,1,0,0,1
+contrast,A340-600,4,3,3,0,0
+contrast,A380,4,3,3,0,0
+contrast,ATR-42,4,1,0,0,1
+contrast,ATR-72,4,4,4,0,0
+contrast,An-12,4,3,3,0,0
+contrast,BAE 146-200,4,1,0,0,1
+contrast,BAE 146-300,4,4,4,0,0
+contrast,BAE-125,4,3,3,0,0
+contrast,Beechcraft 1900,4,2,3,1,0
+contrast,Boeing 717,4,2,2,0,0
+contrast,C-130,4,4,4,0,0
+contrast,C-47,4,4,4,0,0
+contrast,CRJ-200,4,2,2,1,1
+contrast,CRJ-700,4,0,1,1,0
+contrast,CRJ-900,4,4,2,0,2
+contrast,Cessna 172,4,4,4,0,0
+contrast,Cessna 208,4,4,4,0,0
+contrast,Cessna 525,4,2,3,1,0

@@ -1,0 +1,22 @@
+{
+  "status": "passed",
+  "tests": "tests.repro.test_text_detail",
+  "test_count": 2,
+  "test_seconds": 0.693,
+  "source_sha256": "9a50256a2067f586c21b46f6de86514daa28b3a916197df379c59e89a28a9433",
+  "config_hashes": {
+    "attentive": "02262578008c0bbf47b5c7ba2c50d246bc3ff2a264cb58030d56b2b882d419c0",
+    "centered": "be602a0006754136bb89a22d68479e66c432b48c81b7c531c42ba43d1ec5ea85"
+  },
+  "historical_reference_hashes": {
+    "classname/export.json": "e497e13a3e40360b122c85423900ce491d8e7496682280f586a1783ede55c69a",
+    "classname/logits.npz": "b6ec87f85d34aaf43f6cfbc055c6c6367ab4992cd6c1807ec730bae2c7a24a4a",
+    "description/export.json": "d91e1c64a97e5cb0df21e3e8622efa13f6a118e574d77e1cf7cbab94e6ef3c26",
+    "description/logits.npz": "a56ea5ba5c494308b228a1ec6fd3c241560c084c3ce3abc1a3f239b5434ddc97",
+    "contrast/export.json": "1e070f3398e6b6f67fbd14a48a9ae982846c0633006e80508e9f1b171d62cd41",
+    "contrast/logits.npz": "74630d8bcc146ea8253aad816b4de9eb6e38ecb8029726c1c1414909bb17f9cf"
+  },
+  "full_suite_run": false,
+  "server_repeat_tests": false,
+  "new_dataset_training": false
+}

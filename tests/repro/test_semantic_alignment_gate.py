@@ -6,7 +6,9 @@ from pathlib import Path
 import subprocess
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest import mock
 
 import numpy as np
 import torch
@@ -201,6 +203,76 @@ class SemanticAlignmentGateTest(unittest.TestCase):
         prerequisite_path = Path(protocol['DTD_development_prerequisite']['path'])
         self.assertFalse(prerequisite_path.is_absolute())
         self.assertEqual(protocol['maximum_new_trainings'], 3)
+
+    def test_ucf_export_allows_trainer_to_create_runtime_subdirectory(self):
+        path = ROOT / 'scripts/repro/semantic_alignment_ucf_confirmation.py'
+        spec = importlib.util.spec_from_file_location('semantic_alignment_ucf_export', path)
+        study = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(study)
+
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            data_root = root / 'data'
+            model_dir = root / 'model'
+            output_dir = root / 'export'
+            image_path = data_root / 'ucf101/images/example.jpg'
+            image_path.parent.mkdir(parents=True)
+            image_path.touch()
+            model_dir.mkdir()
+
+            cfg = SimpleNamespace(
+                TRAINER=SimpleNamespace(
+                    NAME='CoOp_TextDetail_SemanticGatedRadius',
+                    TEXTCONSISTENCY=SimpleNamespace(DEVICE=None, CLIP_PATH=None),
+                ),
+                DATASET=SimpleNamespace(
+                    NAME='UCF101', NUM_SHOTS=16, SUBSAMPLE_CLASSES='base', ROOT=None),
+                OPTIM=SimpleNamespace(MAX_EPOCH=20),
+                TEST=SimpleNamespace(SPLIT=None),
+                SEED=1,
+                OUTPUT_DIR=None,
+                USE_CUDA=False,
+                merge_from_file=lambda *_: None,
+                freeze=lambda: None,
+            )
+
+            class FakeTrainer:
+                model = object()
+                test_loader = object()
+                device = 'cuda'
+                dm = SimpleNamespace(dataset=SimpleNamespace(
+                    test=[SimpleNamespace(impath=str(image_path), label=0)],
+                    classnames=['example'],
+                ))
+                run_provenance = {'test': True}
+                loaded_checkpoints = [{'epoch': 20}]
+
+                def load_model(self, *_args, **_kwargs):
+                    return None
+
+            def build_trainer(fake_cfg):
+                # Dassl creates cfg.OUTPUT_DIR while the trainer is initialized.
+                Path(fake_cfg.OUTPUT_DIR).mkdir(parents=True)
+                return FakeTrainer()
+
+            arrays = {
+                'labels': np.array([0], dtype=np.int64),
+                'Q': np.array([0.], dtype=np.float32),
+                **{name: np.zeros((1, 1), dtype=np.float32)
+                   for name in study.BRANCHES_2D},
+            }
+            with (mock.patch('dassl.config.get_cfg_default', return_value=cfg),
+                  mock.patch('dassl.engine.build_trainer', side_effect=build_trainer),
+                  mock.patch('dassl.utils.set_random_seed'),
+                  mock.patch('train.extend_cfg'),
+                  mock.patch.object(study, 'collect_predictions',
+                                    return_value=(arrays, [str(image_path)]))):
+                record = study.export_checkpoint(
+                    1, model_dir, 'base', data_root, root / 'clip.pt', output_dir)
+
+            self.assertEqual(record['status'], 'exported')
+            self.assertTrue((output_dir / '预测.npz').is_file())
+            self.assertTrue((output_dir / '导出.json').is_file())
 
 
 if __name__ == '__main__':

@@ -257,7 +257,8 @@ def export_checkpoint(seed, model_dir, split, data_root, clip_path, output_dir):
                       'label': int(item.label)} for item in items]
     if rows != expected_rows or arrays['S'].shape != (len(items), len(trainer.dm.dataset.classnames)):
         raise ValueError('Export rows/classes differ from the deterministic dataset loader')
-    output_dir.mkdir(parents=True)
+    # Trainer initialization creates cfg.OUTPUT_DIR (a child of this folder).
+    output_dir.mkdir(parents=True, exist_ok=True)
     archive_path = output_dir / '预测.npz'
     np.savez_compressed(archive_path, **arrays)
     record = {

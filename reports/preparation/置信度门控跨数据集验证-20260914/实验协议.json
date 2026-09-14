@@ -1,7 +1,7 @@
 {
   "protocol": "置信度门控跨数据集验证-v1",
   "created_before_independent_results": true,
-  "repository_commit": "7e56f470b56c03c4fbf4174db822faa3c21bf12c",
+  "repository_commit": "c666efd78558537a877ca65b85b27e4a16877835",
   "data_root": "/root/autodl-tmp/textconsistency/data",
   "clip_path": "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
   "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
@@ -132,6 +132,6 @@
     "templates/texture_prompts_full.json": "dabdcafded7babd67046d0f90abeb510b648bdaaf397b884f265f3460a7942a9",
     "templates/ucf_prompts_full.json": "3acc805cbcd115331cc975f6146b24de2fc1732c45ee54a57c25259facbc6b9a",
     "scripts/repro/confidence_gated_fusion.py": "88434ce940250d02cf74bac3784d72d6a05b0b0eb773859f575577671518983e",
-    "scripts/repro/confidence_gate_study.py": "793620b5839c229eabb1053d6664518e3892096e13227bc0dbb59f95ff55d66d"
+    "scripts/repro/confidence_gate_study.py": "c07b187d440636a5ef6624caeb6f01ea9ecb23be559ee3100bbe271f8fc3edd1"
   }
 }

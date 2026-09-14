@@ -1,0 +1,15 @@
+{
+  "结论": "仅执行器提交和执行器文件哈希变化；公式、数据集、种子、训练设置、停止规则均未变化",
+  "变化": [
+    {
+      "字段": "files_sha256.scripts/repro/confidence_gate_study.py",
+      "原值": "793620b5839c229eabb1053d6664518e3892096e13227bc0dbb59f95ff55d66d",
+      "新值": "c07b187d440636a5ef6624caeb6f01ea9ecb23be559ee3100bbe271f8fc3edd1"
+    },
+    {
+      "字段": "repository_commit",
+      "原值": "7e56f470b56c03c4fbf4174db822faa3c21bf12c",
+      "新值": "c666efd78558537a877ca65b85b27e4a16877835"
+    }
+  ]
+}

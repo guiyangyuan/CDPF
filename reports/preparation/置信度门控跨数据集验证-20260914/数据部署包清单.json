@@ -15,6 +15,14 @@
       "字节数": 131824435,
       "SHA256": "b5d212d9018271ff8ae594138e3fb3f8a8abff256cda1df0ddbb6d9fcd11c5fc",
       "归档条目数": 13429
+    },
+    {
+      "文件": "固定代码-43ebe6f.tar.gz",
+      "本机路径": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/置信度门控跨数据集验证-20260914/固定代码-43ebe6f.tar.gz",
+      "字节数": 31056109,
+      "SHA256": "c73e0f9da3bae5ae5784090d7f60ccd60760fbccf40aba622a423a14697b9f44",
+      "归档条目数": null,
+      "Git提交": "43ebe6f0674804ec61d8588b6b67021cb0888e1f"
     }
   ]
 }

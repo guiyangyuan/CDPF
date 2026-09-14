@@ -1,0 +1,164 @@
+{
+  "state": "completed",
+  "source_sha256": "b582a30a733c735126afccf6c77f64c0d1fdec3be9fd4b34d8a227b15e7c39bf",
+  "input_hashes": {
+    "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/configs/repro/text_residual/classname.yaml": "d72b29115949af803f4c221a5d76c6630baed30727c54b36e91646dff42e130c",
+    "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/configs/repro/text_residual/description.yaml": "3cec99139bdc6a3d9e00710fec261ac4bd18a0cbfc9f733028bd560fe016ea07",
+    "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/configs/repro/text_residual/contrast.yaml": "9dd1a4e4a067cc9bf0409227cbc63faf5db5dc688ac0710c81ef54e18309da51",
+    "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/configs/datasets/fgvc_aircraft.yaml": "2853829da10a89ad7d4b54b55c9bad542f0d6bdeeb273bdee0551fa486ec53a5",
+    "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/scripts/repro/text_residual_pilot.py": "cb4c8891fc22a62a6d3820001c7188ddac11f253ff51f89cb8cd24269ea3100a",
+    "/root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_1.pkl": "ede51e816f27fe43e5142277349414badbb64c6d94dcfdb99ae3dd617bb959a2"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "stages": [
+    {
+      "name": "classname-train",
+      "status": "passed"
+    },
+    {
+      "name": "classname-export",
+      "status": "passed"
+    },
+    {
+      "name": "description-train",
+      "status": "passed"
+    },
+    {
+      "name": "description-export",
+      "status": "passed"
+    },
+    {
+      "name": "contrast-train",
+      "status": "passed"
+    },
+    {
+      "name": "contrast-export",
+      "status": "passed"
+    }
+  ],
+  "planned_commands": [
+    [
+      "classname-train",
+      [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-u",
+        "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/train.py",
+        "--root",
+        "/root/autodl-tmp/textconsistency/data",
+        "--seed",
+        "1",
+        "--dataset-config-file",
+        "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/configs/datasets/fgvc_aircraft.yaml",
+        "--config-file",
+        "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/configs/repro/text_residual/classname.yaml",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-residual-20260914-d5152e1/classname/model",
+        "USE_CUDA",
+        "True",
+        "TRAINER.TEXTCONSISTENCY.DEVICE",
+        "cuda",
+        "TRAINER.TEXTCONSISTENCY.CLIP_PATH",
+        "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+        "TEST.NO_TEST",
+        "True"
+      ]
+    ],
+    [
+      "classname-export",
+      [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-u",
+        "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/scripts/repro/text_residual_pilot.py",
+        "export",
+        "--model-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-residual-20260914-d5152e1/classname/model",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-residual-20260914-d5152e1/classname/export"
+      ]
+    ],
+    [
+      "description-train",
+      [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-u",
+        "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/train.py",
+        "--root",
+        "/root/autodl-tmp/textconsistency/data",
+        "--seed",
+        "1",
+        "--dataset-config-file",
+        "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/configs/datasets/fgvc_aircraft.yaml",
+        "--config-file",
+        "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/configs/repro/text_residual/description.yaml",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-residual-20260914-d5152e1/description/model",
+        "USE_CUDA",
+        "True",
+        "TRAINER.TEXTCONSISTENCY.DEVICE",
+        "cuda",
+        "TRAINER.TEXTCONSISTENCY.CLIP_PATH",
+        "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+        "TEST.NO_TEST",
+        "True"
+      ]
+    ],
+    [
+      "description-export",
+      [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-u",
+        "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/scripts/repro/text_residual_pilot.py",
+        "export",
+        "--model-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-residual-20260914-d5152e1/description/model",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-residual-20260914-d5152e1/description/export"
+      ]
+    ],
+    [
+      "contrast-train",
+      [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-u",
+        "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/train.py",
+        "--root",
+        "/root/autodl-tmp/textconsistency/data",
+        "--seed",
+        "1",
+        "--dataset-config-file",
+        "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/configs/datasets/fgvc_aircraft.yaml",
+        "--config-file",
+        "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/configs/repro/text_residual/contrast.yaml",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-residual-20260914-d5152e1/contrast/model",
+        "USE_CUDA",
+        "True",
+        "TRAINER.TEXTCONSISTENCY.DEVICE",
+        "cuda",
+        "TRAINER.TEXTCONSISTENCY.CLIP_PATH",
+        "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+        "TEST.NO_TEST",
+        "True"
+      ]
+    ],
+    [
+      "contrast-export",
+      [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-u",
+        "/root/autodl-tmp/textconsistency/releases/text-residual-20260914-d5152e1/scripts/repro/text_residual_pilot.py",
+        "export",
+        "--model-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-residual-20260914-d5152e1/contrast/model",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-residual-20260914-d5152e1/contrast/export"
+      ]
+    ]
+  ],
+  "max_training_runs": 3,
+  "wallclock_cap_seconds": 3600,
+  "minimum_gain_pp": 1.0,
+  "current_stage": "contrast-export",
+  "continuation_signal": false,
+  "elapsed_seconds": 937.9001712426543
+}

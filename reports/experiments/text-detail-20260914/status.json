@@ -1,0 +1,122 @@
+{
+  "state": "completed",
+  "source_sha256": "9a50256a2067f586c21b46f6de86514daa28b3a916197df379c59e89a28a9433",
+  "input_hashes": {
+    "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/configs/repro/text_detail/attentive.yaml": "02262578008c0bbf47b5c7ba2c50d246bc3ff2a264cb58030d56b2b882d419c0",
+    "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/configs/repro/text_detail/centered.yaml": "be602a0006754136bb89a22d68479e66c432b48c81b7c531c42ba43d1ec5ea85",
+    "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/configs/datasets/fgvc_aircraft.yaml": "2853829da10a89ad7d4b54b55c9bad542f0d6bdeeb273bdee0551fa486ec53a5",
+    "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/scripts/repro/text_detail_pilot.py": "4ced8ea6283ec79201590f3c5634d0412174646bce09e9704d4d85f03b449f02",
+    "/root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_1.pkl": "ede51e816f27fe43e5142277349414badbb64c6d94dcfdb99ae3dd617bb959a2",
+    "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/reports/experiments/text-adamw-20260914/classname/export.json": "e497e13a3e40360b122c85423900ce491d8e7496682280f586a1783ede55c69a",
+    "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/reports/experiments/text-adamw-20260914/classname/logits.npz": "b6ec87f85d34aaf43f6cfbc055c6c6367ab4992cd6c1807ec730bae2c7a24a4a",
+    "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/reports/experiments/text-adamw-20260914/description/export.json": "d91e1c64a97e5cb0df21e3e8622efa13f6a118e574d77e1cf7cbab94e6ef3c26",
+    "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/reports/experiments/text-adamw-20260914/description/logits.npz": "a56ea5ba5c494308b228a1ec6fd3c241560c084c3ce3abc1a3f239b5434ddc97",
+    "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/reports/experiments/text-adamw-20260914/contrast/export.json": "1e070f3398e6b6f67fbd14a48a9ae982846c0633006e80508e9f1b171d62cd41",
+    "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/reports/experiments/text-adamw-20260914/contrast/logits.npz": "74630d8bcc146ea8253aad816b4de9eb6e38ecb8029726c1c1414909bb17f9cf"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "stages": [
+    {
+      "name": "attentive-train",
+      "status": "passed"
+    },
+    {
+      "name": "attentive-export",
+      "status": "passed"
+    },
+    {
+      "name": "centered-train",
+      "status": "passed"
+    },
+    {
+      "name": "centered-export",
+      "status": "passed"
+    }
+  ],
+  "planned_commands": [
+    [
+      "attentive-train",
+      [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-u",
+        "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/train.py",
+        "--root",
+        "/root/autodl-tmp/textconsistency/data",
+        "--seed",
+        "1",
+        "--dataset-config-file",
+        "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/configs/datasets/fgvc_aircraft.yaml",
+        "--config-file",
+        "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/configs/repro/text_detail/attentive.yaml",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-detail-20260914-cd109fe/attentive/model",
+        "USE_CUDA",
+        "True",
+        "TRAINER.TEXTCONSISTENCY.DEVICE",
+        "cuda",
+        "TRAINER.TEXTCONSISTENCY.CLIP_PATH",
+        "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+        "TEST.NO_TEST",
+        "True"
+      ]
+    ],
+    [
+      "attentive-export",
+      [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-u",
+        "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/scripts/repro/text_detail_pilot.py",
+        "export",
+        "--model-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-detail-20260914-cd109fe/attentive/model",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-detail-20260914-cd109fe/attentive/export"
+      ]
+    ],
+    [
+      "centered-train",
+      [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-u",
+        "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/train.py",
+        "--root",
+        "/root/autodl-tmp/textconsistency/data",
+        "--seed",
+        "1",
+        "--dataset-config-file",
+        "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/configs/datasets/fgvc_aircraft.yaml",
+        "--config-file",
+        "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/configs/repro/text_detail/centered.yaml",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-detail-20260914-cd109fe/centered/model",
+        "USE_CUDA",
+        "True",
+        "TRAINER.TEXTCONSISTENCY.DEVICE",
+        "cuda",
+        "TRAINER.TEXTCONSISTENCY.CLIP_PATH",
+        "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+        "TEST.NO_TEST",
+        "True"
+      ]
+    ],
+    [
+      "centered-export",
+      [
+        "/root/autodl-tmp/textconsistency/.venv/bin/python",
+        "-u",
+        "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/scripts/repro/text_detail_pilot.py",
+        "export",
+        "--model-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-detail-20260914-cd109fe/centered/model",
+        "--output-dir",
+        "/root/autodl-tmp/textconsistency/runs/text-detail-20260914-cd109fe/centered/export"
+      ]
+    ]
+  ],
+  "max_training_runs": 2,
+  "wallclock_cap_seconds": 1800,
+  "minimum_gain_pp": 1.0,
+  "current_stage": "centered-export",
+  "continuation_signal": false,
+  "elapsed_seconds": 522.7866298258305
+}

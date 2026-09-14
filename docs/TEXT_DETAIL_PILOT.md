@@ -37,3 +37,7 @@ loss = CE(S,y) + CE(stopgrad(S)+R,y)
 只运行`tests.repro.test_text_detail`两项短检查，0.693秒通过：均匀权重极限、padding屏蔽、图片依赖、类别重排/独立批处理；两个更新的学生保持、同参数、两优化器恢复、完整重载、不同类别数量与签名拒绝。无全套测试或服务器重复合成检查。[记录](../reports/preparation/text-detail-20260914/checks.json)。
 
 训练入口：`PYTHONPATH=.:Dassl.pytorch python scripts/repro/text_detail_pilot.py run --data-root DATA --clip-path CLIP --output-root FRESH_OUTPUT`。需CUDA；不得复用已有输出或复跑历史队列。
+
+## 执行结果（训练后追加，原规则未改）
+
+固定两组已完成，8.71分钟：attentive.Z40.0%、centered.Z38.0%，历史类别名Z38.5%。主假设失败、预登记次假设通过；新旧S/M/F完全一致。36文件和两个完整模型已备份核验，AutoDL网页确认已关机，备用定时已取消。禁止复跑本批，未追加种子/数据集。后续建议补同样保留类别名的均值描述对照，再做多种子/Novel确认；当前不能把组合增益全归因于图像注意力。见[完整报告](../reports/experiments/text-detail-20260914/README.md)。

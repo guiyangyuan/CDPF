@@ -1,0 +1,24 @@
+{
+  "started_utc": "2026-09-14T03:50:15.206710+00:00",
+  "pid": 1212,
+  "source_git": "cd109fe6d982b5d6d5dada9f6a413e80e89846ec",
+  "source_archive_sha256": "4fee81514e483f9262a7fc7e3552542883118d20b74d2202e7b666e1d1b033bc",
+  "command": [
+    "timeout",
+    "--kill-after=10s",
+    "1800s",
+    "/root/autodl-tmp/textconsistency/.venv/bin/python",
+    "-u",
+    "/root/autodl-tmp/textconsistency/releases/text-detail-20260914-cd109fe/scripts/repro/text_detail_pilot.py",
+    "run",
+    "--data-root",
+    "/root/autodl-tmp/textconsistency/data",
+    "--clip-path",
+    "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
+    "--output-root",
+    "/root/autodl-tmp/textconsistency/runs/text-detail-20260914-cd109fe"
+  ],
+  "max_training_runs": 2,
+  "max_seconds": 1800,
+  "automatic_expansion": false
+}

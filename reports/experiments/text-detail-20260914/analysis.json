@@ -1,0 +1,113 @@
+{
+  "status": "completed",
+  "scope": "Aircraft seed1 Base validation development only",
+  "n": 200,
+  "correct": {
+    "classname": {
+      "S": 64,
+      "M": 48,
+      "Z": 77,
+      "F": 61
+    },
+    "description": {
+      "S": 64,
+      "M": 48,
+      "Z": 75,
+      "F": 61
+    },
+    "contrast": {
+      "S": 64,
+      "M": 48,
+      "Z": 75,
+      "F": 61
+    },
+    "attentive": {
+      "S": 64,
+      "M": 48,
+      "Z": 80,
+      "F": 61
+    },
+    "centered": {
+      "S": 64,
+      "M": 48,
+      "Z": 76,
+      "F": 61
+    }
+  },
+  "comparisons": {
+    "centered.Z - classname.S": {
+      "gain_pp": 6.0,
+      "corrected": 27,
+      "harmed": 15,
+      "passes_1pp": true
+    },
+    "centered.Z - classname.F": {
+      "gain_pp": 7.5,
+      "corrected": 32,
+      "harmed": 17,
+      "passes_1pp": true
+    },
+    "centered.Z - classname.Z": {
+      "gain_pp": -0.5,
+      "corrected": 6,
+      "harmed": 7,
+      "passes_1pp": false
+    },
+    "centered.Z - description.Z": {
+      "gain_pp": 0.5,
+      "corrected": 12,
+      "harmed": 11,
+      "passes_1pp": false
+    },
+    "centered.Z - contrast.Z": {
+      "gain_pp": 0.5,
+      "corrected": 13,
+      "harmed": 12,
+      "passes_1pp": false
+    },
+    "centered.Z - attentive.Z": {
+      "gain_pp": -2.0,
+      "corrected": 8,
+      "harmed": 12,
+      "passes_1pp": false
+    }
+  },
+  "continuation_signal": false,
+  "attentive_comparisons": {
+    "attentive.Z - classname.S": {
+      "gain_pp": 8.0,
+      "corrected": 30,
+      "harmed": 14,
+      "passes_1pp": true
+    },
+    "attentive.Z - classname.F": {
+      "gain_pp": 9.5,
+      "corrected": 37,
+      "harmed": 18,
+      "passes_1pp": true
+    },
+    "attentive.Z - classname.Z": {
+      "gain_pp": 1.5,
+      "corrected": 10,
+      "harmed": 7,
+      "passes_1pp": true
+    },
+    "attentive.Z - description.Z": {
+      "gain_pp": 2.5,
+      "corrected": 12,
+      "harmed": 7,
+      "passes_1pp": true
+    },
+    "attentive.Z - contrast.Z": {
+      "gain_pp": 2.5,
+      "corrected": 16,
+      "harmed": 11,
+      "passes_1pp": true
+    }
+  },
+  "attentive_signal": true,
+  "reference_source_sha256": "143031dbd46e1c024bf62259d64906dc07ab209bea21e2faccb82dc8cef7d6e6",
+  "new_source_sha256": "9a50256a2067f586c21b46f6de86514daa28b3a916197df379c59e89a28a9433",
+  "reference_logits_exact_S_M_F": true,
+  "automatic_expansion": false
+}

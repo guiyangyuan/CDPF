@@ -7,8 +7,9 @@ import unittest
 
 import torch
 from torch.nn import functional as F
-from trainers.coop_text_detail import description_attention, anchored_delta
+from trainers.coop_text_detail import description_attention, description_weights, anchored_delta
 from trainers.coop_text_residual import SharedTextResidual
+from scripts.repro.text_detail_pilot import confirmation_decision
 from .test_text_residual import make_text
 
 
@@ -46,17 +47,37 @@ class TextDetailSmoke(unittest.TestCase):
         single = anchored_delta(head, names, views, mask, description_attention(images[:1], views, mask, 20.), True)
         torch.testing.assert_close(single, actual[:1])
 
+    def test_uniform_description_control_is_image_independent(self):
+        torch.manual_seed(21)
+        images = F.normalize(torch.randn(3, 8), dim=-1)
+        views = F.normalize(torch.randn(2, 4, 8), dim=-1)
+        mask = torch.tensor([[1, 1, 0, 0], [1, 1, 1, 0]], dtype=torch.bool)
+        weights = description_weights(images, views, mask, 20., 'uniform')
+        expected = mask.float() / mask.sum(-1, keepdim=True)
+        torch.testing.assert_close(weights, expected[None].expand_as(weights), rtol=0, atol=0)
+        changed = F.normalize(torch.randn(3, 8), dim=-1)
+        torch.testing.assert_close(weights, description_weights(changed, views, mask, 20., 'uniform'), rtol=0, atol=0)
+        self.assertTrue((weights[:, ~mask] == 0).all())
+
+    def test_confirmation_rule_is_fixed_before_scores(self):
+        passed = confirmation_decision([2.5, 1.5, -0.5], 0.25)
+        self.assertTrue(passed['passes'])
+        self.assertEqual(passed['positive_seeds'], 2)
+        self.assertFalse(confirmation_decision([2.0, -0.5, -0.5], 0.5)['passes'])
+        self.assertFalse(confirmation_decision([2.5, 1.5, -0.5], -0.01)['passes'])
+
     def test_two_updates_reload_and_new_classes(self):
         baseline = make_text(self.root / 'baseline', 'classname', adamw=True)
+        uniform = make_text(self.root / 'uniform', detail='uniform')
         raw = make_text(self.root / 'raw', detail='attentive')
         first = make_text(self.root / 'first', detail='centered')
         batch = {'img': torch.randn(3, 3, 32, 32), 'label': torch.tensor([0, 1, 2])}
-        for t in (raw, first):
+        for t in (uniform, raw, first):
             self.assertEqual(t.run_provenance['trainable_parameters'], baseline.run_provenance['trainable_parameters'])
             torch.testing.assert_close(t.model(batch['img'])['Z'], baseline.model(batch['img'])['S'], rtol=0, atol=0)
             correction = t.loss_terms(t.model(batch['img']), batch['label'])[1]
             self.assertIsNone(torch.autograd.grad(correction, t.model.prompt_learner.ctx, allow_unused=True)[0])
-        for t in (baseline, raw, first): t.forward_backward(batch)
+        for t in (baseline, uniform, raw, first): t.forward_backward(batch)
         first.save_model(0, self.root / 'first')
         saved = torch.load(self.root / 'first/textconsistency/model.pth.tar-1', weights_only=False)
         same = make_text(self.root / 'same', detail='centered')
@@ -69,8 +90,8 @@ class TextDetailSmoke(unittest.TestCase):
         torch.testing.assert_close(novel_names, novel.model.detail_names, rtol=0, atol=0)
         self.assertEqual(novel.model(batch['img'])['Z'].shape, (3, 4))
         with self.assertRaisesRegex(ValueError, 'signature mismatch'): raw.load_model(self.root / 'first', 1)
-        for t in (baseline, raw, first, same): t.forward_backward(batch)
-        for t in (raw, first, same):
+        for t in (baseline, uniform, raw, first, same): t.forward_backward(batch)
+        for t in (uniform, raw, first, same):
             torch.testing.assert_close(t.model.prompt_learner.ctx, baseline.model.prompt_learner.ctx, rtol=0, atol=0)
             self.assertTrue(all(p.grad is None for p in t.model.image_encoder.parameters()))
             self.assertGreater(t.model.text_residual.up.weight.abs().max().item(), 0)

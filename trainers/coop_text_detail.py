@@ -53,6 +53,16 @@ def bound_by_description_radius(delta, radii, eps=1e-6):
     return torch.where(radius > 0., bounded, torch.zeros_like(bounded))
 
 
+def semantic_alignment_gate(student, description, residual, eps=1e-8):
+    """Trust residual logits only when they follow frozen-description evidence."""
+    semantic_direction = description - student
+    semantic_direction = semantic_direction - semantic_direction.mean(-1, keepdim=True)
+    centered_residual = residual - residual.mean(-1, keepdim=True)
+    alignment = F.cosine_similarity(centered_residual.float(), semantic_direction.float(),
+                                    dim=-1, eps=eps)
+    return alignment.clamp(0., 1.).to(residual.dtype)
+
+
 def description_attention(features, views, mask, scale):
     logits = scale * torch.einsum('bd,cvd->bcv', features, views)
     return logits.masked_fill(~mask[None], -torch.inf).softmax(-1)
@@ -214,6 +224,28 @@ class SubspaceRadiusTextDetailCLIP(RadiusBoundedTextDetailCLIP):
         return {'S': student, 'M': mean, 'R': residual, 'Z': fusion + residual, 'F': fusion}
 
 
+class SemanticGatedRadiusTextDetailCLIP(RadiusBoundedTextDetailCLIP):
+    """Gate a radius-bounded residual by frozen-description agreement."""
+    def __init__(self, cfg, classnames, clip_model):
+        super().__init__(cfg, classnames, clip_model)
+        self.correction_identity.update(
+            version=7,
+            kind='semantic_alignment_gated_radius_text_detail',
+            inference='F+q*R_hat',
+            objective='CE(S,y)+CE(stopgrad(F)+stopgrad(q)*R_hat,y)',
+            gate='clamp(cos(center(R_hat),center(M-S)),0,1)',
+            gate_scope='per_sample_scalar',
+            fitted_hyperparameters=[],
+        )
+
+    def forward(self, image):
+        outputs = super().forward(image)
+        gate = semantic_alignment_gate(outputs['S'], outputs['M'], outputs['R']).detach()
+        outputs['Q'] = gate
+        outputs['Z'] = outputs['F'] + gate[:, None] * outputs['R']
+        return outputs
+
+
 @TRAINER_REGISTRY.register()
 class CoOp_TextDetail(CoOp_TextResidual_AdamW):
     model_builder = TextDetailCLIP
@@ -245,3 +277,13 @@ class CoOp_TextDetail_RadiusBounded(CoOp_TextDetail_FusionAligned):
 class CoOp_TextDetail_SubspaceRadius(CoOp_TextDetail_RadiusBounded):
     """Project residuals into frozen class-description tangents before bounding."""
     model_builder = SubspaceRadiusTextDetailCLIP
+
+
+@TRAINER_REGISTRY.register()
+class CoOp_TextDetail_SemanticGatedRadius(CoOp_TextDetail_RadiusBounded):
+    """Use a fixed semantic-alignment gate on the radius-bounded residual."""
+    model_builder = SemanticGatedRadiusTextDetailCLIP
+
+    def loss_terms(self, outputs, labels):
+        corrected = outputs['F'].detach() + outputs['Q'][:, None] * outputs['R']
+        return F.cross_entropy(outputs['S'], labels), F.cross_entropy(corrected, labels)

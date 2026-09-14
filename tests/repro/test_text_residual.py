@@ -36,8 +36,10 @@ def make_text(output, mode='contrast', novel=False, adamw=False, detail=None):
         CoOp_TextDetail, CoOp_TextDetail_FusionAligned,
         CoOp_TextDetail_RadiusBounded,
         CoOp_TextDetail_SubspaceRadius,
+        CoOp_TextDetail_SemanticGatedRadius,
     )
-    cls = (CoOp_TextDetail_SubspaceRadius if detail == 'subspace_radius_attentive'
+    cls = (CoOp_TextDetail_SemanticGatedRadius if detail == 'semantic_gated_radius_attentive'
+           else CoOp_TextDetail_SubspaceRadius if detail == 'subspace_radius_attentive'
            else CoOp_TextDetail_RadiusBounded if detail == 'radius_bounded_attentive'
            else CoOp_TextDetail_FusionAligned if detail == 'fusion_aligned_attentive'
            else CoOp_TextDetail if detail

@@ -178,6 +178,30 @@ class SemanticAlignmentGateTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'hash mismatch'):
                 study.load_export(root / '基础测试集')
 
+    def test_ucf_confirmation_protocol_is_staged_and_fixed(self):
+        path = ROOT / 'scripts/repro/semantic_alignment_ucf_confirmation.py'
+        self.assertTrue(path.is_file(), 'missing UCF101 semantic-gate confirmation runner')
+        spec = importlib.util.spec_from_file_location('semantic_alignment_ucf_confirmation', path)
+        study = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(study)
+
+        self.assertEqual(study.planned_cases(), [
+            {'phase': 'UCF101单种子独立筛选', 'seed': 1},
+            {'phase': 'UCF101三种子独立确认', 'seed': 2},
+            {'phase': 'UCF101三种子独立确认', 'seed': 3},
+        ])
+        self.assertTrue(study.screening_decision(.01, 0.)['passes'])
+        self.assertFalse(study.screening_decision(0., 1.)['passes'])
+        self.assertFalse(study.screening_decision(1., -.01)['passes'])
+        self.assertTrue(study.confirmation_decision([.1, -.1, .2], 0.)['passes'])
+        self.assertFalse(study.confirmation_decision([.1, -.1, -.2], 0.)['passes'])
+        protocol = study.build_protocol(
+            '/server/data', '/server/clip.pt', '/server/output', 'fixed-commit',
+            ROOT / 'reports/experiments/语义一致性门控筛选-20260914-v2/结果分析.json')
+        prerequisite_path = Path(protocol['DTD_development_prerequisite']['path'])
+        self.assertFalse(prerequisite_path.is_absolute())
+        self.assertEqual(protocol['maximum_new_trainings'], 3)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,0 +1,10 @@
+test_corrected_branch_and_loss_share_the_same_fusion_anchor (tests.repro.test_fusion_aligned_text_detail.FusionAlignedTextDetailTest.test_corrected_branch_and_loss_share_the_same_fusion_anchor) ... ok
+test_zero_residual_starts_at_fusion_without_changing_student_update (tests.repro.test_fusion_aligned_text_detail.FusionAlignedTextDetailTest.test_zero_residual_starts_at_fusion_without_changing_student_update) ... ok
+test_plan_has_one_training_per_seed_and_keeps_ucf_last (tests.repro.test_fusion_aligned_study.FusionAlignedStudyTest.test_plan_has_one_training_per_seed_and_keeps_ucf_last) ... ok
+test_single_seed_screen_requires_hm_gain_and_novel_preservation (tests.repro.test_fusion_aligned_study.FusionAlignedStudyTest.test_single_seed_screen_requires_hm_gain_and_novel_preservation) ... ok
+test_three_seed_confirmation_requires_mean_stability (tests.repro.test_fusion_aligned_study.FusionAlignedStudyTest.test_three_seed_confirmation_requires_mean_stability) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.079s
+
+OK

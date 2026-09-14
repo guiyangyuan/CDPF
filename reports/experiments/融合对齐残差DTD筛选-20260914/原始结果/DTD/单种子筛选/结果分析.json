@@ -1,0 +1,42 @@
+{
+  "dataset": "dtd",
+  "seeds": [
+    1
+  ],
+  "formula": {
+    "simple_fusion": "F = 0.5 * (S + M)",
+    "corrected": "Z = F + R",
+    "objective": "CE(S, y) + CE(stopgrad(F) + R, y)",
+    "fitted_hyperparameters": []
+  },
+  "results": [
+    {
+      "seed": 1,
+      "base": {
+        "F": 76.62037037037037,
+        "Z": 80.32407407407408
+      },
+      "novel": {
+        "F": 68.71980676328504,
+        "Z": 61.35265700483091
+      },
+      "hm_F": 72.45535473843763,
+      "hm_Z": 69.56816872281814
+    }
+  ],
+  "comparison": {
+    "Z对F_HM逐种子增益": [
+      -2.8871860156194913
+    ],
+    "Z对F_Novel平均增益": -7.367149758454126
+  },
+  "decision": {
+    "passes": false,
+    "criteria": {
+      "融合对齐残差HM优于简单融合": false,
+      "新类别准确率不下降": false
+    },
+    "HM增益": -2.8871860156194913,
+    "Novel增益": -7.367149758454126
+  }
+}

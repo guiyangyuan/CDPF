@@ -1,0 +1,38 @@
+{
+  "state": "stopped_by_preregistered_rule",
+  "protocol": "/root/autodl-tmp/textconsistency/releases/融合对齐残差-20260914-6e805cd/reports/preparation/融合对齐残差-20260914/实验协议.json",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "started": 1789375230.913792,
+  "events": [
+    {
+      "case": {
+        "phase": "DTD单种子筛选",
+        "dataset": "dtd",
+        "seed": 1
+      },
+      "step": "训练",
+      "status": "completed"
+    },
+    {
+      "case": {
+        "phase": "DTD单种子筛选",
+        "dataset": "dtd",
+        "seed": 1
+      },
+      "step": "基础测试集",
+      "status": "completed"
+    },
+    {
+      "case": {
+        "phase": "DTD单种子筛选",
+        "dataset": "dtd",
+        "seed": 1
+      },
+      "step": "新类别测试集",
+      "status": "completed"
+    }
+  ],
+  "current_phase": "DTD单种子筛选",
+  "conclusion": "DTD单种子筛选未通过",
+  "ended": 1789375347.1358376
+}

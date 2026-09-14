@@ -1,0 +1,30 @@
+{
+  "status": "verified",
+  "files": 17,
+  "baseline_train_ce": 1.7359501123428345,
+  "baseline_train_correct": 90,
+  "results": {
+    "sgd": {
+      "train_correct": 90,
+      "n": 200,
+      "train_accuracy_pct": 45.0,
+      "ce": 1.7330998182296753,
+      "ce_reduction": 0.0028502941131591797,
+      "train_fit_signal": false,
+      "max_abs_reloaded_logit_diff": 3.814697265625e-06
+    },
+    "adamw": {
+      "train_correct": 151,
+      "n": 200,
+      "train_accuracy_pct": 75.5,
+      "ce": 0.8922712802886963,
+      "ce_reduction": 0.8436788320541382,
+      "train_fit_signal": true,
+      "max_abs_reloaded_logit_diff": 1.239776611328125e-05
+    }
+  },
+  "training_subset_disjoint_from_prior_validation": true,
+  "cache_and_anchor_hashes_verified": true,
+  "new_training_or_gpu_inference_for_verification": 0,
+  "scope": "training subset only; not validation/test accuracy"
+}

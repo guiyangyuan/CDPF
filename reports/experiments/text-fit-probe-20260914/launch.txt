@@ -1,0 +1,344 @@
+Loading trainer: CoOp_TextResidual
+Loading dataset: FGVCAircraft
+Loading preprocessed few-shot data from /root/autodl-tmp/textconsistency/data/fgvc_aircraft/split_fewshot/shot_16-seed_1.pkl
+SUBSAMPLE BASE CLASSES!
+Building transform_train
++ random resized crop (size=(224, 224), scale=(0.08, 1.0))
++ random flip
++ to torch tensor of range [0, 1]
++ normalization (mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711])
+Building transform_test
++ resize the smaller edge to 224
++ 224x224 center crop
++ to torch tensor of range [0, 1]
++ normalization (mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711])
+---------  ------------
+Dataset    FGVCAircraft
+# classes  50
+# train_x  800
+# val      200
+# test     1,666
+---------  ------------
+build model vit is True
+Effective description counts: {"707-320": 20, "727-200": 20, "737-200": 19, "737-300": 19, "737-400": 16, "737-500": 19, "737-600": 20, "737-700": 19, "737-800": 19, "737-900": 18, "747-100": 20, "747-200": 17, "747-300": 20, "747-400": 18, "757-200": 20, "757-300": 20, "767-200": 18, "767-300": 18, "767-400": 18, "777-200": 19, "777-300": 18, "A300B4": 20, "A310": 20, "A318": 16, "A319": 19, "A320": 18, "A321": 20, "A330-200": 16, "A330-300": 18, "A340-200": 19, "A340-300": 20, "A340-500": 20, "A340-600": 19, "A380": 19, "ATR-42": 17, "ATR-72": 15, "An-12": 9, "BAE 146-200": 20, "BAE 146-300": 19, "BAE-125": 20, "Beechcraft 1900": 19, "Boeing 717": 16, "C-130": 8, "C-47": 19, "CRJ-200": 20, "CRJ-700": 18, "CRJ-900": 20, "Cessna 172": 12, "Cessna 208": 19, "Cessna 525": 19}
+Effective protocol: {"code_sha256": "b582a30a733c735126afccf6c77f64c0d1fdec3be9fd4b34d8a227b15e7c39bf", "cuda_runtime": "12.8", "dataset": "FGVCAircraft", "description_counts": [20, 20, 19, 19, 16, 19, 20, 19, 19, 18, 20, 17, 20, 18, 20, 20, 18, 18, 18, 19, 18, 20, 20, 16, 19, 18, 20, 16, 18, 19, 20, 20, 19, 19, 17, 15, 9, 20, 19, 20, 19, 16, 8, 19, 20, 18, 20, 12, 19, 19], "device": "cuda", "effective_losses": {"adaptive_ce": 0.0, "contrastive": 0.0, "correction_ce": 1.0, "diversity": 0.0, "kd": 0.0}, "gpu": "NVIDIA GeForce RTX 4090", "loss_identity": {"active": false, "effective_weight": 0.0, "format": 1, "mode": "full_kl", "non_target_weighting": "none_full_distribution_kl", "temperature": 2.0}, "model_signature": {"ablation_group": null, "aggregation": "mean", "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f", "correction": {"classname_template": "a photo of a {}, a type of aircraft.", "coefficient": 1.0, "delta_normalization": false, "enabled": true, "hidden_dim": 64, "inference": "S+R", "init": "kaiming_down_zero_up_no_bias_rng_isolated", "input": "unit_text_views_minus_neighbor_mean", "kind": "shared_text_residual", "mode": "contrast", "neighbor_k": 5, "objective": "CE(S,y)+CE(stopgrad(S)+R,y)", "pooling": "masked_mean_after_relu_down", "residual": "clip_scale*original_image@text_delta.T", "scale": 0.2, "version": 2}, "feature_adapter": false, "format": 4, "loss_identity": {"active": false, "effective_weight": 0.0, "format": 1, "mode": "full_kl", "non_target_weighting": "none_full_distribution_kl", "temperature": 2.0}, "n_ctx": 4, "n_groups": 4, "n_views": 20, "order_seed": 0, "order_version": 1, "template_sha256": "d86833c2483c1d12907abeb6198412f1d0a020bd12999a3f170967a7f549e3b8", "trainer": "CoOp_TextResidual", "view_order": "contiguous"}, "python": "3.12.3", "seed": 1, "shots": 16, "subsample": "base", "test_samples_sha256": "78dd9ed86b8d2d13c40d88fac9b778ec450b322707c44347521c07e7db9b714a", "torch": "2.8.0+cu128", "train_samples_sha256": "ae5851085ef5e74b7cb612cda7454fde300601ef14ad21b707bbbfbbd3c85e9a", "trainable_parameters": 67584, "val_samples_sha256": "7ac44ab40ea24086902991743d3b51720e467204034efd2b5a98352416fd02bb", "view_order_manifest": {"classes": [{"classname": "707-320", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "727-200", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "737-200", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-300", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-400", "count": 16, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}, {"classname": "737-500", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-600", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "737-700", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-800", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "737-900", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "747-100", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "747-200", "count": 17, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]}, {"classname": "747-300", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "747-400", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "757-200", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "757-300", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "767-200", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "767-300", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "767-400", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "777-200", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "777-300", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "A300B4", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A310", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A318", "count": 16, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}, {"classname": "A319", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "A320", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "A321", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A330-200", "count": 16, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}, {"classname": "A330-300", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "A340-200", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "A340-300", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A340-500", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "A340-600", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "A380", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "ATR-42", "count": 17, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]}, {"classname": "ATR-72", "count": 15, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]}, {"classname": "An-12", "count": 9, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8]}, {"classname": "BAE 146-200", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "BAE 146-300", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "BAE-125", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "Beechcraft 1900", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "Boeing 717", "count": 16, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}, {"classname": "C-130", "count": 8, "order": [0, 1, 2, 3, 4, 5, 6, 7]}, {"classname": "C-47", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "CRJ-200", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "CRJ-700", "count": 18, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17]}, {"classname": "CRJ-900", "count": 20, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]}, {"classname": "Cessna 172", "count": 12, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]}, {"classname": "Cessna 208", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}, {"classname": "Cessna 525", "count": 19, "order": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]}], "n_groups": 4, "policy": "contiguous", "seed": 0, "sha256": "85e521430b8c8de02c7401994a69bcfd8d5c06ab804803a988bcba3359cc9a6a", "version": 1}}
+Loading evaluator: Classification
+Loaded checkpoint: {"epoch": 20, "path": "/root/autodl-tmp/textconsistency/runs/text-residual-20260914-d5152e1/contrast/model/textconsistency/model.pth.tar-20", "sha256": "440e356a634810fd062b925c981da579692d09f6f50ddc3eaf299653644ce5ba"}
+Building transform_test
++ resize the smaller edge to 224
++ 224x224 center crop
++ to torch tensor of range [0, 1]
++ normalization (mean=[0.48145466, 0.4578275, 0.40821073], std=[0.26862954, 0.26130258, 0.27577711])
+{"stage": "sgd", "initial": {"step": 0, "ce": 1.7359503507614136, "correct": 90, "accuracy_pct": 44.999998807907104, "corrected": 0, "harmed": 0, "prediction_changes": 0, "residual_row_std_mean": 0.0}, "final": {"step": 200, "ce": 1.7330999374389648, "correct": 90, "accuracy_pct": 44.999998807907104, "corrected": 0, "harmed": 0, "prediction_changes": 1, "residual_row_std_mean": 0.01922384835779667}}
+{"stage": "adamw", "initial": {"step": 0, "ce": 1.7359503507614136, "correct": 90, "accuracy_pct": 44.999998807907104, "corrected": 0, "harmed": 0, "prediction_changes": 0, "residual_row_std_mean": 0.0}, "final": {"step": 200, "ce": 0.8922712802886963, "correct": 151, "accuracy_pct": 75.49999952316284, "corrected": 64, "harmed": 3, "prediction_changes": 95, "residual_row_std_mean": 1.4630649089813232}}
+{
+  "state": "completed",
+  "scope": "fixed Base training subset; no validation/test inference",
+  "settings": {
+    "sgd": {
+      "optimizer": "sgd",
+      "settings": {
+        "lr": 0.002,
+        "momentum": 0.9,
+        "weight_decay": 0.0005
+      },
+      "steps": 200,
+      "trajectory": [
+        {
+          "step": 0,
+          "ce": 1.7359503507614136,
+          "correct": 90,
+          "accuracy_pct": 44.999998807907104,
+          "corrected": 0,
+          "harmed": 0,
+          "prediction_changes": 0,
+          "residual_row_std_mean": 0.0
+        },
+        {
+          "step": 20,
+          "ce": 1.7357909679412842,
+          "correct": 90,
+          "accuracy_pct": 44.999998807907104,
+          "corrected": 0,
+          "harmed": 0,
+          "prediction_changes": 0,
+          "residual_row_std_mean": 0.0010399820748716593
+        },
+        {
+          "step": 40,
+          "ce": 1.7355378866195679,
+          "correct": 90,
+          "accuracy_pct": 44.999998807907104,
+          "corrected": 0,
+          "harmed": 0,
+          "prediction_changes": 0,
+          "residual_row_std_mean": 0.0026269759982824326
+        },
+        {
+          "step": 60,
+          "ce": 1.7352768182754517,
+          "correct": 90,
+          "accuracy_pct": 44.999998807907104,
+          "corrected": 0,
+          "harmed": 0,
+          "prediction_changes": 0,
+          "residual_row_std_mean": 0.004337329417467117
+        },
+        {
+          "step": 80,
+          "ce": 1.7349804639816284,
+          "correct": 90,
+          "accuracy_pct": 44.999998807907104,
+          "corrected": 0,
+          "harmed": 0,
+          "prediction_changes": 0,
+          "residual_row_std_mean": 0.006349558942019939
+        },
+        {
+          "step": 100,
+          "ce": 1.7346998453140259,
+          "correct": 90,
+          "accuracy_pct": 44.999998807907104,
+          "corrected": 0,
+          "harmed": 0,
+          "prediction_changes": 0,
+          "residual_row_std_mean": 0.008320514112710953
+        },
+        {
+          "step": 120,
+          "ce": 1.7343950271606445,
+          "correct": 90,
+          "accuracy_pct": 44.999998807907104,
+          "corrected": 0,
+          "harmed": 0,
+          "prediction_changes": 0,
+          "residual_row_std_mean": 0.010413373820483685
+        },
+        {
+          "step": 140,
+          "ce": 1.7341166734695435,
+          "correct": 90,
+          "accuracy_pct": 44.999998807907104,
+          "corrected": 0,
+          "harmed": 0,
+          "prediction_changes": 1,
+          "residual_row_std_mean": 0.012220864184200764
+        },
+        {
+          "step": 160,
+          "ce": 1.7338076829910278,
+          "correct": 90,
+          "accuracy_pct": 44.999998807907104,
+          "corrected": 0,
+          "harmed": 0,
+          "prediction_changes": 1,
+          "residual_row_std_mean": 0.014249226078391075
+        },
+        {
+          "step": 180,
+          "ce": 1.7334665060043335,
+          "correct": 90,
+          "accuracy_pct": 44.999998807907104,
+          "corrected": 0,
+          "harmed": 0,
+          "prediction_changes": 1,
+          "residual_row_std_mean": 0.016739685088396072
+        },
+        {
+          "step": 200,
+          "ce": 1.7330999374389648,
+          "correct": 90,
+          "accuracy_pct": 44.999998807907104,
+          "corrected": 0,
+          "harmed": 0,
+          "prediction_changes": 1,
+          "residual_row_std_mean": 0.01922384835779667
+        }
+      ],
+      "initial": {
+        "step": 0,
+        "ce": 1.7359503507614136,
+        "correct": 90,
+        "accuracy_pct": 44.999998807907104,
+        "corrected": 0,
+        "harmed": 0,
+        "prediction_changes": 0,
+        "residual_row_std_mean": 0.0
+      },
+      "final": {
+        "step": 200,
+        "ce": 1.7330999374389648,
+        "correct": 90,
+        "accuracy_pct": 44.999998807907104,
+        "corrected": 0,
+        "harmed": 0,
+        "prediction_changes": 1,
+        "residual_row_std_mean": 0.01922384835779667
+      },
+      "ce_reduction": 0.0028504133224487305,
+      "parameter_update_l2": {
+        "down.weight": 0.02345276065170765,
+        "up.weight": 0.10134181380271912
+      },
+      "train_fit_signal": false
+    },
+    "adamw": {
+      "optimizer": "adamw",
+      "settings": {
+        "lr": 0.001,
+        "betas": [
+          0.9,
+          0.999
+        ],
+        "eps": 1e-08,
+        "weight_decay": 0.0005
+      },
+      "steps": 200,
+      "trajectory": [
+        {
+          "step": 0,
+          "ce": 1.7359503507614136,
+          "correct": 90,
+          "accuracy_pct": 44.999998807907104,
+          "corrected": 0,
+          "harmed": 0,
+          "prediction_changes": 0,
+          "residual_row_std_mean": 0.0
+        },
+        {
+          "step": 20,
+          "ce": 1.7154449224472046,
+          "correct": 91,
+          "accuracy_pct": 45.500001311302185,
+          "corrected": 3,
+          "harmed": 2,
+          "prediction_changes": 12,
+          "residual_row_std_mean": 0.10489330440759659
+        },
+        {
+          "step": 40,
+          "ce": 1.6723847389221191,
+          "correct": 90,
+          "accuracy_pct": 44.999998807907104,
+          "corrected": 7,
+          "harmed": 7,
+          "prediction_changes": 27,
+          "residual_row_std_mean": 0.29695868492126465
+        },
+        {
+          "step": 60,
+          "ce": 1.6082462072372437,
+          "correct": 98,
+          "accuracy_pct": 49.000000953674316,
+          "corrected": 13,
+          "harmed": 5,
+          "prediction_changes": 38,
+          "residual_row_std_mean": 0.25744953751564026
+        },
+        {
+          "step": 80,
+          "ce": 1.5097383260726929,
+          "correct": 104,
+          "accuracy_pct": 51.99999809265137,
+          "corrected": 21,
+          "harmed": 7,
+          "prediction_changes": 57,
+          "residual_row_std_mean": 0.49733036756515503
+        },
+        {
+          "step": 100,
+          "ce": 1.3917059898376465,
+          "correct": 108,
+          "accuracy_pct": 54.00000214576721,
+          "corrected": 23,
+          "harmed": 5,
+          "prediction_changes": 61,
+          "residual_row_std_mean": 0.5528727173805237
+        },
+        {
+          "step": 120,
+          "ce": 1.272000789642334,
+          "correct": 123,
+          "accuracy_pct": 61.500000953674316,
+          "corrected": 38,
+          "harmed": 5,
+          "prediction_changes": 81,
+          "residual_row_std_mean": 0.7832109332084656
+        },
+        {
+          "step": 140,
+          "ce": 1.1599161624908447,
+          "correct": 130,
+          "accuracy_pct": 64.99999761581421,
+          "corrected": 45,
+          "harmed": 5,
+          "prediction_changes": 84,
+          "residual_row_std_mean": 0.9441433548927307
+        },
+        {
+          "step": 160,
+          "ce": 1.0605446100234985,
+          "correct": 139,
+          "accuracy_pct": 69.49999928474426,
+          "corrected": 52,
+          "harmed": 3,
+          "prediction_changes": 88,
+          "residual_row_std_mean": 1.0965958833694458
+        },
+        {
+          "step": 180,
+          "ce": 0.9697554111480713,
+          "correct": 147,
+          "accuracy_pct": 73.50000143051147,
+          "corrected": 60,
+          "harmed": 3,
+          "prediction_changes": 94,
+          "residual_row_std_mean": 1.356943964958191
+        },
+        {
+          "step": 200,
+          "ce": 0.8922712802886963,
+          "correct": 151,
+          "accuracy_pct": 75.49999952316284,
+          "corrected": 64,
+          "harmed": 3,
+          "prediction_changes": 95,
+          "residual_row_std_mean": 1.4630649089813232
+        }
+      ],
+      "initial": {
+        "step": 0,
+        "ce": 1.7359503507614136,
+        "correct": 90,
+        "accuracy_pct": 44.999998807907104,
+        "corrected": 0,
+        "harmed": 0,
+        "prediction_changes": 0,
+        "residual_row_std_mean": 0.0
+      },
+      "final": {
+        "step": 200,
+        "ce": 0.8922712802886963,
+        "correct": 151,
+        "accuracy_pct": 75.49999952316284,
+        "corrected": 64,
+        "harmed": 3,
+        "prediction_changes": 95,
+        "residual_row_std_mean": 1.4630649089813232
+      },
+      "ce_reduction": 0.8436790704727173,
+      "parameter_update_l2": {
+        "down.weight": 7.7305097579956055,
+        "up.weight": 7.4021077156066895
+      },
+      "train_fit_signal": true
+    }
+  },
+  "adamw_minus_sgd_ce": -0.8408286571502686,
+  "optimizer_setting_sensitivity_signal": true,
+  "any_train_fit_signal": true,
+  "elapsed_seconds": 8.69515435025096,
+  "gpu_optimization_steps": 0,
+  "cpu_optimization_steps": 400,
+  "automatic_expansion": false
+}

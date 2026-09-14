@@ -108,6 +108,22 @@ def _harmonic_mean(base, novel):
     return float(2. * base * novel / (base + novel)) if base + novel else 0.
 
 
+def development_decision(hm_gain, novel_gain):
+    values = [float(hm_gain), float(novel_gain)]
+    if not all(np.isfinite(values)):
+        raise ValueError('Development decision requires finite gains')
+    criteria = {
+        'HM增益为正': values[0] > 0.,
+        'Novel下降不超过1个百分点': values[1] >= -1.,
+    }
+    return {
+        'passes': all(criteria.values()),
+        'criteria': criteria,
+        'HM增益': values[0],
+        'Novel增益': values[1],
+    }
+
+
 def _split_analysis(arrays):
     computed = compute_gated_logits(arrays['S'], arrays['M'], arrays['R'])
     labels = arrays['labels']
@@ -306,19 +322,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-def development_decision(hm_gain, novel_gain):
-    values = [float(hm_gain), float(novel_gain)]
-    if not all(np.isfinite(values)):
-        raise ValueError('Development decision requires finite gains')
-    criteria = {
-        'HM增益为正': values[0] > 0.,
-        'Novel下降不超过1个百分点': values[1] >= -1.,
-    }
-    return {
-        'passes': all(criteria.values()),
-        'criteria': criteria,
-        'HM增益': values[0],
-        'Novel增益': values[1],
-    }

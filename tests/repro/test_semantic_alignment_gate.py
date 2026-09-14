@@ -3,6 +3,8 @@ import importlib.util
 import hashlib
 import json
 from pathlib import Path
+import subprocess
+import sys
 import tempfile
 import unittest
 
@@ -149,6 +151,17 @@ class SemanticAlignmentGateTest(unittest.TestCase):
             self.assertEqual(analysis['splits']['base']['total'], 2)
             self.assertIn('corrections_vs_F', analysis['splits']['novel'])
             self.assertIn('decision', analysis)
+
+            protocol = study.build_protocol(
+                root / '基础测试集', root / '新类别测试集', root / '输出', 'test-commit')
+            protocol_path = root / '实验协议.json'
+            protocol_path.write_text(json.dumps(protocol, ensure_ascii=False))
+            completed = subprocess.run(
+                [sys.executable, str(path), 'run', '--protocol', str(protocol_path)],
+                cwd=ROOT, text=True, capture_output=True)
+            self.assertEqual(completed.returncode, 0, completed.stderr)
+            status = json.loads((root / '输出/执行状态.json').read_text())
+            self.assertEqual(status['new_trainings_completed'], 0)
 
             archive = root / '基础测试集/预测.npz'
             archive.write_bytes(archive.read_bytes() + b'tampered')

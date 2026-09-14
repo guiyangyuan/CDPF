@@ -1,0 +1,20 @@
+{
+  "状态": "已打包并校验",
+  "用途": "无卡模式部署到训练实例，不提交GitHub大文件",
+  "文件": [
+    {
+      "文件": "DTD数据集.tar.gz",
+      "本机路径": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/置信度门控跨数据集验证-20260914/DTD数据集.tar.gz",
+      "字节数": 626307479,
+      "SHA256": "0a98543cd736d220d1e7b7ba3b17663dc5f1474849b9cab9293cf8645c74f632",
+      "归档条目数": 5729
+    },
+    {
+      "文件": "UCF101数据集.tar.gz",
+      "本机路径": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/置信度门控跨数据集验证-20260914/UCF101数据集.tar.gz",
+      "字节数": 131824435,
+      "SHA256": "b5d212d9018271ff8ae594138e3fb3f8a8abff256cda1df0ddbb6d9fcd11c5fc",
+      "归档条目数": 13429
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "purpose": "isolate image weighting, then confirm Base/Novel across three seeds",
+  "dataset": "FGVCAircraft",
+  "shots": 16,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "variants": {
+    "classname": {
+      "label": "类别名",
+      "trainer": "CoOp_TextResidual_AdamW",
+      "config_sha256": "2585fc2bd629a19aa97ca9554ef1d7abd4cb62f73458879a0b3e062436f6f147"
+    },
+    "uniform": {
+      "label": "均值描述",
+      "trainer": "CoOp_TextDetail",
+      "config_sha256": "e5ea760fa821aed782a545f6ccb45008e118b41833e9ca919adbe9ba713de9bd"
+    },
+    "attentive": {
+      "label": "图片加权",
+      "trainer": "CoOp_TextDetail",
+      "config_sha256": "02262578008c0bbf47b5c7ba2c50d246bc3ff2a264cb58030d56b2b882d419c0"
+    }
+  },
+  "development_gate": "seed1 Base validation: attentive - uniform >= 1.0pp",
+  "expansion_rule": "run all three variants on seeds 1/2/3 only if development gate passes",
+  "confirmation_rule": {
+    "mean_paired_hm_gain_attentive_minus_uniform_pp": ">= 1.0",
+    "positive_hm_seed_count": ">= 2 of 3",
+    "mean_novel_gain_attentive_minus_uniform_pp": ">= 0.0"
+  },
+  "fixed_epoch": 20,
+  "automatic_retry": false,
+  "preflight": {
+    "1": {
+      "train_rows": 800,
+      "val_rows": 200,
+      "base_test_rows": 1666,
+      "train_sha256": "ae5851085ef5e74b7cb612cda7454fde300601ef14ad21b707bbbfbbd3c85e9a"
+    },
+    "2": {
+      "train_rows": 800,
+      "val_rows": 200,
+      "base_test_rows": 1666,
+      "train_sha256": "ae05002965cddf63fa83c5537d249e45f968af7683fa8b9b87b6dd048739585e"
+    },
+    "3": {
+      "train_rows": 800,
+      "val_rows": 200,
+      "base_test_rows": 1666,
+      "train_sha256": "aa24df6792e0120acda0d6b5ed48e1e5c500586e1da207ac4fb095fd18a5ab8a"
+    }
+  },
+  "code_sha256": "f1d22f0bfc16cf1a754b990da12b5526325ab49f192c68877dcf8f13c6237ba1"
+}

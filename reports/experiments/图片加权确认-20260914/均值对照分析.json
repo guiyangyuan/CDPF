@@ -1,0 +1,14 @@
+{
+  "scope": "Aircraft seed1 Base validation development gate",
+  "rows": 200,
+  "attentive_correct": 80,
+  "attentive_accuracy": 40.0,
+  "uniform_correct": 77,
+  "uniform_accuracy": 38.5,
+  "attentive_minus_uniform_pp": 1.5,
+  "threshold_pp": 1.0,
+  "passes": true,
+  "same_rows_classes_and_exact_S_M_F": true,
+  "reference_source_sha256": "9a50256a2067f586c21b46f6de86514daa28b3a916197df379c59e89a28a9433",
+  "uniform_source_sha256": "f1d22f0bfc16cf1a754b990da12b5526325ab49f192c68877dcf8f13c6237ba1"
+}

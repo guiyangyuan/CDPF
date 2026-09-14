@@ -1,0 +1,121 @@
+{
+  "state": "completed",
+  "current_stage": "全部完成",
+  "stages": [
+    {
+      "stage": "均值描述-种子1-训练",
+      "status": "passed"
+    },
+    {
+      "stage": "均值描述-种子1-基础验证集",
+      "status": "passed"
+    },
+    {
+      "stage": "类别名-种子1-训练",
+      "status": "passed"
+    },
+    {
+      "stage": "类别名-种子1-基础测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "类别名-种子1-新类别测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "均值描述-种子1-基础测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "均值描述-种子1-新类别测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "图片加权-种子1-训练",
+      "status": "passed"
+    },
+    {
+      "stage": "图片加权-种子1-基础测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "图片加权-种子1-新类别测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "类别名-种子2-训练",
+      "status": "passed"
+    },
+    {
+      "stage": "类别名-种子2-基础测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "类别名-种子2-新类别测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "均值描述-种子2-训练",
+      "status": "passed"
+    },
+    {
+      "stage": "均值描述-种子2-基础测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "均值描述-种子2-新类别测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "图片加权-种子2-训练",
+      "status": "passed"
+    },
+    {
+      "stage": "图片加权-种子2-基础测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "图片加权-种子2-新类别测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "类别名-种子3-训练",
+      "status": "passed"
+    },
+    {
+      "stage": "类别名-种子3-基础测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "类别名-种子3-新类别测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "均值描述-种子3-训练",
+      "status": "passed"
+    },
+    {
+      "stage": "均值描述-种子3-基础测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "均值描述-种子3-新类别测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "图片加权-种子3-训练",
+      "status": "passed"
+    },
+    {
+      "stage": "图片加权-种子3-基础测试集",
+      "status": "passed"
+    },
+    {
+      "stage": "图片加权-种子3-新类别测试集",
+      "status": "passed"
+    }
+  ],
+  "expanded": true,
+  "conclusion": "image weighting not confirmed",
+  "elapsed_seconds": 3184.2050490528345
+}

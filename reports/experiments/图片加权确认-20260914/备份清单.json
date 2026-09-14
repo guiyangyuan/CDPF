@@ -1,0 +1,873 @@
+{
+  "created_at": "2026-09-14T13:46:29.795632+08:00",
+  "run": "图片加权确认-20260914-4c56fa8",
+  "file_count_excluding_manifest": 172,
+  "total_bytes_excluding_manifest": 105698775,
+  "expected_counts": {
+    "checkpoints": 9,
+    "prediction_npz": 19,
+    "exports": 19
+  },
+  "files": [
+    {
+      "path": "图片加权/种子1/基础测试集/导出.json",
+      "size": 168193,
+      "sha256": "65917d1f5368a7f58ca7cc60b088e2869b6d4138b6555d67dffe5b619dab795e"
+    },
+    {
+      "path": "图片加权/种子1/基础测试集/运行信息/effective_config.yaml",
+      "size": 4203,
+      "sha256": "e05df0b23e8ae4ee6cf72449312ed3262232f84bfc1e94a0b441e854b2bbd2d7"
+    },
+    {
+      "path": "图片加权/种子1/基础测试集/运行信息/run_manifest.json",
+      "size": 20934,
+      "sha256": "4d953e5517b2c7b05acad7bcd96b7a93d3b7ca76fd9c7d478243c82d8ba77d30"
+    },
+    {
+      "path": "图片加权/种子1/基础测试集/预测.npz",
+      "size": 1448155,
+      "sha256": "154d61ef66d04c40b6591d967d7da55e9df76447774e2140ce8875807564a72d"
+    },
+    {
+      "path": "图片加权/种子1/基础测试集导出.log",
+      "size": 10623,
+      "sha256": "de0188299adc457b74be1bd4cd90dfb9165b49834b156bbdccbaefa2c1c63901"
+    },
+    {
+      "path": "图片加权/种子1/新类别测试集/导出.json",
+      "size": 167950,
+      "sha256": "585662f83f18c4f886e09e3b55be94c2e4f6a18c210231e0a38b45283dd59fb9"
+    },
+    {
+      "path": "图片加权/种子1/新类别测试集/运行信息/effective_config.yaml",
+      "size": 4208,
+      "sha256": "7a7ba1eddadedc6404b45ffd702ef93c2f5c07b8a319c488a134916bcc9f09fe"
+    },
+    {
+      "path": "图片加权/种子1/新类别测试集/运行信息/run_manifest.json",
+      "size": 20618,
+      "sha256": "334d7846a42141403847deef8e7daee081d46535bfe05b6c75582e53d40979c8"
+    },
+    {
+      "path": "图片加权/种子1/新类别测试集/预测.npz",
+      "size": 1451382,
+      "sha256": "ec0a8ee404d67dceb6821ae97279db6648a2a6e64a08cf8d3830a7a2a96226f8"
+    },
+    {
+      "path": "图片加权/种子1/新类别测试集导出.log",
+      "size": 10592,
+      "sha256": "a62609046cfc7643656e868b5a1389ce934373009661d357ee45f9c968929add"
+    },
+    {
+      "path": "图片加权/种子1/模型/effective_config.yaml",
+      "size": 4155,
+      "sha256": "2eda997d9dbcbd3b6aa274d1c15280b3f4b9f861c134194c05796938d4f3fdb7"
+    },
+    {
+      "path": "图片加权/种子1/模型/log.txt",
+      "size": 35179,
+      "sha256": "1431ca22259f202a6720ec05d65c689fb9be884cc285c1f6386365fa8782be98"
+    },
+    {
+      "path": "图片加权/种子1/模型/metrics.json",
+      "size": 21156,
+      "sha256": "2a9a435c4e735e8675174a7a030884a8a77a4e869da1a4994193941b7de09372"
+    },
+    {
+      "path": "图片加权/种子1/模型/run_manifest.json",
+      "size": 20934,
+      "sha256": "4d953e5517b2c7b05acad7bcd96b7a93d3b7ca76fd9c7d478243c82d8ba77d30"
+    },
+    {
+      "path": "图片加权/种子1/模型/textconsistency/checkpoint",
+      "size": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    {
+      "path": "图片加权/种子1/模型/textconsistency/model.pth.tar-20",
+      "size": 8291263,
+      "sha256": "f773b22e9a2d700eb1461f83083d9835f6c6c5e1a264d018806a6dfda8c247e6"
+    },
+    {
+      "path": "图片加权/种子1/模型/textconsistency/model.pth.tar-20.sha256",
+      "size": 65,
+      "sha256": "7fa4b9cccf53221f518979ae60cc6bcfe45896cda853cff6f4b1908eeb166e3c"
+    },
+    {
+      "path": "图片加权/种子1/训练.log",
+      "size": 35201,
+      "sha256": "269d99af9a0aa7cb08d1717e843b7cb0d1fc84445bf20257c4c956a82d495576"
+    },
+    {
+      "path": "图片加权/种子2/基础测试集/导出.json",
+      "size": 168195,
+      "sha256": "0ecd773c5602f4687c63165ed1b72ce59d799e58b0df39717d940325f5031023"
+    },
+    {
+      "path": "图片加权/种子2/基础测试集/运行信息/effective_config.yaml",
+      "size": 4203,
+      "sha256": "e3ae7a84a2acf37b54e283079793f33af9e40b545e47cd39d835803ede02ef97"
+    },
+    {
+      "path": "图片加权/种子2/基础测试集/运行信息/run_manifest.json",
+      "size": 20934,
+      "sha256": "bab8a5e3d55e1e31fbf7ec1d10d16a9b6ed0a231c1e8c707a046c5ad2f67f6db"
+    },
+    {
+      "path": "图片加权/种子2/基础测试集/预测.npz",
+      "size": 1451930,
+      "sha256": "8a4cf4cf6990f29fe1f3ee14cc5b7877f143529776b5f6fc3154a5d3ad993394"
+    },
+    {
+      "path": "图片加权/种子2/基础测试集导出.log",
+      "size": 10623,
+      "sha256": "14651e5f15661cc3747b97ed3f83225e3517f84a8b56f8d4219ed110d035221f"
+    },
+    {
+      "path": "图片加权/种子2/新类别测试集/导出.json",
+      "size": 167950,
+      "sha256": "9423c055784effbd0daf0a14d8ef4f23877c8f0964cd1db3805cda3b6d228678"
+    },
+    {
+      "path": "图片加权/种子2/新类别测试集/运行信息/effective_config.yaml",
+      "size": 4208,
+      "sha256": "5ec257297b714bf6b4fa83d4ea48b010f2d864cc93dcd0921f494a792db93da7"
+    },
+    {
+      "path": "图片加权/种子2/新类别测试集/运行信息/run_manifest.json",
+      "size": 20618,
+      "sha256": "ca983f5f564986a7e7e0d22e742d7bf720a2c6bba4206550ed234c2a14359599"
+    },
+    {
+      "path": "图片加权/种子2/新类别测试集/预测.npz",
+      "size": 1454869,
+      "sha256": "aa0b752046a06ecdab3e12bbdb4fda4d26f8546ec4b0e15a2e0c606598b80a8f"
+    },
+    {
+      "path": "图片加权/种子2/新类别测试集导出.log",
+      "size": 10592,
+      "sha256": "ede4efdbf24641e0da742f0fdbbae78c47c066365a7b4208a051dc97fc64a36c"
+    },
+    {
+      "path": "图片加权/种子2/模型/effective_config.yaml",
+      "size": 4155,
+      "sha256": "4437030f68865a5ae579bab354dee7bc2112b78665f2951a8843a3a9c457ff59"
+    },
+    {
+      "path": "图片加权/种子2/模型/log.txt",
+      "size": 35180,
+      "sha256": "b6909cecb602b1dea3501d146ea3b1eee9f8644136b6de7f913ebe0c2a6b7e65"
+    },
+    {
+      "path": "图片加权/种子2/模型/metrics.json",
+      "size": 21156,
+      "sha256": "727d35f9d8806e7c81b5bc15d0609dc3728992c0ad86fb95b9b278afbf9e0f7b"
+    },
+    {
+      "path": "图片加权/种子2/模型/run_manifest.json",
+      "size": 20934,
+      "sha256": "bab8a5e3d55e1e31fbf7ec1d10d16a9b6ed0a231c1e8c707a046c5ad2f67f6db"
+    },
+    {
+      "path": "图片加权/种子2/模型/textconsistency/checkpoint",
+      "size": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    {
+      "path": "图片加权/种子2/模型/textconsistency/model.pth.tar-20",
+      "size": 8291263,
+      "sha256": "fa1dd88b45bbafdb2424824f02a1844fe5d7e1fa7ffe9ff820f6b7a11d904564"
+    },
+    {
+      "path": "图片加权/种子2/模型/textconsistency/model.pth.tar-20.sha256",
+      "size": 65,
+      "sha256": "18de037425f0fc42fea508ac441551a5121473788ce98cf0a63d19512d89710c"
+    },
+    {
+      "path": "图片加权/种子2/训练.log",
+      "size": 35202,
+      "sha256": "70ac26bbb118d18f34db10c231e1cc5d29b1dc4d3b2d08957c2aa4d50b70e520"
+    },
+    {
+      "path": "图片加权/种子3/基础测试集/导出.json",
+      "size": 168196,
+      "sha256": "364fb67742595a8ddd182116816fc6ef90a27314a8a7b4a43b3ab4b3de890e34"
+    },
+    {
+      "path": "图片加权/种子3/基础测试集/运行信息/effective_config.yaml",
+      "size": 4203,
+      "sha256": "b501da786ab988432311e16a57c28479f52193d52c5430f0d8ac09a08cd73e05"
+    },
+    {
+      "path": "图片加权/种子3/基础测试集/运行信息/run_manifest.json",
+      "size": 20934,
+      "sha256": "0be5c69a2c6c332852d25731b42ca22f3c344e64e7e7f092c730fa2b22ffb8f2"
+    },
+    {
+      "path": "图片加权/种子3/基础测试集/预测.npz",
+      "size": 1448257,
+      "sha256": "cd1d57b4010c09a8b5b5964f1400e735a19da0051c3785dee8840d4b60fcf1c9"
+    },
+    {
+      "path": "图片加权/种子3/基础测试集导出.log",
+      "size": 10623,
+      "sha256": "808606bf9a7cf72db4224b79e101f05e9ea7b43df445ba7e5a620d23150d16a2"
+    },
+    {
+      "path": "图片加权/种子3/新类别测试集/导出.json",
+      "size": 167951,
+      "sha256": "ddbda5ae4a3cf646a4f7fe313dc91e6237d0c229d628a872c8e8cf812e3b5e9c"
+    },
+    {
+      "path": "图片加权/种子3/新类别测试集/运行信息/effective_config.yaml",
+      "size": 4208,
+      "sha256": "b65efe655f3b376645df402f3fa0940e24d371b9611da065936fdb70f259d2e3"
+    },
+    {
+      "path": "图片加权/种子3/新类别测试集/运行信息/run_manifest.json",
+      "size": 20618,
+      "sha256": "8b66131b58edb80109c7d323d97edba0b1eb9e74fac65b595819b653374ce471"
+    },
+    {
+      "path": "图片加权/种子3/新类别测试集/预测.npz",
+      "size": 1450572,
+      "sha256": "d799fffd8010347783ac7c6a6e84c0b348dbb3a22aa207ec731a23a1cf191afc"
+    },
+    {
+      "path": "图片加权/种子3/新类别测试集导出.log",
+      "size": 10592,
+      "sha256": "5ec931632bd23cb8bdf08f465939658567de37c24db13529c59d8fa8f1eddefb"
+    },
+    {
+      "path": "图片加权/种子3/模型/effective_config.yaml",
+      "size": 4155,
+      "sha256": "22461b9a76d1b15607ed5227b12a03dd01bd546bf3e4deb0aad8eb86857b3521"
+    },
+    {
+      "path": "图片加权/种子3/模型/log.txt",
+      "size": 35179,
+      "sha256": "7c1f908923f342dfde434a2d6480e8a344ba016b0a5e2264be24f5ec49223704"
+    },
+    {
+      "path": "图片加权/种子3/模型/metrics.json",
+      "size": 21156,
+      "sha256": "13bce9870eea8f0472f46194c01211ed40f59a2ce1ec667f4d3dd36042e680f7"
+    },
+    {
+      "path": "图片加权/种子3/模型/run_manifest.json",
+      "size": 20934,
+      "sha256": "0be5c69a2c6c332852d25731b42ca22f3c344e64e7e7f092c730fa2b22ffb8f2"
+    },
+    {
+      "path": "图片加权/种子3/模型/textconsistency/checkpoint",
+      "size": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    {
+      "path": "图片加权/种子3/模型/textconsistency/model.pth.tar-20",
+      "size": 8291263,
+      "sha256": "f362d35d7d09839f578c633970abb8e9026096e81013e3876d097c6d3b8f0c48"
+    },
+    {
+      "path": "图片加权/种子3/模型/textconsistency/model.pth.tar-20.sha256",
+      "size": 65,
+      "sha256": "8413fa8d019c77ba1bcd6afde14db84887bcdbf1465c4d2f00aefc4102609d00"
+    },
+    {
+      "path": "图片加权/种子3/训练.log",
+      "size": 35201,
+      "sha256": "58564a4a04234cb65deebd40987e1f8eb4335986f8b87e1a6139c1ac39c6cb16"
+    },
+    {
+      "path": "均值对照分析.json",
+      "size": 505,
+      "sha256": "7693c95257b4fed66c8692ea559295964704a6bdeff38f1fa760077da36f33f2"
+    },
+    {
+      "path": "均值描述/种子1/基础测试集/导出.json",
+      "size": 168157,
+      "sha256": "d26069e26480367b08449c3b185855f90288a460ada779a0bf29d46aac83eb66"
+    },
+    {
+      "path": "均值描述/种子1/基础测试集/运行信息/effective_config.yaml",
+      "size": 4201,
+      "sha256": "b9870c0ac5af3afeb44a67a1045a4fda7c20d21e4124efc04c5223b4e82df452"
+    },
+    {
+      "path": "均值描述/种子1/基础测试集/运行信息/run_manifest.json",
+      "size": 20898,
+      "sha256": "5ef93ba4f4f4379bc4fafe6ee7ebcb68be68b931747010bd55becf6e9fb86576"
+    },
+    {
+      "path": "均值描述/种子1/基础测试集/预测.npz",
+      "size": 1448487,
+      "sha256": "e6a2cd92906e57a7ca0527fb4194b83b18e0beee28360b5af3e5d0a586da6ef6"
+    },
+    {
+      "path": "均值描述/种子1/基础测试集导出.log",
+      "size": 10587,
+      "sha256": "8b835ebaf43c18ae1f0734a6d3d0c15da8f7ab219856eacd4f95eeaa774a2fba"
+    },
+    {
+      "path": "均值描述/种子1/基础验证集/导出.json",
+      "size": 42318,
+      "sha256": "72c7337db6d0c2400fe71be16a9b8a4c8ad24354b87b2e740f63014715019c80"
+    },
+    {
+      "path": "均值描述/种子1/基础验证集/运行信息/effective_config.yaml",
+      "size": 4200,
+      "sha256": "03f62d698aafe88ea9c3471f0d8a4a222530f05e0d2f675b41afde0b6ad1f1fb"
+    },
+    {
+      "path": "均值描述/种子1/基础验证集/运行信息/run_manifest.json",
+      "size": 20898,
+      "sha256": "5ef93ba4f4f4379bc4fafe6ee7ebcb68be68b931747010bd55becf6e9fb86576"
+    },
+    {
+      "path": "均值描述/种子1/基础验证集/预测.npz",
+      "size": 175326,
+      "sha256": "6ee27c4d65334bf55c688b20d4caaa34e18db9ed84549972ae81dbc636f9685b"
+    },
+    {
+      "path": "均值描述/种子1/基础验证集导出.log",
+      "size": 10587,
+      "sha256": "8b835ebaf43c18ae1f0734a6d3d0c15da8f7ab219856eacd4f95eeaa774a2fba"
+    },
+    {
+      "path": "均值描述/种子1/新类别测试集/导出.json",
+      "size": 167914,
+      "sha256": "9bc6329b54889734b2967690ab6a8cd3bf6f72c800210a1abbf4cf6808573524"
+    },
+    {
+      "path": "均值描述/种子1/新类别测试集/运行信息/effective_config.yaml",
+      "size": 4206,
+      "sha256": "47729adc0078cbe0ba0039c038462fa8cddc53aa2e55b0d7b96ed59d498b6534"
+    },
+    {
+      "path": "均值描述/种子1/新类别测试集/运行信息/run_manifest.json",
+      "size": 20582,
+      "sha256": "098a2d14655986bd5976e75f1186b61806c3c5c647bec183ce6080fdf6b55426"
+    },
+    {
+      "path": "均值描述/种子1/新类别测试集/预测.npz",
+      "size": 1451447,
+      "sha256": "3cb915b756300bca14824baeefbd193c276057d528b9fc590481f7f75ee45897"
+    },
+    {
+      "path": "均值描述/种子1/新类别测试集导出.log",
+      "size": 10556,
+      "sha256": "9cbe24f7934d2f5e7949c26365cfb55acdd6703ec4b5c1feba9d123550263cde"
+    },
+    {
+      "path": "均值描述/种子1/模型/effective_config.yaml",
+      "size": 4153,
+      "sha256": "1d41fa167a0c91f36a811bc6472daf66a4186d2f05a7566f6f65ebedee75ebad"
+    },
+    {
+      "path": "均值描述/种子1/模型/log.txt",
+      "size": 35139,
+      "sha256": "c652dcf042be2b0118d4ef2deff4b74ff5d77b026c77e079b6dff39da1c1c629"
+    },
+    {
+      "path": "均值描述/种子1/模型/metrics.json",
+      "size": 21120,
+      "sha256": "3cd21a2f5aef9daa0094d7412078517b02a3c5565af4d961601f85ae4c4fb0e1"
+    },
+    {
+      "path": "均值描述/种子1/模型/run_manifest.json",
+      "size": 20898,
+      "sha256": "5ef93ba4f4f4379bc4fafe6ee7ebcb68be68b931747010bd55becf6e9fb86576"
+    },
+    {
+      "path": "均值描述/种子1/模型/textconsistency/checkpoint",
+      "size": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    {
+      "path": "均值描述/种子1/模型/textconsistency/model.pth.tar-20",
+      "size": 8291199,
+      "sha256": "ada386d164a88a17dbd462fd3dec8c33779d1c8071e5cdc38094335c2da8c624"
+    },
+    {
+      "path": "均值描述/种子1/模型/textconsistency/model.pth.tar-20.sha256",
+      "size": 65,
+      "sha256": "dbd9b6609db6eedaa50866661729c613f9a9de3cfd19404bc86e9cd7abd51e28"
+    },
+    {
+      "path": "均值描述/种子1/训练.log",
+      "size": 35161,
+      "sha256": "6d6d286a15d9f1f80954ec55f4d5acd3f19c70c190323b77d7ee0264e32216ca"
+    },
+    {
+      "path": "均值描述/种子2/基础测试集/导出.json",
+      "size": 168158,
+      "sha256": "0eaa921b29729cb53bfbe6d0832727fbed0d2038f6eb0d6855311bb891f6496c"
+    },
+    {
+      "path": "均值描述/种子2/基础测试集/运行信息/effective_config.yaml",
+      "size": 4201,
+      "sha256": "b230f6d45d042a9e2d88f69c7caa6f422d73128363d7a8ca7627cba93075ec73"
+    },
+    {
+      "path": "均值描述/种子2/基础测试集/运行信息/run_manifest.json",
+      "size": 20898,
+      "sha256": "34452392b9c1cf9693afad48fc46f11a6cb1a06d6f3faa09434c2288f37f6a85"
+    },
+    {
+      "path": "均值描述/种子2/基础测试集/预测.npz",
+      "size": 1450940,
+      "sha256": "d3d53d8dc04a3c1dd01250defe80c9fb93f22e21d4fd7ffb69acf74bede0cf9c"
+    },
+    {
+      "path": "均值描述/种子2/基础测试集导出.log",
+      "size": 10587,
+      "sha256": "e62b3705f70d26605d1818b13f5355989faee5a5b07caa2e97559b248b45d3ed"
+    },
+    {
+      "path": "均值描述/种子2/新类别测试集/导出.json",
+      "size": 167915,
+      "sha256": "50fe7f4bc79a1044319d7a69cbca11c1f89b5b0cb1feacad6ce248977aba8a26"
+    },
+    {
+      "path": "均值描述/种子2/新类别测试集/运行信息/effective_config.yaml",
+      "size": 4206,
+      "sha256": "14bb7ec20126cfb7d7ffaffe8273f4a327a11c75d0b8d713ce73109848cd4b19"
+    },
+    {
+      "path": "均值描述/种子2/新类别测试集/运行信息/run_manifest.json",
+      "size": 20582,
+      "sha256": "e83be5c6bb0b3da6b5dc0bb9b58392f12486bb3865de156dbf9c132baae580d1"
+    },
+    {
+      "path": "均值描述/种子2/新类别测试集/预测.npz",
+      "size": 1453909,
+      "sha256": "9105e31db881c6b3f1f9fbe4d49e7c56827e0b97cc04932b20862f12dbae4d56"
+    },
+    {
+      "path": "均值描述/种子2/新类别测试集导出.log",
+      "size": 10556,
+      "sha256": "fafda47d46ebc9e8a84c9cc2267e8a00943291a17b48703c5a161dfb83a63810"
+    },
+    {
+      "path": "均值描述/种子2/模型/effective_config.yaml",
+      "size": 4153,
+      "sha256": "e3eef7162b2bc163378bfe1a0d4c3538a130db75a2425b93b40d0ede12f6518e"
+    },
+    {
+      "path": "均值描述/种子2/模型/log.txt",
+      "size": 35140,
+      "sha256": "d56b1b9f93537e25f9f0129b52f14e42ce2dfa2e22c90b0fdd99292de6816901"
+    },
+    {
+      "path": "均值描述/种子2/模型/metrics.json",
+      "size": 21120,
+      "sha256": "8c7f901c7f88e266df87c55524d831e6f1484eb7bffd654d01f3937a149f55ad"
+    },
+    {
+      "path": "均值描述/种子2/模型/run_manifest.json",
+      "size": 20898,
+      "sha256": "34452392b9c1cf9693afad48fc46f11a6cb1a06d6f3faa09434c2288f37f6a85"
+    },
+    {
+      "path": "均值描述/种子2/模型/textconsistency/checkpoint",
+      "size": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    {
+      "path": "均值描述/种子2/模型/textconsistency/model.pth.tar-20",
+      "size": 8291199,
+      "sha256": "4c4386f9b205b6b17356699dd2c0ba532726fbe5dc5fb2339602c3dc2ed3564a"
+    },
+    {
+      "path": "均值描述/种子2/模型/textconsistency/model.pth.tar-20.sha256",
+      "size": 65,
+      "sha256": "093de6c9d3c6a573c91fbaa57d1d0e02a3ecdcfdf5afbe0925675353ff07aba8"
+    },
+    {
+      "path": "均值描述/种子2/训练.log",
+      "size": 35162,
+      "sha256": "9edee42633228fef5566e81f4bdc76f34d894c6b26ad4189bcadbb2ddc845507"
+    },
+    {
+      "path": "均值描述/种子3/基础测试集/导出.json",
+      "size": 168160,
+      "sha256": "78e1cfcc367fd4e03df9e5e75948722fbdc16fba3a890fcf824239406f70940e"
+    },
+    {
+      "path": "均值描述/种子3/基础测试集/运行信息/effective_config.yaml",
+      "size": 4201,
+      "sha256": "639448184ef7a74e842eef852530a25a200da0c72344c8d40c8d9249d5508601"
+    },
+    {
+      "path": "均值描述/种子3/基础测试集/运行信息/run_manifest.json",
+      "size": 20898,
+      "sha256": "9d3dc6fd02ade35bbe0bdc701cbb8586b285b49cce342e1ee6855b3ffd87bf2b"
+    },
+    {
+      "path": "均值描述/种子3/基础测试集/预测.npz",
+      "size": 1449051,
+      "sha256": "f17860764ebf0cedd1e7a1c8c8114c005adb7bd57018fe063cc0a1ab1d63206a"
+    },
+    {
+      "path": "均值描述/种子3/基础测试集导出.log",
+      "size": 10587,
+      "sha256": "cb21b25e7b022d3540ef7fe87a15d0d816c441a5ba3ca7596337941fb701d1db"
+    },
+    {
+      "path": "均值描述/种子3/新类别测试集/导出.json",
+      "size": 167915,
+      "sha256": "6f3e63dce9ca9b2f56b34e4f762145abb51dbbac5cc19cba680f92a3638b527e"
+    },
+    {
+      "path": "均值描述/种子3/新类别测试集/运行信息/effective_config.yaml",
+      "size": 4206,
+      "sha256": "94dc739b0fffa20ed82b7360e0a9e3666ae184031a4cd3c5281768063e2bb6f3"
+    },
+    {
+      "path": "均值描述/种子3/新类别测试集/运行信息/run_manifest.json",
+      "size": 20582,
+      "sha256": "796dddd6e61ca939c5cedb2fcb17fbd5dfa648d2d930216e4ab99f6c767bd7c6"
+    },
+    {
+      "path": "均值描述/种子3/新类别测试集/预测.npz",
+      "size": 1450240,
+      "sha256": "5ad7b7f6cd908d4c4b58e7a11cafe4c7725949f6f8ebbfcc9083921693442ff9"
+    },
+    {
+      "path": "均值描述/种子3/新类别测试集导出.log",
+      "size": 10556,
+      "sha256": "0b19dd17f1a1c62720de64ea2704364d9ea04319aa3159d7be4ad936e3716c65"
+    },
+    {
+      "path": "均值描述/种子3/模型/effective_config.yaml",
+      "size": 4153,
+      "sha256": "c2ce2814110698e91a630ffe1069ee5861025e8c7decaff4f6bdbd74a6e21b5f"
+    },
+    {
+      "path": "均值描述/种子3/模型/log.txt",
+      "size": 35140,
+      "sha256": "8279de88730f126fbb94a731e885efc5f07ad8439913a070c66e6038d182b144"
+    },
+    {
+      "path": "均值描述/种子3/模型/metrics.json",
+      "size": 21120,
+      "sha256": "d02927ff1ee00eafe614832b04b1beccd7ce665ce0a31b6f999429af4c977cf0"
+    },
+    {
+      "path": "均值描述/种子3/模型/run_manifest.json",
+      "size": 20898,
+      "sha256": "9d3dc6fd02ade35bbe0bdc701cbb8586b285b49cce342e1ee6855b3ffd87bf2b"
+    },
+    {
+      "path": "均值描述/种子3/模型/textconsistency/checkpoint",
+      "size": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    {
+      "path": "均值描述/种子3/模型/textconsistency/model.pth.tar-20",
+      "size": 8291199,
+      "sha256": "8a48a1cba529ef348808d0e88bf8d90fd78dfe205f84b04f447782e6cdc46967"
+    },
+    {
+      "path": "均值描述/种子3/模型/textconsistency/model.pth.tar-20.sha256",
+      "size": 65,
+      "sha256": "ca6e7e1522c575ec42b6fd10793aae8539a1f75c19b587fb84ca6d08ff610eef"
+    },
+    {
+      "path": "均值描述/种子3/训练.log",
+      "size": 35162,
+      "sha256": "af11f21916388ec90f21b5b70df0dcafccd3de6ba703fe37d293bb9af532fd17"
+    },
+    {
+      "path": "实验协议.json",
+      "size": 1817,
+      "sha256": "b25536d63c8b0989af381f032614efd3f935286b6e7f1438be4a0ad8deca976d"
+    },
+    {
+      "path": "执行状态.json",
+      "size": 2713,
+      "sha256": "51b0ca554d50451137a21e68f25d5d2a63316e1284d6f9a614a86ec86e3fe866"
+    },
+    {
+      "path": "类别名/种子1/基础测试集/导出.json",
+      "size": 167936,
+      "sha256": "8e633ba9d67897b15d2181d8e1a57eae4be84f61033725c7430301708328fe67"
+    },
+    {
+      "path": "类别名/种子1/基础测试集/运行信息/effective_config.yaml",
+      "size": 4204,
+      "sha256": "590b44497ed6b0d9c3d2bbfc042a72b2d18ef5c001d4f3393153d997b441ad0b"
+    },
+    {
+      "path": "类别名/种子1/基础测试集/运行信息/run_manifest.json",
+      "size": 20690,
+      "sha256": "f1486c428bd89bcf6497803653e2429f615203a7cd3ad1dab2253bd1e9dbdce2"
+    },
+    {
+      "path": "类别名/种子1/基础测试集/预测.npz",
+      "size": 1445240,
+      "sha256": "0b0156501aecc9448a1217eafadce2866c85e28e528a4a6131dc6f14b9063c63"
+    },
+    {
+      "path": "类别名/种子1/基础测试集导出.log",
+      "size": 10405,
+      "sha256": "d18fc289d7c8a2dfddc32d985b0b01ceab013b16a66690d451418626816bf581"
+    },
+    {
+      "path": "类别名/种子1/新类别测试集/导出.json",
+      "size": 167695,
+      "sha256": "af7c52dd001a2696d8b299465302d530e182499fe1b35109ae47a1b409b0978a"
+    },
+    {
+      "path": "类别名/种子1/新类别测试集/运行信息/effective_config.yaml",
+      "size": 4209,
+      "sha256": "b44ed0a8be44e9e79b33810fbf354a8b0257c06fa3c87c938a3899085e07d452"
+    },
+    {
+      "path": "类别名/种子1/新类别测试集/运行信息/run_manifest.json",
+      "size": 20374,
+      "sha256": "f910103f7112f68e5851c8489e96c8e04211c474a418e2646195a786df7f0084"
+    },
+    {
+      "path": "类别名/种子1/新类别测试集/预测.npz",
+      "size": 1449093,
+      "sha256": "63cc0adf3fc7188b80e371c2c267915ebcff396f996eb0dbd40857d27b6a4e68"
+    },
+    {
+      "path": "类别名/种子1/新类别测试集导出.log",
+      "size": 10374,
+      "sha256": "f18ee88cb476e72c6cbd2c609389da840c074d6171eda79ea78b34781e699e3b"
+    },
+    {
+      "path": "类别名/种子1/模型/effective_config.yaml",
+      "size": 4156,
+      "sha256": "42161a830d41d42c85d19faee0ff7211cbfd767b2485ee5825889a2fe673b57e"
+    },
+    {
+      "path": "类别名/种子1/模型/log.txt",
+      "size": 34980,
+      "sha256": "63d2f2f0bde0ea411f993553cb81ce7a19017b35c406e66c2025765232ff0b40"
+    },
+    {
+      "path": "类别名/种子1/模型/metrics.json",
+      "size": 20912,
+      "sha256": "d0f2c893e8f8b7b0a306958ff982346a40156e0f4d39195ff09ed4afd11d734f"
+    },
+    {
+      "path": "类别名/种子1/模型/run_manifest.json",
+      "size": 20690,
+      "sha256": "f1486c428bd89bcf6497803653e2429f615203a7cd3ad1dab2253bd1e9dbdce2"
+    },
+    {
+      "path": "类别名/种子1/模型/textconsistency/checkpoint",
+      "size": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    {
+      "path": "类别名/种子1/模型/textconsistency/model.pth.tar-20",
+      "size": 8291007,
+      "sha256": "8a7320603e4a18c032101818a0b25fbe9bfc0a2ebb3ef9d6eb90ad455ff601e6"
+    },
+    {
+      "path": "类别名/种子1/模型/textconsistency/model.pth.tar-20.sha256",
+      "size": 65,
+      "sha256": "3a874c807a9cd01c07901d1542f68fcd855c459116203b495bd4a6c29709ce2c"
+    },
+    {
+      "path": "类别名/种子1/训练.log",
+      "size": 35002,
+      "sha256": "98c40b4e1a5912339740b11f82022d3dd862a18e9439168c00a88b1be8639fae"
+    },
+    {
+      "path": "类别名/种子2/基础测试集/导出.json",
+      "size": 167940,
+      "sha256": "440af99c1ee124cc739ca7d77fe21290f851d3478c041a22363a6ed9bd12bf48"
+    },
+    {
+      "path": "类别名/种子2/基础测试集/运行信息/effective_config.yaml",
+      "size": 4204,
+      "sha256": "cb4008ad8305ec4619a16c7c9621233a84e01b1b5904715c288bbb1d750db491"
+    },
+    {
+      "path": "类别名/种子2/基础测试集/运行信息/run_manifest.json",
+      "size": 20690,
+      "sha256": "26bddff0a7459988495296b561491cc0d2e02430616e41938924c26991ecfe62"
+    },
+    {
+      "path": "类别名/种子2/基础测试集/预测.npz",
+      "size": 1450616,
+      "sha256": "82bd5c03e07bf021a6fc4f79dbfe2e7d0440def419e387bd52ec01ed6b446e83"
+    },
+    {
+      "path": "类别名/种子2/基础测试集导出.log",
+      "size": 10405,
+      "sha256": "7205f15d32166dc3c93b9f2d5d2c7af341a48efe300ad93ae4abeb2fb676ca72"
+    },
+    {
+      "path": "类别名/种子2/新类别测试集/导出.json",
+      "size": 167696,
+      "sha256": "4c26cb3acc4dd5a39fb139e63da121f13cf9d1bc43b8fa27109724b277ac6689"
+    },
+    {
+      "path": "类别名/种子2/新类别测试集/运行信息/effective_config.yaml",
+      "size": 4209,
+      "sha256": "66f016dab57e0356d4ee05493ef7f869724f0673107b84ecea515b7144d9e3fa"
+    },
+    {
+      "path": "类别名/种子2/新类别测试集/运行信息/run_manifest.json",
+      "size": 20374,
+      "sha256": "e4d1cff1fbd1df50d2eea15ae1aaf92292c6a344f762c90c4b2c78af8ffd508a"
+    },
+    {
+      "path": "类别名/种子2/新类别测试集/预测.npz",
+      "size": 1453194,
+      "sha256": "562ad4e1be2a6fb84022e41ce10b09f6634ea1dd09a7e36c92b998b23be22c60"
+    },
+    {
+      "path": "类别名/种子2/新类别测试集导出.log",
+      "size": 10374,
+      "sha256": "2a00e07fa8037f3ccb538595ee4e6bec4858931d147677a4e36cb3518b025092"
+    },
+    {
+      "path": "类别名/种子2/模型/effective_config.yaml",
+      "size": 4156,
+      "sha256": "0d7905a1e374a1107f6601c7e3f1398c2d962102f2027e5426f04a8922eeb203"
+    },
+    {
+      "path": "类别名/种子2/模型/log.txt",
+      "size": 34982,
+      "sha256": "53cb187f88a0a0a0bb8400b6fae604bb0bdfeb4b162f706d92374ffa21d55805"
+    },
+    {
+      "path": "类别名/种子2/模型/metrics.json",
+      "size": 20911,
+      "sha256": "19c1f87a126f55255a2b52fce3f4e3173ea6d1ad39c1aaeb35a4ffbf3b832b49"
+    },
+    {
+      "path": "类别名/种子2/模型/run_manifest.json",
+      "size": 20690,
+      "sha256": "26bddff0a7459988495296b561491cc0d2e02430616e41938924c26991ecfe62"
+    },
+    {
+      "path": "类别名/种子2/模型/textconsistency/checkpoint",
+      "size": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    {
+      "path": "类别名/种子2/模型/textconsistency/model.pth.tar-20",
+      "size": 8291007,
+      "sha256": "a9d43abf756e149d57dd2280729a105de2609a63b7553b4e8666dad286914613"
+    },
+    {
+      "path": "类别名/种子2/模型/textconsistency/model.pth.tar-20.sha256",
+      "size": 65,
+      "sha256": "e812a721e3863d3a9eb726c8bf846d170a5c66077168c35a0c0ce4c8e1db0481"
+    },
+    {
+      "path": "类别名/种子2/训练.log",
+      "size": 35004,
+      "sha256": "3dfb50bc010d99ce47ba3c1a3c1419ed5020de2f06eca617a482af1561c39f67"
+    },
+    {
+      "path": "类别名/种子3/基础测试集/导出.json",
+      "size": 167940,
+      "sha256": "e02ba7530a2eda74c6d8f55bda1eb6a80227f319a11dfd8c89925c3a07b0181a"
+    },
+    {
+      "path": "类别名/种子3/基础测试集/运行信息/effective_config.yaml",
+      "size": 4204,
+      "sha256": "5023b0d02702043917bc62a51c9876a6608410e60a7fbfd8b3302ec4538437ed"
+    },
+    {
+      "path": "类别名/种子3/基础测试集/运行信息/run_manifest.json",
+      "size": 20690,
+      "sha256": "895edfc32fdc3954826d88856bec2e7cfcd137ea5d37470b2d1f95747529fbd3"
+    },
+    {
+      "path": "类别名/种子3/基础测试集/预测.npz",
+      "size": 1447525,
+      "sha256": "72b99f029a43968c7e2217bc75dab64a4165170963aa8e0c24ec4c8a46f3c786"
+    },
+    {
+      "path": "类别名/种子3/基础测试集导出.log",
+      "size": 10405,
+      "sha256": "99b9cb3bb99e5b504ad292a67822d40debf1496305d49e8e037423aa1533a57f"
+    },
+    {
+      "path": "类别名/种子3/新类别测试集/导出.json",
+      "size": 167696,
+      "sha256": "29b5f67d8c2b6e9d4325c19f6c8dcd0521489453b1bcdddf61edb8a93dda0545"
+    },
+    {
+      "path": "类别名/种子3/新类别测试集/运行信息/effective_config.yaml",
+      "size": 4209,
+      "sha256": "c1d95b1dc1b18f2780d99afd64c5503bda0d22ce550001de28bf5edc4610c8e1"
+    },
+    {
+      "path": "类别名/种子3/新类别测试集/运行信息/run_manifest.json",
+      "size": 20374,
+      "sha256": "212cf4802a3f18757cfef056b5727990bff2f7cf53bdd14746f5f0459a9d3ec7"
+    },
+    {
+      "path": "类别名/种子3/新类别测试集/预测.npz",
+      "size": 1449072,
+      "sha256": "079c069682a99d715b5011530fcb2f695d6fb2dfa208008d85194a6c632daa7e"
+    },
+    {
+      "path": "类别名/种子3/新类别测试集导出.log",
+      "size": 10374,
+      "sha256": "a083a2e215a8e37c0de408d6c3a9cc48a2173cdc8dfb658758c0da7e633d7896"
+    },
+    {
+      "path": "类别名/种子3/模型/effective_config.yaml",
+      "size": 4156,
+      "sha256": "897a85def0025b34b9cddb3a1ced9e54ac706cae79c498c9ab9e9a10d8b2940b"
+    },
+    {
+      "path": "类别名/种子3/模型/log.txt",
+      "size": 34982,
+      "sha256": "5a4f74a6224fbd8ec20685273918b7c62814c22cfec84606c0279d90162298ff"
+    },
+    {
+      "path": "类别名/种子3/模型/metrics.json",
+      "size": 20912,
+      "sha256": "a2692264d6ff52e78979aaf307ad4c99578b3e832ccd42a07ad09f4ef3803ee5"
+    },
+    {
+      "path": "类别名/种子3/模型/run_manifest.json",
+      "size": 20690,
+      "sha256": "895edfc32fdc3954826d88856bec2e7cfcd137ea5d37470b2d1f95747529fbd3"
+    },
+    {
+      "path": "类别名/种子3/模型/textconsistency/checkpoint",
+      "size": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    {
+      "path": "类别名/种子3/模型/textconsistency/model.pth.tar-20",
+      "size": 8291007,
+      "sha256": "6abd8d2e6601cc5d194f3cb66c54b1786c032427f3ddb0f58498458e996123c0"
+    },
+    {
+      "path": "类别名/种子3/模型/textconsistency/model.pth.tar-20.sha256",
+      "size": 65,
+      "sha256": "28ca85ce56bf0e29da1952c9d411b56d5d5a6678b19c80d6bf1ef20aa0509e71"
+    },
+    {
+      "path": "类别名/种子3/训练.log",
+      "size": 35004,
+      "sha256": "2aa3f0954e740372f3a78b66fa1bcf3d58f036a0c5579c29aa162eefe18f985a"
+    },
+    {
+      "path": "结果分析.json",
+      "size": 6237,
+      "sha256": "f8510673c1dc9043f5eccc089b527861ccfb29706df16fef7847e002e8a441b5"
+    },
+    {
+      "path": "结果报告.md",
+      "size": 1589,
+      "sha256": "42a59e03efa8bdec71eba05c3be0fdf164b61b5af0aa827ecf82e11dd86c6662"
+    }
+  ]
+}

@@ -101,9 +101,7 @@ class ValidatedTrainer(TrainerX):
         if text_residual is not None:
             self.trainable_modules['text_residual'] = text_residual
         parameters = [p for p in self.trainable_modules.parameters() if p.requires_grad]
-        self.optim = torch.optim.SGD(parameters, lr=cfg.OPTIM.LR, momentum=cfg.OPTIM.MOMENTUM,
-                                     weight_decay=cfg.OPTIM.WEIGHT_DECAY)
-        self.sched = build_lr_scheduler(self.optim, cfg.OPTIM)
+        self.optim, self.sched = self.build_optimizers(parameters)
         self.register_model('textconsistency', self.trainable_modules, self.optim, self.sched)
         self.group = getattr(self.model, 'group', None)
         self.kd_weight = tc.KD_WEIGHT if self.group is None or self.group['use_kd'] else 0.
@@ -132,6 +130,9 @@ class ValidatedTrainer(TrainerX):
         correction = getattr(self.model, 'correction_identity', None)
         if correction is not None:
             self.repro_signature.update(format=4, correction=dict(correction))
+        optimization = getattr(self, 'optimization_identity', None)
+        if optimization is not None:
+            self.repro_signature.update(format=5, optimization=optimization)
         self.run_provenance = {
             'seed': cfg.SEED, 'dataset': cfg.DATASET.NAME, 'shots': cfg.DATASET.NUM_SHOTS,
             'subsample': cfg.DATASET.SUBSAMPLE_CLASSES, 'model_signature': self.repro_signature,
@@ -154,6 +155,12 @@ class ValidatedTrainer(TrainerX):
         (directory / 'run_manifest.json').write_text(json.dumps(self.run_provenance, indent=2))
         (directory / 'effective_config.yaml').write_text(cfg.dump())
         print('Effective protocol: ' + json.dumps(self.run_provenance, sort_keys=True))
+
+    def build_optimizers(self, parameters):
+        cfg = self.cfg
+        optimizer = torch.optim.SGD(parameters, lr=cfg.OPTIM.LR, momentum=cfg.OPTIM.MOMENTUM,
+                                    weight_decay=cfg.OPTIM.WEIGHT_DECAY)
+        return optimizer, build_lr_scheduler(optimizer, cfg.OPTIM)
 
     def set_model_mode(self, mode='train', names=None):
         super().set_model_mode(mode, names)

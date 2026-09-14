@@ -1,0 +1,64 @@
+{
+  "status": "development_screen_complete",
+  "dataset": "DTD",
+  "evidence_role": "development_only",
+  "new_trainings": 0,
+  "formula": {
+    "simple_fusion": "F=0.5*(S+M)",
+    "semantic_direction": "D=center(M-S)",
+    "residual_direction": "R0=center(R_hat)",
+    "gate": "q=clamp(cos(R0,D),0,1)",
+    "corrected": "G=F+q*R_hat",
+    "fitted_hyperparameters": []
+  },
+  "source_exports": {
+    "base": {
+      "folder": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune/reports/experiments/描述半径约束残差筛选-20260914/原始结果/旧检查点零训练重载/基础测试集",
+      "predictions_sha256": "4e6d01f34b70879afd0e63b88b65b9d932e460d29baa0c45d98618365ee8e0fa"
+    },
+    "novel": {
+      "folder": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune/reports/experiments/描述半径约束残差筛选-20260914/原始结果/旧检查点零训练重载/新类别测试集",
+      "predictions_sha256": "56699d7b01432e7bb5f9c4f6b049888299fcd9fe000013b048c9fb82832c57cc"
+    }
+  },
+  "splits": {
+    "base": {
+      "total": 864,
+      "F_accuracy": 76.62037037037037,
+      "G_accuracy": 76.62037037037037,
+      "radius_accuracy": 81.71296296296296,
+      "gate_mean": 0.0008987077744677663,
+      "gate_zero_fraction": 0.9861111111111112,
+      "predictions_changed_vs_F": 0,
+      "corrections_vs_F": 0,
+      "harms_vs_F": 0
+    },
+    "novel": {
+      "total": 828,
+      "F_accuracy": 68.71980676328504,
+      "G_accuracy": 68.84057971014492,
+      "radius_accuracy": 66.30434782608695,
+      "gate_mean": 0.04323739930987358,
+      "gate_zero_fraction": 0.7318840579710145,
+      "predictions_changed_vs_F": 5,
+      "corrections_vs_F": 2,
+      "harms_vs_F": 1
+    }
+  },
+  "harmonic_means": {
+    "F": 72.45535473843763,
+    "G": 72.52242902280956,
+    "radius": 73.20663629564153
+  },
+  "hm_gain": 0.06707428437192675,
+  "novel_gain": 0.12077294685988704,
+  "decision": {
+    "passes": true,
+    "criteria": {
+      "HM增益为正": true,
+      "Novel下降不超过1个百分点": true
+    },
+    "HM增益": 0.06707428437192675,
+    "Novel增益": 0.12077294685988704
+  }
+}

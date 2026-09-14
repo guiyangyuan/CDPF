@@ -1,0 +1,43 @@
+{
+  "independent_recompute": true,
+  "formula": "q=clip(cos(center(R),center(M-S)),0,1); G=F+qR",
+  "accuracy": {
+    "base": {
+      "F": 76.62037037037037,
+      "G": 76.62037037037037,
+      "radius": 81.71296296296296
+    },
+    "novel": {
+      "F": 68.71980676328504,
+      "G": 68.84057971014492,
+      "radius": 66.30434782608695
+    }
+  },
+  "harmonic_mean": {
+    "F": 72.45535473843763,
+    "G": 72.52242902280956,
+    "radius": 73.20663629564153
+  },
+  "gate": {
+    "base": {
+      "mean": 0.0008987077744677663,
+      "zero_fraction": 0.9861111111111112
+    },
+    "novel": {
+      "mean": 0.04323739930987358,
+      "zero_fraction": 0.7318840579710145
+    }
+  },
+  "transitions": {
+    "base": {
+      "changed": 0,
+      "corrections": 0,
+      "harms": 0
+    },
+    "novel": {
+      "changed": 5,
+      "corrections": 2,
+      "harms": 1
+    }
+  }
+}

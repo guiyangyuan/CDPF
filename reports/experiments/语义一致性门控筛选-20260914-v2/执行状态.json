@@ -1,0 +1,13 @@
+{
+  "state": "passed_development_gate",
+  "protocol": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune/reports/preparation/语义一致性门控-20260914/实验协议-v2.json",
+  "started": 1789386652.132823,
+  "ended": 1789386652.186343,
+  "new_trainings_completed": 0,
+  "UCF101_output_created": false,
+  "gate_archives_sha256": {
+    "基础测试集门控预测.npz": "cbb9a0170b521f567b7ef87fec02745fd0b06413b9cea19403deb385c31806ba",
+    "新类别测试集门控预测.npz": "270ef961cf92b6131f16740c5067cf3409b267b2fcaf9bbc375dd5219f18624b"
+  },
+  "conclusion": "proceed to frozen UCF101 confirmation"
+}

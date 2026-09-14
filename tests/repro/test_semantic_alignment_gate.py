@@ -80,13 +80,23 @@ class SemanticAlignmentGateTest(unittest.TestCase):
             labels = torch.tensor([0, 1, 2])
             student_loss, correction_loss = gated.loss_terms(outputs, labels)
             torch.testing.assert_close(student_loss, F.cross_entropy(outputs['S'], labels))
-            torch.testing.assert_close(correction_loss, F.cross_entropy(outputs['Z'], labels))
+            torch.testing.assert_close(
+                correction_loss,
+                F.cross_entropy(outputs['F'].detach() + outputs['R'], labels))
             self.assertIsNone(torch.autograd.grad(
                 correction_loss, gated.model.prompt_learner.ctx,
                 allow_unused=True, retain_graph=True)[0])
             identity = gated.model.correction_identity
             self.assertEqual(identity['kind'], 'semantic_alignment_gated_radius_text_detail')
             self.assertEqual(identity['fitted_hyperparameters'], [])
+
+            fresh = make_text(root / 'fresh', detail='semantic_gated_radius_attentive')
+            self.assertEqual(torch.count_nonzero(fresh.model.text_residual.up.weight).item(), 0)
+            fresh.forward_backward({'img': images, 'label': labels})
+            self.assertGreater(torch.count_nonzero(fresh.model.text_residual.up.weight).item(), 0)
+            self.assertEqual(
+                fresh.model.correction_identity['training_objective'],
+                'CE(S,y)+CE(stopgrad(F)+R_hat,y)')
 
     def test_offline_study_freezes_formula_and_stopping_rule(self):
         path = ROOT / 'scripts/repro/semantic_alignment_gate_study.py'

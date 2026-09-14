@@ -229,10 +229,12 @@ class SemanticGatedRadiusTextDetailCLIP(RadiusBoundedTextDetailCLIP):
     def __init__(self, cfg, classnames, clip_model):
         super().__init__(cfg, classnames, clip_model)
         self.correction_identity.update(
-            version=7,
+            version=8,
             kind='semantic_alignment_gated_radius_text_detail',
             inference='F+q*R_hat',
-            objective='CE(S,y)+CE(stopgrad(F)+stopgrad(q)*R_hat,y)',
+            objective='CE(S,y)+CE(stopgrad(F)+R_hat,y)',
+            training_objective='CE(S,y)+CE(stopgrad(F)+R_hat,y)',
+            gate_training='inference_only_after_ungated_residual_training',
             gate='clamp(cos(center(R_hat),center(M-S)),0,1)',
             gate_scope='per_sample_scalar',
             fitted_hyperparameters=[],
@@ -283,7 +285,3 @@ class CoOp_TextDetail_SubspaceRadius(CoOp_TextDetail_RadiusBounded):
 class CoOp_TextDetail_SemanticGatedRadius(CoOp_TextDetail_RadiusBounded):
     """Use a fixed semantic-alignment gate on the radius-bounded residual."""
     model_builder = SemanticGatedRadiusTextDetailCLIP
-
-    def loss_terms(self, outputs, labels):
-        corrected = outputs['F'].detach() + outputs['Q'][:, None] * outputs['R']
-        return F.cross_entropy(outputs['S'], labels), F.cross_entropy(corrected, labels)

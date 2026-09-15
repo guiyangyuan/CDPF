@@ -61,14 +61,15 @@ class ValidatedTrainer(TrainerX):
     def check_cfg(self, cfg):
         validate_visual_adapter_config(cfg)
         tc = cfg.TRAINER.TEXTCONSISTENCY
+        relation_weight = getattr(tc, 'RELATION_WEIGHT', 0.)
         if tc.PREC != 'fp32':
             raise ValueError('Use PREC fp32 for the validated reproduction; mixed precision is not yet validated')
         loss_scalars = (tc.KD_TEMP, tc.KD_WEIGHT, tc.ADAPTIVE_CE_WEIGHT,
-                        tc.DIVERSITY_WEIGHT, tc.CONTRASTIVE_WEIGHT)
+                        tc.DIVERSITY_WEIGHT, tc.CONTRASTIVE_WEIGHT, relation_weight)
         if (not all(math.isfinite(float(value)) for value in loss_scalars)
                 or tc.KD_TEMP <= 0
                 or min(tc.KD_WEIGHT, tc.ADAPTIVE_CE_WEIGHT,
-                       tc.DIVERSITY_WEIGHT, tc.CONTRASTIVE_WEIGHT) < 0):
+                       tc.DIVERSITY_WEIGHT, tc.CONTRASTIVE_WEIGHT, relation_weight) < 0):
             raise ValueError('Invalid loss configuration')
         if tc.CONTRASTIVE_WEIGHT != 0:
             raise ValueError('Disable the old frozen-feature contrastive loss (CONTRASTIVE_WEIGHT=0)')
@@ -130,6 +131,9 @@ class ValidatedTrainer(TrainerX):
         correction = getattr(self.model, 'correction_identity', None)
         if correction is not None:
             self.repro_signature.update(format=4, correction=dict(correction))
+        relation = getattr(self.model, 'relation_identity', None)
+        if relation is not None:
+            self.repro_signature.update(format=6, relation_regularization=dict(relation))
         optimization = getattr(self, 'optimization_identity', None)
         if optimization is not None:
             self.repro_signature.update(format=5, optimization=optimization)
@@ -151,6 +155,8 @@ class ValidatedTrainer(TrainerX):
         }
         if correction is not None:
             self.run_provenance['effective_losses']['correction_ce'] = float(correction['enabled'])
+        if relation is not None:
+            self.run_provenance['effective_losses']['relation'] = float(relation['weight'])
         directory = Path(cfg.OUTPUT_DIR); directory.mkdir(parents=True, exist_ok=True)
         (directory / 'run_manifest.json').write_text(json.dumps(self.run_provenance, indent=2))
         (directory / 'effective_config.yaml').write_text(cfg.dump())

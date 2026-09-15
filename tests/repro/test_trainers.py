@@ -2,6 +2,7 @@
 Only loading external pretrained weights is substituted; trainers and losses are real.
 """
 import contextlib
+import importlib
 import io
 import json
 from pathlib import Path
@@ -32,7 +33,8 @@ def tiny_clip(cfg):
 
 
 def make_trainer(trainer_cls, output, mode='hierarchical', adapter=True, group='full',
-                 view_order='contiguous', order_seed=0, kd_mode='full_kl'):
+                 view_order='contiguous', order_seed=0, kd_mode='full_kl',
+                 relation_weight=None):
     cfg = get_cfg_default(); extend_cfg(cfg)
     cfg.SEED = 1; cfg.USE_CUDA = False; cfg.DATASET.ROOT = str(output)
     cfg.DATASET.NAME = 'Caltech101'; cfg.DATASET.SUBSAMPLE_CLASSES = 'base'
@@ -45,6 +47,10 @@ def make_trainer(trainer_cls, output, mode='hierarchical', adapter=True, group='
     tc.KD_WEIGHT = 1.; tc.KD_LOSS_MODE = kd_mode; tc.DEVICE = 'cpu'; tc.AGGREGATION = mode
     tc.USE_FEATURE_ADAPTER = adapter; tc.ABLATION_GROUP = group
     tc.VIEW_ORDER = view_order; tc.ORDER_SEED = order_seed
+    if relation_weight is not None:
+        tc.RELATION_WEIGHT = relation_weight
+        tc.KD_WEIGHT = 0.; tc.ADAPTIVE_CE_WEIGHT = 0.
+        tc.AGGREGATION = 'mean'; tc.USE_FEATURE_ADAPTER = False
     if group == 'baseline': tc.INFERENCE_BRANCH = 'student'
     trainer = trainer_cls.__new__(trainer_cls); TrainerBase.__init__(trainer)
     trainer.cfg = cfg
@@ -64,6 +70,67 @@ class TrainerIntegration(unittest.TestCase):
 
     def tearDown(self):
         self.capture.__exit__(None, None, None)
+
+    def test_category_relation_loss_matches_off_diagonal_geometry(self):
+        try:
+            module = importlib.import_module('trainers.类别关系保持提示')
+        except ModuleNotFoundError:
+            self.fail('missing production module: trainers.类别关系保持提示')
+        prompt = torch.tensor([[1., 0.], [0., 1.], [1., 1.]], requires_grad=True)
+        description = torch.tensor([[1., 0.], [1., 1.], [0., 1.]], requires_grad=True)
+
+        loss = module.category_relation_loss(prompt, description)
+
+        self.assertAlmostEqual(loss.item(), 1. / 3., places=6)
+        loss.backward()
+        self.assertIsNotNone(prompt.grad)
+        self.assertGreater(prompt.grad.abs().sum().item(), 0.)
+        self.assertIsNone(description.grad)
+
+    def test_relation_regularizer_changes_only_training_objective(self):
+        module = importlib.import_module('trainers.类别关系保持提示')
+        trainer_cls = getattr(module, 'CoOp_TextConsistency_RelationPreserving', None)
+        self.assertIsNotNone(trainer_cls, 'missing relation-preserving trainer')
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            baseline = make_trainer(trainer_cls, root / 'baseline', relation_weight=0.)
+            proposed = make_trainer(trainer_cls, root / 'proposed', relation_weight=1.)
+            images = torch.randn(3, 3, 32, 32)
+            labels = torch.tensor([0, 1, 2])
+
+            baseline.model.eval(); proposed.model.eval()
+            torch.testing.assert_close(
+                baseline.model_inference(images), proposed.model_inference(images), rtol=0, atol=0)
+            self.assertEqual(baseline.run_provenance['trainable_parameters'],
+                             proposed.run_provenance['trainable_parameters'])
+            self.assertEqual(proposed.run_provenance['trainable_parameters'],
+                             proposed.model.prompt_learner.ctx.numel())
+
+            baseline.forward_backward({'img': images, 'label': labels})
+            result = proposed.forward_backward({'img': images, 'label': labels})
+            self.assertGreater(result['loss_relation'], 0.)
+            self.assertFalse(torch.equal(
+                baseline.model.prompt_learner.ctx, proposed.model.prompt_learner.ctx))
+            self.assertTrue(all(p.grad is None for p in proposed.model.text_encoder.parameters()))
+            self.assertFalse(proposed.model.multiview_encoder.multiview_features.requires_grad)
+            identity = proposed.repro_signature['relation_regularization']
+            self.assertEqual(identity, {
+                'format': 1,
+                'kind': 'description_class_relation_mse',
+                'formula': 'mean_offdiag((T@T.T-stopgrad(D@D.T))^2)',
+                'weight': 1.0,
+                'trainable_parameters_added': 0,
+                'inference': 'unchanged_0.5*(S+M)',
+            })
+            self.assertEqual(proposed.run_provenance['effective_losses']['relation'], 1.)
+
+            baseline.save_model(0, root / 'baseline')
+            before = {name: value.detach().clone()
+                      for name, value in proposed.trainable_modules.state_dict().items()}
+            with self.assertRaisesRegex(ValueError, 'signature'):
+                proposed.load_model(root / 'baseline', 1)
+            for name, value in proposed.trainable_modules.state_dict().items():
+                torch.testing.assert_close(value, before[name], rtol=0, atol=0)
 
     def test_real_training_updates_student_and_aggregator_while_clip_stays_frozen(self):
         for cls in (CoOp_TextConsistency_V2_FG, CoCoOp_TextConsistency_V2_FG):

@@ -36,6 +36,7 @@ import trainers.coop_text_residual
 import trainers.coop_text_residual_adamw
 import trainers.coop_text_detail
 import trainers.coop_textconsistency_ablation
+import trainers.类别关系保持提示
 
 import trainers.cocoop
 import trainers.cocoop_textconsistency_v2_fg
@@ -147,6 +148,7 @@ def extend_cfg(cfg):
     cfg.TRAINER.TEXTCONSISTENCY.TEXT_RESIDUAL_K = 5
     cfg.TRAINER.TEXTCONSISTENCY.TEXT_RESIDUAL_ADAMW_LR = 0.001
     cfg.TRAINER.TEXTCONSISTENCY.TEXT_DETAIL_POOLING = "centered"
+    cfg.TRAINER.TEXTCONSISTENCY.RELATION_WEIGHT = 0.0
     cfg.TRAINER.TEXTCONSISTENCY.INFERENCE_BRANCH = "ensemble"
     cfg.TRAINER.TEXTCONSISTENCY.ENSEMBLE_ALPHA = 0.5
     cfg.TRAINER.TEXTCONSISTENCY.DEVICE = "auto"

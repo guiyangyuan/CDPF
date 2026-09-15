@@ -274,6 +274,30 @@ class SemanticAlignmentGateTest(unittest.TestCase):
             self.assertTrue((output_dir / '预测.npz').is_file())
             self.assertTrue((output_dir / '导出.json').is_file())
 
+    def test_oxford_pets_confirmation_is_fixed_and_staged(self):
+        path = ROOT / 'scripts/repro/语义一致性门控OxfordPets验证.py'
+        self.assertTrue(path.is_file(), 'missing OxfordPets confirmation runner')
+        spec = importlib.util.spec_from_file_location('semantic_alignment_oxford_pets', path)
+        study = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(study)
+
+        self.assertEqual(study.planned_cases(), [
+            {'phase': 'OxfordPets单种子独立筛选', 'seed': 1},
+            {'phase': 'OxfordPets三种子独立确认', 'seed': 2},
+            {'phase': 'OxfordPets三种子独立确认', 'seed': 3},
+        ])
+        protocol = study.build_protocol(
+            '/server/data', '/server/clip.pt', '/server/output', 'fixed-commit',
+            ROOT / 'reports/experiments/语义一致性门控UCF101独立验证-20260915/独立复算.json')
+        self.assertEqual(protocol['training']['dataset'], 'OxfordPets')
+        self.assertEqual(protocol['maximum_new_trainings'], 3)
+        self.assertEqual(protocol['dataset_receipt_expected']['split_counts'],
+                         {'train': 2944, 'val': 736, 'test': 3669})
+        self.assertEqual(protocol['UCF101_confirmation_prerequisite']['positive_hm_seeds'], 2)
+        command = study.train_command(1, '/server/data', '/server/clip.pt', '/server/model')
+        self.assertIn(str(ROOT / 'configs/datasets/oxford_pets.yaml'), command)
+        self.assertIn('CoOp_TextDetail_SemanticGatedRadius', command)
+
 
 if __name__ == '__main__':
     unittest.main()

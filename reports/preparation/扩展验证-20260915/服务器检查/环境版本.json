@@ -1,0 +1,22 @@
+{
+  "Python": "3.12.3",
+  "PyTorch": "2.8.0+cu128",
+  "Torchvision": "0.23.0+cu128",
+  "CUDA运行时": "12.8",
+  "当前CUDA可用": false,
+  "模型源码SHA256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+  "依赖版本": {
+    "numpy": "2.2.6",
+    "scipy": "1.15.3",
+    "Pillow": "11.2.1",
+    "ftfy": "6.3.1",
+    "regex": "2024.11.6",
+    "yacs": "0.1.8",
+    "tqdm": "4.67.1",
+    "scikit-learn": "1.6.1",
+    "tabulate": "0.9.0",
+    "tensorboard": "2.19.0",
+    "gdown": "5.2.0",
+    "wilds": "2.0.0"
+  }
+}

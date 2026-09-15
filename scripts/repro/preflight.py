@@ -12,6 +12,9 @@ from dassl.utils import set_random_seed
 from datasets.ucf101 import UCF101
 from datasets.dtd import DescribableTextures
 from datasets.fgvc_aircraft import FGVCAircraft
+from datasets.caltech101 import Caltech101
+from datasets.oxford_flowers import OxfordFlowers
+from datasets.eurosat import EuroSAT
 from train import extend_cfg
 from trainers.textconsistency_common import TEMPLATE_FILES, description_rows, sha256_file
 from trainers.textconsistency_runtime import sample_digest
@@ -20,6 +23,12 @@ DATASETS = {
     'ucf101': {'name': 'UCF101', 'loader': UCF101, 'dir': 'ucf101', 'image_dir': 'UCF-101-midframes', 'split': 'split_zhou_UCF101.json'},
     'dtd': {'name': 'DescribableTextures', 'loader': DescribableTextures, 'dir': 'dtd', 'image_dir': 'images', 'split': 'split_zhou_DescribableTextures.json'},
     'fgvc_aircraft': {'name': 'FGVCAircraft', 'loader': FGVCAircraft, 'dir': 'fgvc_aircraft', 'image_dir': 'images'},
+    'caltech101': {'name': 'Caltech101', 'loader': Caltech101, 'dir': 'caltech-101',
+                   'image_dir': '101_ObjectCategories', 'split': 'split_zhou_Caltech101.json'},
+    'oxford_flowers': {'name': 'OxfordFlowers', 'loader': OxfordFlowers, 'dir': 'oxford_flowers',
+                       'image_dir': 'jpg', 'split': 'split_zhou_OxfordFlowers.json'},
+    'eurosat': {'name': 'EuroSAT', 'loader': EuroSAT, 'dir': 'eurosat',
+                'image_dir': '2750', 'split': 'split_zhou_EuroSAT.json'},
 }
 
 

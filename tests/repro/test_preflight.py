@@ -17,7 +17,7 @@ def load_preflight():
 class PreflightBehavior(unittest.TestCase):
     def test_missing_fixed_zhou_split_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
-            for dataset in ('ucf101', 'dtd'):
+            for dataset in ('ucf101', 'dtd', 'caltech101', 'oxford_flowers', 'eurosat'):
                 with self.subTest(dataset=dataset), self.assertRaises(FileNotFoundError):
                     load_preflight().check(temp, dataset=dataset)
 

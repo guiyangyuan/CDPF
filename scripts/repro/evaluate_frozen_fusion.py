@@ -30,6 +30,9 @@ DATASETS = {
     "ucf101": ("UCF101", "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f"),
     "dtd": ("DescribableTextures", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
     "fgvc_aircraft": ("FGVCAircraft", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
+    "caltech101": ("Caltech101", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
+    "oxford_flowers": ("OxfordFlowers", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
+    "eurosat": ("EuroSAT", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
 }
 EXPECTED_SIGNATURE = {
     "format": 2,

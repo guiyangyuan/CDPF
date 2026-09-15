@@ -290,12 +290,17 @@ class RunnerBehavior(unittest.TestCase):
 
     def test_dataset_commands_and_kd_are_explicit(self):
         runner = module('run_pilot')
-        for key, display in [('ucf101', 'UCF101'), ('dtd', 'DescribableTextures'),
-                             ('fgvc_aircraft', 'FGVCAircraft')]:
+        cases = [('ucf101', 'UCF101', 'ucf101.yaml'),
+                 ('dtd', 'DescribableTextures', 'dtd.yaml'),
+                 ('fgvc_aircraft', 'FGVCAircraft', 'fgvc_aircraft.yaml'),
+                 ('caltech101', 'Caltech101', '扩展验证.yaml'),
+                 ('oxford_flowers', 'OxfordFlowers', '扩展验证.yaml'),
+                 ('eurosat', 'EuroSAT', '扩展验证.yaml')]
+        for key, display, config in cases:
             commands = runner.build_commands('/data', '/results', [1], 3,
                                              ['baseline', 'flat'], dataset=key, kd_weight=0.25)
             self.assertTrue(all(str(ROOT / f'configs/datasets/{key}.yaml') in c for c in commands))
-            self.assertTrue(all(str(ROOT / f'configs/repro/{key}.yaml') in c for c in commands))
+            self.assertTrue(all(str(ROOT / 'configs/repro' / config) in c for c in commands))
             baseline = [c for c in commands if '/baseline/' in c[c.index('--output-dir') + 1]]
             flat = [c for c in commands if '/flat/' in c[c.index('--output-dir') + 1]]
             self.assertTrue(all(c[c.index('TRAINER.TEXTCONSISTENCY.KD_WEIGHT') + 1] == '0.0' for c in baseline))

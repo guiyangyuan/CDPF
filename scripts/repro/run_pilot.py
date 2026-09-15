@@ -22,6 +22,9 @@ DATASETS = {
     'ucf101': {'name': 'UCF101'},
     'dtd': {'name': 'DescribableTextures'},
     'fgvc_aircraft': {'name': 'FGVCAircraft'},
+    'caltech101': {'name': 'Caltech101', 'config': '扩展验证.yaml'},
+    'oxford_flowers': {'name': 'OxfordFlowers', 'config': '扩展验证.yaml'},
+    'eurosat': {'name': 'EuroSAT', 'config': '扩展验证.yaml'},
 }
 
 
@@ -31,6 +34,7 @@ def build_commands(data_root, output_root, seeds, epochs, variants, device='cuda
         raise ValueError(f'Unknown dataset: {dataset}')
     if not math.isfinite(kd_weight) or kd_weight < 0:
         raise ValueError('KD weight must be a finite nonnegative number')
+    repro_config = DATASETS[dataset].get('config', f'{dataset}.yaml')
     commands = []
     for variant in variants:
         if variant not in VARIANTS: raise ValueError(f'Unknown variant: {variant}')
@@ -43,7 +47,7 @@ def build_commands(data_root, output_root, seeds, epochs, variants, device='cuda
             common = [python, str(ROOT / 'train.py'), '--root', str(Path(data_root).resolve()),
                       '--seed', str(seed), '--trainer', trainer,
                       '--dataset-config-file', str(ROOT / f'configs/datasets/{dataset}.yaml'),
-                      '--config-file', str(ROOT / f'configs/repro/{dataset}.yaml')]
+                      '--config-file', str(ROOT / 'configs/repro' / repro_config)]
             opts = ['DATASET.NUM_SHOTS', '16', 'TRAINER.TEXTCONSISTENCY.DEVICE', device,
                     'TRAINER.TEXTCONSISTENCY.AGGREGATION', 'mean' if baseline else mode,
                     'TRAINER.TEXTCONSISTENCY.USE_FEATURE_ADAPTER', str(adapter),

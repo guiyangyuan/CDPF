@@ -143,6 +143,16 @@ def _baseline_fixture(root, dataset="dtd", seed=1, split="base"):
 
 
 class FrozenFusionMetadata(unittest.TestCase):
+    def test_extension_datasets_use_the_frozen_model_source(self):
+        for dataset, display in (("caltech101", "Caltech101"),
+                                 ("oxford_flowers", "OxfordFlowers"),
+                                 ("eurosat", "EuroSAT")):
+            with self.subTest(dataset=dataset), tempfile.TemporaryDirectory() as temp:
+                baseline = _baseline_fixture(temp, dataset=dataset)
+                result = fusion.validate_baseline_metadata(
+                    baseline, dataset, 1, "base", fusion.DATASETS[dataset][1])
+                self.assertEqual(result["metric"]["dataset"], display)
+
     def test_metadata_accepts_exactly_the_three_frozen_study_seeds(self):
         for seed in fusion.ALLOWED_SEEDS:
             with self.subTest(seed=seed), tempfile.TemporaryDirectory() as temp:

@@ -1,0 +1,106 @@
+{
+  "复算器": "独立NumPy脚本，不导入项目评估代码",
+  "归档SHA256": "54be1f2db1fea10d8038f877afb32de78cc137ba82099f068df510438c0d4ce7",
+  "清单核验文件数": 34,
+  "公式核验": "F=0.5*(S+M), G=F+Q*R，逐元素通过",
+  "results": [
+    {
+      "seed": 1,
+      "base": {
+        "samples": 1934,
+        "F": 82.8852119958635,
+        "U": 85.31540847983455,
+        "G": 83.04033092037228,
+        "gate_mean": 0.00443778233602643,
+        "gate_zero_fraction": 0.968459152016546,
+        "predictions_changed_vs_F": 3,
+        "corrections_vs_F": 3,
+        "harms_vs_F": 0
+      },
+      "novel": {
+        "samples": 1849,
+        "F": 75.22985397512169,
+        "U": 73.2287723093564,
+        "G": 75.33802055164955,
+        "gate_mean": 0.03641919791698456,
+        "gate_zero_fraction": 0.7203893996755003,
+        "predictions_changed_vs_F": 9,
+        "corrections_vs_F": 4,
+        "harms_vs_F": 2
+      },
+      "hm_F": 78.87221065056566,
+      "hm_U": 78.81137725712702,
+      "hm_G": 79.0018850347732,
+      "hm_gain": 0.12967438420753297,
+      "novel_gain": 0.10816657652786432
+    },
+    {
+      "seed": 2,
+      "base": {
+        "samples": 1934,
+        "F": 82.57497414684592,
+        "U": 87.28024819027922,
+        "G": 82.6783867631851,
+        "gate_mean": 0.013440084643661976,
+        "gate_zero_fraction": 0.8996897621509824,
+        "predictions_changed_vs_F": 2,
+        "corrections_vs_F": 2,
+        "harms_vs_F": 0
+      },
+      "novel": {
+        "samples": 1849,
+        "F": 76.09518658734451,
+        "U": 74.74310438074635,
+        "G": 75.93293672255274,
+        "gate_mean": 0.03985647112131119,
+        "gate_zero_fraction": 0.7133585722011898,
+        "predictions_changed_vs_F": 9,
+        "corrections_vs_F": 1,
+        "harms_vs_F": 4
+      },
+      "hm_F": 79.20276926769887,
+      "hm_U": 80.52662282745646,
+      "hm_G": 79.16222590471213,
+      "hm_gain": -0.040543362986738885,
+      "novel_gain": -0.16224986479177517
+    },
+    {
+      "seed": 3,
+      "base": {
+        "samples": 1934,
+        "F": 82.36814891416753,
+        "U": 85.67735263702173,
+        "G": 82.36814891416753,
+        "gate_mean": 0.010597518645226955,
+        "gate_zero_fraction": 0.8940020682523268,
+        "predictions_changed_vs_F": 2,
+        "corrections_vs_F": 1,
+        "harms_vs_F": 1
+      },
+      "novel": {
+        "samples": 1849,
+        "F": 73.39102217414819,
+        "U": 72.09302325581395,
+        "G": 73.98593834505138,
+        "gate_mean": 0.061436306685209274,
+        "gate_zero_fraction": 0.6246619794483504,
+        "predictions_changed_vs_F": 21,
+        "corrections_vs_F": 13,
+        "harms_vs_F": 2
+      },
+      "hm_F": 77.6208887241142,
+      "hm_U": 78.30036965054686,
+      "hm_G": 77.95235665385897,
+      "hm_gain": 0.33146792974477535,
+      "novel_gain": 0.5949161709031898
+    }
+  ],
+  "aggregate": {
+    "mean_hm_gain": 0.14019965032185647,
+    "sample_std_hm_gain": 0.18622885490714397,
+    "mean_novel_gain": 0.18027762754642632,
+    "sample_std_novel_gain": 0.38369923659261884,
+    "positive_hm_seeds": 2,
+    "passes_frozen_rule": true
+  }
+}

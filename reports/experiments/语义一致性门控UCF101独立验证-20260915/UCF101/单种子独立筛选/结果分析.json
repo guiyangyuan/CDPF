@@ -1,0 +1,51 @@
+{
+  "dataset": "UCF101",
+  "evidence_role": "independent_confirmation",
+  "seeds": [
+    1
+  ],
+  "formula": {
+    "simple_fusion": "F=0.5*(S+M)",
+    "radius_residual": "U=F+R_hat",
+    "semantic_direction": "D=center(M-S)",
+    "residual_direction": "R0=center(R_hat)",
+    "gate": "q=clamp(cos(R0,D),0,1)",
+    "corrected": "G=F+q*R_hat",
+    "training_objective": "CE(S,y)+CE(stopgrad(F)+R_hat,y)",
+    "gate_training": "inference_only_after_ungated_residual_training",
+    "fitted_hyperparameters": []
+  },
+  "results": [
+    {
+      "seed": 1,
+      "base": {
+        "F": 82.8852119958635,
+        "U": 85.31540847983455,
+        "G": 83.04033092037228,
+        "gate_mean": 0.00443778233602643,
+        "gate_zero_fraction": 0.968459152016546
+      },
+      "novel": {
+        "F": 75.22985397512169,
+        "U": 73.2287723093564,
+        "G": 75.33802055164955,
+        "gate_mean": 0.03641919791698456,
+        "gate_zero_fraction": 0.7203893996755003
+      },
+      "hm_F": 78.87221065056566,
+      "hm_U": 78.81137725712702,
+      "hm_G": 79.0018850347732,
+      "hm_gain": 0.12967438420753297,
+      "novel_gain": 0.10816657652786432
+    }
+  ],
+  "decision": {
+    "passes": true,
+    "criteria": {
+      "HM增益为正": true,
+      "Novel准确率不下降": true
+    },
+    "HM增益": 0.12967438420753297,
+    "Novel增益": 0.10816657652786432
+  }
+}

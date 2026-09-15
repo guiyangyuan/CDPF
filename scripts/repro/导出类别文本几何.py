@@ -5,15 +5,19 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import sys
 from pathlib import Path
+
+
+根目录 = Path(__file__).resolve().parents[2]
+if str(根目录) not in sys.path:
+    sys.path.insert(0, str(根目录))
 
 import torch
 from torch.nn import functional as F
 
 from clip import clip
 
-
-根目录 = Path(__file__).resolve().parents[2]
 数据集定义 = {
     "DTD": {
         "模板": "templates/texture_prompts_full.json",

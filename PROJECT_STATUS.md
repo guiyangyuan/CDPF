@@ -1,6 +1,8 @@
 # TextConsistency：工作计划与当前进度
 
-最后更新：2026-09-15（OxfordPets 第二独立数据集 seed1 已完成但未通过冻结规则；只训练1次，结果已独立复算、完整备份并关机）。
+最后更新：2026-09-15（共识保护残差无卡离线探针已完成；三种候选均未通过冻结判据，生产模型未修改，GPU保持关机）。
+
+**最新无卡开发诊断已完成：共识保护残差离线探针。** 复用 DTD seed1、UCF101 seed1/2/3、OxfordPets seed1 共五组 Base/Novel 逐样本 logits，新增训练0次。分支共识保护、候选类别约束、不确定性衰减三种无参数策略的平均HM增益分别为+0.0759/+0.0699/+0.0803pp，但OxfordPets仍分别下降−0.0546/−0.0546/−0.0273pp，三者均未通过“至少3/5不下降、OxfordPets不下降、平均增益为正”的冻结判据。OxfordPets原门控改变的6个Base样本全部位于S/M分歧区域，因此共识规则没有保护作用；不确定性衰减虽把改变数降到1，剩余一次仍为改错。生产模型未修改，这组开发诊断不进入投稿主结果表；下一轮停止继续叠加输出端启发式门控，转向训练阶段的表示改进。见[结果报告](reports/experiments/共识保护残差离线探针-20260915/结果报告.md)、[完整结果](reports/experiments/共识保护残差离线探针-20260915/结果.json)和[核验收据](reports/experiments/共识保护残差离线探针-20260915/核验收据.json)。
 
 **最新独立数据集筛选已完成、未通过并关机：OxfordPets 语义一致性门控。** 16-shot、ViT-B/16、20 epochs、seed1；F为Base 95.37、Novel 97.93、HM 96.64，G为95.27/97.93/96.58，相对F为Base −0.11pp、Novel +0.00pp、HM −0.05pp。Novel条件通过，但HM没有严格为正，执行器按事前规则停止，seed2/3没有运行。门控在Base改变6张预测（改对2、改错4），Novel没有改变预测；这没有复现UCF101的小幅平均正收益，不能宣称跨数据集稳定涨点。独立NumPy复算与执行器结果最大绝对差0，21个运行文件SHA全部通过；完整checkpoint与归档保存在本机和AutoDL数据盘，报告、原始预测、日志和配置纳入GitHub；页面已确认“已关机”。见[结果报告](reports/experiments/语义一致性门控OxfordPets独立验证-20260915/结果报告.md)、[独立复算](reports/experiments/语义一致性门控OxfordPets独立验证-20260915/独立复算.json)、[备份收据](reports/experiments/语义一致性门控OxfordPets独立验证-20260915/备份收据.json)和[关机确认](reports/experiments/语义一致性门控OxfordPets独立验证-20260915/关机确认.json)。
 

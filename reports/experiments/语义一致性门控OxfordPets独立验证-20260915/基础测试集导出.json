@@ -1,0 +1,8187 @@
+{
+  "status": "exported",
+  "dataset": "oxford_pets",
+  "seed": 1,
+  "split": "base",
+  "rows": [
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_201.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_202.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_204.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_205.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_206.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_207.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_20.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_210.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_212.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_213.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_215.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_216.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_217.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_219.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_21.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_220.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_221.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_223.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_224.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_225.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_226.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_228.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_22.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_230.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_232.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_24.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_25.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_26.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_27.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_29.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_2.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_30.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_31.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_32.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_33.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_36.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_37.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_3.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_40.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_43.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_44.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_45.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_46.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_47.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_48.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_49.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_4.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_50.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_51.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_52.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_54.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_55.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_56.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_57.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_58.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_5.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_60.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_61.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_62.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_63.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_65.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_66.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_67.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_68.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_69.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_6.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_70.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_71.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_72.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_73.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_74.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_75.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_76.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_77.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_78.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_79.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_7.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_80.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_81.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_83.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_84.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_85.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_86.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_87.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_88.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_89.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_8.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_90.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_91.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_92.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_93.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_94.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_95.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_96.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_97.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_98.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_99.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/Abyssinian_9.jpg",
+      "label": 0
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_203.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_205.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_207.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_208.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_209.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_20.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_211.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_212.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_214.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_216.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_217.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_218.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_21.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_220.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_221.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_224.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_22.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_23.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_24.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_25.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_26.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_27.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_28.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_29.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_2.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_30.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_31.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_32.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_33.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_34.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_35.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_36.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_37.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_38.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_39.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_3.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_40.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_41.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_42.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_43.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_44.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_45.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_46.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_47.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_48.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_49.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_50.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_51.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_52.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_53.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_54.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_55.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_56.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_57.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_58.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_59.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_5.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_60.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_61.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_62.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_63.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_64.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_65.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_66.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_67.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_68.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_69.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_6.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_70.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_71.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_72.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_73.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_74.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_75.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_76.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_77.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_78.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_79.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_7.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_80.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_81.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_82.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_83.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_84.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_85.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_86.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_87.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_89.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_8.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_90.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_91.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_92.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_93.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_94.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_95.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_96.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_97.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_98.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_99.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_bulldog_9.jpg",
+      "label": 1
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_191.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_192.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_193.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_194.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_195.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_196.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_197.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_198.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_199.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_19.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_1.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_200.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_201.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_202.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_203.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_204.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_20.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_21.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_22.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_23.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_24.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_25.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_26.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_27.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_28.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_29.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_2.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_30.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_31.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_32.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_33.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_35.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_36.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_37.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_38.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_39.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_40.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_41.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_42.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_43.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_44.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_45.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_46.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_47.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_48.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_49.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_4.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_50.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_51.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_52.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_53.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_54.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_55.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_56.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_57.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_58.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_59.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_5.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_60.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_61.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_62.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_63.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_64.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_65.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_66.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_67.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_68.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_69.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_6.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_70.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_71.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_72.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_73.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_74.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_75.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_76.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_77.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_78.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_79.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_7.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_80.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_81.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_82.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_84.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_86.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_87.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_88.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_89.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_8.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_90.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_91.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_92.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_93.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_94.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_95.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_96.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_97.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_98.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_99.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/american_pit_bull_terrier_9.jpg",
+      "label": 2
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_191.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_192.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_193.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_194.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_195.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_196.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_197.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_198.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_199.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_19.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_1.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_200.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_20.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_21.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_22.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_23.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_24.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_25.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_26.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_27.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_28.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_29.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_2.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_30.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_31.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_32.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_33.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_34.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_35.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_36.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_37.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_38.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_39.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_3.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_40.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_41.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_42.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_43.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_44.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_45.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_46.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_47.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_48.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_49.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_4.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_50.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_51.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_52.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_53.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_54.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_55.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_56.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_57.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_58.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_59.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_5.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_60.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_61.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_62.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_63.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_64.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_65.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_66.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_67.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_68.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_69.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_6.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_70.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_71.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_72.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_73.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_74.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_75.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_76.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_77.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_78.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_79.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_7.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_80.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_81.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_82.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_83.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_84.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_85.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_86.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_87.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_88.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_89.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_8.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_90.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_91.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_92.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_93.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_94.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_95.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_96.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_97.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_98.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_99.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/basset_hound_9.jpg",
+      "label": 3
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_195.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_196.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_197.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_198.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_199.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_19.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_1.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_200.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_201.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_202.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_203.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_204.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_20.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_21.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_22.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_23.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_24.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_25.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_26.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_27.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_28.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_29.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_2.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_30.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_31.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_32.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_33.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_34.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_35.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_36.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_37.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_38.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_39.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_3.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_40.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_41.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_42.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_43.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_44.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_45.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_46.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_47.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_48.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_49.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_4.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_50.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_51.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_52.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_53.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_54.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_55.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_56.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_57.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_58.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_59.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_5.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_60.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_61.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_62.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_63.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_64.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_65.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_66.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_67.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_68.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_69.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_6.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_70.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_71.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_72.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_73.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_74.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_75.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_76.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_77.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_78.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_79.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_7.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_80.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_81.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_82.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_83.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_84.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_85.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_86.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_87.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_88.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_89.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_8.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_90.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_91.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_92.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_93.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_94.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_95.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_96.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_97.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_98.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_99.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/beagle_9.jpg",
+      "label": 4
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_192.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_193.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_194.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_195.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_196.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_197.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_198.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_199.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_19.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_1.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_200.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_201.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_20.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_21.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_22.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_23.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_24.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_25.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_26.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_27.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_28.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_29.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_2.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_30.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_31.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_32.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_33.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_34.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_35.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_36.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_37.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_38.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_39.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_3.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_40.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_41.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_42.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_43.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_44.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_45.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_46.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_47.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_48.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_49.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_4.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_50.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_51.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_52.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_53.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_54.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_55.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_56.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_57.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_58.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_59.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_5.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_60.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_61.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_62.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_63.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_64.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_65.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_66.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_67.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_68.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_69.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_6.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_70.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_71.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_72.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_73.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_74.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_75.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_76.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_77.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_78.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_79.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_7.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_80.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_81.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_82.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_83.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_84.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_85.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_86.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_87.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_88.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_89.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_8.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_90.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_91.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_92.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_93.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_94.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_95.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_96.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_97.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_98.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_99.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Bengal_9.jpg",
+      "label": 5
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_191.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_192.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_193.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_194.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_196.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_197.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_198.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_199.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_19.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_1.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_200.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_201.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_20.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_21.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_22.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_23.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_24.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_25.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_26.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_27.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_28.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_29.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_2.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_30.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_31.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_32.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_33.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_34.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_35.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_36.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_37.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_38.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_39.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_3.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_40.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_41.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_42.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_43.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_44.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_45.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_46.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_47.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_48.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_49.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_4.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_50.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_51.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_52.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_53.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_54.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_55.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_56.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_57.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_58.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_59.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_5.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_60.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_61.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_62.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_63.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_64.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_65.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_66.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_67.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_68.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_69.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_6.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_70.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_71.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_72.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_73.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_74.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_75.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_76.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_77.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_78.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_79.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_7.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_80.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_81.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_82.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_83.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_84.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_85.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_86.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_87.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_88.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_89.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_8.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_90.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_91.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_92.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_93.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_94.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_95.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_96.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_97.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_98.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_99.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Birman_9.jpg",
+      "label": 6
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_200.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_201.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_202.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_204.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_205.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_208.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_20.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_213.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_214.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_215.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_21.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_221.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_23.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_24.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_25.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_26.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_27.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_29.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_2.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_30.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_31.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_33.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_34.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_36.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_37.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_38.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_39.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_3.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_40.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_41.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_42.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_43.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_45.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_46.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_47.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_48.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_49.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_4.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_50.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_52.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_53.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_54.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_55.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_56.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_57.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_58.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_59.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_5.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_60.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_61.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_62.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_63.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_64.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_65.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_66.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_67.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_68.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_6.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_70.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_71.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_72.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_73.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_74.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_75.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_76.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_77.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_78.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_79.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_7.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_80.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_81.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_82.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_83.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_84.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_86.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_87.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_88.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_89.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_8.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_90.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_91.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_93.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_94.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_95.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_96.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_97.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_98.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/Bombay_9.jpg",
+      "label": 7
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_191.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_192.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_193.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_194.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_195.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_196.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_197.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_198.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_199.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_19.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_1.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_200.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_20.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_21.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_22.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_23.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_24.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_25.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_26.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_27.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_28.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_29.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_2.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_30.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_31.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_32.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_33.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_34.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_35.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_36.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_37.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_38.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_39.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_3.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_40.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_41.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_42.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_43.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_44.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_45.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_46.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_47.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_48.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_49.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_4.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_50.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_51.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_52.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_53.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_54.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_55.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_56.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_57.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_58.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_59.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_5.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_60.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_61.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_62.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_63.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_64.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_65.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_66.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_67.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_68.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_69.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_6.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_70.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_71.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_72.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_73.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_74.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_75.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_76.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_77.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_78.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_79.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_7.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_80.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_81.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_83.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_84.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_85.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_86.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_87.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_88.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_89.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_8.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_90.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_91.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_92.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_93.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_94.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_95.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_96.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_97.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_98.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_99.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/boxer_9.jpg",
+      "label": 8
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_212.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_213.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_218.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_21.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_223.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_22.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_230.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_239.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_241.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_248.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_258.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_25.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_263.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_265.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_266.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_267.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_268.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_269.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_26.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_270.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_271.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_272.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_273.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_274.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_275.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_276.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_277.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_278.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_27.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_28.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_29.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_2.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_30.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_31.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_32.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_33.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_34.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_36.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_37.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_38.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_39.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_3.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_40.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_41.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_42.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_43.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_44.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_45.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_46.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_47.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_48.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_49.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_50.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_51.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_52.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_53.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_54.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_55.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_56.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_57.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_58.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_59.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_60.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_61.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_62.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_63.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_64.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_65.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_66.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_67.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_68.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_6.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_70.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_71.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_72.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_74.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_75.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_77.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_78.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_79.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_82.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_83.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_84.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_85.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_86.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_87.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_88.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_89.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_8.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_90.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_91.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_92.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_93.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_94.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_95.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_96.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_97.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_98.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_99.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/British_Shorthair_9.jpg",
+      "label": 9
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_191.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_192.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_193.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_194.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_195.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_196.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_197.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_198.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_199.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_19.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_1.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_200.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_20.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_21.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_22.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_23.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_24.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_25.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_26.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_27.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_28.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_29.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_2.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_30.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_31.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_32.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_33.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_34.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_35.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_36.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_37.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_38.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_39.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_3.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_40.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_41.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_42.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_43.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_44.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_45.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_46.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_47.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_48.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_49.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_4.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_50.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_51.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_52.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_53.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_54.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_55.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_56.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_57.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_58.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_59.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_5.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_60.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_61.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_62.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_63.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_64.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_65.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_66.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_67.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_68.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_69.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_6.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_70.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_71.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_72.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_73.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_74.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_75.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_76.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_77.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_78.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_79.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_7.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_80.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_81.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_82.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_83.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_84.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_85.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_86.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_87.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_88.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_89.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_8.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_90.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_91.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_92.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_93.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_94.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_95.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_96.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_97.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_98.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_99.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/chihuahua_9.jpg",
+      "label": 10
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_198.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_199.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_19.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_1.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_201.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_204.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_207.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_209.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_20.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_210.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_212.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_213.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_214.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_215.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_218.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_219.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_21.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_220.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_221.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_222.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_223.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_224.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_22.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_23.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_25.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_26.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_27.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_28.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_29.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_2.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_30.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_31.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_33.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_34.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_35.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_36.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_39.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_3.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_40.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_42.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_43.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_44.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_45.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_46.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_47.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_48.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_49.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_4.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_50.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_51.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_52.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_53.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_54.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_56.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_57.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_58.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_59.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_5.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_60.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_61.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_62.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_63.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_67.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_68.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_69.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_6.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_70.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_73.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_74.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_75.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_76.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_77.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_78.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_79.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_7.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_80.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_81.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_82.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_83.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_84.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_85.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_86.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_87.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_88.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_89.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_8.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_90.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_91.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_92.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_93.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_94.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_95.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_96.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_97.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_98.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_99.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/Egyptian_Mau_9.jpg",
+      "label": 11
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_191.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_192.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_193.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_194.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_195.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_196.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_197.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_198.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_199.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_19.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_1.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_200.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_20.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_21.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_22.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_23.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_24.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_25.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_26.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_27.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_28.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_29.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_2.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_30.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_31.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_32.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_33.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_34.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_35.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_36.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_37.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_38.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_39.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_3.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_40.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_41.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_42.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_43.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_44.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_45.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_46.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_47.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_48.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_49.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_4.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_50.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_51.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_52.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_53.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_54.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_55.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_56.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_57.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_58.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_59.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_5.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_60.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_61.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_62.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_63.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_64.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_65.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_66.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_67.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_68.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_69.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_6.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_70.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_71.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_72.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_73.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_74.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_75.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_76.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_77.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_78.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_79.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_7.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_80.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_81.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_82.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_83.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_84.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_85.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_86.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_87.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_88.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_89.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_8.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_90.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_91.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_92.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_93.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_94.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_95.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_96.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_97.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_98.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_99.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_cocker_spaniel_9.jpg",
+      "label": 12
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_191.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_192.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_193.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_194.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_195.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_196.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_197.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_198.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_199.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_19.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_1.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_200.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_20.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_21.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_22.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_23.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_24.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_25.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_26.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_27.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_28.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_29.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_2.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_30.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_31.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_32.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_33.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_34.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_35.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_36.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_37.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_38.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_39.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_3.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_40.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_41.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_42.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_43.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_44.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_45.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_46.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_47.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_48.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_49.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_4.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_50.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_51.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_52.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_53.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_54.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_55.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_56.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_57.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_58.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_59.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_5.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_60.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_61.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_62.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_63.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_64.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_65.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_66.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_67.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_68.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_69.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_6.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_70.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_71.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_72.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_73.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_74.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_75.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_76.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_77.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_78.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_79.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_7.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_80.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_81.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_82.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_83.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_84.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_85.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_86.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_87.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_88.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_89.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_8.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_90.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_91.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_92.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_93.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_94.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_95.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_96.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_97.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_98.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_99.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/english_setter_9.jpg",
+      "label": 13
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_191.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_192.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_193.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_194.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_195.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_196.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_197.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_198.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_199.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_19.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_1.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_200.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_20.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_21.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_22.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_23.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_24.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_25.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_26.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_27.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_28.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_29.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_2.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_30.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_31.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_32.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_33.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_34.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_35.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_36.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_37.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_38.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_39.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_3.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_40.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_41.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_42.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_43.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_44.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_45.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_46.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_47.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_48.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_49.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_4.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_50.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_51.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_52.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_53.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_54.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_55.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_56.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_57.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_58.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_59.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_5.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_60.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_61.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_62.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_63.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_64.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_65.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_66.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_67.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_68.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_69.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_6.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_70.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_71.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_72.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_73.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_74.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_75.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_76.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_77.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_78.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_79.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_7.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_80.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_81.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_82.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_83.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_84.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_85.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_86.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_87.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_88.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_89.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_8.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_90.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_91.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_92.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_93.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_94.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_95.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_96.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_97.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_98.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_99.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/german_shorthaired_9.jpg",
+      "label": 14
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_191.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_192.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_193.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_194.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_195.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_196.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_197.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_198.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_199.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_19.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_1.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_200.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_20.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_21.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_22.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_23.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_24.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_25.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_26.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_27.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_28.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_29.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_2.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_30.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_31.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_32.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_33.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_34.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_35.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_36.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_37.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_38.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_39.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_3.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_40.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_41.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_42.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_43.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_44.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_45.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_46.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_47.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_48.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_49.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_4.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_50.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_51.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_52.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_53.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_54.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_55.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_56.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_57.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_58.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_59.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_5.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_60.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_61.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_62.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_63.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_64.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_65.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_66.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_67.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_68.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_69.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_6.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_70.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_71.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_72.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_73.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_74.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_75.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_76.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_77.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_78.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_79.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_7.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_80.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_81.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_82.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_83.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_84.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_85.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_86.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_87.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_88.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_89.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_8.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_90.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_91.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_92.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_93.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_94.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_95.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_96.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_97.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_98.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_99.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/great_pyrenees_9.jpg",
+      "label": 15
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_191.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_192.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_193.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_194.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_195.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_196.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_197.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_198.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_199.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_19.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_1.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_200.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_20.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_21.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_22.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_23.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_24.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_25.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_26.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_27.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_28.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_29.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_2.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_30.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_31.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_32.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_33.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_34.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_35.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_36.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_37.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_38.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_39.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_3.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_40.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_41.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_42.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_43.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_44.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_45.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_46.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_47.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_48.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_49.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_4.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_50.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_51.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_52.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_53.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_54.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_55.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_56.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_57.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_58.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_59.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_5.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_60.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_61.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_62.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_63.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_64.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_65.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_66.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_67.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_68.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_69.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_6.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_70.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_71.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_72.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_73.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_74.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_75.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_76.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_77.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_78.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_79.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_7.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_80.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_81.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_82.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_83.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_84.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_85.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_86.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_87.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_88.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_89.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_8.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_90.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_91.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_92.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_93.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_94.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_95.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_96.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_97.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_98.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_99.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/havanese_9.jpg",
+      "label": 16
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_191.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_192.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_193.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_194.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_195.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_196.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_197.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_198.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_199.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_19.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_1.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_200.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_20.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_21.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_22.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_23.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_24.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_25.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_26.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_27.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_28.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_29.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_2.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_30.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_31.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_32.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_33.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_34.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_35.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_36.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_37.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_38.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_39.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_3.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_40.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_41.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_42.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_43.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_44.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_45.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_46.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_47.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_48.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_49.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_4.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_50.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_51.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_52.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_53.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_54.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_55.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_56.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_57.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_58.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_59.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_5.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_60.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_61.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_62.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_63.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_64.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_65.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_66.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_67.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_68.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_69.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_6.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_70.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_71.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_72.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_73.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_74.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_75.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_76.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_77.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_78.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_79.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_7.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_80.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_81.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_82.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_83.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_84.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_85.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_86.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_87.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_88.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_89.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_8.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_90.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_91.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_92.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_93.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_94.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_95.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_96.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_97.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_98.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_99.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/japanese_chin_9.jpg",
+      "label": 17
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_191.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_192.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_193.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_194.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_195.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_196.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_197.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_198.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_199.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_19.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_1.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_200.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_20.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_21.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_22.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_23.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_24.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_25.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_26.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_27.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_28.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_29.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_2.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_30.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_31.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_32.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_33.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_34.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_35.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_36.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_37.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_38.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_39.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_3.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_40.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_41.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_42.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_43.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_44.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_45.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_46.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_47.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_48.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_49.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_4.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_50.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_51.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_52.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_53.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_54.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_55.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_56.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_57.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_58.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_5.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_60.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_61.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_62.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_63.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_64.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_65.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_66.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_67.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_68.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_69.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_6.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_70.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_71.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_72.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_73.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_74.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_75.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_76.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_77.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_78.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_79.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_7.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_80.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_81.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_82.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_83.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_84.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_85.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_86.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_87.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_88.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_89.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_8.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_90.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_91.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_92.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_93.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_94.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_95.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_96.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_97.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_98.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_99.jpg",
+      "label": 18
+    },
+    {
+      "sample_id": "oxford_pets/images/keeshond_9.jpg",
+      "label": 18
+    }
+  ],
+  "class_order": [
+    "abyssinian",
+    "american_bulldog",
+    "american_pit_bull_terrier",
+    "basset_hound",
+    "beagle",
+    "bengal",
+    "birman",
+    "bombay",
+    "boxer",
+    "british_shorthair",
+    "chihuahua",
+    "egyptian_mau",
+    "english_cocker_spaniel",
+    "english_setter",
+    "german_shorthaired",
+    "great_pyrenees",
+    "havanese",
+    "japanese_chin",
+    "keeshond"
+  ],
+  "provenance": {
+    "seed": 1,
+    "dataset": "OxfordPets",
+    "shots": 16,
+    "subsample": "base",
+    "model_signature": {
+      "format": 5,
+      "trainer": "CoOp_TextDetail_SemanticGatedRadius",
+      "n_ctx": 4,
+      "aggregation": "mean",
+      "feature_adapter": false,
+      "n_groups": 4,
+      "n_views": 20,
+      "ablation_group": null,
+      "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+      "template_sha256": "6948e8ebaf0883e31747a084b8844c6e635e15bf629b53450fa3c7507fe5fc64",
+      "view_order": "contiguous",
+      "order_seed": 0,
+      "order_version": 1,
+      "loss_identity": {
+        "format": 1,
+        "mode": "full_kl",
+        "temperature": 2.0,
+        "effective_weight": 0.0,
+        "active": false,
+        "non_target_weighting": "none_full_distribution_kl"
+      },
+      "correction": {
+        "version": 8,
+        "enabled": true,
+        "kind": "semantic_alignment_gated_radius_text_detail",
+        "mode": "classname",
+        "hidden_dim": 64,
+        "scale": 0.2,
+        "neighbor_k": 5,
+        "classname_template": "a photo of a {}, a type of pet.",
+        "init": "kaiming_down_zero_up_no_bias_rng_isolated",
+        "input": "classname_hidden_plus_image_weighted_description_hidden",
+        "pooling": "image_conditioned_after_relu_down",
+        "delta_normalization": false,
+        "residual": "clip_scale*einsum(image,radius_bounded_per_image_text_delta)",
+        "inference": "F+q*R_hat",
+        "coefficient": 1.0,
+        "objective": "CE(S,y)+CE(stopgrad(F)+R_hat,y)",
+        "detail_pooling": "attentive",
+        "attention": "masked_softmax(frozen_clip_scale*image@unit_views)",
+        "centering": "none",
+        "classname_training_preserved": false,
+        "fusion_anchor": "F=0.5*(S+M)",
+        "description_radius": "sqrt(mean_valid(||description-mean_valid(description)||^2))",
+        "bounding": "radius*tanh(||delta||/radius)*delta/(||delta||+eps)",
+        "fitted_hyperparameters": [],
+        "training_objective": "CE(S,y)+CE(stopgrad(F)+R_hat,y)",
+        "gate_training": "inference_only_after_ungated_residual_training",
+        "gate": "clamp(cos(center(R_hat),center(M-S)),0,1)",
+        "gate_scope": "per_sample_scalar"
+      },
+      "optimization": {
+        "format": 1,
+        "student": {
+          "name": "sgd",
+          "lr": 0.002,
+          "momentum": 0.9,
+          "weight_decay": 0.0005,
+          "scheduler": "cosine",
+          "max_epoch": 20,
+          "warmup_epoch": 1,
+          "warmup_type": "constant",
+          "warmup_cons_lr": 1e-05
+        },
+        "residual": {
+          "name": "adamw",
+          "lr": 0.001,
+          "betas": [
+            0.9,
+            0.999
+          ],
+          "eps": 1e-08,
+          "weight_decay": 0.0005,
+          "scheduler": "constant",
+          "warmup_epoch": 0
+        },
+        "student_gradient": "student_ce_only",
+        "residual_gradient": "correction_ce_only"
+      }
+    },
+    "code_sha256": "4125b47b0078d2fdacd34ab123d0aa27da60feb793fe5756b6d934e6f0de49cc",
+    "torch": "2.8.0+cu128",
+    "python": "3.12.3",
+    "device": "cuda",
+    "cuda_runtime": "12.8",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "loss_identity": {
+      "format": 1,
+      "mode": "full_kl",
+      "temperature": 2.0,
+      "effective_weight": 0.0,
+      "active": false,
+      "non_target_weighting": "none_full_distribution_kl"
+    },
+    "effective_losses": {
+      "kd": 0.0,
+      "adaptive_ce": 0.0,
+      "diversity": 0.0,
+      "contrastive": 0.0,
+      "correction_ce": 1.0
+    },
+    "train_samples_sha256": "7c6529f5440e65f9c1a59001377372e9e98f6728d81fb06fc4984cccef34c5c0",
+    "val_samples_sha256": "d0959f8fd3b94f56a2d69af6086b20297edf83481f983b8c2a468f3f3f662072",
+    "test_samples_sha256": "c1a3364d1723a134f49d7bb3e45ecb637a6d748837fc282bd50718b21015b639",
+    "trainable_parameters": 67584,
+    "description_counts": [
+      20,
+      20,
+      20,
+      20,
+      20,
+      19,
+      20,
+      18,
+      20,
+      19,
+      18,
+      15,
+      20,
+      20,
+      20,
+      15,
+      20,
+      20,
+      20
+    ],
+    "view_order_manifest": {
+      "version": 1,
+      "policy": "contiguous",
+      "seed": 0,
+      "n_groups": 4,
+      "classes": [
+        {
+          "classname": "abyssinian",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "american_bulldog",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "american_pit_bull_terrier",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "basset_hound",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "beagle",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "bengal",
+          "count": 19,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18
+          ]
+        },
+        {
+          "classname": "birman",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "bombay",
+          "count": 18,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ]
+        },
+        {
+          "classname": "boxer",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "british_shorthair",
+          "count": 19,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18
+          ]
+        },
+        {
+          "classname": "chihuahua",
+          "count": 18,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ]
+        },
+        {
+          "classname": "egyptian_mau",
+          "count": 15,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ]
+        },
+        {
+          "classname": "english_cocker_spaniel",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "english_setter",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "german_shorthaired",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "great_pyrenees",
+          "count": 15,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ]
+        },
+        {
+          "classname": "havanese",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "japanese_chin",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        },
+        {
+          "classname": "keeshond",
+          "count": 20,
+          "order": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+          ]
+        }
+      ],
+      "sha256": "7a17f454f5b0c216a8d94b913c5e4a7ac2027b76ff11553995b14bc415c1480b"
+    }
+  },
+  "checkpoint": [
+    {
+      "path": "/root/autodl-tmp/textconsistency/runs/语义一致性门控-OxfordPets-20260915-ba57805/OxfordPets/种子1/模型/textconsistency/model.pth.tar-20",
+      "sha256": "a12a37c674869150fa93480d058bfc5d503e6ba7cf3669980c03bd343cf75f99",
+      "epoch": 20
+    }
+  ],
+  "predictions_sha256": "5def477a73bed3cbd3a9e40a1b3d2076d28d0bedcbd0f8b11793b8178d642364",
+  "branch_semantics": {
+    "F": "0.5*(S+M)",
+    "R": "description-radius bounded residual",
+    "Q": "semantic alignment scalar",
+    "Z": "F+Q*R"
+  }
+}

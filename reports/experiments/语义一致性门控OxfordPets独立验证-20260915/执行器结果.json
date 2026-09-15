@@ -1,0 +1,51 @@
+{
+  "dataset": "OxfordPets",
+  "evidence_role": "independent_confirmation",
+  "seeds": [
+    1
+  ],
+  "formula": {
+    "simple_fusion": "F=0.5*(S+M)",
+    "radius_residual": "U=F+R_hat",
+    "semantic_direction": "D=center(M-S)",
+    "residual_direction": "R0=center(R_hat)",
+    "gate": "q=clamp(cos(R0,D),0,1)",
+    "corrected": "G=F+q*R_hat",
+    "training_objective": "CE(S,y)+CE(stopgrad(F)+R_hat,y)",
+    "gate_training": "inference_only_after_ungated_residual_training",
+    "fitted_hyperparameters": []
+  },
+  "results": [
+    {
+      "seed": 1,
+      "base": {
+        "F": 95.37480063795853,
+        "U": 93.99255715045189,
+        "G": 95.26847421584263,
+        "gate_mean": 0.03657633811235428,
+        "gate_zero_fraction": 0.7533227006911217
+      },
+      "novel": {
+        "F": 97.93064876957494,
+        "U": 97.03579418344519,
+        "G": 97.93064876957494,
+        "gate_mean": 0.03881695866584778,
+        "gate_zero_fraction": 0.7734899328859061
+      },
+      "hm_F": 96.63582823320186,
+      "hm_U": 95.48993504618645,
+      "hm_G": 96.58121986349995,
+      "hm_gain": -0.054608369701909965,
+      "novel_gain": 0.0
+    }
+  ],
+  "decision": {
+    "passes": false,
+    "criteria": {
+      "HM增益为正": false,
+      "Novel准确率不下降": true
+    },
+    "HM增益": -0.054608369701909965,
+    "Novel增益": 0.0
+  }
+}

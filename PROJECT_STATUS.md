@@ -1,8 +1,10 @@
 # TextConsistency：工作计划与当前进度
 
-最后更新：2026-09-15（OxfordPets 第二独立数据集的本地无卡准备已完成；官方数据、固定划分、三种子采样、描述覆盖、执行器与停止规则均已核验，尚未启动 GPU 训练）。
+最后更新：2026-09-15（OxfordPets 第二独立数据集 seed1 已完成但未通过冻结规则；只训练1次，结果已独立复算、完整备份并关机）。
 
-**当前无卡准备已完成：OxfordPets 语义一致性门控第二独立验证。** 官方数据与固定划分已下载，train/val/test 为2944/736/3669、共37类、7349张划分内图片全部可解码；三种子16-shot真实loader预检通过。固定入口先跑seed1，只有G相对F的HM为正且Novel不下降才继续seed2/3，最多三次训练；公式、阈值和停止条件不允许依据OxfordPets输出修改。两张投稿统一表已生成，历史框架结果与新门控受控消融分开呈现。当前尚无OxfordPets分数或checkpoint，AutoDL未因本阶段准备而开机。见[准备说明](reports/preparation/语义一致性门控OxfordPets验证-20260915/准备说明.md)、[数据预检](reports/preparation/语义一致性门控OxfordPets验证-20260915/数据预检.json)、[固定协议](reports/preparation/语义一致性门控OxfordPets验证-20260915/实验协议.json)和[统一结果表](reports/experiments/投稿实验统一结果-20260915/统一结果表.md)。
+**最新独立数据集筛选已完成、未通过并关机：OxfordPets 语义一致性门控。** 16-shot、ViT-B/16、20 epochs、seed1；F为Base 95.37、Novel 97.93、HM 96.64，G为95.27/97.93/96.58，相对F为Base −0.11pp、Novel +0.00pp、HM −0.05pp。Novel条件通过，但HM没有严格为正，执行器按事前规则停止，seed2/3没有运行。门控在Base改变6张预测（改对2、改错4），Novel没有改变预测；这没有复现UCF101的小幅平均正收益，不能宣称跨数据集稳定涨点。独立NumPy复算与执行器结果最大绝对差0，21个运行文件SHA全部通过；完整checkpoint与归档保存在本机和AutoDL数据盘，报告、原始预测、日志和配置纳入GitHub；页面已确认“已关机”。见[结果报告](reports/experiments/语义一致性门控OxfordPets独立验证-20260915/结果报告.md)、[独立复算](reports/experiments/语义一致性门控OxfordPets独立验证-20260915/独立复算.json)、[备份收据](reports/experiments/语义一致性门控OxfordPets独立验证-20260915/备份收据.json)和[关机确认](reports/experiments/语义一致性门控OxfordPets独立验证-20260915/关机确认.json)。
+
+**本轮训练前的无卡准备记录：OxfordPets 语义一致性门控第二独立验证。** 官方数据与固定划分已下载，train/val/test 为2944/736/3669、共37类、7349张划分内图片全部可解码；三种子16-shot真实loader预检通过。固定入口先跑seed1，只有G相对F的HM为正且Novel不下降才继续seed2/3，最多三次训练；公式、阈值和停止条件不允许依据OxfordPets输出修改。两张投稿统一表已生成，历史框架结果与新门控受控消融分开呈现。该段描述的是生成任何OxfordPets分数前的准备状态，实际运行结果以上一段为准。见[准备说明](reports/preparation/语义一致性门控OxfordPets验证-20260915/准备说明.md)、[数据预检](reports/preparation/语义一致性门控OxfordPets验证-20260915/数据预检.json)、[固定协议](reports/preparation/语义一致性门控OxfordPets验证-20260915/实验协议.json)和[统一结果表](reports/experiments/投稿实验统一结果-20260915/统一结果表.md)。
 
 **最新UCF101独立验证已完成、通过冻结规则并关机：语义一致性门控。** 16-shot、ViT-B/16、20 epochs、seed 1/2/3；G相对简单融合F的逐种子HM增益为+0.13/−0.04/+0.33pp，均值+0.14pp，Novel平均+0.18pp，2/3种子HM为正。门控在Base共改变7/5802个预测（改对6、改错1），在Novel改变39/5547个（改对18、改错8），属于真实但很小的保护性收益，不能单独作为显著涨点或SOTA证据。首次运行在seed1训练后、预测导出前因目录非幂等失败；最小修复加入回归测试，公式/门槛未变，复用seed1检查点后完成seed2/3，实际共3次训练。独立NumPy复算验证34个文件、6个预测包、F/G公式和判定均一致；原始预测、日志与报告已下载并纳入GitHub，三个权重留在AutoDL数据盘；页面确认“已关机”。见[结果报告](reports/experiments/语义一致性门控UCF101独立验证-20260915/结果报告.md)、[独立复算](reports/experiments/语义一致性门控UCF101独立验证-20260915/独立复算.json)和[备份收据](reports/experiments/语义一致性门控UCF101独立验证-20260915/备份收据.json)。
 
@@ -152,7 +154,7 @@
 | 描述半径约束残差 | 零训练筛选未通过，已停止、备份并关机 | 06ad53a；相对F的Base/Novel/HM为+5.09/−2.42/+0.75pp；Novel超过−1pp边界；新增训练0次，未触碰UCF101 |
 | 类别描述子空间约束残差 | 零训练筛选未通过，已停止、备份并关机 | b5ba7c1；相对F的Base/Novel/HM为+0.23/−2.66/−1.41pp；两项门槛均失败；新增训练0次，未触碰UCF101 |
 | 语义一致性门控UCF101独立验证 | 三种子通过冻结规则、已核验备份并关机 | 实际3训练/6导出；G−F平均Base/Novel/HM为+0.09/+0.18/+0.14pp，2/3种子HM为正；作用真实但很小 |
-| OxfordPets语义一致性门控第二独立验证 | 本地无卡准备完成，待服务器复核与seed1 | 官方固定划分及7349张图片可解码；三种子16-shot loader与描述覆盖通过；seed1不过即停止，最多3次训练 |
+| OxfordPets语义一致性门控第二独立验证 | seed1未通过，已停止、核验、备份并关机 | G−F为Base −0.11、Novel +0.00、HM −0.05pp；只运行1次训练，seed2/3未启动；21文件SHA通过 |
 | 投稿实验定稿及论文修改 | 待上述证据 | 用户当前要求暂不处理论文 |
 
 ## 实验顺序和判断规则

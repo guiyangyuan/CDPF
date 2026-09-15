@@ -1,0 +1,27 @@
+{
+  "state": "stopped_by_preregistered_rule",
+  "protocol": "/root/autodl-tmp/textconsistency/releases/语义一致性门控-OxfordPets-ba57805/reports/preparation/语义一致性门控OxfordPets验证-20260915/实验协议.json",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "started": 1789446978.3932965,
+  "events": [
+    {
+      "seed": 1,
+      "step": "训练",
+      "status": "completed"
+    },
+    {
+      "seed": 1,
+      "step": "基础测试集",
+      "status": "completed"
+    },
+    {
+      "seed": 1,
+      "step": "新类别测试集",
+      "status": "completed"
+    }
+  ],
+  "current_phase": "OxfordPets单种子独立筛选",
+  "new_trainings_completed": 1,
+  "conclusion": "OxfordPets seed1未通过",
+  "ended": 1789447088.6430192
+}

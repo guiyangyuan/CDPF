@@ -1,0 +1,34 @@
+{
+  "状态": "完成",
+  "实例ID": "a5904787c3-600682b1",
+  "GPU": "NVIDIA GeForce RTX 4090",
+  "协议": "冻结均值概率融合扩展验证-v1",
+  "数据集": "EuroSAT",
+  "运行": [
+    {
+      "输出目录": "/root/autodl-tmp/textconsistency/runs/扩展验证-EuroSAT-seed1-20260915-8f54900",
+      "种子": [1],
+      "开始时间UTC": "2026-09-15T09:09:59.103149+00:00",
+      "结束时间UTC": "2026-09-15T09:11:39.635381+00:00",
+      "已完成命令": 6,
+      "总命令": 6
+    },
+    {
+      "输出目录": "/root/autodl-tmp/textconsistency/runs/扩展验证-EuroSAT-seed23-20260915-8f54900",
+      "种子": [2, 3],
+      "开始时间UTC": "2026-09-15T09:13:38.648530+00:00",
+      "结束时间UTC": "2026-09-15T09:17:15.079571+00:00",
+      "已完成命令": 11,
+      "总命令": 11
+    }
+  ],
+  "训练次数": 3,
+  "标准CoOp重载评估次数": 6,
+  "冻结融合评估次数": 6,
+  "阶段汇总次数": 2,
+  "模型源码SHA256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+  "CLIP_SHA256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+  "融合评估器SHA256": "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3",
+  "服务器备份路径": "/root/autodl-tmp/textconsistency/backups/EuroSAT扩展验证-seed123-20260915-8f54900.tar.gz",
+  "服务器备份SHA256": "3f1c46edb9ecebeb51872b3d8779d0990de6aa8394cb3ef2a3b0004cada9ef2e"
+}

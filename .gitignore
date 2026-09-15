@@ -17,6 +17,7 @@ __pycache__/
 /.venv/
 /data/
 /runs/
+/outputs/
 verification/**/fixture/
 verification/**/events.out.tfevents.*
 clip/*.part

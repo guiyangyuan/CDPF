@@ -3,7 +3,7 @@
   "created_before_OxfordPets_outputs": true,
   "repository_commit": "ba57805b08fcf3ebf37aa3dc1696a7f8b2a8b787",
   "data_root": "/root/autodl-tmp/textconsistency/data",
-  "clip_path": "/root/autodl-tmp/textconsistency/clip/ViT-B-16.pt",
+  "clip_path": "/root/autodl-tmp/textconsistency/assets/ViT-B-16.pt",
   "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
   "output_root": "/root/autodl-tmp/textconsistency/runs/语义一致性门控-OxfordPets-20260915-ba57805",
   "formula": {

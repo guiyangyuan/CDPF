@@ -125,8 +125,16 @@ def main() -> None:
         raise ValueError("CLIP ViT-B/16权重SHA256不一致")
     if args.batch_size < 1:
         raise ValueError("batch-size必须为正")
-    model, _ = clip.load(str(clip_path), device="cpu", jit=False)
-    model.eval().float()
+    jit_model = torch.jit.load(str(clip_path), map_location="cpu").eval()
+    design_details = {
+        "trainer": "CoOp",
+        "vision_depth": 0,
+        "language_depth": 0,
+        "vision_ctx": 0,
+        "language_ctx": 0,
+    }
+    model = clip.build_model(jit_model.state_dict(), design_details).float().eval()
+    del jit_model
     outputs = []
     for dataset, spec in 数据集定义.items():
         for split in ("Base", "Novel"):

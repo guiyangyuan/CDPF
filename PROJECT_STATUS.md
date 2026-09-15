@@ -1,8 +1,8 @@
 # TextConsistency：工作计划与当前进度
 
-最后更新：2026-09-15（OxfordFlowers无卡数据准备、真实loader、seed1计划和无CUDA拒绝检查全部通过，证据已备份并关机；下一步为GPU执行OxfordFlowers seed1）。
+最后更新：2026-09-15（OxfordFlowers三种子GPU扩展验证已通过，独立复算145项0失败，完整备份已下载并关机；固定概率融合相对CoOp的Novel/HM增益为+6.903/+3.985pp）。
 
-**当前下一步已具体化：OxfordFlowers GPU seed1。** 无卡准备已完成：8,189张图片、102类、4,093/1,633/2,463固定划分全部通过摘要和路径核验；三种子真实16-shot loader均为51个Base类、51个Novel类和816个Base训练样本，采样摘要互异。seed1六步训练/评估计划和无CUDA拒绝检查已生成，证据包SHA256为`ca6e86a1d8cfd4c08482d20885bd084bc88736c8e0d7dd5d6e82cdbfcce55417`并已下载。AutoDL实例`a5904787c3-600682b1`已确认关机。下一批只跑seed1：若固定概率融合HM严格高于CoOp且Novel增益不低于−0.5pp，再补seed2/3；否则停止。见[服务器准备报告](reports/preparation/牛津花卉扩展验证-20260915/服务器准备报告.md)和[数据准备入口](scripts/repro/准备牛津花卉数据.py)。
+**当前最新结果：OxfordFlowers三种子通过冻结规则。** seed1先得到Novel/HM +5.603/+3.129pp，通过事前门槛后才扩展seed2/3；三种子中固定概率融合相对CoOp的Base/Novel/HM均值变化为−1.298/+6.903/+3.985pp，3/3种子HM为正。共3次训练、6次CoOp标准重载、6次融合评估，两段执行器17条命令全部完成；145项独立检查0失败。完整包SHA256为`fc9d690d6d87a87f927110af2916fb7fd95a9115da19aa3046c16a594365b86f`，已下载并解压；AutoDL页面确认实例“已关机”。该结果支持简单概率融合在第五个数据集上的稳定收益，但不是严格盲测或SOTA声明。见[结果报告](reports/experiments/牛津花卉扩展验证-20260915/结果报告.md)。
 
 **最新GPU扩展验证已完成、三种子通过并关机：EuroSAT固定均值概率融合。** 固定ViT-B/16、16-shot、20 epochs、N_CTX=4、alpha=0.5，先跑seed1并通过事前门槛后才补seed2/3。原CoOp三种子Base/Novel/HM为84.381/56.282/67.525，固定均值概率融合为84.556/70.103/76.654，相对提升+0.175/+13.821/+9.129pp；逐种子HM增益为+9.053/+4.746/+15.837pp，3/3为正。概率融合相对固定logit均值融合的HM再提高0.963pp。三次训练、十二次评估和两次阶段汇总全部成功；独立脚本逐行复算六份预测及检查点/日志/清单，145项检查0失败。完整包SHA256为`3f1c46edb9ecebeb51872b3d8779d0990de6aa8394cb3ef2a3b0004cada9ef2e`，本机已下载并解压；AutoDL页面确认344机“已关机”。该结果支持方法在第四个数据集上的稳定收益，但EuroSAT不是严格盲测，不能声称SOTA。见[结果报告](reports/experiments/EuroSAT扩展验证-20260915/结果报告.md)、[独立复算](reports/experiments/EuroSAT扩展验证-20260915/独立复算.json)、[三种子表](reports/experiments/EuroSAT扩展验证-20260915/三种子结果.csv)和[关机确认](reports/experiments/EuroSAT扩展验证-20260915/关机确认.json)。
 
@@ -10,7 +10,7 @@
 
 **最新文本迁移探针已完成、未通过并关机：Base到Novel类别语义可靠性。** 在必要性上界通过后，AutoDL无卡模式用冻结OpenAI CLIP ViT-B/16一次性编码DTD、UCF101、OxfordPets共185类的Base/Novel类别名和描述，只导出类内一致性、类别名对齐、跨类间隔三项冻结文本特征；耗时1143秒，未读取图片、未训练且GPU不可见。每个数据集/种子只用Base类别的诊断目标拟合`lambda=1`三变量岭回归，再仅凭文本预测Novel类别权重。文本映射相对固定0.5的三数据集等权HM为−1.5631pp，相对Base均值标量为−0.6346pp，只有1/3数据集不低于标量，三项继续条件全部失败。DTD/UCF101的Base权重均值明显低于Novel目标，三项文本特征未预测到这种分支可靠性变化；按协议停止本方向，不修改特征、正则或门槛。独立复算重建5个映射、全部Base/Novel预测和HM，错误0；确定性重跑结果SHA256为`b91010049cb83f9dfdc24973675d7053ca55046ecd8ea709d5c2160c4b17e73d`。服务器导出SHA256为`efc58d6b842594b5ca6ecce3f6f4253fac0ec4926b6601254c87b95422f4fb90`，源码提交`ab35c84`；结果/日志/收据均已下载，页面确认344机“已关机”。见[结果报告](reports/experiments/类别语义可靠性迁移探针-20260915/结果报告.md)、[独立复算](reports/experiments/类别语义可靠性迁移探针-20260915/独立复算.json)、[服务器收据](reports/experiments/类别语义可靠性迁移探针-20260915/服务器文本导出/服务器运行收据.json)和[关机确认](reports/experiments/类别语义可靠性迁移探针-20260915/关机确认.json)。
 
-**当前研究决策：停止继续叠加残差、门控或类别权重，转入投稿证据补全。** 已有稳定正结果仍是CoOp学生与均值描述的简单概率融合：相对原CoOp，UCF101/DTD/Aircraft/EuroSAT的三种子HM分别提升+5.05/+7.20/+4.20/+9.13pp；后续复杂模块没有形成跨数据集稳定独立收益。为满足“期刊录用、尽快毕业”的目标，固定简单概率融合作为候选主方法，继续补OxfordFlowers、Caltech101、标准基线和置信区间，不再为当前四个数据集设计新规则。该路线仍是方法实验论文，但方法新颖性有限，不能声称SOTA或保证录用。见[后续研究决策](reports/experiments/类别语义可靠性迁移探针-20260915/后续研究决策.md)。
+**当前研究决策：停止继续叠加残差、门控或类别权重，转入投稿证据补全。** 稳定正结果仍是CoOp学生与均值描述的简单概率融合：相对原CoOp，UCF101/DTD/Aircraft/EuroSAT/OxfordFlowers的三种子HM分别提升+5.05/+7.20/+4.20/+9.13/+3.99pp；后续复杂模块没有形成跨数据集稳定独立收益。为满足“期刊录用、尽快毕业”的目标，固定简单概率融合作为候选主方法，优先整理统一结果表、标准基线、置信区间和论文叙事；Caltech101只作可选的第六数据集，不应在当前证据已足时无限扩量。该路线仍是方法实验论文，但方法新颖性有限，不能声称SOTA或保证录用。见[后续研究决策](reports/experiments/类别语义可靠性迁移探针-20260915/后续研究决策.md)。
 
 **EuroSAT扩展验证的无卡准备记录。** 仓库审计确认Caltech101、EuroSAT、OxfordFlowers均已有历史调参或论文成绩，因此它们只作为未参与本轮融合规则选择的扩展验证。服务器实际数据根目录为`/root/autodl-tmp/textconsistency/data`；EuroSAT共27,000张、10类，归档MD5为`c8fa0143…`，固定Zhou划分SHA256为`541503a7…`，13,500/5,400/8,100条路径全部存在且互不重叠。三个种子的真实loader预检、冻结源码、CLIP、三项针对性测试和无CUDA拒绝检查均通过。该准备已由上一段GPU批次完整执行，不得重复运行旧入口。见[服务器准备报告](reports/preparation/扩展验证-20260915/服务器准备报告.md)、[准备说明](reports/preparation/扩展验证-20260915/准备说明.md)和[冻结协议](reports/preparation/扩展验证-20260915/冻结协议.json)。
 
@@ -148,6 +148,7 @@
 | UCF101 三种子实验 | 已完成 | 上述报告；禁止当成所有数据集结论 |
 | 服务器连接与环境检查 | EuroSAT三种子运行、备份完成并关机 | westc:26022的344机；EuroSAT数据、冻结源码、3次训练/12次评估、完整备份和145项独立复算均已核验，AutoDL网页确认已关机 |
 | OxfordFlowers无卡数据与执行准备 | 已完成、备份并关机 | 8,189图像/102类、固定划分和三种子16-shot真实loader通过；seed1六步计划及无CUDA拒绝通过；未产生准确率 |
+| OxfordFlowers三种子GPU扩展验证 | 已通过、核验备份并关机 | 概率融合相对CoOp Base/Novel/HM为−1.298/+6.903/+3.985pp，3/3种子HM正增益；145项独立检查0失败 |
 | DTD / Aircraft ZIP 本机校验 | 已完成 | reports/preparation/dataset-archives.json |
 | UCF101 / DTD / Aircraft 服务器部署与预检 | 已完成 | ZIP 校验、固定划分、图像/描述覆盖、每类 16-shot、三种子采样均通过；见 ready.json |
 | 官方 CoOp 差异核查与独立诊断 | 本机、开卡后服务器均通过 | 无卡时期 SIGKILL 保留；开卡后完整模型诊断 logits/梯度/更新差均为0，见本批 start-evidence |

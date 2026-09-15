@@ -20,7 +20,6 @@ from pathlib import Path
 }
 预期模型源码摘要 = "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
 预期CLIP摘要 = "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f"
-预期备份摘要 = "3f1c46edb9ecebeb51872b3d8779d0990de6aa8394cb3ef2a3b0004cada9ef2e"
 
 
 def sha256(path: Path) -> str:
@@ -63,21 +62,27 @@ def server_path_to_local(input_root: Path, server_path: str) -> Path:
     return input_root / server_path[len(prefix):]
 
 
-def audit_archive(input_root: Path, audit: Audit) -> dict:
-    archive = input_root / "EuroSAT扩展验证-seed123-20260915-8f54900.tar.gz"
+def audit_archive(
+    input_root: Path,
+    audit: Audit,
+    archive_name: str,
+    expected_sha256: str,
+    expected_members: int,
+) -> dict:
+    archive = input_root / archive_name
     audit.require("本机备份包存在", archive.is_file(), str(archive))
     archive_sha = sha256(archive)
-    audit.require("本机备份包SHA256与服务器收据一致", archive_sha == 预期备份摘要, archive_sha)
+    audit.require("本机备份包SHA256与服务器收据一致", archive_sha == expected_sha256, archive_sha)
     with tarfile.open(archive, "r:gz") as bundle:
         members = bundle.getmembers()
     unsafe = [member.name for member in members if Path(member.name).is_absolute() or ".." in Path(member.name).parts]
     audit.require("备份包成员路径安全", not unsafe, unsafe)
-    audit.require("备份包成员数量符合服务器记录", len(members) == 121, len(members))
+    audit.require("备份包成员数量符合服务器记录", len(members) == expected_members, len(members))
     return {"路径": str(archive), "字节数": archive.stat().st_size, "SHA256": archive_sha, "成员数": len(members)}
 
 
-def audit_manifest(input_root: Path, audit: Audit) -> dict:
-    manifest = input_root / "setup-logs/扩展验证-20260915-8f54900/服务器文件清单.txt"
+def audit_manifest(input_root: Path, audit: Audit, manifest_relative_path: str) -> dict:
+    manifest = input_root / manifest_relative_path
     audit.require("服务器文件清单存在", manifest.is_file(), str(manifest))
     raw_lines = manifest.read_bytes().splitlines(keepends=True)
     entries = []
@@ -91,7 +96,7 @@ def audit_manifest(input_root: Path, audit: Audit) -> dict:
     audit.require("服务器清单文件均已下载", not missing, missing)
     mismatches = []
     self_entry = None
-    manifest_server_path = "/root/autodl-tmp/textconsistency/setup-logs/扩展验证-20260915-8f54900/服务器文件清单.txt"
+    manifest_server_path = "/root/autodl-tmp/textconsistency/" + manifest_relative_path
     for index, expected, server_path, local_path in entries:
         if server_path == manifest_server_path:
             self_entry = (index, expected)
@@ -156,13 +161,13 @@ def audit_predictions(path: Path, metrics: dict, audit: Audit, seed: int, split:
     return recomputed
 
 
-def audit_split(run_root: Path, seed: int, split: str, audit: Audit) -> tuple[dict, dict]:
+def audit_split(run_root: Path, seed: int, split: str, audit: Audit, dataset_key: str) -> tuple[dict, dict]:
     result_dir = run_root / "融合评估" / f"seed{seed}" / split
     metrics_path = result_dir / "metrics.json"
     metrics = load_json(metrics_path)
     audit.require(f"seed{seed}-{split}评估完成", metrics.get("status") == "passed", metrics.get("status"))
     audit.require(f"seed{seed}-{split}结果身份",
-                  (metrics.get("dataset_key"), metrics.get("seed"), metrics.get("subsample")) == ("eurosat", seed, split),
+                  (metrics.get("dataset_key"), metrics.get("seed"), metrics.get("subsample")) == (dataset_key, seed, split),
                   {key: metrics.get(key) for key in ("dataset_key", "seed", "subsample")})
     audit.require(f"seed{seed}-{split}固定alpha", close(float(metrics["fixed_protocol"]["alpha"]), 0.5),
                   metrics["fixed_protocol"]["alpha"])
@@ -216,7 +221,7 @@ def audit_split(run_root: Path, seed: int, split: str, audit: Audit) -> tuple[di
     return recomputed, metadata
 
 
-def audit_runs(input_root: Path, audit: Audit) -> tuple[list[dict], dict]:
+def audit_runs(input_root: Path, audit: Audit, dataset_key: str, dataset_name: str) -> tuple[list[dict], dict]:
     run_roots = sorted(path for path in (input_root / "runs").iterdir() if path.is_dir())
     audit.require("只包含两段冻结执行", len(run_roots) == 2, [path.name for path in run_roots])
     seed_to_root: dict[int, Path] = {}
@@ -228,9 +233,10 @@ def audit_runs(input_root: Path, audit: Audit) -> tuple[list[dict], dict]:
         audit.require(f"{run_root.name}命令全部完成",
                       status["状态"] == "完成" and status["已完成命令"] == status["总命令"] == protocol["命令数"], status)
         audit.require(f"{run_root.name}冻结协议",
-                      (protocol["数据集键"], protocol["训练轮数"], protocol["样本数"], protocol["骨干"],
-                       protocol["实际模型源码SHA256"]) == ("eurosat", 20, 16, "ViT-B/16", 预期模型源码摘要),
-                      {key: protocol[key] for key in ("数据集键", "训练轮数", "样本数", "骨干", "实际模型源码SHA256")})
+                      (protocol["数据集键"], protocol["数据集"], protocol["训练轮数"], protocol["样本数"], protocol["骨干"],
+                       protocol["实际模型源码SHA256"]) ==
+                      (dataset_key, dataset_name, 20, 16, "ViT-B/16", 预期模型源码摘要),
+                      {key: protocol[key] for key in ("数据集键", "数据集", "训练轮数", "样本数", "骨干", "实际模型源码SHA256")})
         for seed in protocol["种子"]:
             audit.require(f"seed{seed}只执行一次", seed not in seed_to_root, str(run_root))
             seed_to_root[seed] = run_root
@@ -240,8 +246,8 @@ def audit_runs(input_root: Path, audit: Audit) -> tuple[list[dict], dict]:
     metadata_by_seed = {}
     for seed in sorted(seed_to_root):
         root = seed_to_root[seed]
-        base, base_metadata = audit_split(root, seed, "base", audit)
-        novel, novel_metadata = audit_split(root, seed, "new", audit)
+        base, base_metadata = audit_split(root, seed, "base", audit, dataset_key)
+        novel, novel_metadata = audit_split(root, seed, "new", audit, dataset_key)
         audit.require(f"seed{seed}两分支使用同一检查点", base_metadata["checkpoint_sha256"] == novel_metadata["checkpoint_sha256"],
                       {"base": base_metadata["checkpoint_sha256"], "novel": novel_metadata["checkpoint_sha256"]})
         metadata_by_seed[str(seed)] = {"base": base_metadata, "novel": novel_metadata}
@@ -327,19 +333,28 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input-root", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--dataset-key", default="eurosat")
+    parser.add_argument("--dataset-name", default="EuroSAT")
+    parser.add_argument("--archive-name", default="EuroSAT扩展验证-seed123-20260915-8f54900.tar.gz")
+    parser.add_argument("--expected-archive-sha256",
+                        default="3f1c46edb9ecebeb51872b3d8779d0990de6aa8394cb3ef2a3b0004cada9ef2e")
+    parser.add_argument("--expected-member-count", type=int, default=121)
+    parser.add_argument("--manifest-relative-path",
+                        default="setup-logs/扩展验证-20260915-8f54900/服务器文件清单.txt")
     args = parser.parse_args()
     input_root = args.input_root.resolve()
     output_dir = args.output_dir.resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
 
     audit = Audit()
-    backup = audit_archive(input_root, audit)
-    manifest = audit_manifest(input_root, audit)
-    rows, metadata = audit_runs(input_root, audit)
+    backup = audit_archive(input_root, audit, args.archive_name, args.expected_archive_sha256,
+                           args.expected_member_count)
+    manifest = audit_manifest(input_root, audit, args.manifest_relative_path)
+    rows, metadata = audit_runs(input_root, audit, args.dataset_key, args.dataset_name)
     result = summarize(rows, audit)
     payload = {
         "状态": "通过" if all(item["通过"] for item in audit.checks) else "失败",
-        "数据集": "EuroSAT",
+        "数据集": args.dataset_name,
         "协议": "冻结均值概率融合扩展验证-v1",
         "输入根目录": str(input_root),
         "备份": backup,

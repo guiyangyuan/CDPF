@@ -1,0 +1,19 @@
+{
+  "状态": "本机备份及独立复算通过",
+  "本机目录": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune/outputs/牛津花卉扩展验证-seed123-20260915-8f54900",
+  "压缩包": {
+    "路径": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune/outputs/牛津花卉扩展验证-seed123-20260915-8f54900/牛津花卉扩展验证-seed123-20260915-8f54900.tar.gz",
+    "字节数": 1833802,
+    "SHA256": "fc9d690d6d87a87f927110af2916fb7fd95a9115da19aa3046c16a594365b86f",
+    "成员数": 118
+  },
+  "服务器文件清单条目数": 88,
+  "普通文件逐项SHA不一致数": 0,
+  "独立复算检查项数量": 145,
+  "独立复算失败检查项数量": 0,
+  "三个检查点SHA256": {
+    "1": "50030706793771b4df996f244db660854bfbe520d8ddc5d05a6e14d18cff8970",
+    "2": "ef70109e357b150c35540ddf123891710b2dfa59d6fb65340bd4d2c041f7bad7",
+    "3": "cfaeb5f10a46ef97e3a0b34d5753bf41827371eaa4435b81629e8c59c1838684"
+  }
+}

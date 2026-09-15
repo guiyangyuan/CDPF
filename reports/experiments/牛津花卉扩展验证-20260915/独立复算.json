@@ -1,0 +1,1201 @@
+{
+  "状态": "通过",
+  "数据集": "OxfordFlowers",
+  "协议": "冻结均值概率融合扩展验证-v1",
+  "输入根目录": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune/outputs/牛津花卉扩展验证-seed123-20260915-8f54900",
+  "备份": {
+    "路径": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune/outputs/牛津花卉扩展验证-seed123-20260915-8f54900/牛津花卉扩展验证-seed123-20260915-8f54900.tar.gz",
+    "字节数": 1833802,
+    "SHA256": "fc9d690d6d87a87f927110af2916fb7fd95a9115da19aa3046c16a594365b86f",
+    "成员数": 118
+  },
+  "服务器文件清单": {
+    "清单条目数": 88,
+    "普通文件核验数": 87,
+    "普通文件不一致数": 0,
+    "清单自身说明": "自身条目记录的是写入该行之前的文件前缀；前缀SHA256已匹配"
+  },
+  "结果": {
+    "逐种子": [
+      {
+        "种子": 1,
+        "方法": {
+          "student": {
+            "Base": 97.05603038936373,
+            "Novel": 71.84397163120568,
+            "HM": 82.5682724749961
+          },
+          "description_mean": {
+            "Base": 74.07407407407408,
+            "Novel": 79.50354609929079,
+            "HM": 76.69283527459935
+          },
+          "simple_fusion": {
+            "Base": 93.54226020892688,
+            "Novel": 77.23404255319149,
+            "HM": 84.60947788009545
+          },
+          "mean_probability_fusion": {
+            "Base": 95.91642924976259,
+            "Novel": 77.44680851063829,
+            "HM": 85.69776874376451
+          }
+        },
+        "融合相对CoOp": {
+          "Base增益pp": -1.1396011396011403,
+          "Novel增益pp": 5.6028368794326155,
+          "HM增益pp": 3.1294962687684063
+        }
+      },
+      {
+        "种子": 2,
+        "方法": {
+          "student": {
+            "Base": 96.58119658119658,
+            "Novel": 70.85106382978724,
+            "HM": 81.73909265675402
+          },
+          "description_mean": {
+            "Base": 74.07407407407408,
+            "Novel": 79.50354609929079,
+            "HM": 76.69283527459935
+          },
+          "simple_fusion": {
+            "Base": 94.01709401709402,
+            "Novel": 75.60283687943263,
+            "HM": 83.8104223399161
+          },
+          "mean_probability_fusion": {
+            "Base": 95.25166191832858,
+            "Novel": 77.58865248226951,
+            "HM": 85.5176423459948
+          }
+        },
+        "融合相对CoOp": {
+          "Base增益pp": -1.3295346628679994,
+          "Novel增益pp": 6.737588652482273,
+          "HM增益pp": 3.7785496892407764
+        }
+      },
+      {
+        "种子": 3,
+        "方法": {
+          "student": {
+            "Base": 97.43589743589743,
+            "Novel": 66.17021276595744,
+            "HM": 78.81556570742605
+          },
+          "description_mean": {
+            "Base": 74.07407407407408,
+            "Novel": 79.50354609929079,
+            "HM": 76.69283527459935
+          },
+          "simple_fusion": {
+            "Base": 94.68186134852802,
+            "Novel": 73.47517730496453,
+            "HM": 82.74130664827423
+          },
+          "mean_probability_fusion": {
+            "Base": 96.01139601139602,
+            "Novel": 74.53900709219859,
+            "HM": 83.92350880435416
+          }
+        },
+        "融合相对CoOp": {
+          "Base增益pp": -1.4245014245014147,
+          "Novel增益pp": 8.368794326241144,
+          "HM增益pp": 5.1079430969281105
+        }
+      }
+    ],
+    "均值": {
+      "student": {
+        "Base均值": 97.02437480215258,
+        "Novel均值": 69.62174940898346,
+        "均值的HM": 81.07007277865459,
+        "种子HM均值": 81.04097694639206
+      },
+      "description_mean": {
+        "Base均值": 74.07407407407408,
+        "Novel均值": 79.50354609929079,
+        "均值的HM": 76.69283527459935,
+        "种子HM均值": 76.69283527459935
+      },
+      "simple_fusion": {
+        "Base均值": 94.0804051915163,
+        "Novel均值": 75.43735224586288,
+        "均值的HM": 83.73372528229272,
+        "种子HM均值": 83.72040228942859
+      },
+      "mean_probability_fusion": {
+        "Base均值": 95.72649572649573,
+        "Novel均值": 76.52482269503547,
+        "均值的HM": 85.05540833957974,
+        "种子HM均值": 85.04630663137115
+      }
+    },
+    "融合相对CoOp": {
+      "Base增益pp": -1.2978790756568515,
+      "Novel增益pp": 6.903073286052006,
+      "HM增益pp": 3.985335560925151,
+      "正HM增益种子数": 3
+    },
+    "门槛": {
+      "融合HM严格高于CoOp": true,
+      "融合Novel相对CoOp不低于-0.5pp": true,
+      "至少三分之二种子HM正增益": true
+    },
+    "通过": true
+  },
+  "运行元数据": {
+    "1": {
+      "base": {
+        "checkpoint_sha256": "50030706793771b4df996f244db660854bfbe520d8ddc5d05a6e14d18cff8970",
+        "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "evaluator_sha256": "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3",
+        "train_samples_sha256": "a2c95695339b2bead4904766394e725a764fb1021885f144b00928dea1e5b7d6",
+        "test_samples_sha256": "a8b7aa96d147e01ae3add8cd710fdd289d539147e61af00f8c69afd9a60216c4",
+        "predictions_sha256": "ec4620ef1ad3cdd24a1d88e4aa37aeae220dde917e487610ba43e7a7d8aa8097"
+      },
+      "novel": {
+        "checkpoint_sha256": "50030706793771b4df996f244db660854bfbe520d8ddc5d05a6e14d18cff8970",
+        "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "evaluator_sha256": "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3",
+        "train_samples_sha256": "9217d9f37e168c4db6b1d73b15318fa86fbcbfd93a666262b4e06d372c6fc6e8",
+        "test_samples_sha256": "155819283e083c5943ccb630748a00fedf3c1b889583bd608fc8a8cdc8a302ab",
+        "predictions_sha256": "2ba72666696d4e479bec0c0e3784f930a203965f9f069083c238397c6bcbaaea"
+      }
+    },
+    "2": {
+      "base": {
+        "checkpoint_sha256": "ef70109e357b150c35540ddf123891710b2dfa59d6fb65340bd4d2c041f7bad7",
+        "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "evaluator_sha256": "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3",
+        "train_samples_sha256": "34e2aad28b807b254b83b3b07478737b29c656e09c5153cf39bb560435a62c92",
+        "test_samples_sha256": "a8b7aa96d147e01ae3add8cd710fdd289d539147e61af00f8c69afd9a60216c4",
+        "predictions_sha256": "e9e3023ac3cd09385230b768942a756354e2c99e6f943bdf4f3667c866087376"
+      },
+      "novel": {
+        "checkpoint_sha256": "ef70109e357b150c35540ddf123891710b2dfa59d6fb65340bd4d2c041f7bad7",
+        "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "evaluator_sha256": "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3",
+        "train_samples_sha256": "07bdaa21f0a7853d623e54d792ddef182169816459bdbb82595f59dc24e944c0",
+        "test_samples_sha256": "155819283e083c5943ccb630748a00fedf3c1b889583bd608fc8a8cdc8a302ab",
+        "predictions_sha256": "7ddb20d08a26cd0b615149eef848a5bec2955b2f75d2eae7715c0febda9515c7"
+      }
+    },
+    "3": {
+      "base": {
+        "checkpoint_sha256": "cfaeb5f10a46ef97e3a0b34d5753bf41827371eaa4435b81629e8c59c1838684",
+        "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "evaluator_sha256": "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3",
+        "train_samples_sha256": "71c88ae70c13958794a0456645ff1999c02c320f5a25a61b8956e3115b8556b7",
+        "test_samples_sha256": "a8b7aa96d147e01ae3add8cd710fdd289d539147e61af00f8c69afd9a60216c4",
+        "predictions_sha256": "cb893ebf53c9b319b02063333b7c870f70d3cbf9ed45fd4b391f889881e4f3b1"
+      },
+      "novel": {
+        "checkpoint_sha256": "cfaeb5f10a46ef97e3a0b34d5753bf41827371eaa4435b81629e8c59c1838684",
+        "model_source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "evaluator_sha256": "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3",
+        "train_samples_sha256": "a432a4f78d31e38752cdc557c729a0ed4458eda1e1c9c418dd601971d6998826",
+        "test_samples_sha256": "155819283e083c5943ccb630748a00fedf3c1b889583bd608fc8a8cdc8a302ab",
+        "predictions_sha256": "6f2330fdd31c80dc80d2ab2a4880c3accbce8d0f148e51cd27339e6e6f22b7e2"
+      }
+    }
+  },
+  "检查项数量": 145,
+  "失败检查项数量": 0,
+  "检查项": [
+    {
+      "检查": "本机备份包存在",
+      "通过": true,
+      "详情": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune/outputs/牛津花卉扩展验证-seed123-20260915-8f54900/牛津花卉扩展验证-seed123-20260915-8f54900.tar.gz"
+    },
+    {
+      "检查": "本机备份包SHA256与服务器收据一致",
+      "通过": true,
+      "详情": "fc9d690d6d87a87f927110af2916fb7fd95a9115da19aa3046c16a594365b86f"
+    },
+    {
+      "检查": "备份包成员路径安全",
+      "通过": true,
+      "详情": []
+    },
+    {
+      "检查": "备份包成员数量符合服务器记录",
+      "通过": true,
+      "详情": 118
+    },
+    {
+      "检查": "服务器文件清单存在",
+      "通过": true,
+      "详情": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune/outputs/牛津花卉扩展验证-seed123-20260915-8f54900/setup-logs/牛津花卉GPU验证-20260915-783f235/服务器文件清单.txt"
+    },
+    {
+      "检查": "服务器清单文件均已下载",
+      "通过": true,
+      "详情": []
+    },
+    {
+      "检查": "服务器实验文件逐项SHA256一致",
+      "通过": true,
+      "详情": []
+    },
+    {
+      "检查": "清单包含自身条目",
+      "通过": true,
+      "详情": [
+        87,
+        "0c5afc786366849141e3335bb6acf1677b95f691ed0cd0f3d0b6e2d9e3d1fe45"
+      ]
+    },
+    {
+      "检查": "清单自身条目对应写入前缀SHA256",
+      "通过": true,
+      "详情": {
+        "前缀行数": 87,
+        "SHA256": "0c5afc786366849141e3335bb6acf1677b95f691ed0cd0f3d0b6e2d9e3d1fe45"
+      }
+    },
+    {
+      "检查": "只包含两段冻结执行",
+      "通过": true,
+      "详情": [
+        "牛津花卉扩展验证-seed1-20260915-8f54900-正式",
+        "牛津花卉扩展验证-seed23-20260915-8f54900-正式"
+      ]
+    },
+    {
+      "检查": "牛津花卉扩展验证-seed1-20260915-8f54900-正式命令全部完成",
+      "通过": true,
+      "详情": {
+        "状态": "完成",
+        "已完成命令": 6,
+        "总命令": 6,
+        "当前命令": null,
+        "结束时间": "2026-09-15T11:04:14.537250+00:00"
+      }
+    },
+    {
+      "检查": "牛津花卉扩展验证-seed1-20260915-8f54900-正式冻结协议",
+      "通过": true,
+      "详情": {
+        "数据集键": "oxford_flowers",
+        "数据集": "OxfordFlowers",
+        "训练轮数": 20,
+        "样本数": 16,
+        "骨干": "ViT-B/16",
+        "实际模型源码SHA256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
+      }
+    },
+    {
+      "检查": "seed1只执行一次",
+      "通过": true,
+      "详情": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune/outputs/牛津花卉扩展验证-seed123-20260915-8f54900/runs/牛津花卉扩展验证-seed1-20260915-8f54900-正式"
+    },
+    {
+      "检查": "牛津花卉扩展验证-seed23-20260915-8f54900-正式命令全部完成",
+      "通过": true,
+      "详情": {
+        "状态": "完成",
+        "已完成命令": 11,
+        "总命令": 11,
+        "当前命令": null,
+        "结束时间": "2026-09-15T11:10:45.928418+00:00"
+      }
+    },
+    {
+      "检查": "牛津花卉扩展验证-seed23-20260915-8f54900-正式冻结协议",
+      "通过": true,
+      "详情": {
+        "数据集键": "oxford_flowers",
+        "数据集": "OxfordFlowers",
+        "训练轮数": 20,
+        "样本数": 16,
+        "骨干": "ViT-B/16",
+        "实际模型源码SHA256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
+      }
+    },
+    {
+      "检查": "seed2只执行一次",
+      "通过": true,
+      "详情": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune/outputs/牛津花卉扩展验证-seed123-20260915-8f54900/runs/牛津花卉扩展验证-seed23-20260915-8f54900-正式"
+    },
+    {
+      "检查": "seed3只执行一次",
+      "通过": true,
+      "详情": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/github-publish/textconsistency_v2_tune/outputs/牛津花卉扩展验证-seed123-20260915-8f54900/runs/牛津花卉扩展验证-seed23-20260915-8f54900-正式"
+    },
+    {
+      "检查": "三种子结果齐全",
+      "通过": true,
+      "详情": [
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "检查": "seed1-base评估完成",
+      "通过": true,
+      "详情": "passed"
+    },
+    {
+      "检查": "seed1-base结果身份",
+      "通过": true,
+      "详情": {
+        "dataset_key": "oxford_flowers",
+        "seed": 1,
+        "subsample": "base"
+      }
+    },
+    {
+      "检查": "seed1-base固定alpha",
+      "通过": true,
+      "详情": 0.5
+    },
+    {
+      "检查": "seed1-base冻结模型源码",
+      "通过": true,
+      "详情": {
+        "root": "/root/autodl-tmp/textconsistency/releases/扩展验证-20260915-8f54900",
+        "model_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "expected_model_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "evaluator_sha256": "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3"
+      }
+    },
+    {
+      "检查": "seed1-base冻结CLIP",
+      "通过": true,
+      "详情": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f"
+    },
+    {
+      "检查": "seed1-base输入文件未被评估修改",
+      "通过": true,
+      "详情": {
+        "checkpoint": "50030706793771b4df996f244db660854bfbe520d8ddc5d05a6e14d18cff8970",
+        "sidecar": "582d4741c2a5a503e6741f8f780444c0b37574da5f6faa3f90841f428efde5f9",
+        "historical_metrics": "e092fd1d352238454249b1328642998940aa9b0c19d43aa3061732a3279e72bf",
+        "historical_log": "d415ce3985aad5979f8d0a7a4823c9692630b2c2bdf73544a3032a14193c4db1"
+      }
+    },
+    {
+      "检查": "seed1-base检查点SHA256",
+      "通过": true,
+      "详情": "50030706793771b4df996f244db660854bfbe520d8ddc5d05a6e14d18cff8970"
+    },
+    {
+      "检查": "seed1-base检查点旁路摘要",
+      "通过": true,
+      "详情": "50030706793771b4df996f244db660854bfbe520d8ddc5d05a6e14d18cff8970"
+    },
+    {
+      "检查": "seed1-base历史指标SHA256",
+      "通过": true,
+      "详情": "e092fd1d352238454249b1328642998940aa9b0c19d43aa3061732a3279e72bf"
+    },
+    {
+      "检查": "seed1-base历史日志SHA256",
+      "通过": true,
+      "详情": "d415ce3985aad5979f8d0a7a4823c9692630b2c2bdf73544a3032a14193c4db1"
+    },
+    {
+      "检查": "seed1-baseCoOp重载结果一致",
+      "通过": true,
+      "详情": 97.05603038936373
+    },
+    {
+      "检查": "seed1-base训练运行签名",
+      "通过": true,
+      "详情": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
+    },
+    {
+      "检查": "seed1-base运行设备",
+      "通过": true,
+      "详情": {
+        "device": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4090"
+      }
+    },
+    {
+      "检查": "seed1-base预测文件SHA256",
+      "通过": true,
+      "详情": "ec4620ef1ad3cdd24a1d88e4aa37aeae220dde917e487610ba43e7a7d8aa8097"
+    },
+    {
+      "检查": "seed1-base预测身份一致",
+      "通过": true,
+      "详情": []
+    },
+    {
+      "检查": "seed1-base预测数量",
+      "通过": true,
+      "详情": 1053
+    },
+    {
+      "检查": "seed1-base-student独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1022,
+        "total": 1053,
+        "accuracy": 97.05603038936373
+      }
+    },
+    {
+      "检查": "seed1-base-description_mean独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 780,
+        "total": 1053,
+        "accuracy": 74.07407407407408
+      }
+    },
+    {
+      "检查": "seed1-base-simple_fusion独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 985,
+        "total": 1053,
+        "accuracy": 93.54226020892688
+      }
+    },
+    {
+      "检查": "seed1-base-mean_probability_fusion独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1010,
+        "total": 1053,
+        "accuracy": 95.91642924976259
+      }
+    },
+    {
+      "检查": "seed1-new评估完成",
+      "通过": true,
+      "详情": "passed"
+    },
+    {
+      "检查": "seed1-new结果身份",
+      "通过": true,
+      "详情": {
+        "dataset_key": "oxford_flowers",
+        "seed": 1,
+        "subsample": "new"
+      }
+    },
+    {
+      "检查": "seed1-new固定alpha",
+      "通过": true,
+      "详情": 0.5
+    },
+    {
+      "检查": "seed1-new冻结模型源码",
+      "通过": true,
+      "详情": {
+        "root": "/root/autodl-tmp/textconsistency/releases/扩展验证-20260915-8f54900",
+        "model_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "expected_model_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "evaluator_sha256": "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3"
+      }
+    },
+    {
+      "检查": "seed1-new冻结CLIP",
+      "通过": true,
+      "详情": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f"
+    },
+    {
+      "检查": "seed1-new输入文件未被评估修改",
+      "通过": true,
+      "详情": {
+        "checkpoint": "50030706793771b4df996f244db660854bfbe520d8ddc5d05a6e14d18cff8970",
+        "sidecar": "582d4741c2a5a503e6741f8f780444c0b37574da5f6faa3f90841f428efde5f9",
+        "historical_metrics": "9eb75ae59965e3d3fcdbf7f353bb49d7a1eb477d0779d329783e854eb002ef88",
+        "historical_log": "a52b841a845656e448ec99ef401ece70a96097f9e9536c0f515cc39a0d9905d8"
+      }
+    },
+    {
+      "检查": "seed1-new检查点SHA256",
+      "通过": true,
+      "详情": "50030706793771b4df996f244db660854bfbe520d8ddc5d05a6e14d18cff8970"
+    },
+    {
+      "检查": "seed1-new检查点旁路摘要",
+      "通过": true,
+      "详情": "50030706793771b4df996f244db660854bfbe520d8ddc5d05a6e14d18cff8970"
+    },
+    {
+      "检查": "seed1-new历史指标SHA256",
+      "通过": true,
+      "详情": "9eb75ae59965e3d3fcdbf7f353bb49d7a1eb477d0779d329783e854eb002ef88"
+    },
+    {
+      "检查": "seed1-new历史日志SHA256",
+      "通过": true,
+      "详情": "a52b841a845656e448ec99ef401ece70a96097f9e9536c0f515cc39a0d9905d8"
+    },
+    {
+      "检查": "seed1-newCoOp重载结果一致",
+      "通过": true,
+      "详情": 71.84397163120568
+    },
+    {
+      "检查": "seed1-new训练运行签名",
+      "通过": true,
+      "详情": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
+    },
+    {
+      "检查": "seed1-new运行设备",
+      "通过": true,
+      "详情": {
+        "device": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4090"
+      }
+    },
+    {
+      "检查": "seed1-new预测文件SHA256",
+      "通过": true,
+      "详情": "2ba72666696d4e479bec0c0e3784f930a203965f9f069083c238397c6bcbaaea"
+    },
+    {
+      "检查": "seed1-new预测身份一致",
+      "通过": true,
+      "详情": []
+    },
+    {
+      "检查": "seed1-new预测数量",
+      "通过": true,
+      "详情": 1410
+    },
+    {
+      "检查": "seed1-new-student独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1013,
+        "total": 1410,
+        "accuracy": 71.84397163120568
+      }
+    },
+    {
+      "检查": "seed1-new-description_mean独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1121,
+        "total": 1410,
+        "accuracy": 79.50354609929079
+      }
+    },
+    {
+      "检查": "seed1-new-simple_fusion独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1089,
+        "total": 1410,
+        "accuracy": 77.23404255319149
+      }
+    },
+    {
+      "检查": "seed1-new-mean_probability_fusion独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1092,
+        "total": 1410,
+        "accuracy": 77.44680851063829
+      }
+    },
+    {
+      "检查": "seed1两分支使用同一检查点",
+      "通过": true,
+      "详情": {
+        "base": "50030706793771b4df996f244db660854bfbe520d8ddc5d05a6e14d18cff8970",
+        "novel": "50030706793771b4df996f244db660854bfbe520d8ddc5d05a6e14d18cff8970"
+      }
+    },
+    {
+      "检查": "seed2-base评估完成",
+      "通过": true,
+      "详情": "passed"
+    },
+    {
+      "检查": "seed2-base结果身份",
+      "通过": true,
+      "详情": {
+        "dataset_key": "oxford_flowers",
+        "seed": 2,
+        "subsample": "base"
+      }
+    },
+    {
+      "检查": "seed2-base固定alpha",
+      "通过": true,
+      "详情": 0.5
+    },
+    {
+      "检查": "seed2-base冻结模型源码",
+      "通过": true,
+      "详情": {
+        "root": "/root/autodl-tmp/textconsistency/releases/扩展验证-20260915-8f54900",
+        "model_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "expected_model_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "evaluator_sha256": "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3"
+      }
+    },
+    {
+      "检查": "seed2-base冻结CLIP",
+      "通过": true,
+      "详情": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f"
+    },
+    {
+      "检查": "seed2-base输入文件未被评估修改",
+      "通过": true,
+      "详情": {
+        "checkpoint": "ef70109e357b150c35540ddf123891710b2dfa59d6fb65340bd4d2c041f7bad7",
+        "sidecar": "3eededc669ded1fa1e747ef30f7d585ed9439929afd094d28747222c614890a3",
+        "historical_metrics": "6ef8c61579b80b235c41770b320de6e793d4c6f9f4125fcbea5feef51def98e3",
+        "historical_log": "f2a0c232d20981214e94b8f6db3ac433dacfd64c2f2b29fe981d28241519f3e3"
+      }
+    },
+    {
+      "检查": "seed2-base检查点SHA256",
+      "通过": true,
+      "详情": "ef70109e357b150c35540ddf123891710b2dfa59d6fb65340bd4d2c041f7bad7"
+    },
+    {
+      "检查": "seed2-base检查点旁路摘要",
+      "通过": true,
+      "详情": "ef70109e357b150c35540ddf123891710b2dfa59d6fb65340bd4d2c041f7bad7"
+    },
+    {
+      "检查": "seed2-base历史指标SHA256",
+      "通过": true,
+      "详情": "6ef8c61579b80b235c41770b320de6e793d4c6f9f4125fcbea5feef51def98e3"
+    },
+    {
+      "检查": "seed2-base历史日志SHA256",
+      "通过": true,
+      "详情": "f2a0c232d20981214e94b8f6db3ac433dacfd64c2f2b29fe981d28241519f3e3"
+    },
+    {
+      "检查": "seed2-baseCoOp重载结果一致",
+      "通过": true,
+      "详情": 96.58119658119658
+    },
+    {
+      "检查": "seed2-base训练运行签名",
+      "通过": true,
+      "详情": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
+    },
+    {
+      "检查": "seed2-base运行设备",
+      "通过": true,
+      "详情": {
+        "device": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4090"
+      }
+    },
+    {
+      "检查": "seed2-base预测文件SHA256",
+      "通过": true,
+      "详情": "e9e3023ac3cd09385230b768942a756354e2c99e6f943bdf4f3667c866087376"
+    },
+    {
+      "检查": "seed2-base预测身份一致",
+      "通过": true,
+      "详情": []
+    },
+    {
+      "检查": "seed2-base预测数量",
+      "通过": true,
+      "详情": 1053
+    },
+    {
+      "检查": "seed2-base-student独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1017,
+        "total": 1053,
+        "accuracy": 96.58119658119658
+      }
+    },
+    {
+      "检查": "seed2-base-description_mean独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 780,
+        "total": 1053,
+        "accuracy": 74.07407407407408
+      }
+    },
+    {
+      "检查": "seed2-base-simple_fusion独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 990,
+        "total": 1053,
+        "accuracy": 94.01709401709402
+      }
+    },
+    {
+      "检查": "seed2-base-mean_probability_fusion独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1003,
+        "total": 1053,
+        "accuracy": 95.25166191832858
+      }
+    },
+    {
+      "检查": "seed2-new评估完成",
+      "通过": true,
+      "详情": "passed"
+    },
+    {
+      "检查": "seed2-new结果身份",
+      "通过": true,
+      "详情": {
+        "dataset_key": "oxford_flowers",
+        "seed": 2,
+        "subsample": "new"
+      }
+    },
+    {
+      "检查": "seed2-new固定alpha",
+      "通过": true,
+      "详情": 0.5
+    },
+    {
+      "检查": "seed2-new冻结模型源码",
+      "通过": true,
+      "详情": {
+        "root": "/root/autodl-tmp/textconsistency/releases/扩展验证-20260915-8f54900",
+        "model_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "expected_model_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "evaluator_sha256": "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3"
+      }
+    },
+    {
+      "检查": "seed2-new冻结CLIP",
+      "通过": true,
+      "详情": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f"
+    },
+    {
+      "检查": "seed2-new输入文件未被评估修改",
+      "通过": true,
+      "详情": {
+        "checkpoint": "ef70109e357b150c35540ddf123891710b2dfa59d6fb65340bd4d2c041f7bad7",
+        "sidecar": "3eededc669ded1fa1e747ef30f7d585ed9439929afd094d28747222c614890a3",
+        "historical_metrics": "df952231ebd4b6ea7d4b61bb72cdbfb71db3db34bcca592b6d2953ff45186314",
+        "historical_log": "f7583da2e1f3b889a83ed2ff071c2d31787ee34a600f7a7f2f945086b866cbc9"
+      }
+    },
+    {
+      "检查": "seed2-new检查点SHA256",
+      "通过": true,
+      "详情": "ef70109e357b150c35540ddf123891710b2dfa59d6fb65340bd4d2c041f7bad7"
+    },
+    {
+      "检查": "seed2-new检查点旁路摘要",
+      "通过": true,
+      "详情": "ef70109e357b150c35540ddf123891710b2dfa59d6fb65340bd4d2c041f7bad7"
+    },
+    {
+      "检查": "seed2-new历史指标SHA256",
+      "通过": true,
+      "详情": "df952231ebd4b6ea7d4b61bb72cdbfb71db3db34bcca592b6d2953ff45186314"
+    },
+    {
+      "检查": "seed2-new历史日志SHA256",
+      "通过": true,
+      "详情": "f7583da2e1f3b889a83ed2ff071c2d31787ee34a600f7a7f2f945086b866cbc9"
+    },
+    {
+      "检查": "seed2-newCoOp重载结果一致",
+      "通过": true,
+      "详情": 70.85106382978724
+    },
+    {
+      "检查": "seed2-new训练运行签名",
+      "通过": true,
+      "详情": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
+    },
+    {
+      "检查": "seed2-new运行设备",
+      "通过": true,
+      "详情": {
+        "device": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4090"
+      }
+    },
+    {
+      "检查": "seed2-new预测文件SHA256",
+      "通过": true,
+      "详情": "7ddb20d08a26cd0b615149eef848a5bec2955b2f75d2eae7715c0febda9515c7"
+    },
+    {
+      "检查": "seed2-new预测身份一致",
+      "通过": true,
+      "详情": []
+    },
+    {
+      "检查": "seed2-new预测数量",
+      "通过": true,
+      "详情": 1410
+    },
+    {
+      "检查": "seed2-new-student独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 999,
+        "total": 1410,
+        "accuracy": 70.85106382978724
+      }
+    },
+    {
+      "检查": "seed2-new-description_mean独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1121,
+        "total": 1410,
+        "accuracy": 79.50354609929079
+      }
+    },
+    {
+      "检查": "seed2-new-simple_fusion独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1066,
+        "total": 1410,
+        "accuracy": 75.60283687943263
+      }
+    },
+    {
+      "检查": "seed2-new-mean_probability_fusion独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1094,
+        "total": 1410,
+        "accuracy": 77.58865248226951
+      }
+    },
+    {
+      "检查": "seed2两分支使用同一检查点",
+      "通过": true,
+      "详情": {
+        "base": "ef70109e357b150c35540ddf123891710b2dfa59d6fb65340bd4d2c041f7bad7",
+        "novel": "ef70109e357b150c35540ddf123891710b2dfa59d6fb65340bd4d2c041f7bad7"
+      }
+    },
+    {
+      "检查": "seed3-base评估完成",
+      "通过": true,
+      "详情": "passed"
+    },
+    {
+      "检查": "seed3-base结果身份",
+      "通过": true,
+      "详情": {
+        "dataset_key": "oxford_flowers",
+        "seed": 3,
+        "subsample": "base"
+      }
+    },
+    {
+      "检查": "seed3-base固定alpha",
+      "通过": true,
+      "详情": 0.5
+    },
+    {
+      "检查": "seed3-base冻结模型源码",
+      "通过": true,
+      "详情": {
+        "root": "/root/autodl-tmp/textconsistency/releases/扩展验证-20260915-8f54900",
+        "model_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "expected_model_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "evaluator_sha256": "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3"
+      }
+    },
+    {
+      "检查": "seed3-base冻结CLIP",
+      "通过": true,
+      "详情": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f"
+    },
+    {
+      "检查": "seed3-base输入文件未被评估修改",
+      "通过": true,
+      "详情": {
+        "checkpoint": "cfaeb5f10a46ef97e3a0b34d5753bf41827371eaa4435b81629e8c59c1838684",
+        "sidecar": "034c085357b251a33d10d3d38e670e184005f93d2f8984c4133c5c8f65524d9f",
+        "historical_metrics": "8b337d87d1ec26941bc010eed7e7fe59c86461d190f35ab0868581e7495a2078",
+        "historical_log": "d59386679164bbf553cc93d31f0e032acec2752baebee68850f5b8583403a29d"
+      }
+    },
+    {
+      "检查": "seed3-base检查点SHA256",
+      "通过": true,
+      "详情": "cfaeb5f10a46ef97e3a0b34d5753bf41827371eaa4435b81629e8c59c1838684"
+    },
+    {
+      "检查": "seed3-base检查点旁路摘要",
+      "通过": true,
+      "详情": "cfaeb5f10a46ef97e3a0b34d5753bf41827371eaa4435b81629e8c59c1838684"
+    },
+    {
+      "检查": "seed3-base历史指标SHA256",
+      "通过": true,
+      "详情": "8b337d87d1ec26941bc010eed7e7fe59c86461d190f35ab0868581e7495a2078"
+    },
+    {
+      "检查": "seed3-base历史日志SHA256",
+      "通过": true,
+      "详情": "d59386679164bbf553cc93d31f0e032acec2752baebee68850f5b8583403a29d"
+    },
+    {
+      "检查": "seed3-baseCoOp重载结果一致",
+      "通过": true,
+      "详情": 97.43589743589743
+    },
+    {
+      "检查": "seed3-base训练运行签名",
+      "通过": true,
+      "详情": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
+    },
+    {
+      "检查": "seed3-base运行设备",
+      "通过": true,
+      "详情": {
+        "device": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4090"
+      }
+    },
+    {
+      "检查": "seed3-base预测文件SHA256",
+      "通过": true,
+      "详情": "cb893ebf53c9b319b02063333b7c870f70d3cbf9ed45fd4b391f889881e4f3b1"
+    },
+    {
+      "检查": "seed3-base预测身份一致",
+      "通过": true,
+      "详情": []
+    },
+    {
+      "检查": "seed3-base预测数量",
+      "通过": true,
+      "详情": 1053
+    },
+    {
+      "检查": "seed3-base-student独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1026,
+        "total": 1053,
+        "accuracy": 97.43589743589743
+      }
+    },
+    {
+      "检查": "seed3-base-description_mean独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 780,
+        "total": 1053,
+        "accuracy": 74.07407407407408
+      }
+    },
+    {
+      "检查": "seed3-base-simple_fusion独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 997,
+        "total": 1053,
+        "accuracy": 94.68186134852802
+      }
+    },
+    {
+      "检查": "seed3-base-mean_probability_fusion独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1011,
+        "total": 1053,
+        "accuracy": 96.01139601139602
+      }
+    },
+    {
+      "检查": "seed3-new评估完成",
+      "通过": true,
+      "详情": "passed"
+    },
+    {
+      "检查": "seed3-new结果身份",
+      "通过": true,
+      "详情": {
+        "dataset_key": "oxford_flowers",
+        "seed": 3,
+        "subsample": "new"
+      }
+    },
+    {
+      "检查": "seed3-new固定alpha",
+      "通过": true,
+      "详情": 0.5
+    },
+    {
+      "检查": "seed3-new冻结模型源码",
+      "通过": true,
+      "详情": {
+        "root": "/root/autodl-tmp/textconsistency/releases/扩展验证-20260915-8f54900",
+        "model_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "expected_model_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "evaluator_sha256": "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3"
+      }
+    },
+    {
+      "检查": "seed3-new冻结CLIP",
+      "通过": true,
+      "详情": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f"
+    },
+    {
+      "检查": "seed3-new输入文件未被评估修改",
+      "通过": true,
+      "详情": {
+        "checkpoint": "cfaeb5f10a46ef97e3a0b34d5753bf41827371eaa4435b81629e8c59c1838684",
+        "sidecar": "034c085357b251a33d10d3d38e670e184005f93d2f8984c4133c5c8f65524d9f",
+        "historical_metrics": "cc4fdda832a51684772bff78affd10ea995bd7b299a4ecf3e0512c73efa2c9f5",
+        "historical_log": "b384c01a78094a52f93f88eadef38a0e453563e18cdbf256aef77e085357295b"
+      }
+    },
+    {
+      "检查": "seed3-new检查点SHA256",
+      "通过": true,
+      "详情": "cfaeb5f10a46ef97e3a0b34d5753bf41827371eaa4435b81629e8c59c1838684"
+    },
+    {
+      "检查": "seed3-new检查点旁路摘要",
+      "通过": true,
+      "详情": "cfaeb5f10a46ef97e3a0b34d5753bf41827371eaa4435b81629e8c59c1838684"
+    },
+    {
+      "检查": "seed3-new历史指标SHA256",
+      "通过": true,
+      "详情": "cc4fdda832a51684772bff78affd10ea995bd7b299a4ecf3e0512c73efa2c9f5"
+    },
+    {
+      "检查": "seed3-new历史日志SHA256",
+      "通过": true,
+      "详情": "b384c01a78094a52f93f88eadef38a0e453563e18cdbf256aef77e085357295b"
+    },
+    {
+      "检查": "seed3-newCoOp重载结果一致",
+      "通过": true,
+      "详情": 66.17021276595744
+    },
+    {
+      "检查": "seed3-new训练运行签名",
+      "通过": true,
+      "详情": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
+    },
+    {
+      "检查": "seed3-new运行设备",
+      "通过": true,
+      "详情": {
+        "device": "cuda",
+        "gpu": "NVIDIA GeForce RTX 4090"
+      }
+    },
+    {
+      "检查": "seed3-new预测文件SHA256",
+      "通过": true,
+      "详情": "6f2330fdd31c80dc80d2ab2a4880c3accbce8d0f148e51cd27339e6e6f22b7e2"
+    },
+    {
+      "检查": "seed3-new预测身份一致",
+      "通过": true,
+      "详情": []
+    },
+    {
+      "检查": "seed3-new预测数量",
+      "通过": true,
+      "详情": 1410
+    },
+    {
+      "检查": "seed3-new-student独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 933,
+        "total": 1410,
+        "accuracy": 66.17021276595744
+      }
+    },
+    {
+      "检查": "seed3-new-description_mean独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1121,
+        "total": 1410,
+        "accuracy": 79.50354609929079
+      }
+    },
+    {
+      "检查": "seed3-new-simple_fusion独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1036,
+        "total": 1410,
+        "accuracy": 73.47517730496453
+      }
+    },
+    {
+      "检查": "seed3-new-mean_probability_fusion独立准确率",
+      "通过": true,
+      "详情": {
+        "correct": 1051,
+        "total": 1410,
+        "accuracy": 74.53900709219859
+      }
+    },
+    {
+      "检查": "seed3两分支使用同一检查点",
+      "通过": true,
+      "详情": {
+        "base": "cfaeb5f10a46ef97e3a0b34d5753bf41827371eaa4435b81629e8c59c1838684",
+        "novel": "cfaeb5f10a46ef97e3a0b34d5753bf41827371eaa4435b81629e8c59c1838684"
+      }
+    },
+    {
+      "检查": "三种子训练采样互异",
+      "通过": true,
+      "详情": [
+        "a2c95695339b2bead4904766394e725a764fb1021885f144b00928dea1e5b7d6",
+        "34e2aad28b807b254b83b3b07478737b29c656e09c5153cf39bb560435a62c92",
+        "71c88ae70c13958794a0456645ff1999c02c320f5a25a61b8956e3115b8556b7"
+      ]
+    },
+    {
+      "检查": "三种子检查点互异",
+      "通过": true,
+      "详情": [
+        "50030706793771b4df996f244db660854bfbe520d8ddc5d05a6e14d18cff8970",
+        "ef70109e357b150c35540ddf123891710b2dfa59d6fb65340bd4d2c041f7bad7",
+        "cfaeb5f10a46ef97e3a0b34d5753bf41827371eaa4435b81629e8c59c1838684"
+      ]
+    },
+    {
+      "检查": "六次融合评估器完全一致",
+      "通过": true,
+      "详情": [
+        "eee46bd60421120e345ed6c963a4df5599ce1645d9197bc7635ef8bc6afb90f3"
+      ]
+    },
+    {
+      "检查": "冻结三种子门槛全部通过",
+      "通过": true,
+      "详情": {
+        "融合HM严格高于CoOp": true,
+        "融合Novel相对CoOp不低于-0.5pp": true,
+        "至少三分之二种子HM正增益": true
+      }
+    }
+  ]
+}

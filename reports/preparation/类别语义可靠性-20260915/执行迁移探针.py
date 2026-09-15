@@ -95,6 +95,7 @@ def main():
             "Base均值标量": scalar,
             "文本映射Base预测均值": float(predicted["Base"].mean()),
             "文本映射Novel预测均值": float(predicted["Novel"].mean()),
+            "Novel诊断上界目标均值": float(split_data["Novel"]["target"].mean()),
             "Novel预测与诊断上界目标Pearson": corr(predicted["Novel"], split_data["Novel"]["target"]),
             "Novel预测与诊断上界目标MAE": float(np.abs(predicted["Novel"] - split_data["Novel"]["target"]).mean()),
             "岭回归系数": {name: float(model[0][i]) for i, name in enumerate(特征名)},
@@ -154,8 +155,16 @@ def main():
     lines += ["", f"三数据集等权：相对固定 {mean_fixed:+.4f}pp，相对Base均值标量 {mean_scalar:+.4f}pp；"
               f"{nonworse}/3 数据集不低于标量。", "", "## 冻结判定", ""]
     lines += [f"- {'通过' if value else '未通过'}：{name}" for name, value in checks.items()]
+    lines += ["", "## 失败诊断", ""]
+    for dataset in sorted({x["数据集"] for x in results}):
+        rows = [x for x in results if x["数据集"] == dataset]
+        pred = float(np.mean([x["文本映射Novel预测均值"] for x in rows]))
+        target = float(np.mean([x["Novel诊断上界目标均值"] for x in rows]))
+        correlation = float(np.mean([x["Novel预测与诊断上界目标Pearson"] for x in rows]))
+        lines.append(f"- {dataset}：Novel预测alpha均值 {pred:.3f}，诊断上界目标均值 {target:.3f}，"
+                     f"Pearson均值 {correlation:+.3f}。")
     lines += ["", "Novel图片和标签没有参与文本映射拟合；保存的Novel诊断上界目标只用于计算相关性和MAE。"
-              "若未通过，不改变三项文本特征或岭回归设置。", ""]
+              "三项冻结文本几何没有预测到Base/Novel之间的分支可靠性变化，按协议停止，不改变三项特征或岭回归设置。", ""]
     (输出目录 / "结果报告.md").write_text("\n".join(lines))
     print(json.dumps({"通过": payload["通过"], "相对固定HM增益pp": mean_fixed,
                       "相对标量HM增益pp": mean_scalar, "结果SHA256": sha(output)}, ensure_ascii=False, indent=2))

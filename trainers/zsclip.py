@@ -1,37 +1,10 @@
 import torch
-import torch.nn as nn
 
 from dassl.engine import TRAINER_REGISTRY, TrainerX
-from dassl.optim import build_optimizer, build_lr_scheduler
 
-# from clip import longclip as clip
 from clip import clip
-from clip.model import convert_weights
 
-from .coop import load_clip_to_cpu
-from .imagenet_templates import IMAGENET_TEMPLATES, IMAGENET_TEMPLATES_SELECT
-
-from clip.simple_tokenizer import SimpleTokenizer as _Tokenizer
-_tokenizer = _Tokenizer()
-
-
-CUSTOM_TEMPLATES = {
-    "OxfordPets": "a photo of a {}, a type of pet.",
-    "OxfordFlowers": "a photo of a {}",
-    "FGVCAircraft": "a photo of a {}, a type of aircraft.",
-    "DescribableTextures": "{} texture.",
-    "EuroSAT": "a centered satellite photo of {}.",
-    "StanfordCars": "a photo of a {}.",
-    "Food101": "a photo of {}, a type of food.",
-    "SUN397": "a photo of a {}.",
-    "Caltech101": "a photo of a {}.",
-    "UCF101": "a photo of a person doing {}.",
-    "ImageNet": "a photo of a {}.",
-    "ImageNetSketch": "a photo of a {}.",
-    "ImageNetV2": "a photo of a {}.",
-    "ImageNetA": "a photo of a {}.",
-    "ImageNetR": "a photo of a {}.",
-}
+from .coop import CUSTOM_TEMPLATES, load_clip_to_cpu
 
 
 @TRAINER_REGISTRY.register()
@@ -46,29 +19,7 @@ class ZeroshotCLIP(TrainerX):
 
         temp = CUSTOM_TEMPLATES[cfg.DATASET.NAME]
         prompts = [temp.format(c.replace("_", " ")) for c in classnames]
-        print(f"Prompts: {prompts}")
-    
-        prompts = torch.cat([clip.tokenize(p) for p in prompts])
-        print(f'prompt after tokenize size is {prompts.size()}') # 102, 77 不管是多少的长度，都会tokenize到这个维度。
-
-        # text = "a photo of a flower."  # [49406,   320,  1125,   539,   320,  4055,   269, 49407] flower貌似是对应4055
-        text = "a photo of a flower," # [49406,   320,  1125,   539,   320,  4055, 49407]
-        prompt2 = clip.tokenize(text)
-        # prompt2 = prompt2.repeat(102,1)
-        print(f'prompt2 after tokenize size is {prompt2.size()}') # 102, 77 
-        print(f'prompt2 is {prompt2}') # 102, 77 
-
-        text_class = "a photo of a"
-        leng = _tokenizer.encode(text_class) # 4055
-        temp = clip_model.token_embedding(leng)
-        print(leng)
-        print(temp)
-
-        # prompts = torch.concat([prompts, prompt2], dim=1)
-        prompt2 = prompt2.to(self.device)
-        prompts = prompts.to(self.device)
-
-        # prompts = (prompts + prompt2)/2
+        prompts = torch.cat([clip.tokenize(p) for p in prompts]).to(self.device)
 
         with torch.no_grad():
             text_features = clip_model.encode_text(prompts)
@@ -76,6 +27,13 @@ class ZeroshotCLIP(TrainerX):
 
         self.text_features = text_features
         self.clip_model = clip_model
+
+    def load_model(self, directory, epoch=None):
+        if directory:
+            raise ValueError("ZeroshotCLIP does not load a learned checkpoint")
+        if epoch is not None:
+            raise ValueError("ZeroshotCLIP does not accept a checkpoint epoch")
+        print("ZeroshotCLIP uses the frozen CLIP checkpoint directly")
 
     def model_inference(self, image):
         image_features = self.clip_model.encode_image(image)
@@ -122,5 +80,4 @@ class ZeroshotCLIP(TrainerX):
 
 #         self.text_features = mean_text_features
 #         self.clip_model = clip_model
-
 

@@ -158,7 +158,6 @@ class PromptLearner(nn.Module):
         # Use instance-conditioned context tokens for all classes
         prompts = []
         for ctx_shifted_i in ctx_shifted:
-            print(f'shifted i size is {ctx_shifted_i.size()}')
             ctx_i = ctx_shifted_i.unsqueeze(0).expand(self.n_cls, -1, -1)
             pts_i = self.construct_prompts(ctx_i, prefix, suffix)  # (n_cls, n_tkn, ctx_dim)
             prompts.append(pts_i)

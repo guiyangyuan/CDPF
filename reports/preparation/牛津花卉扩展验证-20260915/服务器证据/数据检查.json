@@ -1,0 +1,40 @@
+{
+  "状态": "通过",
+  "数据集": "OxfordFlowers",
+  "目录": "/root/autodl-tmp/textconsistency/data/oxford_flowers",
+  "文件": {
+    "图像归档": {
+      "路径": "/root/autodl-tmp/textconsistency/data/archives/102flowers.tgz",
+      "字节数": 344862509,
+      "MD5": "52808999861908f626f3c1f4e79d11fa",
+      "网址": "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/102flowers.tgz"
+    },
+    "图像标签": {
+      "路径": "/root/autodl-tmp/textconsistency/data/oxford_flowers/imagelabels.mat",
+      "字节数": 502,
+      "MD5": "e0620be6f572b9609742df49c70aed4d",
+      "网址": "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/imagelabels.mat"
+    },
+    "类别名称": {
+      "路径": "/root/autodl-tmp/textconsistency/data/oxford_flowers/cat_to_name.json",
+      "字节数": 2212,
+      "SHA256": "0469f1ad7fe0072d98155c49aa58649d998edbbe3326229003aa5f7228525236",
+      "网址": "https://raw.githubusercontent.com/linzhiqiu/cross_modal_adaptation/main/splits/cat_to_name.json"
+    },
+    "固定划分": {
+      "路径": "/root/autodl-tmp/textconsistency/data/oxford_flowers/split_zhou_OxfordFlowers.json",
+      "字节数": 771139,
+      "SHA256": "2f50c42fc1a17ca13c271cb4269b1347bdb43d2be672e34f74a4e4cbfbcca794",
+      "网址": "https://raw.githubusercontent.com/linzhiqiu/cross_modal_adaptation/main/splits/split_zhou_OxfordFlowers.json"
+    }
+  },
+  "图像数": 8189,
+  "类别数": 102,
+  "划分数量": {
+    "train": 4093,
+    "val": 1633,
+    "test": 2463
+  },
+  "划分互不重叠": true,
+  "划分覆盖全部图像": true
+}

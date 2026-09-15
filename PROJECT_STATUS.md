@@ -1,8 +1,8 @@
 # TextConsistency：工作计划与当前进度
 
-最后更新：2026-09-15（EuroSAT三种子已通过并关机；OxfordFlowers无卡准备入口及数据摘要已在本机固定，待启动￥0.10/小时无卡模式部署数据）。
+最后更新：2026-09-15（OxfordFlowers无卡数据准备、真实loader、seed1计划和无CUDA拒绝检查全部通过，证据已备份并关机；下一步为GPU执行OxfordFlowers seed1）。
 
-**当前下一步已具体化：OxfordFlowers无卡准备。** 已新增中文数据准备入口，固定Oxford官方图像/标签MD5、Zhou划分及类别名SHA256，下载后将核验8,189张图片、102类、4,093/1,633/2,463固定划分，再运行三种子16-shot真实loader、seed1六步计划和无CUDA拒绝检查。本机已验证脚本可加载、两个配套JSON摘要一致；AutoDL当前仍为“已关机”，页面最终确认显示无卡模式为0.5核CPU、2GB内存、￥0.10/小时、最低￥0.01，尚未点击计费确认。无卡准备完成后才切GPU跑OxfordFlowers seed1，通过后才补seed2/3。见[准备计划](reports/preparation/牛津花卉扩展验证-20260915/准备计划.md)和[数据准备入口](scripts/repro/准备牛津花卉数据.py)。
+**当前下一步已具体化：OxfordFlowers GPU seed1。** 无卡准备已完成：8,189张图片、102类、4,093/1,633/2,463固定划分全部通过摘要和路径核验；三种子真实16-shot loader均为51个Base类、51个Novel类和816个Base训练样本，采样摘要互异。seed1六步训练/评估计划和无CUDA拒绝检查已生成，证据包SHA256为`ca6e86a1d8cfd4c08482d20885bd084bc88736c8e0d7dd5d6e82cdbfcce55417`并已下载。AutoDL实例`a5904787c3-600682b1`已确认关机。下一批只跑seed1：若固定概率融合HM严格高于CoOp且Novel增益不低于−0.5pp，再补seed2/3；否则停止。见[服务器准备报告](reports/preparation/牛津花卉扩展验证-20260915/服务器准备报告.md)和[数据准备入口](scripts/repro/准备牛津花卉数据.py)。
 
 **最新GPU扩展验证已完成、三种子通过并关机：EuroSAT固定均值概率融合。** 固定ViT-B/16、16-shot、20 epochs、N_CTX=4、alpha=0.5，先跑seed1并通过事前门槛后才补seed2/3。原CoOp三种子Base/Novel/HM为84.381/56.282/67.525，固定均值概率融合为84.556/70.103/76.654，相对提升+0.175/+13.821/+9.129pp；逐种子HM增益为+9.053/+4.746/+15.837pp，3/3为正。概率融合相对固定logit均值融合的HM再提高0.963pp。三次训练、十二次评估和两次阶段汇总全部成功；独立脚本逐行复算六份预测及检查点/日志/清单，145项检查0失败。完整包SHA256为`3f1c46edb9ecebeb51872b3d8779d0990de6aa8394cb3ef2a3b0004cada9ef2e`，本机已下载并解压；AutoDL页面确认344机“已关机”。该结果支持方法在第四个数据集上的稳定收益，但EuroSAT不是严格盲测，不能声称SOTA。见[结果报告](reports/experiments/EuroSAT扩展验证-20260915/结果报告.md)、[独立复算](reports/experiments/EuroSAT扩展验证-20260915/独立复算.json)、[三种子表](reports/experiments/EuroSAT扩展验证-20260915/三种子结果.csv)和[关机确认](reports/experiments/EuroSAT扩展验证-20260915/关机确认.json)。
 
@@ -147,6 +147,7 @@
 | 修复训练/保存/评估与记录 | 已完成 | 原 23 项测试 + 三种子审计 |
 | UCF101 三种子实验 | 已完成 | 上述报告；禁止当成所有数据集结论 |
 | 服务器连接与环境检查 | EuroSAT三种子运行、备份完成并关机 | westc:26022的344机；EuroSAT数据、冻结源码、3次训练/12次评估、完整备份和145项独立复算均已核验，AutoDL网页确认已关机 |
+| OxfordFlowers无卡数据与执行准备 | 已完成、备份并关机 | 8,189图像/102类、固定划分和三种子16-shot真实loader通过；seed1六步计划及无CUDA拒绝通过；未产生准确率 |
 | DTD / Aircraft ZIP 本机校验 | 已完成 | reports/preparation/dataset-archives.json |
 | UCF101 / DTD / Aircraft 服务器部署与预检 | 已完成 | ZIP 校验、固定划分、图像/描述覆盖、每类 16-shot、三种子采样均通过；见 ready.json |
 | 官方 CoOp 差异核查与独立诊断 | 本机、开卡后服务器均通过 | 无卡时期 SIGKILL 保留；开卡后完整模型诊断 logits/梯度/更新差均为0，见本批 start-evidence |

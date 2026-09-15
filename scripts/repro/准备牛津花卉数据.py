@@ -6,9 +6,8 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-import shutil
+import subprocess
 import tarfile
-import urllib.request
 
 
 文件 = {
@@ -49,9 +48,32 @@ def digest(path: Path, algorithm: str) -> str:
 
 def download(url: str, path: Path) -> None:
     temporary = path.with_name(path.name + ".part")
-    request = urllib.request.Request(url, headers={"User-Agent": "textconsistency-dataset-preparation/1.0"})
-    with urllib.request.urlopen(request, timeout=120) as response, temporary.open("wb") as output:
-        shutil.copyfileobj(response, output, length=1024 * 1024)
+    subprocess.run(
+        [
+            "curl",
+            "--fail",
+            "--location",
+            "--retry",
+            "8",
+            "--retry-all-errors",
+            "--retry-delay",
+            "3",
+            "--connect-timeout",
+            "20",
+            "--speed-time",
+            "120",
+            "--speed-limit",
+            "1024",
+            "--continue-at",
+            "-",
+            "--user-agent",
+            "textconsistency-dataset-preparation/1.0",
+            "--output",
+            str(temporary),
+            url,
+        ],
+        check=True,
+    )
     temporary.replace(path)
 
 

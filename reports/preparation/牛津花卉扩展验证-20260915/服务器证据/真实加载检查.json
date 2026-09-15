@@ -1,0 +1,34 @@
+{
+  "dataset": "OxfordFlowers",
+  "split_sha256": "2f50c42fc1a17ca13c271cb4269b1347bdb43d2be672e34f74a4e4cbfbcca794",
+  "image_counts": {
+    "train": 4093,
+    "val": 1633,
+    "test": 2463
+  },
+  "all_images_present": true,
+  "splits_disjoint": true,
+  "seeds": [
+    {
+      "seed": 1,
+      "base_classes": 51,
+      "novel_classes": 51,
+      "train_samples": 816,
+      "train_sha256": "a2c95695339b2bead4904766394e725a764fb1021885f144b00928dea1e5b7d6"
+    },
+    {
+      "seed": 2,
+      "base_classes": 51,
+      "novel_classes": 51,
+      "train_samples": 816,
+      "train_sha256": "34e2aad28b807b254b83b3b07478737b29c656e09c5153cf39bb560435a62c92"
+    },
+    {
+      "seed": 3,
+      "base_classes": 51,
+      "novel_classes": 51,
+      "train_samples": 816,
+      "train_sha256": "71c88ae70c13958794a0456645ff1999c02c320f5a25a61b8956e3115b8556b7"
+    }
+  ]
+}

@@ -1,12 +1,16 @@
 # TextConsistency：工作计划与当前进度
 
-最后更新：2026-09-16（CoCoOp五数据集标准基线的无卡协议、执行器和静态核验已完成：固定15次训练、30次独立评估和45条命令；待服务器聚焦测试后执行核心三数据集阶段。当前没有产生CoCoOp准确率，AutoDL实例仍保持关机）。
+最后更新：2026-09-16（CoCoOp核心三数据集三种子已完成、独立复核、完整备份并关机；当前下一步是补EuroSAT和OxfordFlowers的CoCoOp三种子，再统一测效率）。
 
-**CoCoOp五数据集标准基线无卡准备已完成。** 固定作者仓库提交`ff61507c790454bce7c5052c3ac39e60772f1f89`，协议为ViT-B/16、16-shot、4个上下文token、`a photo of a`初始化、fp16、batch 1、10 epochs、seed 1/2/3；五数据集共15次训练和30次Base/Novel独立重载。执行分为核心三数据集9次训练和扩展两数据集6次训练，只用于控制备份与计费，不依据核心分数删除扩展结果。7项静态核验通过；本机无PyTorch，因此CUDA保存重载测试仍待服务器执行，不能把当前状态写成准确率或GPU结果。见[准备说明](reports/preparation/联合上下文提示基线-20260916/准备说明.md)、[CPU核验](reports/preparation/联合上下文提示基线-20260916/CPU核验.json)和[冻结计划](reports/preparation/联合上下文提示基线-20260916/本机静态计划.json)。
+**最新GPU标准基线已完成：CoCoOp核心三数据集。** 固定源码提交`2ded4b1`，使用CoCoOp标准ViT-B/16、16-shot、4个上下文token、`a photo of a`初始化、fp16、batch 1、10 epochs和seed 1/2/3。UCF101、DTD、FGVC-Aircraft共9次训练和18次Base/Novel独立重载，27条命令全部成功，总耗时63.78分钟。三数据集Base/Novel/HM分别为82.11/73.82/77.75、77.08/53.14/62.91、36.01/32.75/34.31，等权HM为58.32。77个文件SHA、9个检查点、18份原始评估日志及全部统计独立复核通过；完整归档SHA256为`7467c75b8fcfac92e468413bd1cb936468892932fb64d5dedf9db48286474c61`，已下载解压，AutoDL页面确认实例“已关机”。见[结果报告](reports/experiments/联合上下文提示基线-核心三数据集-20260916/结果报告.md)、[独立复核](reports/experiments/联合上下文提示基线-核心三数据集-20260916/独立复核.json)、[备份收据](reports/experiments/联合上下文提示基线-核心三数据集-20260916/备份收据.json)和[关机确认](reports/experiments/联合上下文提示基线-核心三数据集-20260916/关机确认.json)。
 
-**最新GPU标准基线已完成、复核备份并关机：五数据集 Zero-shot CLIP。** 固定冻结CLIP ViT-B/16和本仓库单一数据集模板，在UCF101、DTD、FGVC-Aircraft、EuroSAT、OxfordFlowers分别评估Base/Novel，共10条命令，不训练、不加载检查点、不搜索模板。五数据集Base/Novel/HM分别为70.89/78.47/74.49、53.12/60.75/56.68、27.73/35.93/31.30、57.07/63.97/60.33、71.70/77.45/74.46，等权HM为59.45。十条命令总推理108.00秒；归档SHA256为`6df72c6a92ff9cc1c17bcef72533ca59abab209a5a66cadfa228815119443686`。本机从10份原始日志重新计算correct/total，10/10一致；清单中的25个文件逐SHA一致、检查点为0。主方法等权HM 70.13，相对Zero-shot提升+10.67pp。见[结果报告](reports/experiments/投稿零样本基线-20260916/独立复核报告.md)、[独立复核](reports/experiments/投稿零样本基线-20260916/独立复核.json)、[备份收据](reports/experiments/投稿零样本基线-20260916/备份收据.json)和[关机确认](reports/experiments/投稿零样本基线-20260916/关机确认.json)。
+**核心比较结论：主方法在三个数据集均高于CoCoOp。** 固定均值概率融合在UCF101、DTD、FGVC-Aircraft上的HM分别为79.47、70.99、38.46，相对CoCoOp增加+1.73、+8.08、+4.15pp；核心三数据集等权HM为62.97，比CoCoOp高+4.65pp。CoCoOp使用标准10 epochs、batch 1配方，主方法沿用历史20 epochs配方；相同backbone、16-shot、split和seeds，但不是完全等训练预算，因此只能写成标准配方比较。这一结果加强了投稿证据，但还不能宣称五数据集CoCoOp比较或SOTA。
 
-**当前下一步：执行 CoCoOp 核心三数据集，再统一测效率。** Zero-shot CLIP已进入同一张五数据集主表；CoOp等权HM为64.21，固定均值概率融合为70.13，增加+5.91pp，Novel等权平均增加+9.84pp，Base等权平均变化−0.38pp。五个数据集和15个逐种子HM比较全部正向。CoCoOp无卡协议已冻结；开卡后先跑服务器聚焦测试，再完成UCF101、DTD、Aircraft三种子，备份并复核后执行EuroSAT和OxfordFlowers。随后固定batch和硬件测CoOp、logits融合、概率融合的参数量、单图推理耗时与峰值显存。见[五数据集主结果](reports/experiments/投稿实验统一结果-20260915/统一结果表.md)、[基线缺口](reports/experiments/投稿实验统一结果-20260915/标准基线缺口.md)和[CoCoOp准备说明](reports/preparation/联合上下文提示基线-20260916/准备说明.md)。
+**首次运行失败已隔离并修复。** 提交`1362cca`的首次尝试完成UCF101 seed1训练后，在Base检查点重载时触发PyTorch 2.6默认`weights_only=True`兼容错误；该输出没有并入正式结果。提交`2ded4b1`显式使用完整检查点加载并兼容旧PyTorch，服务器聚焦测试和真实失败检查点重载均通过。正式结果随后在新release和全新输出目录从头运行；见[失败与修复记录](reports/experiments/联合上下文提示基线-核心三数据集-20260916/失败与修复记录.md)。
+
+**当前下一步：补齐CoCoOp扩展两数据集，再统一测效率。** 五数据集Zero-shot CLIP已经完成；CoCoOp还需EuroSAT和OxfordFlowers各三种子，共6次训练和12次Base/Novel独立评估。完成并复核后，生成完整五数据集CoCoOp平均；随后在固定硬件和batch下测CoOp、固定logits融合、固定概率融合的可训练参数、单图推理耗时与峰值显存。开卡前保持实例关机，下一次启动须重新核对运行目录和数据完整性。
+
+**五数据集Zero-shot CLIP标准基线已完成、独立复核、备份并关机。** 五数据集Base/Novel/HM分别为70.89/78.47/74.49、53.12/60.75/56.68、27.73/35.93/31.30、57.07/63.97/60.33、71.70/77.45/74.46，等权HM为59.45；10条推理命令和25个原始文件核验通过，零检查点。见[独立复核报告](reports/experiments/投稿零样本基线-20260916/独立复核报告.md)。
 
 **当前最新结果：OxfordFlowers三种子通过冻结规则。** seed1先得到Novel/HM +5.603/+3.129pp，通过事前门槛后才扩展seed2/3；三种子中固定概率融合相对CoOp的Base/Novel/HM均值变化为−1.298/+6.903/+3.985pp，3/3种子HM为正。共3次训练、6次CoOp标准重载、6次融合评估，两段执行器17条命令全部完成；145项独立检查0失败。完整包SHA256为`fc9d690d6d87a87f927110af2916fb7fd95a9115da19aa3046c16a594365b86f`，已下载并解压；AutoDL页面确认实例“已关机”。该结果支持简单概率融合在第五个数据集上的稳定收益，但不是严格盲测或SOTA声明。见[结果报告](reports/experiments/牛津花卉扩展验证-20260915/结果报告.md)。
 
@@ -157,7 +161,7 @@
 | OxfordFlowers三种子GPU扩展验证 | 已通过、核验备份并关机 | 概率融合相对CoOp Base/Novel/HM为−1.298/+6.903/+3.985pp，3/3种子HM正增益；145项独立检查0失败 |
 | 五数据集投稿证据统一 | 已完成、无需GPU | 60行逐种子结果、20行方法汇总、五组配对区间和LaTeX主表自动生成；5/5数据集、15/15种子HM正增益 |
 | 五数据集Zero-shot CLIP标准基线 | 已完成、独立复核、备份并关机 | 10条Base/Novel推理全部成功；等权HM 59.45；25原始文件和10份日志核验通过；零检查点 |
-| 五数据集CoCoOp标准基线 | 无卡协议与执行器已完成，待服务器聚焦测试和GPU | 固定15训练/30独立评估；核心阶段9训练，扩展阶段6训练；7项静态核验通过，当前无准确率 |
+| 五数据集CoCoOp标准基线 | 核心三数据集已完成、复核备份并关机；扩展两数据集待运行 | 核心9训练/18评估全部成功，等权HM 58.32；主方法核心等权HM高+4.65pp；待补EuroSAT和OxfordFlowers共6训练/12评估 |
 | DTD / Aircraft ZIP 本机校验 | 已完成 | reports/preparation/dataset-archives.json |
 | UCF101 / DTD / Aircraft 服务器部署与预检 | 已完成 | ZIP 校验、固定划分、图像/描述覆盖、每类 16-shot、三种子采样均通过；见 ready.json |
 | 官方 CoOp 差异核查与独立诊断 | 本机、开卡后服务器均通过 | 无卡时期 SIGKILL 保留；开卡后完整模型诊断 logits/梯度/更新差均为0，见本批 start-evidence |

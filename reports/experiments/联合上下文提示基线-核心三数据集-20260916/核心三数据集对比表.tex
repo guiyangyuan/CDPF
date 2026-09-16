@@ -1,0 +1,26 @@
+% 由核心三数据集CoCoOp实跑结果生成
+\begin{table}[t]
+\centering
+\caption{核心三数据集标准配方比较。CoCoOp训练10轮；CoOp和Ours训练20轮。}
+\label{tab:cocoop_core}
+\begin{tabular}{llccc}
+\toprule
+Dataset & Method & Base & Novel & H \\
+\midrule
+UCF101 & Zero-shot CLIP & 70.89 & 78.47 & 74.49 \\
+ & CoOp & 83.56 & 67.08 & 74.42 \\
+ & CoCoOp & 82.11 & 73.82 & 77.75 \\
+ & Ours & 82.70 & 76.49 & 79.47 \\
+\midrule
+DTD & Zero-shot CLIP & 53.12 & 60.75 & 56.68 \\
+ & CoOp & 77.78 & 54.07 & 63.79 \\
+ & CoCoOp & 77.08 & 53.14 & 62.91 \\
+ & Ours & 77.93 & 65.18 & 70.99 \\
+\midrule
+FGVC-Aircraft & Zero-shot CLIP & 27.73 & 35.93 & 31.30 \\
+ & CoOp & 37.54 & 31.51 & 34.26 \\
+ & CoCoOp & 36.01 & 32.75 & 34.31 \\
+ & Ours & 37.47 & 39.49 & 38.46 \\
+\bottomrule
+\end{tabular}
+\end{table}

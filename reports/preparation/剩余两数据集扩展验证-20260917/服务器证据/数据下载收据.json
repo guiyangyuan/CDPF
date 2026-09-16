@@ -1,0 +1,70 @@
+{
+  "状态": "通过",
+  "数据根目录": "/root/autodl-tmp/textconsistency/data",
+  "数据集": [
+    {
+      "数据集": "StanfordCars",
+      "目录": "/root/autodl-tmp/textconsistency/data/stanford_cars",
+      "类别数": 196,
+      "划分数量": {
+        "train": 6509,
+        "val": 1635,
+        "test": 8041
+      },
+      "唯一划分图像数": 16185,
+      "划分SHA256": "40acee7aa65c8e4727a32d90e884b7c3f8960b523422317e163f7af65432959d",
+      "所有路径存在且非空": true,
+      "划分互斥": true
+    },
+    {
+      "数据集": "SUN397",
+      "目录": "/root/autodl-tmp/textconsistency/data/sun397",
+      "类别数": 397,
+      "划分数量": {
+        "train": 15880,
+        "val": 3970,
+        "test": 19850
+      },
+      "唯一划分图像数": 39700,
+      "划分SHA256": "9847f9ef611008073ac42adee6614bbb83f877cfbcfbd3115fc8284e0c8c1c47",
+      "所有路径存在且非空": true,
+      "划分互斥": true
+    }
+  ],
+  "磁盘": {
+    "总字节": 53687091200,
+    "已用字节": 37190238208,
+    "空闲字节": 16496852992
+  },
+  "下载": [
+    {
+      "数据集": "StanfordCars",
+      "状态": "已完整，跳过下载",
+      "图像数": 16185
+    },
+    {
+      "数据集": "SUN397",
+      "状态": "流式下载并选择性解压完成",
+      "图像数": 39700,
+      "本次新增图像": 38789,
+      "归档字节数": 39077296924,
+      "归档SHA256": "f404130965a7ad77bed5ececc71e720ab50f3cc1e1bb257257610d38f3b928ec",
+      "来源": "https://hf-mirror.com/datasets/Veiiaj3dad/CLIP-Prompt-learning-sun397/resolve/main/SUN397.tar.gz?download=true",
+      "归档处理": "未落盘，只保存固定划分使用的图像"
+    }
+  ],
+  "来源与存储策略": {
+    "StanfordCars": {
+      "归档网址": "https://github.com/zhengli97/PromptKD/releases/download/datasets/stanford_cars.zip",
+      "归档字节数": 1957803555,
+      "归档方式": "下载ZIP后只解压固定划分所需图像；成功后默认删除ZIP"
+    },
+    "SUN397": {
+      "归档网址": "https://hf-mirror.com/datasets/Veiiaj3dad/CLIP-Prompt-learning-sun397/resolve/main/SUN397.tar.gz?download=true",
+      "原始归档网址": "https://huggingface.co/datasets/Veiiaj3dad/CLIP-Prompt-learning-sun397/resolve/main/SUN397.tar.gz?download=true",
+      "归档字节数": 39077296924,
+      "归档SHA256": "f404130965a7ad77bed5ececc71e720ab50f3cc1e1bb257257610d38f3b928ec",
+      "归档方式": "流式读取整包，仅落盘固定划分所需图像，不保存39GB压缩包"
+    }
+  }
+}

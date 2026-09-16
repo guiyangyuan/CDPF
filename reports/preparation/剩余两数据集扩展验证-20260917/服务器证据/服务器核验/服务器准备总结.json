@@ -1,0 +1,94 @@
+{
+  "状态": "通过",
+  "完成时间": "2026-09-17T02:45:19+08:00",
+  "运行模式": "无GPU模式",
+  "数据下载收据": {
+    "路径": "/root/autodl-tmp/textconsistency/preparation/剩余两数据集-20260917-03cc19f/数据下载收据.json",
+    "SHA256": "968a464cef9103e7f12ffd897e999452194840aefb38a4e86dedafe94e0051f1"
+  },
+  "严格核验": "/root/autodl-tmp/textconsistency/preparation/剩余两数据集-20260917-03cc19f/服务器核验/数据严格核验.json",
+  "冻结模型源码SHA256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+  "真实加载预检": {
+    "StanfordCars": {
+      "分割SHA256": "40acee7aa65c8e4727a32d90e884b7c3f8960b523422317e163f7af65432959d",
+      "图像数": {
+        "train": 6509,
+        "val": 1635,
+        "test": 8041
+      },
+      "全部图像存在": true,
+      "分割互斥": true,
+      "种子数": 3,
+      "每种子训练样本数": [
+        1568,
+        1568,
+        1568
+      ]
+    },
+    "SUN397": {
+      "分割SHA256": "9847f9ef611008073ac42adee6614bbb83f877cfbcfbd3115fc8284e0c8c1c47",
+      "图像数": {
+        "train": 15880,
+        "val": 3970,
+        "test": 19850
+      },
+      "全部图像存在": true,
+      "分割互斥": true,
+      "种子数": 3,
+      "每种子训练样本数": [
+        3184,
+        3184,
+        3184
+      ]
+    }
+  },
+  "训练计划": {
+    "主方法": {
+      "协议": "投稿主方法剩余两数据集冻结扩展-v1",
+      "训练数": 6,
+      "内部命令数": 32,
+      "路径": "/root/autodl-tmp/textconsistency/preparation/剩余两数据集-20260917-03cc19f/服务器核验/主方法剩余两数据集计划.json"
+    },
+    "零样本CLIP": {
+      "协议": "投稿Zero-shot-CLIP剩余两数据集-v1",
+      "命令数": 4,
+      "路径": "/root/autodl-tmp/textconsistency/preparation/剩余两数据集-20260917-03cc19f/服务器核验/零样本剩余两数据集计划.json"
+    },
+    "CoCoOp": {
+      "协议": "投稿CoCoOp剩余两数据集标准基线-v1",
+      "运行数": 6,
+      "命令数": 18,
+      "路径": "/root/autodl-tmp/textconsistency/preparation/剩余两数据集-20260917-03cc19f/服务器核验/联合上下文剩余两数据集计划.json"
+    }
+  },
+  "无GPU拒绝核验": {
+    "状态": "通过",
+    "GPU可用": false,
+    "检查": {
+      "主方法": {
+        "退出码": 1,
+        "包含CUDA拒绝信息": true,
+        "输出目录未创建": true,
+        "日志": "/root/autodl-tmp/textconsistency/preparation/剩余两数据集-20260917-03cc19f/服务器核验/主方法无GPU拒绝日志.txt"
+      },
+      "零样本CLIP": {
+        "退出码": 1,
+        "包含CUDA拒绝信息": true,
+        "输出目录未创建": true,
+        "日志": "/root/autodl-tmp/textconsistency/preparation/剩余两数据集-20260917-03cc19f/服务器核验/零样本无GPU拒绝日志.txt"
+      },
+      "CoCoOp": {
+        "退出码": 1,
+        "包含CUDA拒绝信息": true,
+        "输出目录未创建": true,
+        "日志": "/root/autodl-tmp/textconsistency/preparation/剩余两数据集-20260917-03cc19f/服务器核验/联合上下文无GPU拒绝日志.txt"
+      }
+    }
+  },
+  "磁盘": {
+    "总字节": 53687091200,
+    "已用字节": 37194932224,
+    "可用字节": 16492158976
+  },
+  "下一步": "切换有卡模式后依次执行零样本基线、主方法和CoCoOp计划。"
+}

@@ -1,0 +1,34 @@
+{
+  "dataset": "SUN397",
+  "split_sha256": "9847f9ef611008073ac42adee6614bbb83f877cfbcfbd3115fc8284e0c8c1c47",
+  "image_counts": {
+    "train": 15880,
+    "val": 3970,
+    "test": 19850
+  },
+  "all_images_present": true,
+  "splits_disjoint": true,
+  "seeds": [
+    {
+      "seed": 1,
+      "base_classes": 199,
+      "novel_classes": 198,
+      "train_samples": 3184,
+      "train_sha256": "918f94c1e2204b304200c824e16d1a1874bb856843133dc9c3836a0b01e8dcaf"
+    },
+    {
+      "seed": 2,
+      "base_classes": 199,
+      "novel_classes": 198,
+      "train_samples": 3184,
+      "train_sha256": "52aefcf6746ceed2d269420c45fe13547b66b155aa54f5ac7504015d7a2f792c"
+    },
+    {
+      "seed": 3,
+      "base_classes": 199,
+      "novel_classes": 198,
+      "train_samples": 3184,
+      "train_sha256": "a96b838b77759ba92efad369ea7c40bd78da7013cbf7050d3ce4389e1e8db3c9"
+    }
+  ]
+}

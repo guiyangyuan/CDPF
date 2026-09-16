@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/root/autodl-tmp/textconsistency/releases/投稿标准基线-20260916-fc59a83/scripts/repro/运行三数据集联合上下文基线.py", line 529, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/root/autodl-tmp/textconsistency/releases/投稿标准基线-20260916-fc59a83/scripts/repro/运行三数据集联合上下文基线.py", line 524, in main
+    return 执行阶段(args.plan_path, args.stage)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/textconsistency/releases/投稿标准基线-20260916-fc59a83/scripts/repro/运行三数据集联合上下文基线.py", line 344, in 执行阶段
+    raise RuntimeError("没有可用CUDA，拒绝创建输出或执行训练")
+RuntimeError: 没有可用CUDA，拒绝创建输出或执行训练

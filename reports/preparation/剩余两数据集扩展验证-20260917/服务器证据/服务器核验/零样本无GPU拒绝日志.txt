@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/root/autodl-tmp/textconsistency/releases/投稿标准基线-20260916-fc59a83/scripts/repro/运行三数据集零样本基线.py", line 361, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/root/autodl-tmp/textconsistency/releases/投稿标准基线-20260916-fc59a83/scripts/repro/运行三数据集零样本基线.py", line 357, in main
+    return 执行(args.plan_path)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/textconsistency/releases/投稿标准基线-20260916-fc59a83/scripts/repro/运行三数据集零样本基线.py", line 266, in 执行
+    raise RuntimeError("没有可用CUDA，拒绝创建输出或执行评估")
+RuntimeError: 没有可用CUDA，拒绝创建输出或执行评估

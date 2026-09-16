@@ -1,0 +1,1 @@
+a1816f435ada46704febfb1440b518a5b49004e0ae358e71ecce0c2a3c83dcec  /root/autodl-tmp/textconsistency/data/archives/stanford_cars.zip

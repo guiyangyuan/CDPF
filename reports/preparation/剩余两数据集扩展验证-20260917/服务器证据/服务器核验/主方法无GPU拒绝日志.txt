@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/root/autodl-tmp/textconsistency/releases/三数据集主方法-20260916-9bd4a7f/scripts/repro/运行三数据集主方法.py", line 264, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/root/autodl-tmp/textconsistency/releases/三数据集主方法-20260916-9bd4a7f/scripts/repro/运行三数据集主方法.py", line 260, in main
+    return 执行(args.plan_path)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/root/autodl-tmp/textconsistency/releases/三数据集主方法-20260916-9bd4a7f/scripts/repro/运行三数据集主方法.py", line 179, in 执行
+    raise RuntimeError("没有可用CUDA，拒绝创建输出或执行训练")
+RuntimeError: 没有可用CUDA，拒绝创建输出或执行训练

@@ -127,6 +127,23 @@ def 解压归档(archive: Path, fmt: str, destination: Path) -> None:
         raise ValueError(f"未知归档格式：{fmt}")
 
 
+def 补齐Caltech内容(dataset_root: Path) -> None:
+    """CaltechDATA 的 ZIP 内部仍包含一层图像 TAR，需要再展开一次。"""
+    image_root = dataset_root / "101_ObjectCategories"
+    if image_root.is_dir():
+        return
+    candidates = (
+        dataset_root / "101_ObjectCategories.tar.gz",
+        dataset_root / "caltech-101" / "101_ObjectCategories.tar.gz",
+    )
+    nested = next((path for path in candidates if path.is_file()), None)
+    if nested is None:
+        raise FileNotFoundError("Caltech101官方ZIP中缺少101_ObjectCategories.tar.gz")
+    解压归档(nested, "tar", dataset_root)
+    if not image_root.is_dir():
+        raise FileNotFoundError("Caltech101嵌套图像归档解压后仍缺少101_ObjectCategories")
+
+
 def 下载并解压(data_root: Path, archive_root: Path) -> list[dict]:
     receipts = []
     for name, spec in 数据集.items():
@@ -151,6 +168,8 @@ def 下载并解压(data_root: Path, archive_root: Path) -> list[dict]:
                         "SHA256": 文件摘要(archive, "sha256"),
                     }
                 )
+        if name == "Caltech101":
+            补齐Caltech内容(dataset_root)
         split_path = dataset_root / spec["划分文件"]
         下载(spec["划分网址"], split_path)
     return receipts

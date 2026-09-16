@@ -1,4 +1,6 @@
 import importlib.util
+import io
+import tarfile
 import tempfile
 import unittest
 from pathlib import Path
@@ -82,6 +84,22 @@ class 三数据集扩展测试(unittest.TestCase):
                          {"train": 50500, "val": 20200, "test": 30300})
         self.assertEqual(module.数据集["OxfordPets"]["划分SHA256"],
                          "d7f3ffe65b3919f95132e51422894ae18686b83c331fd8c0adcdc3dc2de6301e")
+
+    def test_Caltech官方ZIP内层图像归档会继续展开(self):
+        module = 加载模块("准备三数据集数据.py", "Caltech嵌套归档")
+        with tempfile.TemporaryDirectory() as temporary:
+            dataset_root = Path(temporary) / "caltech-101"
+            nested = dataset_root / "caltech-101" / "101_ObjectCategories.tar.gz"
+            nested.parent.mkdir(parents=True)
+            payload = b"image"
+            with tarfile.open(nested, "w:gz") as bundle:
+                info = tarfile.TarInfo("101_ObjectCategories/airplanes/image_0001.jpg")
+                info.size = len(payload)
+                bundle.addfile(info, io.BytesIO(payload))
+            module.补齐Caltech内容(dataset_root)
+            self.assertEqual(
+                (dataset_root / "101_ObjectCategories/airplanes/image_0001.jpg").read_bytes(), payload
+            )
 
 
 if __name__ == "__main__":

@@ -89,6 +89,39 @@ def 加载扩展数据集(仓库根目录: Path, relative: Path) -> tuple[list[d
     return rows, relative.as_posix()
 
 
+def 加载零样本基线(仓库根目录: Path) -> tuple[dict[str, dict], dict, list[str]]:
+    result_relative = Path("reports/experiments/投稿零样本基线-20260916/结果.json")
+    audit_relative = Path("reports/experiments/投稿零样本基线-20260916/独立复核.json")
+    payload = 读取_json(仓库根目录 / result_relative)
+    audit = 读取_json(仓库根目录 / audit_relative)
+    if payload.get("状态") != "通过" or audit.get("状态") != "通过":
+        raise ValueError("Zero-shot CLIP结果或独立复核没有通过")
+    if audit.get("检查", {}).get("分支结果数") != 10 or audit.get("检查", {}).get("训练检查点数") != 0:
+        raise ValueError("Zero-shot CLIP独立复核的分支数或检查点数异常")
+    index = {}
+    for row in payload.get("结果", []):
+        dataset = row["数据集"]
+        if dataset in index or dataset not in 数据集顺序:
+            raise ValueError(f"Zero-shot CLIP数据集身份异常：{dataset}")
+        expected_hm = 调和平均(float(row["Base"]), float(row["Novel"]))
+        if not math.isclose(float(row["HM"]), expected_hm, rel_tol=0.0, abs_tol=1e-12):
+            raise ValueError(f"Zero-shot CLIP的HM不能复算：{dataset}")
+        index[dataset] = {
+            "Base": float(row["Base"]),
+            "Novel": float(row["Novel"]),
+            "HM": expected_hm,
+        }
+    if set(index) != set(数据集顺序):
+        raise ValueError("Zero-shot CLIP五数据集结果不完整")
+    cross = {
+        "数据集数": len(index),
+        "数据集等权Base均值": statistics.mean(index[name]["Base"] for name in 数据集顺序),
+        "数据集等权Novel均值": statistics.mean(index[name]["Novel"] for name in 数据集顺序),
+        "数据集等权HM均值": statistics.mean(index[name]["HM"] for name in 数据集顺序),
+    }
+    return index, cross, [result_relative.as_posix(), audit_relative.as_posix()]
+
+
 def 核验逐种子(rows: list[dict]) -> None:
     identities = set()
     for row in rows:
@@ -219,12 +252,14 @@ def signed(value: float) -> str:
     return f"{value:+.2f}"
 
 
-def 生成_markdown(summaries: list[dict], paired: list[dict], cross: dict, sources: list[str]) -> str:
+def 生成_markdown(
+    summaries: list[dict], paired: list[dict], cross: dict, zero_shot: dict[str, dict], zero_shot_cross: dict, sources: list[str]
+) -> str:
     index = {(item["数据集"], item["方法"]): item for item in summaries}
     lines = [
         "# 五数据集投稿主结果",
         "",
-        "更新日期：2026-09-15。全部数值来自已通过审计的逐种子产物，由 `scripts/repro/生成投稿主结果.py` 自动生成；单位为准确率百分点。主协议均为 CLIP ViT-B/16、16-shot、20 epochs、seed 1/2/3、融合权重 0.5。",
+        "更新日期：2026-09-16。全部数值来自已通过审计的实验产物，由 `scripts/repro/生成投稿主结果.py` 自动生成；单位为准确率百分点。训练方法采用 CLIP ViT-B/16、16-shot、20 epochs、seed 1/2/3，融合权重固定为 0.5；Zero-shot CLIP 冻结模型并对每个分支评估一次。",
         "",
         "## 投稿主表",
         "",
@@ -236,6 +271,10 @@ def 生成_markdown(summaries: list[dict], paired: list[dict], cross: dict, sour
     for dataset in 数据集顺序:
         baseline = index[(dataset, "CoOp")]
         fusion = index[(dataset, "固定均值概率融合")]
+        zero = zero_shot[dataset]
+        lines.append(
+            f"| {dataset} | Zero-shot CLIP | {fmt(zero['Base'])} | {fmt(zero['Novel'])} | {fmt(zero['HM'])} | {signed(zero['HM'] - baseline['HM_均值计算'])} |"
+        )
         lines.append(
             f"| {dataset} | CoOp | {fmt(baseline['Base均值'])} | {fmt(baseline['Novel均值'])} | {fmt(baseline['HM_均值计算'])} | +0.00 |"
         )
@@ -245,7 +284,7 @@ def 生成_markdown(summaries: list[dict], paired: list[dict], cross: dict, sour
     lines.extend(
         [
             "",
-            f"五个数据集等权平均 HM 从 **{fmt(cross['CoOp']['数据集等权HM均值'])}** 提高到 **{fmt(cross['固定均值概率融合']['数据集等权HM均值'])}**，增加 **{signed(cross['固定均值概率融合相对CoOp']['数据集等权HM增益'])}pp**。Novel 等权平均增加 **{signed(cross['固定均值概率融合相对CoOp']['数据集等权Novel增益'])}pp**，Base 等权平均变化为 **{signed(cross['固定均值概率融合相对CoOp']['数据集等权Base增益'])}pp**。",
+            f"五个数据集等权平均 HM 为 Zero-shot CLIP **{fmt(zero_shot_cross['数据集等权HM均值'])}**、CoOp **{fmt(cross['CoOp']['数据集等权HM均值'])}**、固定均值概率融合 **{fmt(cross['固定均值概率融合']['数据集等权HM均值'])}**。主方法相对 CoOp 增加 **{signed(cross['固定均值概率融合相对CoOp']['数据集等权HM增益'])}pp**，相对 Zero-shot CLIP 增加 **{signed(cross['固定均值概率融合']['数据集等权HM均值'] - zero_shot_cross['数据集等权HM均值'])}pp**；相对 CoOp 的 Novel 等权平均增加 **{signed(cross['固定均值概率融合相对CoOp']['数据集等权Novel增益'])}pp**，Base 等权平均变化为 **{signed(cross['固定均值概率融合相对CoOp']['数据集等权Base增益'])}pp**。",
             "",
             "## 配对稳定性与描述性区间",
             "",
@@ -287,7 +326,8 @@ def 生成_markdown(summaries: list[dict], paired: list[dict], cross: dict, sour
             "",
             "- UCF101、DTD、Aircraft 参与过方法分析；EuroSAT、OxfordFlowers 是冻结融合规则后的扩展验证，但仓库中已有历史成绩，因此也不能标成严格盲测。",
             "- 五个数据集的核心训练配置一致，但历史检查点来自不同的已冻结源码快照；每批源码、CLIP、检查点和样本身份已经各自审计。论文中应报告这一事实，不能写成单次全新统一重跑。",
-            "- 本表只证明相对本仓库 CoOp 实现的收益。它没有完成 CoCoOp、MaPLe、PromptSRC 等标准方法的同协议五数据集复现，不能宣称 SOTA。",
+            "- Zero-shot CLIP 已按同一数据划分实际评估，并从原始 correct/total 独立复算；它不训练，也没有种子标准差。",
+            "- 本表只证明相对本仓库 CoOp 实现和同划分 Zero-shot CLIP 的收益。它没有完成 CoCoOp、MaPLe、PromptSRC 等训练型方法的同协议五数据集复现，不能宣称 SOTA。",
             "- 简单概率融合没有新增可训练参数，但当前尚无统一的端到端推理时间、显存和 FLOPs 对照。",
             "",
             "## 数据来源",
@@ -298,21 +338,25 @@ def 生成_markdown(summaries: list[dict], paired: list[dict], cross: dict, sour
     lines.extend(
         [
             "",
-            "机器可读版本见[统一结果](统一结果.json)、[逐种子结果](主结果逐种子.csv)、[统计汇总](主结果汇总.csv)、[配对增益与区间](配对增益与区间.csv)；可直接用于论文的表格见[LaTeX主表](论文主结果表.tex)，尚缺对照见[标准基线缺口](标准基线缺口.md)。",
+            "机器可读版本见[统一结果](统一结果.json)、[标准基线汇总](标准基线汇总.csv)、[逐种子结果](主结果逐种子.csv)、[统计汇总](主结果汇总.csv)、[配对增益与区间](配对增益与区间.csv)；可直接用于论文的表格见[LaTeX主表](论文主结果表.tex)，尚缺对照见[标准基线缺口](标准基线缺口.md)。",
             "",
         ]
     )
     return "\n".join(lines)
 
 
-def 生成_latex(summaries: list[dict]) -> str:
+def 生成_latex(summaries: list[dict], zero_shot: dict[str, dict]) -> str:
     index = {(item["数据集"], item["方法"]): item for item in summaries}
     rows = []
     for dataset in 数据集顺序:
         base = index[(dataset, "CoOp")]
         fusion = index[(dataset, "固定均值概率融合")]
+        zero = zero_shot[dataset]
         rows.append(
-            f"{dataset} & CoOp & {fmt(base['Base均值'])} & {fmt(base['Novel均值'])} & {fmt(base['HM_均值计算'])} \\\\"
+            f"{dataset} & Zero-shot CLIP & {fmt(zero['Base'])} & {fmt(zero['Novel'])} & {fmt(zero['HM'])} \\\\"
+        )
+        rows.append(
+            f" & CoOp & {fmt(base['Base均值'])} & {fmt(base['Novel均值'])} & {fmt(base['HM_均值计算'])} \\\\"
         )
         rows.append(
             f" & Ours & {fmt(fusion['Base均值'])} & {fmt(fusion['Novel均值'])} & \\textbf{{{fmt(fusion['HM_均值计算'])}}} \\\\"
@@ -324,7 +368,7 @@ def 生成_latex(summaries: list[dict]) -> str:
             "% Auto-generated by scripts/repro/生成投稿主结果.py",
             "\\begin{table*}[t]",
             "\\centering",
-            "\\caption{Base-to-novel generalization with CLIP ViT-B/16 under the 16-shot setting. Results are averaged over three seeds; H is the harmonic mean of the averaged Base and Novel accuracies.}",
+            "\\caption{Base-to-novel generalization with CLIP ViT-B/16. Trainable methods use 16 shots and are averaged over three seeds; zero-shot CLIP is evaluated once. H is the harmonic mean of Base and Novel accuracies.}",
             "\\label{tab:five_dataset_main}",
             "\\begin{tabular}{llccc}",
             "\\toprule",
@@ -339,10 +383,10 @@ def 生成_latex(summaries: list[dict]) -> str:
     )
 
 
-def 生成基线缺口(cross: dict) -> str:
+def 生成基线缺口(cross: dict, zero_shot_cross: dict) -> str:
     return f"""# 标准基线与投稿证据缺口
 
-更新日期：2026-09-15。本清单只记录是否真实执行，不用论文中的外部数字冒充本地复现。
+更新日期：2026-09-16。本清单只记录是否真实执行，不用论文中的外部数字冒充本地复现。
 
 | 对照 | 当前状态 | 能否进入主表 | 下一步 |
 |---|---|---|---|
@@ -351,19 +395,18 @@ def 生成基线缺口(cross: dict) -> str:
 | 固定 logits 均值融合 | 五数据集、三种子已评估 | 可以作为融合方式消融 | 与概率融合并列 |
 | 固定均值概率融合 | 五数据集、三种子已完成并审计 | 可以，候选主方法 | 固定公式，不再按数据集调权重 |
 | 原层级与 MLP 完整方法 | UCF101、DTD、Aircraft 三种子完成 | 只适合历史消融 | 在 DTD、Aircraft 弱于简单融合，不扩展为主方法 |
-| Zero-shot CLIP | 尚无五数据集统一实跑表 | 暂不可以 | GPU 只推理，成本最低，优先补 |
+| Zero-shot CLIP | 五数据集Base/Novel共10次实评，原始日志独立复算通过 | 可以 | 注明冻结模型、每个分支只评估一次 |
 | CoCoOp | 代码存在，尚无同协议五数据集三种子结果 | 暂不可以 | 作为最重要的训练型标准基线 |
 | MaPLe、PromptSRC 等近期提示学习方法 | 尚未取得同代码、同划分、同预算实跑结果 | 暂不可以 | 选择一个可复现且协议最接近的方法；单列外部论文数字，不能与本地结果混称公平复现 |
 | 参数量、推理耗时、显存 | 仅部分批次有零散记录 | 暂不可以形成统一效率表 | 固定 batch 和硬件后测 CoOp、logits 融合、概率融合 |
 
 ## 投稿前最低补充顺序
 
-1. **Zero-shot CLIP 五数据集评估**：无需训练，可验证描述分支与 CoOp 的位置关系，并补完整基础对照。
-2. **CoCoOp 同协议复现**：至少覆盖 UCF101、DTD、Aircraft；预算允许时再补 EuroSAT、OxfordFlowers。所有种子和失败结果必须保留。
-3. **统一效率表**：报告可训练参数、单图推理耗时、峰值显存。当前主方法没有新增可训练参数，但增加描述分支计算，不能只写“零开销”。
-4. **文献对照边界**：外部论文成绩只放单独表格，并注明 backbone、shots、epoch、split 和统计口径；配置不同时不标粗为直接胜负。
+1. **CoCoOp 同协议复现**：至少覆盖 UCF101、DTD、Aircraft；预算允许时再补 EuroSAT、OxfordFlowers。所有种子和失败结果必须保留。
+2. **统一效率表**：报告可训练参数、单图推理耗时、峰值显存。当前主方法没有新增可训练参数，但增加描述分支计算，不能只写“零开销”。
+3. **文献对照边界**：外部论文成绩只放单独表格，并注明 backbone、shots、epoch、split 和统计口径；配置不同时不标粗为直接胜负。
 
-当前固定概率融合在五数据集等权 HM 上相对 CoOp 提升 **{cross['固定均值概率融合相对CoOp']['数据集等权HM增益']:+.2f}pp**，且 15/15 个种子比较为正。这足以进入论文主结果，但仅有一个训练基线仍容易被审稿人质疑，下一次开卡应优先补标准基线，而不是再设计新模块。
+Zero-shot CLIP 的五数据集等权 HM 为 **{zero_shot_cross['数据集等权HM均值']:.2f}**。固定概率融合为 **{cross['固定均值概率融合']['数据集等权HM均值']:.2f}**，相对 Zero-shot CLIP 提升 **{cross['固定均值概率融合']['数据集等权HM均值'] - zero_shot_cross['数据集等权HM均值']:+.2f}pp**；相对 CoOp 提升 **{cross['固定均值概率融合相对CoOp']['数据集等权HM增益']:+.2f}pp**，且 15/15 个种子比较为正。这足以进入论文主结果，但仍缺一个训练型自适应提示基线，下一次开卡应优先补 CoCoOp，而不是再设计新模块。
 """
 
 
@@ -389,8 +432,37 @@ def main() -> int:
     核验逐种子(rows)
     rows.sort(key=lambda item: (数据集顺序.index(item["数据集"]), item["种子"], 方法顺序.index(item["方法"])))
     summaries, paired, cross = 生成统计(rows)
+    zero_shot, zero_shot_cross, zero_shot_sources = 加载零样本基线(root)
+    sources.extend(zero_shot_sources)
+
+    summary_index = {(item["数据集"], item["方法"]): item for item in summaries}
+    baseline_rows = []
+    for dataset in 数据集顺序:
+        baseline_rows.append(
+            {
+                "数据集": dataset,
+                "方法": "Zero-shot CLIP",
+                "Base": zero_shot[dataset]["Base"],
+                "Novel": zero_shot[dataset]["Novel"],
+                "HM": zero_shot[dataset]["HM"],
+                "评估次数": 1,
+            }
+        )
+        for method in ("CoOp", "固定均值概率融合"):
+            item = summary_index[(dataset, method)]
+            baseline_rows.append(
+                {
+                    "数据集": dataset,
+                    "方法": method,
+                    "Base": item["Base均值"],
+                    "Novel": item["Novel均值"],
+                    "HM": item["HM_均值计算"],
+                    "评估次数": 3,
+                }
+            )
 
     写_csv(output / "主结果逐种子.csv", rows, ["数据集", "种子", "方法", "Base", "Novel", "HM", "来源"])
+    写_csv(output / "标准基线汇总.csv", baseline_rows, ["数据集", "方法", "Base", "Novel", "HM", "评估次数"])
     写_csv(
         output / "主结果汇总.csv",
         summaries,
@@ -432,12 +504,19 @@ def main() -> int:
         "方法汇总": summaries,
         "融合相对CoOp": paired,
         "跨数据集汇总": cross,
+        "Zero-shot CLIP": {
+            "五数据集结果": [dict(数据集=dataset, **zero_shot[dataset]) for dataset in 数据集顺序],
+            "跨数据集汇总": zero_shot_cross,
+            "统计口径": "冻结CLIP；每个Base/Novel分支评估一次；不训练、不报告种子标准差",
+        },
         "来源": sources,
     }
     (output / "统一结果.json").write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    (output / "统一结果表.md").write_text(生成_markdown(summaries, paired, cross, sources), encoding="utf-8")
-    (output / "论文主结果表.tex").write_text(生成_latex(summaries), encoding="utf-8")
-    (output / "标准基线缺口.md").write_text(生成基线缺口(cross), encoding="utf-8")
+    (output / "统一结果表.md").write_text(
+        生成_markdown(summaries, paired, cross, zero_shot, zero_shot_cross, sources), encoding="utf-8"
+    )
+    (output / "论文主结果表.tex").write_text(生成_latex(summaries, zero_shot), encoding="utf-8")
+    (output / "标准基线缺口.md").write_text(生成基线缺口(cross, zero_shot_cross), encoding="utf-8")
 
     print(
         json.dumps(
@@ -448,6 +527,7 @@ def main() -> int:
                 "数据集数": len(数据集顺序),
                 "HM正增益数据集数": cross["固定均值概率融合相对CoOp"]["HM正增益数据集数"],
                 "HM正增益种子数": cross["固定均值概率融合相对CoOp"]["HM正增益种子数"],
+                "Zero-shot CLIP等权HM": zero_shot_cross["数据集等权HM均值"],
                 "输出目录": str(output),
             },
             ensure_ascii=False,

@@ -1,0 +1,91 @@
+{
+  "状态": "完成",
+  "开始时间Unix": 1789494082.9571953,
+  "GPU": "NVIDIA GeForce RTX 4090",
+  "总命令": 10,
+  "已完成命令": 10,
+  "命令": [
+    {
+      "序号": 1,
+      "数据集": "UCF101",
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 9.354771852493286,
+      "运行日志": "/root/autodl-tmp/textconsistency/runs/投稿零样本基线-20260916-fc59a83/运行日志/01-UCF101-基础测试.txt"
+    },
+    {
+      "序号": 2,
+      "数据集": "UCF101",
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 8.858068466186523,
+      "运行日志": "/root/autodl-tmp/textconsistency/runs/投稿零样本基线-20260916-fc59a83/运行日志/02-UCF101-新类别测试.txt"
+    },
+    {
+      "序号": 3,
+      "数据集": "DTD",
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 8.798985719680786,
+      "运行日志": "/root/autodl-tmp/textconsistency/runs/投稿零样本基线-20260916-fc59a83/运行日志/03-DTD-基础测试.txt"
+    },
+    {
+      "序号": 4,
+      "数据集": "DTD",
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 9.362186431884766,
+      "运行日志": "/root/autodl-tmp/textconsistency/runs/投稿零样本基线-20260916-fc59a83/运行日志/04-DTD-新类别测试.txt"
+    },
+    {
+      "序号": 5,
+      "数据集": "FGVC-Aircraft",
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 16.252955198287964,
+      "运行日志": "/root/autodl-tmp/textconsistency/runs/投稿零样本基线-20260916-fc59a83/运行日志/05-FGVC-Aircraft-基础测试.txt"
+    },
+    {
+      "序号": 6,
+      "数据集": "FGVC-Aircraft",
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 16.227153539657593,
+      "运行日志": "/root/autodl-tmp/textconsistency/runs/投稿零样本基线-20260916-fc59a83/运行日志/06-FGVC-Aircraft-新类别测试.txt"
+    },
+    {
+      "序号": 7,
+      "数据集": "EuroSAT",
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 10.317426919937134,
+      "运行日志": "/root/autodl-tmp/textconsistency/runs/投稿零样本基线-20260916-fc59a83/运行日志/07-EuroSAT-基础测试.txt"
+    },
+    {
+      "序号": 8,
+      "数据集": "EuroSAT",
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 9.28941822052002,
+      "运行日志": "/root/autodl-tmp/textconsistency/runs/投稿零样本基线-20260916-fc59a83/运行日志/08-EuroSAT-新类别测试.txt"
+    },
+    {
+      "序号": 9,
+      "数据集": "OxfordFlowers",
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 9.908551216125488,
+      "运行日志": "/root/autodl-tmp/textconsistency/runs/投稿零样本基线-20260916-fc59a83/运行日志/09-OxfordFlowers-基础测试.txt"
+    },
+    {
+      "序号": 10,
+      "数据集": "OxfordFlowers",
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 9.62618613243103,
+      "运行日志": "/root/autodl-tmp/textconsistency/runs/投稿零样本基线-20260916-fc59a83/运行日志/10-OxfordFlowers-新类别测试.txt"
+    }
+  ],
+  "结束时间Unix": 1789494190.9609432,
+  "总耗时秒": 108.00374794006348
+}

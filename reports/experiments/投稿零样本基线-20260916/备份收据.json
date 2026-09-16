@@ -1,0 +1,15 @@
+{
+  "状态": "通过",
+  "实验": "五数据集Zero-shot CLIP标准基线",
+  "实例ID": "a5904787c3-600682b1",
+  "GPU": "NVIDIA GeForce RTX 4090",
+  "执行源码提交": "fc59a83",
+  "源码归档SHA256": "1e785a4a95fe118de50a3dd4f0693ea1620399d2e3ae1ceb8a382059558a0967",
+  "CLIP_SHA256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+  "服务器归档": "/root/autodl-tmp/textconsistency/backups/投稿零样本基线-20260916-fc59a83.tar.gz",
+  "下载归档SHA256": "6df72c6a92ff9cc1c17bcef72533ca59abab209a5a66cadfa228815119443686",
+  "下载归档字节数": 13247,
+  "归档成员数": 45,
+  "GitHub证据目录": "reports/experiments/投稿零样本基线-20260916",
+  "说明": "GitHub保存配置、计划、状态、原始日志、结果和独立复核；本批没有训练权重或数据集文件。归档仍保存在服务器数据盘，本机解压副本位于git忽略的outputs目录。"
+}

@@ -1,10 +1,10 @@
 # TextConsistency：工作计划与当前进度
 
-最后更新：2026-09-16（五数据集Zero-shot CLIP标准基线的10条Base/Novel推理队列已完成无卡准备；修复原零样本入口的调试错误和模板不一致，执行器、配置及8项静态核验通过，下一步开卡执行后立即备份关机）。
+最后更新：2026-09-16（五数据集Zero-shot CLIP标准基线的10条Base/Novel推理已全部完成；下载归档、25个原始文件和10份日志独立复核通过，主表与LaTeX表已更新，AutoDL网页确认实例已关机）。
 
-**当前待执行：五数据集 Zero-shot CLIP 标准基线。** 固定冻结CLIP ViT-B/16和本仓库单一数据集模板，在UCF101、DTD、FGVC-Aircraft、EuroSAT、OxfordFlowers分别评估Base/Novel，共10条命令，不训练、不加载检查点、不搜索模板。原零样本代码中会把Python列表传给`token_embedding`的调试错误已经删除，OxfordFlowers模板统一为本仓库CoOp标准模板；CoCoOp逐样本调试打印也已删除，尚未开始CoCoOp训练。执行器会核验源码/配置、CLIP SHA、CUDA、日志correct/total和“零检查点”；开卡前8项静态检查通过。见[准备说明](reports/preparation/投稿标准基线-20260916/准备说明.md)、[CPU核验](reports/preparation/投稿标准基线-20260916/CPU核验.json)和[执行器](scripts/repro/运行零样本基线.py)。
+**最新GPU标准基线已完成、复核备份并关机：五数据集 Zero-shot CLIP。** 固定冻结CLIP ViT-B/16和本仓库单一数据集模板，在UCF101、DTD、FGVC-Aircraft、EuroSAT、OxfordFlowers分别评估Base/Novel，共10条命令，不训练、不加载检查点、不搜索模板。五数据集Base/Novel/HM分别为70.89/78.47/74.49、53.12/60.75/56.68、27.73/35.93/31.30、57.07/63.97/60.33、71.70/77.45/74.46，等权HM为59.45。十条命令总推理108.00秒；归档SHA256为`6df72c6a92ff9cc1c17bcef72533ca59abab209a5a66cadfa228815119443686`。本机从10份原始日志重新计算correct/total，10/10一致；清单中的25个文件逐SHA一致、检查点为0。主方法等权HM 70.13，相对Zero-shot提升+10.67pp。见[结果报告](reports/experiments/投稿零样本基线-20260916/独立复核报告.md)、[独立复核](reports/experiments/投稿零样本基线-20260916/独立复核.json)、[备份收据](reports/experiments/投稿零样本基线-20260916/备份收据.json)和[关机确认](reports/experiments/投稿零样本基线-20260916/关机确认.json)。
 
-**当前下一步：补投稿标准基线，不再设计新模块。** 已把UCF101、DTD、FGVC-Aircraft、EuroSAT、OxfordFlowers统一为同一张三种子主表；CoOp的五数据集等权HM为64.21，固定均值概率融合为70.13，增加+5.91pp，Novel等权平均增加+9.84pp，Base等权平均变化−0.38pp。五个数据集和15个逐种子HM比较全部正向；配对95% t区间按n=3、df=2仅作描述。自动生成器会拒绝缺行、重复身份和HM复算不一致，并同时输出CSV、JSON和可粘贴到Overleaf的LaTeX表。投稿证据的主要缺口是Zero-shot CLIP、CoCoOp等同协议标准基线与统一效率表；下一次开卡优先做这些，不继续堆残差或门控。见[五数据集主结果](reports/experiments/投稿实验统一结果-20260915/统一结果表.md)、[基线缺口](reports/experiments/投稿实验统一结果-20260915/标准基线缺口.md)和[生成脚本](scripts/repro/生成投稿主结果.py)。
+**当前下一步：补 CoCoOp 训练型标准基线，再统一测效率。** Zero-shot CLIP已进入同一张五数据集主表；CoOp等权HM为64.21，固定均值概率融合为70.13，增加+5.91pp，Novel等权平均增加+9.84pp，Base等权平均变化−0.38pp。五个数据集和15个逐种子HM比较全部正向。下一阶段先在无卡模式冻结CoCoOp协议、执行器和停止条件，开卡后至少完成UCF101、DTD、Aircraft三种子；预算允许时再扩EuroSAT和OxfordFlowers。随后固定batch和硬件测CoOp、logits融合、概率融合的参数量、单图推理耗时与峰值显存。见[五数据集主结果](reports/experiments/投稿实验统一结果-20260915/统一结果表.md)、[基线缺口](reports/experiments/投稿实验统一结果-20260915/标准基线缺口.md)和[生成脚本](scripts/repro/生成投稿主结果.py)。
 
 **当前最新结果：OxfordFlowers三种子通过冻结规则。** seed1先得到Novel/HM +5.603/+3.129pp，通过事前门槛后才扩展seed2/3；三种子中固定概率融合相对CoOp的Base/Novel/HM均值变化为−1.298/+6.903/+3.985pp，3/3种子HM为正。共3次训练、6次CoOp标准重载、6次融合评估，两段执行器17条命令全部完成；145项独立检查0失败。完整包SHA256为`fc9d690d6d87a87f927110af2916fb7fd95a9115da19aa3046c16a594365b86f`，已下载并解压；AutoDL页面确认实例“已关机”。该结果支持简单概率融合在第五个数据集上的稳定收益，但不是严格盲测或SOTA声明。见[结果报告](reports/experiments/牛津花卉扩展验证-20260915/结果报告.md)。
 
@@ -154,7 +154,7 @@
 | OxfordFlowers无卡数据与执行准备 | 已完成、备份并关机 | 8,189图像/102类、固定划分和三种子16-shot真实loader通过；seed1六步计划及无CUDA拒绝通过；未产生准确率 |
 | OxfordFlowers三种子GPU扩展验证 | 已通过、核验备份并关机 | 概率融合相对CoOp Base/Novel/HM为−1.298/+6.903/+3.985pp，3/3种子HM正增益；145项独立检查0失败 |
 | 五数据集投稿证据统一 | 已完成、无需GPU | 60行逐种子结果、20行方法汇总、五组配对区间和LaTeX主表自动生成；5/5数据集、15/15种子HM正增益 |
-| 五数据集Zero-shot CLIP标准基线 | 无卡准备完成、待GPU执行 | 10条Base/Novel推理命令；不训练、零检查点；执行器/配置与8项静态核验通过 |
+| 五数据集Zero-shot CLIP标准基线 | 已完成、独立复核、备份并关机 | 10条Base/Novel推理全部成功；等权HM 59.45；25原始文件和10份日志核验通过；零检查点 |
 | DTD / Aircraft ZIP 本机校验 | 已完成 | reports/preparation/dataset-archives.json |
 | UCF101 / DTD / Aircraft 服务器部署与预检 | 已完成 | ZIP 校验、固定划分、图像/描述覆盖、每类 16-shot、三种子采样均通过；见 ready.json |
 | 官方 CoOp 差异核查与独立诊断 | 本机、开卡后服务器均通过 | 无卡时期 SIGKILL 保留；开卡后完整模型诊断 logits/梯度/更新差均为0，见本批 start-evidence |

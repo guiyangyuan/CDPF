@@ -39,7 +39,8 @@ import zipfile
         "划分SHA256": "9847f9ef611008073ac42adee6614bbb83f877cfbcfbd3115fc8284e0c8c1c47",
         "划分数量": {"train": 15880, "val": 3970, "test": 19850},
         "类别数": 397,
-        "归档网址": "https://huggingface.co/datasets/Veiiaj3dad/CLIP-Prompt-learning-sun397/resolve/main/SUN397.tar.gz?download=true",
+        "归档网址": "https://hf-mirror.com/datasets/Veiiaj3dad/CLIP-Prompt-learning-sun397/resolve/main/SUN397.tar.gz?download=true",
+        "原始归档网址": "https://huggingface.co/datasets/Veiiaj3dad/CLIP-Prompt-learning-sun397/resolve/main/SUN397.tar.gz?download=true",
         "归档字节数": 39077296924,
         "归档SHA256": "f404130965a7ad77bed5ececc71e720ab50f3cc1e1bb257257610d38f3b928ec",
         "归档方式": "流式读取整包，仅落盘固定划分所需图像，不保存39GB压缩包",
@@ -68,7 +69,7 @@ def 下载(url: str, target: Path) -> None:
     target.parent.mkdir(parents=True, exist_ok=True)
     partial = target.with_suffix(target.suffix + ".part")
     command = [
-        "curl", "-L", "--fail", "--retry", "8", "--retry-delay", "10",
+        "curl", "-L", "--fail", "--retry", "8", "--retry-all-errors", "--retry-delay", "10",
         "--connect-timeout", "30", "-C", "-", "--output", str(partial), url,
     ]
     subprocess.run(command, check=True)
@@ -216,7 +217,7 @@ def 准备SUN397(data_root: Path) -> dict:
         raise OSError(f"SUN397流式解压前至少需要18GiB空闲空间，当前仅{free_bytes / 1024**3:.2f}GiB")
     image_root.mkdir(parents=True, exist_ok=True)
     command = [
-        "curl", "-L", "--fail", "--retry", "8", "--retry-delay", "10",
+        "curl", "-L", "--fail", "--retry", "8", "--retry-all-errors", "--retry-delay", "10",
         "--connect-timeout", "30", spec["归档网址"],
     ]
     process = subprocess.Popen(command, stdout=subprocess.PIPE)
@@ -340,7 +341,7 @@ def main() -> int:
     result = 核验(data_root)
     result["下载"] = download_receipts
     result["来源与存储策略"] = {
-        name: {key: spec[key] for key in spec if key in {"归档网址", "归档字节数", "归档SHA256", "归档方式"}}
+        name: {key: spec[key] for key in spec if key in {"归档网址", "原始归档网址", "归档字节数", "归档SHA256", "归档方式"}}
         for name, spec in 数据集.items()
     }
     原子写json(args.receipt.resolve(), result)

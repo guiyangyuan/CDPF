@@ -120,6 +120,31 @@ def _zip相对图像路径(name: str) -> str | None:
     return None
 
 
+def _写入图像(source, target: Path) -> None:
+    target.parent.mkdir(parents=True, exist_ok=True)
+    partial = target.with_suffix(target.suffix + ".part")
+    with partial.open("wb") as destination:
+        shutil.copyfileobj(source, destination, length=4 * 1024 * 1024)
+    partial.replace(target)
+
+
+def _提取ZIP内TGZ(bundle: zipfile.ZipFile, item: zipfile.ZipInfo, dataset_root: Path, missing: set[str]) -> int:
+    extracted = 0
+    with bundle.open(item) as compressed, tarfile.open(fileobj=compressed, mode="r|gz") as nested:
+        for member in nested:
+            relative = _zip相对图像路径(member.name.removeprefix("./"))
+            if relative not in missing or not member.isfile():
+                continue
+            source = nested.extractfile(member)
+            if source is None:
+                raise IOError(f"无法读取StanfordCars成员：{member.name}")
+            with source:
+                _写入图像(source, dataset_root / relative)
+            missing.remove(relative)
+            extracted += 1
+    return extracted
+
+
 def 准备StanfordCars(data_root: Path, archive_root: Path, keep_archive: bool) -> dict:
     spec = 数据集["StanfordCars"]
     dataset_root = data_root / spec["目录"]
@@ -136,15 +161,15 @@ def 准备StanfordCars(data_root: Path, archive_root: Path, keep_archive: bool) 
     extracted = 0
     with zipfile.ZipFile(archive) as bundle:
         for item in bundle.infolist():
+            if item.filename.endswith(("cars_train.tgz", "cars_test.tgz")):
+                extracted += _提取ZIP内TGZ(bundle, item, dataset_root, missing)
+                continue
             relative = _zip相对图像路径(item.filename)
             if relative not in missing or item.is_dir():
                 continue
-            target = dataset_root / relative
-            target.parent.mkdir(parents=True, exist_ok=True)
-            partial = target.with_suffix(target.suffix + ".part")
-            with bundle.open(item) as source, partial.open("wb") as destination:
-                shutil.copyfileobj(source, destination, length=4 * 1024 * 1024)
-            partial.replace(target)
+            with bundle.open(item) as source:
+                _写入图像(source, dataset_root / relative)
+            missing.remove(relative)
             extracted += 1
     remaining = [path for path in paths if not (dataset_root / path).is_file()]
     if remaining:

@@ -203,7 +203,7 @@ class 摘要读取器:
         return data
 
 
-def 准备SUN397(data_root: Path) -> dict:
+def 准备SUN397(data_root: Path, input_path: Path | None = None) -> dict:
     spec = 数据集["SUN397"]
     dataset_root = data_root / spec["目录"]
     image_root = dataset_root / spec["图像目录"]
@@ -216,14 +216,21 @@ def 准备SUN397(data_root: Path) -> dict:
     if free_bytes < 18 * 1024**3:
         raise OSError(f"SUN397流式解压前至少需要18GiB空闲空间，当前仅{free_bytes / 1024**3:.2f}GiB")
     image_root.mkdir(parents=True, exist_ok=True)
-    command = [
-        "curl", "-L", "--fail", "--retry", "8", "--retry-all-errors", "--retry-delay", "10",
-        "--connect-timeout", "30", spec["归档网址"],
-    ]
-    process = subprocess.Popen(command, stdout=subprocess.PIPE)
-    if process.stdout is None:
-        raise RuntimeError("无法读取SUN397下载流")
-    reader = 摘要读取器(process.stdout)
+    process = None
+    if input_path is None:
+        command = [
+            "curl", "-L", "--fail", "--retry", "8", "--retry-all-errors", "--retry-delay", "10",
+            "--connect-timeout", "30", spec["归档网址"],
+        ]
+        process = subprocess.Popen(command, stdout=subprocess.PIPE)
+        if process.stdout is None:
+            raise RuntimeError("无法读取SUN397下载流")
+        raw = process.stdout
+        source_name = spec["归档网址"]
+    else:
+        raw = input_path.resolve().open("rb", buffering=0)
+        source_name = str(input_path.resolve())
+    reader = 摘要读取器(raw)
     found: set[str] = set()
     written = 0
     try:
@@ -248,14 +255,16 @@ def 准备SUN397(data_root: Path) -> dict:
         for _ in iter(lambda: reader.read(4 * 1024 * 1024), b""):
             pass
     except BaseException:
-        process.terminate()
-        process.wait()
+        if process is not None:
+            process.terminate()
+            process.wait()
         raise
     finally:
-        process.stdout.close()
-    returncode = process.wait()
-    if returncode != 0:
-        raise RuntimeError(f"SUN397下载失败，curl退出码{returncode}")
+        raw.close()
+    if process is not None:
+        returncode = process.wait()
+        if returncode != 0:
+            raise RuntimeError(f"SUN397下载失败，curl退出码{returncode}")
     if reader.bytes_read != spec["归档字节数"]:
         raise ValueError(f"SUN397下载字节数错误：{reader.bytes_read}")
     actual_sha = reader.digest.hexdigest()
@@ -274,7 +283,7 @@ def 准备SUN397(data_root: Path) -> dict:
         "本次新增图像": written,
         "归档字节数": reader.bytes_read,
         "归档SHA256": actual_sha,
-        "来源": spec["归档网址"],
+        "来源": source_name,
         "归档处理": "未落盘，只保存固定划分使用的图像",
     }
 
@@ -324,6 +333,7 @@ def main() -> int:
         item.add_argument("--data-root", type=Path, required=True)
         item.add_argument("--receipt", type=Path, required=True)
     download_parser.add_argument("--archive-root", type=Path, required=True)
+    download_parser.add_argument("--sun-input", type=Path)
     download_parser.add_argument("--保留汽车归档", action="store_true")
     args = parser.parse_args()
     if args.command == "计划":
@@ -337,7 +347,7 @@ def main() -> int:
         archive_root.mkdir(parents=True, exist_ok=True)
         下载划分(data_root)
         download_receipts.append(准备StanfordCars(data_root, archive_root, args.保留汽车归档))
-        download_receipts.append(准备SUN397(data_root))
+        download_receipts.append(准备SUN397(data_root, args.sun_input))
     result = 核验(data_root)
     result["下载"] = download_receipts
     result["来源与存储策略"] = {

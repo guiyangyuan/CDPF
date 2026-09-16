@@ -138,7 +138,7 @@ class 剩余两数据集准备测试(unittest.TestCase):
             }
             disk = SimpleNamespace(free=30 * 1024**3)
             with mock.patch.object(module.shutil, "disk_usage", return_value=disk):
-                receipt = module.准备SUN397(data_root)
+                receipt = module.准备SUN397(data_root, archive)
             self.assertEqual(receipt["图像数"], 2)
             self.assertEqual((data_root / "sun397/SUN397/a/a1.jpg").read_bytes(), b"scene-a")
             self.assertEqual((data_root / "sun397/SUN397/b/b1.jpg").read_bytes(), b"scene-b")

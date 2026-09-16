@@ -1,0 +1,34 @@
+{
+  "dataset": "Caltech101",
+  "split_sha256": "52ce83205ff8ff8a1a18119aad6376120ae35c36e783a984bc560cbf10e73fa5",
+  "image_counts": {
+    "train": 4128,
+    "val": 1649,
+    "test": 2465
+  },
+  "all_images_present": true,
+  "splits_disjoint": true,
+  "seeds": [
+    {
+      "seed": 1,
+      "base_classes": 50,
+      "novel_classes": 50,
+      "train_samples": 800,
+      "train_sha256": "970088c394994c8c4fb172df510f9e7baeadfe8b1a2553800b37aba5408f31ff"
+    },
+    {
+      "seed": 2,
+      "base_classes": 50,
+      "novel_classes": 50,
+      "train_samples": 800,
+      "train_sha256": "0b4ae6b619ba035cd2e18208981aafb300a62b0db8b847c1379b3e9d8ffb4b69"
+    },
+    {
+      "seed": 3,
+      "base_classes": 50,
+      "novel_classes": 50,
+      "train_samples": 800,
+      "train_sha256": "ec74797f68f95f536012f649795d600e4674bdca382ebdcf8b52541904b1b815"
+    }
+  ]
+}

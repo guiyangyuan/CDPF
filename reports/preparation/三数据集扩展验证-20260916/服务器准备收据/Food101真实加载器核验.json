@@ -1,0 +1,34 @@
+{
+  "dataset": "Food101",
+  "split_sha256": "7c3d456c4f348255e1a363e0ea5118318936488f3ec20d83758e0ee67cb9037c",
+  "image_counts": {
+    "train": 50500,
+    "val": 20200,
+    "test": 30300
+  },
+  "all_images_present": true,
+  "splits_disjoint": true,
+  "seeds": [
+    {
+      "seed": 1,
+      "base_classes": 51,
+      "novel_classes": 50,
+      "train_samples": 816,
+      "train_sha256": "e52691f44ce677fa6831672d4c4787d0cbf3b7260273a67a613507b77bb5c400"
+    },
+    {
+      "seed": 2,
+      "base_classes": 51,
+      "novel_classes": 50,
+      "train_samples": 816,
+      "train_sha256": "8d73b977ab067b041dc68c1990a175e151972d7df51d47de24ddaf3cb7e5bec4"
+    },
+    {
+      "seed": 3,
+      "base_classes": 51,
+      "novel_classes": 50,
+      "train_samples": 816,
+      "train_sha256": "b548b6022f6f7df93a70937de62db0ec7e5a966c6189e661dbd6bae3061afcdd"
+    }
+  ]
+}

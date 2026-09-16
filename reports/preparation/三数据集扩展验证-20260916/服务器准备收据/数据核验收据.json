@@ -1,0 +1,54 @@
+{
+  "状态": "通过",
+  "数据根目录": "/root/autodl-tmp/textconsistency/data",
+  "数据集": [
+    {
+      "数据集": "Caltech101",
+      "目录": "/root/autodl-tmp/textconsistency/data/caltech-101",
+      "类别数": 100,
+      "划分数量": {
+        "train": 4128,
+        "val": 1649,
+        "test": 2465
+      },
+      "唯一划分图像数": 8242,
+      "划分SHA256": "52ce83205ff8ff8a1a18119aad6376120ae35c36e783a984bc560cbf10e73fa5",
+      "所有路径存在": true,
+      "划分互斥": true
+    },
+    {
+      "数据集": "OxfordPets",
+      "目录": "/root/autodl-tmp/textconsistency/data/oxford_pets",
+      "类别数": 37,
+      "划分数量": {
+        "train": 2944,
+        "val": 736,
+        "test": 3669
+      },
+      "唯一划分图像数": 7349,
+      "划分SHA256": "d7f3ffe65b3919f95132e51422894ae18686b83c331fd8c0adcdc3dc2de6301e",
+      "所有路径存在": true,
+      "划分互斥": true
+    },
+    {
+      "数据集": "Food101",
+      "目录": "/root/autodl-tmp/textconsistency/data/food-101",
+      "类别数": 101,
+      "划分数量": {
+        "train": 50500,
+        "val": 20200,
+        "test": 30300
+      },
+      "唯一划分图像数": 101000,
+      "划分SHA256": "7c3d456c4f348255e1a363e0ea5118318936488f3ec20d83758e0ee67cb9037c",
+      "所有路径存在": true,
+      "划分互斥": true
+    }
+  ],
+  "归档": [],
+  "磁盘": {
+    "total": 53687091200,
+    "used": 25409679360,
+    "free": 28277411840
+  }
+}

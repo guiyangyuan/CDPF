@@ -1,8 +1,8 @@
 # TextConsistency：工作计划与当前进度
 
-最后更新：2026-09-16（Caltech101、OxfordPets、Food101 的冻结扩展队列已完成本机准备；下一步无卡补数据并核验，再开卡执行）。
+最后更新：2026-09-16（Caltech101、OxfordPets、Food101 已在服务器完成数据落盘和真实加载器三种子核验；下一步切换 GPU 执行冻结队列）。
 
-**新增三数据集已冻结，尚未产生新准确率。** 用户指定补 Caltech101、OxfordPets、Food101；本轮沿用固定均值概率融合，不设计新模块、不调 alpha。主方法固定 9 次训练与 36 次独立 Base/Novel 评估，Zero-shot 固定 6 次评估，CoCoOp 固定 9 次训练与 18 次评估；三个数据集、三个种子无论正负全部保留。旧 OxfordPets 结果来自 67,584 参数残差模型，不能混入本轮纯 2,048 参数 CoOp 主表，因此会按统一协议重跑。四个新中文入口和 6 项轻量测试均已通过；下一步在 AutoDL 无卡模式复核现有 OxfordPets，并下载 Caltech101 与约 5 GB 的 Food101。见[准备说明](reports/preparation/三数据集扩展验证-20260916/准备说明.md)、[冻结协议](reports/preparation/三数据集扩展验证-20260916/冻结协议.json)和[CPU核验](reports/preparation/三数据集扩展验证-20260916/CPU核验.json)。
+**新增三数据集已完成服务器数据准备，尚未产生新准确率。** 用户指定补 Caltech101、OxfordPets、Food101；本轮沿用固定均值概率融合，不设计新模块、不调 alpha。主方法固定 9 次训练与 36 次独立 Base/Novel 评估，Zero-shot 固定 6 次评估，CoCoOp 固定 9 次训练与 18 次评估；三个数据集、三个种子无论正负全部保留。Caltech101、OxfordPets、Food101 的固定划分分别为 4,128/1,649/2,465、2,944/736/3,669、50,500/20,200/30,300，所有路径存在且划分互斥；三个种子的真实 loader 16-shot 采样均通过。旧 OxfordPets 结果来自 67,584 参数残差模型，不能混入本轮纯 2,048 参数 CoOp 主表，因此会按统一协议重跑。下一步切换 GPU，按 Zero-shot、主方法、CoCoOp 的冻结顺序执行。见[服务器准备报告](reports/preparation/三数据集扩展验证-20260916/服务器准备报告.md)、[准备说明](reports/preparation/三数据集扩展验证-20260916/准备说明.md)和[冻结协议](reports/preparation/三数据集扩展验证-20260916/冻结协议.json)。
 
 **最新GPU标准基线已全部完成：CoCoOp五数据集。** 固定源码提交`2ded4b1`，使用CoCoOp标准ViT-B/16、16-shot、4个上下文token、`a photo of a`初始化、fp16、batch 1、10 epochs和seed 1/2/3。UCF101、DTD、FGVC-Aircraft、EuroSAT、OxfordFlowers共15次训练和30次Base/Novel独立重载，45条命令全部成功，总耗时98.03分钟。五数据集Base/Novel/HM分别为82.11/73.82/77.75、77.08/53.14/62.91、36.01/32.75/34.31、87.58/62.45/72.91、95.03/70.83/81.16，等权HM为65.81。
 
@@ -168,7 +168,7 @@
 | 五数据集投稿证据统一 | 已完成、无需GPU | 60行逐种子结果、20行方法汇总、五组配对区间和LaTeX主表自动生成；5/5数据集、15/15种子HM正增益 |
 | 五数据集Zero-shot CLIP标准基线 | 已完成、独立复核、备份并关机 | 10条Base/Novel推理全部成功；等权HM 59.45；25原始文件和10份日志核验通过；零检查点 |
 | 五数据集CoCoOp标准基线 | 五数据集三种子已完成、复核备份并关机 | 15训练/30评估全部成功；等权HM 65.81；主方法70.13，高+4.32pp且5/5数据集为正 |
-| Caltech101 / OxfordPets / Food101扩展 | 本机冻结准备完成，等待无卡数据阶段 | 主方法9训练/36评估、Zero-shot 6评估、CoCoOp 9训练/18评估；6项轻量测试通过；尚无新准确率 |
+| Caltech101 / OxfordPets / Food101扩展 | 服务器数据和真实加载器核验完成，等待 GPU 队列 | 三套固定划分路径/互斥检查通过，3数据集×3种子16-shot采样通过；主方法9训练/36评估、Zero-shot 6评估、CoCoOp 9训练/18评估；尚无新准确率 |
 | DTD / Aircraft ZIP 本机校验 | 已完成 | reports/preparation/dataset-archives.json |
 | UCF101 / DTD / Aircraft 服务器部署与预检 | 已完成 | ZIP 校验、固定划分、图像/描述覆盖、每类 16-shot、三种子采样均通过；见 ready.json |
 | 官方 CoOp 差异核查与独立诊断 | 本机、开卡后服务器均通过 | 无卡时期 SIGKILL 保留；开卡后完整模型诊断 logits/梯度/更新差均为0，见本批 start-evidence |

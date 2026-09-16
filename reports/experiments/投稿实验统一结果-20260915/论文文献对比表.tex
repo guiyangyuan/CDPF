@@ -1,0 +1,18 @@
+% 文献方法数值来自原论文；本文方法来自本仓库审计结果
+\begin{table*}[t]
+\centering
+\caption{Comparison with published base-to-novel results using CLIP ViT-B/16. Results marked $\dagger$ are reported by the corresponding papers and are not rerun in our codebase. Avg. is the unweighted mean of harmonic means over the five datasets.}
+\label{tab:published_comparison}
+\begin{tabular}{lcccccc}
+\toprule
+Method & UCF101 & DTD & Aircraft & EuroSAT & Flowers102 & Avg. \\
+\midrule
+CuPL$^{\dagger}$ & 76.40 & 61.30 & 33.20 & 61.80 & 76.10 & 61.76 \\
+CoCoOp$^{\dagger}$ & 77.64 & 64.85 & 27.74 & 71.21 & 81.71 & 64.63 \\
+KgCoOp$^{\dagger}$ & 79.65 & 64.35 & 34.83 & 73.48 & 83.65 & 67.19 \\
+MaPLe$^{\dagger}$ & 80.77 & 68.16 & 36.50 & \textbf{82.35} & 82.56 & 70.07 \\
+PromptSRC$^{\dagger}$ & \textbf{82.74} & \textbf{71.75} & \textbf{40.15} & 82.32 & \textbf{85.95} & \textbf{72.58} \\
+Ours & 79.47 & \underline{70.99} & \underline{38.46} & 76.65 & \underline{85.06} & \underline{70.13} \\
+\bottomrule
+\end{tabular}
+\end{table*}

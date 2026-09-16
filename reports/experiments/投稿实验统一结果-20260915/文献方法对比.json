@@ -1,0 +1,99 @@
+{
+  "状态": "通过",
+  "用途": "投稿文献定位；外部数字与本地实跑严格分栏，不宣称同代码同预算公平复现",
+  "数据集顺序": [
+    "UCF101",
+    "DTD",
+    "FGVC-Aircraft",
+    "EuroSAT",
+    "OxfordFlowers"
+  ],
+  "结果": [
+    {
+      "方法": "CuPL",
+      "UCF101": 76.4,
+      "DTD": 61.3,
+      "FGVC-Aircraft": 33.2,
+      "EuroSAT": 61.8,
+      "OxfordFlowers": 76.1,
+      "五数据集等权HM": 61.76,
+      "来源": "ProText（AAAI 2025）Table 3 对 CuPL 的 Base-to-Novel 实现",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/download/32444/34599",
+      "协议备注": "CuPL仅对Base使用LLM描述，Novel沿用zero-shot CLIP；与本文Novel也使用冻结描述的输入条件不同。"
+    },
+    {
+      "方法": "CoCoOp（论文报告）",
+      "UCF101": 77.64,
+      "DTD": 64.85,
+      "FGVC-Aircraft": 27.74,
+      "EuroSAT": 71.21,
+      "OxfordFlowers": 81.71,
+      "五数据集等权HM": 64.63,
+      "来源": "MaPLe（CVPR 2023）Table 3",
+      "url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Khattak_MaPLe_Multi-Modal_Prompt_Learning_CVPR_2023_paper.pdf",
+      "协议备注": "论文报告值，非本仓库复跑值。"
+    },
+    {
+      "方法": "KgCoOp",
+      "UCF101": 79.65,
+      "DTD": 64.35,
+      "FGVC-Aircraft": 34.83,
+      "EuroSAT": 73.48,
+      "OxfordFlowers": 83.65,
+      "五数据集等权HM": 67.19200000000001,
+      "来源": "PromptSRC（ICCV 2023）Table 1",
+      "url": "https://openaccess.thecvf.com/content/ICCV2023/html/Khattak_Self-regulating_Prompts_Foundational_Model_Adaptation_without_Forgetting_ICCV_2023_paper.html",
+      "协议备注": "论文报告值，非本仓库复跑值。"
+    },
+    {
+      "方法": "MaPLe",
+      "UCF101": 80.77,
+      "DTD": 68.16,
+      "FGVC-Aircraft": 36.5,
+      "EuroSAT": 82.35,
+      "OxfordFlowers": 82.56,
+      "五数据集等权HM": 70.068,
+      "来源": "MaPLe（CVPR 2023）Table 3",
+      "url": "https://openaccess.thecvf.com/content/CVPR2023/papers/Khattak_MaPLe_Multi-Modal_Prompt_Learning_CVPR_2023_paper.pdf",
+      "协议备注": "论文报告值，非本仓库复跑值。"
+    },
+    {
+      "方法": "PromptSRC",
+      "UCF101": 82.74,
+      "DTD": 71.75,
+      "FGVC-Aircraft": 40.15,
+      "EuroSAT": 82.32,
+      "OxfordFlowers": 85.95,
+      "五数据集等权HM": 72.582,
+      "来源": "PromptSRC（ICCV 2023）Table 1",
+      "url": "https://openaccess.thecvf.com/content/ICCV2023/html/Khattak_Self-regulating_Prompts_Foundational_Model_Adaptation_without_Forgetting_ICCV_2023_paper.html",
+      "协议备注": "论文报告值，非本仓库复跑值。"
+    },
+    {
+      "方法": "本文方法",
+      "UCF101": 79.47,
+      "DTD": 70.99,
+      "FGVC-Aircraft": 38.46,
+      "EuroSAT": 76.65,
+      "OxfordFlowers": 85.06,
+      "五数据集等权HM": 70.126,
+      "来源": "本仓库五数据集三种子审计结果",
+      "url": "统一结果.json",
+      "协议备注": "ViT-B/16、16-shot、20 epochs、seed 1/2/3；固定0.5概率融合。"
+    }
+  ],
+  "本文方法相对文献平均HM差值": {
+    "CuPL": 8.366000000000007,
+    "CoCoOp（论文报告）": 5.496000000000009,
+    "KgCoOp": 2.9339999999999975,
+    "MaPLe": 0.058000000000006935,
+    "PromptSRC": -2.455999999999989
+  },
+  "融合模块新增可训练参数": 0,
+  "整个模型可训练参数": 2048,
+  "效率证据": {
+    "batch64相对CoOp延迟增幅_百分比": 0.7411685601111717,
+    "固定描述类向量_MiB": 0.09765625
+  },
+  "结论": "本文方法平均HM高于CuPL、CoCoOp与KgCoOp，与MaPLe基本持平（+0.06pp），低于PromptSRC 2.46pp。"
+}

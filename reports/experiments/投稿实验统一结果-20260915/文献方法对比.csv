@@ -1,0 +1,7 @@
+﻿方法,UCF101,DTD,FGVC-Aircraft,EuroSAT,OxfordFlowers,五数据集等权HM,来源,url,协议备注
+CuPL,76.4,61.3,33.2,61.8,76.1,61.76,ProText（AAAI 2025）Table 3 对 CuPL 的 Base-to-Novel 实现,https://ojs.aaai.org/index.php/AAAI/article/download/32444/34599,CuPL仅对Base使用LLM描述，Novel沿用zero-shot CLIP；与本文Novel也使用冻结描述的输入条件不同。
+CoCoOp（论文报告）,77.64,64.85,27.74,71.21,81.71,64.63,MaPLe（CVPR 2023）Table 3,https://openaccess.thecvf.com/content/CVPR2023/papers/Khattak_MaPLe_Multi-Modal_Prompt_Learning_CVPR_2023_paper.pdf,论文报告值，非本仓库复跑值。
+KgCoOp,79.65,64.35,34.83,73.48,83.65,67.19200000000001,PromptSRC（ICCV 2023）Table 1,https://openaccess.thecvf.com/content/ICCV2023/html/Khattak_Self-regulating_Prompts_Foundational_Model_Adaptation_without_Forgetting_ICCV_2023_paper.html,论文报告值，非本仓库复跑值。
+MaPLe,80.77,68.16,36.5,82.35,82.56,70.068,MaPLe（CVPR 2023）Table 3,https://openaccess.thecvf.com/content/CVPR2023/papers/Khattak_MaPLe_Multi-Modal_Prompt_Learning_CVPR_2023_paper.pdf,论文报告值，非本仓库复跑值。
+PromptSRC,82.74,71.75,40.15,82.32,85.95,72.582,PromptSRC（ICCV 2023）Table 1,https://openaccess.thecvf.com/content/ICCV2023/html/Khattak_Self-regulating_Prompts_Foundational_Model_Adaptation_without_Forgetting_ICCV_2023_paper.html,论文报告值，非本仓库复跑值。
+本文方法,79.47,70.99,38.46,76.65,85.06,70.126,本仓库五数据集三种子审计结果,统一结果.json,ViT-B/16、16-shot、20 epochs、seed 1/2/3；固定0.5概率融合。

@@ -95,6 +95,7 @@ class 剩余两数据集准备测试(unittest.TestCase):
             with zipfile.ZipFile(archive, "w") as bundle:
                 for partition, payload in nested_archives.items():
                     bundle.writestr(f"stanford_cars/extra_stuff/{partition}.tgz", payload)
+                    bundle.writestr(f"__MACOSX/stanford_cars/extra_stuff/._{partition}.tgz", b"apple-double")
             module.数据集["StanfordCars"] = {
                 "目录": "stanford_cars", "图像目录": ".", "划分文件": "split.json",
                 "划分SHA256": split_sha, "划分数量": {"train": 1, "val": 0, "test": 1},

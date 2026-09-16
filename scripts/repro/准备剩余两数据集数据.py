@@ -161,7 +161,7 @@ def 准备StanfordCars(data_root: Path, archive_root: Path, keep_archive: bool) 
     extracted = 0
     with zipfile.ZipFile(archive) as bundle:
         for item in bundle.infolist():
-            if item.filename.endswith(("cars_train.tgz", "cars_test.tgz")):
+            if Path(item.filename).name in {"cars_train.tgz", "cars_test.tgz"}:
                 extracted += _提取ZIP内TGZ(bundle, item, dataset_root, missing)
                 continue
             relative = _zip相对图像路径(item.filename)

@@ -1,0 +1,12 @@
+{
+  "状态": "已下载并校验",
+  "服务器归档": "/root/autodl-tmp/textconsistency/archives/统一推理效率-20260916-d07157d-UCF101-seed1-v2.tar.gz",
+  "本地归档": "outputs/统一推理效率-20260916-d07157d/统一推理效率-20260916-d07157d-UCF101-seed1-v2.tar.gz",
+  "归档SHA256": "761e0b1c53dd28ed71e4cf46f6a7661bedcb37d9ca43b4e1af324c9dda4a28b3",
+  "归档内文件": [
+    "run_manifest.json",
+    "effective_config.yaml",
+    "效率实测结果.json"
+  ],
+  "说明": "完整归档保存在本机outputs（被Git忽略）；GitHub保存结果JSON、审计和报告。"
+}

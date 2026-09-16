@@ -312,7 +312,10 @@ def benchmark(args: argparse.Namespace) -> dict[str, Any]:
     if not all(math.isfinite(value) for method in results.values() for batch in method.values()
                for value in batch.values() if isinstance(value, float)):
         raise ValueError("结果中包含非有限数字")
-    output_dir.mkdir(parents=True)
+    # Dassl's logger creates the configured output directory while the model is
+    # constructed. The path was verified fresh above, so reusing that same
+    # framework-created directory here is expected and safe.
+    output_dir.mkdir(parents=True, exist_ok=True)
     _atomic_json(output_dir / "效率实测结果.json", payload)
     return payload
 

@@ -51,6 +51,7 @@ def make_trainer(output: Path) -> CoCoOp:
     trainer = CoCoOp.__new__(CoCoOp)
     TrainerBase.__init__(trainer)
     trainer.cfg = cfg
+    trainer.device = torch.device("cpu")
     trainer.dm = SimpleNamespace(dataset=SimpleNamespace(classnames=["red object", "blue object", "green object"]))
     trainer.check_cfg(cfg)
     with patch("trainers.cocoop.load_clip_to_cpu", side_effect=tiny_clip):

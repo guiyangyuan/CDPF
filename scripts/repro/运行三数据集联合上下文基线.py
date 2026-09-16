@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""生成、执行和汇总新增三数据集 CoCoOp 标准基线队列。"""
+"""生成、执行和汇总扩展数据集 CoCoOp 标准基线队列。"""
 
 from __future__ import annotations
 
@@ -18,14 +18,28 @@ import time
 from pathlib import Path
 
 
-数据集 = [
+新增三数据集 = [
     ("Caltech101", "caltech101.yaml", "caltech101", "新增三数据集"),
     ("OxfordPets", "oxford_pets.yaml", "oxford_pets", "新增三数据集"),
     ("Food101", "food101.yaml", "food101", "新增三数据集"),
 ]
-数据目录 = {"Caltech101": "caltech-101", "OxfordPets": "oxford_pets", "Food101": "food-101"}
+剩余两数据集 = [
+    ("StanfordCars", "stanford_cars.yaml", "stanford_cars", "剩余两数据集"),
+    ("SUN397", "sun397.yaml", "sun397", "剩余两数据集"),
+]
+套件 = {"新增三数据集": 新增三数据集, "剩余两数据集": 剩余两数据集}
+协议数据集 = {
+    "投稿CoCoOp新增三数据集标准基线-v1": 新增三数据集,
+    "投稿CoCoOp剩余两数据集标准基线-v1": 剩余两数据集,
+}
+数据目录 = {
+    "Caltech101": "caltech-101",
+    "OxfordPets": "oxford_pets",
+    "Food101": "food-101",
+    "StanfordCars": "stanford_cars",
+    "SUN397": "sun397",
+}
 种子 = (1, 2, 3)
-协议名称 = "投稿CoCoOp新增三数据集标准基线-v1"
 上游提交 = "ff61507c790454bce7c5052c3ac39e60772f1f89"
 上游训练器摘要 = "90c7b866d59bce0fd825fa099ab03606d72ef9965bbf5d9cee20729728d1bc84"
 上游配置摘要 = "3294d36c623187c137a2bf43ba6eefd7ccbf50d14b7183fae95731dcb2aa44c1"
@@ -54,7 +68,7 @@ def 调和平均(base: float, novel: float) -> float:
     return 0.0 if base + novel == 0 else 2.0 * base * novel / (base + novel)
 
 
-def 源码清单(source_root: Path) -> list[Path]:
+def 源码清单(source_root: Path, dataset_rows: list[tuple[str, str, str, str]]) -> list[Path]:
     files = [
         Path("train.py"),
         Path("trainers/cocoop.py"),
@@ -65,7 +79,7 @@ def 源码清单(source_root: Path) -> list[Path]:
         Path("Dassl.pytorch/dassl/utils/torchtools.py"),
         Path("scripts/repro/运行三数据集联合上下文基线.py"),
     ]
-    for _, filename, module_name, _ in 数据集:
+    for _, filename, module_name, _ in dataset_rows:
         files.append(Path("configs/datasets") / filename)
         files.append(Path("datasets") / f"{module_name}.py")
     missing = [path.as_posix() for path in files if not (source_root / path).is_file()]
@@ -89,13 +103,22 @@ def 固定选项() -> list[str]:
     ]
 
 
-def 生成计划(source_root: Path, data_root: Path, output_root: Path, python: Path) -> dict:
+def 生成计划(
+    source_root: Path,
+    data_root: Path,
+    output_root: Path,
+    python: Path,
+    dataset_rows: list[tuple[str, str, str, str]] = 新增三数据集,
+    protocol: str = "投稿CoCoOp新增三数据集标准基线-v1",
+) -> dict:
     source_root = source_root.resolve()
     data_root = data_root.resolve()
     output_root = output_root.resolve()
     trainer_config = source_root / "configs/trainers/CoCoOp/vit_b16_c4_ep10_batch1_ctxv1.yaml"
     runs = []
-    for dataset, dataset_config, _, stage in 数据集:
+    if 协议数据集.get(protocol) != dataset_rows:
+        raise ValueError("协议与数据集套件不匹配")
+    for dataset, dataset_config, _, stage in dataset_rows:
         for seed in 种子:
             run_root = output_root / stage / dataset / f"种子{seed}"
             training = run_root / "训练"
@@ -135,7 +158,7 @@ def 生成计划(source_root: Path, data_root: Path, output_root: Path, python: 
                 }
             )
     return {
-        "协议": 协议名称,
+        "协议": protocol,
         "状态": "待执行",
         "方法": "CoCoOp（Conditional Context Optimization）",
         "上游": {
@@ -162,9 +185,9 @@ def 生成计划(source_root: Path, data_root: Path, output_root: Path, python: 
         "输出目录": str(output_root),
         "Python": str(python),
         "预期CLIP_SHA256": 预期CLIP摘要,
-        "源码文件SHA256": {path.as_posix(): sha256(source_root / path) for path in 源码清单(source_root)},
+        "源码文件SHA256": {path.as_posix(): sha256(source_root / path) for path in 源码清单(source_root, dataset_rows)},
         "阶段": {
-            "新增三数据集": ["Caltech101", "OxfordPets", "Food101"],
+            dataset_rows[0][3]: [name for name, _, _, _ in dataset_rows],
         },
         "运行数": len(runs),
         "命令数": len(runs) * 3,
@@ -173,7 +196,11 @@ def 生成计划(source_root: Path, data_root: Path, output_root: Path, python: 
 
 
 def 检查计划身份(plan: dict, require_runtime: bool) -> tuple[Path, Path, Path]:
-    if plan.get("协议") != 协议名称 or plan.get("运行数") != 9 or plan.get("命令数") != 27:
+    dataset_rows = 协议数据集.get(plan.get("协议"))
+    if dataset_rows is None:
+        raise ValueError("未知CoCoOp协议")
+    expected_runs = len(dataset_rows) * len(种子)
+    if plan.get("运行数") != expected_runs or plan.get("命令数") != expected_runs * 3:
         raise ValueError("执行计划身份、运行数或命令数错误")
     if plan.get("固定协议") != {
         "backbone": "CLIP ViT-B/16",
@@ -192,13 +219,13 @@ def 检查计划身份(plan: dict, require_runtime: bool) -> tuple[Path, Path, P
     source_root = Path(plan["源码目录"])
     data_root = Path(plan["数据目录"])
     output_root = Path(plan["输出目录"])
-    actual = {path.as_posix(): sha256(source_root / path) for path in 源码清单(source_root)}
+    actual = {path.as_posix(): sha256(source_root / path) for path in 源码清单(source_root, dataset_rows)}
     if actual != plan["源码文件SHA256"]:
         raise ValueError("源码或配置在计划生成后发生变化")
     if require_runtime:
         if not data_root.is_dir():
             raise FileNotFoundError(f"数据目录不存在：{data_root}")
-        missing = [数据目录[name] for name, _, _, _ in 数据集 if not (data_root / 数据目录[name]).is_dir()]
+        missing = [数据目录[name] for name, _, _, _ in dataset_rows if not (data_root / 数据目录[name]).is_dir()]
         if missing:
             raise FileNotFoundError(f"缺少数据集目录：{missing}")
         clip_path = source_root / "clip/ViT-B-16.pt"
@@ -240,9 +267,9 @@ def 阶段运行(plan: dict, stage: str) -> list[dict]:
     return [item for item in plan["运行"] if item["阶段"] == stage]
 
 
-def 汇总逐种子(rows: list[dict]) -> list[dict]:
+def 汇总逐种子(rows: list[dict], dataset_rows: list[tuple[str, str, str, str]]) -> list[dict]:
     summaries = []
-    for dataset in [name for name, _, _, _ in 数据集 if any(row["数据集"] == name for row in rows)]:
+    for dataset in [name for name, _, _, _ in dataset_rows if any(row["数据集"] == name for row in rows)]:
         group = sorted((row for row in rows if row["数据集"] == dataset), key=lambda row: row["种子"])
         if [row["种子"] for row in group] != [1, 2, 3]:
             raise ValueError(f"三种子结果不完整：{dataset}")
@@ -267,11 +294,12 @@ def 汇总逐种子(rows: list[dict]) -> list[dict]:
     return summaries
 
 
-def 写阶段结果(stage_root: Path, stage: str, rows: list[dict], status: dict) -> None:
-    summaries = 汇总逐种子(rows)
+def 写阶段结果(stage_root: Path, stage: str, rows: list[dict], status: dict, plan: dict) -> None:
+    dataset_rows = 协议数据集[plan["协议"]]
+    summaries = 汇总逐种子(rows, dataset_rows)
     result = {
         "状态": "通过",
-        "协议": 协议名称,
+        "协议": plan["协议"],
         "阶段": stage,
         "逐种子": rows,
         "数据集汇总": summaries,
@@ -315,7 +343,10 @@ def 执行阶段(plan_path: Path, stage: str) -> int:
     if not torch.cuda.is_available():
         raise RuntimeError("没有可用CUDA，拒绝创建输出或执行训练")
     runs = 阶段运行(plan, stage)
-    expected_runs = 9
+    dataset_rows = 协议数据集[plan["协议"]]
+    if stage not in plan["阶段"]:
+        raise ValueError(f"阶段不属于执行计划：{stage}")
+    expected_runs = len(dataset_rows) * len(种子)
     if len(runs) != expected_runs:
         raise ValueError(f"阶段运行数错误：{len(runs)}")
     stage_root = output_root / stage
@@ -325,7 +356,7 @@ def 执行阶段(plan_path: Path, stage: str) -> int:
     shutil.copy2(plan_path, stage_root / "执行计划.json")
     status = {
         "状态": "运行中",
-        "协议": 协议名称,
+        "协议": plan["协议"],
         "阶段": stage,
         "GPU": torch.cuda.get_device_name(0),
         "开始时间Unix": time.time(),
@@ -399,13 +430,13 @@ def 执行阶段(plan_path: Path, stage: str) -> int:
                     "新类别测试日志SHA256": metrics["new"]["日志SHA256"],
                 }
             )
-        if {path.as_posix(): sha256(source_root / path) for path in 源码清单(source_root)} != plan["源码文件SHA256"]:
+        if {path.as_posix(): sha256(source_root / path) for path in 源码清单(source_root, dataset_rows)} != plan["源码文件SHA256"]:
             raise ValueError("执行期间源码或配置发生变化")
         status["状态"] = "完成"
         status["结束时间Unix"] = time.time()
         status["总耗时秒"] = status["结束时间Unix"] - status["开始时间Unix"]
         原子写json(stage_root / "执行状态.json", status)
-        写阶段结果(stage_root, stage, rows, status)
+        写阶段结果(stage_root, stage, rows, status, plan)
         写文件清单(stage_root)
     except Exception:
         if status.get("状态") == "运行中":
@@ -420,9 +451,10 @@ def 执行阶段(plan_path: Path, stage: str) -> int:
 def 最终汇总(plan_path: Path) -> int:
     plan = json.loads(plan_path.read_text(encoding="utf-8"))
     _, _, output_root = 检查计划身份(plan, require_runtime=False)
+    dataset_rows = 协议数据集[plan["协议"]]
     rows = []
     stage_evidence = []
-    for stage in ("新增三数据集",):
+    for stage in plan["阶段"]:
         result_path = output_root / stage / "阶段结果.json"
         result = json.loads(result_path.read_text(encoding="utf-8"))
         if result.get("状态") != "通过" or result.get("阶段") != stage:
@@ -430,10 +462,10 @@ def 最终汇总(plan_path: Path) -> int:
         rows.extend(result["逐种子"])
         stage_evidence.append({"阶段": stage, "结果SHA256": sha256(result_path)})
     identities = {(row["数据集"], row["种子"]) for row in rows}
-    expected = {(dataset, seed) for dataset, _, _, _ in 数据集 for seed in 种子}
-    if len(rows) != 9 or identities != expected:
-        raise ValueError("新增三数据集三种子结果不完整或存在重复")
-    summaries = 汇总逐种子(rows)
+    expected = {(dataset, seed) for dataset, _, _, _ in dataset_rows for seed in 种子}
+    if len(rows) != len(expected) or identities != expected:
+        raise ValueError("扩展数据集三种子结果不完整或存在重复")
+    summaries = 汇总逐种子(rows, dataset_rows)
     cross = {
         "数据集等权Base均值": statistics.mean(row["Base均值"] for row in summaries),
         "数据集等权Novel均值": statistics.mean(row["Novel均值"] for row in summaries),
@@ -441,19 +473,20 @@ def 最终汇总(plan_path: Path) -> int:
     }
     payload = {
         "状态": "通过",
-        "协议": 协议名称,
+        "协议": plan["协议"],
         "逐种子": rows,
         "数据集汇总": summaries,
         "跨数据集汇总": cross,
         "阶段证据": stage_evidence,
     }
-    原子写json(output_root / "三数据集最终结果.json", payload)
-    with (output_root / "三数据集最终结果.csv").open("w", encoding="utf-8", newline="") as file:
+    prefix = "三数据集" if len(dataset_rows) == 3 else "两数据集"
+    原子写json(output_root / f"{prefix}最终结果.json", payload)
+    with (output_root / f"{prefix}最终结果.csv").open("w", encoding="utf-8", newline="") as file:
         fields = ["数据集", "种子数", "Base均值", "Base样本标准差", "Novel均值", "Novel样本标准差", "HM_均值计算", "种子HM均值", "种子HM样本标准差"]
         writer = csv.DictWriter(file, fieldnames=fields, extrasaction="ignore", lineterminator="\n")
         writer.writeheader()
         writer.writerows(summaries)
-    print(json.dumps({"状态": "通过", "数据集数": 3, "逐种子行数": 9, "输出目录": str(output_root)}, ensure_ascii=False))
+    print(json.dumps({"状态": "通过", "数据集数": len(dataset_rows), "逐种子行数": len(rows), "输出目录": str(output_root)}, ensure_ascii=False))
     return 0
 
 
@@ -466,9 +499,10 @@ def main() -> int:
     plan_parser.add_argument("--output-root", type=Path, required=True)
     plan_parser.add_argument("--python", type=Path, default=Path(sys.executable))
     plan_parser.add_argument("--plan-path", type=Path, required=True)
+    plan_parser.add_argument("--suite", choices=tuple(套件), default="新增三数据集")
     run_parser = subparsers.add_parser("执行阶段")
     run_parser.add_argument("--plan-path", type=Path, required=True)
-    run_parser.add_argument("--stage", choices=["新增三数据集"], required=True)
+    run_parser.add_argument("--stage", choices=list(套件), required=True)
     summary_parser = subparsers.add_parser("汇总")
     summary_parser.add_argument("--plan-path", type=Path, required=True)
     args = parser.parse_args()
@@ -476,7 +510,13 @@ def main() -> int:
     if args.command == "计划":
         if args.output_root.exists():
             raise FileExistsError(f"计划输出目录必须不存在：{args.output_root}")
-        payload = 生成计划(args.source_root, args.data_root, args.output_root, args.python)
+        dataset_rows = 套件[args.suite]
+        protocol = (
+            "投稿CoCoOp新增三数据集标准基线-v1"
+            if args.suite == "新增三数据集"
+            else "投稿CoCoOp剩余两数据集标准基线-v1"
+        )
+        payload = 生成计划(args.source_root, args.data_root, args.output_root, args.python, dataset_rows, protocol)
         原子写json(args.plan_path, payload)
         print(json.dumps({"状态": "计划完成", "运行数": payload["运行数"], "命令数": payload["命令数"], "计划": str(args.plan_path)}, ensure_ascii=False))
         return 0

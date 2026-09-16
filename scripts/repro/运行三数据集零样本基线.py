@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""生成或执行新增三数据集 Zero-shot CLIP 基线队列，并从日志独立汇总。"""
+"""生成或执行扩展数据集 Zero-shot CLIP 基线队列，并从日志独立汇总。"""
 
 from __future__ import annotations
 
@@ -16,11 +16,20 @@ import time
 from pathlib import Path
 
 
-数据集 = [
+新增三数据集 = [
     ("Caltech101", "caltech101.yaml"),
     ("OxfordPets", "oxford_pets.yaml"),
     ("Food101", "food101.yaml"),
 ]
+剩余两数据集 = [
+    ("StanfordCars", "stanford_cars.yaml"),
+    ("SUN397", "sun397.yaml"),
+]
+套件 = {"新增三数据集": 新增三数据集, "剩余两数据集": 剩余两数据集}
+协议数据集 = {
+    "投稿Zero-shot-CLIP新增三数据集-v1": 新增三数据集,
+    "投稿Zero-shot-CLIP剩余两数据集-v1": 剩余两数据集,
+}
 分支 = [("base", "基础测试"), ("new", "新类别测试")]
 预期CLIP摘要 = "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f"
 准确率模式 = re.compile(r"^\* accuracy:\s*([0-9.]+)%$", re.MULTILINE)
@@ -47,27 +56,36 @@ def 调和平均(base: float, novel: float) -> float:
     return 0.0 if base + novel == 0 else 2.0 * base * novel / (base + novel)
 
 
-def 源码清单(source_root: Path) -> list[Path]:
+def 源码清单(source_root: Path, dataset_rows: list[tuple[str, str]]) -> list[Path]:
     files = [
         Path("train.py"),
         Path("trainers/zsclip.py"),
         Path("trainers/coop.py"),
         Path("configs/repro/零样本基线.yaml"),
     ]
-    files.extend(Path("configs/datasets") / filename for _, filename in 数据集)
+    files.extend(Path("configs/datasets") / filename for _, filename in dataset_rows)
     missing = [str(path) for path in files if not (source_root / path).is_file()]
     if missing:
         raise FileNotFoundError(f"缺少执行文件：{missing}")
     return files
 
 
-def 生成计划(source_root: Path, data_root: Path, output_root: Path, python: Path) -> dict:
+def 生成计划(
+    source_root: Path,
+    data_root: Path,
+    output_root: Path,
+    python: Path,
+    dataset_rows: list[tuple[str, str]] = 新增三数据集,
+    protocol: str = "投稿Zero-shot-CLIP新增三数据集-v1",
+) -> dict:
     source_root = source_root.resolve()
     data_root = data_root.resolve()
     output_root = output_root.resolve()
     common_config = source_root / "configs/repro/零样本基线.yaml"
     commands = []
-    for dataset, filename in 数据集:
+    if 协议数据集.get(protocol) != dataset_rows:
+        raise ValueError("协议与数据集套件不匹配")
+    for dataset, filename in dataset_rows:
         for split, split_name in 分支:
             result_dir = output_root / dataset / split_name
             command = [
@@ -103,17 +121,17 @@ def 生成计划(source_root: Path, data_root: Path, output_root: Path, python: 
                 }
             )
     return {
-        "协议": "投稿Zero-shot-CLIP新增三数据集-v1",
+        "协议": protocol,
         "状态": "待执行",
         "源码目录": str(source_root),
         "数据目录": str(data_root),
         "输出目录": str(output_root),
         "Python": str(python),
         "方法": "ZeroshotCLIP，单一数据集模板，冻结CLIP ViT-B/16",
-        "数据集": [name for name, _ in 数据集],
+        "数据集": [name for name, _ in dataset_rows],
         "分支": [split for split, _ in 分支],
         "命令数": len(commands),
-        "源码文件SHA256": {path.as_posix(): sha256(source_root / path) for path in 源码清单(source_root)},
+        "源码文件SHA256": {path.as_posix(): sha256(source_root / path) for path in 源码清单(source_root, dataset_rows)},
         "预期CLIP_SHA256": 预期CLIP摘要,
         "命令": commands,
     }
@@ -122,9 +140,12 @@ def 生成计划(source_root: Path, data_root: Path, output_root: Path, python: 
 def 检查计划身份(plan: dict) -> tuple[Path, Path]:
     source_root = Path(plan["源码目录"])
     output_root = Path(plan["输出目录"])
-    if plan.get("协议") != "投稿Zero-shot-CLIP新增三数据集-v1" or plan.get("命令数") != 6:
+    dataset_rows = 协议数据集.get(plan.get("协议"))
+    if dataset_rows is None or plan.get("命令数") != len(dataset_rows) * len(分支):
         raise ValueError("执行计划身份或命令数错误")
-    actual = {path.as_posix(): sha256(source_root / path) for path in 源码清单(source_root)}
+    if plan.get("数据集") != [name for name, _ in dataset_rows]:
+        raise ValueError("执行计划数据集顺序错误")
+    actual = {path.as_posix(): sha256(source_root / path) for path in 源码清单(source_root, dataset_rows)}
     if actual != plan["源码文件SHA256"]:
         raise ValueError("源码或配置在计划生成后发生变化")
     clip_path = source_root / "clip/ViT-B-16.pt"
@@ -159,7 +180,9 @@ def 解析日志(path: Path) -> dict:
 
 
 def 生成结果(plan: dict, status: dict, output_root: Path) -> dict:
-    if status.get("状态") != "完成" or status.get("已完成命令") != 6:
+    dataset_rows = 协议数据集[plan["协议"]]
+    expected_commands = len(dataset_rows) * len(分支)
+    if status.get("状态") != "完成" or status.get("已完成命令") != expected_commands:
         raise ValueError("执行状态未完成")
     rows = []
     by_dataset: dict[str, dict[str, dict]] = {}
@@ -171,10 +194,10 @@ def 生成结果(plan: dict, status: dict, output_root: Path) -> dict:
         row = {"数据集": item["数据集"], "分支": item["分支"], **metrics}
         rows.append(row)
         by_dataset.setdefault(item["数据集"], {})[item["分支"]] = metrics
-    if len(rows) != 6 or any(set(value) != {"base", "new"} for value in by_dataset.values()):
-        raise ValueError("新增三数据集Base/Novel结果不完整")
+    if len(rows) != expected_commands or any(set(value) != {"base", "new"} for value in by_dataset.values()):
+        raise ValueError("扩展数据集Base/Novel结果不完整")
     summaries = []
-    for dataset, _ in 数据集:
+    for dataset, _ in dataset_rows:
         base = by_dataset[dataset]["base"]["复算准确率"]
         novel = by_dataset[dataset]["new"]["复算准确率"]
         summaries.append({"数据集": dataset, "Base": base, "Novel": novel, "HM": 调和平均(base, novel)})
@@ -185,8 +208,8 @@ def 生成结果(plan: dict, status: dict, output_root: Path) -> dict:
         "结果": summaries,
         "逐分支复算": rows,
         "检查": {
-            "执行命令完成": 6,
-            "结果分支": 6,
+            "执行命令完成": expected_commands,
+            "结果分支": expected_commands,
             "训练检查点数量": 0,
             "源码计划前后相同": True,
             "CLIP_SHA256": 预期CLIP摘要,
@@ -201,7 +224,7 @@ def 写结果文件(result: dict, output_root: Path) -> None:
         writer.writeheader()
         writer.writerows(result["结果"])
     lines = [
-        "# 新增三数据集 Zero-shot CLIP 基线结果",
+        "# 扩展数据集 Zero-shot CLIP 基线结果",
         "",
         "方法为冻结 OpenAI CLIP ViT-B/16 与各数据集单一标准模板；每个 Base/Novel 分支只评估一次，不训练、不选择种子、不生成检查点。",
         "",
@@ -233,6 +256,7 @@ def 写文件清单(output_root: Path) -> None:
 def 执行(plan_path: Path) -> int:
     plan = json.loads(plan_path.read_text(encoding="utf-8"))
     source_root, output_root = 检查计划身份(plan)
+    expected_commands = plan["命令数"]
     if output_root.exists():
         raise FileExistsError(f"输出目录必须不存在：{output_root}")
 
@@ -248,7 +272,7 @@ def 执行(plan_path: Path) -> int:
         "状态": "运行中",
         "开始时间Unix": time.time(),
         "GPU": gpu,
-        "总命令": 6,
+        "总命令": expected_commands,
         "已完成命令": 0,
         "命令": [],
     }
@@ -312,6 +336,7 @@ def main() -> int:
     plan_parser.add_argument("--output-root", type=Path, required=True)
     plan_parser.add_argument("--python", type=Path, default=Path(sys.executable))
     plan_parser.add_argument("--plan-path", type=Path, required=True)
+    plan_parser.add_argument("--suite", choices=tuple(套件), default="新增三数据集")
     execute_parser = subparsers.add_parser("执行")
     execute_parser.add_argument("--plan-path", type=Path, required=True)
     args = parser.parse_args()
@@ -319,7 +344,13 @@ def main() -> int:
     if args.command == "计划":
         if args.output_root.exists():
             raise FileExistsError(f"计划输出目录必须不存在：{args.output_root}")
-        payload = 生成计划(args.source_root, args.data_root, args.output_root, args.python)
+        dataset_rows = 套件[args.suite]
+        protocol = (
+            "投稿Zero-shot-CLIP新增三数据集-v1"
+            if args.suite == "新增三数据集"
+            else "投稿Zero-shot-CLIP剩余两数据集-v1"
+        )
+        payload = 生成计划(args.source_root, args.data_root, args.output_root, args.python, dataset_rows, protocol)
         原子写json(args.plan_path, payload)
         print(json.dumps({"状态": "计划完成", "命令数": payload["命令数"], "计划": str(args.plan_path)}, ensure_ascii=False))
         return 0

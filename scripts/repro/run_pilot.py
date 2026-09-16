@@ -27,6 +27,8 @@ DATASETS = {
     'food101': {'name': 'Food101', 'config': '扩展验证.yaml'},
     'oxford_flowers': {'name': 'OxfordFlowers', 'config': '扩展验证.yaml'},
     'eurosat': {'name': 'EuroSAT', 'config': '扩展验证.yaml'},
+    'stanford_cars': {'name': 'StanfordCars', 'config': '扩展验证.yaml'},
+    'sun397': {'name': 'SUN397', 'config': '扩展验证.yaml'},
 }
 
 

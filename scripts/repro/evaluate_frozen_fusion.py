@@ -35,6 +35,8 @@ DATASETS = {
     "food101": ("Food101", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
     "oxford_flowers": ("OxfordFlowers", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
     "eurosat": ("EuroSAT", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
+    "stanford_cars": ("StanfordCars", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
+    "sun397": ("SUN397", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
 }
 EXPECTED_SIGNATURE = {
     "format": 2,

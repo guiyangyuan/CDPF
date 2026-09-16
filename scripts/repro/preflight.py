@@ -17,6 +17,8 @@ from datasets.oxford_pets import OxfordPets
 from datasets.food101 import Food101
 from datasets.oxford_flowers import OxfordFlowers
 from datasets.eurosat import EuroSAT
+from datasets.stanford_cars import StanfordCars
+from datasets.sun397 import SUN397
 from train import extend_cfg
 from trainers.textconsistency_common import TEMPLATE_FILES, description_rows, sha256_file
 from trainers.textconsistency_runtime import sample_digest
@@ -35,6 +37,10 @@ DATASETS = {
                        'image_dir': 'jpg', 'split': 'split_zhou_OxfordFlowers.json'},
     'eurosat': {'name': 'EuroSAT', 'loader': EuroSAT, 'dir': 'eurosat',
                 'image_dir': '2750', 'split': 'split_zhou_EuroSAT.json'},
+    'stanford_cars': {'name': 'StanfordCars', 'loader': StanfordCars, 'dir': 'stanford_cars',
+                      'image_dir': '.', 'split': 'split_zhou_StanfordCars.json'},
+    'sun397': {'name': 'SUN397', 'loader': SUN397, 'dir': 'sun397',
+               'image_dir': 'SUN397', 'split': 'split_zhou_SUN397.json'},
 }
 
 

@@ -58,6 +58,30 @@ class 三数据集扩展测试(unittest.TestCase):
             for split in ("base", "new")
         })
 
+    def test_剩余两数据集三套计划固定且完整(self):
+        main = 加载模块("运行三数据集主方法.py", "剩余两数据集主方法")
+        zero = 加载模块("运行三数据集零样本基线.py", "剩余两数据集零样本")
+        cocoop = 加载模块("运行三数据集联合上下文基线.py", "剩余两数据集联合上下文")
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            main_plan = main.生成计划(
+                root / "data", root / "main", Path("python"), main.剩余两数据集,
+                "投稿主方法剩余两数据集冻结扩展-v1",
+            )
+            zero_plan = zero.生成计划(
+                ROOT, root / "data", root / "zero", Path("python"), zero.剩余两数据集,
+                "投稿Zero-shot-CLIP剩余两数据集-v1",
+            )
+            cocoop_plan = cocoop.生成计划(
+                ROOT, root / "data", root / "cocoop", Path("python"), cocoop.剩余两数据集,
+                "投稿CoCoOp剩余两数据集标准基线-v1",
+            )
+        self.assertEqual(main_plan["数据集"], ["StanfordCars", "SUN397"])
+        self.assertEqual((main_plan["训练数"], main_plan["内部命令数"]), (6, 32))
+        self.assertEqual((zero_plan["数据集"], zero_plan["命令数"]), (["StanfordCars", "SUN397"], 4))
+        self.assertEqual((cocoop_plan["运行数"], cocoop_plan["命令数"]), (6, 18))
+        self.assertEqual(list(cocoop_plan["阶段"]), ["剩余两数据集"])
+
     def test_三个入口均接入主方法配置与描述文件(self):
         run_pilot = (ROOT / "scripts/repro/run_pilot.py").read_text(encoding="utf-8")
         evaluator = (ROOT / "scripts/repro/evaluate_frozen_fusion.py").read_text(encoding="utf-8")

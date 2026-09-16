@@ -1,0 +1,23 @@
+\begin{table*}[t]
+\centering
+\caption{Base-to-novel generalization on eight datasets with CLIP ViT-B/16. Values are percentages. Our method uses a fixed 0.5 probability fusion and adds no trainable parameters to the CoOp learner.}
+\label{tab:eight-dataset-main}
+\small
+\setlength{\tabcolsep}{4.2pt}
+\begin{tabular}{lrrrrr}
+\toprule
+Dataset & Zero-shot HM & CoOp HM & CoCoOp HM & Ours HM & $\Delta$ vs. CoCoOp \\
+\midrule
+UCF101        & 74.49 & 74.42 & 77.75 & \textbf{79.47} & +1.73 \\
+DTD           & 56.68 & 63.79 & 62.91 & \textbf{70.99} & +8.08 \\
+FGVC-Aircraft & 31.30 & 34.26 & 34.31 & \textbf{38.46} & +4.15 \\
+EuroSAT       & 60.33 & 67.52 & 72.91 & \textbf{76.65} & +3.74 \\
+Flowers102    & 74.46 & 81.07 & 81.16 & \textbf{85.06} & +3.89 \\
+Caltech101    & 95.61 & 95.95 & 95.44 & \textbf{96.09} & +0.64 \\
+OxfordPets    & 94.15 & 96.39 & 96.46 & \textbf{96.63} & +0.16 \\
+Food101       & 90.59 & 90.51 & 90.89 & \textbf{91.30} & +0.41 \\
+\midrule
+Average       & 72.20 & 75.49 & 76.48 & \textbf{79.33} & +2.85 \\
+\bottomrule
+\end{tabular}
+\end{table*}

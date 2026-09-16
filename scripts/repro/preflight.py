@@ -13,6 +13,8 @@ from datasets.ucf101 import UCF101
 from datasets.dtd import DescribableTextures
 from datasets.fgvc_aircraft import FGVCAircraft
 from datasets.caltech101 import Caltech101
+from datasets.oxford_pets import OxfordPets
+from datasets.food101 import Food101
 from datasets.oxford_flowers import OxfordFlowers
 from datasets.eurosat import EuroSAT
 from train import extend_cfg
@@ -25,6 +27,10 @@ DATASETS = {
     'fgvc_aircraft': {'name': 'FGVCAircraft', 'loader': FGVCAircraft, 'dir': 'fgvc_aircraft', 'image_dir': 'images'},
     'caltech101': {'name': 'Caltech101', 'loader': Caltech101, 'dir': 'caltech-101',
                    'image_dir': '101_ObjectCategories', 'split': 'split_zhou_Caltech101.json'},
+    'oxford_pets': {'name': 'OxfordPets', 'loader': OxfordPets, 'dir': 'oxford_pets',
+                    'image_dir': 'images', 'split': 'split_zhou_OxfordPets.json'},
+    'food101': {'name': 'Food101', 'loader': Food101, 'dir': 'food-101',
+                'image_dir': 'images', 'split': 'split_zhou_Food101.json'},
     'oxford_flowers': {'name': 'OxfordFlowers', 'loader': OxfordFlowers, 'dir': 'oxford_flowers',
                        'image_dir': 'jpg', 'split': 'split_zhou_OxfordFlowers.json'},
     'eurosat': {'name': 'EuroSAT', 'loader': EuroSAT, 'dir': 'eurosat',

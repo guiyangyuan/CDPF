@@ -23,6 +23,8 @@ DATASETS = {
     'dtd': {'name': 'DescribableTextures'},
     'fgvc_aircraft': {'name': 'FGVCAircraft'},
     'caltech101': {'name': 'Caltech101', 'config': '扩展验证.yaml'},
+    'oxford_pets': {'name': 'OxfordPets', 'config': '扩展验证.yaml'},
+    'food101': {'name': 'Food101', 'config': '扩展验证.yaml'},
     'oxford_flowers': {'name': 'OxfordFlowers', 'config': '扩展验证.yaml'},
     'eurosat': {'name': 'EuroSAT', 'config': '扩展验证.yaml'},
 }

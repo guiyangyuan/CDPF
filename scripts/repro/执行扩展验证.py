@@ -18,6 +18,8 @@ sys.path.insert(0, str(ROOT))
     "eurosat": "EuroSAT",
     "oxford_flowers": "OxfordFlowers",
     "caltech101": "Caltech101",
+    "oxford_pets": "OxfordPets",
+    "food101": "Food101",
 }
 预期模型源码摘要 = "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
 

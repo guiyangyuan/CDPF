@@ -1,0 +1,53 @@
+{
+  "状态": "通过",
+  "阶段": "新增三数据集开卡前静态核验",
+  "GPU训练或推理次数": 0,
+  "测试": {
+    "命令": "python3 -m unittest tests.repro.test_三数据集扩展",
+    "通过": 5,
+    "失败": 0,
+    "耗时秒": 0.048
+  },
+  "语法核验": {
+    "通过": true,
+    "文件数": 8,
+    "说明": "三个批量执行器、数据准备器与四个复用入口均通过py_compile"
+  },
+  "计划核验": {
+    "数据集": [
+      "Caltech101",
+      "OxfordPets",
+      "Food101"
+    ],
+    "主方法": {
+      "训练数": 9,
+      "内部命令数": 48,
+      "固定概率融合alpha": 0.5
+    },
+    "Zero-shot CLIP": {
+      "训练数": 0,
+      "评估数": 6
+    },
+    "CoCoOp": {
+      "训练数": 9,
+      "评估数": 18,
+      "命令数": 27
+    },
+    "总GPU训练数": 18,
+    "总GPU评估数": 60,
+    "结果筛选": false
+  },
+  "文件SHA256": {
+    "scripts/repro/准备三数据集数据.py": "6c9be2567c6e94bf7e524b2ccfd0f089b2f703885b5052ff4511dcd4485158cc",
+    "scripts/repro/运行三数据集主方法.py": "d477312e2606aa9ad7fa1b9d210364f982c39f4e99b03ba318b758e2e9284676",
+    "scripts/repro/运行三数据集联合上下文基线.py": "08c43f024b43cd3c5df8d88b63e657e4268a33b9046aabd50f0769231254ac45",
+    "scripts/repro/运行三数据集零样本基线.py": "6f63c711d1f8f50f9e2b17724de5fbb43cb43d10b13f052af6d43125ff1d4fc8",
+    "scripts/repro/执行扩展验证.py": "f18dae02e811810bd9660dff2f3cddff334b00ec58bd63944269032487264b22",
+    "scripts/repro/preflight.py": "f9910af1ffaaab484280de54ce8d567c89ee1b4a76134d534bbfe06555e678b7",
+    "scripts/repro/run_pilot.py": "14c38901420695f3d8837083fa6e4bc7891022a6567ef84d0c104cebfa3d1bf5",
+    "scripts/repro/evaluate_frozen_fusion.py": "fb0ea68801342ae225cd328aa6d53f97c20eadade4ee56af0fc554a99ff40e28",
+    "tests/repro/test_三数据集扩展.py": "46e9ab91861355b07c64eab8f3fa86986982d197ac4590ea8fcadabb8de929de",
+    "reports/preparation/三数据集扩展验证-20260916/冻结协议.json": "b008d361a57d04a60fa0e5f3b9e9d90d995bf2d5c96feebf72969d9849c53814"
+  },
+  "说明": "本机没有服务器数据和CLIP权重。本轮只证明下载/核验逻辑与固定队列可生成；真实图像、固定划分、三种子loader、CUDA和模型摘要将在服务器执行前再次核验。"
+}

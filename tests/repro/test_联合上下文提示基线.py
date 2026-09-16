@@ -47,7 +47,7 @@ def make_trainer(output: Path) -> CoCoOp:
     cfg.OPTIM.NAME = "sgd"
     cfg.OPTIM.LR = 0.002
     cfg.OPTIM.MAX_EPOCH = 10
-    cfg.OPTIM.WARMUP_EPOCH = 0
+    cfg.OPTIM.WARMUP_EPOCH = 1
     trainer = CoCoOp.__new__(CoCoOp)
     TrainerBase.__init__(trainer)
     trainer.cfg = cfg

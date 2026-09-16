@@ -63,6 +63,7 @@ def 源码清单(source_root: Path) -> list[Path]:
         Path("clip/clip.py"),
         Path("configs/trainers/CoCoOp/vit_b16_c4_ep10_batch1_ctxv1.yaml"),
         Path("Dassl.pytorch/dassl/engine/trainer.py"),
+        Path("Dassl.pytorch/dassl/utils/torchtools.py"),
         Path("scripts/repro/运行联合上下文提示基线.py"),
     ]
     for _, filename, module_name, _ in 数据集:

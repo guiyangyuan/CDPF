@@ -1,6 +1,6 @@
 # TextConsistency：复现修订版
 
-2026-09-10。本版本从当前工作文件复制并修订；原目录 `/Users/bytedance/Documents/textConsistency` 保留。已完成 UCF101 三种子、18 次训练、96 次独立评估。完整方法 HM 80.66，当前 CoOp 风格基线 74.42；其他数据集、KD 独立贡献和官方配置基线尚未验证。旧论文数字未被自动验证。
+截至 2026-09-17，固定均值概率融合已完成十个 Base-to-Novel 数据集、三个随机种子的统一实验和独立审计。十数据集平均 HM 为 78.75，本地 CoCoOp 为 76.15，同批 CoOp 为 75.33；主方法在 10/10 个数据集高于本地 CoCoOp，并在 30/30 个种子级比较中高于同批 CoOp。旧的复杂模型主张已停止使用，当前投稿方法是无新增可训练参数的固定概率融合。
 
 **后续接手、查看完成进度和下一步，请先读 [PROJECT_STATUS.md](PROJECT_STATUS.md)。**
 
@@ -17,6 +17,7 @@
 - [执行报告、代码核查及论文评审](reports/README.md)
 - [本地验证记录](verification/README.md)
 - [方法与实验表述边界](REPRO_METHOD.md)
+- [论文投稿稿、源码包与修改说明](论文投稿版本-20260917/论文修改说明.md)
 - [原始交付源码包](artifacts/TextConsistency-repro-source.zip)、[校验信息](artifacts/TextConsistency-源码包校验.json)、[修订补丁](artifacts/TextConsistency-修订.patch)
 
 源码包是上传前的本地交付快照，GitHub 版本另补充了文件索引和报告。二者训练源码一致。历史报告/JSON 中的本机绝对路径用于溯源，换服务器后按下文重新创建环境、准备数据并生成运行命令。

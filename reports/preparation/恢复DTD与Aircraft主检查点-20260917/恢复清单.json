@@ -1,0 +1,501 @@
+{
+  "格式版本": 1,
+  "状态": "六个历史主检查点已恢复并逐文件校验",
+  "生成日期": "2026-09-17",
+  "用途": "补齐DTD与FGVC-Aircraft类别名称对照和固定权重稳健性；仅冻结推理，不重新训练",
+  "来源完整备份": {
+    "文件": "crossdataset-study-20260911-55424.tar.gz",
+    "sha256": "4a681854c299562d8d4dca771584abf09cf167daf919de89ff2f631187e9e34e"
+  },
+  "来源代码归档": {
+    "文件": "crossdataset-ops-6ce9c6e.tar.gz",
+    "sha256": "70792d86f6475caed6f02e58ec98938494073258c139eb38b6008bb5f85bab67",
+    "模型源码摘要": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
+  },
+  "恢复包": {
+    "文件": "历史主检查点恢复包.tar.gz",
+    "字节数": 2869027,
+    "sha256": "141f1f4a88ea59ff71fdc04fd43235fd298d9e8e6104e1fa1eb626e2605abf2b"
+  },
+  "检查点": [
+    {
+      "数据集": "dtd",
+      "种子": 1,
+      "相对路径": "formal/dtd/baseline/seed1/textconsistency/model.pth.tar-20",
+      "字节数": 3609591,
+      "sha256": "b8954631a9fba87b1ffe68827067946c0acb8340b7de9530cfb73caea9762e13",
+      "Base": 78.125,
+      "Novel": 53.6231884057971,
+      "HM": 63.59573736679272
+    },
+    {
+      "数据集": "dtd",
+      "种子": 2,
+      "相对路径": "formal/dtd/baseline/seed2/textconsistency/model.pth.tar-20",
+      "字节数": 3609591,
+      "sha256": "ede7a2d666a442fcf0fde727ab0e63bc2f17b10d80f58e73279f990c6c885e4a",
+      "Base": 76.73611111111111,
+      "Novel": 53.6231884057971,
+      "HM": 63.13066975487359
+    },
+    {
+      "数据集": "dtd",
+      "种子": 3,
+      "相对路径": "formal/dtd/baseline/seed3/textconsistency/model.pth.tar-20",
+      "字节数": 3609591,
+      "sha256": "89d5d692654f616f6115f06bfdfb51b7049f4c0e9f51fd0f820487f99ea019ad",
+      "Base": 78.47222222222223,
+      "Novel": 54.95169082125604,
+      "HM": 64.6388071710543
+    },
+    {
+      "数据集": "fgvc_aircraft",
+      "种子": 1,
+      "相对路径": "formal/fgvc_aircraft/baseline/seed1/textconsistency/model.pth.tar-20",
+      "字节数": 7496695,
+      "sha256": "07cbda0ab8e300600c823f51ccfde38867c1ef898e58b5a7ace634c55305fce8",
+      "Base": 38.59543817527011,
+      "Novel": 32.63347330533893,
+      "HM": 35.364943117049215
+    },
+    {
+      "数据集": "fgvc_aircraft",
+      "种子": 2,
+      "相对路径": "formal/fgvc_aircraft/baseline/seed2/textconsistency/model.pth.tar-20",
+      "字节数": 7496695,
+      "sha256": "d5528de6f1a229dfa2a43f926940470f11e8f35041089015d3167ed650d1a998",
+      "Base": 37.09483793517407,
+      "Novel": 29.394121175764848,
+      "HM": 32.79853304493904
+    },
+    {
+      "数据集": "fgvc_aircraft",
+      "种子": 3,
+      "相对路径": "formal/fgvc_aircraft/baseline/seed3/textconsistency/model.pth.tar-20",
+      "字节数": 7496695,
+      "sha256": "5da8cc806ae09e2e1d91e732bcf7d606ad595eabf8c8fb87199b59ac973272e3",
+      "Base": 36.91476590636255,
+      "Novel": 32.51349730053989,
+      "HM": 34.57462670698799
+    }
+  ],
+  "历史CoOp结果": {
+    "dtd": {
+      "seeds": [
+        {
+          "种子": 1,
+          "Base": 78.125,
+          "Novel": 53.6231884057971,
+          "HM": 63.59573736679272
+        },
+        {
+          "种子": 2,
+          "Base": 76.73611111111111,
+          "Novel": 53.6231884057971,
+          "HM": 63.13066975487359
+        },
+        {
+          "种子": 3,
+          "Base": 78.47222222222223,
+          "Novel": 54.95169082125604,
+          "HM": 64.6388071710543
+        }
+      ],
+      "三种子均值": {
+        "Base": 77.77777777777779,
+        "Novel": 54.06602254428341,
+        "HM": 63.78965224766751
+      }
+    },
+    "fgvc_aircraft": {
+      "seeds": [
+        {
+          "种子": 1,
+          "Base": 38.59543817527011,
+          "Novel": 32.63347330533893,
+          "HM": 35.364943117049215
+        },
+        {
+          "种子": 2,
+          "Base": 37.09483793517407,
+          "Novel": 29.394121175764848,
+          "HM": 32.79853304493904
+        },
+        {
+          "种子": 3,
+          "Base": 36.91476590636255,
+          "Novel": 32.51349730053989,
+          "HM": 34.57462670698799
+        }
+      ],
+      "三种子均值": {
+        "Base": 37.53501400560224,
+        "Novel": 31.51369726054789,
+        "HM": 34.26181448871886
+      }
+    }
+  },
+  "文件数量": 90,
+  "文件": {
+    "formal/dtd/baseline/seed1/effective_config.yaml": {
+      "字节数": 3762,
+      "sha256": "69efc26261bbed6330b9c50b551a5a4c4b29963cf0086164e531c0b743939c28"
+    },
+    "formal/dtd/baseline/seed1/eval_base_student/effective_config.yaml": {
+      "字节数": 3780,
+      "sha256": "67fb44a5ed8612ea58ee141a0b2c21669b348673a9dda7c085e89d2566aa91a9"
+    },
+    "formal/dtd/baseline/seed1/eval_base_student/log.txt": {
+      "字节数": 7423,
+      "sha256": "4def913ec50ef7e1bcab817f723f764bc5c14b23d8b23c2b053bfc746b79deac"
+    },
+    "formal/dtd/baseline/seed1/eval_base_student/metrics.json": {
+      "字节数": 1706,
+      "sha256": "34c2d94726c1f0ae30a56343b28f81b1f95af555b70812fe1384d607c7737bb6"
+    },
+    "formal/dtd/baseline/seed1/eval_base_student/run_manifest.json": {
+      "字节数": 1220,
+      "sha256": "f80c8b5fb56ac4f7c67753a16415cdb64bdf563c46e85aed58ad31603e858a36"
+    },
+    "formal/dtd/baseline/seed1/eval_new_student/effective_config.yaml": {
+      "字节数": 3778,
+      "sha256": "e2d54eb0f4dcc97964bbc9a026e936f7c92e89c468be21d5465761e9b51f660c"
+    },
+    "formal/dtd/baseline/seed1/eval_new_student/log.txt": {
+      "字节数": 7417,
+      "sha256": "94884c5a285fc4e3229ae291586cde024b12390330df0ac8f88e34c17aeabf53"
+    },
+    "formal/dtd/baseline/seed1/eval_new_student/metrics.json": {
+      "字节数": 1726,
+      "sha256": "4d1b11ccfa93e111859c2951bf82239e49a3f2a6c14d8276450c0f8a0feb0f8c"
+    },
+    "formal/dtd/baseline/seed1/eval_new_student/run_manifest.json": {
+      "字节数": 1219,
+      "sha256": "77fc41146897ef86bf62d6dd651cef7bdeb2c0231d78c851dc5b94f37da5ab81"
+    },
+    "formal/dtd/baseline/seed1/log.txt": {
+      "字节数": 17438,
+      "sha256": "81c57608c2facd754450f6c9041c596833da900ff31ec504881b90a9c2fa51fe"
+    },
+    "formal/dtd/baseline/seed1/metrics.json": {
+      "字节数": 1445,
+      "sha256": "83f7dc3ce14be564a8c4d42d74effd9fc6a3658b76dc6f85bff7b8972101b767"
+    },
+    "formal/dtd/baseline/seed1/run_manifest.json": {
+      "字节数": 1220,
+      "sha256": "f80c8b5fb56ac4f7c67753a16415cdb64bdf563c46e85aed58ad31603e858a36"
+    },
+    "formal/dtd/baseline/seed1/textconsistency/checkpoint": {
+      "字节数": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    "formal/dtd/baseline/seed1/textconsistency/model.pth.tar-20": {
+      "字节数": 3609591,
+      "sha256": "b8954631a9fba87b1ffe68827067946c0acb8340b7de9530cfb73caea9762e13"
+    },
+    "formal/dtd/baseline/seed1/textconsistency/model.pth.tar-20.sha256": {
+      "字节数": 65,
+      "sha256": "0aea57bd1a364cf356cba763d762360b67a8e4a056d7442427b74537ede14273"
+    },
+    "formal/dtd/baseline/seed2/effective_config.yaml": {
+      "字节数": 3762,
+      "sha256": "0c4572b51e6b6394f1e089207fe0e8498076aaeb9a460940e285bcc8737fb65f"
+    },
+    "formal/dtd/baseline/seed2/eval_base_student/effective_config.yaml": {
+      "字节数": 3780,
+      "sha256": "3f63235186c99815bc82c239b72de941048ccb5ef60b28149e0b4cd7c1e556b1"
+    },
+    "formal/dtd/baseline/seed2/eval_base_student/log.txt": {
+      "字节数": 7423,
+      "sha256": "03a234d80e4cb83db76aa64ec830f6b2f1dec0e99d0d7c2cbd147266807ab954"
+    },
+    "formal/dtd/baseline/seed2/eval_base_student/metrics.json": {
+      "字节数": 1729,
+      "sha256": "96ab605b0ae5047d264cf2b447fa65b573efac182dc1a4b317c8e77e33d02802"
+    },
+    "formal/dtd/baseline/seed2/eval_base_student/run_manifest.json": {
+      "字节数": 1220,
+      "sha256": "9f283fd9fe8efc6fb5a44c38470a9d99ab31991048dd8a47eedfc7742aeaadc9"
+    },
+    "formal/dtd/baseline/seed2/eval_new_student/effective_config.yaml": {
+      "字节数": 3778,
+      "sha256": "6cbe3b0b81737327df2e8117e9f3afddb1bc53ffd546f2fd33f34b884340da97"
+    },
+    "formal/dtd/baseline/seed2/eval_new_student/log.txt": {
+      "字节数": 7417,
+      "sha256": "0dc4dc6e46f8cce5d1bd818eac7c02f9a7e6866b23790b7ee468c30f3172988f"
+    },
+    "formal/dtd/baseline/seed2/eval_new_student/metrics.json": {
+      "字节数": 1725,
+      "sha256": "044bcdd3c9b4690fe9e13f27d9fc24b1a083eb1479beff76d0494cc1ac42a91d"
+    },
+    "formal/dtd/baseline/seed2/eval_new_student/run_manifest.json": {
+      "字节数": 1219,
+      "sha256": "54d72847bd2abd1fdc57b4a766e68a37729a88b23aaffdcbe6316176c774824d"
+    },
+    "formal/dtd/baseline/seed2/log.txt": {
+      "字节数": 17438,
+      "sha256": "be05a3e2c6be3211235132fabb6b2d76da06b112ec8dcb28f0baec864c874bef"
+    },
+    "formal/dtd/baseline/seed2/metrics.json": {
+      "字节数": 1468,
+      "sha256": "3030107bfc9b23cac4cdcdd9e8936dbfba1d6522207d13dad2aec2e74078c35d"
+    },
+    "formal/dtd/baseline/seed2/run_manifest.json": {
+      "字节数": 1220,
+      "sha256": "9f283fd9fe8efc6fb5a44c38470a9d99ab31991048dd8a47eedfc7742aeaadc9"
+    },
+    "formal/dtd/baseline/seed2/textconsistency/checkpoint": {
+      "字节数": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    "formal/dtd/baseline/seed2/textconsistency/model.pth.tar-20": {
+      "字节数": 3609591,
+      "sha256": "ede7a2d666a442fcf0fde727ab0e63bc2f17b10d80f58e73279f990c6c885e4a"
+    },
+    "formal/dtd/baseline/seed2/textconsistency/model.pth.tar-20.sha256": {
+      "字节数": 65,
+      "sha256": "de0870820a8386c1517a77ae733e7229db8eddb238682c90c3077f7a837d95d6"
+    },
+    "formal/dtd/baseline/seed3/effective_config.yaml": {
+      "字节数": 3762,
+      "sha256": "6e5705be72fad35b6899f278400f3451d2e9da94de3d6bbc7b1bd7154dd36944"
+    },
+    "formal/dtd/baseline/seed3/eval_base_student/effective_config.yaml": {
+      "字节数": 3780,
+      "sha256": "06e2549ff1e618b6d3940ebb9f33f55f8518e0f162781d9013275797be2c4f78"
+    },
+    "formal/dtd/baseline/seed3/eval_base_student/log.txt": {
+      "字节数": 7423,
+      "sha256": "fda531829aeb186ac2f5fc3a565915564254d467008382252abf53371e81cab4"
+    },
+    "formal/dtd/baseline/seed3/eval_base_student/metrics.json": {
+      "字节数": 1728,
+      "sha256": "2623fb30b12a54645cf3768306dd3b4e610bc4319540a77e5be05b0775b52879"
+    },
+    "formal/dtd/baseline/seed3/eval_base_student/run_manifest.json": {
+      "字节数": 1220,
+      "sha256": "dd7b30b9ff5268c7e2ccb47621c9e1afebf9761c05c4d3f318c0941844e85179"
+    },
+    "formal/dtd/baseline/seed3/eval_new_student/effective_config.yaml": {
+      "字节数": 3778,
+      "sha256": "ae8881d860db79a4c75dc1c5d712893225bfe6b78dc96b805443489c802a4d13"
+    },
+    "formal/dtd/baseline/seed3/eval_new_student/log.txt": {
+      "字节数": 7417,
+      "sha256": "c14bc891e28bd0853a019b5fd5777d70deb0de1223868500e3c445f2bf875963"
+    },
+    "formal/dtd/baseline/seed3/eval_new_student/metrics.json": {
+      "字节数": 1727,
+      "sha256": "11fa8bb8ff8f47d86b8515eb92911f33c3a4038ca4c7bc133548607b98eaa0f4"
+    },
+    "formal/dtd/baseline/seed3/eval_new_student/run_manifest.json": {
+      "字节数": 1219,
+      "sha256": "4e43da4c3e01177bb698289727bb6c108bd65e1e1e996ff0b0d485bd505616d5"
+    },
+    "formal/dtd/baseline/seed3/log.txt": {
+      "字节数": 17437,
+      "sha256": "ffc6106b62899f1337de1648b9bc02c0ef744294f91c97452671e716e3d1085e"
+    },
+    "formal/dtd/baseline/seed3/metrics.json": {
+      "字节数": 1467,
+      "sha256": "71f991ea8914e92ec7a9e2ee879f1650764dde6d274ffbcb752ef4b5e9f54470"
+    },
+    "formal/dtd/baseline/seed3/run_manifest.json": {
+      "字节数": 1220,
+      "sha256": "dd7b30b9ff5268c7e2ccb47621c9e1afebf9761c05c4d3f318c0941844e85179"
+    },
+    "formal/dtd/baseline/seed3/textconsistency/checkpoint": {
+      "字节数": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    "formal/dtd/baseline/seed3/textconsistency/model.pth.tar-20": {
+      "字节数": 3609591,
+      "sha256": "89d5d692654f616f6115f06bfdfb51b7049f4c0e9f51fd0f820487f99ea019ad"
+    },
+    "formal/dtd/baseline/seed3/textconsistency/model.pth.tar-20.sha256": {
+      "字节数": 65,
+      "sha256": "78131e53bbefca25738d538abadc9a907541246484c2b6676abe05d316121d57"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/effective_config.yaml": {
+      "字节数": 3765,
+      "sha256": "83d8b8da9c167b8b6b5e260e562a97f2f3057443e184ff60eaa67f2c8c345057"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/eval_base_student/effective_config.yaml": {
+      "字节数": 3783,
+      "sha256": "488fa289b7b0cea4459f2ec2e96cb281cb5c1ad146aceb4646125b2f1232be7d"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/eval_base_student/log.txt": {
+      "字节数": 7359,
+      "sha256": "3d6ea52a3b23d7d144ba8ceb609e083c0334f40c0450044a500ee4769ae87499"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/eval_base_student/metrics.json": {
+      "字节数": 1731,
+      "sha256": "5b472f7fbc70ad70bb93fe23c556d84661f0318e0481a6c64a611e5a048af371"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/eval_base_student/run_manifest.json": {
+      "字节数": 1213,
+      "sha256": "68e6eee32e01e7532f1e911def65533377845b944a013e2f3898fe6a83a3fe2e"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/eval_new_student/effective_config.yaml": {
+      "字节数": 3781,
+      "sha256": "a994f1135097be4e8145701b54d797ab3c66c31eb18ace9d42baff7b1b96fe7e"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/eval_new_student/log.txt": {
+      "字节数": 7353,
+      "sha256": "6bb5391cd75e1983bea84eae8696cee30a0c35806516b5367acbb6a497c9fe3d"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/eval_new_student/metrics.json": {
+      "字节数": 1731,
+      "sha256": "e9486d1a3e033e1753f1d88838fec440b835c49a26dffbc83e6abd6a17fa8ca9"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/eval_new_student/run_manifest.json": {
+      "字节数": 1212,
+      "sha256": "3275e83852af236b7f864e7d3fe5218e2ee05c9069a78b8a9560dab74ffbf6db"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/log.txt": {
+      "字节数": 32573,
+      "sha256": "a6a3eef1638377e34a961a9eede176f49aad3c4a2319027893792f889cb1767a"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/metrics.json": {
+      "字节数": 1460,
+      "sha256": "38d492dd4058dd4237492780986045d3b99be4447d1399540f4131fef11410ad"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/run_manifest.json": {
+      "字节数": 1213,
+      "sha256": "68e6eee32e01e7532f1e911def65533377845b944a013e2f3898fe6a83a3fe2e"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/textconsistency/checkpoint": {
+      "字节数": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/textconsistency/model.pth.tar-20": {
+      "字节数": 7496695,
+      "sha256": "07cbda0ab8e300600c823f51ccfde38867c1ef898e58b5a7ace634c55305fce8"
+    },
+    "formal/fgvc_aircraft/baseline/seed1/textconsistency/model.pth.tar-20.sha256": {
+      "字节数": 65,
+      "sha256": "d2b411b8477059f06bfd253e3d519823b0ebd60965c2ddcbdd8e5ea4f23bd728"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/effective_config.yaml": {
+      "字节数": 3765,
+      "sha256": "33da9093a2e8d36cc3553e80f7d1e8d1f5a3102b1422d3de973604f96808c839"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/eval_base_student/effective_config.yaml": {
+      "字节数": 3783,
+      "sha256": "ea6d7b1988dffa357f5dd58420c9ff35c0bda4dc51610de2c70f287c7681f5cf"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/eval_base_student/log.txt": {
+      "字节数": 7359,
+      "sha256": "cb92e1b5065fa7359bdc023d1114da4bdfc77a631288f90695788c718b61ceaa"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/eval_base_student/metrics.json": {
+      "字节数": 1731,
+      "sha256": "83374d368f46f1a6fe735748ea44635931f9e8bf0fd535cb43f1c7c12efd60a4"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/eval_base_student/run_manifest.json": {
+      "字节数": 1213,
+      "sha256": "15948b5a007177b5ca04f827552e01ba986a92ea704dcca0c041c6ac1c34babf"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/eval_new_student/effective_config.yaml": {
+      "字节数": 3781,
+      "sha256": "c0af9a637c9d6fd19ef74319ea266a4fdae642df9f78a9655f533bfc56de1f62"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/eval_new_student/log.txt": {
+      "字节数": 7353,
+      "sha256": "dfc7e0ff1293bc52f363d4a901bb23fc41150ea4070651da020c4f15d17007f2"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/eval_new_student/metrics.json": {
+      "字节数": 1732,
+      "sha256": "c2478d2afdd84214eda2727c9b9cab71f30024f5c52c9e6c52b4d3f4cced6c5e"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/eval_new_student/run_manifest.json": {
+      "字节数": 1212,
+      "sha256": "3484ca044493e0605c9d09eaf97d1cce455417c776f6e7169871507100c91059"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/log.txt": {
+      "字节数": 32575,
+      "sha256": "d9374ba3d4c0d85f04c1c108f6ed29095b829c0a51537c0931869228eee64cc8"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/metrics.json": {
+      "字节数": 1460,
+      "sha256": "042f616e6ddec44864e63cd121471712ec18cd634c9db82ba28509d879eb680d"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/run_manifest.json": {
+      "字节数": 1213,
+      "sha256": "15948b5a007177b5ca04f827552e01ba986a92ea704dcca0c041c6ac1c34babf"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/textconsistency/checkpoint": {
+      "字节数": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/textconsistency/model.pth.tar-20": {
+      "字节数": 7496695,
+      "sha256": "d5528de6f1a229dfa2a43f926940470f11e8f35041089015d3167ed650d1a998"
+    },
+    "formal/fgvc_aircraft/baseline/seed2/textconsistency/model.pth.tar-20.sha256": {
+      "字节数": 65,
+      "sha256": "1e5e05210897a145c0038bc6efa04e2b363da236da69f39908487712ec42b1dc"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/effective_config.yaml": {
+      "字节数": 3765,
+      "sha256": "1fe85944d61127e93746d388032f7b297048624c3187931d2f5bf402462b2582"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/eval_base_student/effective_config.yaml": {
+      "字节数": 3783,
+      "sha256": "362ec25abaae4ff903f2f41dec376d87e1cc9dc17bf2b2de38b855b0b18d3423"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/eval_base_student/log.txt": {
+      "字节数": 7359,
+      "sha256": "625c4ba08eaecb45b431069fb04c0967ca29024b9bbdc5e5f777d24134ca9de3"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/eval_base_student/metrics.json": {
+      "字节数": 1731,
+      "sha256": "04203efe70351114354ec0f8d6253781e9396891c072fa8369c937b72947bee3"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/eval_base_student/run_manifest.json": {
+      "字节数": 1213,
+      "sha256": "bb5c9220ff74b46c3dde1e80f86940948fa137432d6e1d05214b7cc33db082bd"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/eval_new_student/effective_config.yaml": {
+      "字节数": 3781,
+      "sha256": "11afd0150936570f6c7ee9e3de6ad7f917db2be2789bec40f030ef9216414867"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/eval_new_student/log.txt": {
+      "字节数": 7353,
+      "sha256": "680b08d60766116508c4f9edbc19ac7d1de5fe3105aa77370f38e1dc4c5573ce"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/eval_new_student/metrics.json": {
+      "字节数": 1730,
+      "sha256": "2a745423fdf9479cac77265238afc3084908f67ce08a5715cf5f1f7e18692fd6"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/eval_new_student/run_manifest.json": {
+      "字节数": 1212,
+      "sha256": "3a5ddc7f065fa569d27998eb5e198c3c79485d09f2dee656e23c4d26cba20f49"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/log.txt": {
+      "字节数": 32575,
+      "sha256": "47bbeb46151b588389ebfbc053cc67b8c32f534e4c89100105ac39da4e32a17b"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/metrics.json": {
+      "字节数": 1460,
+      "sha256": "1286e7ca7c49eb9b220cc3ac405c9c6e837338a5f8aa466fc371082ea74cacfa"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/run_manifest.json": {
+      "字节数": 1213,
+      "sha256": "bb5c9220ff74b46c3dde1e80f86940948fa137432d6e1d05214b7cc33db082bd"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/textconsistency/checkpoint": {
+      "字节数": 16,
+      "sha256": "30ba5f235013401a9e0a839b9ab50582acb97dd11adf4fbbe0f15739221f413e"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/textconsistency/model.pth.tar-20": {
+      "字节数": 7496695,
+      "sha256": "5da8cc806ae09e2e1d91e732bcf7d606ad595eabf8c8fb87199b59ac973272e3"
+    },
+    "formal/fgvc_aircraft/baseline/seed3/textconsistency/model.pth.tar-20.sha256": {
+      "字节数": 65,
+      "sha256": "7589f6dadd12e6cf407873b32bb4d3e67c00a5f410b5da036cc339a0e0275976"
+    }
+  }
+}

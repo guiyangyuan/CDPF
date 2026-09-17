@@ -1,0 +1,71 @@
+{
+  "状态": "部署成功，90个文件与6个epoch-20检查点全部通过SHA-256核验",
+  "训练次数": 0,
+  "恢复包": "/root/autodl-tmp/textconsistency/incoming/恢复两数据集-20260918/历史主检查点恢复包.tar.gz",
+  "恢复包sha256": "141f1f4a88ea59ff71fdc04fd43235fd298d9e8e6104e1fa1eb626e2605abf2b",
+  "目标目录": "/root/autodl-tmp/textconsistency/recovered-inputs/crossdataset-study-20260910-v1",
+  "文件数量": 90,
+  "检查点": [
+    {
+      "数据集": "dtd",
+      "种子": 1,
+      "相对路径": "formal/dtd/baseline/seed1/textconsistency/model.pth.tar-20",
+      "字节数": 3609591,
+      "sha256": "b8954631a9fba87b1ffe68827067946c0acb8340b7de9530cfb73caea9762e13",
+      "Base": 78.125,
+      "Novel": 53.6231884057971,
+      "HM": 63.59573736679272
+    },
+    {
+      "数据集": "dtd",
+      "种子": 2,
+      "相对路径": "formal/dtd/baseline/seed2/textconsistency/model.pth.tar-20",
+      "字节数": 3609591,
+      "sha256": "ede7a2d666a442fcf0fde727ab0e63bc2f17b10d80f58e73279f990c6c885e4a",
+      "Base": 76.73611111111111,
+      "Novel": 53.6231884057971,
+      "HM": 63.13066975487359
+    },
+    {
+      "数据集": "dtd",
+      "种子": 3,
+      "相对路径": "formal/dtd/baseline/seed3/textconsistency/model.pth.tar-20",
+      "字节数": 3609591,
+      "sha256": "89d5d692654f616f6115f06bfdfb51b7049f4c0e9f51fd0f820487f99ea019ad",
+      "Base": 78.47222222222223,
+      "Novel": 54.95169082125604,
+      "HM": 64.6388071710543
+    },
+    {
+      "数据集": "fgvc_aircraft",
+      "种子": 1,
+      "相对路径": "formal/fgvc_aircraft/baseline/seed1/textconsistency/model.pth.tar-20",
+      "字节数": 7496695,
+      "sha256": "07cbda0ab8e300600c823f51ccfde38867c1ef898e58b5a7ace634c55305fce8",
+      "Base": 38.59543817527011,
+      "Novel": 32.63347330533893,
+      "HM": 35.364943117049215
+    },
+    {
+      "数据集": "fgvc_aircraft",
+      "种子": 2,
+      "相对路径": "formal/fgvc_aircraft/baseline/seed2/textconsistency/model.pth.tar-20",
+      "字节数": 7496695,
+      "sha256": "d5528de6f1a229dfa2a43f926940470f11e8f35041089015d3167ed650d1a998",
+      "Base": 37.09483793517407,
+      "Novel": 29.394121175764848,
+      "HM": 32.79853304493904
+    },
+    {
+      "数据集": "fgvc_aircraft",
+      "种子": 3,
+      "相对路径": "formal/fgvc_aircraft/baseline/seed3/textconsistency/model.pth.tar-20",
+      "字节数": 7496695,
+      "sha256": "5da8cc806ae09e2e1d91e732bcf7d606ad595eabf8c8fb87199b59ac973272e3",
+      "Base": 36.91476590636255,
+      "Novel": 32.51349730053989,
+      "HM": 34.57462670698799
+    }
+  ],
+  "下一步": "运行DTD与FGVC-Aircraft共12次冻结推理；禁止重新训练或覆盖历史检查点。"
+}

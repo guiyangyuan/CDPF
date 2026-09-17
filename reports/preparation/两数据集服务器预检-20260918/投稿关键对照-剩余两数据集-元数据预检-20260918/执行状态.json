@@ -1,0 +1,116 @@
+{
+  "状态": "完成",
+  "训练次数": 0,
+  "已完成": 12,
+  "总数": 12,
+  "运行": [
+    {
+      "序号": 1,
+      "数据集": "DescribableTextures",
+      "种子": 1,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 15.571326494216919,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-剩余两数据集-元数据预检-20260918/运行日志/01-DescribableTextures-seed1-base.txt"
+    },
+    {
+      "序号": 2,
+      "数据集": "DescribableTextures",
+      "种子": 1,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 15.10276746749878,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-剩余两数据集-元数据预检-20260918/运行日志/02-DescribableTextures-seed1-new.txt"
+    },
+    {
+      "序号": 3,
+      "数据集": "DescribableTextures",
+      "种子": 2,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 14.213046073913574,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-剩余两数据集-元数据预检-20260918/运行日志/03-DescribableTextures-seed2-base.txt"
+    },
+    {
+      "序号": 4,
+      "数据集": "DescribableTextures",
+      "种子": 2,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 13.970019817352295,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-剩余两数据集-元数据预检-20260918/运行日志/04-DescribableTextures-seed2-new.txt"
+    },
+    {
+      "序号": 5,
+      "数据集": "DescribableTextures",
+      "种子": 3,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 14.309120178222656,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-剩余两数据集-元数据预检-20260918/运行日志/05-DescribableTextures-seed3-base.txt"
+    },
+    {
+      "序号": 6,
+      "数据集": "DescribableTextures",
+      "种子": 3,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 15.627543449401855,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-剩余两数据集-元数据预检-20260918/运行日志/06-DescribableTextures-seed3-new.txt"
+    },
+    {
+      "序号": 7,
+      "数据集": "FGVCAircraft",
+      "种子": 1,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 13.78714656829834,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-剩余两数据集-元数据预检-20260918/运行日志/07-FGVCAircraft-seed1-base.txt"
+    },
+    {
+      "序号": 8,
+      "数据集": "FGVCAircraft",
+      "种子": 1,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 15.78238821029663,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-剩余两数据集-元数据预检-20260918/运行日志/08-FGVCAircraft-seed1-new.txt"
+    },
+    {
+      "序号": 9,
+      "数据集": "FGVCAircraft",
+      "种子": 2,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 13.830697536468506,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-剩余两数据集-元数据预检-20260918/运行日志/09-FGVCAircraft-seed2-base.txt"
+    },
+    {
+      "序号": 10,
+      "数据集": "FGVCAircraft",
+      "种子": 2,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 14.993743419647217,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-剩余两数据集-元数据预检-20260918/运行日志/10-FGVCAircraft-seed2-new.txt"
+    },
+    {
+      "序号": 11,
+      "数据集": "FGVCAircraft",
+      "种子": 3,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 15.567152261734009,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-剩余两数据集-元数据预检-20260918/运行日志/11-FGVCAircraft-seed3-base.txt"
+    },
+    {
+      "序号": 12,
+      "数据集": "FGVCAircraft",
+      "种子": 3,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 15.11746335029602,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-剩余两数据集-元数据预检-20260918/运行日志/12-FGVCAircraft-seed3-new.txt"
+    }
+  ]
+}

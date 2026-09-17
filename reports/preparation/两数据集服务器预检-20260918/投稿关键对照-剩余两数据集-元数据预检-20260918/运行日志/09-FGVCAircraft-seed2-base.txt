@@ -1,0 +1,13 @@
+{
+  "status": "validated_metadata",
+  "dataset": "fgvc_aircraft",
+  "seed": 2,
+  "subsample": "base",
+  "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+  "checkpoint_sha256": "d5528de6f1a229dfa2a43f926940470f11e8f35041089015d3167ed650d1a998",
+  "historical_student": {
+    "correct": 618,
+    "total": 1666,
+    "accuracy": 37.09483793517407
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "status": "validated_metadata",
+  "dataset": "dtd",
+  "seed": 1,
+  "subsample": "new",
+  "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+  "checkpoint_sha256": "b8954631a9fba87b1ffe68827067946c0acb8340b7de9530cfb73caea9762e13",
+  "historical_student": {
+    "correct": 444,
+    "total": 828,
+    "accuracy": 53.6231884057971
+  }
+}

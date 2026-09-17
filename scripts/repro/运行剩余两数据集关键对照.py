@@ -100,6 +100,7 @@ def 执行(args: argparse.Namespace, plan: dict) -> dict:
         command = [
             str(args.python), "-B", str(args.release_root / "scripts/repro/汇总类别名称与权重稳健性.py"),
             "--input-root", str(args.output_root), "--output-dir", str(summary),
+            "--datasets", "DTD", "FGVCAircraft",
         ]
         completed = subprocess.run(command, capture_output=True, text=True)
         status["汇总命令"] = command

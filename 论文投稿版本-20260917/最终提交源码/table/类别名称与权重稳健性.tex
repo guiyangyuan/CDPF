@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{Class-name control on all ten datasets with matched frozen checkpoints. All values are three-seed macro averages (\%).}
+\label{tab:class_name_control}
+\small
+\setlength{\tabcolsep}{7pt}
+\begin{tabular}{lrrr}
+\toprule
+Method & Base & Novel & HM \\
+\midrule
+CoOp & 81.88 & 70.50 & 75.33 \\
+Class name only & 69.20 & 74.92 & 71.86 \\
+CoOp + class name & 81.17 & 74.17 & 77.23 \\
+Description only & 71.77 & 78.43 & 74.77 \\
+\textbf{TextConsistency} & \textbf{81.58} & \textbf{76.44} & \textbf{78.75} \\
+\bottomrule
+\end{tabular}
+\end{table}

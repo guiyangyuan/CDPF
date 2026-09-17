@@ -9,8 +9,8 @@ from pathlib import Path
 
 
 数据集顺序 = [
-    "UCF101", "EuroSAT", "OxfordFlowers", "Caltech101",
-    "OxfordPets", "Food101", "StanfordCars", "SUN397",
+    "UCF101", "DTD", "FGVCAircraft", "EuroSAT", "OxfordFlowers",
+    "Caltech101", "OxfordPets", "Food101", "StanfordCars", "SUN397",
 ]
 
 
@@ -44,7 +44,7 @@ def 绘图(summary_dir: Path, output_base: Path) -> None:
     import matplotlib.pyplot as plt
 
     gains, curves = 读取数据(summary_dir)
-    short_names = ["UCF", "EuroSAT", "Flowers", "Caltech", "Pets", "Food", "Cars", "SUN"]
+    short_names = ["UCF", "DTD", "Aircraft", "EuroSAT", "Flowers", "Caltech", "Pets", "Food", "Cars", "SUN"]
     plt.rcParams.update({"font.size": 9, "pdf.fonttype": 42, "ps.fonttype": 42})
     fig, axes = plt.subplots(1, 2, figsize=(10.6, 3.45), constrained_layout=True)
 
@@ -67,14 +67,20 @@ def 绘图(summary_dir: Path, output_base: Path) -> None:
     axes[1].axvline(0.5, color="#555555", linestyle="--", linewidth=0.9, alpha=0.7)
     axes[1].set_xticks(curves["alpha"])
     axes[1].set_xlabel(r"Global description weight $\alpha$")
-    axes[1].set_ylabel("Eight-dataset macro average (%)")
+    axes[1].set_ylabel("Ten-dataset macro average (%)")
     axes[1].set_title("(b) One global weight for all datasets")
     axes[1].grid(alpha=0.25, linewidth=0.6)
     axes[1].legend(frameon=False, ncol=3, loc="lower center")
 
     output_base.parent.mkdir(parents=True, exist_ok=True)
-    fig.savefig(output_base.with_suffix(".pdf"), bbox_inches="tight")
-    fig.savefig(output_base.with_suffix(".png"), dpi=220, bbox_inches="tight")
+    fig.savefig(
+        output_base.with_suffix(".pdf"), bbox_inches="tight",
+        metadata={"Creator": "TextConsistency", "CreationDate": None, "ModDate": None},
+    )
+    fig.savefig(
+        output_base.with_suffix(".png"), dpi=220, bbox_inches="tight",
+        metadata={"Software": "TextConsistency"},
+    )
     plt.close(fig)
 
 

@@ -58,7 +58,7 @@ The simplicity of the method is useful for two reasons. First, it isolates the v
 The contributions of this paper are as follows:
 \begin{itemize}
     \item We introduce a fixed probability-fusion formulation that combines a learned prompt posterior with a frozen class-description posterior. It uses the existing CLIP encoders and adds no trainable parameters beyond CoOp.
-    \item We provide controlled component and class-name studies that separate branch complementarity from ordinary class-name ensembling. On the fixed eight-dataset subset with matched checkpoints, descriptions add 1.15 HM points over class-name fusion.
+    \item We provide controlled component and class-name studies that separate branch complementarity from ordinary class-name ensembling. Across all ten datasets with matched checkpoints, descriptions add 1.53 HM points over class-name fusion.
     \item We evaluate the same 0.5 fusion rule on ten base-to-novel datasets. TextConsistency reaches 78.75 average HM, improves over local CoCoOp on ten out of ten datasets, and improves over matched CoOp in all 30 seed-level comparisons.
     \item We report measured inference cost on one RTX 4090 and explicitly separate local reproductions from published comparison numbers.
 \end{itemize}
@@ -223,16 +223,16 @@ The description branch is deterministic for a fixed dataset and split. Repeating
 
 \input{table/类别名称与权重稳健性}
 
-Table~\ref{tab:class_name_control} uses the eight datasets for which the exact main-study checkpoints were available during this frozen evaluation. DTD and FGVC Aircraft are excluded rather than replaced by checkpoints from a different training configuration. Relative to the same CoOp checkpoints fused with ordinary class-name prompts, TextConsistency improves macro HM from 83.61 to 84.76, a gain of 1.15 points. It is higher on seven of eight datasets and 19 of 24 matched dataset-seed comparisons. The largest gain is 6.18 points on EuroSAT, while StanfordCars is 0.18 points lower. The result therefore supports an average contribution from descriptive semantics without implying uniform improvement on every dataset.
+Table~\ref{tab:class_name_control} uses all ten main-study datasets and the exact matched checkpoints from the primary evaluation. Relative to the same CoOp checkpoints fused with ordinary class-name prompts, TextConsistency improves macro HM from 77.23 to 78.75, a gain of 1.53 points. It is higher on nine of ten datasets and 25 of 30 matched dataset-seed comparisons. The largest gain is 6.18 points on EuroSAT; the newly completed DTD and FGVC Aircraft controls add 3.38 and 2.69 points, respectively, while StanfordCars is 0.18 points lower. The result therefore supports an average contribution from descriptive semantics without implying uniform improvement on every dataset.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.98\textwidth]{图4-语义对照与权重稳健性.pdf}
-\caption{Controlled semantic and weight analyses on the fixed eight-dataset subset. (a) HM difference between TextConsistency and an otherwise matched CoOp-plus-class-name probability average. (b) Base, novel, and HM macro averages for one global description weight shared by every dataset. The main method remains the pre-specified $\alpha=0.5$.}
+\caption{Controlled semantic and weight analyses on all ten datasets. (a) HM difference between TextConsistency and an otherwise matched CoOp-plus-class-name probability average. (b) Base, novel, and HM macro averages for one global description weight shared by every dataset. The main method remains the pre-specified $\alpha=0.5$.}
 \label{fig:semantic_control}
 \end{figure*}
 
-Figure~\ref{fig:semantic_control}(b) reports the common grid $\alpha\in\{0,0.25,0.5,0.75,1\}$ without selecting a dataset-specific value. The pre-specified midpoint obtains the highest macro HM, 84.76. Both intermediate mixtures outperform the two single-branch endpoints, while increasing $\alpha$ trades base accuracy for novel accuracy. This pattern is consistent with the intended balance between adaptation and frozen semantic coverage.
+Figure~\ref{fig:semantic_control}(b) reports the common grid $\alpha\in\{0,0.25,0.5,0.75,1\}$ without selecting a dataset-specific value. The pre-specified midpoint obtains the highest macro HM, 78.75. Both intermediate mixtures outperform the two single-branch endpoints, while increasing $\alpha$ trades base accuracy for novel accuracy. This pattern is consistent with the intended balance between adaptation and frozen semantic coverage.
 
 \subsection{Stability Across Seeds}
 
@@ -258,7 +258,7 @@ Table~\ref{tab:efficiency} reports CUDA-event measurements on one RTX 4090. Each
 
 The experiments support a narrow conclusion: a fixed posterior average can recover useful frozen semantics that CoOp underuses after base-class adaptation. They do not show that natural-language descriptions are universally superior to learned prompts. The description-only average is lower than CoOp, and the smallest fusion gains occur on datasets where the two branches are already similarly strong.
 
-Several limitations remain. First, ImageNet is absent, so the ten-dataset average cannot be compared directly with the common eleven-dataset benchmark average. Second, the local CoCoOp baseline uses its standard 10-epoch recipe while CoOp and TextConsistency use 20 epochs. Third, the descriptions originate from the public CuPL/ProText assets; we do not compare alternative language models, generation instructions, or description budgets. Fourth, the class-name and global-weight controls currently cover eight datasets because the exact DTD and FGVC Aircraft checkpoints from the main study were unavailable on the active server. Their result files were not substituted with checkpoints from a different configuration; completing these two datasets remains required before submission. Finally, the efficiency result is measured on one GPU and should not be treated as a hardware-independent latency guarantee.
+Several limitations remain. First, ImageNet is absent, so the ten-dataset average cannot be compared directly with the common eleven-dataset benchmark average. Second, the local CoCoOp baseline uses its standard 10-epoch recipe while CoOp and TextConsistency use 20 epochs. Third, the descriptions originate from the public CuPL/ProText assets; we do not compare alternative language models, generation instructions, or description budgets. Fourth, the global-weight analysis uses a coarse five-point grid and evaluates the same datasets as the main study; it does not establish calibration robustness under an external distribution shift. Finally, the efficiency result is measured on one GPU and should not be treated as a hardware-independent latency guarantee.
 
 The full experimental evidence was accumulated in audited batches with frozen data splits, seeds, source hashes, checkpoints, raw predictions, and independent recomputation. This makes the reported values traceable, although a future single-release rerun including ImageNet would provide a cleaner eleven-dataset benchmark package.
 

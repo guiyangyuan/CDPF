@@ -18,6 +18,7 @@ def 加载(filename: str, name: str):
 
 
 class 投稿关键对照测试(unittest.TestCase):
+    @unittest.skipUnless(importlib.util.find_spec("torch") is not None, "计划模块依赖 GPU 环境中的 torch")
     def test_计划只复用历史检查点并完整覆盖(self):
         module = 加载("运行投稿关键对照.py", "运行关键对照")
         with tempfile.TemporaryDirectory() as temporary:
@@ -34,7 +35,8 @@ class 投稿关键对照测试(unittest.TestCase):
 
     def test_汇总验证端点并报告描述语义增益(self):
         summary = 加载("汇总类别名称与权重稳健性.py", "汇总关键对照")
-        from scripts.repro.evaluate_frozen_fusion import ALPHA_GRID, alpha_branch_name
+        ALPHA_GRID = summary.ALPHA_GRID
+        alpha_branch_name = summary.alpha_branch_name
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "input"
             for dataset in summary.数据集顺序:
@@ -60,10 +62,11 @@ class 投稿关键对照测试(unittest.TestCase):
                             branch = alpha_branch_name("description_probability_alpha", alpha)
                             correct = student if alpha == 0 else description if alpha == 1 else main
                             metrics[branch] = {"correct": correct, "total": total, "accuracy": float(correct)}
-                        path = root / dataset / f"seed{seed}" / split / "metrics.json"
+                        internal = summary.指标数据集名称[dataset]
+                        path = root / internal / f"seed{seed}" / split / "metrics.json"
                         path.parent.mkdir(parents=True)
                         path.write_text(json.dumps({
-                            "status": "passed", "dataset": dataset, "seed": seed,
+                            "status": "passed", "dataset": internal, "seed": seed,
                             "subsample": split, "split": "test", "metrics": metrics,
                         }), encoding="utf-8")
             output = Path(temporary) / "output"
@@ -77,7 +80,8 @@ class 投稿关键对照测试(unittest.TestCase):
 
     def test_阶段汇总明确使用实际数据集和配对总数(self):
         summary = 加载("汇总类别名称与权重稳健性.py", "汇总关键对照子集")
-        from scripts.repro.evaluate_frozen_fusion import ALPHA_GRID, alpha_branch_name
+        ALPHA_GRID = summary.ALPHA_GRID
+        alpha_branch_name = summary.alpha_branch_name
         datasets = ["UCF101", "EuroSAT"]
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary) / "input"
@@ -108,6 +112,35 @@ class 投稿关键对照测试(unittest.TestCase):
             report = (output / "结果报告.md").read_text(encoding="utf-8")
             self.assertIn("胜出数据集：2/2", report)
             self.assertIn("胜出配对种子：6/6", report)
+
+    def test_DTD汇总把评估器内部名称映射为论文名称(self):
+        summary = 加载("汇总类别名称与权重稳健性.py", "汇总DTD别名")
+        ALPHA_GRID = summary.ALPHA_GRID
+        alpha_branch_name = summary.alpha_branch_name
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary) / "input"
+            for seed in (1, 2, 3):
+                for split in ("base", "new"):
+                    metrics = {
+                        "student": {"correct": 70, "total": 100, "accuracy": 70.0},
+                        "classname": {"correct": 68, "total": 100, "accuracy": 68.0},
+                        "classname_probability_fusion": {"correct": 72, "total": 100, "accuracy": 72.0},
+                        "description_mean": {"correct": 74, "total": 100, "accuracy": 74.0},
+                        "mean_probability_fusion": {"correct": 76, "total": 100, "accuracy": 76.0},
+                    }
+                    for alpha in ALPHA_GRID:
+                        correct = 70 if alpha == 0 else 74 if alpha == 1 else 76
+                        metrics[alpha_branch_name("description_probability_alpha", alpha)] = {
+                            "correct": correct, "total": 100, "accuracy": float(correct)}
+                    path = root / "DescribableTextures" / f"seed{seed}" / split / "metrics.json"
+                    path.parent.mkdir(parents=True)
+                    path.write_text(json.dumps({
+                        "status": "passed", "dataset": "DescribableTextures", "seed": seed,
+                        "subsample": split, "split": "test", "metrics": metrics,
+                    }), encoding="utf-8")
+            result = summary.生成结果(root, Path(temporary) / "output", ["DTD"])
+            self.assertEqual(result["数据集"], ["DTD"])
+            self.assertEqual(result["核心比较"]["配对种子总数"], 3)
 
 
 if __name__ == "__main__":

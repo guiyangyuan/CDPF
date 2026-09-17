@@ -6,6 +6,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import runpy
 import shutil
 from pathlib import Path
 
@@ -28,6 +29,7 @@ Overleaf目录 = Path(__file__).resolve().parent / "Overleaf直接替换"
     "图1-方法框架.pdf",
     "图2-十数据集增益.pdf",
     "图3-消融稳定性效率.pdf",
+    "图4-语义对照与权重稳健性.pdf",
 ]
 
 数据集顺序 = [
@@ -293,6 +295,44 @@ TextConsistency & 64 & 90.796 & 704.88 & 0.74\% \\
     保存("table_efficiency.tex", text)
 
 
+def 生成类别名称与权重表() -> None:
+    rows = 读取_csv(
+        结果目录 / "投稿关键对照十数据集-20260918" / "汇总" / "关键对照数据集汇总.csv"
+    )
+    labels = {
+        "CoOp": "CoOp",
+        "类别名称": "Class name only",
+        "CoOp+类别名称": "CoOp + class name",
+        "类别描述": "Description only",
+        "TextConsistency": r"\textbf{TextConsistency}",
+    }
+    index = {(row["数据集"], row["方法"]): row for row in rows}
+    control_name = {"FGVC-Aircraft": "FGVCAircraft"}
+    lines = [
+        r"\begin{table}[t]",
+        r"\centering",
+        r"\caption{Class-name control on all ten datasets with matched frozen checkpoints. All values are three-seed macro averages (\%).}",
+        r"\label{tab:class_name_control}",
+        r"\small",
+        r"\setlength{\tabcolsep}{7pt}",
+        r"\begin{tabular}{lrrr}",
+        r"\toprule",
+        r"Method & Base & Novel & HM \\",
+        r"\midrule",
+    ]
+    for method, label in labels.items():
+        selected = [index[(control_name.get(dataset, dataset), method)] for dataset in 数据集顺序]
+        base = sum(float(row["Base均值"]) for row in selected) / len(selected)
+        novel = sum(float(row["Novel均值"]) for row in selected) / len(selected)
+        hm = sum(float(row["HM_均值计算"]) for row in selected) / len(selected)
+        values = [数字(base), 数字(novel), 数字(hm)]
+        if method == "TextConsistency":
+            values = [rf"\textbf{{{value}}}" for value in values]
+        lines.append(f"{label} & " + " & ".join(values) + " " + r"\\")
+    lines += [r"\bottomrule", r"\end{tabular}", r"\end{table}"]
+    保存("类别名称与权重稳健性.tex", "\n".join(lines))
+
+
 def 生成方法框架图() -> None:
     blue = "#2F5D9B"
     blue_light = "#EAF1FA"
@@ -533,15 +573,26 @@ def 生成图表(index: dict[tuple[str, str], dict[str, float]], components: dic
     生成方法框架图()
     gains = 生成数据集增益图(index)
     seed_gains = 生成诊断图(components)
+    plot_module = runpy.run_path(str(根目录 / "scripts" / "repro" / "绘制类别名称与权重稳健性.py"))
+    plot_module["绘图"](
+        结果目录 / "投稿关键对照十数据集-20260918" / "汇总",
+        源码目录 / "图4-语义对照与权重稳健性",
+    )
+    semantic_result = json.loads(
+        (结果目录 / "投稿关键对照十数据集-20260918" / "汇总" / "结果.json")
+        .read_text(encoding="utf-8")
+    )
 
     source_paths = [
         结果目录 / "斯坦福汽车与SUN397扩展验证-20260917" / "十数据集结果.csv",
         结果目录 / "投稿实验统一结果-20260915" / "主结果逐种子.csv",
         结果目录 / "统一推理效率-20260916" / "效率实测结果.json",
+        结果目录 / "投稿关键对照十数据集-20260918" / "汇总" / "关键对照数据集汇总.csv",
+        结果目录 / "投稿关键对照十数据集-20260918" / "汇总" / "统一权重稳健性.csv",
     ]
     receipt = {
         "状态": "通过",
-        "图数量": 3,
+        "图数量": 4,
         "图文件": {name: 文件哈希(源码目录 / name) for name in 图名列表},
         "主要数据来源": [
             {"路径": str(path.relative_to(根目录)), "SHA256": 文件哈希(path)}
@@ -549,6 +600,8 @@ def 生成图表(index: dict[tuple[str, str], dict[str, float]], components: dic
         ],
         "十数据集HM增益": gains,
         "逐种子配对HM增益": seed_gains,
+        "类别名称控制": semantic_result["核心比较"],
+        "统一权重稳健性": semantic_result["权重稳健性"],
         "说明": "所有结果图由已审计CSV/JSON自动生成；方法框架图只描述已发布实现。",
     }
     (Path(__file__).resolve().parent / "图表数据来源.json").write_text(
@@ -557,7 +610,7 @@ def 生成图表(index: dict[tuple[str, str], dict[str, float]], components: dic
 
 
 def 生成Overleaf直接替换文件() -> None:
-    """把五张表内联到主文件，并复制参考文献和三张矢量图。"""
+    """把六张表内联到主文件，并复制参考文献和四张矢量图。"""
     text = (源码目录 / "pag.tex").read_text(encoding="utf-8")
     for name in (
         "table_local_hm.tex",
@@ -565,6 +618,7 @@ def 生成Overleaf直接替换文件() -> None:
         "table_published_hm.tex",
         "table_components.tex",
         "table_efficiency.tex",
+        "类别名称与权重稳健性.tex",
     ):
         marker = rf"\input{{table/{name.removesuffix('.tex')}}}"
         table = (表格目录 / name).read_text(encoding="utf-8").rstrip()
@@ -590,6 +644,7 @@ def main() -> None:
     生成文献表()
     生成组件表(components)
     生成效率表()
+    生成类别名称与权重表()
     生成图表(index, components)
     生成Overleaf直接替换文件()
     print(
@@ -597,8 +652,8 @@ def main() -> None:
             {
                 "状态": "通过",
                 "表格目录": str(表格目录),
-                "表格数": 5,
-                "图数量": 3,
+                "表格数": 6,
+                "图数量": 4,
                 "Overleaf直接替换目录": str(Overleaf目录),
             },
             ensure_ascii=False,

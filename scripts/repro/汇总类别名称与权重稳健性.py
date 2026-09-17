@@ -8,21 +8,24 @@ import csv
 import json
 import math
 import statistics
-import sys
 from collections import defaultdict
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-if str(ROOT) not in sys.path:
-    sys.path.insert(0, str(ROOT))
+ALPHA_GRID = (0.0, 0.25, 0.5, 0.75, 1.0)
 
-from scripts.repro.evaluate_frozen_fusion import ALPHA_GRID, alpha_branch_name
+
+def alpha_branch_name(prefix: str, alpha: float) -> str:
+    if not prefix or not math.isfinite(float(alpha)) or not 0 <= float(alpha) <= 1:
+        raise ValueError("融合分支要求非空前缀和[0,1]内的alpha")
+    return f"{prefix}_{float(alpha):.2f}".replace(".", "_")
 
 
 数据集顺序 = [
     "UCF101", "DTD", "FGVCAircraft", "EuroSAT", "OxfordFlowers",
     "Caltech101", "OxfordPets", "Food101", "StanfordCars", "SUN397",
 ]
+指标数据集名称 = {dataset: dataset for dataset in 数据集顺序}
+指标数据集名称["DTD"] = "DescribableTextures"
 方法 = {
     "CoOp": "student",
     "类别名称": "classname",
@@ -39,9 +42,10 @@ def 调和平均(base: float, novel: float) -> float:
 def 读取输入(root: Path, datasets: list[str]) -> list[dict]:
     rows = []
     expected = {
-        (dataset, seed, split)
+        (指标数据集名称[dataset], seed, split)
         for dataset in datasets for seed in (1, 2, 3) for split in ("base", "new")
     }
+    display_name = {指标数据集名称[dataset]: dataset for dataset in datasets}
     actual = set()
     for path in sorted(root.rglob("metrics.json")):
         value = json.loads(path.read_text(encoding="utf-8"))
@@ -80,7 +84,7 @@ def 读取输入(root: Path, datasets: list[str]) -> list[dict]:
             if not math.isclose(float(row["accuracy"]), expected_accuracy, abs_tol=1e-10):
                 raise ValueError(f"准确率不可复算：{path} {branch}")
         rows.append({
-            "数据集": identity[0], "种子": int(identity[1]), "分支": identity[2],
+            "数据集": display_name[identity[0]], "种子": int(identity[1]), "分支": identity[2],
             "指标": metrics, "来源": str(path),
         })
         actual.add(identity)
@@ -147,7 +151,7 @@ def 汇总权重(rows: list[dict], datasets: list[str]) -> list[dict]:
             "宏平均Base": statistics.mean(dataset_base),
             "宏平均Novel": statistics.mean(dataset_novel),
             "宏平均HM": statistics.mean(dataset_hm),
-            "数据集HM标准差": statistics.stdev(dataset_hm),
+            "数据集HM标准差": statistics.stdev(dataset_hm) if len(dataset_hm) > 1 else 0.0,
         })
     return output
 

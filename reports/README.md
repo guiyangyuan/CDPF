@@ -1,4 +1,4 @@
-> 最新状态：[项目进度](../PROJECT_STATUS.md)；[三种子实验](experiments/TextConsistency-UCF101三种子实验报告.md)；[CoOp 核查](preparation/CoOp基线核查.md)。以下早期报告保留其当时状态。
+> 最新状态：[项目进度](../PROJECT_STATUS.md)；[十数据集扩展验证](experiments/斯坦福汽车与SUN397扩展验证-20260917/结果报告.md)；[十数据集文献对比](experiments/斯坦福汽车与SUN397扩展验证-20260917/十数据集文献方法对比.md)。以下早期报告保留其当时状态。
 
 # 项目报告与历史证据
 

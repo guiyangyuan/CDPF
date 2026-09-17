@@ -1,0 +1,265 @@
+{
+  "状态": "通过",
+  "直接来源": {
+    "URL": "https://github.com/muzairkhattak/ProText",
+    "提交": "f63d96bc971f6fde5d55e8e24bc5d93bb463453f",
+    "根目录许可证": "MIT"
+  },
+  "CuPL上游生成协议": {
+    "URL": "https://github.com/sarahpratt/CuPL",
+    "提交": "719619c829792ff8f37298266e941b7f077c7f5c",
+    "模型": "OpenAI GPT-3 DaVinci-002",
+    "温度": 0.99,
+    "每个生成指令返回数": 10,
+    "最大token": 50,
+    "停止符": ".",
+    "生成时间": "CuPL论文与代码未公布精确调用日期。",
+    "数据集生成指令": {
+      "airplane_prompts_full.json": [
+        "Describe a(n) {} aircraft",
+        "Describe the {} aircraft"
+      ],
+      "cal_prompts_full.json": [
+        "Describe what a(n) {} looks like:",
+        "Describe a(n) {}:",
+        "What are the identifying characteristics of a(n) {}?"
+      ],
+      "cars_prompts_full.json": [
+        "How can you identify a(n) {}?",
+        "Description of a(n) {}, a type of car.",
+        "A caption of a photo of a(n) {}:",
+        "What are the primary characteristics of a(n) {}?",
+        "Description of the exterior of a(n) {}",
+        "What are the identifying characteristics of a(n) {}, a type of car?",
+        "Describe an image from the internet of a(n) {}",
+        "What does a(n) {} look like?",
+        "Describe what a(n) {}, a type of car, looks like"
+      ],
+      "flower_prompts_full.json": [
+        "Describe how to identify a(n) {}, a type of flower",
+        "What does a(n) {} flower look like?"
+      ],
+      "food_prompts_full.json": [
+        "Describe what {} looks like",
+        "Visually describe {}",
+        "How can you tell that the food in this photo is {}?"
+      ],
+      "imagenet_prompts_full.json": [
+        "Describe what a(n) {} looks like",
+        "How can you identify a(n) {}?",
+        "What does a(n) {} look like?",
+        "Describe an image from the internet of a(n) {}",
+        "A caption of an image of a(n) {}:"
+      ],
+      "pets_prompts_full.json": [
+        "Describe what a pet {} looks like",
+        "Visually describe a(n) '{}', a type of pet."
+      ],
+      "sun_prompts_full.json": [
+        "Describe what a(n) {} looks like",
+        "How can you identify a(n) {}?",
+        "Describe a photo of a(n) {}"
+      ],
+      "texture_prompts_full.json": [
+        "What does \"{}\" material look like?",
+        "What does a \"{}\" surface look like?",
+        "What does a \"{}\" texture look like?",
+        "What does a \"{}\" object look like?",
+        "What does a \"{}\" thing look like?",
+        "What does a \"{}\" pattern look like?"
+      ],
+      "ucf_prompts_full.json": [
+        "Describe the action of {}",
+        "What does the act of {} look like?",
+        "What does a person doing {} look like?",
+        "Describe \"{}\"",
+        "Describe the action \"{}\""
+      ]
+    },
+    "许可说明": "该固定提交的根目录未发现单独LICENSE；本仓库直接对齐的ProText镜像根目录声明MIT。"
+  },
+  "EuroSAT来源边界": {
+    "直接文件": "ProText/templates/EuroSAT.json",
+    "每类描述数": 25,
+    "可核实事实": "与ProText固定提交字节级一致。",
+    "未公开元数据": [
+      "具体LLM版本",
+      "温度",
+      "生成日期",
+      "每指令采样数"
+    ]
+  },
+  "实验实际选择": {
+    "每类上限": 20,
+    "规则": "按文件原始顺序取前20条非空且文本去重的描述；CLIP分词后再去除token序列完全重复项。",
+    "人工筛选": "没有按模型结果或测试集准确率筛选。只包含类别键名匹配规范化和两处已登记的脏文本清理。"
+  },
+  "文件统计": {
+    "总数": 11,
+    "字节完全一致": 6,
+    "已登记适配": 5
+  },
+  "文件": [
+    {
+      "本地文件": "templates/airplane_prompts_full.json",
+      "ProText文件": "templates/airplane_prompts_full.json",
+      "本地SHA256": "d86833c2483c1d12907abeb6198412f1d0a020bd12999a3f170967a7f549e3b8",
+      "ProText_SHA256": "d86833c2483c1d12907abeb6198412f1d0a020bd12999a3f170967a7f549e3b8",
+      "字节完全一致": true,
+      "类别数": 100,
+      "本地描述数": 2000,
+      "ProText描述数": 2000,
+      "仅类别键名规范化数": 0,
+      "本地新增文本": [],
+      "本地删除文本": []
+    },
+    {
+      "本地文件": "templates/cal_prompts_full.json",
+      "ProText文件": "templates/cal_prompts_full.json",
+      "本地SHA256": "aaec243406bc68264ea20d51a1f4edaa2b7e35f3443a9c59cb63e510eb23e5d5",
+      "ProText_SHA256": "4f768c3dca827391cd47c38f62bcef5436201b445aa933f1465dbc449e157a6b",
+      "字节完全一致": false,
+      "类别数": 102,
+      "本地描述数": 3060,
+      "ProText描述数": 3060,
+      "仅类别键名规范化数": 18,
+      "本地新增文本": [],
+      "本地删除文本": []
+    },
+    {
+      "本地文件": "templates/cars_prompts_full.json",
+      "ProText文件": "templates/cars_prompts_full.json",
+      "本地SHA256": "d10a188ef0ec68c445a9fbe8dd4a2aa980f8d0423f8494e92ec5e0a44c8844a2",
+      "ProText_SHA256": "280a99f0503fce6e7f89edd05628dd1ead7b4fbac2a70845675e2dd1a80123ec",
+      "字节完全一致": false,
+      "类别数": 196,
+      "本地描述数": 17639,
+      "ProText描述数": 17640,
+      "仅类别键名规范化数": 0,
+      "本地新增文本": [],
+      "本地删除文本": [
+        {
+          "类别": "2012 nissan juke hatchback",
+          "文本": "IMG_1555.",
+          "数量": 1
+        }
+      ]
+    },
+    {
+      "本地文件": "templates/eurosat_prompts_full.json",
+      "ProText文件": "templates/EuroSAT.json",
+      "本地SHA256": "fe1076499e4fb8c019e83e677af2e9ecc302cb2240edcca0a1ed7fbb35af2110",
+      "ProText_SHA256": "fe1076499e4fb8c019e83e677af2e9ecc302cb2240edcca0a1ed7fbb35af2110",
+      "字节完全一致": true,
+      "类别数": 10,
+      "本地描述数": 250,
+      "ProText描述数": 250,
+      "仅类别键名规范化数": 0,
+      "本地新增文本": [],
+      "本地删除文本": []
+    },
+    {
+      "本地文件": "templates/flower_prompts_full.json",
+      "ProText文件": "templates/flower_prompts_full.json",
+      "本地SHA256": "9e2252fc5c1bd56aeb9e3a1b28b1072e1d2a813c8973ea62b77f66938bae4a84",
+      "ProText_SHA256": "9e2252fc5c1bd56aeb9e3a1b28b1072e1d2a813c8973ea62b77f66938bae4a84",
+      "字节完全一致": true,
+      "类别数": 102,
+      "本地描述数": 2040,
+      "ProText描述数": 2040,
+      "仅类别键名规范化数": 0,
+      "本地新增文本": [],
+      "本地删除文本": []
+    },
+    {
+      "本地文件": "templates/food_prompts_full.json",
+      "ProText文件": "templates/food_prompts_full.json",
+      "本地SHA256": "67cb17f323b7f0726e4b152224365fda289658ff92b0d14ee264910a16af96dc",
+      "ProText_SHA256": "67cb17f323b7f0726e4b152224365fda289658ff92b0d14ee264910a16af96dc",
+      "字节完全一致": true,
+      "类别数": 101,
+      "本地描述数": 3030,
+      "ProText描述数": 3030,
+      "仅类别键名规范化数": 0,
+      "本地新增文本": [],
+      "本地删除文本": []
+    },
+    {
+      "本地文件": "templates/imagenet_prompts_full.json",
+      "ProText文件": "templates/imagenet_prompts_full.json",
+      "本地SHA256": "31da80d50a83ef6935238eafc5b44df4b839d23f3cead8591fcfa2cb2d808b91",
+      "ProText_SHA256": "31da80d50a83ef6935238eafc5b44df4b839d23f3cead8591fcfa2cb2d808b91",
+      "字节完全一致": true,
+      "类别数": 998,
+      "本地描述数": 49900,
+      "ProText描述数": 49900,
+      "仅类别键名规范化数": 0,
+      "本地新增文本": [],
+      "本地删除文本": []
+    },
+    {
+      "本地文件": "templates/pets_prompts_full.json",
+      "ProText文件": "templates/pets_prompts_full.json",
+      "本地SHA256": "6948e8ebaf0883e31747a084b8844c6e635e15bf629b53450fa3c7507fe5fc64",
+      "ProText_SHA256": "b53cbe7f37e807c13a3f02e511c6058e6a50bafea3f8c4363cb85bf32920c6c6",
+      "字节完全一致": false,
+      "类别数": 37,
+      "本地描述数": 740,
+      "ProText描述数": 740,
+      "仅类别键名规范化数": 12,
+      "本地新增文本": [],
+      "本地删除文本": []
+    },
+    {
+      "本地文件": "templates/sun_prompts_full.json",
+      "ProText文件": "templates/sun_prompts_full.json",
+      "本地SHA256": "67af625aaec8727dbde84006e876049f4276d462b91367656ade95ee3976ce30",
+      "ProText_SHA256": "d4a18979ab922fee3e56653b0b83f7649bcdc9f7aa6f82c302a6922bf4fad484",
+      "字节完全一致": false,
+      "类别数": 397,
+      "本地描述数": 11910,
+      "ProText描述数": 11910,
+      "仅类别键名规范化数": 45,
+      "本地新增文本": [
+        {
+          "类别": "creek",
+          "文本": " A creek is usually a small, shallow stream of water.",
+          "数量": 1
+        }
+      ],
+      "本地删除文本": [
+        {
+          "类别": "creek",
+          "文本": "_A creek is usually a small, shallow stream of water.",
+          "数量": 1
+        }
+      ]
+    },
+    {
+      "本地文件": "templates/texture_prompts_full.json",
+      "ProText文件": "templates/texture_prompts_full.json",
+      "本地SHA256": "dabdcafded7babd67046d0f90abeb510b648bdaaf397b884f265f3460a7942a9",
+      "ProText_SHA256": "dabdcafded7babd67046d0f90abeb510b648bdaaf397b884f265f3460a7942a9",
+      "字节完全一致": true,
+      "类别数": 47,
+      "本地描述数": 2820,
+      "ProText描述数": 2820,
+      "仅类别键名规范化数": 0,
+      "本地新增文本": [],
+      "本地删除文本": []
+    },
+    {
+      "本地文件": "templates/ucf_prompts_full.json",
+      "ProText文件": "templates/ucf_prompts_full.json",
+      "本地SHA256": "3acc805cbcd115331cc975f6146b24de2fc1732c45ee54a57c25259facbc6b9a",
+      "ProText_SHA256": "c6ebd57977a9889d177b2e672597b9d122609819f77eb6be7d4ddccc5ed8c042",
+      "字节完全一致": false,
+      "类别数": 101,
+      "本地描述数": 5050,
+      "ProText描述数": 5050,
+      "仅类别键名规范化数": 1,
+      "本地新增文本": [],
+      "本地删除文本": []
+    }
+  ]
+}

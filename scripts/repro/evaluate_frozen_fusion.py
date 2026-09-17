@@ -24,6 +24,7 @@ from torch.nn import functional as F
 
 EPOCH = 20
 ALPHA = 0.5
+ALPHA_GRID = (0.0, 0.25, 0.5, 0.75, 1.0)
 TRAINABLE_PARAMETERS = 2048
 ALLOWED_SEEDS = (1, 2, 3)
 DATASETS = {
@@ -53,6 +54,57 @@ EXPECTED_SIGNATURE = {
     "order_version": 1,
 }
 EXPECTED_LOSSES = {"kd": 0.0, "adaptive_ce": 1.0, "diversity": 0.0, "contrastive": 0.0}
+
+
+def alpha_branch_name(prefix: str, alpha: float) -> str:
+    if not prefix or not math.isfinite(float(alpha)) or not 0 <= float(alpha) <= 1:
+        raise ValueError("Fusion branch requires a nonempty prefix and alpha in [0, 1]")
+    return f"{prefix}_{float(alpha):.2f}".replace(".", "_")
+
+
+def probability_fusion_grid(
+    student_logits: torch.Tensor,
+    auxiliary_logits: torch.Tensor,
+    alphas: Iterable[float] = ALPHA_GRID,
+    *,
+    prefix: str = "description_probability_alpha",
+) -> dict[str, torch.Tensor]:
+    """Evaluate a frozen global alpha grid without selecting a per-dataset value."""
+    if student_logits.ndim != 2 or auxiliary_logits.shape != student_logits.shape:
+        raise ValueError("Probability fusion requires aligned [B,C] logits")
+    if any(not torch.is_floating_point(value) or not torch.isfinite(value).all().item()
+           for value in (student_logits, auxiliary_logits)):
+        raise ValueError("Probability fusion logits must be finite floating-point tensors")
+    requested = tuple(float(alpha) for alpha in alphas)
+    if not requested or len(set(requested)) != len(requested):
+        raise ValueError("Alpha grid must be nonempty and contain no duplicates")
+    student_probability = torch.softmax(student_logits, dim=-1)
+    auxiliary_probability = torch.softmax(auxiliary_logits, dim=-1)
+    outputs = {}
+    for alpha in requested:
+        name = alpha_branch_name(prefix, alpha)
+        outputs[name] = (1.0 - alpha) * student_probability + alpha * auxiliary_probability
+    return outputs
+
+
+def classname_logits(
+    image_features: torch.Tensor,
+    classname_features: torch.Tensor,
+    logit_scale: torch.Tensor | float,
+) -> torch.Tensor:
+    if image_features.ndim != 2 or classname_features.ndim != 2:
+        raise ValueError("Class-name branch expects image [B,D] and text [C,D] features")
+    if image_features.shape[1] != classname_features.shape[1]:
+        raise ValueError("Image and class-name feature dimensions differ")
+    if any(not torch.is_floating_point(value) or not torch.isfinite(value).all().item()
+           for value in (image_features, classname_features)):
+        raise ValueError("Class-name branch features must be finite floating-point tensors")
+    scale = torch.as_tensor(logit_scale, device=image_features.device, dtype=image_features.dtype)
+    if scale.numel() != 1 or not torch.isfinite(scale).all().item() or scale.item() <= 0:
+        raise ValueError("logit_scale must be one finite positive scalar")
+    images = F.normalize(image_features.float(), dim=-1)
+    texts = F.normalize(classname_features.float(), dim=-1)
+    return (scale.float() * images @ texts.t()).to(image_features.dtype)
 
 
 def sha256_file(path: Path) -> str:
@@ -442,6 +494,48 @@ def description_order_evidence(encoder: Any, classnames: list[str]) -> dict[str,
     return payload
 
 
+def encode_classname_features(
+    cfg: Any,
+    classnames: list[str],
+    clip_model: Any,
+    device: torch.device,
+) -> tuple[torch.Tensor, dict[str, Any]]:
+    """Encode the same single class-name templates used by ZeroshotCLIP."""
+    from clip import clip
+    from trainers.coop import CUSTOM_TEMPLATES
+
+    template = CUSTOM_TEMPLATES.get(cfg.DATASET.NAME)
+    if not isinstance(template, str) or "{}" not in template:
+        raise ValueError(f"No valid class-name template for {cfg.DATASET.NAME}")
+    if not classnames or len(set(classnames)) != len(classnames):
+        raise ValueError("Class-name encoding requires a nonempty unique class order")
+    prompts = [template.format(name.replace("_", " ")) for name in classnames]
+    prompt_payload = json.dumps(prompts, ensure_ascii=False, separators=(",", ":")).encode()
+    prompt_sha256 = hashlib.sha256(prompt_payload).hexdigest()
+    tokens = clip.tokenize(prompts, truncate=True)
+    original_device = next(clip_model.parameters()).device
+    clip_model.to(device).eval()
+    chunks = []
+    text_batch_size = int(cfg.TRAINER.TEXTCONSISTENCY.TEXT_BATCH_SIZE)
+    if text_batch_size < 1:
+        raise ValueError("TEXT_BATCH_SIZE must be positive")
+    with torch.no_grad():
+        for chunk in tokens.split(text_batch_size):
+            chunks.append(F.normalize(clip_model.encode_text(chunk.to(device)).float(), dim=-1))
+    features = torch.cat(chunks, dim=0)
+    clip_model.to(original_device)
+    if features.shape[0] != len(classnames) or not torch.isfinite(features).all().item():
+        raise ValueError("Class-name text encoder returned malformed features")
+    evidence = {
+        "definition": "one dataset-specific class-name prompt per class",
+        "template": template,
+        "prompt_count": len(prompts),
+        "prompts_sha256": prompt_sha256,
+        "class_order": list(classnames),
+    }
+    return features, evidence
+
+
 def _validate_checkpoint_tensors(checkpoint_path: Path, manifest: Mapping[str, Any]) -> None:
     checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
     if checkpoint.get("epoch") != EPOCH or checkpoint.get("repro_signature") != manifest["model_signature"]:
@@ -529,10 +623,13 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
             raise ValueError("CLIP file SHA differs from the baseline signature")
         descriptions = encoder.get_view_features().to(trainer.device)
         mask = encoder.view_mask.to(trainer.device)
+        classnames = list(trainer.dm.dataset.classnames)
+        class_features, classname_evidence = encode_classname_features(
+            cfg, classnames, clip_model, trainer.device)
+        class_features = class_features.to(trainer.device)
         shared_logit_scale = float(trainer.model.logit_scale.exp().detach().cpu().item())
         del clip_model
 
-        classnames = list(trainer.dm.dataset.classnames)
         order_evidence = description_order_evidence(encoder, classnames)
         samples = trainer.dm.dataset.test
         before_inventory = _sample_inventory(samples, data_root)
@@ -544,10 +641,14 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
             "historical_log": sha256_file(Path(metadata["eval_dir"]) / "log.txt"),
         }
 
-        predictions = {name: [] for name in (
+        legacy_branches = (
             "student", "description_mean", "simple_fusion", "description_instance",
             "mean_probability_fusion", "adk_probability_fusion",
-        )}
+        )
+        alpha_branches = tuple(
+            alpha_branch_name("description_probability_alpha", alpha) for alpha in ALPHA_GRID)
+        comparison_branches = ("classname", "classname_probability_fusion", *alpha_branches)
+        predictions = {name: [] for name in (*legacy_branches, *comparison_branches)}
         labels: list[int] = []
         rows: list[dict[str, Any]] = []
         trainer.set_model_mode("eval")
@@ -557,6 +658,22 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
                 student, _, image_features, _ = trainer.model(image, return_attn=False)
                 logits = frozen_fusion_logits(
                     student, image_features, descriptions, mask, trainer.model.logit_scale.exp())
+                class_logits = classname_logits(
+                    image_features, class_features, trainer.model.logit_scale.exp())
+                description_grid = probability_fusion_grid(
+                    student, logits["description_mean"], ALPHA_GRID,
+                    prefix="description_probability_alpha")
+                class_fusion = probability_fusion_grid(
+                    student, class_logits, (ALPHA,), prefix="classname_probability_alpha")
+                if not torch.equal(
+                    description_grid[alpha_branch_name("description_probability_alpha", ALPHA)],
+                    logits["mean_probability_fusion"],
+                ):
+                    raise ValueError("Alpha=0.5 grid result differs from the frozen main method")
+                logits.update(description_grid)
+                logits["classname"] = class_logits
+                logits["classname_probability_fusion"] = class_fusion[
+                    alpha_branch_name("classname_probability_alpha", ALPHA)]
                 batch_predictions = {name: logits[name].argmax(dim=1).cpu().tolist() for name in predictions}
                 batch_labels = label.cpu().tolist()
                 paths = list(batch["impath"])
@@ -615,6 +732,8 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
             "fixed_protocol": {
                 "epoch": EPOCH,
                 "alpha": ALPHA,
+                "alpha_grid": list(ALPHA_GRID),
+                "alpha_grid_scope": "one global grid for robustness reporting; no per-dataset selection",
                 "formula": "simple_fusion=(student_logits+description_mean_logits)/2",
                 "description_mean": "normalize(each valid description), mean(valid), normalize(mean)",
                 "logits": "exp(CLIP.logit_scale) * normalized_image @ normalized_text.T",
@@ -629,6 +748,9 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
                 "trainable_components": [],
             },
             "additional_formulas": {
+                "classname": "exp(CLIP.logit_scale)*normalized_image@normalized_single_template_classname.T",
+                "classname_probability_fusion": "0.5*softmax(student_logits)+0.5*softmax(classname_logits)",
+                "description_probability_grid": "(1-alpha)*softmax(student_logits)+alpha*softmax(description_mean_logits)",
                 "description_attention": "masked_softmax(exp(CLIP.logit_scale)*cos(image, description), dim=descriptions)",
                 "description_instance": "normalize(sum(description_attention*normalized_description))",
                 "mean_probability_fusion": "0.5*softmax(student_logits)+0.5*softmax(description_mean_logits)",
@@ -643,7 +765,8 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
                        "expected_model_sha256": args.expected_source_sha256,
                        "evaluator_sha256": sha256_file(Path(__file__).resolve())},
             "assets": {"clip_sha256": trainer.repro_signature["clip_sha256"],
-                       "template_sha256": encoder.template_sha256},
+                       "template_sha256": encoder.template_sha256,
+                       "classname_template": classname_evidence},
             "effective_config": effective_cfg,
             "baseline_declared_config": {
                 "training_kd_weight": metadata["train_config"]["TRAINER"]["TEXTCONSISTENCY"]["KD_WEIGHT"],

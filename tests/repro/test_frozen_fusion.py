@@ -90,6 +90,36 @@ class FrozenFusionMath(unittest.TestCase):
         self.assertIsNone(gradient)
         self.assertIsNotNone(torch.autograd.grad(result["description_instance"].sum(), descriptions)[0])
 
+    def test_global_alpha_grid_has_fixed_endpoints_and_matches_main_method(self):
+        student = torch.tensor([[2.0, -1.0], [0.5, 0.0]])
+        description = torch.tensor([[-0.5, 1.0], [0.0, 1.0]])
+        result = fusion.probability_fusion_grid(student, description)
+        student_probability = torch.softmax(student, dim=-1)
+        description_probability = torch.softmax(description, dim=-1)
+        torch.testing.assert_close(result["description_probability_alpha_0_00"], student_probability)
+        torch.testing.assert_close(result["description_probability_alpha_1_00"], description_probability)
+        torch.testing.assert_close(
+            result["description_probability_alpha_0_50"],
+            0.5 * student_probability + 0.5 * description_probability,
+        )
+        self.assertEqual(tuple(result), tuple(
+            fusion.alpha_branch_name("description_probability_alpha", alpha)
+            for alpha in fusion.ALPHA_GRID
+        ))
+
+    def test_classname_branch_uses_normalized_features_and_shared_scale(self):
+        image = torch.tensor([[3.0, 0.0], [0.0, -4.0]])
+        text = torch.tensor([[2.0, 0.0], [0.0, -5.0]])
+        result = fusion.classname_logits(image, text, 2.5)
+        torch.testing.assert_close(result, torch.tensor([[2.5, 0.0], [0.0, 2.5]]))
+
+    def test_probability_grid_rejects_duplicate_or_out_of_range_alpha(self):
+        logits = torch.ones(2, 3)
+        with self.assertRaisesRegex(ValueError, "duplicates"):
+            fusion.probability_fusion_grid(logits, logits, (0.5, 0.5))
+        with self.assertRaisesRegex(ValueError, "alpha in"):
+            fusion.probability_fusion_grid(logits, logits, (-0.1,))
+
 
 def _signature():
     return {**fusion.EXPECTED_SIGNATURE, "clip_sha256": "c" * 64}

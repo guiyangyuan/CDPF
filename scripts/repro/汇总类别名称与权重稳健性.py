@@ -36,11 +36,11 @@ def 调和平均(base: float, novel: float) -> float:
     return 0.0 if base + novel == 0 else 2.0 * base * novel / (base + novel)
 
 
-def 读取输入(root: Path) -> list[dict]:
+def 读取输入(root: Path, datasets: list[str]) -> list[dict]:
     rows = []
     expected = {
         (dataset, seed, split)
-        for dataset in 数据集顺序 for seed in (1, 2, 3) for split in ("base", "new")
+        for dataset in datasets for seed in (1, 2, 3) for split in ("base", "new")
     }
     actual = set()
     for path in sorted(root.rglob("metrics.json")):
@@ -89,10 +89,10 @@ def 读取输入(root: Path) -> list[dict]:
     return rows
 
 
-def 构造逐种子(rows: list[dict]) -> list[dict]:
+def 构造逐种子(rows: list[dict], datasets: list[str]) -> list[dict]:
     index = {(row["数据集"], row["种子"], row["分支"]): row for row in rows}
     output = []
-    for dataset in 数据集顺序:
+    for dataset in datasets:
         for seed in (1, 2, 3):
             for method, branch in 方法.items():
                 base = float(index[(dataset, seed, "base")]["指标"][branch]["accuracy"])
@@ -102,12 +102,12 @@ def 构造逐种子(rows: list[dict]) -> list[dict]:
     return output
 
 
-def 汇总方法(seed_rows: list[dict]) -> list[dict]:
+def 汇总方法(seed_rows: list[dict], datasets: list[str]) -> list[dict]:
     grouped = defaultdict(list)
     for row in seed_rows:
         grouped[(row["数据集"], row["方法"])].append(row)
     output = []
-    for dataset in 数据集顺序:
+    for dataset in datasets:
         for method in 方法:
             group = sorted(grouped[(dataset, method)], key=lambda item: item["种子"])
             base = [row["Base"] for row in group]
@@ -124,7 +124,7 @@ def 汇总方法(seed_rows: list[dict]) -> list[dict]:
     return output
 
 
-def 汇总权重(rows: list[dict]) -> list[dict]:
+def 汇总权重(rows: list[dict], datasets: list[str]) -> list[dict]:
     index = {(row["数据集"], row["种子"], row["分支"]): row for row in rows}
     output = []
     for alpha in ALPHA_GRID:
@@ -132,7 +132,7 @@ def 汇总权重(rows: list[dict]) -> list[dict]:
         dataset_hm = []
         dataset_base = []
         dataset_novel = []
-        for dataset in 数据集顺序:
+        for dataset in datasets:
             base = statistics.mean(
                 float(index[(dataset, seed, "base")]["指标"][branch]["accuracy"])
                 for seed in (1, 2, 3))
@@ -143,7 +143,7 @@ def 汇总权重(rows: list[dict]) -> list[dict]:
             dataset_novel.append(novel)
             dataset_hm.append(调和平均(base, novel))
         output.append({
-            "alpha": alpha, "数据集数": len(数据集顺序),
+            "alpha": alpha, "数据集数": len(datasets),
             "宏平均Base": statistics.mean(dataset_base),
             "宏平均Novel": statistics.mean(dataset_novel),
             "宏平均HM": statistics.mean(dataset_hm),
@@ -154,26 +154,29 @@ def 汇总权重(rows: list[dict]) -> list[dict]:
 
 def 写csv(path: Path, rows: list[dict]) -> None:
     with path.open("w", encoding="utf-8-sig", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(file, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
 
-def 生成结果(input_root: Path, output_dir: Path) -> dict:
-    rows = 读取输入(input_root)
-    seed_rows = 构造逐种子(rows)
-    summaries = 汇总方法(seed_rows)
-    alpha_rows = 汇总权重(rows)
+def 生成结果(input_root: Path, output_dir: Path, datasets: list[str] | None = None) -> dict:
+    datasets = list(数据集顺序 if datasets is None else datasets)
+    if not datasets or len(set(datasets)) != len(datasets) or any(item not in 数据集顺序 for item in datasets):
+        raise ValueError("数据集列表必须是非空、无重复的固定十数据集子集")
+    rows = 读取输入(input_root, datasets)
+    seed_rows = 构造逐种子(rows, datasets)
+    summaries = 汇总方法(seed_rows, datasets)
+    alpha_rows = 汇总权重(rows, datasets)
     summary_index = {(row["数据集"], row["方法"]): row for row in summaries}
     macro = {
         method: statistics.mean(summary_index[(dataset, method)]["HM_均值计算"]
-                                for dataset in 数据集顺序)
+                                for dataset in datasets)
         for method in 方法
     }
     description_wins = sum(
         summary_index[(dataset, "TextConsistency")]["HM_均值计算"] >
         summary_index[(dataset, "CoOp+类别名称")]["HM_均值计算"]
-        for dataset in 数据集顺序
+        for dataset in datasets
     )
     paired_wins = sum(
         row["HM"] > next(item["HM"] for item in seed_rows
@@ -182,14 +185,14 @@ def 生成结果(input_root: Path, output_dir: Path) -> dict:
         for row in seed_rows if row["方法"] == "TextConsistency"
     )
     result = {
-        "状态": "通过", "协议": "投稿关键对照-v1", "数据集": 数据集顺序,
+        "状态": "通过", "协议": "投稿关键对照-v1", "数据集": datasets,
         "种子": [1, 2, 3], "全局alpha网格": list(ALPHA_GRID),
         "方法宏平均HM": macro,
         "核心比较": {
             "TextConsistency减CoOp+类别名称_HM_pp": macro["TextConsistency"] - macro["CoOp+类别名称"],
             "TextConsistency胜出数据集数": description_wins,
             "TextConsistency胜出配对种子数": paired_wins,
-            "配对种子总数": 30,
+            "配对种子总数": len(datasets) * 3,
         },
         "权重稳健性": alpha_rows,
         "选择边界": "alpha网格仅用于事后稳健性报告，不按数据集选最优值，主方法仍固定alpha=0.5。",
@@ -206,7 +209,7 @@ def 生成结果(input_root: Path, output_dir: Path) -> dict:
         f"- TextConsistency 宏平均 HM：{macro['TextConsistency']:.2f}",
         f"- CoOp+类别名称 宏平均 HM：{macro['CoOp+类别名称']:.2f}",
         f"- 描述语义净增益：{result['核心比较']['TextConsistency减CoOp+类别名称_HM_pp']:+.2f} pp",
-        f"- 胜出数据集：{description_wins}/10；胜出配对种子：{paired_wins}/30",
+        f"- 胜出数据集：{description_wins}/{len(datasets)}；胜出配对种子：{paired_wins}/{len(datasets) * 3}",
         "",
         "## 全局权重网格",
         "",
@@ -226,8 +229,10 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input-root", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--datasets", nargs="+", choices=数据集顺序, default=None,
+                        help="可选的固定数据集子集；默认严格要求十数据集全部齐全")
     args = parser.parse_args()
-    print(json.dumps(生成结果(args.input_root, args.output_dir), ensure_ascii=False, indent=2))
+    print(json.dumps(生成结果(args.input_root, args.output_dir, args.datasets), ensure_ascii=False, indent=2))
     return 0
 
 

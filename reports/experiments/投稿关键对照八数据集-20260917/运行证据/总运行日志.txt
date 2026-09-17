@@ -1,0 +1,440 @@
+nohup: ignoring input
+{
+  "状态": "完成",
+  "已完成": 48,
+  "总数": 48,
+  "运行": [
+    {
+      "序号": 1,
+      "数据集": "UCF101",
+      "种子": 1,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 21.038947105407715,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/01-UCF101-seed1-base.txt"
+    },
+    {
+      "序号": 2,
+      "数据集": "UCF101",
+      "种子": 1,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 20.645684003829956,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/02-UCF101-seed1-new.txt"
+    },
+    {
+      "序号": 3,
+      "数据集": "UCF101",
+      "种子": 2,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 21.20741033554077,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/03-UCF101-seed2-base.txt"
+    },
+    {
+      "序号": 4,
+      "数据集": "UCF101",
+      "种子": 2,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 20.563891172409058,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/04-UCF101-seed2-new.txt"
+    },
+    {
+      "序号": 5,
+      "数据集": "UCF101",
+      "种子": 3,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 19.13686990737915,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/05-UCF101-seed3-base.txt"
+    },
+    {
+      "序号": 6,
+      "数据集": "UCF101",
+      "种子": 3,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 20.080207347869873,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/06-UCF101-seed3-new.txt"
+    },
+    {
+      "序号": 7,
+      "数据集": "EuroSAT",
+      "种子": 1,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 23.016731023788452,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/07-EuroSAT-seed1-base.txt"
+    },
+    {
+      "序号": 8,
+      "数据集": "EuroSAT",
+      "种子": 1,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 26.859386920928955,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/08-EuroSAT-seed1-new.txt"
+    },
+    {
+      "序号": 9,
+      "数据集": "EuroSAT",
+      "种子": 2,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 24.69362735748291,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/09-EuroSAT-seed2-base.txt"
+    },
+    {
+      "序号": 10,
+      "数据集": "EuroSAT",
+      "种子": 2,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 24.47943139076233,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/10-EuroSAT-seed2-new.txt"
+    },
+    {
+      "序号": 11,
+      "数据集": "EuroSAT",
+      "种子": 3,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 24.333862781524658,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/11-EuroSAT-seed3-base.txt"
+    },
+    {
+      "序号": 12,
+      "数据集": "EuroSAT",
+      "种子": 3,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 21.63581943511963,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/12-EuroSAT-seed3-new.txt"
+    },
+    {
+      "序号": 13,
+      "数据集": "OxfordFlowers",
+      "种子": 1,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 16.6459321975708,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/13-OxfordFlowers-seed1-base.txt"
+    },
+    {
+      "序号": 14,
+      "数据集": "OxfordFlowers",
+      "种子": 1,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 18.086552619934082,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/14-OxfordFlowers-seed1-new.txt"
+    },
+    {
+      "序号": 15,
+      "数据集": "OxfordFlowers",
+      "种子": 2,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 18.890467405319214,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/15-OxfordFlowers-seed2-base.txt"
+    },
+    {
+      "序号": 16,
+      "数据集": "OxfordFlowers",
+      "种子": 2,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 18.42392611503601,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/16-OxfordFlowers-seed2-new.txt"
+    },
+    {
+      "序号": 17,
+      "数据集": "OxfordFlowers",
+      "种子": 3,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 16.633131742477417,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/17-OxfordFlowers-seed3-base.txt"
+    },
+    {
+      "序号": 18,
+      "数据集": "OxfordFlowers",
+      "种子": 3,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 19.29500102996826,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/18-OxfordFlowers-seed3-new.txt"
+    },
+    {
+      "序号": 19,
+      "数据集": "Caltech101",
+      "种子": 1,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 19.994656085968018,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/19-Caltech101-seed1-base.txt"
+    },
+    {
+      "序号": 20,
+      "数据集": "Caltech101",
+      "种子": 1,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 17.520968198776245,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/20-Caltech101-seed1-new.txt"
+    },
+    {
+      "序号": 21,
+      "数据集": "Caltech101",
+      "种子": 2,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 19.963001489639282,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/21-Caltech101-seed2-base.txt"
+    },
+    {
+      "序号": 22,
+      "数据集": "Caltech101",
+      "种子": 2,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 16.789002656936646,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/22-Caltech101-seed2-new.txt"
+    },
+    {
+      "序号": 23,
+      "数据集": "Caltech101",
+      "种子": 3,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 18.579181909561157,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/23-Caltech101-seed3-base.txt"
+    },
+    {
+      "序号": 24,
+      "数据集": "Caltech101",
+      "种子": 3,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 16.726369380950928,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/24-Caltech101-seed3-new.txt"
+    },
+    {
+      "序号": 25,
+      "数据集": "OxfordPets",
+      "种子": 1,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 17.877649307250977,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/25-OxfordPets-seed1-base.txt"
+    },
+    {
+      "序号": 26,
+      "数据集": "OxfordPets",
+      "种子": 1,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 17.46611762046814,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/26-OxfordPets-seed1-new.txt"
+    },
+    {
+      "序号": 27,
+      "数据集": "OxfordPets",
+      "种子": 2,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 18.916722059249878,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/27-OxfordPets-seed2-base.txt"
+    },
+    {
+      "序号": 28,
+      "数据集": "OxfordPets",
+      "种子": 2,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 16.643515586853027,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/28-OxfordPets-seed2-new.txt"
+    },
+    {
+      "序号": 29,
+      "数据集": "OxfordPets",
+      "种子": 3,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 18.92254614830017,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/29-OxfordPets-seed3-base.txt"
+    },
+    {
+      "序号": 30,
+      "数据集": "OxfordPets",
+      "种子": 3,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 17.83338761329651,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/30-OxfordPets-seed3-new.txt"
+    },
+    {
+      "序号": 31,
+      "数据集": "Food101",
+      "种子": 1,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 59.43573522567749,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/31-Food101-seed1-base.txt"
+    },
+    {
+      "序号": 32,
+      "数据集": "Food101",
+      "种子": 1,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 58.21837091445923,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/32-Food101-seed1-new.txt"
+    },
+    {
+      "序号": 33,
+      "数据集": "Food101",
+      "种子": 2,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 59.13688611984253,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/33-Food101-seed2-base.txt"
+    },
+    {
+      "序号": 34,
+      "数据集": "Food101",
+      "种子": 2,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 59.372936964035034,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/34-Food101-seed2-new.txt"
+    },
+    {
+      "序号": 35,
+      "数据集": "Food101",
+      "种子": 3,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 61.067336082458496,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/35-Food101-seed3-base.txt"
+    },
+    {
+      "序号": 36,
+      "数据集": "Food101",
+      "种子": 3,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 60.33952879905701,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/36-Food101-seed3-new.txt"
+    },
+    {
+      "序号": 37,
+      "数据集": "StanfordCars",
+      "种子": 1,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 30.377768516540527,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/37-StanfordCars-seed1-base.txt"
+    },
+    {
+      "序号": 38,
+      "数据集": "StanfordCars",
+      "种子": 1,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 30.860812187194824,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/38-StanfordCars-seed1-new.txt"
+    },
+    {
+      "序号": 39,
+      "数据集": "StanfordCars",
+      "种子": 2,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 29.42580246925354,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/39-StanfordCars-seed2-base.txt"
+    },
+    {
+      "序号": 40,
+      "数据集": "StanfordCars",
+      "种子": 2,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 34.23750448226929,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/40-StanfordCars-seed2-new.txt"
+    },
+    {
+      "序号": 41,
+      "数据集": "StanfordCars",
+      "种子": 3,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 30.594057083129883,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/41-StanfordCars-seed3-base.txt"
+    },
+    {
+      "序号": 42,
+      "数据集": "StanfordCars",
+      "种子": 3,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 30.34461545944214,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/42-StanfordCars-seed3-new.txt"
+    },
+    {
+      "序号": 43,
+      "数据集": "SUN397",
+      "种子": 1,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 96.42666697502136,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/43-SUN397-seed1-base.txt"
+    },
+    {
+      "序号": 44,
+      "数据集": "SUN397",
+      "种子": 1,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 84.58097815513611,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/44-SUN397-seed1-new.txt"
+    },
+    {
+      "序号": 45,
+      "数据集": "SUN397",
+      "种子": 2,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 92.9196252822876,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/45-SUN397-seed2-base.txt"
+    },
+    {
+      "序号": 46,
+      "数据集": "SUN397",
+      "种子": 2,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 84.87339949607849,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/46-SUN397-seed2-new.txt"
+    },
+    {
+      "序号": 47,
+      "数据集": "SUN397",
+      "种子": 3,
+      "分支": "base",
+      "退出码": 0,
+      "耗时秒": 93.77503538131714,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/47-SUN397-seed3-base.txt"
+    },
+    {
+      "序号": 48,
+      "数据集": "SUN397",
+      "种子": 3,
+      "分支": "new",
+      "退出码": 0,
+      "耗时秒": 93.7887909412384,
+      "日志": "/root/autodl-tmp/textconsistency/runs/投稿关键对照-八数据集-20260917-04b6de0/运行日志/48-SUN397-seed3-new.txt"
+    }
+  ]
+}

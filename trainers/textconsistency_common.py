@@ -5,12 +5,13 @@ Groups are contiguous blocks of descriptions, not annotated semantic categories.
 import hashlib
 import json
 import math
-import random
 from pathlib import Path
 
 import torch
 from torch import nn
 from torch.nn import functional as F
+
+from .textconsistency_metadata import description_permutation, view_order_manifest
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 TEMPLATE_FILES = {
@@ -222,35 +223,6 @@ def description_rows(templates, classnames, n_views):
             raise ValueError(f'No nonempty descriptions for class: {name}')
         rows.append(unique)
     return rows
-
-
-def description_permutation(count, policy='contiguous', n_groups=4, seed=0):
-    """Reorder only effective views, with an RNG independent of training seeds.
-
-    Interleaved order gathers positions 0,G,2G,... then 1,1+G,... before
-    the unchanged contiguous hierarchical pooling. No semantic labels are used.
-    """
-    if count < 1 or n_groups < 1 or not isinstance(seed, int) or seed < 0:
-        raise ValueError('Invalid description order configuration')
-    if policy not in ('contiguous', 'interleaved', 'shuffle') or (policy != 'shuffle' and seed != 0):
-        raise ValueError('Use contiguous/interleaved with seed 0, or shuffle with an explicit seed')
-    order = list(range(count))
-    if policy == 'interleaved':
-        order.sort(key=lambda index: (index % n_groups, index // n_groups))
-    elif policy == 'shuffle':
-        random.Random(seed).shuffle(order)
-    return order
-
-
-def view_order_manifest(classnames, counts, policy, n_groups, seed):
-    records = [{'classname': name, 'count': count,
-                'order': description_permutation(count, policy, n_groups, seed)}
-               for name, count in zip(classnames, counts)]
-    if len(classnames) != len(counts) or len(set(classnames)) != len(classnames):
-        raise ValueError('Description ordering requires unique classes and complete counts')
-    payload = {'version': 1, 'policy': policy, 'seed': seed, 'n_groups': n_groups, 'classes': records}
-    payload['sha256'] = hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
-    return payload
 
 
 class CachedMultiViewTextEncoder(nn.Module):

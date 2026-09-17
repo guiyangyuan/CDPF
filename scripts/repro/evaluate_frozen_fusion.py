@@ -38,6 +38,7 @@ DATASETS = {
     "eurosat": ("EuroSAT", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
     "stanford_cars": ("StanfordCars", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
     "sun397": ("SUN397", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
+    "imagenet": ("ImageNet", "e4d4343f31b7cdbcccd3b81ddc99536080c62e573783b27c9366a3c64a7892db"),
 }
 EXPECTED_SIGNATURE = {
     "format": 2,

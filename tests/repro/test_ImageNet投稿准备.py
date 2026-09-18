@@ -1,6 +1,8 @@
 import importlib.util
+import io
 import json
 from pathlib import Path
+import tarfile
 import tempfile
 import unittest
 
@@ -115,6 +117,58 @@ class ImageNet投稿准备测试(unittest.TestCase):
         self.assertEqual(plan["固定协议"]["alpha"], 0.5)
         self.assertEqual(plan["固定协议"]["类别划分"], "按synset排序前500类为Base，后500类为Novel")
         self.assertIn("不搜索", plan["固定协议"]["选择限制"])
+
+    def test_公开归档可恢复解压到训练与验证synset目录(self):
+        module = 加载模块(
+            ROOT / "scripts/repro/准备ImageNet投稿实验.py",
+            "ImageNet公开归档解压",
+        )
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            train_archive = root / "train.tar"
+            val_archive = root / "val.tar"
+            image_root = root / "images"
+
+            with tarfile.open(train_archive, "w") as outer:
+                for synset, payload in (
+                    ("n00000001", b"train-one"),
+                    ("n00000002", b"train-two"),
+                ):
+                    inner_payload = io.BytesIO()
+                    with tarfile.open(fileobj=inner_payload, mode="w") as inner:
+                        info = tarfile.TarInfo(f"{synset}_0001.JPEG")
+                        info.size = len(payload)
+                        inner.addfile(info, io.BytesIO(payload))
+                    data = inner_payload.getvalue()
+                    info = tarfile.TarInfo(f"{synset}.tar")
+                    info.size = len(data)
+                    outer.addfile(info, io.BytesIO(data))
+
+            with tarfile.open(val_archive, "w") as bundle:
+                for index, payload in enumerate((b"val-one", b"val-two"), start=1):
+                    info = tarfile.TarInfo(f"ILSVRC2012_val_{index:08d}.JPEG")
+                    info.size = len(payload)
+                    bundle.addfile(info, io.BytesIO(payload))
+
+            first = module.解压图像归档(
+                train_archive,
+                val_archive,
+                image_root,
+                ["n00000002", "n00000001"],
+                {"n00000001", "n00000002"},
+            )
+            second = module.解压图像归档(
+                train_archive,
+                val_archive,
+                image_root,
+                ["n00000002", "n00000001"],
+                {"n00000001", "n00000002"},
+            )
+            self.assertEqual(first, {"训练写入": 2, "训练复用": 0, "验证写入": 2, "验证复用": 0})
+            self.assertEqual(second, {"训练写入": 0, "训练复用": 2, "验证写入": 0, "验证复用": 2})
+            self.assertEqual((image_root / "train/n00000001/n00000001_0001.JPEG").read_bytes(), b"train-one")
+            self.assertEqual((image_root / "val/n00000002/ILSVRC2012_val_00000001.JPEG").read_bytes(), b"val-one")
+            self.assertEqual((image_root / "val/n00000001/ILSVRC2012_val_00000002.JPEG").read_bytes(), b"val-two")
 
 
 if __name__ == "__main__":

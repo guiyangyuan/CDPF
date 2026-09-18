@@ -1,8 +1,8 @@
 # TextConsistency：工作计划与当前进度
 
-最后更新：2026-09-18（ImageNet投稿实验静态准备和重复类别修复已完成；ImageNet图像尚未下载；GPU未启动）。
+最后更新：2026-09-18（ImageNet公开归档、可恢复解压和实验计划已准备；等待确认1元/日数据盘扩容；GPU未启动，实例已关机）。
 
-**ImageNet 投稿实验的无卡准备已完成。** CoOp 官方 `classnames.txt` 已按固定提交归档并核验为1000个synset、998个唯一显示名称；差异来自两组官方重复名称：`missile`和`sunglasses`。1000个synset均有至少20条描述，没有默认提示词回退。原代码会因重复显示名称拒绝ImageNet Novel分支，现已改为用类别位置保留独立synset身份。三种子计划固定为3次训练、6次CoOp复评、6次冻结融合评估和1次汇总，共16条命令；22项针对性测试和语法编译通过。当前尚未下载1,281,167张训练图像和50,000张验证图像，因此没有ImageNet结果，也不应开GPU。见[ImageNet准备说明](reports/preparation/ImageNet投稿实验-20260918/准备说明.md)和[静态核验](reports/preparation/ImageNet投稿实验-20260918/静态核验.json)。
+**ImageNet 投稿实验的无卡准备已完成，当前只受付费存储阻塞。** CoOp 官方 `classnames.txt` 已核验为1000个synset、998个唯一显示名称；差异来自两组官方重复名称：`missile`和`sunglasses`。1000个synset均有至少20条描述。原代码会因重复显示名称拒绝ImageNet Novel分支，现已改为用类别位置保留独立synset身份。AutoDL公开数据已定位到`/root/autodl-pub/ImageNet/ILSVRC2012`，包含138G训练归档、6.3G验证归档和官方devkit；已实现可恢复流式解压及验证集synset整理。三种子计划固定为3次训练、6次CoOp复评、6次冻结融合评估和1次汇总，共16条命令；23项针对性测试和语法编译通过。服务器release、类别表和初始计划已经部署，实例已关机。当前50G数据盘只剩15G；扩到200GB需新增150GB，页面报价1元/日且关机计费，我没有代为购买。确认扩容前不解压、不启动GPU。见[ImageNet准备说明](reports/preparation/ImageNet投稿实验-20260918/准备说明.md)、[服务器准备收据](reports/preparation/ImageNet投稿实验-20260918/服务器准备收据.json)和[静态核验](reports/preparation/ImageNet投稿实验-20260918/静态核验.json)。
 
 **投稿关键对照已完成并写入论文。** 十数据集上，TextConsistency宏平均HM为78.75，`CoOp + 普通类别名称`为77.23，描述语义净增益+1.53pp；胜出9/10个数据集和25/30个匹配种子。统一 `alpha=0、0.25、0.5、0.75、1` 网格中，预先固定的`alpha=0.5`取得最高HM 78.75，没有按数据集选权重。11个描述文件已对照ProText固定提交并追溯CuPL协议；论文三套源码已写入结果、描述来源、近期文献和真实GitHub地址。见[十数据集关键对照结果](reports/experiments/投稿关键对照十数据集-20260918/汇总/结果报告.md)和[论文打磨进度](论文投稿版本-20260917/论文打磨进度-20260917.md)。
 

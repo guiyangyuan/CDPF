@@ -1,0 +1,65 @@
+{
+  "状态": "等待付费数据盘扩容，GPU未启动",
+  "日期": "2026-09-18",
+  "实例": {
+    "区域与编号": "西北B区/344机",
+    "实例ID": "a5904787c3-600682b1",
+    "准备模式": "无卡模式",
+    "准备后状态": "已关机",
+    "GPU训练已启动": false
+  },
+  "服务器部署": {
+    "release目录": "/root/autodl-tmp/textconsistency/releases/ImageNet投稿准备-20260918-099f364",
+    "上传归档": "/root/autodl-tmp/textconsistency/incoming/ImageNet投稿准备-20260918-099f364.tar.gz",
+    "上传归档SHA256": "7927b4ab2856e6dad44dd3721b10eedaf012af729537ec604b1107b912c01797",
+    "类别名称文件": "/root/autodl-tmp/textconsistency/data/imagenet/classnames.txt",
+    "类别名称SHA256": "89e0b642c6697a3a43a06a2bb65f9fefb3ca295ccc5f4ba9ce385f1a3a58c629",
+    "针对性测试": "22项通过（提交099f364；后续本机新增公开归档解压测试后为23项）"
+  },
+  "AutoDL公开数据": {
+    "页面标称名称": "ImageNet",
+    "页面标称大小": "157.56 GB",
+    "发布方": "image-net.org",
+    "根目录": "/root/autodl-pub/ImageNet/ILSVRC2012",
+    "只读文件系统": "AutoFS:fswestb1",
+    "训练归档": {
+      "文件": "ILSVRC2012_img_train.tar",
+      "页面内ls大小": "138G"
+    },
+    "验证归档": {
+      "文件": "ILSVRC2012_img_val.tar",
+      "页面内ls大小": "6.3G"
+    },
+    "开发包": {
+      "文件": "ILSVRC2012_devkit_t12.tar.gz",
+      "页面内ls大小": "2.5M"
+    },
+    "本地复制归档是否必要": false
+  },
+  "存储阻塞": {
+    "数据盘总量": "50G",
+    "已用": "36G",
+    "可用": "15G",
+    "使用率": "71%",
+    "公开归档解压结果估计": "约130GB",
+    "结论": "当前空间不足，未开始解压",
+    "建议总容量": "200GB",
+    "需新增付费容量": "150GB",
+    "AutoDL页面预览费用": "1.00元/日",
+    "关机是否计费": true,
+    "扩容是否已执行": false
+  },
+  "冻结计划": {
+    "服务器计划文件": "/root/autodl-tmp/textconsistency/setup-logs/ImageNet投稿实验-20260918/执行计划.json",
+    "服务器计划SHA256": "7aec7b31e74c358ac25bd1a48a387de55eb3fc524f680b42844496fdcf9207e4",
+    "协议": "ImageNet投稿主实验-v1",
+    "训练数": 3,
+    "基线训练与复评命令数": 9,
+    "冻结融合评估数": 6,
+    "命令数": 16,
+    "模型源码SHA256": "e4d4343f31b7cdbcccd3b81ddc99536080c62e573783b27c9366a3c64a7892db",
+    "说明": "该计划由提交099f364生成；公开归档解压入口合入后需在新release中重新生成，旧计划不直接执行。"
+  },
+  "下一步": "用户确认是否承担150GB付费数据盘的1元/日费用；确认后扩容到200GB，部署含可恢复解压入口的新release，解压并严格核验，最后才开启GPU训练。",
+  "敏感信息": "未在本收据、代码、日志或Git中保存SSH密码、ImageNet账号或密码。"
+}

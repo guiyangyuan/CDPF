@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 from collections import defaultdict
 import hashlib
+import io
 import json
 import os
 from pathlib import Path
@@ -13,6 +14,7 @@ import re
 import shutil
 import subprocess
 import sys
+import tarfile
 import time
 from typing import Mapping
 
@@ -27,6 +29,11 @@ ROOT = Path(__file__).resolve().parents[2]
 }
 图像后缀 = {".jpeg", ".jpg", ".png"}
 种子 = (1, 2, 3)
+公开数据归档 = {
+    "训练": "ILSVRC2012_img_train.tar",
+    "验证": "ILSVRC2012_img_val.tar",
+    "开发包": "ILSVRC2012_devkit_t12.tar.gz",
+}
 
 
 def sha256(path: Path) -> str:
@@ -119,6 +126,185 @@ def _图像数量(folder: Path) -> int:
         1 for path in folder.iterdir()
         if path.is_file() and not path.name.startswith(".") and path.suffix.casefold() in 图像后缀
     )
+
+
+def _写入归档成员(bundle: tarfile.TarFile, member: tarfile.TarInfo, target: Path) -> bool:
+    """原子写入单个普通文件；返回 True 表示新写入，False 表示复用。"""
+    if not member.isfile():
+        return False
+    if Path(member.name).name != member.name or member.name.startswith("."):
+        raise ValueError(f"归档包含不安全路径：{member.name}")
+    if target.is_file() and target.stat().st_size == member.size:
+        return False
+    source = bundle.extractfile(member)
+    if source is None:
+        raise ValueError(f"无法读取归档成员：{member.name}")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temporary = target.with_name(target.name + ".tmp")
+    with temporary.open("wb") as output:
+        shutil.copyfileobj(source, output, length=1024 * 1024)
+    if temporary.stat().st_size != member.size:
+        temporary.unlink(missing_ok=True)
+        raise ValueError(f"归档成员写入不完整：{member.name}")
+    temporary.replace(target)
+    return True
+
+
+def 解压图像归档(train_archive: Path, val_archive: Path, image_root: Path,
+             validation_synsets: list[str], expected_synsets: set[str]) -> dict[str, int]:
+    """流式解压官方 train/val 归档，可安全重复运行以继续未完成任务。"""
+    if not train_archive.is_file() or not val_archive.is_file():
+        raise FileNotFoundError("缺少 ImageNet 训练或验证归档")
+    if not validation_synsets or any(synset not in expected_synsets for synset in validation_synsets):
+        raise ValueError("验证集标签包含未知 synset")
+    counters = {"训练写入": 0, "训练复用": 0, "验证写入": 0, "验证复用": 0}
+    seen_train: set[str] = set()
+    with tarfile.open(train_archive, "r:") as outer:
+        for class_index, outer_member in enumerate(outer, start=1):
+            if not outer_member.isfile() or not outer_member.name.endswith(".tar"):
+                continue
+            if Path(outer_member.name).name != outer_member.name:
+                raise ValueError(f"训练归档包含不安全路径：{outer_member.name}")
+            synset = outer_member.name[:-4]
+            if synset not in expected_synsets or synset in seen_train:
+                raise ValueError(f"训练归档包含未知或重复 synset：{synset}")
+            seen_train.add(synset)
+            payload = outer.extractfile(outer_member)
+            if payload is None:
+                raise ValueError(f"无法读取训练类别归档：{outer_member.name}")
+            with tarfile.open(fileobj=payload, mode="r:") as inner:
+                for member in inner:
+                    if not member.isfile():
+                        continue
+                    written = _写入归档成员(inner, member, image_root / "train" / synset / member.name)
+                    counters["训练写入" if written else "训练复用"] += 1
+            if class_index % 25 == 0:
+                print(f"训练集解压进度：{len(seen_train)}/{len(expected_synsets)} 类", flush=True)
+    if seen_train != expected_synsets:
+        raise ValueError(f"训练归档类别不完整，缺少：{sorted(expected_synsets - seen_train)}")
+
+    seen_val: set[int] = set()
+    pattern = re.compile(r"ILSVRC2012_val_(\d{8})\.JPEG", re.IGNORECASE)
+    with tarfile.open(val_archive, "r:") as bundle:
+        for member in bundle:
+            if not member.isfile():
+                continue
+            match = pattern.fullmatch(member.name)
+            if match is None:
+                raise ValueError(f"验证归档文件名不符合官方格式：{member.name}")
+            index = int(match.group(1))
+            if index < 1 or index > len(validation_synsets) or index in seen_val:
+                raise ValueError(f"验证归档编号越界或重复：{index}")
+            seen_val.add(index)
+            synset = validation_synsets[index - 1]
+            written = _写入归档成员(bundle, member, image_root / "val" / synset / member.name)
+            counters["验证写入" if written else "验证复用"] += 1
+    if len(seen_val) != len(validation_synsets):
+        raise ValueError("验证归档图像数与开发包标签数不一致")
+    return counters
+
+
+def 读取验证集synset(devkit_archive: Path, expected_synsets: set[str]) -> list[str]:
+    """用官方 devkit 的 meta.mat 将验证集类别 ID 转换为 synset。"""
+    if not devkit_archive.is_file():
+        raise FileNotFoundError(f"缺少 ImageNet 开发包：{devkit_archive}")
+    with tarfile.open(devkit_archive, "r:gz") as bundle:
+        ground_member = next(
+            (member for member in bundle if member.name.endswith("ILSVRC2012_validation_ground_truth.txt")),
+            None,
+        )
+        if ground_member is None:
+            raise ValueError("ImageNet 开发包缺少验证集标签")
+        ground_file = bundle.extractfile(ground_member)
+        if ground_file is None:
+            raise ValueError("无法读取 ImageNet 验证集标签")
+        labels = [int(line) for line in ground_file.read().decode("utf-8").splitlines() if line.strip()]
+
+    with tarfile.open(devkit_archive, "r:gz") as bundle:
+        meta_member = next((member for member in bundle if member.name.endswith("data/meta.mat")), None)
+        if meta_member is None:
+            raise ValueError("ImageNet 开发包缺少 meta.mat")
+        meta_file = bundle.extractfile(meta_member)
+        if meta_file is None:
+            raise ValueError("无法读取 ImageNet meta.mat")
+        try:
+            from scipy.io import loadmat
+        except ImportError as exc:
+            raise RuntimeError("整理 ImageNet 验证集需要 scipy") from exc
+        entries = loadmat(io.BytesIO(meta_file.read()), squeeze_me=True, struct_as_record=False)["synsets"]
+
+    id_to_synset: dict[int, str] = {}
+    for entry in entries.flat:
+        identifier = int(entry.ILSVRC2012_ID)
+        synset = str(entry.WNID)
+        children = int(entry.num_children)
+        if children == 0 and synset in expected_synsets:
+            id_to_synset[identifier] = synset
+    if set(id_to_synset.values()) != expected_synsets:
+        raise ValueError("开发包叶类别与 classnames.txt 不一致")
+    try:
+        validation = [id_to_synset[label] for label in labels]
+    except KeyError as exc:
+        raise ValueError(f"验证集标签引用未知类别ID：{exc.args[0]}") from exc
+    counts = defaultdict(int)
+    for synset in validation:
+        counts[synset] += 1
+    if len(validation) != 50_000 or set(counts.values()) != {50}:
+        raise ValueError("ImageNet 验证集必须为1000类、每类50张")
+    return validation
+
+
+def 解压公开数据(source_root: Path, data_root: Path, public_root: Path,
+             minimum_free_gib: int = 160) -> dict:
+    """从 AutoDL 只读公共归档解压 ImageNet，完成后执行严格数据核验。"""
+    data_root, public_root = data_root.resolve(), public_root.resolve()
+    free_bytes = shutil.disk_usage(data_root).free
+    required = minimum_free_gib * 1024 ** 3
+    if free_bytes < required:
+        raise OSError(
+            f"可用空间不足：{free_bytes / 1024**3:.1f} GiB；至少需要 {minimum_free_gib} GiB"
+        )
+    dataset_root = data_root / "imagenet"
+    classnames_path = dataset_root / "classnames.txt"
+    if sha256(classnames_path) != 官方类别文件SHA256:
+        raise ValueError("请先安装并核验官方 classnames.txt")
+    classnames = 读取类别名称(classnames_path)
+    if len(classnames) != 1000:
+        raise ValueError("ImageNet classnames.txt 必须包含1000类")
+    archives = {name: public_root / filename for name, filename in 公开数据归档.items()}
+    missing = [str(path) for path in archives.values() if not path.is_file()]
+    if missing:
+        raise FileNotFoundError(f"AutoDL 公共数据归档缺失：{missing}")
+    status_path = dataset_root / "公开数据解压状态.json"
+    status = {
+        "状态": "运行中",
+        "开始时间Unix": time.time(),
+        "公共数据目录": str(public_root),
+        "目标目录": str(dataset_root / "images"),
+        "开始前可用GiB": free_bytes / 1024 ** 3,
+        "归档": {name: {"路径": str(path), "字节数": path.stat().st_size} for name, path in archives.items()},
+    }
+    原子写json(status_path, status)
+    try:
+        validation_synsets = 读取验证集synset(archives["开发包"], set(classnames))
+        counters = 解压图像归档(
+            archives["训练"], archives["验证"], dataset_root / "images",
+            validation_synsets, set(classnames),
+        )
+        audit = 核验数据集(source_root, data_root)
+        status.update({
+            "状态": "完成",
+            "结束时间Unix": time.time(),
+            "解压统计": counters,
+            "数据核验": audit,
+        })
+        status["总耗时秒"] = status["结束时间Unix"] - status["开始时间Unix"]
+        原子写json(status_path, status)
+        return status
+    except Exception as exc:
+        status.update({"状态": "失败", "结束时间Unix": time.time(), "错误": f"{type(exc).__name__}: {exc}"})
+        原子写json(status_path, status)
+        raise
 
 
 def 核验图像目录(image_root: Path, classnames: Mapping[str, str], *,
@@ -412,6 +598,15 @@ def main() -> int:
     verify.add_argument("--data-root", type=Path, required=True)
     verify.add_argument("--output", type=Path)
 
+    extract = subparsers.add_parser("解压公开数据")
+    extract.add_argument("--data-root", type=Path, required=True)
+    extract.add_argument(
+        "--public-root",
+        type=Path,
+        default=Path("/root/autodl-pub/ImageNet/ILSVRC2012"),
+    )
+    extract.add_argument("--minimum-free-gib", type=int, default=160)
+
     planning = subparsers.add_parser("计划")
     planning.add_argument("--data-root", type=Path, required=True)
     planning.add_argument("--output-root", type=Path, required=True)
@@ -436,6 +631,16 @@ def main() -> int:
         if args.output:
             原子写json(args.output, result)
         print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
+    if args.command == "解压公开数据":
+        if args.minimum_free_gib < 1:
+            parser.error("--minimum-free-gib 必须为正整数")
+        result = 解压公开数据(ROOT, args.data_root, args.public_root, args.minimum_free_gib)
+        print(json.dumps({
+            "状态": result["状态"],
+            "总耗时秒": result["总耗时秒"],
+            "解压统计": result["解压统计"],
+        }, ensure_ascii=False, indent=2))
         return 0
     if args.command == "计划":
         if args.output_root.exists():

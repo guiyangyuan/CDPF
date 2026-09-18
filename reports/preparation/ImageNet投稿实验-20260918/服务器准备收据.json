@@ -1,5 +1,5 @@
 {
-  "状态": "等待付费数据盘扩容，GPU未启动",
+  "状态": "真实数据准备与冻结计划完成，GPU未启动，实例已关机",
   "日期": "2026-09-18",
   "实例": {
     "区域与编号": "西北B区/344机",
@@ -9,57 +9,57 @@
     "GPU训练已启动": false
   },
   "服务器部署": {
-    "release目录": "/root/autodl-tmp/textconsistency/releases/ImageNet投稿准备-20260918-099f364",
-    "上传归档": "/root/autodl-tmp/textconsistency/incoming/ImageNet投稿准备-20260918-099f364.tar.gz",
-    "上传归档SHA256": "7927b4ab2856e6dad44dd3721b10eedaf012af729537ec604b1107b912c01797",
+    "Git提交": "45ff8bab09692d6ed3f7d90f8822d030fb6db354",
+    "release目录": "/root/autodl-tmp/textconsistency/releases/ImageNet投稿准备-20260918-45ff8ba-upload",
+    "上传归档": "/root/ImageNet投稿准备-20260918-45ff8ba.tar.gz",
+    "上传归档字节数": 92972662,
+    "上传归档SHA256": "5f9be422e49d68f9f57527f4b6710ea319c7914d737049e160c2e6c5689c1c15",
     "类别名称文件": "/root/autodl-tmp/textconsistency/data/imagenet/classnames.txt",
     "类别名称SHA256": "89e0b642c6697a3a43a06a2bb65f9fefb3ca295ccc5f4ba9ce385f1a3a58c629",
-    "针对性测试": "22项通过（提交099f364；后续本机新增公开归档解压测试后为23项）"
+    "针对性测试": "服务器23项通过"
   },
   "AutoDL公开数据": {
     "页面标称名称": "ImageNet",
     "页面标称大小": "157.56 GB",
     "发布方": "image-net.org",
     "根目录": "/root/autodl-pub/ImageNet/ILSVRC2012",
-    "只读文件系统": "AutoFS:fswestb1",
-    "训练归档": {
-      "文件": "ILSVRC2012_img_train.tar",
-      "页面内ls大小": "138G"
-    },
-    "验证归档": {
-      "文件": "ILSVRC2012_img_val.tar",
-      "页面内ls大小": "6.3G"
-    },
-    "开发包": {
-      "文件": "ILSVRC2012_devkit_t12.tar.gz",
-      "页面内ls大小": "2.5M"
-    },
+    "训练归档": "ILSVRC2012_img_train.tar（页面内ls为138G）",
+    "验证归档": "ILSVRC2012_img_val.tar（页面内ls为6.3G）",
+    "开发包": "ILSVRC2012_devkit_t12.tar.gz（页面内ls为2.5M）",
     "本地复制归档是否必要": false
   },
-  "存储阻塞": {
-    "数据盘总量": "50G",
-    "已用": "36G",
-    "可用": "15G",
-    "使用率": "71%",
-    "公开归档解压结果估计": "约130GB",
-    "结论": "当前空间不足，未开始解压",
-    "建议总容量": "200GB",
-    "需新增付费容量": "150GB",
-    "AutoDL页面预览费用": "1.00元/日",
+  "存储": {
+    "扩容前": "50G总量、36G已用、15G可用",
+    "扩容后总量": "200GB",
+    "新增付费容量": "150GB",
+    "AutoDL页面费用": "1.00元/日",
     "关机是否计费": true,
-    "扩容是否已执行": false
+    "扩容是否已执行": true,
+    "解压前可用": "165G",
+    "解压核验后可用": "约19G"
+  },
+  "真实数据核验": {
+    "状态": "通过",
+    "数据目录": "/root/autodl-tmp/textconsistency/data/imagenet",
+    "类别目录数": 1000,
+    "训练图像数": 1281167,
+    "验证图像数": 50000,
+    "训练每类最少": 732,
+    "训练每类最多": 1300,
+    "验证每类": 50,
+    "类别目录完全匹配": true,
+    "状态文件": "/root/autodl-tmp/textconsistency/data/imagenet/公开数据解压状态.json"
   },
   "冻结计划": {
-    "服务器计划文件": "/root/autodl-tmp/textconsistency/setup-logs/ImageNet投稿实验-20260918/执行计划.json",
-    "服务器计划SHA256": "7aec7b31e74c358ac25bd1a48a387de55eb3fc524f680b42844496fdcf9207e4",
+    "服务器计划文件": "/root/autodl-tmp/textconsistency/setup-logs/ImageNet投稿实验-20260918/执行计划45ff8ba.json",
     "协议": "ImageNet投稿主实验-v1",
     "训练数": 3,
     "基线训练与复评命令数": 9,
     "冻结融合评估数": 6,
     "命令数": 16,
     "模型源码SHA256": "e4d4343f31b7cdbcccd3b81ddc99536080c62e573783b27c9366a3c64a7892db",
-    "说明": "该计划由提交099f364生成；公开归档解压入口合入后需在新release中重新生成，旧计划不直接执行。"
+    "状态": "待GPU执行"
   },
-  "下一步": "用户确认是否承担150GB付费数据盘的1元/日费用；确认后扩容到200GB，部署含可恢复解压入口的新release，解压并严格核验，最后才开启GPU训练。",
+  "下一步": "在AutoDL页面确认RTX 4090开机价格后启动GPU，执行冻结计划；保存并核验结果后立即关机。",
   "敏感信息": "未在本收据、代码、日志或Git中保存SSH密码、ImageNet账号或密码。"
 }

@@ -3,10 +3,11 @@ import builtins
 import hashlib
 import json
 from pathlib import Path
+import sys
 import tempfile
+from types import ModuleType, SimpleNamespace
 import unittest
 from unittest import mock
-from types import SimpleNamespace
 
 import torch
 import yaml
@@ -119,6 +120,55 @@ class FrozenFusionMath(unittest.TestCase):
             fusion.probability_fusion_grid(logits, logits, (0.5, 0.5))
         with self.assertRaisesRegex(ValueError, "alpha in"):
             fusion.probability_fusion_grid(logits, logits, (-0.1,))
+
+    def test_imagenet_baseline_signature_includes_inactive_loss_identity(self):
+        self.assertEqual(
+            fusion._expected_signature("imagenet")["loss_identity"],
+            {
+                "format": 1,
+                "mode": "full_kl",
+                "temperature": 2.0,
+                "effective_weight": 0.0,
+                "active": False,
+                "non_target_weighting": "none_full_distribution_kl",
+            },
+        )
+
+    def test_classname_encoder_accepts_duplicate_imagenet_display_names(self):
+        clip_package = ModuleType("clip")
+        clip_api = ModuleType("clip.clip")
+        clip_api.tokenize = lambda prompts, truncate: torch.arange(len(prompts)).reshape(-1, 1)
+        clip_package.clip = clip_api
+        trainers_package = ModuleType("trainers")
+        coop_module = ModuleType("trainers.coop")
+        coop_module.CUSTOM_TEMPLATES = {"ImageNet": "a photo of a {}."}
+
+        class DummyClip(torch.nn.Module):
+            def __init__(self):
+                super().__init__()
+                self.anchor = torch.nn.Parameter(torch.ones(1))
+
+            def encode_text(self, tokens):
+                values = tokens.float() + 1
+                return torch.cat((values, torch.ones_like(values)), dim=1)
+
+        cfg = SimpleNamespace(
+            DATASET=SimpleNamespace(NAME="ImageNet"),
+            TRAINER=SimpleNamespace(TEXTCONSISTENCY=SimpleNamespace(TEXT_BATCH_SIZE=8)),
+        )
+        modules = {
+            "clip": clip_package,
+            "clip.clip": clip_api,
+            "trainers": trainers_package,
+            "trainers.coop": coop_module,
+        }
+        with mock.patch.dict(sys.modules, modules):
+            features, evidence = fusion.encode_classname_features(
+                cfg, ["missile", "missile"], DummyClip(), torch.device("cpu"))
+
+        self.assertEqual(tuple(features.shape), (2, 2))
+        self.assertEqual(evidence["class_order"], ["missile", "missile"])
+        self.assertEqual(evidence["prompt_count"], 2)
 
 
 def _signature():

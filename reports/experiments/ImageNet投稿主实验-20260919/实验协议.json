@@ -1,0 +1,14 @@
+{
+  "协议": "ImageNet投稿主实验-v1",
+  "数据集": "ImageNet",
+  "数据集键": "imagenet",
+  "种子": [
+    1,
+    2,
+    3
+  ],
+  "训练轮数": 20,
+  "样本数": 16,
+  "骨干": "ViT-B/16",
+  "主比较": "0.5*softmax(CoOp logits)+0.5*softmax(冻结均值描述 logits)"
+}

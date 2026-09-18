@@ -247,7 +247,17 @@ def _expected_signature(dataset: str) -> dict[str, Any]:
     if dataset == "ucf101":
         return {field: value for field, value in EXPECTED_SIGNATURE.items()
                 if field not in ("view_order", "order_seed", "order_version")} | {"format": 1}
-    return dict(EXPECTED_SIGNATURE)
+    signature = dict(EXPECTED_SIGNATURE)
+    if dataset == "imagenet":
+        signature["loss_identity"] = {
+            "format": 1,
+            "mode": "full_kl",
+            "temperature": 2.0,
+            "effective_weight": 0.0,
+            "active": False,
+            "non_target_weighting": "none_full_distribution_kl",
+        }
+    return signature
 
 
 def _validate_provenance(payload: Mapping[str, Any], dataset: str, seed: int, split: str) -> None:
@@ -508,8 +518,8 @@ def encode_classname_features(
     template = CUSTOM_TEMPLATES.get(cfg.DATASET.NAME)
     if not isinstance(template, str) or "{}" not in template:
         raise ValueError(f"No valid class-name template for {cfg.DATASET.NAME}")
-    if not classnames or len(set(classnames)) != len(classnames):
-        raise ValueError("Class-name encoding requires a nonempty unique class order")
+    if not classnames:
+        raise ValueError("Class-name encoding requires a nonempty class order")
     prompts = [template.format(name.replace("_", " ")) for name in classnames]
     prompt_payload = json.dumps(prompts, ensure_ascii=False, separators=(",", ":")).encode()
     prompt_sha256 = hashlib.sha256(prompt_payload).hexdigest()

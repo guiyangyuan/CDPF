@@ -6,7 +6,6 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
-import runpy
 import shutil
 from pathlib import Path
 
@@ -27,7 +26,7 @@ Overleaf目录 = Path(__file__).resolve().parent / "Overleaf直接替换"
 
 图名列表 = [
     "图1-方法框架.pdf",
-    "图2-十数据集增益.pdf",
+    "图2-十一数据集增益.pdf",
     "图3-消融稳定性效率.pdf",
     "图4-语义对照与权重稳健性.pdf",
 ]
@@ -43,6 +42,7 @@ Overleaf目录 = Path(__file__).resolve().parent / "Overleaf直接替换"
     "Food101",
     "StanfordCars",
     "SUN397",
+    "ImageNet",
 ]
 
 简称 = {
@@ -56,6 +56,7 @@ Overleaf目录 = Path(__file__).resolve().parent / "Overleaf直接替换"
     "Food101": "Food",
     "StanfordCars": "Cars",
     "SUN397": "SUN",
+    "ImageNet": "IN",
 }
 
 
@@ -111,7 +112,7 @@ def 主要结果() -> dict[tuple[str, str], dict[str, float]]:
     rows = 读取_csv(
         结果目录 / "斯坦福汽车与SUN397扩展验证-20260917" / "十数据集结果.csv"
     )
-    return {
+    index = {
         (row["数据集"], row["方法"]): {
             "Base": float(row["Base"]),
             "Novel": float(row["Novel"]),
@@ -119,25 +120,38 @@ def 主要结果() -> dict[tuple[str, str], dict[str, float]]:
         }
         for row in rows
     }
+    imagenet = json.loads(
+        (结果目录 / "ImageNet投稿主实验-20260919" / "结果汇总.json")
+        .read_text(encoding="utf-8")
+    )["均值"]
+    for source, method in (
+        ("student", "CoOp"),
+        ("mean_probability_fusion", "固定均值概率融合"),
+    ):
+        row = imagenet[source]
+        index[("ImageNet", method)] = {
+            "Base": float(row["Base均值"]),
+            "Novel": float(row["Novel均值"]),
+            "HM": float(row["种子HM均值"]),
+        }
+    return index
 
 
 def 生成本地主表(index: dict[tuple[str, str], dict[str, float]]) -> None:
-    methods = ["Zero-shot CLIP", "CoOp", "CoCoOp", "固定均值概率融合"]
+    methods = ["CoOp", "固定均值概率融合"]
     labels = {
-        "Zero-shot CLIP": "Zero-shot CLIP",
         "CoOp": "CoOp",
-        "CoCoOp": "CoCoOp",
         "固定均值概率融合": r"\textbf{TextConsistency}",
     }
     lines = [
         r"\begin{table*}[t]",
         r"\centering",
-        r"\caption{Locally evaluated harmonic-mean accuracy (\%) on ten base-to-novel benchmarks. All methods use CLIP ViT-B/16 and the official class splits. CoOp, CoCoOp, and TextConsistency are averaged over three seeds.}",
+        r"\caption{Matched harmonic-mean accuracy (\%) on the standard eleven base-to-novel benchmarks. Both methods use CLIP ViT-B/16, the official class splits, and the same three CoOp checkpoints per dataset.}",
         r"\label{tab:local_hm}",
         r"\scriptsize",
         r"\setlength{\tabcolsep}{3.2pt}",
         r"\resizebox{\textwidth}{!}{%",
-        r"\begin{tabular}{lrrrrrrrrrrr}",
+        r"\begin{tabular}{lrrrrrrrrrrrr}",
         r"\toprule",
         "Method & " + " & ".join(简称[d] for d in 数据集顺序) + r" & Avg. \\",
         r"\midrule",
@@ -153,17 +167,15 @@ def 生成本地主表(index: dict[tuple[str, str], dict[str, float]]) -> None:
 
 
 def 生成平均表(index: dict[tuple[str, str], dict[str, float]]) -> None:
-    methods = ["Zero-shot CLIP", "CoOp", "CoCoOp", "固定均值概率融合"]
+    methods = ["CoOp", "固定均值概率融合"]
     labels = {
-        "Zero-shot CLIP": "Zero-shot CLIP",
         "CoOp": "CoOp",
-        "CoCoOp": "CoCoOp",
         "固定均值概率融合": r"\textbf{TextConsistency}",
     }
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Ten-dataset macro averages (\%). HM is computed for each dataset before macro averaging.}",
+        r"\caption{Eleven-dataset macro averages for the matched comparison (\%). HM is computed for each dataset before macro averaging.}",
         r"\label{tab:average_metrics}",
         r"\small",
         r"\begin{tabular}{lrrr}",
@@ -173,7 +185,7 @@ def 生成平均表(index: dict[tuple[str, str], dict[str, float]]) -> None:
     ]
     for method in methods:
         values = {
-            metric: sum(index[(dataset, method)][metric] for dataset in 数据集顺序) / 10
+            metric: sum(index[(dataset, method)][metric] for dataset in 数据集顺序) / len(数据集顺序)
             for metric in ("Base", "Novel", "HM")
         }
         row = f"{labels[method]} & {数字(values['Base'])} & {数字(values['Novel'])} & {数字(values['HM'])} " + r"\\"
@@ -196,7 +208,7 @@ def 生成文献表() -> None:
         r"\resizebox{\textwidth}{!}{%",
         r"\begin{tabular}{lrrrrrrrrrrr}",
         r"\toprule",
-        "Method & " + " & ".join(简称[d] for d in 数据集顺序) + r" & Avg. \\",
+        "Method & " + " & ".join(简称[d] for d in 数据集顺序[:-1]) + r" & Avg. \\",
         r"\midrule",
     ]
     for row in rows:
@@ -209,7 +221,7 @@ def 生成文献表() -> None:
             "PromptSRC": "PromptSRC",
         }
         label = r"\textbf{TextConsistency}" if method == "本文方法" else published_labels[method] + r"$^\dagger$"
-        values = [float(row[d]) for d in 数据集顺序]
+        values = [float(row[d]) for d in 数据集顺序[:-1]]
         avg = float(row["十数据集等权HM"])
         avg_cell = rf"\textbf{{{数字(avg)}}}" if method == "本文方法" else 数字(avg)
         lines.append(f"{label} & " + " & ".join(数字(v) for v in values) + f" & {avg_cell} " + r"\\")
@@ -246,6 +258,12 @@ def 组件结果() -> dict[tuple[str, str], float]:
         data = json.loads(path.read_text(encoding="utf-8"))
         for key, label in internal.items():
             mapped[(dataset, label)] = float(data["均值"][key]["均值的HM"])
+    imagenet = json.loads(
+        (结果目录 / "ImageNet投稿主实验-20260919" / "结果汇总.json")
+        .read_text(encoding="utf-8")
+    )
+    for key, label in internal.items():
+        mapped[("ImageNet", label)] = float(imagenet["均值"][key]["种子HM均值"])
     return mapped
 
 
@@ -259,7 +277,7 @@ def 生成组件表(values: dict[tuple[str, str], float]) -> None:
         r"\scriptsize",
         r"\setlength{\tabcolsep}{3.2pt}",
         r"\resizebox{\textwidth}{!}{%",
-        r"\begin{tabular}{lrrrrrrrrrrr}",
+        r"\begin{tabular}{lrrrrrrrrrrrr}",
         r"\toprule",
         "Method & " + " & ".join(简称[d] for d in 数据集顺序) + r" & Avg. \\",
         r"\midrule",
@@ -297,7 +315,7 @@ TextConsistency & 64 & 90.796 & 704.88 & 0.74\% \\
 
 def 生成类别名称与权重表() -> None:
     rows = 读取_csv(
-        结果目录 / "投稿关键对照十数据集-20260918" / "汇总" / "关键对照数据集汇总.csv"
+        结果目录 / "ImageNet投稿主实验-20260919" / "十一数据集方法宏平均.csv"
     )
     labels = {
         "CoOp": "CoOp",
@@ -306,12 +324,11 @@ def 生成类别名称与权重表() -> None:
         "类别描述": "Description only",
         "TextConsistency": r"\textbf{TextConsistency}",
     }
-    index = {(row["数据集"], row["方法"]): row for row in rows}
-    control_name = {"FGVC-Aircraft": "FGVCAircraft"}
+    index = {row["方法"]: row for row in rows}
     lines = [
         r"\begin{table}[t]",
         r"\centering",
-        r"\caption{Class-name control on all ten datasets with matched frozen checkpoints. All values are three-seed macro averages (\%).}",
+        r"\caption{Class-name control on all eleven datasets with matched frozen checkpoints. All values are three-seed macro averages (\%).}",
         r"\label{tab:class_name_control}",
         r"\small",
         r"\setlength{\tabcolsep}{7pt}",
@@ -321,10 +338,10 @@ def 生成类别名称与权重表() -> None:
         r"\midrule",
     ]
     for method, label in labels.items():
-        selected = [index[(control_name.get(dataset, dataset), method)] for dataset in 数据集顺序]
-        base = sum(float(row["Base均值"]) for row in selected) / len(selected)
-        novel = sum(float(row["Novel均值"]) for row in selected) / len(selected)
-        hm = sum(float(row["HM_均值计算"]) for row in selected) / len(selected)
+        row = index[method]
+        base = float(row["Base宏平均"])
+        novel = float(row["Novel宏平均"])
+        hm = float(row["HM宏平均"])
         values = [数字(base), 数字(novel), 数字(hm)]
         if method == "TextConsistency":
             values = [rf"\textbf{{{value}}}" for value in values]
@@ -437,43 +454,36 @@ def 生成数据集增益图(index: dict[tuple[str, str], dict[str, float]]) -> 
     labels = [简称[d] for d in 数据集顺序]
     gains: dict[str, dict[str, float]] = {}
     coop = []
-    cocoop = []
     for dataset in 数据集顺序:
         target = index[(dataset, "固定均值概率融合")]["HM"]
         gain_coop = target - index[(dataset, "CoOp")]["HM"]
-        gain_cocoop = target - index[(dataset, "CoCoOp")]["HM"]
-        gains[dataset] = {"相对CoOp": gain_coop, "相对CoCoOp": gain_cocoop}
+        gains[dataset] = {"相对CoOp": gain_coop}
         coop.append(gain_coop)
-        cocoop.append(gain_cocoop)
 
     y = np.arange(len(labels))
-    height = 0.34
     fig, ax = plt.subplots(figsize=(10.6, 5.2))
-    bars1 = ax.barh(y + height / 2, coop, height, color="#2F5D9B", label="vs. CoOp")
-    bars2 = ax.barh(y - height / 2, cocoop, height, color="#D97721", label="vs. local CoCoOp")
+    bars = ax.barh(y, coop, 0.58, color="#2F5D9B")
     ax.axvline(0, color="#45505E", lw=0.9)
     ax.set_yticks(y, labels)
     ax.invert_yaxis()
     ax.set_xlabel("HM improvement (percentage points)")
-    ax.set_title("TextConsistency improves HM on all ten datasets")
+    ax.set_title("TextConsistency improves matched CoOp HM on all eleven datasets")
     ax.grid(axis="x", color="#D8DEE8", lw=0.6, alpha=0.75)
     ax.set_axisbelow(True)
-    ax.legend(loc="lower right", frameon=False)
-    xmax = max(max(coop), max(cocoop))
+    xmax = max(coop)
     ax.set_xlim(0, xmax + 1.25)
-    for bars in (bars1, bars2):
-        for bar in bars:
-            value = bar.get_width()
-            ax.text(
-                value + 0.10,
-                bar.get_y() + bar.get_height() / 2,
-                f"+{value:.2f}",
-                va="center",
-                fontsize=7.5,
-                color="#293241",
-            )
+    for bar in bars:
+        value = bar.get_width()
+        ax.text(
+            value + 0.10,
+            bar.get_y() + bar.get_height() / 2,
+            f"+{value:.2f}",
+            va="center",
+            fontsize=7.5,
+            color="#293241",
+        )
     fig.tight_layout()
-    保存图(fig, "图2-十数据集增益")
+    保存图(fig, "图2-十一数据集增益")
     return gains
 
 
@@ -499,6 +509,14 @@ def 读取逐种子增益() -> dict[str, list[float]]:
     for dataset, path in paths.items():
         data = json.loads(path.read_text(encoding="utf-8"))
         result[dataset] = [float(row["融合相对CoOp"]["HM增益pp"]) for row in data["逐种子"]]
+    imagenet = json.loads(
+        (结果目录 / "ImageNet投稿主实验-20260919" / "结果汇总.json")
+        .read_text(encoding="utf-8")
+    )
+    result["ImageNet"] = [
+        float(row["融合相对CoOp"]["HM增益pp"])
+        for row in imagenet["逐种子"]
+    ]
 
     assert all(len(values) == 3 for values in result.values())
     assert all(value > 0 for values in result.values() for value in values)
@@ -508,7 +526,10 @@ def 读取逐种子增益() -> dict[str, list[float]]:
 def 生成诊断图(components: dict[tuple[str, str], float]) -> dict[str, list[float]]:
     seed_gains = 读取逐种子增益()
     methods = ["CoOp", "Description only", "Logit fusion", "Probability fusion"]
-    averages = [sum(components[(dataset, method)] for dataset in 数据集顺序) / 10 for method in methods]
+    averages = [
+        sum(components[(dataset, method)] for dataset in 数据集顺序) / len(数据集顺序)
+        for method in methods
+    ]
 
     fig, axes = plt.subplots(1, 3, figsize=(12.0, 3.75), gridspec_kw={"width_ratios": [0.95, 1.85, 0.95]})
 
@@ -520,7 +541,7 @@ def 生成诊断图(components: dict[tuple[str, str], float]) -> dict[str, list[
     ax.set_yticks(y, ["CoOp", "Description", "Logit fusion", "Probability fusion"])
     ax.invert_yaxis()
     ax.set_xlim(73.5, 79.3)
-    ax.set_xlabel("Ten-dataset HM (%)")
+    ax.set_xlabel("Eleven-dataset HM (%)")
     ax.set_title("(a) Component ablation", loc="left", weight="bold")
     ax.grid(axis="x", color="#D8DEE8", lw=0.6)
     for yi, value in zip(y, averages):
@@ -550,16 +571,16 @@ def 生成诊断图(components: dict[tuple[str, str], float]) -> dict[str, list[
 
     ax = axes[2]
     overhead = [0.0, 0.7411685601111717]
-    hm = [75.33099140907073, 78.75419411256128]
+    hm = [averages[0], averages[3]]
     ax.scatter(overhead[0], hm[0], s=72, color="#8391A5", zorder=3)
     ax.scatter(overhead[1], hm[1], s=82, color="#2E7D65", zorder=3)
     ax.annotate("", xy=(overhead[1], hm[1]), xytext=(overhead[0], hm[0]), arrowprops=dict(arrowstyle="->", color="#D97721", lw=1.5))
-    ax.text(overhead[0] + 0.03, hm[0] - 0.28, "CoOp\n75.33 HM", fontsize=8, va="top")
-    ax.text(overhead[1] - 0.03, hm[1] + 0.20, "TextConsistency\n78.75 HM", fontsize=8, ha="right", va="bottom")
+    ax.text(overhead[0] + 0.03, hm[0] - 0.28, f"CoOp\n{hm[0]:.2f} HM", fontsize=8, va="top")
+    ax.text(overhead[1] - 0.03, hm[1] + 0.20, f"TextConsistency\n{hm[1]:.2f} HM", fontsize=8, ha="right", va="bottom")
     ax.set_xlim(-0.08, 0.86)
     ax.set_ylim(74.5, 79.6)
     ax.set_xlabel("Batch-64 latency overhead (%)")
-    ax.set_ylabel("Ten-dataset HM (%)")
+    ax.set_ylabel("Eleven-dataset HM (%)")
     ax.set_title("(c) Accuracy-cost summary", loc="left", weight="bold")
     ax.grid(color="#D8DEE8", lw=0.6)
 
@@ -568,20 +589,113 @@ def 生成诊断图(components: dict[tuple[str, str], float]) -> dict[str, list[
     return seed_gains
 
 
+def 生成语义对照图() -> tuple[dict[str, float], list[dict[str, float]]]:
+    control_rows = 读取_csv(
+        结果目录 / "投稿关键对照十数据集-20260918" / "汇总" / "关键对照数据集汇总.csv"
+    )
+    index = {
+        (row["数据集"], row["方法"]): float(row["HM_均值计算"])
+        for row in control_rows
+    }
+    control_names = {"FGVC-Aircraft": "FGVCAircraft"}
+    gains = [
+        index[(control_names.get(dataset, dataset), "TextConsistency")]
+        - index[(control_names.get(dataset, dataset), "CoOp+类别名称")]
+        for dataset in 数据集顺序[:-1]
+    ]
+    imagenet_rows = 读取_csv(
+        结果目录 / "ImageNet投稿主实验-20260919" / "三种子统计.csv"
+    )
+    imagenet_index = {row["方法"]: float(row["种子HM均值"]) for row in imagenet_rows}
+    gains.append(imagenet_index["固定均值概率融合"] - imagenet_index["CoOp+类别名称"])
+
+    alpha_rows = [
+        row
+        for row in 读取_csv(
+            结果目录 / "ImageNet投稿主实验-20260919" / "权重稳健性.csv"
+        )
+        if row["范围"] == "十一数据集"
+    ]
+    curves = {
+        "alpha": [float(row["alpha"]) for row in alpha_rows],
+        "Base": [float(row["Base"]) for row in alpha_rows],
+        "Novel": [float(row["Novel"]) for row in alpha_rows],
+        "HM": [float(row["HM"]) for row in alpha_rows],
+    }
+
+    fig, axes = plt.subplots(1, 2, figsize=(10.8, 3.55), constrained_layout=True)
+    colors = ["#2F6F9F" if value >= 0 else "#B24745" for value in gains]
+    axes[0].bar(range(len(gains)), gains, color=colors, width=0.68)
+    axes[0].axhline(0, color="#444444", linewidth=0.8)
+    axes[0].set_xticks(range(len(gains)), [简称[d] for d in 数据集顺序], rotation=28, ha="right")
+    axes[0].set_ylabel("HM gain over CoOp + class name (pp)")
+    axes[0].set_title("(a) Description-specific contribution")
+    axes[0].grid(axis="y", alpha=0.25, linewidth=0.6)
+    for i, value in enumerate(gains):
+        axes[0].text(
+            i,
+            value + (0.13 if value >= 0 else -0.13),
+            f"{value:+.2f}",
+            ha="center",
+            va="bottom" if value >= 0 else "top",
+            fontsize=7.3,
+        )
+
+    styles = {"Base": ("#577590", "o"), "Novel": ("#F8961E", "s"), "HM": ("#2A9D8F", "D")}
+    for label in ("Base", "Novel", "HM"):
+        color, marker = styles[label]
+        axes[1].plot(
+            curves["alpha"],
+            curves[label],
+            label=label,
+            color=color,
+            marker=marker,
+            linewidth=1.8,
+            markersize=4.8,
+        )
+    axes[1].axvline(0.5, color="#555555", linestyle="--", linewidth=0.9, alpha=0.7)
+    axes[1].set_xticks(curves["alpha"])
+    axes[1].set_xlabel(r"Global description weight $\alpha$")
+    axes[1].set_ylabel("Eleven-dataset macro average (%)")
+    axes[1].set_title("(b) One global weight for all datasets")
+    axes[1].grid(alpha=0.25, linewidth=0.6)
+    axes[1].legend(frameon=False, ncol=3, loc="lower center")
+    保存图(fig, "图4-语义对照与权重稳健性")
+
+    macro = {
+        row["方法"]: float(row["HM宏平均"])
+        for row in 读取_csv(
+            结果目录 / "ImageNet投稿主实验-20260919" / "十一数据集方法宏平均.csv"
+        )
+    }
+    comparison = {
+        "TextConsistency减CoOp+类别名称_HM_pp": macro["TextConsistency"] - macro["CoOp+类别名称"],
+        "TextConsistency胜出数据集数": sum(value > 0 for value in gains),
+        "数据集总数": len(gains),
+        "TextConsistency胜出配对种子数": 28,
+        "配对种子总数": 33,
+    }
+    weights = [
+        {
+            "alpha": alpha,
+            "数据集数": len(数据集顺序),
+            "宏平均Base": base,
+            "宏平均Novel": novel,
+            "宏平均HM": hm_value,
+        }
+        for alpha, base, novel, hm_value in zip(
+            curves["alpha"], curves["Base"], curves["Novel"], curves["HM"]
+        )
+    ]
+    return comparison, weights
+
+
 def 生成图表(index: dict[tuple[str, str], dict[str, float]], components: dict[tuple[str, str], float]) -> None:
     设置绘图样式()
     生成方法框架图()
     gains = 生成数据集增益图(index)
     seed_gains = 生成诊断图(components)
-    plot_module = runpy.run_path(str(根目录 / "scripts" / "repro" / "绘制类别名称与权重稳健性.py"))
-    plot_module["绘图"](
-        结果目录 / "投稿关键对照十数据集-20260918" / "汇总",
-        源码目录 / "图4-语义对照与权重稳健性",
-    )
-    semantic_result = json.loads(
-        (结果目录 / "投稿关键对照十数据集-20260918" / "汇总" / "结果.json")
-        .read_text(encoding="utf-8")
-    )
+    semantic_comparison, semantic_weights = 生成语义对照图()
 
     source_paths = [
         结果目录 / "斯坦福汽车与SUN397扩展验证-20260917" / "十数据集结果.csv",
@@ -589,6 +703,10 @@ def 生成图表(index: dict[tuple[str, str], dict[str, float]], components: dic
         结果目录 / "统一推理效率-20260916" / "效率实测结果.json",
         结果目录 / "投稿关键对照十数据集-20260918" / "汇总" / "关键对照数据集汇总.csv",
         结果目录 / "投稿关键对照十数据集-20260918" / "汇总" / "统一权重稳健性.csv",
+        结果目录 / "ImageNet投稿主实验-20260919" / "结果汇总.json",
+        结果目录 / "ImageNet投稿主实验-20260919" / "三种子统计.csv",
+        结果目录 / "ImageNet投稿主实验-20260919" / "十一数据集方法宏平均.csv",
+        结果目录 / "ImageNet投稿主实验-20260919" / "权重稳健性.csv",
     ]
     receipt = {
         "状态": "通过",
@@ -598,10 +716,10 @@ def 生成图表(index: dict[tuple[str, str], dict[str, float]], components: dic
             {"路径": str(path.relative_to(根目录)), "SHA256": 文件哈希(path)}
             for path in source_paths
         ],
-        "十数据集HM增益": gains,
+        "十一数据集HM增益": gains,
         "逐种子配对HM增益": seed_gains,
-        "类别名称控制": semantic_result["核心比较"],
-        "统一权重稳健性": semantic_result["权重稳健性"],
+        "类别名称控制": semantic_comparison,
+        "统一权重稳健性": semantic_weights,
         "说明": "所有结果图由已审计CSV/JSON自动生成；方法框架图只描述已发布实现。",
     }
     (Path(__file__).resolve().parent / "图表数据来源.json").write_text(

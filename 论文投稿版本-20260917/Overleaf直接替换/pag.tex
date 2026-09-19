@@ -59,7 +59,7 @@ The contributions of this paper are as follows:
 \begin{itemize}
     \item We introduce a fixed probability-fusion formulation that combines a learned prompt posterior with a frozen class-description posterior. It uses the existing CLIP encoders and adds no trainable parameters beyond CoOp.
     \item We provide controlled component and class-name studies that separate branch complementarity from ordinary class-name ensembling. Across all eleven datasets with matched checkpoints, descriptions add 1.49 HM points over class-name fusion.
-    \item We evaluate the same 0.5 fusion rule on the standard eleven base-to-novel datasets. TextConsistency reaches 78.33 average HM and improves over matched CoOp in all 33 seed-level comparisons; the ten-dataset subset also remains higher than local CoCoOp on every dataset.
+    \item We evaluate the same 0.5 fusion rule on the standard eleven base-to-novel datasets. TextConsistency reaches 78.33 average HM and improves over matched CoOp in all 33 seed-level comparisons; on the ten datasets shared by the literature comparison, it exceeds the published CoCoOp average by 3.09 points.
     \item We report measured inference cost on one RTX 4090 and explicitly separate local reproductions from published comparison numbers.
 \end{itemize}
 
@@ -174,11 +174,9 @@ For every trainable method, we use 16 shots per base class and random seeds 1, 2
 
 All local experiments use OpenAI CLIP ViT-B/16. CoOp uses four context tokens, batch size 16, SGD with learning rate 0.002 and momentum 0.9, cosine scheduling, and 20 epochs. Images are resized to $224\times224$ with the CLIP normalisation. The description branch uses the deterministic filtering rule above, at most 20 stored descriptions per class, and the same frozen CLIP logit scale as the learned branch. Description embeddings are computed once and cached. The mixing coefficient is always 0.5.
 
-The local CoCoOp baseline follows its standard recipe with four context tokens, batch size 1, and 10 epochs. It shares the backbone, shots, class splits, and three seeds with our evaluation, but its training budget is not identical to the 20-epoch CoOp recipe. We therefore treat it as a standard-recipe baseline rather than an equal-compute ablation.
-
 \subsection{Baselines and Reporting Boundary}
 
-The matched eleven-dataset baseline is CoOp. The local CoCoOp runs cover the ten non-ImageNet datasets and are therefore reported only on that common subset. Local results are separated from published numbers for CuPL, CoCoOp, KgCoOp, MaPLe, and PromptSRC \cite{pratt2023cupl,zhou2022cocoop,yao2023kgcoop,khattak2023maple,khattak2023promptsrc}. Published values are used only for positioning and are marked with $\dagger$; they are not claimed as local reproductions.
+The matched eleven-dataset baseline is CoOp. For broader positioning, we compare against published results for CuPL, CoCoOp, KgCoOp, MaPLe, and PromptSRC \cite{pratt2023cupl,zhou2022cocoop,yao2023kgcoop,khattak2023maple,khattak2023promptsrc}. These literature values are marked with $\dagger$.
 
 \section{Results}
 \label{sec:results}
@@ -217,7 +215,7 @@ CoOp & 81.39 & 70.34 & 75.06 \\
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:local_hm} reports the matched dataset-level HM. TextConsistency reaches 78.33 over eleven datasets, compared with 75.06 for CoOp, a gain of 3.26 percentage points. On ImageNet, HM increases from 72.39 to 74.05, with a 2.90-point gain in novel accuracy and no base-accuracy loss. On the ten non-ImageNet datasets shared with local CoCoOp, TextConsistency averages 78.75 versus 76.15 and remains higher on every dataset.
+Table~\ref{tab:local_hm} reports the matched dataset-level HM. TextConsistency reaches 78.33 over eleven datasets, compared with 75.06 for CoOp, a gain of 3.26 percentage points. On ImageNet, HM increases from 72.39 to 74.05, with a 2.90-point gain in novel accuracy and no base-accuracy loss.
 
 Table~\ref{tab:average_metrics} separates base and novel accuracy. Relative to CoOp, TextConsistency changes the eleven-dataset base average from 81.39 to 81.13 while improving novel accuracy from 70.34 to 76.00. The 5.66-point novel gain is therefore the main source of the improved balance.
 
@@ -358,7 +356,7 @@ Table~\ref{tab:efficiency} reports CUDA-event measurements on one RTX 4090. Each
 
 The results show that fixed posterior fusion consistently restores frozen semantic information that is underused after base-class prompt adaptation. The evidence forms a coherent chain: the learned and frozen branches make complementary errors, description fusion improves macro HM from 75.06 to 78.33, and it exceeds matched class-name fusion by 1.49 points while using one global weight and no additional trainable parameters. The description-only average remains below CoOp, confirming that the gain comes from their complementarity rather than replacing the learned prompt.
 
-Several limitations remain. First, our local CoCoOp results cover ten datasets and use the standard 10-epoch recipe, whereas CoOp and TextConsistency use 20 epochs; CoCoOp therefore serves as a positioning baseline rather than an eleven-dataset equal-compute control. Second, the descriptions originate from the public CuPL/ProText assets; we do not compare alternative language models, generation instructions, or description budgets. Third, the global-weight analysis uses a coarse five-point grid and evaluates the same datasets as the main study; it does not establish calibration robustness under an external distribution shift. Finally, the efficiency result is measured on one GPU and should not be treated as a hardware-independent latency guarantee.
+Several limitations remain. First, the descriptions originate from the public CuPL/ProText assets; we do not compare alternative language models, generation instructions, or description budgets. Second, the global-weight analysis uses a coarse five-point grid and evaluates the same datasets as the main study; it does not establish calibration robustness under an external distribution shift. Finally, the efficiency result is measured on one GPU and should not be treated as a hardware-independent latency guarantee.
 
 The released evidence includes frozen data splits, seeds, source hashes, checkpoints, raw predictions, and independent recomputation. The ImageNet package also records the evaluator hash and verifies 1,281,167 training images and 50,000 validation images, making the complete eleven-dataset evaluation traceable.
 

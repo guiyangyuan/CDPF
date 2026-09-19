@@ -2,10 +2,10 @@
   "状态": "通过",
   "图数量": 4,
   "图文件": {
-    "图1-方法框架.pdf": "9497cb773d294af4de2045ba786d698972f2aceacf046ec9f29edfe9197730ba",
-    "图2-十一数据集增益.pdf": "5a55e9ae06b6b44750f28003d320a544817c29300d6e743d0e84264298bc6f51",
-    "图3-消融稳定性效率.pdf": "68d8e8673ff43d5deac139b36db3c3df2964bcc5a8304044186c3e5158f8a521",
-    "图4-语义对照与权重稳健性.pdf": "b4517dab49a6b841e8b90ef940bcccac83a3c9319367e68da6e733c5863f1137"
+    "图1-方法框架.pdf": "385808dffb83595c24ee42ba1612d08e72c0e39c9764cc2a6f07500a03452a20",
+    "图2-十一数据集增益.pdf": "fe30c5213d34db62633110dc5648790a1b03cf976d8ea87777ac3e2ae23f6a44",
+    "图3-十一数据集三种子配对增益.pdf": "aab929a5eaee750206168ade02fc0abe9955e1921101f4ed6ed12c256a516b75",
+    "图4-语义对照与权重稳健性.pdf": "e6a46826c0174d45063b39885c54ac3b2e7baf9ebefb33c34f56201f880a9ff5"
   },
   "主要数据来源": [
     {
@@ -43,6 +43,26 @@
     {
       "路径": "reports/experiments/ImageNet投稿主实验-20260919/权重稳健性.csv",
       "SHA256": "6f3efe50ff67d627ecb51f18494d2a700c9db6357b97c04aa102a15996696e6c"
+    },
+    {
+      "路径": "reports/experiments/三数据集扩展与八数据集汇总-20260916/主方法-Caltech101-结果.json",
+      "SHA256": "4cb6aea7b7ec49a136f2884c982a2d824a62e8848fd83fc48195783251441259"
+    },
+    {
+      "路径": "reports/experiments/三数据集扩展与八数据集汇总-20260916/主方法-OxfordPets-结果.json",
+      "SHA256": "4a4b62ae4e23ff2b654bdfec4978317f6cea895b71b58c02a8d6c33892d1a06f"
+    },
+    {
+      "路径": "reports/experiments/三数据集扩展与八数据集汇总-20260916/主方法-Food101-结果.json",
+      "SHA256": "f0b40bcd32512290b6a33a91c7b39f180b58180c3edd790106c1c18ad07f39af"
+    },
+    {
+      "路径": "reports/experiments/斯坦福汽车与SUN397扩展验证-20260917/主方法-StanfordCars-结果.json",
+      "SHA256": "3b3b3749d8e8c3def9c31bb020ca52b688482765b9abf015a543033e127c2ea9"
+    },
+    {
+      "路径": "reports/experiments/斯坦福汽车与SUN397扩展验证-20260917/主方法-SUN397-结果.json",
+      "SHA256": "70470e51c41ded89da83e4a4b54cf1926b54a5f204cdefceb074e01c56f2d14b"
     }
   ],
   "十一数据集HM增益": {

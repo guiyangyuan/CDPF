@@ -1,0 +1,47 @@
+\begin{table*}[p]
+\centering
+\caption{Per-dataset results across the three matched seeds (\%). Mean $\pm$ sample standard deviation is reported for Base, Novel, and HM; the last three columns give the raw HM for each seed.}
+\label{tab:per_seed_statistics}
+\small
+\setlength{\tabcolsep}{3.2pt}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{llrrrrrr}
+\toprule
+Dataset & Method & Base & Novel & HM & HM$_1$ & HM$_2$ & HM$_3$ \\
+\midrule
+\multirow{2}{*}{UCF101} & CoOp & $83.56\,\pm\,0.45$ & $67.08\,\pm\,2.90$ & $74.40\,\pm\,1.94$ & 72.48 & 76.36 & 74.36 \\
+ & \textbf{TextConsistency} & $82.70\,\pm\,0.43$ & $76.49\,\pm\,1.13$ & $79.47\,\pm\,0.80$ & 78.81 & 80.36 & 79.24 \\
+\addlinespace[1.5pt]
+\multirow{2}{*}{DTD} & CoOp & $77.78\,\pm\,0.92$ & $54.07\,\pm\,0.77$ & $63.79\,\pm\,0.77$ & 63.60 & 63.13 & 64.64 \\
+ & \textbf{TextConsistency} & $77.93\,\pm\,0.48$ & $65.18\,\pm\,1.82$ & $70.98\,\pm\,1.02$ & 70.28 & 70.51 & 72.14 \\
+\addlinespace[1.5pt]
+\multirow{2}{*}{FGVC-Aircraft} & CoOp & $37.54\,\pm\,0.92$ & $31.51\,\pm\,1.84$ & $34.25\,\pm\,1.31$ & 35.36 & 32.80 & 34.57 \\
+ & \textbf{TextConsistency} & $37.47\,\pm\,0.09$ & $39.49\,\pm\,1.27$ & $38.45\,\pm\,0.56$ & 38.83 & 37.80 & 38.72 \\
+\addlinespace[1.5pt]
+\multirow{2}{*}{EuroSAT} & CoOp & $84.38\,\pm\,4.27$ & $56.28\,\pm\,13.40$ & $66.64\,\pm\,8.04$ & 65.77 & 75.08 & 59.07 \\
+ & \textbf{TextConsistency} & $84.56\,\pm\,1.65$ & $70.10\,\pm\,6.04$ & $76.52\,\pm\,2.87$ & 74.82 & 79.83 & 74.91 \\
+\addlinespace[1.5pt]
+\multirow{2}{*}{OxfordFlowers} & CoOp & $97.02\,\pm\,0.43$ & $69.62\,\pm\,3.03$ & $81.04\,\pm\,1.97$ & 82.57 & 81.74 & 78.82 \\
+ & \textbf{TextConsistency} & $95.73\,\pm\,0.41$ & $76.52\,\pm\,1.72$ & $85.05\,\pm\,0.98$ & 85.70 & 85.52 & 83.92 \\
+\addlinespace[1.5pt]
+\multirow{2}{*}{Caltech101} & CoOp & $98.02\,\pm\,0.36$ & $93.96\,\pm\,1.26$ & $95.94\,\pm\,0.52$ & 96.53 & 95.74 & 95.56 \\
+ & \textbf{TextConsistency} & $98.00\,\pm\,0.13$ & $94.25\,\pm\,1.30$ & $96.08\,\pm\,0.63$ & 96.79 & 95.85 & 95.61 \\
+\addlinespace[1.5pt]
+\multirow{2}{*}{OxfordPets} & CoOp & $95.57\,\pm\,0.26$ & $97.22\,\pm\,0.48$ & $96.39\,\pm\,0.26$ & 96.28 & 96.69 & 96.19 \\
+ & \textbf{TextConsistency} & $95.61\,\pm\,0.20$ & $97.67\,\pm\,0.36$ & $96.63\,\pm\,0.14$ & 96.61 & 96.77 & 96.50 \\
+\addlinespace[1.5pt]
+\multirow{2}{*}{Food101} & CoOp & $90.10\,\pm\,0.23$ & $90.94\,\pm\,0.75$ & $90.51\,\pm\,0.46$ & 90.68 & 90.00 & 90.87 \\
+ & \textbf{TextConsistency} & $90.65\,\pm\,0.16$ & $91.95\,\pm\,0.16$ & $91.30\,\pm\,0.13$ & 91.37 & 91.15 & 91.38 \\
+\addlinespace[1.5pt]
+\multirow{2}{*}{StanfordCars} & CoOp & $74.33\,\pm\,0.98$ & $70.47\,\pm\,1.17$ & $72.34\,\pm\,0.45$ & 71.97 & 72.85 & 72.20 \\
+ & \textbf{TextConsistency} & $72.11\,\pm\,1.14$ & $74.25\,\pm\,0.72$ & $73.16\,\pm\,0.35$ & 72.78 & 73.21 & 73.47 \\
+\addlinespace[1.5pt]
+\multirow{2}{*}{SUN397} & CoOp & $80.54\,\pm\,0.16$ & $73.85\,\pm\,0.63$ & $77.04\,\pm\,0.29$ & 77.05 & 76.75 & 77.33 \\
+ & \textbf{TextConsistency} & $81.07\,\pm\,0.15$ & $78.46\,\pm\,0.15$ & $79.74\,\pm\,0.07$ & 79.72 & 79.68 & 79.82 \\
+\addlinespace[1.5pt]
+\multirow{2}{*}{ImageNet} & CoOp & $76.47\,\pm\,0.06$ & $68.72\,\pm\,0.21$ & $72.39\,\pm\,0.13$ & 72.24 & 72.48 & 72.44 \\
+ & \textbf{TextConsistency} & $76.66\,\pm\,0.07$ & $71.62\,\pm\,0.08$ & $74.05\,\pm\,0.02$ & 74.04 & 74.05 & 74.07 \\
+\bottomrule
+\end{tabular}%
+}
+\end{table*}

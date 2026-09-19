@@ -27,7 +27,7 @@ Overleaf目录 = Path(__file__).resolve().parent / "Overleaf直接替换"
 图名列表 = [
     "图1-方法框架.pdf",
     "图2-十一数据集增益.pdf",
-    "图3-消融稳定性效率.pdf",
+    "图3-十一数据集三种子配对增益.pdf",
     "图4-语义对照与权重稳健性.pdf",
 ]
 
@@ -135,6 +135,107 @@ def 主要结果() -> dict[tuple[str, str], dict[str, float]]:
             "HM": float(row["种子HM均值"]),
         }
     return index
+
+
+def 逐种子主要结果() -> dict[tuple[str, str], list[dict[str, float]]]:
+    """读取 CoOp 与 TextConsistency 的 11 数据集逐种子 Base/Novel/HM。"""
+    result: dict[tuple[str, str], list[dict[str, float]]] = {}
+    method_map = {
+        "CoOp": "CoOp",
+        "固定均值概率融合": "TextConsistency",
+    }
+
+    rows = 读取_csv(结果目录 / "投稿实验统一结果-20260915" / "主结果逐种子.csv")
+    for dataset in 数据集顺序[:5]:
+        for source_method, paper_method in method_map.items():
+            selected = [
+                row
+                for row in rows
+                if row["数据集"] == dataset and row["方法"] == source_method
+            ]
+            selected.sort(key=lambda row: int(row["种子"]))
+            result[(dataset, paper_method)] = [
+                {metric: float(row[metric]) for metric in ("Base", "Novel", "HM")}
+                for row in selected
+            ]
+
+    paths = {
+        "Caltech101": 结果目录 / "三数据集扩展与八数据集汇总-20260916" / "主方法-Caltech101-结果.json",
+        "OxfordPets": 结果目录 / "三数据集扩展与八数据集汇总-20260916" / "主方法-OxfordPets-结果.json",
+        "Food101": 结果目录 / "三数据集扩展与八数据集汇总-20260916" / "主方法-Food101-结果.json",
+        "StanfordCars": 结果目录 / "斯坦福汽车与SUN397扩展验证-20260917" / "主方法-StanfordCars-结果.json",
+        "SUN397": 结果目录 / "斯坦福汽车与SUN397扩展验证-20260917" / "主方法-SUN397-结果.json",
+        "ImageNet": 结果目录 / "ImageNet投稿主实验-20260919" / "结果汇总.json",
+    }
+    json_method_map = {
+        "student": "CoOp",
+        "mean_probability_fusion": "TextConsistency",
+    }
+    for dataset, path in paths.items():
+        data = json.loads(path.read_text(encoding="utf-8"))
+        rows_by_seed = sorted(data["逐种子"], key=lambda row: int(row["种子"]))
+        for source_method, paper_method in json_method_map.items():
+            result[(dataset, paper_method)] = [
+                {
+                    metric: float(row["方法"][source_method][metric])
+                    for metric in ("Base", "Novel", "HM")
+                }
+                for row in rows_by_seed
+            ]
+
+    expected = {
+        (dataset, method)
+        for dataset in 数据集顺序
+        for method in ("CoOp", "TextConsistency")
+    }
+    assert set(result) == expected
+    assert all(len(values) == 3 for values in result.values())
+    return result
+
+
+def 生成逐数据集种子统计表(
+    values: dict[tuple[str, str], list[dict[str, float]]],
+) -> None:
+    """生成 mean +/- sample std 与三次原始 HM 的附录表。"""
+    lines = [
+        r"\begin{table*}[p]",
+        r"\centering",
+        r"\caption{Per-dataset results across the three matched seeds (\%). Mean $\pm$ sample standard deviation is reported for Base, Novel, and HM; the last three columns give the raw HM for each seed.}",
+        r"\label{tab:per_seed_statistics}",
+        r"\small",
+        r"\setlength{\tabcolsep}{3.2pt}",
+        r"\resizebox{\textwidth}{!}{%",
+        r"\begin{tabular}{llrrrrrr}",
+        r"\toprule",
+        r"Dataset & Method & Base & Novel & HM & HM$_1$ & HM$_2$ & HM$_3$ \\",
+        r"\midrule",
+    ]
+    for dataset_index, dataset in enumerate(数据集顺序):
+        for method_index, method in enumerate(("CoOp", "TextConsistency")):
+            rows = values[(dataset, method)]
+            summaries = []
+            for metric in ("Base", "Novel", "HM"):
+                metric_values = np.array([row[metric] for row in rows], dtype=float)
+                summaries.append(
+                    rf"${metric_values.mean():.2f}\,\pm\,{metric_values.std(ddof=1):.2f}$"
+                )
+            raw_hm = [f"{row['HM']:.2f}" for row in rows]
+            dataset_cell = (
+                rf"\multirow{{2}}{{*}}{{{dataset}}}" if method_index == 0 else ""
+            )
+            method_cell = (
+                r"\textbf{TextConsistency}" if method == "TextConsistency" else "CoOp"
+            )
+            lines.append(
+                f"{dataset_cell} & {method_cell} & "
+                + " & ".join(summaries + raw_hm)
+                + " "
+                + r"\\"
+            )
+        if dataset_index != len(数据集顺序) - 1:
+            lines.append(r"\addlinespace[1.5pt]")
+    lines += [r"\bottomrule", r"\end{tabular}%", r"}", r"\end{table*}"]
+    保存("逐数据集种子统计.tex", "\n".join(lines))
 
 
 def 生成本地主表(index: dict[tuple[str, str], dict[str, float]]) -> None:
@@ -523,69 +624,67 @@ def 读取逐种子增益() -> dict[str, list[float]]:
     return result
 
 
-def 生成诊断图(components: dict[tuple[str, str], float]) -> dict[str, list[float]]:
+def 生成种子配对增益图() -> dict[str, list[float]]:
     seed_gains = 读取逐种子增益()
-    methods = ["CoOp", "Description only", "Logit fusion", "Probability fusion"]
-    averages = [
-        sum(components[(dataset, method)] for dataset in 数据集顺序) / len(数据集顺序)
-        for method in methods
-    ]
-
-    fig, axes = plt.subplots(1, 3, figsize=(12.0, 3.75), gridspec_kw={"width_ratios": [0.95, 1.85, 0.95]})
-
-    ax = axes[0]
-    colors = ["#8391A5", "#D9A066", "#6C8FC7", "#2F5D9B"]
-    y = np.arange(len(methods))
-    ax.hlines(y, 73.5, averages, color=colors, linewidth=3)
-    ax.scatter(averages, y, s=58, color=colors, edgecolor="white", linewidth=0.8, zorder=3)
-    ax.set_yticks(y, ["CoOp", "Description", "Logit fusion", "Probability fusion"])
-    ax.invert_yaxis()
-    ax.set_xlim(73.5, 79.3)
-    ax.set_xlabel("Eleven-dataset HM (%)")
-    ax.set_title("(a) Component ablation", loc="left", weight="bold")
-    ax.grid(axis="x", color="#D8DEE8", lw=0.6)
-    for yi, value in zip(y, averages):
-        ax.text(value + 0.09, yi, f"{value:.2f}", va="center", fontsize=7.5)
-
-    ax = axes[1]
+    fig, ax = plt.subplots(figsize=(11.4, 4.9))
     x = np.arange(len(数据集顺序))
-    jitter = [-0.14, 0.0, 0.14]
+    jitter = [-0.17, 0.0, 0.17]
+    colors = ["#8CB3D9", "#3F77B5", "#173B69"]
+    minimums = [min(seed_gains[d]) for d in 数据集顺序]
+    maximums = [max(seed_gains[d]) for d in 数据集顺序]
+    ax.vlines(x, minimums, maximums, color="#B8C3D1", linewidth=2.2, zorder=1)
     for seed_idx in range(3):
         values = [seed_gains[d][seed_idx] for d in 数据集顺序]
         ax.scatter(
             x + jitter[seed_idx],
             values,
-            s=25,
-            alpha=0.9,
-            color=["#7EA0D1", "#2F5D9B", "#173B69"][seed_idx],
+            s=43,
+            alpha=0.95,
+            color=colors[seed_idx],
+            edgecolor="white",
+            linewidth=0.55,
             label=f"Seed {seed_idx + 1}",
+            zorder=3,
         )
     means = [sum(seed_gains[d]) / 3 for d in 数据集顺序]
-    ax.scatter(x, means, marker="D", s=34, color="#D97721", edgecolor="white", linewidth=0.6, label="Mean", zorder=4)
+    ax.scatter(
+        x,
+        means,
+        marker="D",
+        s=58,
+        color="#D97721",
+        edgecolor="white",
+        linewidth=0.7,
+        label="Mean",
+        zorder=4,
+    )
     ax.axhline(0, color="#45505E", lw=0.9)
-    ax.set_xticks(x, [简称[d] for d in 数据集顺序], rotation=42, ha="right")
-    ax.set_ylabel("Paired HM gain (pp)")
-    ax.set_title("(b) Three-seed paired gains", loc="left", weight="bold")
+    ax.set_xticks(x, [简称[d] for d in 数据集顺序], rotation=30, ha="right")
+    ax.set_ylabel("TextConsistency $-$ CoOp HM (percentage points)")
+    ax.set_title(
+        "TextConsistency improves all 33 matched dataset-seed comparisons",
+        loc="left",
+        weight="bold",
+        pad=10,
+    )
     ax.grid(axis="y", color="#D8DEE8", lw=0.6)
-    ax.legend(ncol=2, frameon=False, loc="upper right", handletextpad=0.3, columnspacing=0.8)
+    ax.legend(ncol=4, frameon=False, loc="upper right", handletextpad=0.35, columnspacing=1.1)
+    upper = max(maximums) + 1.5
+    ax.set_ylim(-0.35, upper)
+    for xi, value in zip(x, means):
+        ax.text(
+            xi,
+            value + 0.45,
+            f"{value:+.2f}",
+            ha="center",
+            va="bottom",
+            fontsize=8.1,
+            color="#9A4F16",
+            weight="bold",
+        )
 
-    ax = axes[2]
-    overhead = [0.0, 0.7411685601111717]
-    hm = [averages[0], averages[3]]
-    ax.scatter(overhead[0], hm[0], s=72, color="#8391A5", zorder=3)
-    ax.scatter(overhead[1], hm[1], s=82, color="#2E7D65", zorder=3)
-    ax.annotate("", xy=(overhead[1], hm[1]), xytext=(overhead[0], hm[0]), arrowprops=dict(arrowstyle="->", color="#D97721", lw=1.5))
-    ax.text(overhead[0] + 0.03, hm[0] - 0.28, f"CoOp\n{hm[0]:.2f} HM", fontsize=8, va="top")
-    ax.text(overhead[1] - 0.03, hm[1] + 0.20, f"TextConsistency\n{hm[1]:.2f} HM", fontsize=8, ha="right", va="bottom")
-    ax.set_xlim(-0.08, 0.86)
-    ax.set_ylim(74.5, 79.6)
-    ax.set_xlabel("Batch-64 latency overhead (%)")
-    ax.set_ylabel("Eleven-dataset HM (%)")
-    ax.set_title("(c) Accuracy-cost summary", loc="left", weight="bold")
-    ax.grid(color="#D8DEE8", lw=0.6)
-
-    fig.tight_layout(w_pad=1.4)
-    保存图(fig, "图3-消融稳定性效率")
+    fig.tight_layout()
+    保存图(fig, "图3-十一数据集三种子配对增益")
     return seed_gains
 
 
@@ -690,11 +789,11 @@ def 生成语义对照图() -> tuple[dict[str, float], list[dict[str, float]]]:
     return comparison, weights
 
 
-def 生成图表(index: dict[tuple[str, str], dict[str, float]], components: dict[tuple[str, str], float]) -> None:
+def 生成图表(index: dict[tuple[str, str], dict[str, float]]) -> None:
     设置绘图样式()
     生成方法框架图()
     gains = 生成数据集增益图(index)
-    seed_gains = 生成诊断图(components)
+    seed_gains = 生成种子配对增益图()
     semantic_comparison, semantic_weights = 生成语义对照图()
 
     source_paths = [
@@ -707,6 +806,11 @@ def 生成图表(index: dict[tuple[str, str], dict[str, float]], components: dic
         结果目录 / "ImageNet投稿主实验-20260919" / "三种子统计.csv",
         结果目录 / "ImageNet投稿主实验-20260919" / "十一数据集方法宏平均.csv",
         结果目录 / "ImageNet投稿主实验-20260919" / "权重稳健性.csv",
+        结果目录 / "三数据集扩展与八数据集汇总-20260916" / "主方法-Caltech101-结果.json",
+        结果目录 / "三数据集扩展与八数据集汇总-20260916" / "主方法-OxfordPets-结果.json",
+        结果目录 / "三数据集扩展与八数据集汇总-20260916" / "主方法-Food101-结果.json",
+        结果目录 / "斯坦福汽车与SUN397扩展验证-20260917" / "主方法-StanfordCars-结果.json",
+        结果目录 / "斯坦福汽车与SUN397扩展验证-20260917" / "主方法-SUN397-结果.json",
     ]
     receipt = {
         "状态": "通过",
@@ -728,7 +832,7 @@ def 生成图表(index: dict[tuple[str, str], dict[str, float]], components: dic
 
 
 def 生成Overleaf直接替换文件() -> None:
-    """把六张表内联到主文件，并复制参考文献和四张矢量图。"""
+    """把七张表内联到主文件，并复制参考文献和四张矢量图。"""
     text = (源码目录 / "pag.tex").read_text(encoding="utf-8")
     for name in (
         "table_local_hm.tex",
@@ -737,6 +841,7 @@ def 生成Overleaf直接替换文件() -> None:
         "table_components.tex",
         "table_efficiency.tex",
         "类别名称与权重稳健性.tex",
+        "逐数据集种子统计.tex",
     ):
         marker = rf"\input{{table/{name.removesuffix('.tex')}}}"
         table = (表格目录 / name).read_text(encoding="utf-8").rstrip()
@@ -756,6 +861,7 @@ def 生成Overleaf直接替换文件() -> None:
 
 def main() -> None:
     index = 主要结果()
+    per_seed = 逐种子主要结果()
     components = 组件结果()
     生成本地主表(index)
     生成平均表(index)
@@ -763,14 +869,15 @@ def main() -> None:
     生成组件表(components)
     生成效率表()
     生成类别名称与权重表()
-    生成图表(index, components)
+    生成逐数据集种子统计表(per_seed)
+    生成图表(index)
     生成Overleaf直接替换文件()
     print(
         json.dumps(
             {
                 "状态": "通过",
                 "表格目录": str(表格目录),
-                "表格数": 6,
+                "表格数": 7,
                 "图数量": 4,
                 "Overleaf直接替换目录": str(Overleaf目录),
             },

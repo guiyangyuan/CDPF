@@ -236,14 +236,14 @@ Figure~\ref{fig:semantic_control}(b) reports the common grid $\alpha\in\{0,0.25,
 
 \subsection{Stability Across Seeds}
 
-For each seed, we compare TextConsistency and CoOp using predictions from the same trained checkpoint. All 33 paired HM differences are positive. On ImageNet, the three gains are $+1.80$, $+1.57$, and $+1.63$ points. The largest mean gains remain on EuroSAT, DTD, UCF101, FGVC Aircraft, and OxfordFlowers. Because each dataset has only three seeds, we use these results as evidence of directional stability and do not make strong significance claims from small-sample confidence intervals.
+For each seed, we compare TextConsistency and CoOp using predictions from the same trained checkpoint. All 33 paired HM differences are positive. On ImageNet, the three gains are $+1.80$, $+1.57$, and $+1.63$ points. The largest mean gains remain on EuroSAT, DTD, UCF101, FGVC Aircraft, and OxfordFlowers. Because each dataset has only three seeds, we use these results as evidence of directional stability and do not make strong significance claims from small-sample confidence intervals. Full per-dataset Base, Novel, and seed-level HM statistics are provided in \ref{app:seed_statistics}.
 
 Figure~\ref{fig:diagnostics} retains every paired seed result. The vertical ranges show seed variation within each dataset, and the mean diamonds show that the effect is strongest on EuroSAT, DTD, UCF101, FGVC Aircraft, and OxfordFlowers while remaining positive on the more saturated datasets.
 
 \begin{figure*}[t]
 \centering
 \includegraphics[width=0.96\textwidth]{图3-十一数据集三种子配对增益.pdf}
-\caption{Paired TextConsistency-minus-CoOp HM gains for all three seeds on each of the eleven datasets. Diamonds denote dataset means and vertical lines span the three seed values. All 33 matched comparisons are positive.}
+\caption{Paired TextConsistency-minus-CoOp HM gains for all three seeds on each of the eleven datasets. Diamonds denote dataset means and vertical lines span the three seed values. Dataset means average the three seed-level HM differences and may differ slightly from Table~\ref{tab:local_hm}, where HM is computed after averaging Base and Novel accuracy across seeds. All 33 matched comparisons are positive.}
 \label{fig:diagnostics}
 \end{figure*}
 

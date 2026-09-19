@@ -200,14 +200,14 @@ def 生成逐数据集种子统计表(
     lines = [
         r"\begin{table*}[p]",
         r"\centering",
-        r"\caption{Per-dataset results across the three matched seeds (\%). Mean $\pm$ sample standard deviation is reported for Base, Novel, and HM; the last three columns give the raw HM for each seed.}",
+        r"\caption{Per-dataset seed-level results across the three matched seeds (\%). Mean $\pm$ sample standard deviation is reported for Base, Novel, and seed-level HM; the last three columns give the raw HM for each seed.}",
         r"\label{tab:per_seed_statistics}",
         r"\small",
         r"\setlength{\tabcolsep}{3.2pt}",
         r"\resizebox{\textwidth}{!}{%",
         r"\begin{tabular}{llrrrrrr}",
         r"\toprule",
-        r"Dataset & Method & Base & Novel & HM & HM$_1$ & HM$_2$ & HM$_3$ \\",
+        r"Dataset & Method & Base & Novel & Seed-HM & HM$_1$ & HM$_2$ & HM$_3$ \\",
         r"\midrule",
     ]
     for dataset_index, dataset in enumerate(数据集顺序):

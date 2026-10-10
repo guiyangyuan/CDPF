@@ -27,3 +27,6 @@ clip/*.part
 .env.*
 *.pem
 *.key
+
+# Auto-generated raster figure previews (publication PDFs are tracked)
+/论文投稿版本-20260917/图表预览/

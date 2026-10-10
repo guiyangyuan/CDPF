@@ -2,7 +2,7 @@
 
 # CoCoOp + TextConsistency V2 + FG Training Script
 # 参考AnchorOPT的训练参数：10 epochs, batch size 1
-# 参考结果.md中的最佳超参数
+# 参考 docs/history/paper-v2-fg/结果.md 中的历史超参数
 
 # 数据集路径
 DATA=/root/lanyun-fs/DATA
@@ -18,7 +18,7 @@ BATCH=1
 CFG_EP10=vit_b16_c4_ep10_batch1
 CFG_EP20=vit_b16_c4_ep10_batch1  # 使用相同的config，通过OPTIM.MAX_EPOCH覆盖
 
-# 数据集配置（参考结果.md + AnchorOPT论文设置）
+# 数据集配置（参考 docs/history/paper-v2-fg/结果.md + AnchorOPT论文设置）
 # 格式: 数据集名称:实验ID:N_VIEWS:KD_W:KD_T:N_CTX:EPOCHS
 declare -A DATASET_CONFIGS=(
     # 20 epochs数据集（大部分）

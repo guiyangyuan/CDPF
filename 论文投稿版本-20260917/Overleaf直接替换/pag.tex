@@ -116,9 +116,9 @@ Only the context vectors are optimised, using the standard cross-entropy objecti
 
 \subsection{Frozen Description Branch}
 
-For each class $c$, we use a fixed set of valid natural-language descriptions $\mathcal{D}_c=\{d_{c,1},\ldots,d_{c,m_c}\}$. The stored descriptions cover visible attributes, functions, scenes, actions, or parts when applicable. They are prepared before evaluation and are not selected according to test accuracy.
+We use the fixed class descriptions released with ATPrompt \cite{li2025atprompt}, following the LLM-generated description paradigm of CuPL \cite{pratt2023cupl}. For each class, up to 20 valid descriptions are encoded by the frozen CLIP text encoder and aggregated into a class-level prototype. Let $\mathcal{D}_c=\{d_{c,1},\ldots,d_{c,m_c}\}$ denote the retained descriptions for class $c$.
 
-Each description is encoded and normalised independently:
+Each retained description is encoded and normalised independently:
 \begin{equation}
 \mathbf{u}_{c,j}=\frac{E_t(d_{c,j})}{\|E_t(d_{c,j})\|_2}.
 \end{equation}

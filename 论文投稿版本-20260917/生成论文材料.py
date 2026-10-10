@@ -18,7 +18,7 @@ from matplotlib.patches import FancyBboxPatch
 
 
 根目录 = Path(__file__).resolve().parents[1]
-源码目录 = Path(__file__).resolve().parent / "修改后源码"
+源码目录 = Path(__file__).resolve().parent / "最终提交源码"
 表格目录 = 源码目录 / "table"
 Overleaf目录 = Path(__file__).resolve().parent / "Overleaf直接替换"
 预览目录 = Path(__file__).resolve().parent / "图表预览"

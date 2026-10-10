@@ -1,8 +1,0 @@
-{
-  "code_commit": "43e537c",
-  "release": "/root/autodl-tmp/textconsistency/releases/attribution-ops-20260911-43e537c",
-  "archive": "/root/autodl-tmp/textconsistency/backups/attribution-ops-43e537c.tar.gz",
-  "archive_sha256": "5c74ef538b639cbb319e504748fb425936af83446e79bd696287854a327e0cb0",
-  "archive_bytes": 7476511,
-  "gpu_run": false
-}

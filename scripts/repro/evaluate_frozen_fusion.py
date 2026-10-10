@@ -27,16 +27,16 @@ ALPHA = 0.5
 TRAINABLE_PARAMETERS = 2048
 ALLOWED_SEEDS = (1, 2, 3)
 DATASETS = {
-    "ucf101": ("UCF101", "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f"),
-    "dtd": ("DescribableTextures", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
-    "fgvc_aircraft": ("FGVCAircraft", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
-    "caltech101": ("Caltech101", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
-    "oxford_pets": ("OxfordPets", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
-    "food101": ("Food101", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
-    "oxford_flowers": ("OxfordFlowers", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
-    "eurosat": ("EuroSAT", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
-    "stanford_cars": ("StanfordCars", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
-    "sun397": ("SUN397", "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"),
+    "ucf101": ("UCF101", "b90fa7789983c3ea595a837933d23ee5b4a23e59009cd0c5c42addd99e30d5ef"),
+    "dtd": ("DescribableTextures", "b90fa7789983c3ea595a837933d23ee5b4a23e59009cd0c5c42addd99e30d5ef"),
+    "fgvc_aircraft": ("FGVCAircraft", "b90fa7789983c3ea595a837933d23ee5b4a23e59009cd0c5c42addd99e30d5ef"),
+    "caltech101": ("Caltech101", "b90fa7789983c3ea595a837933d23ee5b4a23e59009cd0c5c42addd99e30d5ef"),
+    "oxford_pets": ("OxfordPets", "b90fa7789983c3ea595a837933d23ee5b4a23e59009cd0c5c42addd99e30d5ef"),
+    "food101": ("Food101", "b90fa7789983c3ea595a837933d23ee5b4a23e59009cd0c5c42addd99e30d5ef"),
+    "oxford_flowers": ("OxfordFlowers", "b90fa7789983c3ea595a837933d23ee5b4a23e59009cd0c5c42addd99e30d5ef"),
+    "eurosat": ("EuroSAT", "b90fa7789983c3ea595a837933d23ee5b4a23e59009cd0c5c42addd99e30d5ef"),
+    "stanford_cars": ("StanfordCars", "b90fa7789983c3ea595a837933d23ee5b4a23e59009cd0c5c42addd99e30d5ef"),
+    "sun397": ("SUN397", "b90fa7789983c3ea595a837933d23ee5b4a23e59009cd0c5c42addd99e30d5ef"),
 }
 EXPECTED_SIGNATURE = {
     "format": 2,
@@ -86,7 +86,7 @@ def frozen_fusion_logits(
     view_mask: torch.Tensor,
     logit_scale: torch.Tensor | float,
 ) -> dict[str, torch.Tensor]:
-    """Return all six fixed logit/probability branches.
+    """Return the CoOp, frozen-description, and two fixed fusion branches.
 
     Description vectors are normalized individually, averaged only over valid
     positions, and normalized again. Image vectors are normalized independently.
@@ -118,35 +118,18 @@ def frozen_fusion_logits(
     description_logits = description_logits.to(student_logits.dtype)
     simple_fusion = (student_logits + description_logits) * ALPHA
 
-    instance_scores = scale.float() * torch.einsum("bd,cvd->bcv", images, descriptions)
-    expanded_mask = mask.unsqueeze(0)
-    attention = torch.softmax(
-        instance_scores.masked_fill(~expanded_mask, torch.finfo(instance_scores.dtype).min), dim=-1)
-    attention = attention * expanded_mask.to(attention.dtype)
-    attention = attention / attention.sum(dim=-1, keepdim=True).clamp_min(1e-12)
-    instance_features = F.normalize(torch.einsum("bcv,cvd->bcd", attention, descriptions), dim=-1)
-    instance_logits = (scale.float() * torch.einsum("bd,bcd->bc", images, instance_features)).to(student_logits.dtype)
-
     student_probability = torch.softmax(student_logits, dim=-1)
     mean_probability = torch.softmax(description_logits, dim=-1)
-    instance_probability = torch.softmax(instance_logits, dim=-1)
     mean_probability_fusion = ALPHA * student_probability + ALPHA * mean_probability
-    adk_probability_fusion = (0.5 * student_probability +
-                              0.25 * mean_probability + 0.25 * instance_probability)
-    outputs = (description_logits, simple_fusion, instance_logits,
-               mean_probability_fusion, adk_probability_fusion)
+    outputs = (description_logits, simple_fusion, mean_probability_fusion)
     if any(not torch.isfinite(value).all().item() for value in outputs):
         raise ValueError("Fusion produced non-finite logits")
     return {
         "student": student_logits,
         "description_mean": description_logits,
         "simple_fusion": simple_fusion,
-        "description_instance": instance_logits,
         "mean_probability_fusion": mean_probability_fusion,
-        "adk_probability_fusion": adk_probability_fusion,
         "description_mean_features": class_features,
-        "description_instance_features": instance_features,
-        "description_attention": attention,
     }
 
 
@@ -545,8 +528,7 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
         }
 
         predictions = {name: [] for name in (
-            "student", "description_mean", "simple_fusion", "description_instance",
-            "mean_probability_fusion", "adk_probability_fusion",
+            "student", "description_mean", "simple_fusion", "mean_probability_fusion",
         )}
         labels: list[int] = []
         rows: list[dict[str, Any]] = []
@@ -615,24 +597,20 @@ def evaluate(args: argparse.Namespace) -> dict[str, Any]:
             "fixed_protocol": {
                 "epoch": EPOCH,
                 "alpha": ALPHA,
-                "formula": "simple_fusion=(student_logits+description_mean_logits)/2",
+                "formula": "mean_probability_fusion=0.5*softmax(student_logits)+0.5*softmax(description_mean_logits)",
                 "description_mean": "normalize(each valid description), mean(valid), normalize(mean)",
                 "logits": "exp(CLIP.logit_scale) * normalized_image @ normalized_text.T",
                 "shared_logit_scale": shared_logit_scale,
-                "attention_tau": 1.0 / shared_logit_scale,
-                "selection": "all branches reported; no search or training",
+                "selection": "fixed alpha; no search or training",
             },
             "method_identity": {
-                "adk_probability_fusion": "controlled CoOp adaptation of the public ADK formulas; not official code or published-score replication",
-                "formula_source": "https://arxiv.org/html/2512.17313v1#S3.SS4",
+                "name": "fixed_probability_fusion",
                 "frozen_components": ["CLIP", "description text features"],
                 "trainable_components": [],
             },
             "additional_formulas": {
-                "description_attention": "masked_softmax(exp(CLIP.logit_scale)*cos(image, description), dim=descriptions)",
-                "description_instance": "normalize(sum(description_attention*normalized_description))",
+                "simple_fusion": "0.5*student_logits+0.5*description_mean_logits",
                 "mean_probability_fusion": "0.5*softmax(student_logits)+0.5*softmax(description_mean_logits)",
-                "adk_probability_fusion": "0.5*softmax(student_logits)+0.25*softmax(description_mean_logits)+0.25*softmax(description_instance_logits)",
                 "description_loss_context_gradient": 0.0,
             },
             "metrics": stats,

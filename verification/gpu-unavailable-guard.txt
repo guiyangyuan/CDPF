@@ -1,7 +1,0 @@
-Traceback (most recent call last):
-  File "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/textConsistency-repro/scripts/repro/run_pilot.py", line 84, in <module>
-    if __name__ == '__main__': main()
-                               ^^^^^^
-  File "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/outputs/textConsistency-repro/scripts/repro/run_pilot.py", line 70, in main
-    raise RuntimeError('CUDA is unavailable; use a GPU server for the full pilot')
-RuntimeError: CUDA is unavailable; use a GPU server for the full pilot

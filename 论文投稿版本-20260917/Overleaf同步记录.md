@@ -27,3 +27,14 @@
 ## 投稿前仍需填写
 
 论文首页仍保留作者姓名、导师姓名、学校/地址和邮箱占位符。正式投稿前应在 `pag.tex` 中替换这些信息并重新编译。
+
+## 2026-10-10 只读核对
+
+已在用户登录状态下重新打开上述项目并下载其当时的已编译 PDF，未覆盖或修改 Overleaf 项目。实际状态为：
+
+- Overleaf `pag.tex` 中搜索 `ATPrompt` 为 0 结果；
+- Overleaf `cas-refs.bib` 中搜索 `li2025atprompt` 为 0 结果；
+- 已编译 PDF 为 16 页、25 条参考文献，包含 CuPL，但不包含 ATPrompt；
+- GitHub `最终提交源码/` 为 26 条参考文献，已包含 `li2025atprompt` 和 ATPrompt/CuPL 来源说明。
+
+因此，Overleaf 项目仍比 GitHub 最终英文源码少一次 ATPrompt 同步。本次只读核对没有擅自替换线上项目；下载的 Overleaf PDF 只代表线上当时的真实编译版本，不能冒充 GitHub 26 条文献源码的最新编译成品。

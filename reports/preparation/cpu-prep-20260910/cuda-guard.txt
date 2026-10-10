@@ -1,7 +1,0 @@
-Traceback (most recent call last):
-  File "/root/autodl-tmp/textconsistency/releases/cpu-prep-20260910/scripts/repro/run_pilot.py", line 108, in <module>
-    if __name__ == '__main__': main()
-                               ^^^^^^
-  File "/root/autodl-tmp/textconsistency/releases/cpu-prep-20260910/scripts/repro/run_pilot.py", line 92, in main
-    raise RuntimeError('CUDA is unavailable; use a GPU server for the full pilot')
-RuntimeError: CUDA is unavailable; use a GPU server for the full pilot

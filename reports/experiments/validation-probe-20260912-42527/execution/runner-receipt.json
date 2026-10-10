@@ -1,6 +1,0 @@
-{
-  "script": "run_gpu.py",
-  "sha256": "afbb1a15eb6866df6b8c63dd8c3decd9e113962a55bdc2fd70122d903f8eba92",
-  "bytes": 8948,
-  "purpose": "frozen nine-case validation inference operations only; no model or method edits"
-}

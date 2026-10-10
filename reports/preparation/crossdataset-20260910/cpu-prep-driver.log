@@ -1,5 +1,0 @@
-{"stage": "plan-only", "state": "running"}
-{"stage": "server-tests", "state": "running"}
-{"stage": "prepare-only", "state": "running"}
-{"stage": "no-cuda-guard", "state": "running"}
-{"state": "completed", "ready": "/root/autodl-tmp/textconsistency/setup-logs/crossdataset-prep-20260910/ready.json"}

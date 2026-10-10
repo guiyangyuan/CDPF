@@ -18,6 +18,7 @@
 - [本地验证记录](verification/README.md)
 - [方法与实验表述边界](REPRO_METHOD.md)
 - [论文投稿稿、源码包与修改说明](论文投稿版本-20260917/论文修改说明.md)
+- [当前英文最终稿](论文投稿版本-20260917/最终提交源码/pag.tex) / [中文对照稿](论文投稿版本-20260917/论文投稿版_中文对照稿.md) / [中英文一致性核对记录](论文投稿版本-20260917/中英文一致性核对记录-20261010.md)
 - [原始交付源码包](artifacts/TextConsistency-repro-source.zip)、[校验信息](artifacts/TextConsistency-源码包校验.json)、[修订补丁](artifacts/TextConsistency-修订.patch)
 
 源码包是上传前的本地交付快照，GitHub 版本另补充了文件索引和报告。二者训练源码一致。历史报告/JSON 中的本机绝对路径用于溯源，换服务器后按下文重新创建环境、准备数据并生成运行命令。

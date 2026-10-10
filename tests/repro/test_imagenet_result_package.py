@@ -13,6 +13,20 @@ def load_json(relative: str):
 
 
 class ImageNetResultPackageTest(unittest.TestCase):
+    def test_repository_status_links_the_result_without_overclaiming(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        status = (ROOT / "PROJECT_STATUS.md").read_text(encoding="utf-8")
+        reports_index = (ROOT / "reports/README.md").read_text(encoding="utf-8")
+        combined = "\n".join((readme, status, reports_index))
+
+        self.assertNotIn("当前十数据集结果不包含 ImageNet", combined)
+        self.assertNotIn("ImageNet 尚无当前固定融合模型的可用结果", combined)
+        self.assertIn("reports/experiments/ImageNet扩展验证-20260918/", combined)
+        self.assertIn("78.33", combined)
+        self.assertIn("本地", combined)
+        self.assertIn("文献", combined)
+        self.assertIn("不宣称 SOTA", combined)
+
     def test_completed_current_model_protocol_and_summary_are_preserved(self):
         protocol = load_json("实验协议.json")
         status = load_json("执行状态.json")

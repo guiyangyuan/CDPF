@@ -38,3 +38,15 @@
 - GitHub `最终提交源码/` 为 26 条参考文献，已包含 `li2025atprompt` 和 ATPrompt/CuPL 来源说明。
 
 因此，Overleaf 项目仍比 GitHub 最终英文源码少一次 ATPrompt 同步。本次只读核对没有擅自替换线上项目；下载的 Overleaf PDF 只代表线上当时的真实编译版本，不能冒充 GitHub 26 条文献源码的最新编译成品。
+
+## 2026-10-11 十一数据集版本准备状态
+
+GitHub `最终提交源码/` 已纳入当前模型的 ImageNet 三种子结果，并生成新的 Overleaf 直接替换包：
+
+- `图2-十一数据集增益.pdf`
+- `图3-十一数据集消融稳定性效率.pdf`
+- 26 条参考文献，包含 `li2025atprompt`
+- 十一数据集宏平均 HM：TextConsistency **78.33**，匹配 CoOp **75.06**
+- ImageNet Base/Novel/HM：**76.66/71.62/74.05**
+
+本地英文 PDF 已从该源码编译通过，但本次仍未修改 Overleaf 线上项目。在线项目完成上传和重新编译前，上述内容应视为“GitHub 待同步版本”，不应记录为已在 Overleaf 发布。

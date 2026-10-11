@@ -1,18 +1,18 @@
 \begin{table*}[t]
 \centering
-\caption{Component comparison using HM (\%). The description branch is frozen. Both fusion variants use a fixed weight of 0.5.}
+\caption{Eleven-dataset component comparison using HM (\%). The description branch is frozen. Both fusion variants use a fixed weight of 0.5.}
 \label{tab:components}
 \scriptsize
 \setlength{\tabcolsep}{3.2pt}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{lrrrrrrrrrrr}
+\begin{tabular}{lrrrrrrrrrrrr}
 \toprule
-Method & UCF & DTD & Air. & Euro. & Flw. & Cal. & Pets & Food & Cars & SUN & Avg. \\
+Method & UCF & DTD & Air. & Euro. & Flw. & Cal. & Pets & Food & Cars & SUN & ImageNet & Avg. \\
 \midrule
-CoOp & 74.42 & 63.79 & 34.26 & 67.52 & 81.07 & 95.95 & 96.39 & 90.51 & 72.35 & 77.05 & 75.33 \\
-Description only & 76.46 & 63.30 & 34.83 & 69.99 & 76.69 & 96.29 & 95.27 & 90.58 & 67.53 & 76.73 & 74.77 \\
-Logit fusion & 78.76 & 70.75 & 38.31 & 75.69 & 83.73 & 96.09 & 96.64 & 91.30 & 72.86 & 79.54 & 78.37 \\
-\textbf{Probability fusion} & 79.47 & 70.99 & 38.46 & 76.65 & 85.06 & 96.09 & 96.63 & 91.30 & 73.16 & 79.74 & \textbf{78.75} \\
+CoOp & 74.42 & 63.79 & 34.26 & 67.52 & 81.07 & 95.95 & 96.39 & 90.51 & 72.35 & 77.05 & 72.39 & 75.06 \\
+Description only & 76.46 & 63.30 & 34.83 & 69.99 & 76.69 & 96.29 & 95.27 & 90.58 & 67.53 & 76.73 & 72.77 & 74.59 \\
+Logit fusion & 78.76 & 70.75 & 38.31 & 75.69 & 83.73 & 96.09 & 96.64 & 91.30 & 72.86 & 79.54 & 74.01 & 77.97 \\
+\textbf{Probability fusion} & 79.47 & 70.99 & 38.46 & 76.65 & 85.06 & 96.09 & 96.63 & 91.30 & 73.16 & 79.74 & 74.05 & \textbf{78.33} \\
 \bottomrule
 \end{tabular}%
 }

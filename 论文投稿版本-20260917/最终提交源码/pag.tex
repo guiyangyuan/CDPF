@@ -35,7 +35,7 @@
 \begin{abstract}
 Prompt learning efficiently adapts vision-language models to downstream recognition tasks, but prompts trained on base classes can lose part of the semantic coverage inherited from the frozen model. We study a simple way to recover this coverage without adding trainable parameters. TextConsistency combines the posterior produced by a CoOp prompt with a second posterior obtained from frozen, class-specific natural-language descriptions. Description embeddings are averaged within each class, both branches share the frozen CLIP image encoder, and their class probabilities are fused with a fixed weight of 0.5. The description branch is pre-computed and does not change prompt training.
 
-We evaluate the method with CLIP ViT-B/16 under the 16-shot base-to-novel protocol on ten datasets and three random seeds. TextConsistency obtains an average harmonic mean of 78.75, compared with 75.33 for the matched CoOp runs and 76.15 for locally evaluated CoCoOp. It improves the harmonic mean over CoOp in all 30 seed-level comparisons and over CoCoOp on all ten datasets. Its ten-dataset average is comparable to the published MaPLe result, while remaining 1.59 percentage points below PromptSRC. On an RTX 4090, the fused predictor adds no trainable parameters and increases batch-64 inference latency by 0.74\%. These results show that fixed probability fusion is a practical way to combine task adaptation with frozen semantic priors, although the current study does not include ImageNet and therefore does not establish an eleven-dataset state of the art.
+We evaluate the method with CLIP ViT-B/16 under the 16-shot base-to-novel protocol on eleven datasets and three random seeds. TextConsistency obtains a macro-average harmonic mean of 78.33, compared with 75.06 for the matched CoOp runs, and improves HM in all 33 seed-level comparisons. On ImageNet, it reaches 76.66 base accuracy, 71.62 novel accuracy, and 74.05 HM, compared with 72.39 HM for matched CoOp. For context, we separately mark the published CoCoOp eleven-dataset result rather than treating it as a local reproduction. On an RTX 4090, the fused predictor adds no trainable parameters and increases batch-64 inference latency by 0.74\%. These results support fixed probability fusion as a practical way to combine task adaptation with frozen semantic priors; cross-paper values are used only for positioning, not for a state-of-the-art claim.
 \end{abstract}
 
 \begin{keyword}
@@ -58,9 +58,8 @@ The simplicity of the method is useful for two reasons. First, it isolates the v
 The contributions of this paper are as follows:
 \begin{itemize}
     \item We introduce a fixed probability-fusion formulation that combines a learned prompt posterior with a frozen class-description posterior. It uses the existing CLIP encoders and adds no trainable parameters beyond CoOp.
-    \item We provide a controlled component study that separates CoOp, the description-only branch, logit fusion, and probability fusion. The results show that the gain comes from branch complementarity rather than from the description branch alone.
-    \item We evaluate the same 0.5 fusion rule on ten base-to-novel datasets. TextConsistency reaches 78.75 average HM, improves over local CoCoOp on ten out of ten datasets, and improves over matched CoOp in all 30 seed-level comparisons.
-    \item We report measured inference cost on one RTX 4090 and explicitly separate local reproductions from published comparison numbers.
+    \item We provide a controlled component study that separates CoOp, the description-only branch, logit fusion, and probability fusion, together with an RTX 4090 inference profile. The results show that the gain comes from branch complementarity rather than from the description branch alone, with no additional trainable parameters and only 0.74\% batch-64 latency overhead.
+    \item We evaluate the same 0.5 fusion rule on all eleven standard base-to-novel datasets. TextConsistency reaches 78.33 macro-average HM, improves over matched CoOp in all 33 seed-level comparisons, and yields a 1.67-point HM gain on ImageNet.
 \end{itemize}
 
 \section{Related Work}
@@ -162,9 +161,9 @@ Relative to CoOp, TextConsistency adds zero trainable parameters. In our ViT-B/1
 
 \subsection{Datasets and Evaluation Protocol}
 
-We evaluate on ten datasets from the standard base-to-novel benchmark: Caltech101, OxfordPets, StanfordCars, OxfordFlowers, Food101, FGVC Aircraft, SUN397, DTD, EuroSAT, and UCF101. They cover generic objects, fine-grained categories, food, aircraft, scenes, textures, remote sensing, and human actions. We use the public class splits associated with CoOp and CoCoOp \cite{zhou2022coop,zhou2022cocoop}. ImageNet is not included because a verified local run was unavailable; therefore all averages in this paper are explicitly ten-dataset averages.
+We evaluate on all eleven datasets from the standard base-to-novel benchmark: ImageNet, Caltech101, OxfordPets, StanfordCars, OxfordFlowers, Food101, FGVC Aircraft, SUN397, DTD, EuroSAT, and UCF101. They cover large-scale generic recognition, fine-grained categories, food, aircraft, scenes, textures, remote sensing, and human actions. We use the public class splits associated with CoOp and CoCoOp \cite{zhou2022coop,zhou2022cocoop}.
 
-For every trainable method, we use 16 shots per base class and random seeds 1, 2, and 3. We first average base and novel accuracy over seeds and then compute dataset-level HM using Eq.~\eqref{eq:hm}. Cross-dataset summaries are unweighted macro averages over the ten dataset-level values. Zero-shot CLIP has no training seed.
+For every locally trained method, we use 16 shots per base class and random seeds 1, 2, and 3. We first average base and novel accuracy over seeds and then compute dataset-level HM using Eq.~\eqref{eq:hm}. Our primary cross-dataset summary is the unweighted macro average over the eleven dataset-level HM values. We also report $H(\bar B,\bar N)$, the harmonic mean after separately averaging base and novel accuracy across datasets, because published prompt-learning papers often use that aggregation convention.
 
 \subsection{Implementation Details}
 
@@ -174,7 +173,7 @@ The local CoCoOp baseline follows its standard recipe with four context tokens, 
 
 \subsection{Baselines and Reporting Boundary}
 
-The locally evaluated baselines are zero-shot CLIP, CoOp, and CoCoOp. Their results are separated from published numbers for CuPL, CoCoOp, KgCoOp, MaPLe, and PromptSRC \cite{pratt2023cupl,zhou2022cocoop,yao2023kgcoop,khattak2023maple,khattak2023promptsrc}. Published values are used only for positioning and are marked with $\dagger$; they are not claimed as local reproductions.
+The matched eleven-dataset baseline is locally trained CoOp. A local CoCoOp evaluation is available on the ten non-ImageNet datasets, while the original CoCoOp paper provides the standard eleven-dataset result \cite{zhou2022cocoop}. We keep these sources separate: the eleven-dataset CoCoOp row is marked with $\dagger$ and uses the paper values throughout rather than splicing one published ImageNet number into ten local results. Published values for CuPL, KgCoOp, MaPLe, and PromptSRC are likewise used only for positioning and are not claimed as local reproductions \cite{pratt2023cupl,yao2023kgcoop,khattak2023maple,khattak2023promptsrc}.
 
 \section{Results}
 \label{sec:results}
@@ -184,18 +183,18 @@ The locally evaluated baselines are zero-shot CLIP, CoOp, and CoCoOp. Their resu
 \input{table/table_local_hm}
 \input{table/table_average_metrics}
 
-Table~\ref{tab:local_hm} reports dataset-level HM. TextConsistency reaches 78.75 on average, compared with 71.88 for zero-shot CLIP, 75.33 for matched CoOp, and 76.15 for local CoCoOp. The gains are 3.42 percentage points over CoOp and 2.60 points over CoCoOp. TextConsistency exceeds local CoCoOp on all ten datasets.
+Table~\ref{tab:local_hm} reports the matched eleven-dataset comparison. TextConsistency reaches 78.33 macro-average HM, compared with 75.06 for CoOp, a gain of 3.26 percentage points. On ImageNet, the respective Base/Novel/HM values are 76.66/71.62/74.05 for TextConsistency and 76.47/68.72/72.39 for CoOp. Thus, the fixed fusion rule improves ImageNet novel accuracy by 2.90 points and HM by 1.67 points without sacrificing base accuracy.
 
-Table~\ref{tab:average_metrics} separates base and novel accuracy. Relative to CoOp, TextConsistency changes the average base accuracy from 81.88 to 81.58 while improving novel accuracy from 70.50 to 76.44. The 5.94-point novel gain is therefore the main source of the improved balance. Relative to local CoCoOp, TextConsistency improves both the macro base and novel averages, although this comparison uses the standard training recipe of each method rather than equal epochs.
+Table~\ref{tab:average_metrics} separates the two cross-dataset aggregation conventions. Relative to CoOp, TextConsistency changes the eleven-dataset mean base accuracy from 81.39 to 81.13 while improving mean novel accuracy from 70.34 to 76.00. Consequently, $H(\bar B,\bar N)$ rises from 75.46 to 78.48, while the macro average of dataset-level HM rises from 75.06 to 78.33. The original CoCoOp paper reports 80.47 base, 71.69 novel, and 75.83 aggregate HM across eleven datasets; recomputing a macro average from its eleven reported dataset-level HMs gives 75.44. These published values provide context but are not a controlled local comparison.
 
-The improvement over CoOp is positive for every dataset and all 30 seed-level comparisons. It is largest on EuroSAT, DTD, UCF101, FGVC Aircraft, and OxfordFlowers. The gains on Caltech101, OxfordPets, Food101, and StanfordCars are smaller, which indicates that the frozen semantic branch is most useful when the learned prompt exhibits a larger base-novel gap.
+The improvement over CoOp is positive for every dataset and all 33 seed-level comparisons. It is largest on EuroSAT, DTD, UCF101, FGVC Aircraft, and OxfordFlowers. The gains on Caltech101, OxfordPets, Food101, StanfordCars, and ImageNet are smaller but remain positive, which indicates that the frozen semantic branch is most useful when the learned prompt exhibits a larger base-novel gap.
 
-Figure~\ref{fig:dataset-gains} visualises these dataset-level gains. The comparison with CoOp isolates the effect of adding the frozen description posterior to the matched learned prompt, whereas the comparison with CoCoOp positions the method against an independently trained conditional-prompt baseline. All bars remain above zero, but their range also shows that the benefit is dataset dependent rather than a uniform offset.
+Figure~\ref{fig:dataset-gains} visualises the eleven matched dataset-level gains over CoOp. All bars remain above zero, but their range also shows that the benefit is dataset dependent rather than a uniform offset. On the ten datasets shared with our local CoCoOp runs, TextConsistency retains a 78.75 versus 76.15 macro-HM advantage and is higher on all ten; we report this as a separate ten-dataset local comparison rather than filling the missing local ImageNet cell with a paper value.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.92\textwidth]{图2-十数据集增益.pdf}
-\caption{Per-dataset HM improvement of TextConsistency over matched CoOp and locally evaluated CoCoOp. Positive values indicate higher harmonic mean. All values are computed from the audited three-seed dataset summaries.}
+\includegraphics[width=0.92\textwidth]{图2-十一数据集增益.pdf}
+\caption{Per-dataset HM improvement of TextConsistency over matched CoOp on all eleven benchmarks. Positive values indicate higher harmonic mean. All values are computed from the audited three-seed dataset summaries.}
 \label{fig:dataset-gains}
 \end{figure*}
 
@@ -210,20 +209,20 @@ Table~\ref{tab:published_hm} recomputes a ten-dataset average using the datasets
 
 \input{table/table_components}
 
-The description-only branch obtains 74.77 average HM, below CoOp at 75.33. Its value lies in complementarity rather than standalone strength. Fixed logit fusion raises the average to 78.37, showing that combining the two semantic sources is already effective. Probability fusion further raises it to 78.75 and is the final method. The same coefficient is used for every dataset; the difference is not produced by dataset-specific weight selection.
+Across eleven datasets, the description-only branch obtains 74.59 macro-average HM, below CoOp at 75.06. Its value lies in complementarity rather than standalone strength. Fixed logit fusion raises the average to 77.97, showing that combining the two semantic sources is already effective. Probability fusion further raises it to 78.33 and is the final method. The same coefficient is used for every dataset, including ImageNet; the difference is not produced by dataset-specific weight selection.
 
 The description branch is deterministic for a fixed dataset and split. Repeating it alongside three CoOp checkpoints does not constitute three independent description-model trainings. Our statistical unit for the trainable branch remains the three CoOp seeds.
 
 \subsection{Stability Across Seeds}
 
-For each seed, we compare TextConsistency and CoOp using predictions from the same trained checkpoint. All 30 paired HM differences are positive. On the first five completed datasets, the mean paired gains were $+5.07$ on UCF101, $+7.19$ on DTD, $+4.20$ on FGVC Aircraft, $+9.88$ on EuroSAT, and $+4.01$ on OxfordFlowers. The remaining five datasets also produced three positive seed-level differences each. Because each dataset has only three seeds, we use these results as evidence of directional stability and do not make strong significance claims from small-sample confidence intervals.
+For each seed, we compare TextConsistency and CoOp using predictions from the same trained checkpoint. All 33 paired HM differences are positive. The mean paired gains include $+5.07$ on UCF101, $+7.19$ on DTD, $+4.20$ on FGVC Aircraft, $+9.88$ on EuroSAT, $+4.01$ on OxfordFlowers, and $+1.67$ on ImageNet. Each of the remaining datasets also produces three positive seed-level differences. Because each dataset has only three seeds, we use these results as evidence of directional stability and do not make strong significance claims from small-sample confidence intervals.
 
-Figure~\ref{fig:diagnostics} summarises the component, stability, and cost evidence in a common visual form. Panel (a) confirms that the description branch is complementary rather than independently dominant. Panel (b) retains every paired seed result and exposes the much smaller gains on already saturated datasets. Panel (c) places the 3.42-point macro-HM improvement next to the measured 0.74\% batch-64 latency increase; the axes combine different evaluation scopes and are intended as a compact accuracy-cost summary rather than a hardware-independent frontier.
+Figure~\ref{fig:diagnostics} summarises the component, stability, and cost evidence in a common visual form. Panel (a) confirms that the description branch is complementary rather than independently dominant. Panel (b) retains every paired seed result, including ImageNet, and exposes the much smaller gains on already saturated datasets. Panel (c) places the 3.26-point eleven-dataset macro-HM improvement next to the measured 0.74\% batch-64 latency increase; the axes combine different evaluation scopes and are intended as a compact accuracy-cost summary rather than a hardware-independent frontier.
 
 \begin{figure*}[t]
 \centering
-\includegraphics[width=0.99\textwidth]{图3-消融稳定性效率.pdf}
-\caption{Diagnostic summary. (a) Ten-dataset component HM. (b) Paired TextConsistency-minus-CoOp HM gains for all three seeds on each dataset; diamonds denote dataset means. (c) Ten-dataset macro HM versus batch-64 latency overhead measured on the UCF101 novel split of one RTX 4090.}
+\includegraphics[width=0.99\textwidth]{图3-十一数据集消融稳定性效率.pdf}
+\caption{Diagnostic summary. (a) Eleven-dataset component HM. (b) Paired TextConsistency-minus-CoOp HM gains for all three seeds on each dataset; diamonds denote dataset means. (c) Eleven-dataset macro HM versus batch-64 latency overhead measured on the UCF101 novel split of one RTX 4090.}
 \label{fig:diagnostics}
 \end{figure*}
 
@@ -238,18 +237,19 @@ Table~\ref{tab:efficiency} reports CUDA-event measurements on one RTX 4090. Each
 
 The experiments support a narrow conclusion: a fixed posterior average can recover useful frozen semantics that CoOp underuses after base-class adaptation. They do not show that natural-language descriptions are universally superior to learned prompts. The description-only average is lower than CoOp, and the smallest fusion gains occur on datasets where the two branches are already similarly strong.
 
-Several limitations remain. First, ImageNet is absent, so the ten-dataset average cannot be compared directly with the common eleven-dataset benchmark average. Second, the local CoCoOp baseline uses its standard 10-epoch recipe while CoOp and TextConsistency use 20 epochs. Third, description quality depends on the stored language used for each class; we do not study different language models, prompt-generation instructions, or annotation budgets. Fourth, the coefficient 0.5 is intentionally fixed for simplicity, but this may be suboptimal for individual datasets. Finally, the efficiency result is measured on one GPU and should not be treated as a hardware-independent latency guarantee.
+Several limitations remain. First, our matched CoOp and TextConsistency evidence covers all eleven datasets, but the local CoCoOp run covers only the ten non-ImageNet datasets; the eleven-dataset CoCoOp comparison therefore uses clearly marked values from its paper. Second, the local CoCoOp baseline uses its standard 10-epoch recipe while CoOp and TextConsistency use 20 epochs. Third, description quality depends on the stored language used for each class; we do not study different language models, prompt-generation instructions, or annotation budgets. Fourth, the coefficient 0.5 is intentionally fixed for simplicity, but this may be suboptimal for individual datasets. Finally, the efficiency result is measured on one GPU and should not be treated as a hardware-independent latency guarantee.
 
-The full experimental evidence was accumulated in audited batches with frozen data splits, seeds, source hashes, checkpoints, raw predictions, and independent recomputation. This makes the reported values traceable, although a future single-release rerun including ImageNet would provide a cleaner eleven-dataset benchmark package.
+The full experimental evidence was accumulated in audited batches with frozen data splits, seeds, source hashes, checkpoints, raw predictions, and independent recomputation. ImageNet was completed as a later extension using the same current trainer and the already fixed 0.5 fusion rule; it was not used to retune the coefficient, temperature, descriptions, or stopping criterion. This makes the eleven-dataset result traceable, although a single monolithic rerun of every method would further simplify provenance.
 
 \section{Conclusion}
 
-We presented TextConsistency, a parameter-free extension to CoOp that averages the class probabilities from learned prompts and frozen class descriptions. The method keeps CLIP frozen, leaves prompt training unchanged, uses a single fixed fusion coefficient, and caches the description prototypes. Across ten base-to-novel datasets, it improves average HM from 75.33 to 78.75 over matched CoOp and exceeds locally evaluated CoCoOp on every dataset. Component results show that the benefit comes from combining complementary branches, and an RTX 4090 measurement shows less than one percent batch-64 latency overhead. The current evidence supports TextConsistency as a simple and reproducible method for improving novel-class balance, while ImageNet evaluation and broader description-generation studies remain future work.
+We presented TextConsistency, a parameter-free extension to CoOp that averages the class probabilities from learned prompts and frozen class descriptions. The method keeps CLIP frozen, leaves prompt training unchanged, uses a single fixed fusion coefficient, and caches the description prototypes. Across all eleven standard base-to-novel datasets, it improves macro-average HM from 75.06 to 78.33 over matched CoOp, including an ImageNet gain from 72.39 to 74.05, and all 33 seed-level paired differences are positive. Component results show that the benefit comes from combining complementary branches, and an RTX 4090 measurement shows less than one percent batch-64 latency overhead. The evidence supports TextConsistency as a simple and reproducible method for improving novel-class balance without implying that cross-paper comparisons establish a state of the art.
 
 \section*{Data and Code Availability}
 
 The implementation, frozen configurations, result tables, audit scripts, and experiment archives are available in the accompanying project repository. The release separates local reproductions from published comparison values and includes machine-readable CSV and JSON summaries.
 
+\small
 \bibliographystyle{elsarticle-num}
 \bibliography{cas-refs}
 

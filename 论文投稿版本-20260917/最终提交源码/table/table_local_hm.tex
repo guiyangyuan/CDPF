@@ -1,18 +1,16 @@
 \begin{table*}[t]
 \centering
-\caption{Locally evaluated harmonic-mean accuracy (\%) on ten base-to-novel benchmarks. All methods use CLIP ViT-B/16 and the official class splits. CoOp, CoCoOp, and TextConsistency are averaged over three seeds.}
+\caption{Matched local harmonic-mean accuracy (\%) on eleven base-to-novel benchmarks. Both rows use CLIP ViT-B/16, the official class splits, 16 base-class shots, and the same three CoOp seeds.}
 \label{tab:local_hm}
 \scriptsize
 \setlength{\tabcolsep}{3.2pt}
 \resizebox{\textwidth}{!}{%
-\begin{tabular}{lrrrrrrrrrrr}
+\begin{tabular}{lrrrrrrrrrrrr}
 \toprule
-Method & UCF & DTD & Air. & Euro. & Flw. & Cal. & Pets & Food & Cars & SUN & Avg. \\
+Method & UCF & DTD & Air. & Euro. & Flw. & Cal. & Pets & Food & Cars & SUN & ImageNet & Avg. \\
 \midrule
-Zero-shot CLIP & 74.49 & 56.68 & 31.30 & 60.33 & 74.46 & 95.61 & 94.15 & 90.59 & 68.83 & 72.36 & 71.88 \\
-CoOp & 74.42 & 63.79 & 34.26 & 67.52 & 81.07 & 95.95 & 96.39 & 90.51 & 72.35 & 77.05 & 75.33 \\
-CoCoOp & 77.75 & 62.91 & 34.31 & 72.91 & 81.16 & 95.44 & 96.46 & 90.89 & 71.79 & 77.92 & 76.15 \\
-\textbf{TextConsistency} & 79.47 & 70.99 & 38.46 & 76.65 & 85.06 & 96.09 & 96.63 & 91.30 & 73.16 & 79.74 & \textbf{78.75} \\
+CoOp & 74.42 & 63.79 & 34.26 & 67.52 & 81.07 & 95.95 & 96.39 & 90.51 & 72.35 & 77.05 & 72.39 & 75.06 \\
+\textbf{TextConsistency} & 79.47 & 70.99 & 38.46 & 76.65 & 85.06 & 96.09 & 96.63 & 91.30 & 73.16 & 79.74 & 74.05 & \textbf{78.33} \\
 \bottomrule
 \end{tabular}%
 }

@@ -1,16 +1,15 @@
 \begin{table}[t]
 \centering
-\caption{Ten-dataset macro averages (\%). HM is computed for each dataset before macro averaging.}
+\caption{Eleven-dataset aggregate results (\%). $H(\bar B,\bar N)$ is the harmonic mean of the cross-dataset mean base and novel accuracies; Macro HM averages the eleven dataset-level harmonic means. CoCoOp values marked with $\dagger$ are from its paper rather than a local reproduction.}
 \label{tab:average_metrics}
 \small
-\begin{tabular}{lrrr}
+\begin{tabular}{lrrrr}
 \toprule
-Method & Base & Novel & HM \\
+Method & Base & Novel & $H(\bar B,\bar N)$ & Macro HM \\
 \midrule
-Zero-shot CLIP & 69.22 & 74.94 & 71.88 \\
-CoOp & 81.88 & 70.50 & 75.33 \\
-CoCoOp & 81.15 & 72.46 & 76.15 \\
-\textbf{TextConsistency} & 81.58 & 76.44 & 78.75 \\
+CoOp & 81.39 & 70.34 & 75.46 & 75.06 \\
+\textbf{TextConsistency} & 81.13 & 76.00 & 78.48 & 78.33 \\
+CoCoOp$^\dagger$ & 80.47 & 71.69 & 75.83 & 75.44 \\
 \bottomrule
 \end{tabular}
 \end{table}

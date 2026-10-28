@@ -92,7 +92,7 @@ class 三数据集扩展测试(unittest.TestCase):
             ("oxford_pets", "OxfordPets", "pets_prompts_full.json"),
             ("food101", "Food101", "food_prompts_full.json"),
         ):
-            self.assertIn(f"'{key}'", run_pilot)
+            self.assertIn(f'"{key}"', run_pilot)
             self.assertIn(f'"{key}"', evaluator)
             self.assertIn(f"'{key}'", preflight)
             self.assertIn(f"'{dataset}': 'templates/{template}'", templates)

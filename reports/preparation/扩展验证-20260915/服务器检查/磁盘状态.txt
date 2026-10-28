@@ -1,3 +1,0 @@
-Filesystem      Size  Used Avail Use% Mounted on
-overlay          30G  432M   30G   2% /
-/dev/md0         50G   12G   39G  23% /root/autodl-tmp

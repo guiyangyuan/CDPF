@@ -1,0 +1,3876 @@
+{
+  "format_version": 1,
+  "status": "complete",
+  "units": {
+    "accuracy_and_gains": "percentage_points",
+    "new": "Novel"
+  },
+  "main_hm_definition": "H(mean_seed_base, mean_seed_new)",
+  "seed_hm_statistics_definition": "mean_and_sample_sd_of_individual_seed_HM; not_main_table_HM",
+  "protocol": {
+    "backbone": "CLIP ViT-B/16",
+    "shots": 16,
+    "checkpoint_epoch": 20,
+    "dataset_count": 11,
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "alpha": 0.5,
+    "additional_training": 0,
+    "max_descriptions_per_class": 20,
+    "matched_template_pool_size": 60,
+    "matched_template_selection": "For each class, take the first M_c token-unique templates in frozen source order; M_c is its effective description count, at most 20.",
+    "template_pool_scope": "The fixed 60-template pool; not a complete 80-template ensemble or every possible template set."
+  },
+  "branch_definitions": {
+    "student": {
+      "label": "CoOp",
+      "meaning": "Original epoch-20 CoOp student posterior; no description fusion."
+    },
+    "mean_probability_fusion": {
+      "label": "CDPF",
+      "meaning": "0.5 * softmax(student_logits) + 0.5 * softmax(frozen_description_mean_logits)."
+    },
+    "matched_template_probability_fusion": {
+      "label": "Matched-count template fusion",
+      "meaning": "0.5 * softmax(student_logits) + 0.5 * softmax(frozen_matched_template_mean_logits); same per-class text count as the description branch."
+    }
+  },
+  "provenance": {
+    "analysis_file": "CDPF_MatchedText_20261023/analysis-final.json",
+    "analysis_sha256": "c33d1f22113ac7a38e73fb4ec499a70065f02f43a30ae24734301f96e1fb9d10",
+    "verification_file": "CDPF_MatchedText_20261023/verification-final.json",
+    "verification_sha256": "2f5a208cf6310d7a69ce29660d4494afdd71491de8731f88a94497847dc513fd",
+    "result_report_sha256": "6d27e8f7ff9859d222fa497864715495a16a5bba7aafebc21c918370c725e7e4",
+    "runner_sha256": "64052bbbc1ebd0856fa67b9bb0e25e78af01ad46e67b42e9be212e09600c1f50",
+    "template_pool_sha256": "c6fcd4ff9b05cc4c80c7645d6337c7c377c62ef64cb2d3d39dba020f7947065b",
+    "verified_cases": 66,
+    "cache_files_byte_hash_verified": 22,
+    "checkpoint_files_byte_hash_verified": 33,
+    "inventory_definition": "SHA-256 of ordered path/label/classname/size/mtime inventory; not an image-byte hash",
+    "identity_check": "Exact receipt.identity and receipt.cache_sha256 equality across seeds within each dataset/split; recorded hashes are compared, image/cache bytes are not reread by this analyzer",
+    "identity_sha256_definition": "SHA-256 of UTF-8 json.dumps(original identity, sort_keys=True, separators=(comma, colon), ensure_ascii=False).",
+    "export_scope": "Exact original summary values and branch names; redundant all-pairs paired_deltas and prediction-level cases omitted. The standard-library summarizer checks stored HMs and recomputes the requested comparisons.",
+    "dataset_split": {
+      "caltech101/base": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "2074aa81019cf676188313c84bdd5008be84ff72ce9af3e37afe3946056076d6",
+        "cache_sha256": "869ed227dd47a73febea78fbc8e0805187721a87af416c59b1aefa212f945290",
+        "test_inventory_sha256": "fee225d9e5298081416a5e904bd6e964082a013f1735ab54a9c9df110415f096",
+        "identity_sha256": "6de10c8fea1dd78535cee8e648a27eef28790f7f54374af20f71968e063ca31a",
+        "class_count": 50,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "caltech101/new": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "aeb521bbbb44e74c8ece424718211b2eda19cb44677a6909d9946bdbe3557cdc",
+        "cache_sha256": "aec01b6a6725258014358869b41d00188aea419e849455d33ca59f67c406134e",
+        "test_inventory_sha256": "5f9ed0103ad63817b9ba0190524a0616103b008b9ae947df7342fb1dd055aa6b",
+        "identity_sha256": "5f79761f3b98101737ff5b918c87dcef47892b3d9de8598dbb1be42c05fb8645",
+        "class_count": 50,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "dtd/base": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "cdffe9f91ff0d496160672fe417d2c2d6f2277831fb9df660e7ff194bcb8cf4a",
+        "cache_sha256": "735685e629d9ebae8bba1087112d7d6ad4181071e26a72eaa5e3cb1bdcd03e0d",
+        "test_inventory_sha256": "edc59a605d870868087d897751fa899a3d122795b35c29bc44e3bf5ab505ef78",
+        "identity_sha256": "0bdd09e0eb4c2b33c858349a41d8656fcd4095d22df77ea9af9c8463b7cc4897",
+        "class_count": 24,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "dtd/new": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "a27e4feec3d054a0c011bff4484df3fb16b1c6442326aa9b1c0e252104125963",
+        "cache_sha256": "0034a4cef9e463e1e5ea5f270c1f82db33676c08a0231020e630d3d684d66d1f",
+        "test_inventory_sha256": "e3fe4820eeb3d18016f904eccd9bd57ea802b2194d5f76bca18e910f5c85738d",
+        "identity_sha256": "75cdb34308ae977dcf1c7185e78d5f7ef13d723db48e56aec346a966db2c0e4b",
+        "class_count": 23,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "eurosat/base": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "3f88a2da1414e808d944752d3e7cdd919fbb03aa177e67715e3b07ade632f014",
+        "cache_sha256": "c78d368df3e5b585459db0789e18f8a6bfb69c1dc9bfa62a2efa1f1f8f6dbfc3",
+        "test_inventory_sha256": "e9a6403b0daf53dd47ac2d0a96748c5a23d9a4e88f5bd2fece6c671ba463e4f7",
+        "identity_sha256": "ecba719133979c8c53c674319d8ecf02d5b0e1048ede81ab65c595d3c56ea434",
+        "class_count": 5,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "eurosat/new": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "3c661ec1923e6845217fc69c97da5e5385ce286aa6c0fa00e54b1a1ba74a34a7",
+        "cache_sha256": "26baf7683eb18bf59f46b6059b600f5d23c0ccc3ea135e6cff703cce2d25dde3",
+        "test_inventory_sha256": "a16476ad335db556f1929cfd9180dfd6cf2313d4960d69ed697b2d235311daf9",
+        "identity_sha256": "f2fccaceac923e5379cb92b576b9ab17e0bf0daa7355c1f2f6a20f7799f25b1a",
+        "class_count": 5,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "fgvc_aircraft/base": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "78dd9ed86b8d2d13c40d88fac9b778ec450b322707c44347521c07e7db9b714a",
+        "cache_sha256": "71dd2f387e7ad117cb3438642f623c42c8f108bd28b8f137775ed09d63fc7176",
+        "test_inventory_sha256": "aef73d12789b66c3151db4fd6b363f936fd62292d30a231a66ff1f9699f76ac0",
+        "identity_sha256": "5fe3ab8e5a94503c5a89ead990fe6d55d50bb262688bc32a2dc5ff022f6a75ea",
+        "class_count": 50,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "fgvc_aircraft/new": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "f15f9d68e9b645abd09c1b38be0f568b4a662db754eefa88ddbdfa5f2155b469",
+        "cache_sha256": "3a79bfe083a2f6ff616e7ffdabde519bc367c2e308f06d01499a27b2920bfa75",
+        "test_inventory_sha256": "6b69ca9d8016a31e1504cc420a07d3007d15307310772904e649e25d8283b995",
+        "identity_sha256": "27c8b01a0c9caa571412d8c59f8a34a756e0393ce3d37c3fb4947b10eb4c6041",
+        "class_count": 50,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "food101/base": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "4b803d92511bf11068a43bd521b7979b72e3b980780c8ecf09ff08e1e614e1ca",
+        "cache_sha256": "c22c333b1423b2ecaa062ad71ca0911aa814446ee885e7ea1005efb827897405",
+        "test_inventory_sha256": "768bcb27318e56c5a31c8be86bbd2aff1a573727a598d71a1385f99e4d2bde9d",
+        "identity_sha256": "31e624a6e70b48658e8f2166fabe652bd1b4f9380f7d7fa31fd8c3b9ec42d732",
+        "class_count": 51,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "food101/new": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "5fbc76f2e008f305e293aede704a75414edaa671b3ca0da023d47a4b2e643bb8",
+        "cache_sha256": "618ee0f6d2ae5d5006865ef0c73b314f526e81f2bd8844da5a9bef6069053039",
+        "test_inventory_sha256": "47e1e49ca2cfb385200bc78bfcb38bf72d15952f430d78c47c5164df4121d7af",
+        "identity_sha256": "ed3b518b6576c8799ff663471dd0a7a14e1843ffc5f1e898c9adb346da8ec915",
+        "class_count": 50,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "imagenet/base": {
+        "source_sha256": "e4d4343f31b7cdbcccd3b81ddc99536080c62e573783b27c9366a3c64a7892db",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "edebd4ea5c8df19d71b44d53173e9e3ea1af32a0350fc5a37a851701296294d5",
+        "cache_sha256": "e49075c1686251fce656e32e8af90861f284414ef5f5759d12ed7c1938138fb4",
+        "test_inventory_sha256": "fe968d5e13a2f68c6ac9c86f3a5586a2c863af16fd2fa86efcb4fd9badab77be",
+        "identity_sha256": "40bdaf067a0d4f28e8534c75f61ccee4beb0da9dbe488f794d4a6c4f3b844c8c",
+        "class_count": 500,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "imagenet/new": {
+        "source_sha256": "e4d4343f31b7cdbcccd3b81ddc99536080c62e573783b27c9366a3c64a7892db",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "21dc352a4877b64a4af27002777441447aaba7314fc11d721c3072ec3644fd06",
+        "cache_sha256": "73d0d8a94dc2472d30647a212b94a5aad4f0d8f41fe9fc67e8c1723f402ce917",
+        "test_inventory_sha256": "6d95f69ef9c15a85f3fc58303a7d2919d6bf76afcec573df700b44c47db9bf62",
+        "identity_sha256": "3bbc47b6fdfb20c594fb06745d6e2d461f2e9ad614e5f1b68eba8e6f79f8e882",
+        "class_count": 500,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "oxford_flowers/base": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "a8b7aa96d147e01ae3add8cd710fdd289d539147e61af00f8c69afd9a60216c4",
+        "cache_sha256": "9936f99c26b2c6d15755bd1d98d12571e0f0fa2edd49020d2382ab4282c4725a",
+        "test_inventory_sha256": "96a399dfba4ad94f5ab60af781fc727688157b162b621ad7180e45776da78a42",
+        "identity_sha256": "316fdc2f4cfbeab4f85e3057a23de937637813c762f7863e74b3f42085a57b3b",
+        "class_count": 51,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "oxford_flowers/new": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "155819283e083c5943ccb630748a00fedf3c1b889583bd608fc8a8cdc8a302ab",
+        "cache_sha256": "ade2a307be0092f711771c540b58b366d7987a7b0ad348ff92e3e04a47545053",
+        "test_inventory_sha256": "d31f267d82cd14424ac749db57e08616b0ee7bc8eeb78dc16f1a4a3159a4672e",
+        "identity_sha256": "fc8847e2463bcd835e467d7f57a3587456fc7e0d293110da8e9541a86fb063cf",
+        "class_count": 51,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "oxford_pets/base": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "c1a3364d1723a134f49d7bb3e45ecb637a6d748837fc282bd50718b21015b639",
+        "cache_sha256": "b655f1a71f982bb98ac2cb378c672ecb382f704095d900e67c635917c2c993a0",
+        "test_inventory_sha256": "b45de27b61228ed7f7800e20f7a2ffca604c468390535175d5686fca29c8df2c",
+        "identity_sha256": "4441eed88ee52d3bbf45950fe2bfc57b7da77708cef568f58099e6ac591b92dd",
+        "class_count": 19,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "oxford_pets/new": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "6ca8bc95bb2d4c108544d276cf5dfaa1490ac9157007f5f80e32b1d21a1bdd08",
+        "cache_sha256": "f6e669bb05519b7360ad36a6c291c704fe6ffa6ef9d9dc5cc6923f32b7cd8738",
+        "test_inventory_sha256": "67796f8b34f172c67954570162cef847c00184dbe26c6415001ac0eb3921a1f1",
+        "identity_sha256": "b53d8746bdf73e0a6b45d29ca67c05338aec317b08eca22dd13a20e63407e932",
+        "class_count": 18,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "stanford_cars/base": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "bf88bbae34b13affe158b373297846122a814f7ecb67996e40f8c4af662de0e7",
+        "cache_sha256": "00dccad25ed6749c74eef7f84868c5af3eb80574ef25d312098238c2a2111078",
+        "test_inventory_sha256": "bc50da3e50ff0b309bdd42edd50f97177ccddbd6f567015a99ae87f7a6500c6b",
+        "identity_sha256": "892db9f8598dc7e12f32728481e5c63126ddf9a0b3e69d9668e533270edcd5a2",
+        "class_count": 98,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "stanford_cars/new": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "424bb568e047d2c593919df87a9b2d85c73b9dff3f28bdf6a1e30c5ad84717a8",
+        "cache_sha256": "979fc4f8b4f5c13a7aa64ef4de6ae0ad54e79c8c4629a9bbd01335ee3676ee6b",
+        "test_inventory_sha256": "1a29925ba8a7eafacd5366458298e996ba11497c49dc7f715da8063d71c85661",
+        "identity_sha256": "bab6d3ba4c9844fd109748ca17d571e4733d5c798115d3603a35f7672e7fd825",
+        "class_count": 98,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "sun397/base": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "2db655d4711935887501aa6adac9ba2462438bf310022974aaa37d5b21442c5d",
+        "cache_sha256": "d083fae93c4405b1071a0739a9c8193797b8ce710b8cec867eb521cb41afc587",
+        "test_inventory_sha256": "3df1998f83907eff1b1e0d26ed2a60749dec27d53a384512a1c04b6b5e8aefe7",
+        "identity_sha256": "0c06602d035a1249129fe38065c39d16cd7b4be61eb4d20e87193f7561719611",
+        "class_count": 199,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "sun397/new": {
+        "source_sha256": "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "a6a8b3d44133655de31670ee758fffb5e888986001b399cced3d212a6a738df0",
+        "cache_sha256": "b0f14078ce0293a4522bbed961c2ebe3a445afb9fcf6befd020890b3c50147c6",
+        "test_inventory_sha256": "a9e91e22d013e6ae2d336ce6a891c69e2004d75ba20fd0bb68a2e238aaaf78a3",
+        "identity_sha256": "9caeea3a0d166e4edcf552e68096367b4a8c2a92dc266b2fc3a0f41d2c0563dd",
+        "class_count": 198,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "ucf101/base": {
+        "source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "5e65b514472e2c8e73cd6dffd50420aba86c9111b0d8d017cb8113cd280149c9",
+        "cache_sha256": "8a9eee596674090e0cab7f75b9df413f0fc6cf64a97a2ec26d79a9055d9f6b82",
+        "test_inventory_sha256": "44ee24f69c80c850acc8d758eeaf8662b13997611936072dcf205555acc067fb",
+        "identity_sha256": "af1cb86364b0afbfd2de0c07d11b9e904cdd1c7190e6d6c6162bfffa5900362c",
+        "class_count": 51,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      },
+      "ucf101/new": {
+        "source_sha256": "d74a9770d0d814c56269486e2492327881633d98314281d0f13a584ee279f17f",
+        "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+        "samples_sha256": "f62c60bb2a56145eac53960bd2e22078d223fbb038f2c5d134ac31ca4dcaf518",
+        "cache_sha256": "6e33a6a4a4f28e75f08cc26487dfcf55821339b733cc2305ce11b217bf6c58c0",
+        "test_inventory_sha256": "3dff916a745eadbd345db9994e5dc6e7a25880f05185dec2bee2210e0180857b",
+        "identity_sha256": "85f4fcb0d6c6f54ed8d879dfd712eb59f6fa92659806bbff577eb0ee158e414c",
+        "class_count": 50,
+        "dtype": "torch.float32",
+        "batch_size": 16,
+        "seeds": [
+          1,
+          2,
+          3
+        ]
+      }
+    }
+  },
+  "summary": {
+    "per_dataset": {
+      "caltech101": {
+        "adk_probability_fusion": {
+          "base": 98.10630514310309,
+          "new": 94.17758369723435,
+          "hm": 96.10180883654722
+        },
+        "classname": {
+          "base": 97.22401549386701,
+          "new": 94.21397379912663,
+          "hm": 95.69533071480403
+        },
+        "classname_probability_fusion": {
+          "base": 98.19238218205294,
+          "new": 93.92285298398836,
+          "hm": 96.01017501669483
+        },
+        "description_instance": {
+          "base": 96.83666881859263,
+          "new": 93.01310043668123,
+          "hm": 94.88638135415786
+        },
+        "description_mean": {
+          "base": 97.28857327307941,
+          "new": 95.30567685589521,
+          "hm": 96.28691739162416
+        },
+        "description_probability_alpha_0_00": {
+          "base": 98.02022810415322,
+          "new": 93.95924308588064,
+          "hm": 95.94678412938259
+        },
+        "description_probability_alpha_0_25": {
+          "base": 97.95567032494081,
+          "new": 94.25036390101893,
+          "hm": 96.06730206441115
+        },
+        "description_probability_alpha_0_50": {
+          "base": 97.99870884441576,
+          "new": 94.25036390101893,
+          "hm": 96.08799500059511
+        },
+        "description_probability_alpha_0_75": {
+          "base": 97.91263180546589,
+          "new": 94.90538573508006,
+          "hm": 96.38555782662361
+        },
+        "description_probability_alpha_1_00": {
+          "base": 97.28857327307941,
+          "new": 95.30567685589521,
+          "hm": 96.28691739162416
+        },
+        "matched_template": {
+          "base": 96.70755326016786,
+          "new": 94.65065502183405,
+          "hm": 95.66804940130402
+        },
+        "matched_template_probability_fusion": {
+          "base": 97.89111254572843,
+          "new": 93.99563318777292,
+          "hm": 95.9038319402259
+        },
+        "mean_probability_fusion": {
+          "base": 97.99870884441576,
+          "new": 94.25036390101893,
+          "hm": 96.08799500059511
+        },
+        "simple_fusion": {
+          "base": 97.99870884441576,
+          "new": 94.25036390101893,
+          "hm": 96.08799500059511
+        },
+        "student": {
+          "base": 98.02022810415322,
+          "new": 93.95924308588064,
+          "hm": 95.94678412938259
+        }
+      },
+      "dtd": {
+        "adk_probability_fusion": {
+          "base": 78.16358024691358,
+          "new": 65.98228663446055,
+          "hm": 71.55823289018532
+        },
+        "classname": {
+          "base": 53.125,
+          "new": 60.386473429951685,
+          "hm": 56.52347386620561
+        },
+        "classname_probability_fusion": {
+          "base": 77.39197530864197,
+          "new": 60.02415458937198,
+          "hm": 67.6105184063974
+        },
+        "description_instance": {
+          "base": 57.754629629629626,
+          "new": 66.78743961352657,
+          "hm": 61.943467974014666
+        },
+        "description_mean": {
+          "base": 60.069444444444436,
+          "new": 66.90821256038647,
+          "hm": 63.304667168654795
+        },
+        "description_probability_alpha_0_00": {
+          "base": 77.77777777777779,
+          "new": 54.06602254428341,
+          "hm": 63.78965224766751
+        },
+        "description_probability_alpha_0_25": {
+          "base": 78.00925925925925,
+          "new": 58.73590982286635,
+          "hm": 67.01435740590816
+        },
+        "description_probability_alpha_0_50": {
+          "base": 77.9320987654321,
+          "new": 65.17713365539453,
+          "hm": 70.98620726779572
+        },
+        "description_probability_alpha_0_75": {
+          "base": 72.45370370370371,
+          "new": 68.0756843800322,
+          "hm": 70.1964981525248
+        },
+        "description_probability_alpha_1_00": {
+          "base": 60.069444444444436,
+          "new": 66.90821256038647,
+          "hm": 63.304667168654795
+        },
+        "matched_template": {
+          "base": 55.555555555555564,
+          "new": 57.85024154589372,
+          "hm": 56.67968287776595
+        },
+        "matched_template_probability_fusion": {
+          "base": 77.27623456790123,
+          "new": 61.35265700483092,
+          "hm": 68.39991664481954
+        },
+        "mean_probability_fusion": {
+          "base": 77.9320987654321,
+          "new": 65.17713365539453,
+          "hm": 70.98620726779572
+        },
+        "simple_fusion": {
+          "base": 77.70061728395062,
+          "new": 64.93558776167473,
+          "hm": 70.74690820839422
+        },
+        "student": {
+          "base": 77.77777777777779,
+          "new": 54.06602254428341,
+          "hm": 63.78965224766751
+        }
+      },
+      "eurosat": {
+        "adk_probability_fusion": {
+          "base": 84.5079365079365,
+          "new": 66.31623931623932,
+          "hm": 74.3149897681531
+        },
+        "classname": {
+          "base": 56.976190476190474,
+          "new": 63.97435897435897,
+          "hm": 60.27281858699657
+        },
+        "classname_probability_fusion": {
+          "base": 83.96031746031747,
+          "new": 60.72649572649573,
+          "hm": 70.47796198076581
+        },
+        "description_instance": {
+          "base": 58.904761904761905,
+          "new": 68.84615384615384,
+          "hm": 63.48864548686776
+        },
+        "description_mean": {
+          "base": 61.0,
+          "new": 82.07692307692308,
+          "hm": 69.98602150537633
+        },
+        "description_probability_alpha_0_00": {
+          "base": 84.38095238095238,
+          "new": 56.28205128205129,
+          "hm": 67.52497764815153
+        },
+        "description_probability_alpha_0_25": {
+          "base": 85.3015873015873,
+          "new": 59.44444444444445,
+          "hm": 70.06348161957331
+        },
+        "description_probability_alpha_0_50": {
+          "base": 84.55555555555556,
+          "new": 70.1025641025641,
+          "hm": 76.6537349175647
+        },
+        "description_probability_alpha_0_75": {
+          "base": 67.98412698412699,
+          "new": 78.65811965811965,
+          "hm": 72.93264686835045
+        },
+        "description_probability_alpha_1_00": {
+          "base": 61.0,
+          "new": 82.07692307692308,
+          "hm": 69.98602150537633
+        },
+        "matched_template": {
+          "base": 52.38095238095238,
+          "new": 73.46153846153847,
+          "hm": 61.155581429195166
+        },
+        "matched_template_probability_fusion": {
+          "base": 82.3015873015873,
+          "new": 63.56410256410257,
+          "hm": 71.72936337864684
+        },
+        "mean_probability_fusion": {
+          "base": 84.55555555555556,
+          "new": 70.1025641025641,
+          "hm": 76.6537349175647
+        },
+        "simple_fusion": {
+          "base": 83.40476190476191,
+          "new": 69.28205128205128,
+          "hm": 75.69026913127097
+        },
+        "student": {
+          "base": 84.38095238095238,
+          "new": 56.28205128205129,
+          "hm": 67.52497764815153
+        }
+      },
+      "fgvc_aircraft": {
+        "adk_probability_fusion": {
+          "base": 37.43497398959584,
+          "new": 39.5120975804839,
+          "hm": 38.44550065437285
+        },
+        "classname": {
+          "base": 27.611044417767108,
+          "new": 35.99280143971206,
+          "hm": 31.249646177013393
+        },
+        "classname_probability_fusion": {
+          "base": 36.57462985194078,
+          "new": 34.99300139972005,
+          "hm": 35.766338810424315
+        },
+        "description_instance": {
+          "base": 30.972388955582232,
+          "new": 42.23155368926215,
+          "hm": 35.73611091982632
+        },
+        "description_mean": {
+          "base": 30.4921968787515,
+          "new": 40.611877624475106,
+          "hm": 34.83191017654167
+        },
+        "description_probability_alpha_0_00": {
+          "base": 37.53501400560224,
+          "new": 31.51369726054789,
+          "hm": 34.26181448871886
+        },
+        "description_probability_alpha_0_25": {
+          "base": 37.85514205682273,
+          "new": 34.39312137572485,
+          "hm": 36.041184482479444
+        },
+        "description_probability_alpha_0_50": {
+          "base": 37.4749899959984,
+          "new": 39.49210157968406,
+          "hm": 38.45711410738051
+        },
+        "description_probability_alpha_0_75": {
+          "base": 35.05402160864346,
+          "new": 41.4117176564687,
+          "hm": 37.9685663025615
+        },
+        "description_probability_alpha_1_00": {
+          "base": 30.4921968787515,
+          "new": 40.611877624475106,
+          "hm": 34.83191017654167
+        },
+        "matched_template": {
+          "base": 26.290516206482593,
+          "new": 33.593281343731256,
+          "hm": 29.49661657164366
+        },
+        "matched_template_probability_fusion": {
+          "base": 35.99439775910364,
+          "new": 35.6128774245151,
+          "hm": 35.802621230236255
+        },
+        "mean_probability_fusion": {
+          "base": 37.4749899959984,
+          "new": 39.49210157968406,
+          "hm": 38.45711410738051
+        },
+        "simple_fusion": {
+          "base": 37.05482192877151,
+          "new": 39.65206958608278,
+          "hm": 38.30947516195528
+        },
+        "student": {
+          "base": 37.53501400560224,
+          "new": 31.51369726054789,
+          "hm": 34.26181448871886
+        }
+      },
+      "food101": {
+        "adk_probability_fusion": {
+          "base": 90.67320261437908,
+          "new": 91.83111111111111,
+          "hm": 91.24848365617963
+        },
+        "classname": {
+          "base": 90.05228758169933,
+          "new": 91.16000000000001,
+          "hm": 90.60275818488985
+        },
+        "classname_probability_fusion": {
+          "base": 90.78431372549021,
+          "new": 91.72222222222221,
+          "hm": 91.25085799893758
+        },
+        "description_instance": {
+          "base": 87.04575163398692,
+          "new": 88.59333333333332,
+          "hm": 87.81272449916483
+        },
+        "description_mean": {
+          "base": 89.6470588235294,
+          "new": 91.53333333333335,
+          "hm": 90.58037704811584
+        },
+        "description_probability_alpha_0_00": {
+          "base": 90.09586056644879,
+          "new": 90.93777777777778,
+          "hm": 90.51486145696924
+        },
+        "description_probability_alpha_0_25": {
+          "base": 90.5119825708061,
+          "new": 91.57777777777778,
+          "hm": 91.04176105485045
+        },
+        "description_probability_alpha_0_50": {
+          "base": 90.65141612200436,
+          "new": 91.95333333333333,
+          "hm": 91.2977335876377
+        },
+        "description_probability_alpha_0_75": {
+          "base": 90.25490196078431,
+          "new": 91.86222222222223,
+          "hm": 91.05146918787212
+        },
+        "description_probability_alpha_1_00": {
+          "base": 89.6470588235294,
+          "new": 91.53333333333335,
+          "hm": 90.58037704811584
+        },
+        "matched_template": {
+          "base": 89.50980392156863,
+          "new": 90.94,
+          "hm": 90.21923428817314
+        },
+        "matched_template_probability_fusion": {
+          "base": 90.55555555555554,
+          "new": 91.62444444444445,
+          "hm": 91.08686430053575
+        },
+        "mean_probability_fusion": {
+          "base": 90.65141612200436,
+          "new": 91.95333333333333,
+          "hm": 91.2977335876377
+        },
+        "simple_fusion": {
+          "base": 90.65359477124183,
+          "new": 91.9488888888889,
+          "hm": 91.29664773359531
+        },
+        "student": {
+          "base": 90.09586056644879,
+          "new": 90.93777777777778,
+          "hm": 90.51486145696924
+        }
+      },
+      "imagenet": {
+        "adk_probability_fusion": {
+          "base": 76.604,
+          "new": 71.52533333333334,
+          "hm": 73.97760472379993
+        },
+        "classname": {
+          "base": 72.404,
+          "new": 68.108,
+          "hm": 70.19032726030518
+        },
+        "classname_probability_fusion": {
+          "base": 76.052,
+          "new": 70.10533333333333,
+          "hm": 72.95769140104728
+        },
+        "description_instance": {
+          "base": 70.492,
+          "new": 68.68,
+          "hm": 69.57420400655305
+        },
+        "description_mean": {
+          "base": 74.368,
+          "new": 71.248,
+          "hm": 72.7745751016372
+        },
+        "description_probability_alpha_0_00": {
+          "base": 76.46933333333334,
+          "new": 68.72133333333333,
+          "hm": 72.38859998959222
+        },
+        "description_probability_alpha_0_25": {
+          "base": 76.83733333333333,
+          "new": 70.34933333333333,
+          "hm": 73.4503375547302
+        },
+        "description_probability_alpha_0_50": {
+          "base": 76.65733333333333,
+          "new": 71.62133333333333,
+          "hm": 74.05381430160028
+        },
+        "description_probability_alpha_0_75": {
+          "base": 75.67333333333333,
+          "new": 71.79333333333334,
+          "hm": 73.682289933695
+        },
+        "description_probability_alpha_1_00": {
+          "base": 74.368,
+          "new": 71.248,
+          "hm": 72.7745751016372
+        },
+        "matched_template": {
+          "base": 73.668,
+          "new": 69.796,
+          "hm": 71.67974861986283
+        },
+        "matched_template_probability_fusion": {
+          "base": 76.31466666666667,
+          "new": 70.51333333333334,
+          "hm": 73.29939151781525
+        },
+        "mean_probability_fusion": {
+          "base": 76.65733333333333,
+          "new": 71.62133333333333,
+          "hm": 74.05381430160028
+        },
+        "simple_fusion": {
+          "base": 76.66933333333334,
+          "new": 71.53066666666666,
+          "hm": 74.01091128505024
+        },
+        "student": {
+          "base": 76.46933333333334,
+          "new": 68.72133333333333,
+          "hm": 72.38859998959222
+        }
+      },
+      "oxford_flowers": {
+        "adk_probability_fusion": {
+          "base": 96.48622981956316,
+          "new": 76.71394799054373,
+          "hm": 85.4715013548871
+        },
+        "classname": {
+          "base": 71.69990503323837,
+          "new": 77.51773049645391,
+          "hm": 74.49540257434171
+        },
+        "classname_probability_fusion": {
+          "base": 95.18835074390631,
+          "new": 75.20094562647755,
+          "hm": 84.0223434341358
+        },
+        "description_instance": {
+          "base": 72.17473884140551,
+          "new": 79.57446808510639,
+          "hm": 75.69418738732021
+        },
+        "description_mean": {
+          "base": 74.07407407407408,
+          "new": 79.50354609929079,
+          "hm": 76.69283527459935
+        },
+        "description_probability_alpha_0_00": {
+          "base": 97.02437480215258,
+          "new": 69.62174940898346,
+          "hm": 81.07007277865459
+        },
+        "description_probability_alpha_0_25": {
+          "base": 97.02437480215258,
+          "new": 71.8676122931442,
+          "hm": 82.5724212402258
+        },
+        "description_probability_alpha_0_50": {
+          "base": 95.72649572649573,
+          "new": 76.52482269503547,
+          "hm": 85.05540833957974
+        },
+        "description_probability_alpha_0_75": {
+          "base": 83.15922760367205,
+          "new": 79.26713947990544,
+          "hm": 81.16655210430986
+        },
+        "description_probability_alpha_1_00": {
+          "base": 74.07407407407408,
+          "new": 79.50354609929079,
+          "hm": 76.69283527459935
+        },
+        "matched_template": {
+          "base": 67.71130104463438,
+          "new": 76.52482269503547,
+          "hm": 71.84878756507653
+        },
+        "matched_template_probability_fusion": {
+          "base": 95.15669515669515,
+          "new": 75.6501182033097,
+          "hm": 84.28955607605619
+        },
+        "mean_probability_fusion": {
+          "base": 95.72649572649573,
+          "new": 76.52482269503547,
+          "hm": 85.05540833957974
+        },
+        "simple_fusion": {
+          "base": 94.0804051915163,
+          "new": 75.43735224586288,
+          "hm": 83.73372528229272
+        },
+        "student": {
+          "base": 97.02437480215258,
+          "new": 69.62174940898346,
+          "hm": 81.07007277865459
+        }
+      },
+      "oxford_pets": {
+        "adk_probability_fusion": {
+          "base": 95.53429027113238,
+          "new": 97.70693512304251,
+          "hm": 96.60839898429687
+        },
+        "classname": {
+          "base": 91.33439659755449,
+          "new": 97.14765100671143,
+          "hm": 94.15137620106134
+        },
+        "classname_probability_fusion": {
+          "base": 95.25075314548998,
+          "new": 97.55779269202088,
+          "hm": 96.39047054436861
+        },
+        "description_instance": {
+          "base": 92.6634768740032,
+          "new": 94.57494407158838,
+          "hm": 93.60945364289678
+        },
+        "description_mean": {
+          "base": 94.47102604997342,
+          "new": 96.08501118568233,
+          "hm": 95.2711834945327
+        },
+        "description_probability_alpha_0_00": {
+          "base": 95.56973241183768,
+          "new": 97.22222222222223,
+          "hm": 96.38889527209035
+        },
+        "description_probability_alpha_0_25": {
+          "base": 95.67605883395356,
+          "new": 97.55779269202088,
+          "hm": 96.60776349073359
+        },
+        "description_probability_alpha_0_50": {
+          "base": 95.60517455254298,
+          "new": 97.6696495152871,
+          "hm": 96.62638613622673
+        },
+        "description_probability_alpha_0_75": {
+          "base": 95.10898458266881,
+          "new": 96.83072334079044,
+          "hm": 95.96213178588782
+        },
+        "description_probability_alpha_1_00": {
+          "base": 94.47102604997342,
+          "new": 96.08501118568233,
+          "hm": 95.2711834945327
+        },
+        "matched_template": {
+          "base": 90.32429558745348,
+          "new": 96.14093959731544,
+          "hm": 93.14189465546825
+        },
+        "matched_template_probability_fusion": {
+          "base": 95.19758993443203,
+          "new": 97.53914988814317,
+          "hm": 96.35414609744217
+        },
+        "mean_probability_fusion": {
+          "base": 95.60517455254298,
+          "new": 97.6696495152871,
+          "hm": 96.62638613622673
+        },
+        "simple_fusion": {
+          "base": 95.64061669324826,
+          "new": 97.65100671140938,
+          "hm": 96.63535685706981
+        },
+        "student": {
+          "base": 95.56973241183768,
+          "new": 97.22222222222223,
+          "hm": 96.38889527209035
+        }
+      },
+      "stanford_cars": {
+        "adk_probability_fusion": {
+          "base": 72.76361819090455,
+          "new": 74.74622431294875,
+          "hm": 73.74159764257136
+        },
+        "classname": {
+          "base": 63.743128435782104,
+          "new": 74.91953453825204,
+          "hm": 68.88091444363923
+        },
+        "classname_probability_fusion": {
+          "base": 72.12227219723472,
+          "new": 74.5976726912602,
+          "hm": 73.33909045846673
+        },
+        "description_instance": {
+          "base": 62.01899050474763,
+          "new": 75.04332755632582,
+          "hm": 67.91234067829812
+        },
+        "description_mean": {
+          "base": 61.569215392303846,
+          "new": 74.77098291656351,
+          "hm": 67.53093818823879
+        },
+        "description_probability_alpha_0_00": {
+          "base": 74.32950191570882,
+          "new": 70.47123875546752,
+          "hm": 72.34896799280774
+        },
+        "description_probability_alpha_0_25": {
+          "base": 73.87139763451607,
+          "new": 72.36114549806058,
+          "hm": 73.10847281825724
+        },
+        "description_probability_alpha_0_50": {
+          "base": 72.1056138597368,
+          "new": 74.25105224065362,
+          "hm": 73.16260808880823
+        },
+        "description_probability_alpha_0_75": {
+          "base": 66.91654172913543,
+          "new": 74.87001733102254,
+          "hm": 70.67020558509745
+        },
+        "description_probability_alpha_1_00": {
+          "base": 61.569215392303846,
+          "new": 74.77098291656351,
+          "hm": 67.53093818823879
+        },
+        "matched_template": {
+          "base": 64.46776611694153,
+          "new": 75.90987868284229,
+          "hm": 69.72250192501333
+        },
+        "matched_template_probability_fusion": {
+          "base": 72.5720473096785,
+          "new": 74.6636956342329,
+          "hm": 73.6030143705952
+        },
+        "mean_probability_fusion": {
+          "base": 72.1056138597368,
+          "new": 74.25105224065362,
+          "hm": 73.16260808880823
+        },
+        "simple_fusion": {
+          "base": 71.57254705980343,
+          "new": 74.18502929768094,
+          "hm": 72.85537579904368
+        },
+        "student": {
+          "base": 74.32950191570882,
+          "new": 70.47123875546752,
+          "hm": 72.34896799280774
+        }
+      },
+      "sun397": {
+        "adk_probability_fusion": {
+          "base": 81.08542713567839,
+          "new": 78.46464646464646,
+          "hm": 79.75351223683674
+        },
+        "classname": {
+          "base": 69.37688442211055,
+          "new": 75.51515151515152,
+          "hm": 72.31599590543833
+        },
+        "classname_probability_fusion": {
+          "base": 79.63149078726968,
+          "new": 77.7003367003367,
+          "hm": 78.65406186307749
+        },
+        "description_instance": {
+          "base": 71.78894472361809,
+          "new": 74.98989898989899,
+          "hm": 73.35451863788997
+        },
+        "description_mean": {
+          "base": 75.27638190954774,
+          "new": 78.23232323232324,
+          "hm": 76.72589298261568
+        },
+        "description_probability_alpha_0_00": {
+          "base": 80.53601340033501,
+          "new": 73.84511784511784,
+          "hm": 77.04557354056695
+        },
+        "description_probability_alpha_0_25": {
+          "base": 81.09212730318258,
+          "new": 75.98653198653199,
+          "hm": 78.45635496307914
+        },
+        "description_probability_alpha_0_50": {
+          "base": 81.06867671691792,
+          "new": 78.45791245791246,
+          "hm": 79.7419310954376
+        },
+        "description_probability_alpha_0_75": {
+          "base": 78.94472361809045,
+          "new": 79.08417508417507,
+          "hm": 79.01438782216069
+        },
+        "description_probability_alpha_1_00": {
+          "base": 75.27638190954774,
+          "new": 78.23232323232324,
+          "hm": 76.72589298261568
+        },
+        "matched_template": {
+          "base": 71.91959798994975,
+          "new": 77.18181818181819,
+          "hm": 74.45784860118327
+        },
+        "matched_template_probability_fusion": {
+          "base": 80.13400335008374,
+          "new": 77.92255892255893,
+          "hm": 79.01281045169517
+        },
+        "mean_probability_fusion": {
+          "base": 81.06867671691792,
+          "new": 78.45791245791246,
+          "hm": 79.7419310954376
+        },
+        "simple_fusion": {
+          "base": 80.84757118927973,
+          "new": 78.27272727272727,
+          "hm": 79.53931649860327
+        },
+        "student": {
+          "base": 80.53601340033501,
+          "new": 73.84511784511784,
+          "hm": 77.04557354056695
+        }
+      },
+      "ucf101": {
+        "adk_probability_fusion": {
+          "base": 82.71285763529816,
+          "new": 76.38363079141878,
+          "hm": 79.42234856086034
+        },
+        "classname": {
+          "base": 70.83764219234746,
+          "new": 78.42076798269335,
+          "hm": 74.43657340705171
+        },
+        "classname_probability_fusion": {
+          "base": 82.64391589107204,
+          "new": 75.22985397512169,
+          "hm": 78.76279548764899
+        },
+        "description_instance": {
+          "base": 69.49327817993795,
+          "new": 76.74418604651163,
+          "hm": 72.93897084217278
+        },
+        "description_mean": {
+          "base": 73.83660806618407,
+          "new": 79.28610059491618,
+          "hm": 76.46438318538041
+        },
+        "description_probability_alpha_0_00": {
+          "base": 83.55739400206825,
+          "new": 67.08130521002344,
+          "hm": 74.41831453569802
+        },
+        "description_probability_alpha_0_25": {
+          "base": 83.62633574629437,
+          "new": 70.4885523706508,
+          "hm": 76.49746781563755
+        },
+        "description_probability_alpha_0_50": {
+          "base": 82.69562219924164,
+          "new": 76.49179736794663,
+          "hm": 79.47282258458671
+        },
+        "description_probability_alpha_0_75": {
+          "base": 77.6456394346777,
+          "new": 79.30412835767082,
+          "hm": 78.46612126610995
+        },
+        "description_probability_alpha_1_00": {
+          "base": 73.83660806618407,
+          "new": 79.28610059491618,
+          "hm": 76.46438318538041
+        },
+        "matched_template": {
+          "base": 69.28645294725956,
+          "new": 77.2850189291509,
+          "hm": 73.06749067892103
+        },
+        "matched_template_probability_fusion": {
+          "base": 82.48879696656326,
+          "new": 75.28393726338562,
+          "hm": 78.72185832454296
+        },
+        "mean_probability_fusion": {
+          "base": 82.69562219924164,
+          "new": 76.49179736794663,
+          "hm": 79.47282258458671
+        },
+        "simple_fusion": {
+          "base": 82.67838676318512,
+          "new": 75.1937984496124,
+          "hm": 78.75867356913085
+        },
+        "student": {
+          "base": 83.55739400206825,
+          "new": 67.08130521002344,
+          "hm": 74.41831453569802
+        }
+      }
+    },
+    "macro_hm": {
+      "adk_probability_fusion": 78.24036175533548,
+      "classname": 71.71041975652246,
+      "classname_probability_fusion": 76.8402095819968,
+      "description_instance": 72.45009140265113,
+      "description_mean": 74.58633650157427,
+      "description_probability_alpha_0_00": 75.06350128002724,
+      "description_probability_alpha_0_25": 76.44735495544418,
+      "description_probability_alpha_0_50": 78.32688685701936,
+      "description_probability_alpha_0_75": 77.04512971229029,
+      "description_probability_alpha_1_00": 74.58633650157427,
+      "matched_template": 71.5579487830552,
+      "matched_template_probability_fusion": 77.10939766660103,
+      "mean_probability_fusion": 78.32688685701936,
+      "simple_fusion": 77.96951404790921,
+      "student": 75.06350128002724
+    },
+    "per_seed": {
+      "caltech101": {
+        "1": {
+          "adk_probability_fusion": {
+            "base": 98.06326662362815,
+            "new": 95.41484716157206,
+            "hm": 96.72093048669875
+          },
+          "classname": {
+            "base": 97.22401549386701,
+            "new": 94.21397379912663,
+            "hm": 95.69533071480403
+          },
+          "classname_probability_fusion": {
+            "base": 97.99870884441575,
+            "new": 94.75982532751091,
+            "hm": 96.35205592646489
+          },
+          "description_instance": {
+            "base": 96.83666881859264,
+            "new": 93.01310043668123,
+            "hm": 94.88638135415785
+          },
+          "description_mean": {
+            "base": 97.28857327307941,
+            "new": 95.3056768558952,
+            "hm": 96.28691739162416
+          },
+          "description_probability_alpha_0_00": {
+            "base": 97.67591994835378,
+            "new": 95.41484716157206,
+            "hm": 96.53214509145779
+          },
+          "description_probability_alpha_0_25": {
+            "base": 97.61136216914139,
+            "new": 95.63318777292577,
+            "hm": 96.61215004398383
+          },
+          "description_probability_alpha_0_50": {
+            "base": 97.86959328599096,
+            "new": 95.74235807860262,
+            "hm": 96.79428960198084
+          },
+          "description_probability_alpha_0_75": {
+            "base": 97.86959328599096,
+            "new": 95.52401746724891,
+            "hm": 96.68258120990616
+          },
+          "description_probability_alpha_1_00": {
+            "base": 97.28857327307941,
+            "new": 95.3056768558952,
+            "hm": 96.28691739162416
+          },
+          "matched_template": {
+            "base": 96.70755326016786,
+            "new": 94.65065502183405,
+            "hm": 95.66804940130402
+          },
+          "matched_template_probability_fusion": {
+            "base": 97.80503550677857,
+            "new": 94.86899563318778,
+            "hm": 96.3146453260839
+          },
+          "mean_probability_fusion": {
+            "base": 97.86959328599096,
+            "new": 95.74235807860262,
+            "hm": 96.79428960198084
+          },
+          "simple_fusion": {
+            "base": 97.86959328599096,
+            "new": 95.74235807860262,
+            "hm": 96.79428960198084
+          },
+          "student": {
+            "base": 97.67591994835378,
+            "new": 95.41484716157206,
+            "hm": 96.53214509145779
+          }
+        },
+        "2": {
+          "adk_probability_fusion": {
+            "base": 98.32149774047772,
+            "new": 93.5589519650655,
+            "hm": 95.88112075358457
+          },
+          "classname": {
+            "base": 97.22401549386701,
+            "new": 94.21397379912663,
+            "hm": 95.69533071480403
+          },
+          "classname_probability_fusion": {
+            "base": 98.45061329890252,
+            "new": 93.44978165938865,
+            "hm": 95.88503785013023
+          },
+          "description_instance": {
+            "base": 96.83666881859264,
+            "new": 93.01310043668123,
+            "hm": 94.88638135415785
+          },
+          "description_mean": {
+            "base": 97.28857327307941,
+            "new": 95.3056768558952,
+            "hm": 96.28691739162416
+          },
+          "description_probability_alpha_0_00": {
+            "base": 98.38605551969012,
+            "new": 93.23144104803494,
+            "hm": 95.73941732289256
+          },
+          "description_probability_alpha_0_25": {
+            "base": 98.38605551969012,
+            "new": 93.5589519650655,
+            "hm": 95.91180685572157
+          },
+          "description_probability_alpha_0_50": {
+            "base": 98.12782440284055,
+            "new": 93.66812227074236,
+            "hm": 95.84612410991261
+          },
+          "description_probability_alpha_0_75": {
+            "base": 97.93415106520335,
+            "new": 94.65065502183405,
+            "hm": 96.26441187826045
+          },
+          "description_probability_alpha_1_00": {
+            "base": 97.28857327307941,
+            "new": 95.3056768558952,
+            "hm": 96.28691739162416
+          },
+          "matched_template": {
+            "base": 96.70755326016786,
+            "new": 94.65065502183405,
+            "hm": 95.66804940130402
+          },
+          "matched_template_probability_fusion": {
+            "base": 98.12782440284055,
+            "new": 93.66812227074236,
+            "hm": 95.84612410991261
+          },
+          "mean_probability_fusion": {
+            "base": 98.12782440284055,
+            "new": 93.66812227074236,
+            "hm": 95.84612410991261
+          },
+          "simple_fusion": {
+            "base": 98.12782440284055,
+            "new": 93.66812227074236,
+            "hm": 95.84612410991261
+          },
+          "student": {
+            "base": 98.38605551969012,
+            "new": 93.23144104803494,
+            "hm": 95.73941732289256
+          }
+        },
+        "3": {
+          "adk_probability_fusion": {
+            "base": 97.93415106520335,
+            "new": 93.5589519650655,
+            "hm": 95.69656964408287
+          },
+          "classname": {
+            "base": 97.22401549386701,
+            "new": 94.21397379912663,
+            "hm": 95.69533071480403
+          },
+          "classname_probability_fusion": {
+            "base": 98.12782440284055,
+            "new": 93.5589519650655,
+            "hm": 95.78893843069359
+          },
+          "description_instance": {
+            "base": 96.83666881859264,
+            "new": 93.01310043668123,
+            "hm": 94.88638135415785
+          },
+          "description_mean": {
+            "base": 97.28857327307941,
+            "new": 95.3056768558952,
+            "hm": 96.28691739162416
+          },
+          "description_probability_alpha_0_00": {
+            "base": 97.99870884441575,
+            "new": 93.23144104803494,
+            "hm": 95.55565219762845
+          },
+          "description_probability_alpha_0_25": {
+            "base": 97.86959328599096,
+            "new": 93.5589519650655,
+            "hm": 95.66573851434512
+          },
+          "description_probability_alpha_0_50": {
+            "base": 97.99870884441575,
+            "new": 93.3406113537118,
+            "hm": 95.6129601165133
+          },
+          "description_probability_alpha_0_75": {
+            "base": 97.93415106520335,
+            "new": 94.5414847161572,
+            "hm": 96.20791752196808
+          },
+          "description_probability_alpha_1_00": {
+            "base": 97.28857327307941,
+            "new": 95.3056768558952,
+            "hm": 96.28691739162416
+          },
+          "matched_template": {
+            "base": 96.70755326016786,
+            "new": 94.65065502183405,
+            "hm": 95.66804940130402
+          },
+          "matched_template_probability_fusion": {
+            "base": 97.74047772756617,
+            "new": 93.44978165938865,
+            "hm": 95.54698374501615
+          },
+          "mean_probability_fusion": {
+            "base": 97.99870884441575,
+            "new": 93.3406113537118,
+            "hm": 95.6129601165133
+          },
+          "simple_fusion": {
+            "base": 97.99870884441575,
+            "new": 93.3406113537118,
+            "hm": 95.6129601165133
+          },
+          "student": {
+            "base": 97.99870884441575,
+            "new": 93.23144104803494,
+            "hm": 95.55565219762845
+          }
+        }
+      },
+      "dtd": {
+        "1": {
+          "adk_probability_fusion": {
+            "base": 78.00925925925925,
+            "new": 65.57971014492753,
+            "hm": 71.25651269830142
+          },
+          "classname": {
+            "base": 53.125,
+            "new": 60.38647342995169,
+            "hm": 56.52347386620561
+          },
+          "classname_probability_fusion": {
+            "base": 77.08333333333333,
+            "new": 59.29951690821256,
+            "hm": 67.03195336137554
+          },
+          "description_instance": {
+            "base": 57.754629629629626,
+            "new": 66.78743961352657,
+            "hm": 61.943467974014666
+          },
+          "description_mean": {
+            "base": 60.06944444444444,
+            "new": 66.90821256038647,
+            "hm": 63.3046671686548
+          },
+          "description_probability_alpha_0_00": {
+            "base": 78.125,
+            "new": 53.6231884057971,
+            "hm": 63.59573736679272
+          },
+          "description_probability_alpha_0_25": {
+            "base": 78.47222222222223,
+            "new": 58.21256038647343,
+            "hm": 66.84092973026041
+          },
+          "description_probability_alpha_0_50": {
+            "base": 77.54629629629629,
+            "new": 64.2512077294686,
+            "hm": 70.27547101363552
+          },
+          "description_probability_alpha_0_75": {
+            "base": 72.10648148148148,
+            "new": 67.6328502415459,
+            "hm": 69.7980561857547
+          },
+          "description_probability_alpha_1_00": {
+            "base": 60.06944444444444,
+            "new": 66.90821256038647,
+            "hm": 63.3046671686548
+          },
+          "matched_template": {
+            "base": 55.55555555555556,
+            "new": 57.85024154589372,
+            "hm": 56.67968287776594
+          },
+          "matched_template_probability_fusion": {
+            "base": 76.85185185185185,
+            "new": 61.35265700483092,
+            "hm": 68.2331617956436
+          },
+          "mean_probability_fusion": {
+            "base": 77.54629629629629,
+            "new": 64.2512077294686,
+            "hm": 70.27547101363552
+          },
+          "simple_fusion": {
+            "base": 77.19907407407408,
+            "new": 63.28502415458937,
+            "hm": 69.55300036218473
+          },
+          "student": {
+            "base": 78.125,
+            "new": 53.6231884057971,
+            "hm": 63.59573736679272
+          }
+        },
+        "2": {
+          "adk_probability_fusion": {
+            "base": 78.93518518518519,
+            "new": 64.97584541062803,
+            "hm": 71.27848878320941
+          },
+          "classname": {
+            "base": 53.125,
+            "new": 60.38647342995169,
+            "hm": 56.52347386620561
+          },
+          "classname_probability_fusion": {
+            "base": 76.9675925925926,
+            "new": 59.54106280193237,
+            "hm": 67.14200284259636
+          },
+          "description_instance": {
+            "base": 57.754629629629626,
+            "new": 66.78743961352657,
+            "hm": 61.943467974014666
+          },
+          "description_mean": {
+            "base": 60.06944444444444,
+            "new": 66.90821256038647,
+            "hm": 63.3046671686548
+          },
+          "description_probability_alpha_0_00": {
+            "base": 76.73611111111111,
+            "new": 53.6231884057971,
+            "hm": 63.13066975487359
+          },
+          "description_probability_alpha_0_25": {
+            "base": 76.85185185185185,
+            "new": 57.729468599033815,
+            "hm": 65.93213015588127
+          },
+          "description_probability_alpha_0_50": {
+            "base": 78.47222222222223,
+            "new": 64.00966183574879,
+            "hm": 70.5069341432978
+          },
+          "description_probability_alpha_0_75": {
+            "base": 72.56944444444444,
+            "new": 67.8743961352657,
+            "hm": 70.14344237820536
+          },
+          "description_probability_alpha_1_00": {
+            "base": 60.06944444444444,
+            "new": 66.90821256038647,
+            "hm": 63.3046671686548
+          },
+          "matched_template": {
+            "base": 55.55555555555556,
+            "new": 57.85024154589372,
+            "hm": 56.67968287776594
+          },
+          "matched_template_probability_fusion": {
+            "base": 76.9675925925926,
+            "new": 60.14492753623188,
+            "hm": 67.52425343462889
+          },
+          "mean_probability_fusion": {
+            "base": 78.47222222222223,
+            "new": 64.00966183574879,
+            "hm": 70.5069341432978
+          },
+          "simple_fusion": {
+            "base": 78.24074074074075,
+            "new": 64.97584541062803,
+            "hm": 70.9939876629968
+          },
+          "student": {
+            "base": 76.73611111111111,
+            "new": 53.6231884057971,
+            "hm": 63.13066975487359
+          }
+        },
+        "3": {
+          "adk_probability_fusion": {
+            "base": 77.54629629629629,
+            "new": 67.3913043478261,
+            "hm": 72.11304770502049
+          },
+          "classname": {
+            "base": 53.125,
+            "new": 60.38647342995169,
+            "hm": 56.52347386620561
+          },
+          "classname_probability_fusion": {
+            "base": 78.125,
+            "new": 61.231884057971016,
+            "hm": 68.6545336366591
+          },
+          "description_instance": {
+            "base": 57.754629629629626,
+            "new": 66.78743961352657,
+            "hm": 61.943467974014666
+          },
+          "description_mean": {
+            "base": 60.06944444444444,
+            "new": 66.90821256038647,
+            "hm": 63.3046671686548
+          },
+          "description_probability_alpha_0_00": {
+            "base": 78.47222222222223,
+            "new": 54.95169082125604,
+            "hm": 64.6388071710543
+          },
+          "description_probability_alpha_0_25": {
+            "base": 78.70370370370371,
+            "new": 60.265700483091784,
+            "hm": 68.26155529805588
+          },
+          "description_probability_alpha_0_50": {
+            "base": 77.77777777777777,
+            "new": 67.27053140096618,
+            "hm": 72.14358405032843
+          },
+          "description_probability_alpha_0_75": {
+            "base": 72.68518518518519,
+            "new": 68.71980676328502,
+            "hm": 70.64689600632661
+          },
+          "description_probability_alpha_1_00": {
+            "base": 60.06944444444444,
+            "new": 66.90821256038647,
+            "hm": 63.3046671686548
+          },
+          "matched_template": {
+            "base": 55.55555555555556,
+            "new": 57.85024154589372,
+            "hm": 56.67968287776594
+          },
+          "matched_template_probability_fusion": {
+            "base": 78.00925925925925,
+            "new": 62.56038647342995,
+            "hm": 69.43589254035305
+          },
+          "mean_probability_fusion": {
+            "base": 77.77777777777777,
+            "new": 67.27053140096618,
+            "hm": 72.14358405032843
+          },
+          "simple_fusion": {
+            "base": 77.66203703703704,
+            "new": 66.54589371980677,
+            "hm": 71.67552624334563
+          },
+          "student": {
+            "base": 78.47222222222223,
+            "new": 54.95169082125604,
+            "hm": 64.6388071710543
+          }
+        }
+      },
+      "eurosat": {
+        "1": {
+          "adk_probability_fusion": {
+            "base": 86.21428571428571,
+            "new": 60.58974358974359,
+            "hm": 71.16564156945917
+          },
+          "classname": {
+            "base": 56.976190476190474,
+            "new": 63.97435897435897,
+            "hm": 60.27281858699657
+          },
+          "classname_probability_fusion": {
+            "base": 84.5952380952381,
+            "new": 57.282051282051285,
+            "hm": 68.30957636782202
+          },
+          "description_instance": {
+            "base": 58.904761904761905,
+            "new": 68.84615384615384,
+            "hm": 63.48864548686776
+          },
+          "description_mean": {
+            "base": 61.0,
+            "new": 82.07692307692308,
+            "hm": 69.98602150537633
+          },
+          "description_probability_alpha_0_00": {
+            "base": 84.71428571428571,
+            "new": 53.743589743589745,
+            "hm": 65.76512606153602
+          },
+          "description_probability_alpha_0_25": {
+            "base": 85.61904761904762,
+            "new": 56.05128205128205,
+            "hm": 67.74964663701866
+          },
+          "description_probability_alpha_0_50": {
+            "base": 86.0952380952381,
+            "new": 66.15384615384616,
+            "hm": 74.8185930131845
+          },
+          "description_probability_alpha_0_75": {
+            "base": 68.47619047619048,
+            "new": 78.92307692307692,
+            "hm": 73.32942345924454
+          },
+          "description_probability_alpha_1_00": {
+            "base": 61.0,
+            "new": 82.07692307692308,
+            "hm": 69.98602150537633
+          },
+          "matched_template": {
+            "base": 52.38095238095238,
+            "new": 73.46153846153847,
+            "hm": 61.155581429195166
+          },
+          "matched_template_probability_fusion": {
+            "base": 83.0,
+            "new": 60.07692307692308,
+            "hm": 69.7021505376344
+          },
+          "mean_probability_fusion": {
+            "base": 86.0952380952381,
+            "new": 66.15384615384616,
+            "hm": 74.8185930131845
+          },
+          "simple_fusion": {
+            "base": 85.02380952380952,
+            "new": 62.94871794871795,
+            "hm": 72.33964163562024
+          },
+          "student": {
+            "base": 84.71428571428571,
+            "new": 53.743589743589745,
+            "hm": 65.76512606153602
+          }
+        },
+        "2": {
+          "adk_probability_fusion": {
+            "base": 82.38095238095238,
+            "new": 75.97435897435898,
+            "hm": 79.04805964855467
+          },
+          "classname": {
+            "base": 56.976190476190474,
+            "new": 63.97435897435897,
+            "hm": 60.27281858699657
+          },
+          "classname_probability_fusion": {
+            "base": 80.97619047619048,
+            "new": 73.61538461538461,
+            "hm": 77.12054687407444
+          },
+          "description_instance": {
+            "base": 58.904761904761905,
+            "new": 68.84615384615384,
+            "hm": 63.48864548686776
+          },
+          "description_mean": {
+            "base": 61.0,
+            "new": 82.07692307692308,
+            "hm": 69.98602150537633
+          },
+          "description_probability_alpha_0_00": {
+            "base": 79.95238095238095,
+            "new": 70.76923076923077,
+            "hm": 75.0810508664058
+          },
+          "description_probability_alpha_0_25": {
+            "base": 81.64285714285714,
+            "new": 74.38461538461539,
+            "hm": 77.84491319505581
+          },
+          "description_probability_alpha_0_50": {
+            "base": 82.80952380952381,
+            "new": 77.05128205128206,
+            "hm": 79.82669599621161
+          },
+          "description_probability_alpha_0_75": {
+            "base": 67.42857142857143,
+            "new": 79.74358974358974,
+            "hm": 73.07083478520583
+          },
+          "description_probability_alpha_1_00": {
+            "base": 61.0,
+            "new": 82.07692307692308,
+            "hm": 69.98602150537633
+          },
+          "matched_template": {
+            "base": 52.38095238095238,
+            "new": 73.46153846153847,
+            "hm": 61.155581429195166
+          },
+          "matched_template_probability_fusion": {
+            "base": 78.28571428571429,
+            "new": 75.56410256410257,
+            "hm": 76.90083569438822
+          },
+          "mean_probability_fusion": {
+            "base": 82.80952380952381,
+            "new": 77.05128205128206,
+            "hm": 79.82669599621161
+          },
+          "simple_fusion": {
+            "base": 82.21428571428571,
+            "new": 76.74358974358974,
+            "hm": 79.38479796292242
+          },
+          "student": {
+            "base": 79.95238095238095,
+            "new": 70.76923076923077,
+            "hm": 75.0810508664058
+          }
+        },
+        "3": {
+          "adk_probability_fusion": {
+            "base": 84.92857142857143,
+            "new": 62.38461538461539,
+            "hm": 71.93159524075939
+          },
+          "classname": {
+            "base": 56.976190476190474,
+            "new": 63.97435897435897,
+            "hm": 60.27281858699657
+          },
+          "classname_probability_fusion": {
+            "base": 86.30952380952381,
+            "new": 51.282051282051285,
+            "hm": 64.33721575152524
+          },
+          "description_instance": {
+            "base": 58.904761904761905,
+            "new": 68.84615384615384,
+            "hm": 63.48864548686776
+          },
+          "description_mean": {
+            "base": 61.0,
+            "new": 82.07692307692308,
+            "hm": 69.98602150537633
+          },
+          "description_probability_alpha_0_00": {
+            "base": 88.47619047619048,
+            "new": 44.333333333333336,
+            "hm": 59.0687223616589
+          },
+          "description_probability_alpha_0_25": {
+            "base": 88.64285714285714,
+            "new": 47.8974358974359,
+            "hm": 62.19066142640609
+          },
+          "description_probability_alpha_0_50": {
+            "base": 84.76190476190476,
+            "new": 67.1025641025641,
+            "hm": 74.9054889569615
+          },
+          "description_probability_alpha_0_75": {
+            "base": 68.04761904761905,
+            "new": 77.3076923076923,
+            "hm": 72.3826924046167
+          },
+          "description_probability_alpha_1_00": {
+            "base": 61.0,
+            "new": 82.07692307692308,
+            "hm": 69.98602150537633
+          },
+          "matched_template": {
+            "base": 52.38095238095238,
+            "new": 73.46153846153847,
+            "hm": 61.155581429195166
+          },
+          "matched_template_probability_fusion": {
+            "base": 85.61904761904762,
+            "new": 55.05128205128205,
+            "hm": 67.01396592280118
+          },
+          "mean_probability_fusion": {
+            "base": 84.76190476190476,
+            "new": 67.1025641025641,
+            "hm": 74.9054889569615
+          },
+          "simple_fusion": {
+            "base": 82.97619047619048,
+            "new": 68.15384615384616,
+            "hm": 74.83815456209024
+          },
+          "student": {
+            "base": 88.47619047619048,
+            "new": 44.333333333333336,
+            "hm": 59.0687223616589
+          }
+        }
+      },
+      "fgvc_aircraft": {
+        "1": {
+          "adk_probability_fusion": {
+            "base": 37.15486194477791,
+            "new": 40.971805638872226,
+            "hm": 38.97009380339034
+          },
+          "classname": {
+            "base": 27.611044417767108,
+            "new": 35.99280143971206,
+            "hm": 31.249646177013393
+          },
+          "classname_probability_fusion": {
+            "base": 36.554621848739494,
+            "new": 34.673065386922616,
+            "hm": 35.58899194247558
+          },
+          "description_instance": {
+            "base": 30.972388955582232,
+            "new": 42.23155368926215,
+            "hm": 35.73611091982632
+          },
+          "description_mean": {
+            "base": 30.4921968787515,
+            "new": 40.611877624475106,
+            "hm": 34.83191017654167
+          },
+          "description_probability_alpha_0_00": {
+            "base": 38.59543817527011,
+            "new": 32.63347330533893,
+            "hm": 35.364943117049215
+          },
+          "description_probability_alpha_0_25": {
+            "base": 37.81512605042017,
+            "new": 34.253149370125975,
+            "hm": 35.94611230799362
+          },
+          "description_probability_alpha_0_50": {
+            "base": 37.454981992797116,
+            "new": 40.31193761247751,
+            "hm": 38.83098122013557
+          },
+          "description_probability_alpha_0_75": {
+            "base": 35.114045618247296,
+            "new": 41.75164967006599,
+            "hm": 38.14625824049962
+          },
+          "description_probability_alpha_1_00": {
+            "base": 30.4921968787515,
+            "new": 40.611877624475106,
+            "hm": 34.83191017654167
+          },
+          "matched_template": {
+            "base": 26.290516206482593,
+            "new": 33.593281343731256,
+            "hm": 29.49661657164366
+          },
+          "matched_template_probability_fusion": {
+            "base": 36.134453781512605,
+            "new": 36.052789442111575,
+            "hm": 36.09357541899441
+          },
+          "mean_probability_fusion": {
+            "base": 37.454981992797116,
+            "new": 40.31193761247751,
+            "hm": 38.83098122013557
+          },
+          "simple_fusion": {
+            "base": 36.8547418967587,
+            "new": 39.892021595680866,
+            "hm": 38.31328104913701
+          },
+          "student": {
+            "base": 38.59543817527011,
+            "new": 32.63347330533893,
+            "hm": 35.364943117049215
+          }
+        },
+        "2": {
+          "adk_probability_fusion": {
+            "base": 37.5750300120048,
+            "new": 37.6124775044991,
+            "hm": 37.593744432801884
+          },
+          "classname": {
+            "base": 27.611044417767108,
+            "new": 35.99280143971206,
+            "hm": 31.249646177013393
+          },
+          "classname_probability_fusion": {
+            "base": 36.434573829531814,
+            "new": 34.13317336532693,
+            "hm": 35.2463462261643
+          },
+          "description_instance": {
+            "base": 30.972388955582232,
+            "new": 42.23155368926215,
+            "hm": 35.73611091982632
+          },
+          "description_mean": {
+            "base": 30.4921968787515,
+            "new": 40.611877624475106,
+            "hm": 34.83191017654167
+          },
+          "description_probability_alpha_0_00": {
+            "base": 37.09483793517407,
+            "new": 29.394121175764848,
+            "hm": 32.79853304493904
+          },
+          "description_probability_alpha_0_25": {
+            "base": 38.11524609843938,
+            "new": 32.99340131973605,
+            "hm": 35.36986447037616
+          },
+          "description_probability_alpha_0_50": {
+            "base": 37.5750300120048,
+            "new": 38.03239352129574,
+            "hm": 37.80232842775407
+          },
+          "description_probability_alpha_0_75": {
+            "base": 35.17406962785114,
+            "new": 41.211757648470304,
+            "hm": 37.95429819119791
+          },
+          "description_probability_alpha_1_00": {
+            "base": 30.4921968787515,
+            "new": 40.611877624475106,
+            "hm": 34.83191017654167
+          },
+          "matched_template": {
+            "base": 26.290516206482593,
+            "new": 33.593281343731256,
+            "hm": 29.49661657164366
+          },
+          "matched_template_probability_fusion": {
+            "base": 36.134453781512605,
+            "new": 34.553089382123574,
+            "hm": 35.326083080763055
+          },
+          "mean_probability_fusion": {
+            "base": 37.5750300120048,
+            "new": 38.03239352129574,
+            "hm": 37.80232842775407
+          },
+          "simple_fusion": {
+            "base": 37.15486194477791,
+            "new": 39.112177564487105,
+            "hm": 38.1084035021871
+          },
+          "student": {
+            "base": 37.09483793517407,
+            "new": 29.394121175764848,
+            "hm": 32.79853304493904
+          }
+        },
+        "3": {
+          "adk_probability_fusion": {
+            "base": 37.5750300120048,
+            "new": 39.95200959808039,
+            "hm": 38.72708069953156
+          },
+          "classname": {
+            "base": 27.611044417767108,
+            "new": 35.99280143971206,
+            "hm": 31.249646177013393
+          },
+          "classname_probability_fusion": {
+            "base": 36.734693877551024,
+            "new": 36.17276544691062,
+            "hm": 36.451564152939405
+          },
+          "description_instance": {
+            "base": 30.972388955582232,
+            "new": 42.23155368926215,
+            "hm": 35.73611091982632
+          },
+          "description_mean": {
+            "base": 30.4921968787515,
+            "new": 40.611877624475106,
+            "hm": 34.83191017654167
+          },
+          "description_probability_alpha_0_00": {
+            "base": 36.91476590636255,
+            "new": 32.51349730053989,
+            "hm": 34.57462670698799
+          },
+          "description_probability_alpha_0_25": {
+            "base": 37.635054021608646,
+            "new": 35.93281343731254,
+            "hm": 36.76424019268352
+          },
+          "description_probability_alpha_0_50": {
+            "base": 37.39495798319328,
+            "new": 40.131973605278944,
+            "hm": 38.71515190922835
+          },
+          "description_probability_alpha_0_75": {
+            "base": 34.87394957983193,
+            "new": 41.271745650869825,
+            "hm": 37.80407474222538
+          },
+          "description_probability_alpha_1_00": {
+            "base": 30.4921968787515,
+            "new": 40.611877624475106,
+            "hm": 34.83191017654167
+          },
+          "matched_template": {
+            "base": 26.290516206482593,
+            "new": 33.593281343731256,
+            "hm": 29.49661657164366
+          },
+          "matched_template_probability_fusion": {
+            "base": 35.714285714285715,
+            "new": 36.23275344931014,
+            "hm": 35.971651479959505
+          },
+          "mean_probability_fusion": {
+            "base": 37.39495798319328,
+            "new": 40.131973605278944,
+            "hm": 38.71515190922835
+          },
+          "simple_fusion": {
+            "base": 37.15486194477791,
+            "new": 39.95200959808039,
+            "hm": 38.50270076663761
+          },
+          "student": {
+            "base": 36.91476590636255,
+            "new": 32.51349730053989,
+            "hm": 34.57462670698799
+          }
+        }
+      },
+      "food101": {
+        "1": {
+          "adk_probability_fusion": {
+            "base": 90.79084967320262,
+            "new": 91.80666666666667,
+            "hm": 91.29593259983683
+          },
+          "classname": {
+            "base": 90.05228758169935,
+            "new": 91.16,
+            "hm": 90.60275818488985
+          },
+          "classname_probability_fusion": {
+            "base": 90.76470588235294,
+            "new": 91.83333333333333,
+            "hm": 91.29589261744967
+          },
+          "description_instance": {
+            "base": 87.04575163398692,
+            "new": 88.59333333333333,
+            "hm": 87.81272449916483
+          },
+          "description_mean": {
+            "base": 89.6470588235294,
+            "new": 91.53333333333333,
+            "hm": 90.58037704811582
+          },
+          "description_probability_alpha_0_00": {
+            "base": 90.3202614379085,
+            "new": 91.03333333333333,
+            "hm": 90.67539550679771
+          },
+          "description_probability_alpha_0_25": {
+            "base": 90.640522875817,
+            "new": 91.61333333333333,
+            "hm": 91.12433183526723
+          },
+          "description_probability_alpha_0_50": {
+            "base": 90.81699346405229,
+            "new": 91.92,
+            "hm": 91.36516784006157
+          },
+          "description_probability_alpha_0_75": {
+            "base": 90.25490196078431,
+            "new": 91.87333333333333,
+            "hm": 91.05692677930726
+          },
+          "description_probability_alpha_1_00": {
+            "base": 89.6470588235294,
+            "new": 91.53333333333333,
+            "hm": 90.58037704811582
+          },
+          "matched_template": {
+            "base": 89.50980392156863,
+            "new": 90.94,
+            "hm": 90.21923428817314
+          },
+          "matched_template_probability_fusion": {
+            "base": 90.51633986928104,
+            "new": 91.62666666666667,
+            "hm": 91.0681190436206
+          },
+          "mean_probability_fusion": {
+            "base": 90.81699346405229,
+            "new": 91.92,
+            "hm": 91.36516784006157
+          },
+          "simple_fusion": {
+            "base": 90.77777777777777,
+            "new": 91.92666666666666,
+            "hm": 91.34860997928246
+          },
+          "student": {
+            "base": 90.3202614379085,
+            "new": 91.03333333333333,
+            "hm": 90.67539550679771
+          }
+        },
+        "2": {
+          "adk_probability_fusion": {
+            "base": 90.50980392156863,
+            "new": 91.61333333333333,
+            "hm": 91.05822534778595
+          },
+          "classname": {
+            "base": 90.05228758169935,
+            "new": 91.16,
+            "hm": 90.60275818488985
+          },
+          "classname_probability_fusion": {
+            "base": 90.80392156862744,
+            "new": 91.59333333333333,
+            "hm": 91.19691917161349
+          },
+          "description_instance": {
+            "base": 87.04575163398692,
+            "new": 88.59333333333333,
+            "hm": 87.81272449916483
+          },
+          "description_mean": {
+            "base": 89.6470588235294,
+            "new": 91.53333333333333,
+            "hm": 90.58037704811582
+          },
+          "description_probability_alpha_0_00": {
+            "base": 89.85620915032679,
+            "new": 90.14,
+            "hm": 89.99788085587859
+          },
+          "description_probability_alpha_0_25": {
+            "base": 90.359477124183,
+            "new": 91.12666666666667,
+            "hm": 90.74145033969114
+          },
+          "description_probability_alpha_0_50": {
+            "base": 90.49019607843137,
+            "new": 91.81333333333333,
+            "hm": 91.14696311975572
+          },
+          "description_probability_alpha_0_75": {
+            "base": 90.22875816993464,
+            "new": 91.78,
+            "hm": 90.99776854809113
+          },
+          "description_probability_alpha_1_00": {
+            "base": 89.6470588235294,
+            "new": 91.53333333333333,
+            "hm": 90.58037704811582
+          },
+          "matched_template": {
+            "base": 89.50980392156863,
+            "new": 90.94,
+            "hm": 90.21923428817314
+          },
+          "matched_template_probability_fusion": {
+            "base": 90.52287581699346,
+            "new": 91.40666666666667,
+            "hm": 90.96262456940045
+          },
+          "mean_probability_fusion": {
+            "base": 90.49019607843137,
+            "new": 91.81333333333333,
+            "hm": 91.14696311975572
+          },
+          "simple_fusion": {
+            "base": 90.49673202614379,
+            "new": 91.81333333333333,
+            "hm": 91.15027858402073
+          },
+          "student": {
+            "base": 89.85620915032679,
+            "new": 90.14,
+            "hm": 89.99788085587859
+          }
+        },
+        "3": {
+          "adk_probability_fusion": {
+            "base": 90.71895424836602,
+            "new": 92.07333333333334,
+            "hm": 91.39112623039878
+          },
+          "classname": {
+            "base": 90.05228758169935,
+            "new": 91.16,
+            "hm": 90.60275818488985
+          },
+          "classname_probability_fusion": {
+            "base": 90.7843137254902,
+            "new": 91.74,
+            "hm": 91.25965490496029
+          },
+          "description_instance": {
+            "base": 87.04575163398692,
+            "new": 88.59333333333333,
+            "hm": 87.81272449916483
+          },
+          "description_mean": {
+            "base": 89.6470588235294,
+            "new": 91.53333333333333,
+            "hm": 90.58037704811582
+          },
+          "description_probability_alpha_0_00": {
+            "base": 90.11111111111111,
+            "new": 91.64,
+            "hm": 90.86912505502029
+          },
+          "description_probability_alpha_0_25": {
+            "base": 90.5359477124183,
+            "new": 91.99333333333334,
+            "hm": 91.25882235267355
+          },
+          "description_probability_alpha_0_50": {
+            "base": 90.6470588235294,
+            "new": 92.12666666666667,
+            "hm": 91.38087381161321
+          },
+          "description_probability_alpha_0_75": {
+            "base": 90.28104575163398,
+            "new": 91.93333333333334,
+            "hm": 91.09969821752252
+          },
+          "description_probability_alpha_1_00": {
+            "base": 89.6470588235294,
+            "new": 91.53333333333333,
+            "hm": 90.58037704811582
+          },
+          "matched_template": {
+            "base": 89.50980392156863,
+            "new": 90.94,
+            "hm": 90.21923428817314
+          },
+          "matched_template_probability_fusion": {
+            "base": 90.62745098039215,
+            "new": 91.84,
+            "hm": 91.22969662061674
+          },
+          "mean_probability_fusion": {
+            "base": 90.6470588235294,
+            "new": 92.12666666666667,
+            "hm": 91.38087381161321
+          },
+          "simple_fusion": {
+            "base": 90.68627450980392,
+            "new": 92.10666666666667,
+            "hm": 91.39095201113298
+          },
+          "student": {
+            "base": 90.11111111111111,
+            "new": 91.64,
+            "hm": 90.86912505502029
+          }
+        }
+      },
+      "imagenet": {
+        "1": {
+          "adk_probability_fusion": {
+            "base": 76.58,
+            "new": 71.492,
+            "hm": 73.94858393214112
+          },
+          "classname": {
+            "base": 72.404,
+            "new": 68.108,
+            "hm": 70.19032726030518
+          },
+          "classname_probability_fusion": {
+            "base": 76.032,
+            "new": 69.832,
+            "hm": 72.8002334229145
+          },
+          "description_instance": {
+            "base": 70.492,
+            "new": 68.68,
+            "hm": 69.57420400655305
+          },
+          "description_mean": {
+            "base": 74.368,
+            "new": 71.248,
+            "hm": 72.7745751016372
+          },
+          "description_probability_alpha_0_00": {
+            "base": 76.436,
+            "new": 68.484,
+            "hm": 72.24183030637592
+          },
+          "description_probability_alpha_0_25": {
+            "base": 76.864,
+            "new": 70.28,
+            "hm": 73.4246985266134
+          },
+          "description_probability_alpha_0_50": {
+            "base": 76.676,
+            "new": 71.576,
+            "hm": 74.03827774330195
+          },
+          "description_probability_alpha_0_75": {
+            "base": 75.648,
+            "new": 71.76,
+            "hm": 73.65272549658091
+          },
+          "description_probability_alpha_1_00": {
+            "base": 74.368,
+            "new": 71.248,
+            "hm": 72.7745751016372
+          },
+          "matched_template": {
+            "base": 73.668,
+            "new": 69.796,
+            "hm": 71.67974861986283
+          },
+          "matched_template_probability_fusion": {
+            "base": 76.3,
+            "new": 70.328,
+            "hm": 73.19238344654501
+          },
+          "mean_probability_fusion": {
+            "base": 76.676,
+            "new": 71.576,
+            "hm": 74.03827774330195
+          },
+          "simple_fusion": {
+            "base": 76.664,
+            "new": 71.56,
+            "hm": 74.02412348877375
+          },
+          "student": {
+            "base": 76.436,
+            "new": 68.484,
+            "hm": 72.24183030637592
+          }
+        },
+        "2": {
+          "adk_probability_fusion": {
+            "base": 76.66,
+            "new": 71.504,
+            "hm": 73.99228746524123
+          },
+          "classname": {
+            "base": 72.404,
+            "new": 68.108,
+            "hm": 70.19032726030518
+          },
+          "classname_probability_fusion": {
+            "base": 76.112,
+            "new": 70.26,
+            "hm": 73.0690175716667
+          },
+          "description_instance": {
+            "base": 70.492,
+            "new": 68.68,
+            "hm": 69.57420400655305
+          },
+          "description_mean": {
+            "base": 74.368,
+            "new": 71.248,
+            "hm": 72.7745751016372
+          },
+          "description_probability_alpha_0_00": {
+            "base": 76.536,
+            "new": 68.84,
+            "hm": 72.48429231785164
+          },
+          "description_probability_alpha_0_25": {
+            "base": 76.928,
+            "new": 70.28,
+            "hm": 73.45388620183685
+          },
+          "description_probability_alpha_0_50": {
+            "base": 76.716,
+            "new": 71.572,
+            "hm": 74.05477924039707
+          },
+          "description_probability_alpha_0_75": {
+            "base": 75.728,
+            "new": 71.812,
+            "hm": 73.71803085265013
+          },
+          "description_probability_alpha_1_00": {
+            "base": 74.368,
+            "new": 71.248,
+            "hm": 72.7745751016372
+          },
+          "matched_template": {
+            "base": 73.668,
+            "new": 69.796,
+            "hm": 71.67974861986283
+          },
+          "matched_template_probability_fusion": {
+            "base": 76.36,
+            "new": 70.656,
+            "hm": 73.39734668335419
+          },
+          "mean_probability_fusion": {
+            "base": 76.716,
+            "new": 71.572,
+            "hm": 74.05477924039707
+          },
+          "simple_fusion": {
+            "base": 76.724,
+            "new": 71.5,
+            "hm": 74.01994278929189
+          },
+          "student": {
+            "base": 76.536,
+            "new": 68.84,
+            "hm": 72.48429231785164
+          }
+        },
+        "3": {
+          "adk_probability_fusion": {
+            "base": 76.572,
+            "new": 71.58,
+            "hm": 73.99189697067877
+          },
+          "classname": {
+            "base": 72.404,
+            "new": 68.108,
+            "hm": 70.19032726030518
+          },
+          "classname_probability_fusion": {
+            "base": 76.012,
+            "new": 70.224,
+            "hm": 73.00345589321371
+          },
+          "description_instance": {
+            "base": 70.492,
+            "new": 68.68,
+            "hm": 69.57420400655305
+          },
+          "description_mean": {
+            "base": 74.368,
+            "new": 71.248,
+            "hm": 72.7745751016372
+          },
+          "description_probability_alpha_0_00": {
+            "base": 76.436,
+            "new": 68.84,
+            "hm": 72.43941518213607
+          },
+          "description_probability_alpha_0_25": {
+            "base": 76.72,
+            "new": 70.488,
+            "hm": 73.47208521276018
+          },
+          "description_probability_alpha_0_50": {
+            "base": 76.58,
+            "new": 71.716,
+            "hm": 74.06823218428009
+          },
+          "description_probability_alpha_0_75": {
+            "base": 75.644,
+            "new": 71.808,
+            "hm": 73.67610275886392
+          },
+          "description_probability_alpha_1_00": {
+            "base": 74.368,
+            "new": 71.248,
+            "hm": 72.7745751016372
+          },
+          "matched_template": {
+            "base": 73.668,
+            "new": 69.796,
+            "hm": 71.67974861986283
+          },
+          "matched_template_probability_fusion": {
+            "base": 76.284,
+            "new": 70.556,
+            "hm": 73.30827981476438
+          },
+          "mean_probability_fusion": {
+            "base": 76.58,
+            "new": 71.716,
+            "hm": 74.06823218428009
+          },
+          "simple_fusion": {
+            "base": 76.62,
+            "new": 71.532,
+            "hm": 73.98863113559048
+          },
+          "student": {
+            "base": 76.436,
+            "new": 68.84,
+            "hm": 72.43941518213607
+          }
+        }
+      },
+      "oxford_flowers": {
+        "1": {
+          "adk_probability_fusion": {
+            "base": 96.67616334283001,
+            "new": 77.30496453900709,
+            "hm": 85.91216150823607
+          },
+          "classname": {
+            "base": 71.69990503323837,
+            "new": 77.51773049645391,
+            "hm": 74.49540257434171
+          },
+          "classname_probability_fusion": {
+            "base": 94.9667616334283,
+            "new": 76.24113475177305,
+            "hm": 84.57990342155213
+          },
+          "description_instance": {
+            "base": 72.17473884140551,
+            "new": 79.57446808510639,
+            "hm": 75.69418738732021
+          },
+          "description_mean": {
+            "base": 74.07407407407408,
+            "new": 79.50354609929079,
+            "hm": 76.69283527459935
+          },
+          "description_probability_alpha_0_00": {
+            "base": 97.05603038936373,
+            "new": 71.84397163120568,
+            "hm": 82.5682724749961
+          },
+          "description_probability_alpha_0_25": {
+            "base": 97.43589743589743,
+            "new": 74.11347517730496,
+            "hm": 84.18932527693858
+          },
+          "description_probability_alpha_0_50": {
+            "base": 95.91642924976259,
+            "new": 77.44680851063829,
+            "hm": 85.69776874376451
+          },
+          "description_probability_alpha_0_75": {
+            "base": 83.19088319088318,
+            "new": 80.2127659574468,
+            "hm": 81.67468569965908
+          },
+          "description_probability_alpha_1_00": {
+            "base": 74.07407407407408,
+            "new": 79.50354609929079,
+            "hm": 76.69283527459935
+          },
+          "matched_template": {
+            "base": 67.71130104463438,
+            "new": 76.52482269503547,
+            "hm": 71.84878756507653
+          },
+          "matched_template_probability_fusion": {
+            "base": 94.9667616334283,
+            "new": 76.45390070921985,
+            "hm": 84.7106674933422
+          },
+          "mean_probability_fusion": {
+            "base": 95.91642924976259,
+            "new": 77.44680851063829,
+            "hm": 85.69776874376451
+          },
+          "simple_fusion": {
+            "base": 93.54226020892688,
+            "new": 77.23404255319149,
+            "hm": 84.60947788009545
+          },
+          "student": {
+            "base": 97.05603038936373,
+            "new": 71.84397163120568,
+            "hm": 82.5682724749961
+          }
+        },
+        "2": {
+          "adk_probability_fusion": {
+            "base": 95.91642924976259,
+            "new": 78.22695035460993,
+            "hm": 86.17324145378234
+          },
+          "classname": {
+            "base": 71.69990503323837,
+            "new": 77.51773049645391,
+            "hm": 74.49540257434171
+          },
+          "classname_probability_fusion": {
+            "base": 95.06172839506173,
+            "new": 75.74468085106383,
+            "hm": 84.31089102820411
+          },
+          "description_instance": {
+            "base": 72.17473884140551,
+            "new": 79.57446808510639,
+            "hm": 75.69418738732021
+          },
+          "description_mean": {
+            "base": 74.07407407407408,
+            "new": 79.50354609929079,
+            "hm": 76.69283527459935
+          },
+          "description_probability_alpha_0_00": {
+            "base": 96.58119658119658,
+            "new": 70.85106382978724,
+            "hm": 81.73909265675402
+          },
+          "description_probability_alpha_0_25": {
+            "base": 96.20132953466286,
+            "new": 72.83687943262412,
+            "hm": 82.90438810707474
+          },
+          "description_probability_alpha_0_50": {
+            "base": 95.25166191832858,
+            "new": 77.58865248226951,
+            "hm": 85.5176423459948
+          },
+          "description_probability_alpha_0_75": {
+            "base": 83.19088319088318,
+            "new": 79.14893617021276,
+            "hm": 81.11959135512971
+          },
+          "description_probability_alpha_1_00": {
+            "base": 74.07407407407408,
+            "new": 79.50354609929079,
+            "hm": 76.69283527459935
+          },
+          "matched_template": {
+            "base": 67.71130104463438,
+            "new": 76.52482269503547,
+            "hm": 71.84878756507653
+          },
+          "matched_template_probability_fusion": {
+            "base": 95.15669515669515,
+            "new": 75.88652482269504,
+            "hm": 84.43609644304262
+          },
+          "mean_probability_fusion": {
+            "base": 95.25166191832858,
+            "new": 77.58865248226951,
+            "hm": 85.5176423459948
+          },
+          "simple_fusion": {
+            "base": 94.01709401709402,
+            "new": 75.60283687943263,
+            "hm": 83.8104223399161
+          },
+          "student": {
+            "base": 96.58119658119658,
+            "new": 70.85106382978724,
+            "hm": 81.73909265675402
+          }
+        },
+        "3": {
+          "adk_probability_fusion": {
+            "base": 96.86609686609687,
+            "new": 74.60992907801419,
+            "hm": 84.29367985935343
+          },
+          "classname": {
+            "base": 71.69990503323837,
+            "new": 77.51773049645391,
+            "hm": 74.49540257434171
+          },
+          "classname_probability_fusion": {
+            "base": 95.53656220322887,
+            "new": 73.61702127659575,
+            "hm": 83.15658453959708
+          },
+          "description_instance": {
+            "base": 72.17473884140551,
+            "new": 79.57446808510639,
+            "hm": 75.69418738732021
+          },
+          "description_mean": {
+            "base": 74.07407407407408,
+            "new": 79.50354609929079,
+            "hm": 76.69283527459935
+          },
+          "description_probability_alpha_0_00": {
+            "base": 97.43589743589743,
+            "new": 66.17021276595744,
+            "hm": 78.81556570742605
+          },
+          "description_probability_alpha_0_25": {
+            "base": 97.43589743589743,
+            "new": 68.65248226950355,
+            "hm": 80.55008102308062
+          },
+          "description_probability_alpha_0_50": {
+            "base": 96.01139601139602,
+            "new": 74.53900709219859,
+            "hm": 83.92350880435416
+          },
+          "description_probability_alpha_0_75": {
+            "base": 83.09591642924977,
+            "new": 78.43971631205673,
+            "hm": 80.70070981600821
+          },
+          "description_probability_alpha_1_00": {
+            "base": 74.07407407407408,
+            "new": 79.50354609929079,
+            "hm": 76.69283527459935
+          },
+          "matched_template": {
+            "base": 67.71130104463438,
+            "new": 76.52482269503547,
+            "hm": 71.84878756507653
+          },
+          "matched_template_probability_fusion": {
+            "base": 95.34662867996201,
+            "new": 74.60992907801419,
+            "hm": 83.71321821862284
+          },
+          "mean_probability_fusion": {
+            "base": 96.01139601139602,
+            "new": 74.53900709219859,
+            "hm": 83.92350880435416
+          },
+          "simple_fusion": {
+            "base": 94.68186134852802,
+            "new": 73.47517730496453,
+            "hm": 82.74130664827423
+          },
+          "student": {
+            "base": 97.43589743589743,
+            "new": 66.17021276595744,
+            "hm": 78.81556570742605
+          }
+        }
+      },
+      "oxford_pets": {
+        "1": {
+          "adk_probability_fusion": {
+            "base": 95.16214779372675,
+            "new": 97.98657718120805,
+            "hm": 96.55371155807114
+          },
+          "classname": {
+            "base": 91.33439659755449,
+            "new": 97.14765100671141,
+            "hm": 94.15137620106131
+          },
+          "classname_probability_fusion": {
+            "base": 95.0026581605529,
+            "new": 97.59507829977629,
+            "hm": 96.28142087511834
+          },
+          "description_instance": {
+            "base": 92.6634768740032,
+            "new": 94.57494407158836,
+            "hm": 93.6094536428968
+          },
+          "description_mean": {
+            "base": 94.47102604997342,
+            "new": 96.08501118568233,
+            "hm": 95.2711834945327
+          },
+          "description_probability_alpha_0_00": {
+            "base": 95.26847421584263,
+            "new": 97.31543624161074,
+            "hm": 96.2810767147195
+          },
+          "description_probability_alpha_0_25": {
+            "base": 95.32163742690058,
+            "new": 97.59507829977629,
+            "hm": 96.44496209982725
+          },
+          "description_probability_alpha_0_50": {
+            "base": 95.37480063795853,
+            "new": 97.87472035794184,
+            "hm": 96.6085907331452
+          },
+          "description_probability_alpha_0_75": {
+            "base": 94.896331738437,
+            "new": 96.92393736017897,
+            "hm": 95.89941830806654
+          },
+          "description_probability_alpha_1_00": {
+            "base": 94.47102604997342,
+            "new": 96.08501118568233,
+            "hm": 95.2711834945327
+          },
+          "matched_template": {
+            "base": 90.32429558745348,
+            "new": 96.14093959731544,
+            "hm": 93.14189465546825
+          },
+          "matched_template_probability_fusion": {
+            "base": 94.68367889420522,
+            "new": 97.53914988814317,
+            "hm": 96.09020537388714
+          },
+          "mean_probability_fusion": {
+            "base": 95.37480063795853,
+            "new": 97.87472035794184,
+            "hm": 96.6085907331452
+          },
+          "simple_fusion": {
+            "base": 95.32163742690058,
+            "new": 97.76286353467562,
+            "hm": 96.52681789847412
+          },
+          "student": {
+            "base": 95.26847421584263,
+            "new": 97.31543624161074,
+            "hm": 96.2810767147195
+          }
+        },
+        "2": {
+          "adk_probability_fusion": {
+            "base": 95.69377990430623,
+            "new": 97.93064876957494,
+            "hm": 96.79929349230679
+          },
+          "classname": {
+            "base": 91.33439659755449,
+            "new": 97.14765100671141,
+            "hm": 94.15137620106131
+          },
+          "classname_probability_fusion": {
+            "base": 95.42796384901648,
+            "new": 97.59507829977629,
+            "hm": 96.49935572618092
+          },
+          "description_instance": {
+            "base": 92.6634768740032,
+            "new": 94.57494407158836,
+            "hm": 93.6094536428968
+          },
+          "description_mean": {
+            "base": 94.47102604997342,
+            "new": 96.08501118568233,
+            "hm": 95.2711834945327
+          },
+          "description_probability_alpha_0_00": {
+            "base": 95.74694311536418,
+            "new": 97.6510067114094,
+            "hm": 96.68960186113613
+          },
+          "description_probability_alpha_0_25": {
+            "base": 95.90643274853801,
+            "new": 97.81879194630872,
+            "hm": 96.85317341734324
+          },
+          "description_probability_alpha_0_50": {
+            "base": 95.69377990430623,
+            "new": 97.87472035794184,
+            "hm": 96.77196377963644
+          },
+          "description_probability_alpha_0_75": {
+            "base": 95.2153110047847,
+            "new": 96.75615212527964,
+            "hm": 95.97954785595402
+          },
+          "description_probability_alpha_1_00": {
+            "base": 94.47102604997342,
+            "new": 96.08501118568233,
+            "hm": 95.2711834945327
+          },
+          "matched_template": {
+            "base": 90.32429558745348,
+            "new": 96.14093959731544,
+            "hm": 93.14189465546825
+          },
+          "matched_template_probability_fusion": {
+            "base": 95.26847421584263,
+            "new": 97.7069351230425,
+            "hm": 96.4722983241048
+          },
+          "mean_probability_fusion": {
+            "base": 95.69377990430623,
+            "new": 97.87472035794184,
+            "hm": 96.77196377963644
+          },
+          "simple_fusion": {
+            "base": 95.80010632642211,
+            "new": 97.93064876957494,
+            "hm": 96.85366229117257
+          },
+          "student": {
+            "base": 95.74694311536418,
+            "new": 97.6510067114094,
+            "hm": 96.68960186113613
+          }
+        },
+        "3": {
+          "adk_probability_fusion": {
+            "base": 95.74694311536418,
+            "new": 97.20357941834452,
+            "hm": 96.46976299379631
+          },
+          "classname": {
+            "base": 91.33439659755449,
+            "new": 97.14765100671141,
+            "hm": 94.15137620106131
+          },
+          "classname_probability_fusion": {
+            "base": 95.32163742690058,
+            "new": 97.48322147651007,
+            "hm": 96.3903124188927
+          },
+          "description_instance": {
+            "base": 92.6634768740032,
+            "new": 94.57494407158836,
+            "hm": 93.6094536428968
+          },
+          "description_mean": {
+            "base": 94.47102604997342,
+            "new": 96.08501118568233,
+            "hm": 95.2711834945327
+          },
+          "description_probability_alpha_0_00": {
+            "base": 95.69377990430623,
+            "new": 96.70022371364654,
+            "hm": 96.19436937469487
+          },
+          "description_probability_alpha_0_25": {
+            "base": 95.80010632642211,
+            "new": 97.25950782997762,
+            "hm": 96.5242910287716
+          },
+          "description_probability_alpha_0_50": {
+            "base": 95.74694311536418,
+            "new": 97.25950782997762,
+            "hm": 96.49729859301303
+          },
+          "description_probability_alpha_0_75": {
+            "base": 95.2153110047847,
+            "new": 96.81208053691275,
+            "hm": 96.00705694469413
+          },
+          "description_probability_alpha_1_00": {
+            "base": 94.47102604997342,
+            "new": 96.08501118568233,
+            "hm": 95.2711834945327
+          },
+          "matched_template": {
+            "base": 90.32429558745348,
+            "new": 96.14093959731544,
+            "hm": 93.14189465546825
+          },
+          "matched_template_probability_fusion": {
+            "base": 95.64061669324828,
+            "new": 97.37136465324384,
+            "hm": 96.49823082206964
+          },
+          "mean_probability_fusion": {
+            "base": 95.74694311536418,
+            "new": 97.25950782997762,
+            "hm": 96.49729859301303
+          },
+          "simple_fusion": {
+            "base": 95.80010632642211,
+            "new": 97.25950782997762,
+            "hm": 96.5242910287716
+          },
+          "student": {
+            "base": 95.69377990430623,
+            "new": 96.70022371364654,
+            "hm": 96.19436937469487
+          }
+        }
+      },
+      "stanford_cars": {
+        "1": {
+          "adk_probability_fusion": {
+            "base": 72.03898050974513,
+            "new": 74.84525872740777,
+            "hm": 73.41531212215673
+          },
+          "classname": {
+            "base": 63.74312843578211,
+            "new": 74.91953453825204,
+            "hm": 68.88091444363921
+          },
+          "classname_probability_fusion": {
+            "base": 71.03948025987006,
+            "new": 74.44912106957167,
+            "hm": 72.70434684584795
+          },
+          "description_instance": {
+            "base": 62.01899050474763,
+            "new": 75.04332755632582,
+            "hm": 67.91234067829812
+          },
+          "description_mean": {
+            "base": 61.569215392303846,
+            "new": 74.77098291656351,
+            "hm": 67.53093818823879
+          },
+          "description_probability_alpha_0_00": {
+            "base": 73.46326836581709,
+            "new": 70.5372616984402,
+            "hm": 71.97053765885538
+          },
+          "description_probability_alpha_0_25": {
+            "base": 72.9135432283858,
+            "new": 72.66650160930924,
+            "hm": 72.78981281058142
+          },
+          "description_probability_alpha_0_50": {
+            "base": 71.36431784107945,
+            "new": 74.25105224065362,
+            "hm": 72.77907118132339
+          },
+          "description_probability_alpha_0_75": {
+            "base": 66.49175412293853,
+            "new": 75.14236197078485,
+            "hm": 70.55288081964723
+          },
+          "description_probability_alpha_1_00": {
+            "base": 61.569215392303846,
+            "new": 74.77098291656351,
+            "hm": 67.53093818823879
+          },
+          "matched_template": {
+            "base": 64.46776611694153,
+            "new": 75.90987868284229,
+            "hm": 69.72250192501333
+          },
+          "matched_template_probability_fusion": {
+            "base": 71.38930534732634,
+            "new": 74.721465709334,
+            "hm": 73.01738938130475
+          },
+          "mean_probability_fusion": {
+            "base": 71.36431784107945,
+            "new": 74.25105224065362,
+            "hm": 72.77907118132339
+          },
+          "simple_fusion": {
+            "base": 70.88955522238881,
+            "new": 74.3748452587274,
+            "hm": 72.59038942318934
+          },
+          "student": {
+            "base": 73.46326836581709,
+            "new": 70.5372616984402,
+            "hm": 71.97053765885538
+          }
+        },
+        "2": {
+          "adk_probability_fusion": {
+            "base": 72.13893053473264,
+            "new": 75.36518940331766,
+            "hm": 73.71677706882042
+          },
+          "classname": {
+            "base": 63.74312843578211,
+            "new": 74.91953453825204,
+            "hm": 68.88091444363921
+          },
+          "classname_probability_fusion": {
+            "base": 71.68915542228885,
+            "new": 75.01856895271106,
+            "hm": 73.31608300953307
+          },
+          "description_instance": {
+            "base": 62.01899050474763,
+            "new": 75.04332755632582,
+            "hm": 67.91234067829812
+          },
+          "description_mean": {
+            "base": 61.569215392303846,
+            "new": 74.77098291656351,
+            "hm": 67.53093818823879
+          },
+          "description_probability_alpha_0_00": {
+            "base": 74.13793103448276,
+            "new": 71.60188165387473,
+            "hm": 72.8478411776939
+          },
+          "description_probability_alpha_0_25": {
+            "base": 73.48825587206397,
+            "new": 72.9636048526863,
+            "hm": 73.22499060411337
+          },
+          "description_probability_alpha_0_50": {
+            "base": 71.5392303848076,
+            "new": 74.96905174548155,
+            "hm": 73.21399427482292
+          },
+          "description_probability_alpha_0_75": {
+            "base": 66.76661669165418,
+            "new": 75.04332755632582,
+            "hm": 70.6634377834307
+          },
+          "description_probability_alpha_1_00": {
+            "base": 61.569215392303846,
+            "new": 74.77098291656351,
+            "hm": 67.53093818823879
+          },
+          "matched_template": {
+            "base": 64.46776611694153,
+            "new": 75.90987868284229,
+            "hm": 69.72250192501333
+          },
+          "matched_template_probability_fusion": {
+            "base": 72.33883058470765,
+            "new": 74.99381034909631,
+            "hm": 73.64239868858918
+          },
+          "mean_probability_fusion": {
+            "base": 71.5392303848076,
+            "new": 74.96905174548155,
+            "hm": 73.21399427482292
+          },
+          "simple_fusion": {
+            "base": 71.06446776611695,
+            "new": 74.64718989848973,
+            "hm": 72.81178329029414
+          },
+          "student": {
+            "base": 74.13793103448276,
+            "new": 71.60188165387473,
+            "hm": 72.8478411776939
+          }
+        },
+        "3": {
+          "adk_probability_fusion": {
+            "base": 74.11294352823589,
+            "new": 74.02822480812083,
+            "hm": 74.07055994377937
+          },
+          "classname": {
+            "base": 63.74312843578211,
+            "new": 74.91953453825204,
+            "hm": 68.88091444363921
+          },
+          "classname_probability_fusion": {
+            "base": 73.63818090954523,
+            "new": 74.32532805149789,
+            "hm": 73.98015891416196
+          },
+          "description_instance": {
+            "base": 62.01899050474763,
+            "new": 75.04332755632582,
+            "hm": 67.91234067829812
+          },
+          "description_mean": {
+            "base": 61.569215392303846,
+            "new": 74.77098291656351,
+            "hm": 67.53093818823879
+          },
+          "description_probability_alpha_0_00": {
+            "base": 75.38730634682659,
+            "new": 69.27457291408764,
+            "hm": 72.20179188880385
+          },
+          "description_probability_alpha_0_25": {
+            "base": 75.21239380309845,
+            "new": 71.45333003218619,
+            "hm": 73.28468924285413
+          },
+          "description_probability_alpha_0_50": {
+            "base": 73.41329335332334,
+            "new": 73.5330527358257,
+            "hm": 73.47312424339614
+          },
+          "description_probability_alpha_0_75": {
+            "base": 67.4912543728136,
+            "new": 74.42436246595692,
+            "hm": 70.78845430282662
+          },
+          "description_probability_alpha_1_00": {
+            "base": 61.569215392303846,
+            "new": 74.77098291656351,
+            "hm": 67.53093818823879
+          },
+          "matched_template": {
+            "base": 64.46776611694153,
+            "new": 75.90987868284229,
+            "hm": 69.72250192501333
+          },
+          "matched_template_probability_fusion": {
+            "base": 73.9880059970015,
+            "new": 74.27581084426838,
+            "hm": 74.13162908198079
+          },
+          "mean_probability_fusion": {
+            "base": 73.41329335332334,
+            "new": 73.5330527358257,
+            "hm": 73.47312424339614
+          },
+          "simple_fusion": {
+            "base": 72.76361819090455,
+            "new": 73.5330527358257,
+            "hm": 73.14631207651988
+          },
+          "student": {
+            "base": 75.38730634682659,
+            "new": 69.27457291408764,
+            "hm": 72.20179188880385
+          }
+        }
+      },
+      "sun397": {
+        "1": {
+          "adk_probability_fusion": {
+            "base": 81.05527638190955,
+            "new": 78.52525252525253,
+            "hm": 79.7702086837478
+          },
+          "classname": {
+            "base": 69.37688442211055,
+            "new": 75.51515151515152,
+            "hm": 72.31599590543833
+          },
+          "classname_probability_fusion": {
+            "base": 79.35678391959799,
+            "new": 77.74747474747475,
+            "hm": 78.543886794367
+          },
+          "description_instance": {
+            "base": 71.78894472361809,
+            "new": 74.98989898989899,
+            "hm": 73.35451863788997
+          },
+          "description_mean": {
+            "base": 75.27638190954774,
+            "new": 78.23232323232324,
+            "hm": 76.72589298261568
+          },
+          "description_probability_alpha_0_00": {
+            "base": 80.39195979899498,
+            "new": 73.97979797979798,
+            "hm": 77.05270744732971
+          },
+          "description_probability_alpha_0_25": {
+            "base": 80.96482412060301,
+            "new": 76.02020202020202,
+            "hm": 78.41464166980842
+          },
+          "description_probability_alpha_0_50": {
+            "base": 80.90452261306532,
+            "new": 78.57575757575758,
+            "hm": 79.72313753273872
+          },
+          "description_probability_alpha_0_75": {
+            "base": 78.7035175879397,
+            "new": 79.26262626262626,
+            "hm": 78.98208246481224
+          },
+          "description_probability_alpha_1_00": {
+            "base": 75.27638190954774,
+            "new": 78.23232323232324,
+            "hm": 76.72589298261568
+          },
+          "matched_template": {
+            "base": 71.91959798994975,
+            "new": 77.18181818181819,
+            "hm": 74.45784860118327
+          },
+          "matched_template_probability_fusion": {
+            "base": 80.01005025125629,
+            "new": 77.97979797979798,
+            "hm": 78.9818792131745
+          },
+          "mean_probability_fusion": {
+            "base": 80.90452261306532,
+            "new": 78.57575757575758,
+            "hm": 79.72313753273872
+          },
+          "simple_fusion": {
+            "base": 80.69346733668341,
+            "new": 78.42424242424242,
+            "hm": 79.54267383527636
+          },
+          "student": {
+            "base": 80.39195979899498,
+            "new": 73.97979797979798,
+            "hm": 77.05270744732971
+          }
+        },
+        "2": {
+          "adk_probability_fusion": {
+            "base": 81.09547738693468,
+            "new": 78.41414141414141,
+            "hm": 79.73227294583069
+          },
+          "classname": {
+            "base": 69.37688442211055,
+            "new": 75.51515151515152,
+            "hm": 72.31599590543833
+          },
+          "classname_probability_fusion": {
+            "base": 79.82914572864321,
+            "new": 77.56565656565657,
+            "hm": 78.68112556779062
+          },
+          "description_instance": {
+            "base": 71.78894472361809,
+            "new": 74.98989898989899,
+            "hm": 73.35451863788997
+          },
+          "description_mean": {
+            "base": 75.27638190954774,
+            "new": 78.23232323232324,
+            "hm": 76.72589298261568
+          },
+          "description_probability_alpha_0_00": {
+            "base": 80.7035175879397,
+            "new": 73.16161616161617,
+            "hm": 76.7477287774837
+          },
+          "description_probability_alpha_0_25": {
+            "base": 81.25628140703517,
+            "new": 75.61616161616162,
+            "hm": 78.33483037290522
+          },
+          "description_probability_alpha_0_50": {
+            "base": 81.11557788944724,
+            "new": 78.29292929292929,
+            "hm": 79.67926325271684
+          },
+          "description_probability_alpha_0_75": {
+            "base": 78.9748743718593,
+            "new": 78.95959595959596,
+            "hm": 78.96723442671897
+          },
+          "description_probability_alpha_1_00": {
+            "base": 75.27638190954774,
+            "new": 78.23232323232324,
+            "hm": 76.72589298261568
+          },
+          "matched_template": {
+            "base": 71.91959798994975,
+            "new": 77.18181818181819,
+            "hm": 74.45784860118327
+          },
+          "matched_template_probability_fusion": {
+            "base": 80.35175879396985,
+            "new": 77.70707070707071,
+            "hm": 79.00728889048744
+          },
+          "mean_probability_fusion": {
+            "base": 81.11557788944724,
+            "new": 78.29292929292929,
+            "hm": 79.67926325271684
+          },
+          "simple_fusion": {
+            "base": 80.83417085427136,
+            "new": 78.08080808080808,
+            "hm": 79.43363706982022
+          },
+          "student": {
+            "base": 80.7035175879397,
+            "new": 73.16161616161617,
+            "hm": 76.7477287774837
+          }
+        },
+        "3": {
+          "adk_probability_fusion": {
+            "base": 81.10552763819095,
+            "new": 78.45454545454545,
+            "hm": 79.75801441262952
+          },
+          "classname": {
+            "base": 69.37688442211055,
+            "new": 75.51515151515152,
+            "hm": 72.31599590543833
+          },
+          "classname_probability_fusion": {
+            "base": 79.70854271356784,
+            "new": 77.78787878787878,
+            "hm": 78.7364995325246
+          },
+          "description_instance": {
+            "base": 71.78894472361809,
+            "new": 74.98989898989899,
+            "hm": 73.35451863788997
+          },
+          "description_mean": {
+            "base": 75.27638190954774,
+            "new": 78.23232323232324,
+            "hm": 76.72589298261568
+          },
+          "description_probability_alpha_0_00": {
+            "base": 80.51256281407035,
+            "new": 74.39393939393939,
+            "hm": 77.33241191383614
+          },
+          "description_probability_alpha_0_25": {
+            "base": 81.05527638190955,
+            "new": 76.32323232323232,
+            "hm": 78.61811299674827
+          },
+          "description_probability_alpha_0_50": {
+            "base": 81.1859296482412,
+            "new": 78.5050505050505,
+            "hm": 79.82298688650482
+          },
+          "description_probability_alpha_0_75": {
+            "base": 79.15577889447236,
+            "new": 79.03030303030303,
+            "hm": 79.0929911976034
+          },
+          "description_probability_alpha_1_00": {
+            "base": 75.27638190954774,
+            "new": 78.23232323232324,
+            "hm": 76.72589298261568
+          },
+          "matched_template": {
+            "base": 71.91959798994975,
+            "new": 77.18181818181819,
+            "hm": 74.45784860118327
+          },
+          "matched_template_probability_fusion": {
+            "base": 80.04020100502512,
+            "new": 78.08080808080808,
+            "hm": 79.04836440842826
+          },
+          "mean_probability_fusion": {
+            "base": 81.1859296482412,
+            "new": 78.5050505050505,
+            "hm": 79.82298688650482
+          },
+          "simple_fusion": {
+            "base": 81.01507537688443,
+            "new": 78.31313131313131,
+            "hm": 79.64119308361938
+          },
+          "student": {
+            "base": 80.51256281407035,
+            "new": 74.39393939393939,
+            "hm": 77.33241191383614
+          }
+        }
+      },
+      "ucf101": {
+        "1": {
+          "adk_probability_fusion": {
+            "base": 82.6783867631851,
+            "new": 75.28393726338561,
+            "hm": 78.80808946658146
+          },
+          "classname": {
+            "base": 70.83764219234746,
+            "new": 78.42076798269335,
+            "hm": 74.43657340705171
+          },
+          "classname_probability_fusion": {
+            "base": 82.8335056876939,
+            "new": 73.76960519199568,
+            "hm": 78.03925448128007
+          },
+          "description_instance": {
+            "base": 69.49327817993795,
+            "new": 76.74418604651163,
+            "hm": 72.93897084217278
+          },
+          "description_mean": {
+            "base": 73.83660806618407,
+            "new": 79.28610059491618,
+            "hm": 76.46438318538041
+          },
+          "description_probability_alpha_0_00": {
+            "base": 83.04033092037228,
+            "new": 64.30502974580854,
+            "hm": 72.48156203620407
+          },
+          "description_probability_alpha_0_25": {
+            "base": 83.24715615305067,
+            "new": 68.14494321254732,
+            "hm": 74.94278436493877
+          },
+          "description_probability_alpha_0_50": {
+            "base": 82.41985522233712,
+            "new": 75.50027041644132,
+            "hm": 78.80846512500952
+          },
+          "description_probability_alpha_0_75": {
+            "base": 77.61116856256463,
+            "new": 79.50243374797188,
+            "hm": 78.54541804155647
+          },
+          "description_probability_alpha_1_00": {
+            "base": 73.83660806618407,
+            "new": 79.28610059491618,
+            "hm": 76.46438318538041
+          },
+          "matched_template": {
+            "base": 69.28645294725956,
+            "new": 77.2850189291509,
+            "hm": 73.06749067892103
+          },
+          "matched_template_probability_fusion": {
+            "base": 82.36814891416753,
+            "new": 73.28285559762034,
+            "hm": 77.56034959945397
+          },
+          "mean_probability_fusion": {
+            "base": 82.41985522233712,
+            "new": 75.50027041644132,
+            "hm": 78.80846512500952
+          },
+          "simple_fusion": {
+            "base": 82.62668045501552,
+            "new": 74.14818820984316,
+            "hm": 78.15817299939924
+          },
+          "student": {
+            "base": 83.04033092037228,
+            "new": 64.30502974580854,
+            "hm": 72.48156203620407
+          }
+        },
+        "2": {
+          "adk_probability_fusion": {
+            "base": 83.29886246122027,
+            "new": 77.71768523526231,
+            "hm": 80.41154609052576
+          },
+          "classname": {
+            "base": 70.83764219234746,
+            "new": 78.42076798269335,
+            "hm": 74.43657340705171
+          },
+          "classname_probability_fusion": {
+            "base": 82.52326783867632,
+            "new": 76.52785289345593,
+            "hm": 79.4125621042497
+          },
+          "description_instance": {
+            "base": 69.49327817993795,
+            "new": 76.74418604651163,
+            "hm": 72.93897084217278
+          },
+          "description_mean": {
+            "base": 73.83660806618407,
+            "new": 79.28610059491618,
+            "hm": 76.46438318538041
+          },
+          "description_probability_alpha_0_00": {
+            "base": 83.86763185108583,
+            "new": 70.09194159004868,
+            "hm": 76.36348973452567
+          },
+          "description_probability_alpha_0_25": {
+            "base": 84.07445708376422,
+            "new": 73.39102217414819,
+            "hm": 78.3703243808463
+          },
+          "description_probability_alpha_0_50": {
+            "base": 83.19544984488108,
+            "new": 77.71768523526231,
+            "hm": 80.3633311951846
+          },
+          "description_probability_alpha_0_75": {
+            "base": 77.97311271975181,
+            "new": 79.44835045970795,
+            "hm": 78.7038191702115
+          },
+          "description_probability_alpha_1_00": {
+            "base": 73.83660806618407,
+            "new": 79.28610059491618,
+            "hm": 76.46438318538041
+          },
+          "matched_template": {
+            "base": 69.28645294725956,
+            "new": 77.2850189291509,
+            "hm": 73.06749067892103
+          },
+          "matched_template_probability_fusion": {
+            "base": 82.98862461220268,
+            "new": 77.12276906435912,
+            "hm": 79.94824583021062
+          },
+          "mean_probability_fusion": {
+            "base": 83.19544984488108,
+            "new": 77.71768523526231,
+            "hm": 80.3633311951846
+          },
+          "simple_fusion": {
+            "base": 83.19544984488108,
+            "new": 77.06868577609518,
+            "hm": 80.01495727353262
+          },
+          "student": {
+            "base": 83.86763185108583,
+            "new": 70.09194159004868,
+            "hm": 76.36348973452567
+          }
+        },
+        "3": {
+          "adk_probability_fusion": {
+            "base": 82.16132368148914,
+            "new": 76.14926987560844,
+            "hm": 79.04113893808889
+          },
+          "classname": {
+            "base": 70.83764219234746,
+            "new": 78.42076798269335,
+            "hm": 74.43657340705171
+          },
+          "classname_probability_fusion": {
+            "base": 82.57497414684592,
+            "new": 75.39210383991346,
+            "hm": 78.82023399811183
+          },
+          "description_instance": {
+            "base": 69.49327817993795,
+            "new": 76.74418604651163,
+            "hm": 72.93897084217278
+          },
+          "description_mean": {
+            "base": 73.83660806618407,
+            "new": 79.28610059491618,
+            "hm": 76.46438318538041
+          },
+          "description_probability_alpha_0_00": {
+            "base": 83.76421923474663,
+            "new": 66.84694429421309,
+            "hm": 74.35547227489155
+          },
+          "description_probability_alpha_0_25": {
+            "base": 83.55739400206825,
+            "new": 69.9296917252569,
+            "hm": 76.13855949172164
+          },
+          "description_probability_alpha_0_50": {
+            "base": 82.47156153050672,
+            "new": 76.25743645213629,
+            "hm": 79.24285974776673
+          },
+          "description_probability_alpha_0_75": {
+            "base": 77.35263702171665,
+            "new": 78.96160086533261,
+            "hm": 78.14883830100268
+          },
+          "description_probability_alpha_1_00": {
+            "base": 73.83660806618407,
+            "new": 79.28610059491618,
+            "hm": 76.46438318538041
+          },
+          "matched_template": {
+            "base": 69.28645294725956,
+            "new": 77.2850189291509,
+            "hm": 73.06749067892103
+          },
+          "matched_template_probability_fusion": {
+            "base": 82.10961737331955,
+            "new": 75.4461871281774,
+            "hm": 78.63699565967633
+          },
+          "mean_probability_fusion": {
+            "base": 82.47156153050672,
+            "new": 76.25743645213629,
+            "hm": 79.24285974776673
+          },
+          "simple_fusion": {
+            "base": 82.21302998965874,
+            "new": 74.36452136289887,
+            "hm": 78.09207095350017
+          },
+          "student": {
+            "base": 83.76421923474663,
+            "new": 66.84694429421309,
+            "hm": 74.35547227489155
+          }
+        }
+      }
+    },
+    "complete_datasets": [
+      "caltech101",
+      "dtd",
+      "eurosat",
+      "fgvc_aircraft",
+      "food101",
+      "imagenet",
+      "oxford_flowers",
+      "oxford_pets",
+      "stanford_cars",
+      "sun397",
+      "ucf101"
+    ],
+    "incomplete_datasets": {},
+    "macro_dataset_count": 11,
+    "macro_dataset_counts": {
+      "adk_probability_fusion": 11,
+      "classname": 11,
+      "classname_probability_fusion": 11,
+      "description_instance": 11,
+      "description_mean": 11,
+      "description_probability_alpha_0_00": 11,
+      "description_probability_alpha_0_25": 11,
+      "description_probability_alpha_0_50": 11,
+      "description_probability_alpha_0_75": 11,
+      "description_probability_alpha_1_00": 11,
+      "matched_template": 11,
+      "matched_template_probability_fusion": 11,
+      "mean_probability_fusion": 11,
+      "simple_fusion": 11,
+      "student": 11
+    }
+  }
+}

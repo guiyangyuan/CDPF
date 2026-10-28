@@ -14,7 +14,6 @@ from .textconsistency_common import (
     PROJECT_ROOT, load_clip_checkpoint, select_device, training_losses, sha256_file,
     description_permutation,
 )
-from .visual_adapter import validate_visual_adapter_config
 
 
 def _loss_identity(mode, temperature, effective_weight):
@@ -59,7 +58,6 @@ def source_digest():
 
 class ValidatedTrainer(TrainerX):
     def check_cfg(self, cfg):
-        validate_visual_adapter_config(cfg)
         tc = cfg.TRAINER.TEXTCONSISTENCY
         relation_weight = getattr(tc, 'RELATION_WEIGHT', 0.)
         if tc.PREC != 'fp32':
@@ -89,18 +87,12 @@ class ValidatedTrainer(TrainerX):
         clip_model = load_clip_checkpoint(cfg)
         self.model = self.model_builder(cfg, self.dm.dataset.classnames, clip_model)
         for name, parameter in self.model.named_parameters():
-            parameter.requires_grad_(name.startswith(('prompt_learner.', 'view_aggregator.', 'visual_adapter.', 'text_residual.')))
+            parameter.requires_grad_(name.startswith('prompt_learner.'))
         self.model.to(self.device)
         self.model.image_encoder.eval()
         self.model.text_encoder.eval()
         self.trainable_modules = nn.ModuleDict({'prompt_learner': self.model.prompt_learner,
                                                 'view_aggregator': self.model.view_aggregator})
-        visual_adapter = getattr(self.model, 'visual_adapter', None)
-        if visual_adapter is not None:
-            self.trainable_modules['visual_adapter'] = visual_adapter
-        text_residual = getattr(self.model, 'text_residual', None)
-        if text_residual is not None:
-            self.trainable_modules['text_residual'] = text_residual
         parameters = [p for p in self.trainable_modules.parameters() if p.requires_grad]
         self.optim, self.sched = self.build_optimizers(parameters)
         self.register_model('textconsistency', self.trainable_modules, self.optim, self.sched)
@@ -125,18 +117,6 @@ class ValidatedTrainer(TrainerX):
             'view_order': tc.VIEW_ORDER, 'order_seed': tc.ORDER_SEED, 'order_version': 1,
             'loss_identity': dict(loss_identity),
         }
-        if visual_adapter is not None:
-            self.repro_signature.update(format=3,
-                visual_adapter=visual_adapter.identity(self.adaptive_ce_weight))
-        correction = getattr(self.model, 'correction_identity', None)
-        if correction is not None:
-            self.repro_signature.update(format=4, correction=dict(correction))
-        relation = getattr(self.model, 'relation_identity', None)
-        if relation is not None:
-            self.repro_signature.update(format=6, relation_regularization=dict(relation))
-        optimization = getattr(self, 'optimization_identity', None)
-        if optimization is not None:
-            self.repro_signature.update(format=5, optimization=optimization)
         self.run_provenance = {
             'seed': cfg.SEED, 'dataset': cfg.DATASET.NAME, 'shots': cfg.DATASET.NUM_SHOTS,
             'subsample': cfg.DATASET.SUBSAMPLE_CLASSES, 'model_signature': self.repro_signature,
@@ -153,10 +133,6 @@ class ValidatedTrainer(TrainerX):
             'description_counts': getattr(encoder, 'description_counts', []),
             'view_order_manifest': getattr(encoder, 'view_order_manifest', None),
         }
-        if correction is not None:
-            self.run_provenance['effective_losses']['correction_ce'] = float(correction['enabled'])
-        if relation is not None:
-            self.run_provenance['effective_losses']['relation'] = float(relation['weight'])
         directory = Path(cfg.OUTPUT_DIR); directory.mkdir(parents=True, exist_ok=True)
         (directory / 'run_manifest.json').write_text(json.dumps(self.run_provenance, indent=2))
         (directory / 'effective_config.yaml').write_text(cfg.dump())

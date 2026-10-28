@@ -18,7 +18,7 @@ class FrozenFusionMath(unittest.TestCase):
     def setUp(self):
         torch.set_num_threads(2)
 
-    def test_fixed_logits_attention_and_probability_formulas(self):
+    def test_fixed_logit_and_probability_formulas(self):
         student = torch.tensor([[2.0, -1.0]])
         image = torch.tensor([[2.0, 0.0]])
         descriptions = torch.tensor([
@@ -36,22 +36,10 @@ class FrozenFusionMath(unittest.TestCase):
         torch.testing.assert_close(result["description_mean"], expected_mean)
         torch.testing.assert_close(result["simple_fusion"], (student + expected_mean) / 2)
 
-        expected_attention = torch.softmax(torch.tensor([2.0, 0.0]), dim=0)
-        torch.testing.assert_close(result["description_attention"][0, 0], expected_attention)
-        self.assertEqual(result["description_attention"][0, 1, 1].item(), 0.0)
-        instance_text0 = torch.nn.functional.normalize(
-            expected_attention @ torch.tensor([[1.0, 0.0], [0.0, 1.0]]), dim=0)
-        expected_instance = torch.tensor([[2.0 * instance_text0[0], -2.0]])
-        torch.testing.assert_close(result["description_instance"], expected_instance)
-
         student_p = torch.softmax(student, dim=-1)
         mean_p = torch.softmax(expected_mean, dim=-1)
-        instance_p = torch.softmax(expected_instance, dim=-1)
         torch.testing.assert_close(result["mean_probability_fusion"], 0.5 * student_p + 0.5 * mean_p)
-        torch.testing.assert_close(
-            result["adk_probability_fusion"], 0.5 * student_p + 0.25 * mean_p + 0.25 * instance_p)
-        for name in ("mean_probability_fusion", "adk_probability_fusion"):
-            torch.testing.assert_close(result[name].sum(dim=-1), torch.ones(1))
+        torch.testing.assert_close(result["mean_probability_fusion"].sum(dim=-1), torch.ones(1))
 
     def test_masked_values_cannot_affect_any_description_branch(self):
         torch.manual_seed(4)
@@ -63,8 +51,7 @@ class FrozenFusionMath(unittest.TestCase):
         changed[~mask] = 1e8
         left = fusion.frozen_fusion_logits(student, image, descriptions, mask, 3.0)
         right = fusion.frozen_fusion_logits(student, image, changed, mask, 3.0)
-        for name in ("description_mean", "simple_fusion", "description_instance",
-                     "mean_probability_fusion", "adk_probability_fusion"):
+        for name in ("description_mean", "simple_fusion", "mean_probability_fusion"):
             torch.testing.assert_close(left[name], right[name])
 
     def test_nonfinite_and_empty_descriptions_are_rejected(self):
@@ -84,11 +71,11 @@ class FrozenFusionMath(unittest.TestCase):
         result = fusion.frozen_fusion_logits(
             student, torch.randn(2, 4), descriptions, torch.ones(3, 2, dtype=torch.bool), 2.0)
         gradient = torch.autograd.grad(
-            result["description_mean"].sum() + result["description_instance"].sum(),
+            result["description_mean"].sum(),
             student, allow_unused=True,
         )[0]
         self.assertIsNone(gradient)
-        self.assertIsNotNone(torch.autograd.grad(result["description_instance"].sum(), descriptions)[0])
+        self.assertIsNotNone(torch.autograd.grad(result["description_mean"].sum(), descriptions)[0])
 
 
 def _signature():
@@ -143,6 +130,35 @@ def _baseline_fixture(root, dataset="dtd", seed=1, split="base"):
 
 
 class FrozenFusionMetadata(unittest.TestCase):
+    def test_current_training_signature_is_accepted_for_dtd_and_ucf101(self):
+        # Independent producer contract: do not copy the evaluator's expectation.
+        signature = {
+            "format": 2, "trainer": "CoOp_TextConsistency_Ablation", "n_ctx": 4,
+            "aggregation": "none", "feature_adapter": False, "n_groups": None,
+            "n_views": 20, "ablation_group": "baseline", "clip_sha256": "c" * 64,
+            "template_sha256": None, "view_order": "contiguous", "order_seed": 0,
+            "order_version": 1,
+            "loss_identity": {
+                "format": 1, "mode": "full_kl", "temperature": 2.0,
+                "effective_weight": 0.0, "active": False,
+                "non_target_weighting": "none_full_distribution_kl",
+            },
+        }
+        for dataset in ("dtd", "ucf101"):
+            with self.subTest(dataset=dataset):
+                payload = _manifest(dataset, 1, "base")
+                payload["model_signature"] = json.loads(json.dumps(signature))
+                fusion._validate_provenance(payload, dataset, 1, "base")
+
+    def test_legacy_ucf_signature_is_not_current_training_provenance(self):
+        payload = _manifest("ucf101", 1, "base")
+        signature = payload["model_signature"]
+        signature["format"] = 1
+        for field in ("loss_identity", "view_order", "order_seed", "order_version"):
+            signature.pop(field, None)
+        with self.assertRaisesRegex(ValueError, "signature|format"):
+            fusion._validate_provenance(payload, "ucf101", 1, "base")
+
     def test_extension_datasets_use_the_frozen_model_source(self):
         for dataset, display in (("caltech101", "Caltech101"),
                                  ("oxford_flowers", "OxfordFlowers"),
@@ -248,12 +264,12 @@ class FrozenFusionMetadata(unittest.TestCase):
                     fusion.validate_baseline_metadata(
                         baseline, "dtd", 1, "base", fusion.DATASETS["dtd"][1])
 
-    def test_wrong_dataset_source_release_is_rejected(self):
+    def test_unrecognized_source_release_is_rejected(self):
         with tempfile.TemporaryDirectory() as temp:
             baseline = _baseline_fixture(temp)
             with self.assertRaisesRegex(ValueError, "requires frozen source"):
                 fusion.validate_baseline_metadata(
-                    baseline, "dtd", 1, "base", fusion.DATASETS["ucf101"][1])
+                    baseline, "dtd", 1, "base", "0" * 64)
 
     def test_source_derived_config_rejects_non_path_drift_but_allows_relocation(self):
         with tempfile.TemporaryDirectory() as temp:

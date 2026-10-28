@@ -1,8 +1,0 @@
-build model vit is True
-{
-  "状态": "完成",
-  "输出": "/root/autodl-tmp/textconsistency/runs/类别文本几何-20260915-8779304/类别文本几何.json",
-  "输出SHA256": "efc58d6b842594b5ca6ecce3f6f4253fac0ec4926b6601254c87b95422f4fb90",
-  "划分数": 6,
-  "类别总数": 185
-}

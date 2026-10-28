@@ -1,8 +1,0 @@
-{
-  "smoke_only": true,
-  "classes": 4,
-  "base_classes": 2,
-  "novel_classes": 2,
-  "images_per_class_per_split": 1,
-  "epochs": 1
-}

@@ -1,14 +1,18 @@
-> 最新状态：[项目进度](../PROJECT_STATUS.md)；[十数据集扩展验证](experiments/斯坦福汽车与SUN397扩展验证-20260917/结果报告.md)；[十数据集文献对比](experiments/斯坦福汽车与SUN397扩展验证-20260917/十数据集文献方法对比.md)。以下早期报告保留其当时状态。
+# CDPF 实验与复核材料
 
-# 项目报告与历史证据
+这里保留当前 CoOp 基线与固定描述后验概率融合（CDPF）的结果、协议和小型审计证据。
 
-按以下顺序阅读，早期核查描述的是修订前状态。
+| 材料 | 入口 |
+| --- | --- |
+| 十数据集结果与独立复核 | [StanfordCars / SUN397 汇总](experiments/斯坦福汽车与SUN397扩展验证-20260917/结果报告.md) |
+| ImageNet 三种子协议、配置、指标与模型哈希 | [ImageNet 结果包](experiments/ImageNet扩展验证-20260918/README.md)（仓库路径：`reports/experiments/ImageNet扩展验证-20260918/`） |
+| 核心三数据集融合结果 | [结果与融合审计](experiments/attribution-study-20260911-42527/README.md) |
+| 五数据集主表与逐种子统计 | [统一结果表](experiments/投稿实验统一结果-20260915/统一结果表.md) |
+| 零样本与本地 CoCoOp 基线 | [Zero-shot CLIP](experiments/投稿零样本基线-20260916/结果报告.md)、[CoCoOp 核心三数据集](experiments/联合上下文提示基线-核心三数据集-20260916/结果报告.md)、[CoCoOp 扩展两数据集](experiments/联合上下文提示基线-扩展两数据集-20260916/结果报告.md) |
+| 推理效率 | [实测与独立审计](experiments/统一推理效率-20260916/结果报告.md) |
 
-1. [第一阶段执行报告](TextConsistency-第一阶段执行报告.md)：修订后的状态、23 项测试、真实模型 smoke、尚待执行的 GPU 实验。
-2. [代码与复现核查](TextConsistency-代码与复现核查.md)：修订前的问题及旧实验日志审查。
-3. [论文质量评审](TextConsistency-论文质量评审.md)：对原始论文稿的评审。
-4. [历史日志证据摘录](audit/历史日志证据摘录.md)、[消融数据提取](audit/historical-ablation.csv)：仅证明有对应历史运行记录，不等于当前方法已复现。
+与原十数据集合并后的本地十一数据集等权平均 HM 为 `78.33`。本地实验与文献公开结果分开标注，当前结果不宣称 SOTA。
 
-报告中的 `outputs/` 和本机绝对路径指此前的本地工作区。本仓库将代码放在根目录、报告放在 `reports/`、文本验证证据放在 `verification/`、原始交付包和补丁放在 `artifacts/`。
+`preparation/` 保留官方 CoOp 来源、上游差异、冻结协议和数据来源校验。服务器开关机记录、重复命令计划和下载过程日志已移出当前工作树。`experiments/` 中的结果 JSON、CSV、配置、指标、manifest 和复核记录继续保留；生成主结果仍需要其中的原始汇总输入。
 
-原始论文 PDF、完整历史日志、图像和 checkpoint 未随报告上传。所有新增小样本验证结果均不可用于填充标准数据集性能表。
+完整实验压缩包从当前工作树移出，其原路径、字节数、SHA-256 和历史版本链接见 [归档索引](archived-artifacts.json)。历史失败路线及旧运维材料可从 [清理前提交](https://github.com/guiyangyuan/textconsistency_v2_tune/tree/3f9b4be38adebf05418d663a597f9d2e873b530a/reports) 找回；未重写 Git 历史。旧收据仍记录归档原路径，请按索引取回后核对哈希。

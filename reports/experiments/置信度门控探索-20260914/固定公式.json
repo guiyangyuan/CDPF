@@ -1,6 +1,0 @@
-{
-  "simple_fusion": "F = 0.5 * (S + M)",
-  "confidence": "q = 1 - H(softmax(S)) / log(C)",
-  "gated_fusion": "G = F + q * R",
-  "fitted_hyperparameters": []
-}

@@ -18,7 +18,7 @@ from pathlib import Path
     "simple_fusion": "固定logit均值融合",
     "mean_probability_fusion": "固定均值概率融合",
 }
-预期模型源码摘要 = "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
+预期模型源码摘要 = "c1d57b85c0b929441df2c8e70bb12cf9901ba29c19b37716eb9bb9dc73abde5a"
 预期CLIP摘要 = "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f"
 
 

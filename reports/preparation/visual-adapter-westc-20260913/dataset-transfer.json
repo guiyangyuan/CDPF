@@ -1,9 +1,0 @@
-{
-  "archive": "/Users/bytedance/Documents/Codex/2026-09-08/https-github-com-zhengli97-awesome-prompt/work/visual-adapter-westc-20260913/fgvc-aircraft-full-images.tar.gz",
-  "bytes": 2755127692,
-  "sha256": "baf805b7b07092f5398f306f8020dc8d4ef0df62fc7e129a0223d32a65a62ab2",
-  "files": 10019,
-  "images": 10000,
-  "excluded": "split_fewshot cache with local paths; regenerate seed1 from official data on new server",
-  "seconds": 54.814309459063224
-}

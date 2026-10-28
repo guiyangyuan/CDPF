@@ -1,7 +1,0 @@
-{
-  "uncompressed_bytes": 213699,
-  "uncompressed_sha256": "8815b47d8f5400e31ba76799456812e33df7f81b4c696a28eefa4ab909647824",
-  "compressed_bytes": 6548,
-  "compressed_sha256": "5cc1017b94cad29325f2983a8bbd27debc65b53e3164ecab1fc956640790b900",
-  "purpose": "Complete CPU preparation metadata, no model weights"
-}

@@ -27,22 +27,11 @@ import datasets.imagenet_a
 import datasets.imagenet_r
 
 import trainers.coop
-import trainers.coop_textconsistency
-import trainers.coop_textconsistency_avg
-import trainers.coop_textconsistency_v2
-import trainers.coop_textconsistency_v2_fg
-import trainers.coop_textconsistency_correction
-import trainers.coop_text_residual
-import trainers.coop_text_residual_adamw
-import trainers.coop_text_detail
 import trainers.coop_textconsistency_ablation
-import trainers.类别关系保持提示
 
 import trainers.cocoop
-import trainers.cocoop_textconsistency_v2_fg
 
 import trainers.zsclip
-from trainers.visual_adapter import validate_visual_adapter_config
 
 def print_args(args, cfg):
     print("***************")
@@ -118,38 +107,24 @@ def extend_cfg(cfg):
     cfg.TRAINER.COCOOP.CTX_INIT = ""  # initialization words
     cfg.TRAINER.COCOOP.PREC = "fp16"  # fp16, fp32, amp
 
-    # Config for TextConsistency (Multi-View Text Consistency Learning)
+    # Current fixed-fusion method: train only the CoOp student, then fuse at evaluation.
     cfg.TRAINER.TEXTCONSISTENCY = CN()
     cfg.TRAINER.TEXTCONSISTENCY.N_CTX = 4
     cfg.TRAINER.TEXTCONSISTENCY.PREC = "fp32"
-    cfg.TRAINER.TEXTCONSISTENCY.N_VIEWS = 5           # 每类使用的描述数量
-    cfg.TRAINER.TEXTCONSISTENCY.CONSISTENCY_WEIGHT = 1.0  # 一致性损失权重
-    cfg.TRAINER.TEXTCONSISTENCY.CONSISTENCY_TEMP = 1.0    # 一致性损失温度
-    cfg.TRAINER.TEXTCONSISTENCY.KD_WEIGHT = 0.0       # KD损失权重
-    cfg.TRAINER.TEXTCONSISTENCY.KD_TEMP = 2.0         # KD温度
+    cfg.TRAINER.TEXTCONSISTENCY.N_VIEWS = 20
+    cfg.TRAINER.TEXTCONSISTENCY.KD_WEIGHT = 0.0
+    cfg.TRAINER.TEXTCONSISTENCY.KD_TEMP = 2.0
     cfg.TRAINER.TEXTCONSISTENCY.KD_LOSS_MODE = "full_kl"
-    cfg.TRAINER.TEXTCONSISTENCY.ADAPTIVE_CE_WEIGHT = 1.0  # 自适应分支分类损失权重
-    cfg.TRAINER.TEXTCONSISTENCY.DIVERSITY_WEIGHT = 0.0    # V2: attention多样性正则化权重
-    cfg.TRAINER.TEXTCONSISTENCY.CONTRASTIVE_WEIGHT = 0.0  # FG: 对比学习权重
-    cfg.TRAINER.TEXTCONSISTENCY.N_GROUPS = 4          # FG: 层次化注意力分组数
-    cfg.TRAINER.TEXTCONSISTENCY.ABLATION_GROUP = "full"  # Paper Table 4.3 group
-
-    cfg.TRAINER.TEXTCONSISTENCY.AGGREGATION = "hierarchical"
+    cfg.TRAINER.TEXTCONSISTENCY.ADAPTIVE_CE_WEIGHT = 1.0
+    cfg.TRAINER.TEXTCONSISTENCY.DIVERSITY_WEIGHT = 0.0
+    cfg.TRAINER.TEXTCONSISTENCY.CONTRASTIVE_WEIGHT = 0.0
+    cfg.TRAINER.TEXTCONSISTENCY.N_GROUPS = 4
+    cfg.TRAINER.TEXTCONSISTENCY.ABLATION_GROUP = "baseline"
+    cfg.TRAINER.TEXTCONSISTENCY.AGGREGATION = "none"
     cfg.TRAINER.TEXTCONSISTENCY.VIEW_ORDER = "contiguous"
     cfg.TRAINER.TEXTCONSISTENCY.ORDER_SEED = 0
-    cfg.TRAINER.TEXTCONSISTENCY.USE_FEATURE_ADAPTER = True
-    cfg.TRAINER.TEXTCONSISTENCY.USE_VISUAL_ADAPTER = False
-    cfg.TRAINER.TEXTCONSISTENCY.VISUAL_ADAPTER_DIM = 64
-    cfg.TRAINER.TEXTCONSISTENCY.VISUAL_ADAPTER_SCALE = 0.2
-    cfg.TRAINER.TEXTCONSISTENCY.CORRECTION_TEXT = "description"
-    cfg.TRAINER.TEXTCONSISTENCY.TEXT_RESIDUAL_MODE = "contrast"
-    cfg.TRAINER.TEXTCONSISTENCY.TEXT_RESIDUAL_DIM = 64
-    cfg.TRAINER.TEXTCONSISTENCY.TEXT_RESIDUAL_SCALE = 0.2
-    cfg.TRAINER.TEXTCONSISTENCY.TEXT_RESIDUAL_K = 5
-    cfg.TRAINER.TEXTCONSISTENCY.TEXT_RESIDUAL_ADAMW_LR = 0.001
-    cfg.TRAINER.TEXTCONSISTENCY.TEXT_DETAIL_POOLING = "centered"
-    cfg.TRAINER.TEXTCONSISTENCY.RELATION_WEIGHT = 0.0
-    cfg.TRAINER.TEXTCONSISTENCY.INFERENCE_BRANCH = "ensemble"
+    cfg.TRAINER.TEXTCONSISTENCY.USE_FEATURE_ADAPTER = False
+    cfg.TRAINER.TEXTCONSISTENCY.INFERENCE_BRANCH = "student"
     cfg.TRAINER.TEXTCONSISTENCY.ENSEMBLE_ALPHA = 0.5
     cfg.TRAINER.TEXTCONSISTENCY.DEVICE = "auto"
     cfg.TRAINER.TEXTCONSISTENCY.CLIP_PATH = "clip/ViT-B-16.pt"
@@ -181,18 +156,9 @@ def setup_cfg(args):
 
 def main(args):
     cfg = setup_cfg(args)
-    validate_visual_adapter_config(cfg)
-    kd_mode_trainers = {
-        "CoOp_TextConsistency_V2_FG",
-        "CoCoOp_TextConsistency_V2_FG",
-        "CoOp_TextConsistency_Ablation",
-    }
     if (cfg.TRAINER.TEXTCONSISTENCY.KD_LOSS_MODE != "full_kl"
-            and cfg.TRAINER.NAME not in kd_mode_trainers):
-        raise ValueError("A non-default KD loss mode is only supported by validated TextConsistency trainers")
-    legacy_trainers = {"CoOp_TextConsistency", "CoOp_TextConsistency_Avg", "CoOp_TextConsistency_V2"}
-    if cfg.TRAINER.NAME in legacy_trainers:
-        raise ValueError("Legacy trainer is not validated; use CoOp_TextConsistency_V2_FG with AGGREGATION mean/flat/hierarchical")
+            and cfg.TRAINER.NAME != "CoOp_TextConsistency_Ablation"):
+        raise ValueError("A non-default KD loss mode is only supported by the validated TextConsistency trainer")
     if "TextConsistency" in cfg.TRAINER.NAME:
         directory = Path(cfg.OUTPUT_DIR)
         if cfg.RESUME:

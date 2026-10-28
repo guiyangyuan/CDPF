@@ -1,7 +1,0 @@
-{
-  "queue_pid": 2741,
-  "study_root": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402",
-  "log": "/root/autodl-tmp/textconsistency/setup-logs/gpu-start-20260910/queue-resume.log",
-  "detached": true,
-  "preserved_checkpoint_sha256": "e8402920fd81ecd79fa5902aba05ef397bc8502a1cc2967bd2d783abede2d0ef"
-}

@@ -1,0 +1,48 @@
+{
+  "状态": "通过",
+  "数据目录": "/root/autodl-tmp/textconsistency/data/imagenet",
+  "类别名称文件SHA256": "89e0b642c6697a3a43a06a2bb65f9fefb3ca295ccc5f4ba9ce385f1a3a58c629",
+  "描述文件SHA256": "31da80d50a83ef6935238eafc5b44df4b839d23f3cead8591fcfa2cb2d808b91",
+  "类别与描述": {
+    "synset数": 1000,
+    "唯一显示名称数": 998,
+    "描述键数": 998,
+    "每类使用描述上限": 20,
+    "缺少描述的synset": [],
+    "少于20条描述的synset": [],
+    "重复显示名称": {
+      "missile": [
+        "n03773504",
+        "n04008634"
+      ],
+      "sunglasses": [
+        "n04355933",
+        "n04356056"
+      ]
+    },
+    "有效描述数范围": [
+      20,
+      20
+    ]
+  },
+  "图像": {
+    "类别目录数": 1000,
+    "训练图像数": 1281167,
+    "验证图像数": 50000,
+    "训练每类最少": 732,
+    "训练每类最多": 1300,
+    "验证每类": 50,
+    "类别目录完全匹配": true
+  },
+  "类别划分": {
+    "规则": "按synset排序前500类为Base，后500类为Novel",
+    "Base数": 500,
+    "Novel数": 500,
+    "Base类别SHA256": "51956f8513191fbb685f5cf849b3ad8e0d4a690fb1ce845d73e759d59ecff49a",
+    "Novel类别SHA256": "66c0e0ec5e0e09ed2986f8fee684e58bdeef80da580db3e1a2944342a28bec47"
+  },
+  "缓存": {
+    "preprocessed.pkl存在": true,
+    "fewshot目录存在": true
+  }
+}

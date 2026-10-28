@@ -27,3 +27,16 @@ clip/*.part
 .env.*
 *.pem
 *.key
+
+# Generated weights, feature caches and downloadable archives
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.npz
+*.tar.gz
+*.tar.xz
+*.zip
+!*.sha256
+*.egg-info/
+.superpowers/

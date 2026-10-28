@@ -1,9 +1,0 @@
-Traceback (most recent call last):
-  File "/root/autodl-tmp/textconsistency/releases/置信度门控-20260914-43ebe6f/scripts/repro/confidence_gate_study.py", line 455, in <module>
-    main()
-  File "/root/autodl-tmp/textconsistency/releases/置信度门控-20260914-43ebe6f/scripts/repro/confidence_gate_study.py", line 444, in main
-    result = run_study(args)
-             ^^^^^^^^^^^^^^^
-  File "/root/autodl-tmp/textconsistency/releases/置信度门控-20260914-43ebe6f/scripts/repro/confidence_gate_study.py", line 374, in run_study
-    raise RuntimeError('An available CUDA GPU is required to run the study')
-RuntimeError: An available CUDA GPU is required to run the study

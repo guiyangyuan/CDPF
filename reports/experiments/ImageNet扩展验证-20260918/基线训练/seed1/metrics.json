@@ -1,0 +1,65 @@
+{
+  "seed": 1,
+  "dataset": "ImageNet",
+  "shots": 16,
+  "subsample": "base",
+  "model_signature": {
+    "format": 2,
+    "trainer": "CoOp_TextConsistency_Ablation",
+    "n_ctx": 4,
+    "aggregation": "none",
+    "feature_adapter": false,
+    "n_groups": null,
+    "n_views": 20,
+    "ablation_group": "baseline",
+    "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+    "template_sha256": null,
+    "view_order": "contiguous",
+    "order_seed": 0,
+    "order_version": 1,
+    "loss_identity": {
+      "format": 1,
+      "mode": "full_kl",
+      "temperature": 2.0,
+      "effective_weight": 0.0,
+      "active": false,
+      "non_target_weighting": "none_full_distribution_kl"
+    }
+  },
+  "code_sha256": "e4d4343f31b7cdbcccd3b81ddc99536080c62e573783b27c9366a3c64a7892db",
+  "torch": "2.8.0+cu128",
+  "python": "3.12.3",
+  "device": "cuda",
+  "cuda_runtime": "12.8",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "loss_identity": {
+    "format": 1,
+    "mode": "full_kl",
+    "temperature": 2.0,
+    "effective_weight": 0.0,
+    "active": false,
+    "non_target_weighting": "none_full_distribution_kl"
+  },
+  "effective_losses": {
+    "kd": 0.0,
+    "adaptive_ce": 1.0,
+    "diversity": 0.0,
+    "contrastive": 0.0
+  },
+  "train_samples_sha256": "b3c2d42027ddd84025d2bedb96066761afe796ea135244c0118f7f7f4a64b5b8",
+  "val_samples_sha256": "edebd4ea5c8df19d71b44d53173e9e3ea1af32a0350fc5a37a851701296294d5",
+  "test_samples_sha256": "edebd4ea5c8df19d71b44d53173e9e3ea1af32a0350fc5a37a851701296294d5",
+  "trainable_parameters": 2048,
+  "description_counts": [],
+  "view_order_manifest": null,
+  "split": "test",
+  "branch": "student",
+  "ensemble_alpha": 0.5,
+  "checkpoints": [],
+  "state": "training_in_memory",
+  "metrics": {
+    "accuracy": 76.436,
+    "error_rate": 23.563999999999993,
+    "macro_f1": 76.14895728619216
+  }
+}

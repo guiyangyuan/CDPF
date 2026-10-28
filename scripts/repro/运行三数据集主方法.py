@@ -37,7 +37,7 @@ ROOT = Path(__file__).resolve().parents[2]
     "sun397": "sun397",
 }
 种子 = (1, 2, 3)
-预期模型源码摘要 = "9bd4a7f248f09c47be17c1bb64921bd9a29d9f3b46e03e8caac9b934b2a95bba"
+预期模型源码摘要 = "c1d57b85c0b929441df2c8e70bb12cf9901ba29c19b37716eb9bb9dc73abde5a"
 
 
 def sha256(path: Path) -> str:

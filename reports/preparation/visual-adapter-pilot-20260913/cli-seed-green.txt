@@ -1,6 +1,0 @@
-test_generated_train_commands_match_effective_config_through_real_cli_parser (repro.test_visual_adapter_validation.VisualValidationTests.test_generated_train_commands_match_effective_config_through_real_cli_parser) ... ok
-
-----------------------------------------------------------------------
-Ran 1 test in 2.148s
-
-OK

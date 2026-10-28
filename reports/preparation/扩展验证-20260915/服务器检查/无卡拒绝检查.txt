@@ -1,7 +1,0 @@
-Traceback (most recent call last):
-  File "/root/autodl-tmp/textconsistency/releases/扩展验证-20260915-8f54900/scripts/repro/执行扩展验证.py", line 144, in <module>
-    raise SystemExit(main())
-                     ^^^^^^
-  File "/root/autodl-tmp/textconsistency/releases/扩展验证-20260915-8f54900/scripts/repro/执行扩展验证.py", line 109, in main
-    raise RuntimeError("冻结扩展验证需要GPU，未创建输出目录")
-RuntimeError: 冻结扩展验证需要GPU，未创建输出目录

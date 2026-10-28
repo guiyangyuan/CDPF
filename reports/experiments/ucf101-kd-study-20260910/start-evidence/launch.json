@@ -1,6 +1,0 @@
-{
-  "queue_pid": 2155,
-  "study_root": "/root/autodl-tmp/textconsistency/runs/ucf101-kd-study-20260910-38402",
-  "log": "/root/autodl-tmp/textconsistency/setup-logs/gpu-start-20260910/queue-launch.log",
-  "detached": true
-}

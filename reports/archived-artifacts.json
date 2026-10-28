@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "historical_commit": "3f9b4be38adebf05418d663a597f9d2e873b530a",
+  "disposition": "Removed from the current worktree; exact bytes remain recoverable from the historical commit. Git history was not rewritten.",
+  "artifacts": [
+    {
+      "path": "reports/experiments/斯坦福汽车与SUN397扩展验证-20260917/完整实验归档.tar.gz",
+      "bytes": 20500366,
+      "sha256": "a227c715f39db925163f39e2a787b0f71f413b539e0080e32c114808439479e9",
+      "historical_url": "https://github.com/guiyangyuan/textconsistency_v2_tune/blob/3f9b4be38adebf05418d663a597f9d2e873b530a/reports/experiments/斯坦福汽车与SUN397扩展验证-20260917/完整实验归档.tar.gz",
+      "contents": "Current StanfordCars and SUN397 experiment archive, including baseline checkpoints and original evaluation evidence; small result and audit files remain in experiments/."
+    },
+    {
+      "path": "reports/experiments/三数据集扩展与八数据集汇总-20260916/完整实验归档.tar.gz",
+      "bytes": 7729460,
+      "sha256": "ebea99de3efd6e5e3497a3fe480031c91ace6a491dc88f5ea793b82f35522d05",
+      "historical_url": "https://github.com/guiyangyuan/textconsistency_v2_tune/blob/3f9b4be38adebf05418d663a597f9d2e873b530a/reports/experiments/三数据集扩展与八数据集汇总-20260916/完整实验归档.tar.gz",
+      "contents": "Current Caltech101, OxfordPets and Food101 experiment archive, including baseline checkpoints and original evaluation evidence; small result and audit files remain in experiments/."
+    },
+    {
+      "path": "reports/preparation/剩余两数据集扩展验证-20260917/服务器准备证据.tar.gz",
+      "bytes": 78618,
+      "sha256": "ac22c290f771b197d07631f67017bda56a47ad0b78a45ea70dd2f79316cf4b17",
+      "historical_url": "https://github.com/guiyangyuan/textconsistency_v2_tune/blob/3f9b4be38adebf05418d663a597f9d2e873b530a/reports/preparation/剩余两数据集扩展验证-20260917/服务器准备证据.tar.gz",
+      "contents": "Server preparation evidence; frozen protocol and data provenance checks remain in preparation/."
+    }
+  ]
+}

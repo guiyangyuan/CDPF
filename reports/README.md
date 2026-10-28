@@ -15,4 +15,4 @@
 
 `preparation/` 保留官方 CoOp 来源、上游差异、冻结协议和数据来源校验。服务器开关机记录、重复命令计划和下载过程日志已移出当前工作树。`experiments/` 中的结果 JSON、CSV、配置、指标、manifest 和复核记录继续保留；生成主结果仍需要其中的原始汇总输入。
 
-完整实验压缩包从当前工作树移出，其原路径、字节数、SHA-256 和历史版本链接见 [归档索引](archived-artifacts.json)。历史失败路线及旧运维材料可从 [清理前提交](https://github.com/guiyangyuan/textconsistency_v2_tune/tree/3f9b4be38adebf05418d663a597f9d2e873b530a/reports) 找回；未重写 Git 历史。旧收据仍记录归档原路径，请按索引取回后核对哈希。
+完整实验压缩包从当前工作树移出，其原路径、字节数、SHA-256 和历史版本链接见 [归档索引](archived-artifacts.json)。历史失败路线及旧运维材料可从 [清理前提交](https://github.com/guiyangyuan/CDPF/tree/3f9b4be38adebf05418d663a597f9d2e873b530a/reports) 找回；未重写 Git 历史。旧收据仍记录归档原路径，请按索引取回后核对哈希。

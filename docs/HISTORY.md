@@ -2,15 +2,15 @@
 
 当前默认源码树面向 **CDPF: Class-Description Posterior Fusion for Base-to-Novel Recognition**。它保留当前训练核心、类别描述、结果汇总和必要来源证据。
 
-历史材料可从整理前的固定提交 [3f9b4be38adebf05418d663a597f9d2e873b530a](https://github.com/guiyangyuan/textconsistency_v2_tune/tree/3f9b4be38adebf05418d663a597f9d2e873b530a) 查阅。该链接固定在历史版本，不随默认分支更新。
+历史材料可从整理前的固定提交 [3f9b4be38adebf05418d663a597f9d2e873b530a](https://github.com/guiyangyuan/CDPF/tree/3f9b4be38adebf05418d663a597f9d2e873b530a) 查阅。该链接固定在历史版本，不随默认分支更新。
 
 ## 旧材料的位置
 
 | 材料 | 历史位置 |
 |---|---|
-| 旧论文源码、PDF、中文对照及 Overleaf 替换副本 | [论文投稿版本-20260917/](https://github.com/guiyangyuan/textconsistency_v2_tune/tree/3f9b4be38adebf05418d663a597f9d2e873b530a/论文投稿版本-20260917) |
-| 旧项目状态、研究与运行过程 | [PROJECT_STATUS.md](https://github.com/guiyangyuan/textconsistency_v2_tune/blob/3f9b4be38adebf05418d663a597f9d2e873b530a/PROJECT_STATUS.md) |
-| 停止的模型、探索计划、旧图表及运维记录 | [历史源码树](https://github.com/guiyangyuan/textconsistency_v2_tune/tree/3f9b4be38adebf05418d663a597f9d2e873b530a) |
+| 旧论文源码、PDF、中文对照及 Overleaf 替换副本 | [论文投稿版本-20260917/](https://github.com/guiyangyuan/CDPF/tree/3f9b4be38adebf05418d663a597f9d2e873b530a/论文投稿版本-20260917) |
+| 旧项目状态、研究与运行过程 | [PROJECT_STATUS.md](https://github.com/guiyangyuan/CDPF/blob/3f9b4be38adebf05418d663a597f9d2e873b530a/PROJECT_STATUS.md) |
+| 停止的模型、探索计划、旧图表及运维记录 | [历史源码树](https://github.com/guiyangyuan/CDPF/tree/3f9b4be38adebf05418d663a597f9d2e873b530a) |
 
 历史目录中的“当前”“最终”“下一步”和服务器状态只适用于记录当时。旧 TextConsistency/V2 FG 稿件、层级聚合、KD、残差和门控研究不属于当前 CDPF 方法；旧表格不能与十一数据集 CDPF 主表混用。
 

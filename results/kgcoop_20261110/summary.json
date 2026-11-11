@@ -1,0 +1,306 @@
+{
+  "schema_version": 1,
+  "provenance": {
+    "kind": "local_reproduction",
+    "experiment": "KgCoOp_11datasets_20261110",
+    "statement": "Locally reproduced KgCoOp results, not values transcribed from original papers.",
+    "coverage": "Thirty accepted cases from ten datasets plus three independently verified ImageNet cases; all eleven datasets use seeds 1, 2, 3.",
+    "source_summaries_sha256": {
+      "verified-local-complete-20261109.json": "356aead95a0a44a622a0b90ef0452dce2a038dd49100bcc9b7d2c784406de684"
+    },
+    "source_independent_audits_sha256": {
+      "imagenet-all3-final-independent-verification-v1.json": "8ab9c1b0e897657ac3a5321b70a1d6c108d82b1b44ad33e7cbc26d84667235fb"
+    }
+  },
+  "scope": {
+    "methods": [
+      "kgcoop"
+    ],
+    "datasets": [
+      "caltech101",
+      "oxford_pets",
+      "oxford_flowers",
+      "fgvc_aircraft",
+      "dtd",
+      "eurosat",
+      "stanford_cars",
+      "food101",
+      "sun397",
+      "ucf101",
+      "imagenet"
+    ],
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "unique_case_count": 33,
+    "cases_per_method": 33,
+    "configurations": [
+      "original",
+      "single_template_probability_fusion",
+      "matched_template_probability_fusion",
+      "description_probability_fusion"
+    ]
+  },
+  "alpha": 0.5,
+  "accuracy_unit": "percent",
+  "difference_unit": "percentage_points",
+  "configuration_labels": {
+    "original": "Native KgCoOp",
+    "single_template_probability_fusion": "Single-template probability fusion",
+    "matched_template_probability_fusion": "Matched-template probability fusion",
+    "description_probability_fusion": "Description probability fusion (CDPF)"
+  },
+  "training_recipe": {
+    "recipe": "official KgCoOp recipe",
+    "epochs": 100,
+    "context_tokens": 4,
+    "training_batch_size": 128,
+    "num_workers": 8,
+    "knowledge_regularization_weight": 8.0
+  },
+  "timing": {
+    "status": "not_remeasured_for_this_export",
+    "measurements_included": false,
+    "statement": "KgCoOp inference timing was not remeasured for this export."
+  },
+  "aggregation": {
+    "seed_hm": "H_ds=2*B_ds*N_ds/(B_ds+N_ds), from integer correct/total percentages.",
+    "dataset_hm": "B_d=mean over three seed Base accuracies; N_d=mean over three seed Novel accuracies; H_d=2*B_d*N_d/(B_d+N_d).",
+    "mean_dataset_hm": "Unweighted arithmetic mean of the eleven H_d values.",
+    "hm_of_mean_base_novel": "2*mean_d(B_d)*mean_d(N_d)/(mean_d(B_d)+mean_d(N_d)); reported separately from mean_dataset_hm.",
+    "paired_comparisons": "Compute HM within the same dataset and seed before subtracting the reference configuration.",
+    "exact_arithmetic": "All aggregation and comparison signs computed with exact rational arithmetic from integer correct/total.",
+    "float_renderings": "Numeric values are floating point renderings; exact fractions are provided for seed HM, dataset metrics and macro metrics.",
+    "statistical_significance_claimed": false
+  },
+  "methods": {
+    "kgcoop": {
+      "case_count": 33,
+      "dataset_count": 11,
+      "macro": {
+        "original": {
+          "mean_base_accuracy_pct": 81.09401777300258,
+          "mean_novel_accuracy_pct": 73.43047791440645,
+          "mean_dataset_hm": 76.75480420007082,
+          "hm_of_mean_base_novel": 77.07221375589523,
+          "exact_fractions": {
+            "mean_base_accuracy_pct": "63337147144757555491703/781033532239704293550",
+            "mean_novel_accuracy_pct": "1523473122951553327710547/20747149769709730417050",
+            "mean_dataset_hm": "43124199111625821418735624163802046294029816210116903620765048/561843646935992419676407671579210348372725017116628975548975",
+            "hm_of_mean_base_novel": "96492441359465852131319636935549157327844091541/1251974436144766517973066476401442097761904000"
+          },
+          "delta_pp": {
+            "vs_original": {
+              "mean_base_accuracy_pct": 0.0,
+              "mean_novel_accuracy_pct": 0.0,
+              "mean_dataset_hm": 0.0,
+              "hm_of_mean_base_novel": 0.0
+            },
+            "vs_single": {
+              "mean_base_accuracy_pct": 2.7266537520126555,
+              "mean_novel_accuracy_pct": -0.938829338940014,
+              "mean_dataset_hm": 0.6365394550944339,
+              "hm_of_mean_base_novel": 0.7562049691943705
+            },
+            "vs_matched": {
+              "mean_base_accuracy_pct": 2.869352286897492,
+              "mean_novel_accuracy_pct": -1.940001678728153,
+              "mean_dataset_hm": 0.11060896554507398,
+              "hm_of_mean_base_novel": 0.3011602091362289
+            }
+          }
+        },
+        "single_template_probability_fusion": {
+          "mean_base_accuracy_pct": 78.36736402098991,
+          "mean_novel_accuracy_pct": 74.36930725334646,
+          "mean_dataset_hm": 76.11826474497639,
+          "hm_of_mean_base_novel": 76.31600878670086,
+          "exact_fractions": {
+            "mean_base_accuracy_pct": "341520327049955946391777/4357940723366465985750",
+            "mean_novel_accuracy_pct": "1611526762781616681447163/21669245315030162880030",
+            "mean_dataset_hm": "1153895647549899514193087236828357910646476767846709308517899854499/15159247933670921297235810984322474913068379315918022525083899800",
+            "hm_of_mean_base_novel": "550369147074934503206922314255668115288523178651/7211712926617882367249500438233291303182720280"
+          },
+          "delta_pp": {
+            "vs_original": {
+              "mean_base_accuracy_pct": -2.7266537520126555,
+              "mean_novel_accuracy_pct": 0.938829338940014,
+              "mean_dataset_hm": -0.6365394550944339,
+              "hm_of_mean_base_novel": -0.7562049691943705
+            },
+            "vs_single": {
+              "mean_base_accuracy_pct": 0.0,
+              "mean_novel_accuracy_pct": 0.0,
+              "mean_dataset_hm": 0.0,
+              "hm_of_mean_base_novel": 0.0
+            },
+            "vs_matched": {
+              "mean_base_accuracy_pct": 0.14269853488483658,
+              "mean_novel_accuracy_pct": -1.0011723397881391,
+              "mean_dataset_hm": -0.52593048954936,
+              "hm_of_mean_base_novel": -0.4550447600581417
+            }
+          }
+        },
+        "matched_template_probability_fusion": {
+          "mean_base_accuracy_pct": 78.22466548610508,
+          "mean_novel_accuracy_pct": 75.3704795931346,
+          "mean_dataset_hm": 76.64419523452575,
+          "hm_of_mean_base_novel": 76.771053546759,
+          "exact_fractions": {
+            "mean_base_accuracy_pct": "11760996707629772243443667/150348954956143076508375",
+            "mean_novel_accuracy_pct": "183737408829199717851646513/2437790097940893324003375",
+            "mean_dataset_hm": "5660769182245088706444310522405687837781872558246576557326565298819391/73857767896492880172940529715610895605880297504755468014742603893750",
+            "hm_of_mean_base_novel": "2160935060308643327261435089090455807955225112483171/28147784359797549993492616493598907849512757211250"
+          },
+          "delta_pp": {
+            "vs_original": {
+              "mean_base_accuracy_pct": -2.869352286897492,
+              "mean_novel_accuracy_pct": 1.940001678728153,
+              "mean_dataset_hm": -0.11060896554507398,
+              "hm_of_mean_base_novel": -0.3011602091362289
+            },
+            "vs_single": {
+              "mean_base_accuracy_pct": -0.14269853488483658,
+              "mean_novel_accuracy_pct": 1.0011723397881391,
+              "mean_dataset_hm": 0.52593048954936,
+              "hm_of_mean_base_novel": 0.4550447600581417
+            },
+            "vs_matched": {
+              "mean_base_accuracy_pct": 0.0,
+              "mean_novel_accuracy_pct": 0.0,
+              "mean_dataset_hm": 0.0,
+              "hm_of_mean_base_novel": 0.0
+            }
+          }
+        },
+        "description_probability_fusion": {
+          "mean_base_accuracy_pct": 79.01645486002381,
+          "mean_novel_accuracy_pct": 77.56534095727852,
+          "mean_dataset_hm": 78.17524529818525,
+          "hm_of_mean_base_novel": 78.28417384616436,
+          "exact_fractions": {
+            "mean_base_accuracy_pct": "29839978430251383949151/377642587016999878200",
+            "mean_novel_accuracy_pct": "2931597211303299290373317/37795195316913074790750",
+            "mean_dataset_hm": "1795738546823263292623765948638068013074420465091669053584994606119/22970680040385487402419554298712288402035389081899159467173854275",
+            "hm_of_mean_base_novel": "87478797551475559496871567918802050304535203867/1117451883996112326287057566045778389747571325"
+          },
+          "delta_pp": {
+            "vs_original": {
+              "mean_base_accuracy_pct": -2.0775629129787614,
+              "mean_novel_accuracy_pct": 4.134863042872072,
+              "mean_dataset_hm": 1.4204410981144215,
+              "hm_of_mean_base_novel": 1.211960090269138
+            },
+            "vs_single": {
+              "mean_base_accuracy_pct": 0.6490908390338943,
+              "mean_novel_accuracy_pct": 3.196033703932058,
+              "mean_dataset_hm": 2.0569805532088554,
+              "hm_of_mean_base_novel": 1.9681650594635087
+            },
+            "vs_matched": {
+              "mean_base_accuracy_pct": 0.7917893739187308,
+              "mean_novel_accuracy_pct": 2.1948613641439185,
+              "mean_dataset_hm": 1.5310500636594955,
+              "hm_of_mean_base_novel": 1.513120299405367
+            }
+          }
+        }
+      },
+      "description_probability_fusion_comparisons": {
+        "vs_original": {
+          "reference_configuration": "original",
+          "dataset_hm": {
+            "improved": 8,
+            "declined": 3,
+            "unchanged": 0,
+            "n": 11,
+            "declined_datasets": [
+              "oxford_pets",
+              "oxford_flowers",
+              "stanford_cars"
+            ]
+          },
+          "paired_seed_hm": {
+            "improved": 26,
+            "declined": 7,
+            "unchanged": 0,
+            "n": 33,
+            "declined_cases": [
+              "oxford_pets/seed1",
+              "oxford_pets/seed2",
+              "oxford_pets/seed3",
+              "oxford_flowers/seed1",
+              "stanford_cars/seed1",
+              "stanford_cars/seed2",
+              "stanford_cars/seed3"
+            ]
+          }
+        },
+        "vs_single": {
+          "reference_configuration": "single_template_probability_fusion",
+          "dataset_hm": {
+            "improved": 10,
+            "declined": 1,
+            "unchanged": 0,
+            "n": 11,
+            "declined_datasets": [
+              "stanford_cars"
+            ]
+          },
+          "paired_seed_hm": {
+            "improved": 30,
+            "declined": 3,
+            "unchanged": 0,
+            "n": 33,
+            "declined_cases": [
+              "stanford_cars/seed1",
+              "stanford_cars/seed2",
+              "stanford_cars/seed3"
+            ]
+          }
+        },
+        "vs_matched": {
+          "reference_configuration": "matched_template_probability_fusion",
+          "dataset_hm": {
+            "improved": 10,
+            "declined": 1,
+            "unchanged": 0,
+            "n": 11,
+            "declined_datasets": [
+              "stanford_cars"
+            ]
+          },
+          "paired_seed_hm": {
+            "improved": 30,
+            "declined": 3,
+            "unchanged": 0,
+            "n": 33,
+            "declined_cases": [
+              "stanford_cars/seed1",
+              "stanford_cars/seed2",
+              "stanford_cars/seed3"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "validation": {
+    "unique_cases_checked": 33,
+    "dataset_configuration_rows": 44,
+    "accepted_case_receipts_sha256_checked": 33,
+    "metrics_json_files_sha256_checked": 66,
+    "training_configs_sha256_and_recipe_checked": 33,
+    "integer_correct_total_pairs": 264,
+    "all_integer_count_pairs_match_sha256_checked_metrics": true,
+    "all_dataset_and_macro_values_agree_with_accepted_verifications": true,
+    "all_dataset_and_seed_values_agree_with_existing_final_report_csvs": true,
+    "float_crosscheck_absolute_tolerance_pp": 1e-10,
+    "max_observed_float_crosscheck_absolute_difference_pp": 3.108624468950438e-14,
+    "validation_limits": "This export recomputes aggregate arithmetic from accepted integer counts; it does not rerun model inference or training."
+  },
+  "negative_results_preserved": true
+}

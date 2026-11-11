@@ -1,0 +1,131 @@
+{
+  "schema": "cdpf_kgcoop_public_protocol_v1",
+  "backbone": "CLIP ViT-B/16",
+  "shots": 16,
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "datasets": [
+    "caltech101",
+    "oxford_pets",
+    "oxford_flowers",
+    "fgvc_aircraft",
+    "dtd",
+    "eurosat",
+    "stanford_cars",
+    "food101",
+    "sun397",
+    "ucf101",
+    "imagenet"
+  ],
+  "cases": 33,
+  "official_repository": "https://github.com/htyao89/KgCoOp",
+  "official_commit": "c43ccc32c8739f64b165cfa205fcc6c0f5bb5b17",
+  "official_recipe_settings": {
+    "TRAINER.NAME": "KgCoOp",
+    "MODEL.BACKBONE.NAME": "ViT-B/16",
+    "DATASET.NUM_SHOTS": 16,
+    "DATASET.SUBSAMPLE_CLASSES (train)": "base",
+    "SEED": [
+      1,
+      2,
+      3
+    ],
+    "TRAINER.COOP.N_CTX": 4,
+    "TRAINER.COOP.CSC": false,
+    "TRAINER.COOP.CTX_INIT": true,
+    "effective_initial_context": "a photo of a",
+    "TRAINER.COOP.CLASS_TOKEN_POSITION": "end",
+    "TRAINER.COOP.W": 8,
+    "TRAINER.COOP.PREC": "fp16",
+    "DATALOADER.TRAIN_X.BATCH_SIZE": 128,
+    "DATALOADER.TEST.BATCH_SIZE": 100,
+    "DATALOADER.NUM_WORKERS": 8,
+    "INPUT.SIZE": [
+      224,
+      224
+    ],
+    "INPUT.INTERPOLATION": "bicubic",
+    "INPUT.PIXEL_MEAN": [
+      0.48145466,
+      0.4578275,
+      0.40821073
+    ],
+    "INPUT.PIXEL_STD": [
+      0.26862954,
+      0.26130258,
+      0.27577711
+    ],
+    "INPUT.TRANSFORMS": [
+      "random_resized_crop",
+      "random_flip",
+      "normalize"
+    ],
+    "OPTIM.NAME": "sgd",
+    "OPTIM.LR": 0.002,
+    "OPTIM.MOMENTUM": 0.9,
+    "OPTIM.WEIGHT_DECAY": 0.0005,
+    "OPTIM.SGD_DAMPNING": 0,
+    "OPTIM.SGD_NESTEROV": false,
+    "OPTIM.MAX_EPOCH": 100,
+    "OPTIM.LR_SCHEDULER": "cosine",
+    "OPTIM.WARMUP_EPOCH": 1,
+    "OPTIM.WARMUP_TYPE": "constant",
+    "OPTIM.WARMUP_CONS_LR": 1e-05,
+    "OPTIM.WARMUP_RECOUNT": true,
+    "TEST.FINAL_MODEL": "last_step",
+    "TEST.SPLIT": "test",
+    "TRAIN.CHECKPOINT_FREQ": 0
+  },
+  "inference": {
+    "same_checkpoint_branches": [
+      "original",
+      "single_template_probability_fusion",
+      "matched_template_probability_fusion",
+      "description_probability_fusion"
+    ],
+    "alpha": 0.5,
+    "text_pool": "same accepted ATPrompt descriptions and helper as completed ten-dataset extension",
+    "base_and_novel_universes": "separate current-class softmax; no test tuning"
+  },
+  "description_limit": 20,
+  "description_source": "https://github.com/zhengli97/ATPrompt",
+  "auxiliary_image_encoder": "shared frozen original CLIP image encoder; learned text prompts only",
+  "imagenet_execution": {
+    "training": {
+      "official_commit": "c43ccc32c8739f64b165cfa205fcc6c0f5bb5b17",
+      "epochs": 100,
+      "batch_size": 128,
+      "context_tokens": 4,
+      "context_init": "a photo of a",
+      "precision": "fp16",
+      "knowledge_weight": 8.0,
+      "optimizer": "sgd",
+      "lr": 0.002,
+      "weight_decay": 0.0005,
+      "momentum": 0.9,
+      "schedule": "cosine, one constant warmup epoch at1e-5",
+      "checkpoint": "epoch100 last step, no validation model selection",
+      "activation_checkpointing": true
+    },
+    "data": "standard full Base/Novel test universe, original JPEG bytes; official devkit validation-label audit; metadata and tar-reader changes do not change split or image transform",
+    "preflight": "passed: original/checkpointed logits and regularized loss exact; finite optimizer update; actual batch128"
+  },
+  "aggregation": {
+    "dataset_hm": "H(mean_seed(Base), mean_seed(Novel))",
+    "mean_dataset_hm": "mean of the eleven dataset HMs",
+    "hm_of_mean_base_novel": "H(mean_dataset(Base), mean_dataset(Novel))",
+    "no_test_tuning": true
+  },
+  "timing": {
+    "status": "not_remeasured_for_this_extension",
+    "CoOp_and_Ding_timing_not_reused": true
+  },
+  "source_sha256": {
+    "official_audit": "3aec6c4aeb23af43f137bdab28294e9541a824da89c2b80144738916d587c67a",
+    "imagenet_extension_protocol": "d45edb79fbd925df2f5e136646d8921f631df78e2c4e6572ff5de3d48ff3f4a6",
+    "unaltered_kgcoop_runner": "b8ce2054da9ae55c27a980386c19ca25212ceb40cc00bf1e73935704a531f677"
+  }
+}

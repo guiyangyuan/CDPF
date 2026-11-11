@@ -47,9 +47,9 @@ dataset_HM = 2 * B * N / (B + N)
 Macro_HM = mean_dataset(dataset_HM)
 ```
 
-`mean_s(HM_s)` 与 `dataset_HM` 是两种统计量；`H(mean_dataset(B), mean_dataset(N))` 与 `Macro_HM` 也不同。原 CoOp 主表与 MaPLe/MMRL 扩展主表使用上面的 `Macro_HM`，从未舍入的数值计算后再显示两位小数。MaPLe/MMRL 同时单列 `H(mean_dataset(B), mean_dataset(N))`，用于与采用这一口径的论文 Average-HM 对照。
+`mean_s(HM_s)` 与 `dataset_HM` 是两种统计量；`H(mean_dataset(B), mean_dataset(N))` 与 `Macro_HM` 也不同。原 CoOp 主表与 KgCoOp、MaPLe/MMRL 扩展主表使用上面的 `Macro_HM`，从未舍入的数值计算后再显示两位小数。新增底座同时单列 `H(mean_dataset(B), mean_dataset(N))`，用于与采用这一口径的论文 Average-HM 对照。
 
-匹配数量模板控制与 CDPF 共用 CoOp checkpoint、类别划分、图像和 `alpha=0.5`，并匹配每类保留文本数量与原型聚合方式。它是对已评估描述配置的控制，不代表所有可能的文本集成方法。MaPLe/MMRL 的十一数据集三种子四配置对照已完成，完整结果见 [扩展结果](../results/multimodal_20261110/README.md)。文献报告值不能标为本地受控复现。
+匹配数量模板控制与 CDPF 共用 CoOp checkpoint、类别划分、图像和 `alpha=0.5`，并匹配每类保留文本数量与原型聚合方式。它是对已评估描述配置的控制，不代表所有可能的文本集成方法。KgCoOp、MaPLe/MMRL 的十一数据集三种子四配置对照已完成，完整结果见 [KgCoOp](../results/kgcoop_20261110/README.md)与 [MaPLe/MMRL](../results/multimodal_20261110/README.md)。文献报告值不能标为本地受控复现。
 
 ## 环境与数据
 
@@ -103,3 +103,13 @@ MaPLe 固定官方提交 `69bce21ae8eda80ad6187534b2dce09cf6c59e17`，十一集�
 MaPLe/MMRL 含有学习后的视觉提示，辅助分支使用单独的原始冻结 CLIP 图像编码器。描述原型预计算；图像前向不能直接复用底座含学习视觉提示的特征。对应新增延迟与显存状态为待 GPU 测量，不套用上述 CoOp 的计时数值。
 
 类别描述复用 [ATPrompt](https://github.com/zhengli97/ATPrompt) 发布的固定文本资产。ATPrompt 学习带锚定属性的结构化提示；CDPF 在推理阶段融合已训练提示分类器与冻结描述分类器的后验，描述文本的来源与本方法贡献分别标注。
+
+## KgCoOp 扩展协议
+
+[KgCoOp 公开结果](../results/kgcoop_20261110/README.md)包含十一数据集、seed 1/2/3 的 33 组本地结果和同检查点四配置对照，覆盖后来补齐的 ImageNet。它不等于此前十数据集的阶段结果，不能混用旧十集宏指标。
+
+固定 [KgCoOp 官方提交](https://github.com/htyao89/KgCoOp/tree/c43ccc32c8739f64b165cfa205fcc6c0f5bb5b17) `c43ccc32c8739f64b165cfa205fcc6c0f5bb5b17`，采用 100 epochs、batch 128、4 context tokens、16-shot、知识正则权重 8、fp16 和最终 epoch-100 checkpoint。ImageNet 保持该配方，使用经过原始与重计算 logits/正则损失等价性及有限更新预检的 activation checkpointing，以及逐图核验的原始 JPEG 读取方式。
+
+四配置为原方法、单模板后验融合、数量匹配模板后验融合和描述后验融合；同一组 Base/Novel 及四配置共用 checkpoint，融合固定 `alpha=0.5`。KgCoOp 仅学习文本提示，辅助分支可共享原始冻结 CLIP 图像特征；本次没有重新测量 KgCoOp 的额外 GPU 开销，不将 CoOp 或 Ding 的计时套用为 KgCoOp 的实测结果。
+
+逐种子整数正确数、样本数与两种 HM 汇总见 [seed_results.json](../results/kgcoop_20261110/seed_results.json)、[summary.json](../results/kgcoop_20261110/summary.json)。`tools/summarize_results.py` 仍对应原 CoOp 主结果。

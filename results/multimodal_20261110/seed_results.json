@@ -1,0 +1,5534 @@
+{
+  "schema_version": 1,
+  "provenance": {
+    "kind": "local_reproduction",
+    "experiment": "CDPF_Multimodal_20261110",
+    "statement": "Locally reproduced results, not values transcribed from original papers.",
+    "source_summaries_sha256": {
+      "maple11-locally-verified-summary-v1.json": "4c7f6cc063343a12c7e1b143a62d1a8caa551459abd720de9afff6f1eee5db4a",
+      "mmrl11-locally-verified-summary-v1.json": "81136ef77e72b706be730139bde3373751f02338b94a12cfb0c9ec4cd5da3ddb"
+    },
+    "source_independent_audits_sha256": {
+      "maple11-independent-arithmetic-audit-v1.json": "fc0b160fd3f3057a1ad927596fcaef8bb872c82754979e8bcb9adf1787f82ceb",
+      "mmrl11-independent-arithmetic-audit-v1.json": "781c3ebda62a4d7eb746afbe771ade085c6361134686c3e900420c09bf32e9c8"
+    }
+  },
+  "scope": {
+    "methods": [
+      "maple",
+      "mmrl"
+    ],
+    "datasets": [
+      "caltech101",
+      "oxford_pets",
+      "oxford_flowers",
+      "fgvc_aircraft",
+      "dtd",
+      "eurosat",
+      "stanford_cars",
+      "food101",
+      "sun397",
+      "ucf101",
+      "imagenet"
+    ],
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "unique_case_count": 66,
+    "cases_per_method": 33,
+    "configurations": [
+      "original",
+      "single_template_probability_fusion",
+      "matched_template_probability_fusion",
+      "description_probability_fusion"
+    ]
+  },
+  "alpha": 0.5,
+  "accuracy_unit": "percent",
+  "difference_unit": "percentage_points",
+  "timing": {
+    "status": "not_measured"
+  },
+  "cases": [
+    {
+      "method": "maple",
+      "dataset": "caltech101",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1521,
+            "total": 1549,
+            "accuracy_pct": 98.19238218205294
+          },
+          "novel": {
+            "correct": 864,
+            "total": 916,
+            "accuracy_pct": 94.32314410480349
+          },
+          "harmonic_mean_pct": 96.21888055669044,
+          "harmonic_mean_exact_fraction": "7300800/75877",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.520870921690196,
+            "vs_matched": -0.27718338410037113
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1525,
+            "total": 1549,
+            "accuracy_pct": 98.45061329890252
+          },
+          "novel": {
+            "correct": 871,
+            "total": 916,
+            "accuracy_pct": 95.08733624454149
+          },
+          "harmonic_mean_pct": 96.73975147838063,
+          "harmonic_mean_exact_fraction": "265655000/2746079",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.520870921690196,
+            "vs_single": 0.0,
+            "vs_matched": 0.2436875375898249
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1519,
+            "total": 1549,
+            "accuracy_pct": 98.06326662362815
+          },
+          "novel": {
+            "correct": 870,
+            "total": 916,
+            "accuracy_pct": 94.97816593886463
+          },
+          "harmonic_mean_pct": 96.4960639407908,
+          "harmonic_mean_exact_fraction": "132153000/1369517",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.27718338410037113,
+            "vs_single": -0.2436875375898249,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1519,
+            "total": 1549,
+            "accuracy_pct": 98.06326662362815
+          },
+          "novel": {
+            "correct": 877,
+            "total": 916,
+            "accuracy_pct": 95.74235807860262
+          },
+          "harmonic_mean_pct": 96.88891539512494,
+          "harmonic_mean_exact_fraction": "266432600/2749877",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.6700348384345124,
+            "vs_single": 0.14916391674431634,
+            "vs_matched": 0.39285145433414126
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "caltech101",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1517,
+            "total": 1549,
+            "accuracy_pct": 97.93415106520335
+          },
+          "novel": {
+            "correct": 874,
+            "total": 916,
+            "accuracy_pct": 95.41484716157206
+          },
+          "harmonic_mean_pct": 96.658086066987,
+          "harmonic_mean_exact_fraction": "132585800/1371699",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.18173593765461782,
+            "vs_matched": -0.206361031924556
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1521,
+            "total": 1549,
+            "accuracy_pct": 98.19238218205294
+          },
+          "novel": {
+            "correct": 875,
+            "total": 916,
+            "accuracy_pct": 95.52401746724891
+          },
+          "harmonic_mean_pct": 96.83982200464162,
+          "harmonic_mean_exact_fraction": "266175000/2748611",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.18173593765461782,
+            "vs_single": 0.0,
+            "vs_matched": -0.024625094269938155
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1520,
+            "total": 1549,
+            "accuracy_pct": 98.12782440284055
+          },
+          "novel": {
+            "correct": 876,
+            "total": 916,
+            "accuracy_pct": 95.63318777292577
+          },
+          "harmonic_mean_pct": 96.86444709891155,
+          "harmonic_mean_exact_fraction": "66576000/687311",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.206361031924556,
+            "vs_single": 0.024625094269938155,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1521,
+            "total": 1549,
+            "accuracy_pct": 98.19238218205294
+          },
+          "novel": {
+            "correct": 876,
+            "total": 916,
+            "accuracy_pct": 95.63318777292577
+          },
+          "harmonic_mean_pct": 96.89588969369055,
+          "harmonic_mean_exact_fraction": "1110330/11459",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.23780362670354957,
+            "vs_single": 0.056067689048931744,
+            "vs_matched": 0.03144259477899359
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "caltech101",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1519,
+            "total": 1549,
+            "accuracy_pct": 98.06326662362815
+          },
+          "novel": {
+            "correct": 871,
+            "total": 916,
+            "accuracy_pct": 95.08733624454149
+          },
+          "harmonic_mean_pct": 96.5523758995805,
+          "harmonic_mean_exact_fraction": "264609800/2740583",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.20643842917657254,
+            "vs_matched": -0.024909509522622643
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1516,
+            "total": 1549,
+            "accuracy_pct": 97.86959328599096
+          },
+          "novel": {
+            "correct": 869,
+            "total": 916,
+            "accuracy_pct": 94.86899563318778
+          },
+          "harmonic_mean_pct": 96.34593747040392,
+          "harmonic_mean_exact_fraction": "263480800/2734737",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.20643842917657254,
+            "vs_single": 0.0,
+            "vs_matched": -0.23134793869919518
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1518,
+            "total": 1549,
+            "accuracy_pct": 97.99870884441575
+          },
+          "novel": {
+            "correct": 872,
+            "total": 916,
+            "accuracy_pct": 95.19650655021834
+          },
+          "harmonic_mean_pct": 96.57728540910311,
+          "harmonic_mean_exact_fraction": "8273100/85663",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.024909509522622643,
+            "vs_single": 0.23134793869919518,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1515,
+            "total": 1549,
+            "accuracy_pct": 97.80503550677857
+          },
+          "novel": {
+            "correct": 875,
+            "total": 916,
+            "accuracy_pct": 95.52401746724891
+          },
+          "harmonic_mean_pct": 96.65107004263402,
+          "harmonic_mean_exact_fraction": "53025000/548623",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.09869414305352207,
+            "vs_single": 0.3051325722300946,
+            "vs_matched": 0.07378463353089942
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "oxford_pets",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1791,
+            "total": 1881,
+            "accuracy_pct": 95.2153110047847
+          },
+          "novel": {
+            "correct": 1756,
+            "total": 1788,
+            "accuracy_pct": 98.2102908277405
+          },
+          "harmonic_mean_pct": 96.68961395431202,
+          "harmonic_mean_exact_fraction": "2184025/22588",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.19023854324624895,
+            "vs_matched": -0.02801509609094145
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1790,
+            "total": 1881,
+            "accuracy_pct": 95.16214779372675
+          },
+          "novel": {
+            "correct": 1750,
+            "total": 1788,
+            "accuracy_pct": 97.87472035794184
+          },
+          "harmonic_mean_pct": 96.49937541106577,
+          "harmonic_mean_exact_fraction": "62650000/649227",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.19023854324624895,
+            "vs_single": 0.0,
+            "vs_matched": -0.21825363933719039
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1796,
+            "total": 1881,
+            "accuracy_pct": 95.48112706007443
+          },
+          "novel": {
+            "correct": 1752,
+            "total": 1788,
+            "accuracy_pct": 97.98657718120805
+          },
+          "harmonic_mean_pct": 96.71762905040296,
+          "harmonic_mean_exact_fraction": "5244320/54223",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.02801509609094145,
+            "vs_single": 0.21825363933719039,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1802,
+            "total": 1881,
+            "accuracy_pct": 95.80010632642211
+          },
+          "novel": {
+            "correct": 1749,
+            "total": 1788,
+            "accuracy_pct": 97.81879194630872
+          },
+          "harmonic_mean_pct": 96.79892565010377,
+          "harmonic_mean_exact_fraction": "792880/8191",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.10931169579174835,
+            "vs_single": 0.29955023903799727,
+            "vs_matched": 0.0812965997008069
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "oxford_pets",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1802,
+            "total": 1881,
+            "accuracy_pct": 95.80010632642211
+          },
+          "novel": {
+            "correct": 1750,
+            "total": 1788,
+            "accuracy_pct": 97.87472035794184
+          },
+          "harmonic_mean_pct": 96.82630187391977,
+          "harmonic_mean_exact_fraction": "315350000/3256863",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.3547956282130977,
+            "vs_matched": 0.2995183169185342
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1797,
+            "total": 1881,
+            "accuracy_pct": 95.53429027113238
+          },
+          "novel": {
+            "correct": 1742,
+            "total": 1788,
+            "accuracy_pct": 97.42729306487696
+          },
+          "harmonic_mean_pct": 96.47150624570668,
+          "harmonic_mean_exact_fraction": "104345800/1081623",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.3547956282130977,
+            "vs_single": 0.0,
+            "vs_matched": -0.0552773112945635
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1794,
+            "total": 1881,
+            "accuracy_pct": 95.37480063795853
+          },
+          "novel": {
+            "correct": 1747,
+            "total": 1788,
+            "accuracy_pct": 97.7069351230425
+          },
+          "harmonic_mean_pct": 96.52678355700125,
+          "harmonic_mean_exact_fraction": "208941200/2164593",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.2995183169185342,
+            "vs_single": 0.0552773112945635,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1802,
+            "total": 1881,
+            "accuracy_pct": 95.80010632642211
+          },
+          "novel": {
+            "correct": 1741,
+            "total": 1788,
+            "accuracy_pct": 97.37136465324384
+          },
+          "harmonic_mean_pct": 96.57934517578431,
+          "harmonic_mean_exact_fraction": "627456400/6496797",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.2469566981354677,
+            "vs_single": 0.10783893007763003,
+            "vs_matched": 0.052561618783066526
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "oxford_pets",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1795,
+            "total": 1881,
+            "accuracy_pct": 95.42796384901648
+          },
+          "novel": {
+            "correct": 1758,
+            "total": 1788,
+            "accuracy_pct": 98.32214765100672
+          },
+          "harmonic_mean_pct": 96.85343950469733,
+          "harmonic_mean_exact_fraction": "105187000/1086043",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.4357738739933665,
+            "vs_matched": 0.4361336272882826
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1789,
+            "total": 1881,
+            "accuracy_pct": 95.1089845826688
+          },
+          "novel": {
+            "correct": 1748,
+            "total": 1788,
+            "accuracy_pct": 97.76286353467562
+          },
+          "harmonic_mean_pct": 96.41766563070397,
+          "harmonic_mean_exact_fraction": "3908965/40542",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.4357738739933665,
+            "vs_single": 0.0,
+            "vs_matched": 0.0003597532949160874
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1787,
+            "total": 1881,
+            "accuracy_pct": 95.0026581605529
+          },
+          "novel": {
+            "correct": 1750,
+            "total": 1788,
+            "accuracy_pct": 97.87472035794184
+          },
+          "harmonic_mean_pct": 96.41730587740905,
+          "harmonic_mean_exact_fraction": "312725000/3243453",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.4361336272882826,
+            "vs_single": -0.0003597532949160874,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1800,
+            "total": 1881,
+            "accuracy_pct": 95.69377990430623
+          },
+          "novel": {
+            "correct": 1746,
+            "total": 1788,
+            "accuracy_pct": 97.6510067114094
+          },
+          "harmonic_mean_pct": 96.66248681686444,
+          "harmonic_mean_exact_fraction": "11640000/120419",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.19095268783287953,
+            "vs_single": 0.24482118616048698,
+            "vs_matched": 0.24518093945540306
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "oxford_flowers",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1018,
+            "total": 1053,
+            "accuracy_pct": 96.67616334283001
+          },
+          "novel": {
+            "correct": 1036,
+            "total": 1410,
+            "accuracy_pct": 73.47517730496453
+          },
+          "harmonic_mean_pct": 83.49388509940276,
+          "harmonic_mean_exact_fraction": "13183100/157893",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -1.0273521803720622,
+            "vs_matched": -0.7696163842767652
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 995,
+            "total": 1053,
+            "accuracy_pct": 94.49192782526116
+          },
+          "novel": {
+            "correct": 1078,
+            "total": 1410,
+            "accuracy_pct": 76.45390070921985
+          },
+          "harmonic_mean_pct": 84.52123727977482,
+          "harmonic_mean_exact_fraction": "53630500/634521",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.0273521803720622,
+            "vs_single": 0.0,
+            "vs_matched": 0.25773579609529707
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 986,
+            "total": 1053,
+            "accuracy_pct": 93.6372269705603
+          },
+          "novel": {
+            "correct": 1080,
+            "total": 1410,
+            "accuracy_pct": 76.59574468085107
+          },
+          "harmonic_mean_pct": 84.26350148367952,
+          "harmonic_mean_exact_fraction": "141984/1685",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.7696163842767652,
+            "vs_single": -0.25773579609529707,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 998,
+            "total": 1053,
+            "accuracy_pct": 94.77682811016145
+          },
+          "novel": {
+            "correct": 1088,
+            "total": 1410,
+            "accuracy_pct": 77.16312056737588
+          },
+          "harmonic_mean_pct": 85.06779105969656,
+          "harmonic_mean_exact_fraction": "54291200/638211",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.573905960293798,
+            "vs_single": 0.5465537799217358,
+            "vs_matched": 0.8042895760170328
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "oxford_flowers",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1006,
+            "total": 1053,
+            "accuracy_pct": 95.53656220322887
+          },
+          "novel": {
+            "correct": 1036,
+            "total": 1410,
+            "accuracy_pct": 73.47517730496453
+          },
+          "harmonic_mean_pct": 83.06601502848525,
+          "harmonic_mean_exact_fraction": "26055400/313671",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.5698018919812449,
+            "vs_matched": -0.9292012690940216
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 990,
+            "total": 1053,
+            "accuracy_pct": 94.01709401709402
+          },
+          "novel": {
+            "correct": 1062,
+            "total": 1410,
+            "accuracy_pct": 75.31914893617021
+          },
+          "harmonic_mean_pct": 83.63581692046651,
+          "harmonic_mean_exact_fraction": "3894000/46559",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.5698018919812449,
+            "vs_single": 0.0,
+            "vs_matched": -0.35939937711277675
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 988,
+            "total": 1053,
+            "accuracy_pct": 93.82716049382717
+          },
+          "novel": {
+            "correct": 1072,
+            "total": 1410,
+            "accuracy_pct": 76.02836879432624
+          },
+          "harmonic_mean_pct": 83.99521629757928,
+          "harmonic_mean_exact_fraction": "2036800/24249",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.9292012690940216,
+            "vs_single": 0.35939937711277675,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1000,
+            "total": 1053,
+            "accuracy_pct": 94.9667616334283
+          },
+          "novel": {
+            "correct": 1093,
+            "total": 1410,
+            "accuracy_pct": 77.51773049645391
+          },
+          "harmonic_mean_pct": 85.35964878370311,
+          "harmonic_mean_exact_fraction": "218600000/2560929",
+          "paired_hm_delta_pp": {
+            "vs_original": 2.2936337552178414,
+            "vs_single": 1.7238318632365965,
+            "vs_matched": 1.36443248612382
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "oxford_flowers",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1011,
+            "total": 1053,
+            "accuracy_pct": 96.01139601139602
+          },
+          "novel": {
+            "correct": 1001,
+            "total": 1410,
+            "accuracy_pct": 70.99290780141844
+          },
+          "harmonic_mean_pct": 81.62817399678895,
+          "harmonic_mean_exact_fraction": "67467400/826521",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -1.9903345155829353,
+            "vs_matched": -1.584036668469972
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 999,
+            "total": 1053,
+            "accuracy_pct": 94.87179487179488
+          },
+          "novel": {
+            "correct": 1054,
+            "total": 1410,
+            "accuracy_pct": 74.7517730496454
+          },
+          "harmonic_mean_pct": 83.61850851237189,
+          "harmonic_mean_exact_fraction": "1949900/23319",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.9903345155829353,
+            "vs_single": 0.0,
+            "vs_matched": 0.4062978471129632
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 994,
+            "total": 1053,
+            "accuracy_pct": 94.39696106362773
+          },
+          "novel": {
+            "correct": 1049,
+            "total": 1410,
+            "accuracy_pct": 74.39716312056737
+          },
+          "harmonic_mean_pct": 83.21221066525892,
+          "harmonic_mean_exact_fraction": "208541200/2506137",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.584036668469972,
+            "vs_single": -0.4062978471129632,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1006,
+            "total": 1053,
+            "accuracy_pct": 95.53656220322887
+          },
+          "novel": {
+            "correct": 1063,
+            "total": 1410,
+            "accuracy_pct": 75.39007092198581
+          },
+          "harmonic_mean_pct": 84.2760202837183,
+          "harmonic_mean_exact_fraction": "213875600/2537799",
+          "paired_hm_delta_pp": {
+            "vs_original": 2.6478462869293424,
+            "vs_single": 0.6575117713464073,
+            "vs_matched": 1.0638096184593706
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 611,
+            "total": 1666,
+            "accuracy_pct": 36.67466986794718
+          },
+          "novel": {
+            "correct": 594,
+            "total": 1667,
+            "accuracy_pct": 35.63287342531493
+          },
+          "harmonic_mean_pct": 36.1462666217163,
+          "harmonic_mean_exact_fraction": "72586800/2008141",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.13226063089459786,
+            "vs_matched": -0.3154454667695155
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 589,
+            "total": 1666,
+            "accuracy_pct": 35.35414165666266
+          },
+          "novel": {
+            "correct": 621,
+            "total": 1667,
+            "accuracy_pct": 37.25254949010198
+          },
+          "harmonic_mean_pct": 36.2785272526109,
+          "harmonic_mean_exact_fraction": "73153800/2016449",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.13226063089459786,
+            "vs_single": 0.0,
+            "vs_matched": -0.18318483587491766
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 593,
+            "total": 1666,
+            "accuracy_pct": 35.59423769507803
+          },
+          "novel": {
+            "correct": 623,
+            "total": 1667,
+            "accuracy_pct": 37.37252549490102
+          },
+          "harmonic_mean_pct": 36.46171208848582,
+          "harmonic_mean_exact_fraction": "73887800/2026449",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.3154454667695155,
+            "vs_single": 0.18318483587491766,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 622,
+            "total": 1666,
+            "accuracy_pct": 37.334933973589436
+          },
+          "novel": {
+            "correct": 698,
+            "total": 1667,
+            "accuracy_pct": 41.87162567486503
+          },
+          "harmonic_mean_pct": 39.47335642088936,
+          "harmonic_mean_exact_fraction": "43415600/1099871",
+          "paired_hm_delta_pp": {
+            "vs_original": 3.3270897991730553,
+            "vs_single": 3.1948291682784573,
+            "vs_matched": 3.0116443324035393
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 616,
+            "total": 1666,
+            "accuracy_pct": 36.97478991596638
+          },
+          "novel": {
+            "correct": 598,
+            "total": 1667,
+            "accuracy_pct": 35.87282543491302
+          },
+          "harmonic_mean_pct": 36.415472977648605,
+          "harmonic_mean_exact_fraction": "526240/14451",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -1.461241694126443,
+            "vs_matched": -0.5293824955496678
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 618,
+            "total": 1666,
+            "accuracy_pct": 37.09483793517407
+          },
+          "novel": {
+            "correct": 645,
+            "total": 1667,
+            "accuracy_pct": 38.692261547690464
+          },
+          "harmonic_mean_pct": 37.87671467177505,
+          "harmonic_mean_exact_fraction": "1107250/29233",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.461241694126443,
+            "vs_single": 0.0,
+            "vs_matched": 0.9318591985767753
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 602,
+            "total": 1666,
+            "accuracy_pct": 36.134453781512605
+          },
+          "novel": {
+            "correct": 630,
+            "total": 1667,
+            "accuracy_pct": 37.79244151169766
+          },
+          "harmonic_mean_pct": 36.944855473198274,
+          "harmonic_mean_exact_fraction": "5418000/146651",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.5293824955496678,
+            "vs_single": -0.9318591985767753,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 640,
+            "total": 1666,
+            "accuracy_pct": 38.41536614645858
+          },
+          "novel": {
+            "correct": 689,
+            "total": 1667,
+            "accuracy_pct": 41.331733653269346
+          },
+          "harmonic_mean_pct": 39.820223826212754,
+          "harmonic_mean_exact_fraction": "44096000/1107377",
+          "paired_hm_delta_pp": {
+            "vs_original": 3.404750848564148,
+            "vs_single": 1.9435091544377046,
+            "vs_matched": 2.87536835301448
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 632,
+            "total": 1666,
+            "accuracy_pct": 37.93517406962785
+          },
+          "novel": {
+            "correct": 573,
+            "total": 1667,
+            "accuracy_pct": 34.37312537492502
+          },
+          "harmonic_mean_pct": 36.06641296867484,
+          "harmonic_mean_exact_fraction": "36213600/1004081",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.08216265389115614,
+            "vs_matched": 0.3748177750489417
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 586,
+            "total": 1666,
+            "accuracy_pct": 35.17406962785114
+          },
+          "novel": {
+            "correct": 614,
+            "total": 1667,
+            "accuracy_pct": 36.832633473305336
+          },
+          "harmonic_mean_pct": 35.98425031478368,
+          "harmonic_mean_exact_fraction": "35980400/999893",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.08216265389115614,
+            "vs_single": 0.0,
+            "vs_matched": 0.2926551211577856
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 575,
+            "total": 1666,
+            "accuracy_pct": 34.513805522208884
+          },
+          "novel": {
+            "correct": 616,
+            "total": 1667,
+            "accuracy_pct": 36.95260947810438
+          },
+          "harmonic_mean_pct": 35.69159519362589,
+          "harmonic_mean_exact_fraction": "70840000/1984781",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.3748177750489417,
+            "vs_single": -0.2926551211577856,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 607,
+            "total": 1666,
+            "accuracy_pct": 36.434573829531814
+          },
+          "novel": {
+            "correct": 684,
+            "total": 1667,
+            "accuracy_pct": 41.03179364127175
+          },
+          "harmonic_mean_pct": 38.59677337638101,
+          "harmonic_mean_exact_fraction": "83037600/2151413",
+          "paired_hm_delta_pp": {
+            "vs_original": 2.530360407706173,
+            "vs_single": 2.612523061597329,
+            "vs_matched": 2.905178182755115
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "dtd",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 701,
+            "total": 864,
+            "accuracy_pct": 81.13425925925925
+          },
+          "novel": {
+            "correct": 492,
+            "total": 828,
+            "accuracy_pct": 59.42028985507246
+          },
+          "harmonic_mean_pct": 68.60000238683422,
+          "harmonic_mean_exact_fraction": "5748200/83793",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -1.3946451368583566,
+            "vs_matched": -2.2501455819578142
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 688,
+            "total": 864,
+            "accuracy_pct": 79.62962962962963
+          },
+          "novel": {
+            "correct": 517,
+            "total": 828,
+            "accuracy_pct": 62.43961352657005
+          },
+          "harmonic_mean_pct": 69.99464752369258,
+          "harmonic_mean_exact_fraction": "2223100/31761",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.3946451368583566,
+            "vs_single": 0.0,
+            "vs_matched": -0.8555004450994577
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 687,
+            "total": 864,
+            "accuracy_pct": 79.51388888888889
+          },
+          "novel": {
+            "correct": 529,
+            "total": 828,
+            "accuracy_pct": 63.888888888888886
+          },
+          "harmonic_mean_pct": 70.85014796879204,
+          "harmonic_mean_exact_fraction": "263350/3717",
+          "paired_hm_delta_pp": {
+            "vs_original": 2.2501455819578142,
+            "vs_single": 0.8555004450994577,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 688,
+            "total": 864,
+            "accuracy_pct": 79.62962962962963
+          },
+          "novel": {
+            "correct": 544,
+            "total": 828,
+            "accuracy_pct": 65.70048309178743
+          },
+          "harmonic_mean_pct": 71.99753770390889,
+          "harmonic_mean_exact_fraction": "233920/3249",
+          "paired_hm_delta_pp": {
+            "vs_original": 3.3975353170746727,
+            "vs_single": 2.002890180216316,
+            "vs_matched": 1.1473897351168585
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "dtd",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 711,
+            "total": 864,
+            "accuracy_pct": 82.29166666666667
+          },
+          "novel": {
+            "correct": 475,
+            "total": 828,
+            "accuracy_pct": 57.367149758454104
+          },
+          "harmonic_mean_pct": 67.60530393110655,
+          "harmonic_mean_exact_fraction": "1876250/27753",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -3.018062996851646,
+            "vs_matched": -3.4435316008726997
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 704,
+            "total": 864,
+            "accuracy_pct": 81.48148148148148
+          },
+          "novel": {
+            "correct": 516,
+            "total": 828,
+            "accuracy_pct": 62.31884057971015
+          },
+          "harmonic_mean_pct": 70.62336692795819,
+          "harmonic_mean_exact_fraction": "189200/2679",
+          "paired_hm_delta_pp": {
+            "vs_original": 3.018062996851646,
+            "vs_single": 0.0,
+            "vs_matched": -0.4254686040210533
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 698,
+            "total": 864,
+            "accuracy_pct": 80.78703703703704
+          },
+          "novel": {
+            "correct": 525,
+            "total": 828,
+            "accuracy_pct": 63.405797101449274
+          },
+          "harmonic_mean_pct": 71.04883553197925,
+          "harmonic_mean_exact_fraction": "3053750/42981",
+          "paired_hm_delta_pp": {
+            "vs_original": 3.4435316008726997,
+            "vs_single": 0.4254686040210533,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 705,
+            "total": 864,
+            "accuracy_pct": 81.59722222222223
+          },
+          "novel": {
+            "correct": 561,
+            "total": 828,
+            "accuracy_pct": 67.7536231884058
+          },
+          "harmonic_mean_pct": 74.0338286330402,
+          "harmonic_mean_exact_fraction": "2197250/29679",
+          "paired_hm_delta_pp": {
+            "vs_original": 6.428524701933649,
+            "vs_single": 3.4104617050820036,
+            "vs_matched": 2.98499310106095
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "dtd",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 693,
+            "total": 864,
+            "accuracy_pct": 80.20833333333333
+          },
+          "novel": {
+            "correct": 491,
+            "total": 828,
+            "accuracy_pct": 59.29951690821256
+          },
+          "harmonic_mean_pct": 68.18706489196695,
+          "harmonic_mean_exact_fraction": "1890350/27723",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -2.2737591837398536,
+            "vs_matched": -2.6630830768250777
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 685,
+            "total": 864,
+            "accuracy_pct": 79.2824074074074
+          },
+          "novel": {
+            "correct": 525,
+            "total": 828,
+            "accuracy_pct": 63.405797101449274
+          },
+          "harmonic_mean_pct": 70.46082407570681,
+          "harmonic_mean_exact_fraction": "1198750/17013",
+          "paired_hm_delta_pp": {
+            "vs_original": 2.2737591837398536,
+            "vs_single": 0.0,
+            "vs_matched": -0.38932389308522414
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 687,
+            "total": 864,
+            "accuracy_pct": 79.51388888888889
+          },
+          "novel": {
+            "correct": 529,
+            "total": 828,
+            "accuracy_pct": 63.888888888888886
+          },
+          "harmonic_mean_pct": 70.85014796879204,
+          "harmonic_mean_exact_fraction": "263350/3717",
+          "paired_hm_delta_pp": {
+            "vs_original": 2.6630830768250777,
+            "vs_single": 0.38932389308522414,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 697,
+            "total": 864,
+            "accuracy_pct": 80.67129629629629
+          },
+          "novel": {
+            "correct": 565,
+            "total": 828,
+            "accuracy_pct": 68.23671497584542
+          },
+          "harmonic_mean_pct": 73.93483003465768,
+          "harmonic_mean_exact_fraction": "19690250/266319",
+          "paired_hm_delta_pp": {
+            "vs_original": 5.747765142690726,
+            "vs_single": 3.4740059589508725,
+            "vs_matched": 3.0846820658656484
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "eurosat",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 3650,
+            "total": 4200,
+            "accuracy_pct": 86.9047619047619
+          },
+          "novel": {
+            "correct": 3000,
+            "total": 3900,
+            "accuracy_pct": 76.92307692307692
+          },
+          "harmonic_mean_pct": 81.60983789826719,
+          "harmonic_mean_exact_fraction": "146000/1789",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -1.3726453123604476,
+            "vs_matched": 0.7804035861268914
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 3614,
+            "total": 4200,
+            "accuracy_pct": 86.04761904761905
+          },
+          "novel": {
+            "correct": 3125,
+            "total": 3900,
+            "accuracy_pct": 80.12820512820512
+          },
+          "harmonic_mean_pct": 82.98248321062763,
+          "harmonic_mean_exact_fraction": "5646875/68049",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.3726453123604476,
+            "vs_single": 0.0,
+            "vs_matched": 2.1530488984873393
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 3553,
+            "total": 4200,
+            "accuracy_pct": 84.5952380952381
+          },
+          "novel": {
+            "correct": 3018,
+            "total": 3900,
+            "accuracy_pct": 77.38461538461539
+          },
+          "harmonic_mean_pct": 80.8294343121403,
+          "harmonic_mean_exact_fraction": "7148636/88441",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.7804035861268914,
+            "vs_single": -2.1530488984873393,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 3556,
+            "total": 4200,
+            "accuracy_pct": 84.66666666666667
+          },
+          "novel": {
+            "correct": 3322,
+            "total": 3900,
+            "accuracy_pct": 85.17948717948718
+          },
+          "harmonic_mean_pct": 84.92230273752013,
+          "harmonic_mean_exact_fraction": "210947/2484",
+          "paired_hm_delta_pp": {
+            "vs_original": 3.3124648392529403,
+            "vs_single": 1.939819526892493,
+            "vs_matched": 4.092868425379832
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "eurosat",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 3794,
+            "total": 4200,
+            "accuracy_pct": 90.33333333333333
+          },
+          "novel": {
+            "correct": 2852,
+            "total": 3900,
+            "accuracy_pct": 73.12820512820512
+          },
+          "harmonic_mean_pct": 80.82530718954249,
+          "harmonic_mean_exact_fraction": "1545784/19125",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 1.1781369350207254,
+            "vs_matched": -1.6934431560477845
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 3746,
+            "total": 4200,
+            "accuracy_pct": 89.19047619047619
+          },
+          "novel": {
+            "correct": 2806,
+            "total": 3900,
+            "accuracy_pct": 71.94871794871794
+          },
+          "harmonic_mean_pct": 79.64717025452175,
+          "harmonic_mean_exact_fraction": "10511276/131973",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.1781369350207254,
+            "vs_single": 0.0,
+            "vs_matched": -2.87158009106851
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 3683,
+            "total": 4200,
+            "accuracy_pct": 87.69047619047619
+          },
+          "novel": {
+            "correct": 3039,
+            "total": 3900,
+            "accuracy_pct": 77.92307692307692
+          },
+          "harmonic_mean_pct": 82.51875034559026,
+          "harmonic_mean_exact_fraction": "7461758/90425",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.6934431560477845,
+            "vs_single": 2.87158009106851,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 3707,
+            "total": 4200,
+            "accuracy_pct": 88.26190476190476
+          },
+          "novel": {
+            "correct": 3175,
+            "total": 3900,
+            "accuracy_pct": 81.41025641025641
+          },
+          "harmonic_mean_pct": 84.69774002151675,
+          "harmonic_mean_exact_fraction": "23539450/277923",
+          "paired_hm_delta_pp": {
+            "vs_original": 3.8724328319742676,
+            "vs_single": 5.050569766994993,
+            "vs_matched": 2.178989675926483
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "eurosat",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 4028,
+            "total": 4200,
+            "accuracy_pct": 95.9047619047619
+          },
+          "novel": {
+            "correct": 2621,
+            "total": 3900,
+            "accuracy_pct": 67.2051282051282
+          },
+          "harmonic_mean_pct": 79.03005531975417,
+          "harmonic_mean_exact_fraction": "10557388/133587",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -1.4927960433844845,
+            "vs_matched": -3.884074759775193
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 3953,
+            "total": 4200,
+            "accuracy_pct": 94.11904761904762
+          },
+          "novel": {
+            "correct": 2744,
+            "total": 3900,
+            "accuracy_pct": 70.35897435897436
+          },
+          "harmonic_mean_pct": 80.52285136313866,
+          "harmonic_mean_exact_fraction": "21694064/269415",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.4927960433844845,
+            "vs_single": 0.0,
+            "vs_matched": -2.3912787163907083
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 3942,
+            "total": 4200,
+            "accuracy_pct": 93.85714285714286
+          },
+          "novel": {
+            "correct": 2896,
+            "total": 3900,
+            "accuracy_pct": 74.25641025641026
+          },
+          "harmonic_mean_pct": 82.91413007952936,
+          "harmonic_mean_exact_fraction": "3805344/45895",
+          "paired_hm_delta_pp": {
+            "vs_original": 3.884074759775193,
+            "vs_single": 2.3912787163907083,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 3908,
+            "total": 4200,
+            "accuracy_pct": 93.04761904761905
+          },
+          "novel": {
+            "correct": 3191,
+            "total": 3900,
+            "accuracy_pct": 81.82051282051282
+          },
+          "harmonic_mean_pct": 87.07365745686616,
+          "harmonic_mean_exact_fraction": "12470428/143217",
+          "paired_hm_delta_pp": {
+            "vs_original": 8.043602137111986,
+            "vs_single": 6.550806093727502,
+            "vs_matched": 4.159527377336794
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "stanford_cars",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 2861,
+            "total": 4002,
+            "accuracy_pct": 71.48925537231385
+          },
+          "novel": {
+            "correct": 2952,
+            "total": 4039,
+            "accuracy_pct": 73.08739787076009
+          },
+          "harmonic_mean_pct": 72.27949373120492,
+          "harmonic_mean_exact_fraction": "1689134400/23369483",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.44885372746115754,
+            "vs_matched": -0.8503948700427746
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 2827,
+            "total": 4002,
+            "accuracy_pct": 70.63968015992003
+          },
+          "novel": {
+            "correct": 3027,
+            "total": 4039,
+            "accuracy_pct": 74.9442931418668
+          },
+          "harmonic_mean_pct": 72.72834745866608,
+          "harmonic_mean_exact_fraction": "1711465800/23532307",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.44885372746115754,
+            "vs_single": 0.0,
+            "vs_matched": -0.401541142581617
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 2845,
+            "total": 4002,
+            "accuracy_pct": 71.08945527236382
+          },
+          "novel": {
+            "correct": 3041,
+            "total": 4039,
+            "accuracy_pct": 75.29091359247339
+          },
+          "harmonic_mean_pct": 73.1298886012477,
+          "harmonic_mean_exact_fraction": "1730329000/23661037",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.8503948700427746,
+            "vs_single": 0.401541142581617,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 2806,
+            "total": 4002,
+            "accuracy_pct": 70.11494252873563
+          },
+          "novel": {
+            "correct": 3011,
+            "total": 4039,
+            "accuracy_pct": 74.5481554840307
+          },
+          "harmonic_mean_pct": 72.26362091215259,
+          "harmonic_mean_exact_fraction": "4591775/63542",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.01587281905233026,
+            "vs_single": -0.4647265465134878,
+            "vs_matched": -0.8662676890951048
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "stanford_cars",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 2935,
+            "total": 4002,
+            "accuracy_pct": 73.3383308345827
+          },
+          "novel": {
+            "correct": 2971,
+            "total": 4039,
+            "accuracy_pct": 73.55781133944046
+          },
+          "harmonic_mean_pct": 73.44790712187506,
+          "harmonic_mean_exact_fraction": "1743977000/23744407",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.1219276849948115,
+            "vs_matched": -0.0056737924841850414
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 2851,
+            "total": 4002,
+            "accuracy_pct": 71.23938030984507
+          },
+          "novel": {
+            "correct": 3051,
+            "total": 4039,
+            "accuracy_pct": 75.53849962862094
+          },
+          "harmonic_mean_pct": 73.32597943688025,
+          "harmonic_mean_exact_fraction": "1739680200/23725291",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.1219276849948115,
+            "vs_single": 0.0,
+            "vs_matched": -0.12760147747899656
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 2866,
+            "total": 4002,
+            "accuracy_pct": 71.61419290354823
+          },
+          "novel": {
+            "correct": 3045,
+            "total": 4039,
+            "accuracy_pct": 75.38994800693241
+          },
+          "harmonic_mean_pct": 73.45358091435925,
+          "harmonic_mean_exact_fraction": "31167750/424319",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0056737924841850414,
+            "vs_single": 0.12760147747899656,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 2832,
+            "total": 4002,
+            "accuracy_pct": 70.76461769115443
+          },
+          "novel": {
+            "correct": 3043,
+            "total": 4039,
+            "accuracy_pct": 75.3404307997029
+          },
+          "harmonic_mean_pct": 72.98087009719546,
+          "harmonic_mean_exact_fraction": "287259200/3936089",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.467037024679594,
+            "vs_single": -0.34510933968478247,
+            "vs_matched": -0.47271081716377905
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "stanford_cars",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 2903,
+            "total": 4002,
+            "accuracy_pct": 72.53873063468266
+          },
+          "novel": {
+            "correct": 2937,
+            "total": 4039,
+            "accuracy_pct": 72.71601881653875
+          },
+          "harmonic_mean_pct": 72.62726653259277,
+          "harmonic_mean_exact_fraction": "1705222200/23479091",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.3343704971457238,
+            "vs_matched": -0.5710305921158201
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 2842,
+            "total": 4002,
+            "accuracy_pct": 71.01449275362319
+          },
+          "novel": {
+            "correct": 3030,
+            "total": 4039,
+            "accuracy_pct": 75.01856895271106
+          },
+          "harmonic_mean_pct": 72.96163702973848,
+          "harmonic_mean_exact_fraction": "29694000/406981",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.3343704971457238,
+            "vs_single": 0.0,
+            "vs_matched": -0.2366600949700963
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 2860,
+            "total": 4002,
+            "accuracy_pct": 71.46426786606696
+          },
+          "novel": {
+            "correct": 3030,
+            "total": 4039,
+            "accuracy_pct": 75.01856895271106
+          },
+          "harmonic_mean_pct": 73.19829712470859,
+          "harmonic_mean_exact_fraction": "2166450/29597",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.5710305921158201,
+            "vs_single": 0.2366600949700963,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 2828,
+            "total": 4002,
+            "accuracy_pct": 70.66466766616692
+          },
+          "novel": {
+            "correct": 3026,
+            "total": 4039,
+            "accuracy_pct": 74.91953453825204
+          },
+          "harmonic_mean_pct": 72.72992439682167,
+          "harmonic_mean_exact_fraction": "213938200/2941543",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.10265786422890288,
+            "vs_single": -0.23171263291682093,
+            "vs_matched": -0.46837272788691725
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "food101",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 13903,
+            "total": 15300,
+            "accuracy_pct": 90.86928104575163
+          },
+          "novel": {
+            "correct": 13823,
+            "total": 15000,
+            "accuracy_pct": 92.15333333333334
+          },
+          "harmonic_mean_pct": 91.50680285470158,
+          "harmonic_mean_exact_fraction": "384362338/4200369",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.06295770704012114,
+            "vs_matched": 0.10875501602303808
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 13924,
+            "total": 15300,
+            "accuracy_pct": 91.00653594771242
+          },
+          "novel": {
+            "correct": 13821,
+            "total": 15000,
+            "accuracy_pct": 92.14
+          },
+          "harmonic_mean_pct": 91.5697605617417,
+          "harmonic_mean_exact_fraction": "128295736/1401071",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.06295770704012114,
+            "vs_single": 0.0,
+            "vs_matched": 0.1717127230631592
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 13893,
+            "total": 15300,
+            "accuracy_pct": 90.80392156862744
+          },
+          "novel": {
+            "correct": 13800,
+            "total": 15000,
+            "accuracy_pct": 92.0
+          },
+          "harmonic_mean_pct": 91.39804783867854,
+          "harmonic_mean_exact_fraction": "852104/9323",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.10875501602303808,
+            "vs_single": -0.1717127230631592,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 13908,
+            "total": 15300,
+            "accuracy_pct": 90.90196078431373
+          },
+          "novel": {
+            "correct": 13844,
+            "total": 15000,
+            "accuracy_pct": 92.29333333333334
+          },
+          "harmonic_mean_pct": 91.59236330527656,
+          "harmonic_mean_exact_fraction": "32090392/350361",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.08556045057498259,
+            "vs_single": 0.022602743534861434,
+            "vs_matched": 0.19431546659802065
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "food101",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 13906,
+            "total": 15300,
+            "accuracy_pct": 90.88888888888889
+          },
+          "novel": {
+            "correct": 13808,
+            "total": 15000,
+            "accuracy_pct": 92.05333333333333
+          },
+          "harmonic_mean_pct": 91.46740521192686,
+          "harmonic_mean_exact_fraction": "5647472/61743",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.022927810706059697,
+            "vs_matched": -0.0033599003171527887
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 13918,
+            "total": 15300,
+            "accuracy_pct": 90.9673202614379
+          },
+          "novel": {
+            "correct": 13789,
+            "total": 15000,
+            "accuracy_pct": 91.92666666666666
+          },
+          "harmonic_mean_pct": 91.4444774012208,
+          "harmonic_mean_exact_fraction": "383830604/4197417",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.022927810706059697,
+            "vs_single": 0.0,
+            "vs_matched": -0.026287711023212482
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 13910,
+            "total": 15300,
+            "accuracy_pct": 90.91503267973856
+          },
+          "novel": {
+            "correct": 13805,
+            "total": 15000,
+            "accuracy_pct": 92.03333333333333
+          },
+          "harmonic_mean_pct": 91.47076511224401,
+          "harmonic_mean_exact_fraction": "76811020/839733",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0033599003171527887,
+            "vs_single": 0.026287711023212482,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 13886,
+            "total": 15300,
+            "accuracy_pct": 90.75816993464052
+          },
+          "novel": {
+            "correct": 13852,
+            "total": 15000,
+            "accuracy_pct": 92.34666666666666
+          },
+          "harmonic_mean_pct": 91.54552792595216,
+          "harmonic_mean_exact_fraction": "24043609/262641",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.07812271402529712,
+            "vs_single": 0.10105052473135681,
+            "vs_matched": 0.07476281370814433
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "food101",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 13886,
+            "total": 15300,
+            "accuracy_pct": 90.75816993464052
+          },
+          "novel": {
+            "correct": 13839,
+            "total": 15000,
+            "accuracy_pct": 92.26
+          },
+          "harmonic_mean_pct": 91.50292302846462,
+          "harmonic_mean_exact_fraction": "128112236/1400089",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.02557298246525395,
+            "vs_matched": 0.09213219032433127
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 13910,
+            "total": 15300,
+            "accuracy_pct": 90.91503267973856
+          },
+          "novel": {
+            "correct": 13807,
+            "total": 15000,
+            "accuracy_pct": 92.04666666666667
+          },
+          "harmonic_mean_pct": 91.47735004599936,
+          "harmonic_mean_exact_fraction": "384110740/4198971",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.02557298246525395,
+            "vs_single": 0.0,
+            "vs_matched": 0.06655920785907732
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 13879,
+            "total": 15300,
+            "accuracy_pct": 90.7124183006536
+          },
+          "novel": {
+            "correct": 13818,
+            "total": 15000,
+            "accuracy_pct": 92.12
+          },
+          "harmonic_mean_pct": 91.41079083814029,
+          "harmonic_mean_exact_fraction": "31963337/349667",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.09213219032433127,
+            "vs_single": -0.06655920785907732,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 13900,
+            "total": 15300,
+            "accuracy_pct": 90.84967320261438
+          },
+          "novel": {
+            "correct": 13841,
+            "total": 15000,
+            "accuracy_pct": 92.27333333333333
+          },
+          "harmonic_mean_pct": 91.55596926051587,
+          "harmonic_mean_exact_fraction": "384779800/4202673",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.053046232051247894,
+            "vs_single": 0.07861921451650185,
+            "vs_matched": 0.14517842237557915
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "sun397",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 8044,
+            "total": 9950,
+            "accuracy_pct": 80.84422110552764
+          },
+          "novel": {
+            "correct": 7711,
+            "total": 9900,
+            "accuracy_pct": 77.88888888888889
+          },
+          "harmonic_mean_pct": 79.33904344492088,
+          "harmonic_mean_exact_fraction": "22555376/284291",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.21611943488626026,
+            "vs_matched": -0.03922431813794952
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 7885,
+            "total": 9950,
+            "accuracy_pct": 79.2462311557789
+          },
+          "novel": {
+            "correct": 7821,
+            "total": 9900,
+            "accuracy_pct": 79.0
+          },
+          "harmonic_mean_pct": 79.12292401003461,
+          "harmonic_mean_exact_fraction": "2491660/31491",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.21611943488626026,
+            "vs_single": 0.0,
+            "vs_matched": -0.2553437530242098
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 7930,
+            "total": 9950,
+            "accuracy_pct": 79.69849246231156
+          },
+          "novel": {
+            "correct": 7827,
+            "total": 9900,
+            "accuracy_pct": 79.06060606060606
+          },
+          "harmonic_mean_pct": 79.37826776305883,
+          "harmonic_mean_exact_fraction": "82757480/1042571",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.03922431813794952,
+            "vs_single": 0.2553437530242098,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 8066,
+            "total": 9950,
+            "accuracy_pct": 81.06532663316582
+          },
+          "novel": {
+            "correct": 7890,
+            "total": 9900,
+            "accuracy_pct": 79.6969696969697
+          },
+          "harmonic_mean_pct": 80.37532465810257,
+          "harmonic_mean_exact_fraction": "42427160/527863",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.0362812131817025,
+            "vs_single": 1.2524006480679628,
+            "vs_matched": 0.997056895043753
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "sun397",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 8030,
+            "total": 9950,
+            "accuracy_pct": 80.7035175879397
+          },
+          "novel": {
+            "correct": 7809,
+            "total": 9900,
+            "accuracy_pct": 78.87878787878788
+          },
+          "harmonic_mean_pct": 79.78072037840525,
+          "harmonic_mean_exact_fraction": "83608360/1047977",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.5121067835462891,
+            "vs_matched": 0.1485830086880737
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 7849,
+            "total": 9950,
+            "accuracy_pct": 78.88442211055276
+          },
+          "novel": {
+            "correct": 7886,
+            "total": 9900,
+            "accuracy_pct": 79.65656565656566
+          },
+          "harmonic_mean_pct": 79.26861359485896,
+          "harmonic_mean_exact_fraction": "30948607/390427",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.5121067835462891,
+            "vs_single": 0.0,
+            "vs_matched": -0.36352377485821546
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 7900,
+            "total": 9950,
+            "accuracy_pct": 79.39698492462311
+          },
+          "novel": {
+            "correct": 7907,
+            "total": 9900,
+            "accuracy_pct": 79.86868686868686
+          },
+          "harmonic_mean_pct": 79.63213736971717,
+          "harmonic_mean_exact_fraction": "249861200/3137693",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.1485830086880737,
+            "vs_single": 0.36352377485821546,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 8028,
+            "total": 9950,
+            "accuracy_pct": 80.68341708542714
+          },
+          "novel": {
+            "correct": 7936,
+            "total": 9900,
+            "accuracy_pct": 80.16161616161617
+          },
+          "harmonic_mean_pct": 80.4216702305725,
+          "harmonic_mean_exact_fraction": "31855104/396101",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.6409498521672542,
+            "vs_single": 1.1530566357135434,
+            "vs_matched": 0.7895328608553279
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "sun397",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 7985,
+            "total": 9950,
+            "accuracy_pct": 80.25125628140704
+          },
+          "novel": {
+            "correct": 7720,
+            "total": 9900,
+            "accuracy_pct": 77.97979797979798
+          },
+          "harmonic_mean_pct": 79.0992233688661,
+          "harmonic_mean_exact_fraction": "24657680/311731",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.0843612202117614,
+            "vs_matched": -0.4771086306975966
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 7887,
+            "total": 9950,
+            "accuracy_pct": 79.26633165829146
+          },
+          "novel": {
+            "correct": 7831,
+            "total": 9900,
+            "accuracy_pct": 79.1010101010101
+          },
+          "harmonic_mean_pct": 79.18358458907787,
+          "harmonic_mean_exact_fraction": "247052388/3119995",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0843612202117614,
+            "vs_single": 0.0,
+            "vs_matched": -0.3927474104858352
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 7930,
+            "total": 9950,
+            "accuracy_pct": 79.69849246231156
+          },
+          "novel": {
+            "correct": 7866,
+            "total": 9900,
+            "accuracy_pct": 79.45454545454545
+          },
+          "harmonic_mean_pct": 79.5763319995637,
+          "harmonic_mean_exact_fraction": "13861640/174193",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.4771086306975966,
+            "vs_single": 0.3927474104858352,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 8007,
+            "total": 9950,
+            "accuracy_pct": 80.47236180904522
+          },
+          "novel": {
+            "correct": 7901,
+            "total": 9900,
+            "accuracy_pct": 79.8080808080808
+          },
+          "harmonic_mean_pct": 80.13884475493914,
+          "harmonic_mean_exact_fraction": "253053228/3157685",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.0396213860730348,
+            "vs_single": 0.9552601658612734,
+            "vs_matched": 0.5625127553754382
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "ucf101",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1581,
+            "total": 1934,
+            "accuracy_pct": 81.74767321613237
+          },
+          "novel": {
+            "correct": 1402,
+            "total": 1849,
+            "accuracy_pct": 75.82477014602487
+          },
+          "harmonic_mean_pct": 78.67490532388646,
+          "harmonic_mean_exact_fraction": "443312400/5634737",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -2.243588452476595,
+            "vs_matched": -1.2849158643183423
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1579,
+            "total": 1934,
+            "accuracy_pct": 81.64426059979317
+          },
+          "novel": {
+            "correct": 1483,
+            "total": 1849,
+            "accuracy_pct": 80.20551649540292
+          },
+          "harmonic_mean_pct": 80.91849377636305,
+          "harmonic_mean_exact_fraction": "468331400/5787693",
+          "paired_hm_delta_pp": {
+            "vs_original": 2.243588452476595,
+            "vs_single": 0.0,
+            "vs_matched": 0.9586725881582531
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1574,
+            "total": 1934,
+            "accuracy_pct": 81.38572905894519
+          },
+          "novel": {
+            "correct": 1453,
+            "total": 1849,
+            "accuracy_pct": 78.58301784748512
+          },
+          "harmonic_mean_pct": 79.9598211882048,
+          "harmonic_mean_exact_fraction": "114351100/1430107",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.2849158643183423,
+            "vs_single": -0.9586725881582531,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1594,
+            "total": 1934,
+            "accuracy_pct": 82.41985522233712
+          },
+          "novel": {
+            "correct": 1494,
+            "total": 1849,
+            "accuracy_pct": 80.80043266630611
+          },
+          "harmonic_mean_pct": 81.60211023279928,
+          "harmonic_mean_exact_fraction": "238143600/2918351",
+          "paired_hm_delta_pp": {
+            "vs_original": 2.9272049089128194,
+            "vs_single": 0.6836164564362243,
+            "vs_matched": 1.6422890445944773
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "ucf101",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1638,
+            "total": 1934,
+            "accuracy_pct": 84.69493278179938
+          },
+          "novel": {
+            "correct": 1464,
+            "total": 1849,
+            "accuracy_pct": 79.17793401838831
+          },
+          "harmonic_mean_pct": 81.84356483695157,
+          "harmonic_mean_exact_fraction": "79934400/976673",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.19580382065591023,
+            "vs_matched": 0.4784959616566883
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1595,
+            "total": 1934,
+            "accuracy_pct": 82.47156153050672
+          },
+          "novel": {
+            "correct": 1509,
+            "total": 1849,
+            "accuracy_pct": 81.61168199026501
+          },
+          "harmonic_mean_pct": 82.03936865760748,
+          "harmonic_mean_exact_fraction": "481371000/5867561",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.19580382065591023,
+            "vs_single": 0.0,
+            "vs_matched": 0.6742997823125986
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1589,
+            "total": 1934,
+            "accuracy_pct": 82.16132368148914
+          },
+          "novel": {
+            "correct": 1490,
+            "total": 1849,
+            "accuracy_pct": 80.58409951325041
+          },
+          "harmonic_mean_pct": 81.36506887529488,
+          "harmonic_mean_exact_fraction": "473522000/5819721",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.4784959616566883,
+            "vs_single": -0.6742997823125986,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1587,
+            "total": 1934,
+            "accuracy_pct": 82.05791106514995
+          },
+          "novel": {
+            "correct": 1506,
+            "total": 1849,
+            "accuracy_pct": 81.44943212547322
+          },
+          "harmonic_mean_pct": 81.75253939350094,
+          "harmonic_mean_exact_fraction": "53111600/649663",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.09102544345063107,
+            "vs_single": -0.2868292641065413,
+            "vs_matched": 0.3874705182060572
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "ucf101",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1636,
+            "total": 1934,
+            "accuracy_pct": 84.59152016546018
+          },
+          "novel": {
+            "correct": 1463,
+            "total": 1849,
+            "accuracy_pct": 79.12385073012439
+          },
+          "harmonic_mean_pct": 81.76638244768128,
+          "harmonic_mean_exact_fraction": "239346800/2927203",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.20160909523359527,
+            "vs_matched": 0.26370060664505995
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1603,
+            "total": 1934,
+            "accuracy_pct": 82.8852119958635
+          },
+          "novel": {
+            "correct": 1499,
+            "total": 1849,
+            "accuracy_pct": 81.07084910762575
+          },
+          "harmonic_mean_pct": 81.96799154291487,
+          "harmonic_mean_exact_fraction": "480579400/5863013",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.20160909523359527,
+            "vs_single": 0.0,
+            "vs_matched": 0.4653097018786552
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1589,
+            "total": 1934,
+            "accuracy_pct": 82.16132368148914
+          },
+          "novel": {
+            "correct": 1495,
+            "total": 1849,
+            "accuracy_pct": 80.85451595457003
+          },
+          "harmonic_mean_pct": 81.50268184103622,
+          "harmonic_mean_exact_fraction": "475111000/5829391",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.26370060664505995,
+            "vs_single": -0.4653097018786552,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1618,
+            "total": 1934,
+            "accuracy_pct": 83.66080661840745
+          },
+          "novel": {
+            "correct": 1505,
+            "total": 1849,
+            "accuracy_pct": 81.3953488372093
+          },
+          "harmonic_mean_pct": 82.51253059797179,
+          "harmonic_mean_exact_fraction": "707875/8579",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.7461481502905067,
+            "vs_single": 0.5445390550569115,
+            "vs_matched": 1.0098487569355667
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "imagenet",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 19231,
+            "total": 25000,
+            "accuracy_pct": 76.924
+          },
+          "novel": {
+            "correct": 17664,
+            "total": 25000,
+            "accuracy_pct": 70.656
+          },
+          "harmonic_mean_pct": 73.65689312915029,
+          "harmonic_mean_exact_fraction": "339696384/4611875",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.33530424328812847,
+            "vs_matched": -0.0354418216480496
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 19027,
+            "total": 25000,
+            "accuracy_pct": 76.108
+          },
+          "novel": {
+            "correct": 17683,
+            "total": 25000,
+            "accuracy_pct": 70.732
+          },
+          "harmonic_mean_pct": 73.32158888586217,
+          "harmonic_mean_exact_fraction": "336454441/4588750",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.33530424328812847,
+            "vs_single": 0.0,
+            "vs_matched": -0.37074606493617807
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 19073,
+            "total": 25000,
+            "accuracy_pct": 76.292
+          },
+          "novel": {
+            "correct": 17816,
+            "total": 25000,
+            "accuracy_pct": 71.264
+          },
+          "harmonic_mean_pct": 73.69233495079834,
+          "harmonic_mean_exact_fraction": "339804568/4611125",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0354418216480496,
+            "vs_single": 0.37074606493617807,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 19204,
+            "total": 25000,
+            "accuracy_pct": 76.816
+          },
+          "novel": {
+            "correct": 18068,
+            "total": 25000,
+            "accuracy_pct": 72.272
+          },
+          "harmonic_mean_pct": 74.47475252200043,
+          "harmonic_mean_exact_fraction": "43372234/582375",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.8178593928501379,
+            "vs_single": 1.1531636361382664,
+            "vs_matched": 0.7824175712020883
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "imagenet",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 19181,
+            "total": 25000,
+            "accuracy_pct": 76.724
+          },
+          "novel": {
+            "correct": 17515,
+            "total": 25000,
+            "accuracy_pct": 70.06
+          },
+          "harmonic_mean_pct": 73.24072705471986,
+          "harmonic_mean_exact_fraction": "67191043/917400",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.10122664646212111,
+            "vs_matched": -0.42357537239878357
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 19016,
+            "total": 25000,
+            "accuracy_pct": 76.064
+          },
+          "novel": {
+            "correct": 17702,
+            "total": 25000,
+            "accuracy_pct": 70.808
+          },
+          "harmonic_mean_pct": 73.34195370118198,
+          "harmonic_mean_exact_fraction": "168310616/2294875",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.10122664646212111,
+            "vs_single": 0.0,
+            "vs_matched": -0.3223487259366625
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 19066,
+            "total": 25000,
+            "accuracy_pct": 76.264
+          },
+          "novel": {
+            "correct": 17809,
+            "total": 25000,
+            "accuracy_pct": 71.236
+          },
+          "harmonic_mean_pct": 73.66430242711864,
+          "harmonic_mean_exact_fraction": "339546394/4609375",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.42357537239878357,
+            "vs_single": 0.3223487259366625,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 19143,
+            "total": 25000,
+            "accuracy_pct": 76.572
+          },
+          "novel": {
+            "correct": 18042,
+            "total": 25000,
+            "accuracy_pct": 72.168
+          },
+          "harmonic_mean_pct": 74.30480161355385,
+          "harmonic_mean_exact_fraction": "115126002/1549375",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.064074558833992,
+            "vs_single": 0.9628479123718707,
+            "vs_matched": 0.6404991864352083
+          }
+        }
+      }
+    },
+    {
+      "method": "maple",
+      "dataset": "imagenet",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 19213,
+            "total": 25000,
+            "accuracy_pct": 76.852
+          },
+          "novel": {
+            "correct": 17673,
+            "total": 25000,
+            "accuracy_pct": 70.692
+          },
+          "harmonic_mean_pct": 73.6434092067451,
+          "harmonic_mean_exact_fraction": "339551349/4610750",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.052560812380438665,
+            "vs_matched": -0.2900167166789254
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 19053,
+            "total": 25000,
+            "accuracy_pct": 76.212
+          },
+          "novel": {
+            "correct": 17786,
+            "total": 25000,
+            "accuracy_pct": 71.144
+          },
+          "harmonic_mean_pct": 73.59084839436467,
+          "harmonic_mean_exact_fraction": "338876658/4604875",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.052560812380438665,
+            "vs_single": 0.0,
+            "vs_matched": -0.3425775290593641
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 19130,
+            "total": 25000,
+            "accuracy_pct": 76.52
+          },
+          "novel": {
+            "correct": 17879,
+            "total": 25000,
+            "accuracy_pct": 71.516
+          },
+          "harmonic_mean_pct": 73.93342592342402,
+          "harmonic_mean_exact_fraction": "68405054/925225",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.2900167166789254,
+            "vs_single": 0.3425775290593641,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 19172,
+            "total": 25000,
+            "accuracy_pct": 76.688
+          },
+          "novel": {
+            "correct": 18100,
+            "total": 25000,
+            "accuracy_pct": 72.4
+          },
+          "harmonic_mean_pct": 74.48233526507835,
+          "harmonic_mean_exact_fraction": "1735066/23295",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.8389260583332364,
+            "vs_single": 0.8914868707136752,
+            "vs_matched": 0.548909341654311
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "caltech101",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1529,
+            "total": 1549,
+            "accuracy_pct": 98.7088444157521
+          },
+          "novel": {
+            "correct": 864,
+            "total": 916,
+            "accuracy_pct": 94.32314410480349
+          },
+          "harmonic_mean_pct": 96.46617255102413,
+          "harmonic_mean_exact_fraction": "2642112/27389",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.15388664386702636,
+            "vs_matched": 0.03083910860810797
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1534,
+            "total": 1549,
+            "accuracy_pct": 99.03163331181408
+          },
+          "novel": {
+            "correct": 864,
+            "total": 916,
+            "accuracy_pct": 94.32314410480349
+          },
+          "harmonic_mean_pct": 96.62005919489116,
+          "harmonic_mean_exact_fraction": "6626880/68587",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.15388664386702636,
+            "vs_single": 0.0,
+            "vs_matched": 0.1847257524751343
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1528,
+            "total": 1549,
+            "accuracy_pct": 98.6442866365397
+          },
+          "novel": {
+            "correct": 864,
+            "total": 916,
+            "accuracy_pct": 94.32314410480349
+          },
+          "harmonic_mean_pct": 96.43533344241602,
+          "harmonic_mean_exact_fraction": "4125600/42781",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.03083910860810797,
+            "vs_single": -0.1847257524751343,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1527,
+            "total": 1549,
+            "accuracy_pct": 98.57972885732731
+          },
+          "novel": {
+            "correct": 870,
+            "total": 916,
+            "accuracy_pct": 94.97816593886463
+          },
+          "harmonic_mean_pct": 96.74543996749154,
+          "harmonic_mean_exact_fraction": "44283000/457727",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.27926741646740594,
+            "vs_single": 0.12538077260037958,
+            "vs_matched": 0.3101065250755139
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "caltech101",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1536,
+            "total": 1549,
+            "accuracy_pct": 99.16074887023886
+          },
+          "novel": {
+            "correct": 866,
+            "total": 916,
+            "accuracy_pct": 94.5414847161572
+          },
+          "harmonic_mean_pct": 96.7960384367689,
+          "harmonic_mean_exact_fraction": "26603520/274841",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.11873557403046903,
+            "vs_matched": -0.026383038631816704
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1534,
+            "total": 1549,
+            "accuracy_pct": 99.03163331181408
+          },
+          "novel": {
+            "correct": 865,
+            "total": 916,
+            "accuracy_pct": 94.43231441048034
+          },
+          "harmonic_mean_pct": 96.67730286273843,
+          "harmonic_mean_exact_fraction": "265382000/2745029",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.11873557403046903,
+            "vs_single": 0.0,
+            "vs_matched": -0.14511861266228573
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1535,
+            "total": 1549,
+            "accuracy_pct": 99.09619109102647
+          },
+          "novel": {
+            "correct": 867,
+            "total": 916,
+            "accuracy_pct": 94.65065502183405
+          },
+          "harmonic_mean_pct": 96.82242147540072,
+          "harmonic_mean_exact_fraction": "266169000/2749043",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.026383038631816704,
+            "vs_single": 0.14511861266228573,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1532,
+            "total": 1549,
+            "accuracy_pct": 98.90251775338929
+          },
+          "novel": {
+            "correct": 869,
+            "total": 916,
+            "accuracy_pct": 94.86899563318778
+          },
+          "harmonic_mean_pct": 96.8437760625709,
+          "harmonic_mean_exact_fraction": "266261600/2749393",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.04773762580200654,
+            "vs_single": 0.16647319983247558,
+            "vs_matched": 0.02135458717018984
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "caltech101",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1535,
+            "total": 1549,
+            "accuracy_pct": 99.09619109102647
+          },
+          "novel": {
+            "correct": 862,
+            "total": 916,
+            "accuracy_pct": 94.10480349344978
+          },
+          "harmonic_mean_pct": 96.53602052750193,
+          "harmonic_mean_exact_fraction": "132317000/1370649",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.14128233523649122,
+            "vs_matched": -0.13207082588850946
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1534,
+            "total": 1549,
+            "accuracy_pct": 99.03163331181408
+          },
+          "novel": {
+            "correct": 865,
+            "total": 916,
+            "accuracy_pct": 94.43231441048034
+          },
+          "harmonic_mean_pct": 96.67730286273843,
+          "harmonic_mean_exact_fraction": "265382000/2745029",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.14128233523649122,
+            "vs_single": 0.0,
+            "vs_matched": 0.009211509347981754
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1530,
+            "total": 1549,
+            "accuracy_pct": 98.77340219496449
+          },
+          "novel": {
+            "correct": 867,
+            "total": 916,
+            "accuracy_pct": 94.65065502183405
+          },
+          "harmonic_mean_pct": 96.66809135339045,
+          "harmonic_mean_exact_fraction": "5202000/53813",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.13207082588850946,
+            "vs_single": -0.009211509347981754,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1533,
+            "total": 1549,
+            "accuracy_pct": 98.96707553260168
+          },
+          "novel": {
+            "correct": 871,
+            "total": 916,
+            "accuracy_pct": 95.08733624454149
+          },
+          "harmonic_mean_pct": 96.98842198047728,
+          "harmonic_mean_exact_fraction": "267048600/2753407",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.45240145297534257,
+            "vs_single": 0.31111911773885137,
+            "vs_matched": 0.3203306270868331
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "oxford_pets",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1797,
+            "total": 1881,
+            "accuracy_pct": 95.53429027113238
+          },
+          "novel": {
+            "correct": 1748,
+            "total": 1788,
+            "accuracy_pct": 97.76286353467562
+          },
+          "harmonic_mean_pct": 96.6357300019197,
+          "harmonic_mean_exact_fraction": "6544075/67719",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.13637427573876637,
+            "vs_matched": 0.13656306413810776
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1795,
+            "total": 1881,
+            "accuracy_pct": 95.42796384901648
+          },
+          "novel": {
+            "correct": 1745,
+            "total": 1788,
+            "accuracy_pct": 97.59507829977629
+          },
+          "harmonic_mean_pct": 96.49935572618094,
+          "harmonic_mean_exact_fraction": "125291000/1298361",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.13637427573876637,
+            "vs_single": 0.0,
+            "vs_matched": 0.0001887883993413715
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1796,
+            "total": 1881,
+            "accuracy_pct": 95.48112706007443
+          },
+          "novel": {
+            "correct": 1744,
+            "total": 1788,
+            "accuracy_pct": 97.53914988814317
+          },
+          "harmonic_mean_pct": 96.4991669377816,
+          "harmonic_mean_exact_fraction": "9788200/101433",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.13656306413810776,
+            "vs_single": -0.0001887883993413715,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1801,
+            "total": 1881,
+            "accuracy_pct": 95.74694311536418
+          },
+          "novel": {
+            "correct": 1754,
+            "total": 1788,
+            "accuracy_pct": 98.09843400447427
+          },
+          "harmonic_mean_pct": 96.90842587931336,
+          "harmonic_mean_exact_fraction": "315895400/3259731",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.2726958773936568,
+            "vs_single": 0.4090701531324232,
+            "vs_matched": 0.40925894153176456
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "oxford_pets",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1797,
+            "total": 1881,
+            "accuracy_pct": 95.53429027113238
+          },
+          "novel": {
+            "correct": 1738,
+            "total": 1788,
+            "accuracy_pct": 97.20357941834452
+          },
+          "harmonic_mean_pct": 96.36170604673033,
+          "harmonic_mean_exact_fraction": "104106200/1080369",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.3255834753738561,
+            "vs_matched": -0.5130580090970536
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1806,
+            "total": 1881,
+            "accuracy_pct": 96.01275917065391
+          },
+          "novel": {
+            "correct": 1741,
+            "total": 1788,
+            "accuracy_pct": 97.37136465324384
+          },
+          "harmonic_mean_pct": 96.68728952210418,
+          "harmonic_mean_exact_fraction": "209616400/2167983",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.3255834753738561,
+            "vs_single": 0.0,
+            "vs_matched": -0.18747453372319747
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1814,
+            "total": 1881,
+            "accuracy_pct": 96.43806485911749
+          },
+          "novel": {
+            "correct": 1740,
+            "total": 1788,
+            "accuracy_pct": 97.31543624161074
+          },
+          "harmonic_mean_pct": 96.87476405582738,
+          "harmonic_mean_exact_fraction": "52606000/543031",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.5130580090970536,
+            "vs_single": 0.18747453372319747,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1809,
+            "total": 1881,
+            "accuracy_pct": 96.17224880382776
+          },
+          "novel": {
+            "correct": 1742,
+            "total": 1788,
+            "accuracy_pct": 97.42729306487696
+          },
+          "harmonic_mean_pct": 96.79570290794591,
+          "harmonic_mean_exact_fraction": "522600/5399",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.4339968612155858,
+            "vs_single": 0.10841338584172967,
+            "vs_matched": -0.0790611478814678
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "oxford_pets",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1808,
+            "total": 1881,
+            "accuracy_pct": 96.1190855927698
+          },
+          "novel": {
+            "correct": 1742,
+            "total": 1788,
+            "accuracy_pct": 97.42729306487696
+          },
+          "harmonic_mean_pct": 96.76876814873738,
+          "harmonic_mean_exact_fraction": "314953600/3254703",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.10844245086555034,
+            "vs_matched": -0.24276689843305924
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1805,
+            "total": 1881,
+            "accuracy_pct": 95.95959595959596
+          },
+          "novel": {
+            "correct": 1741,
+            "total": 1788,
+            "accuracy_pct": 97.37136465324384
+          },
+          "harmonic_mean_pct": 96.66032569787183,
+          "harmonic_mean_exact_fraction": "33079000/342219",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.10844245086555034,
+            "vs_single": 0.0,
+            "vs_matched": -0.3512093492986096
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1816,
+            "total": 1881,
+            "accuracy_pct": 96.54439128123339
+          },
+          "novel": {
+            "correct": 1743,
+            "total": 1788,
+            "accuracy_pct": 97.48322147651007
+          },
+          "harmonic_mean_pct": 97.01153504717044,
+          "harmonic_mean_exact_fraction": "211019200/2175197",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.24276689843305924,
+            "vs_single": 0.3512093492986096,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1817,
+            "total": 1881,
+            "accuracy_pct": 96.59755449229134
+          },
+          "novel": {
+            "correct": 1749,
+            "total": 1788,
+            "accuracy_pct": 97.81879194630872
+          },
+          "harmonic_mean_pct": 97.2043375826717,
+          "harmonic_mean_exact_fraction": "42372440/435911",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.4355694339343112,
+            "vs_single": 0.5440118847998615,
+            "vs_matched": 0.19280253550125195
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "oxford_flowers",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1037,
+            "total": 1053,
+            "accuracy_pct": 98.48053181386514
+          },
+          "novel": {
+            "correct": 1083,
+            "total": 1410,
+            "accuracy_pct": 76.80851063829788
+          },
+          "harmonic_mean_pct": 86.30480114071904,
+          "harmonic_mean_exact_fraction": "74871400/867523",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.18010572528654492,
+            "vs_matched": 0.5177476284766013
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1019,
+            "total": 1053,
+            "accuracy_pct": 96.77113010446344
+          },
+          "novel": {
+            "correct": 1094,
+            "total": 1410,
+            "accuracy_pct": 77.58865248226951
+          },
+          "harmonic_mean_pct": 86.12469541543248,
+          "harmonic_mean_exact_fraction": "55739300/647193",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.18010572528654492,
+            "vs_single": 0.0,
+            "vs_matched": 0.3376419031900564
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1017,
+            "total": 1053,
+            "accuracy_pct": 96.58119658119658
+          },
+          "novel": {
+            "correct": 1088,
+            "total": 1410,
+            "accuracy_pct": 77.16312056737588
+          },
+          "harmonic_mean_pct": 85.78705351224244,
+          "harmonic_mean_exact_fraction": "12294400/143313",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.5177476284766013,
+            "vs_single": -0.3376419031900564,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1025,
+            "total": 1053,
+            "accuracy_pct": 97.340930674264
+          },
+          "novel": {
+            "correct": 1111,
+            "total": 1410,
+            "accuracy_pct": 78.79432624113475
+          },
+          "harmonic_mean_pct": 87.0911728007715,
+          "harmonic_mean_exact_fraction": "227755000/2615133",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.7863716600524738,
+            "vs_single": 0.9664773853390187,
+            "vs_matched": 1.304119288529075
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "oxford_flowers",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1046,
+            "total": 1053,
+            "accuracy_pct": 99.33523266856601
+          },
+          "novel": {
+            "correct": 1076,
+            "total": 1410,
+            "accuracy_pct": 76.31205673758865
+          },
+          "harmonic_mean_pct": 86.31474971317786,
+          "harmonic_mean_exact_fraction": "14068700/162993",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.04411624789505276,
+            "vs_matched": 0.43652875827992865
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1030,
+            "total": 1053,
+            "accuracy_pct": 97.81576448243115
+          },
+          "novel": {
+            "correct": 1088,
+            "total": 1410,
+            "accuracy_pct": 77.16312056737588
+          },
+          "harmonic_mean_pct": 86.27063346528281,
+          "harmonic_mean_exact_fraction": "56032000/649491",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.04411624789505276,
+            "vs_single": 0.0,
+            "vs_matched": 0.3924125103848759
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1029,
+            "total": 1053,
+            "accuracy_pct": 97.72079772079772
+          },
+          "novel": {
+            "correct": 1080,
+            "total": 1410,
+            "accuracy_pct": 76.59574468085107
+          },
+          "harmonic_mean_pct": 85.87822095489794,
+          "harmonic_mean_exact_fraction": "2469600/28757",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.43652875827992865,
+            "vs_single": -0.3924125103848759,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1034,
+            "total": 1053,
+            "accuracy_pct": 98.19563152896487
+          },
+          "novel": {
+            "correct": 1104,
+            "total": 1410,
+            "accuracy_pct": 78.29787234042553
+          },
+          "harmonic_mean_pct": 87.12512192553041,
+          "harmonic_mean_exact_fraction": "19025600/218371",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.8103722123525381,
+            "vs_single": 0.854488460247591,
+            "vs_matched": 1.2469009706324667
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "oxford_flowers",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1040,
+            "total": 1053,
+            "accuracy_pct": 98.76543209876543
+          },
+          "novel": {
+            "correct": 1089,
+            "total": 1410,
+            "accuracy_pct": 77.23404255319149
+          },
+          "harmonic_mean_pct": 86.68268584988732,
+          "harmonic_mean_exact_fraction": "5808000/67003",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.0014184981469943093,
+            "vs_matched": 0.49563848742316496
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1028,
+            "total": 1053,
+            "accuracy_pct": 97.62583095916429
+          },
+          "novel": {
+            "correct": 1099,
+            "total": 1410,
+            "accuracy_pct": 77.94326241134752
+          },
+          "harmonic_mean_pct": 86.68126735174033,
+          "harmonic_mean_exact_fraction": "225954400/2606727",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.0014184981469943093,
+            "vs_single": 0.0,
+            "vs_matched": 0.4942199892761706
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1023,
+            "total": 1053,
+            "accuracy_pct": 97.15099715099716
+          },
+          "novel": {
+            "correct": 1092,
+            "total": 1410,
+            "accuracy_pct": 77.44680851063829
+          },
+          "harmonic_mean_pct": 86.18704736246416,
+          "harmonic_mean_exact_fraction": "12412400/144017",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.49563848742316496,
+            "vs_single": -0.4942199892761706,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1033,
+            "total": 1053,
+            "accuracy_pct": 98.10066476733144
+          },
+          "novel": {
+            "correct": 1112,
+            "total": 1410,
+            "accuracy_pct": 78.86524822695036
+          },
+          "harmonic_mean_pct": 87.43755390174411,
+          "harmonic_mean_exact_fraction": "114869600/1313733",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.7548680518567954,
+            "vs_single": 0.7562865500037897,
+            "vs_matched": 1.2505065392799604
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "fgvc_aircraft",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 753,
+            "total": 1666,
+            "accuracy_pct": 45.198079231692674
+          },
+          "novel": {
+            "correct": 630,
+            "total": 1667,
+            "accuracy_pct": 37.79244151169766
+          },
+          "harmonic_mean_pct": 41.16484028546996,
+          "harmonic_mean_exact_fraction": "31626000/768277",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 1.3087076130095787,
+            "vs_matched": 1.766555906664353
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 722,
+            "total": 1666,
+            "accuracy_pct": 43.33733493397359
+          },
+          "novel": {
+            "correct": 615,
+            "total": 1667,
+            "accuracy_pct": 36.89262147570486
+          },
+          "harmonic_mean_pct": 39.856132672460376,
+          "harmonic_mean_exact_fraction": "22201500/557041",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.3087076130095787,
+            "vs_single": 0.0,
+            "vs_matched": 0.45784829365477425
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 715,
+            "total": 1666,
+            "accuracy_pct": 42.9171668667467
+          },
+          "novel": {
+            "correct": 607,
+            "total": 1667,
+            "accuracy_pct": 36.4127174565087
+          },
+          "harmonic_mean_pct": 39.3982843788056,
+          "harmonic_mean_exact_fraction": "86801000/2203167",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.766555906664353,
+            "vs_single": -0.45784829365477425,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 734,
+            "total": 1666,
+            "accuracy_pct": 44.057623049219686
+          },
+          "novel": {
+            "correct": 705,
+            "total": 1667,
+            "accuracy_pct": 42.29154169166167
+          },
+          "harmonic_mean_pct": 43.156521724626245,
+          "harmonic_mean_exact_fraction": "25873500/599527",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.991681439156293,
+            "vs_single": 3.3003890521658716,
+            "vs_matched": 3.7582373458206457
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "fgvc_aircraft",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 790,
+            "total": 1666,
+            "accuracy_pct": 47.418967587034814
+          },
+          "novel": {
+            "correct": 624,
+            "total": 1667,
+            "accuracy_pct": 37.43251349730054
+          },
+          "harmonic_mean_pct": 41.83807098111872,
+          "harmonic_mean_exact_fraction": "49296000/1178257",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 1.3526614145876603,
+            "vs_matched": 1.8423308167749766
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 733,
+            "total": 1666,
+            "accuracy_pct": 43.99759903961585
+          },
+          "novel": {
+            "correct": 625,
+            "total": 1667,
+            "accuracy_pct": 37.49250149970006
+          },
+          "harmonic_mean_pct": 40.48540956653106,
+          "harmonic_mean_exact_fraction": "91625000/2263161",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.3526614145876603,
+            "vs_single": 0.0,
+            "vs_matched": 0.4896694021873162
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 722,
+            "total": 1666,
+            "accuracy_pct": 43.33733493397359
+          },
+          "novel": {
+            "correct": 619,
+            "total": 1667,
+            "accuracy_pct": 37.13257348530294
+          },
+          "harmonic_mean_pct": 39.995740164343744,
+          "harmonic_mean_exact_fraction": "22345900/558707",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.8423308167749766,
+            "vs_single": -0.4896694021873162,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 765,
+            "total": 1666,
+            "accuracy_pct": 45.91836734693877
+          },
+          "novel": {
+            "correct": 699,
+            "total": 1667,
+            "accuracy_pct": 41.931613677264544
+          },
+          "harmonic_mean_pct": 43.834528313718934,
+          "harmonic_mean_exact_fraction": "2097000/47839",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.996457332600212,
+            "vs_single": 3.3491187471878723,
+            "vs_matched": 3.8387881493751888
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "fgvc_aircraft",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 746,
+            "total": 1666,
+            "accuracy_pct": 44.777911164465785
+          },
+          "novel": {
+            "correct": 623,
+            "total": 1667,
+            "accuracy_pct": 37.37252549490102
+          },
+          "harmonic_mean_pct": 40.74144203374973,
+          "harmonic_mean_exact_fraction": "929516/22815",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.5154385235089978,
+            "vs_matched": 1.443198983414036
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 715,
+            "total": 1666,
+            "accuracy_pct": 42.9171668667467
+          },
+          "novel": {
+            "correct": 631,
+            "total": 1667,
+            "accuracy_pct": 37.85242951409718
+          },
+          "harmonic_mean_pct": 40.22600351024073,
+          "harmonic_mean_exact_fraction": "90233000/2243151",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.5154385235089978,
+            "vs_single": 0.0,
+            "vs_matched": 0.9277604599050383
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 694,
+            "total": 1666,
+            "accuracy_pct": 41.65666266506603
+          },
+          "novel": {
+            "correct": 620,
+            "total": 1667,
+            "accuracy_pct": 37.19256148770246
+          },
+          "harmonic_mean_pct": 39.29824305033569,
+          "harmonic_mean_exact_fraction": "43028000/1094909",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.443198983414036,
+            "vs_single": -0.9277604599050383,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 715,
+            "total": 1666,
+            "accuracy_pct": 42.9171668667467
+          },
+          "novel": {
+            "correct": 705,
+            "total": 1667,
+            "accuracy_pct": 42.29154169166167
+          },
+          "harmonic_mean_pct": 42.60205752534931,
+          "harmonic_mean_exact_fraction": "20163000/473287",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.8606154915995863,
+            "vs_single": 2.376054015108584,
+            "vs_matched": 3.3038144750136222
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "dtd",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 749,
+            "total": 864,
+            "accuracy_pct": 86.68981481481481
+          },
+          "novel": {
+            "correct": 537,
+            "total": 828,
+            "accuracy_pct": 64.85507246376811
+          },
+          "harmonic_mean_pct": 74.19945763462283,
+          "harmonic_mean_exact_fraction": "1340710/18069",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.49160499013752007,
+            "vs_matched": 0.07230421804134185
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 743,
+            "total": 864,
+            "accuracy_pct": 85.99537037037037
+          },
+          "novel": {
+            "correct": 534,
+            "total": 828,
+            "accuracy_pct": 64.4927536231884
+          },
+          "harmonic_mean_pct": 73.70785264448531,
+          "harmonic_mean_exact_fraction": "1322540/17943",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.49160499013752007,
+            "vs_single": 0.0,
+            "vs_matched": -0.4193007720961782
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 740,
+            "total": 864,
+            "accuracy_pct": 85.64814814814815
+          },
+          "novel": {
+            "correct": 541,
+            "total": 828,
+            "accuracy_pct": 65.33816425120773
+          },
+          "harmonic_mean_pct": 74.12715341658149,
+          "harmonic_mean_exact_fraction": "5004250/67509",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.07230421804134185,
+            "vs_single": 0.4193007720961782,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 738,
+            "total": 864,
+            "accuracy_pct": 85.41666666666667
+          },
+          "novel": {
+            "correct": 569,
+            "total": 828,
+            "accuracy_pct": 68.71980676328502
+          },
+          "harmonic_mean_pct": 76.16389160953314,
+          "harmonic_mean_exact_fraction": "233290/3063",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.9644339749103028,
+            "vs_single": 2.456038965047823,
+            "vs_matched": 2.0367381929516446
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "dtd",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 736,
+            "total": 864,
+            "accuracy_pct": 85.18518518518519
+          },
+          "novel": {
+            "correct": 531,
+            "total": 828,
+            "accuracy_pct": 64.1304347826087
+          },
+          "harmonic_mean_pct": 73.17336209220814,
+          "harmonic_mean_exact_fraction": "271400/3709",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 1.0023047231427915,
+            "vs_matched": 0.08553383324641954
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 731,
+            "total": 864,
+            "accuracy_pct": 84.60648148148148
+          },
+          "novel": {
+            "correct": 521,
+            "total": 828,
+            "accuracy_pct": 62.92270531400966
+          },
+          "harmonic_mean_pct": 72.17105736906535,
+          "harmonic_mean_exact_fraction": "19042550/263853",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.0023047231427915,
+            "vs_single": 0.0,
+            "vs_matched": -0.916770889896372
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 734,
+            "total": 864,
+            "accuracy_pct": 84.95370370370371
+          },
+          "novel": {
+            "correct": 531,
+            "total": 828,
+            "accuracy_pct": 64.1304347826087
+          },
+          "harmonic_mean_pct": 73.08782825896172,
+          "harmonic_mean_exact_fraction": "1082650/14813",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.08553383324641954,
+            "vs_single": 0.916770889896372,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 734,
+            "total": 864,
+            "accuracy_pct": 84.95370370370371
+          },
+          "novel": {
+            "correct": 564,
+            "total": 828,
+            "accuracy_pct": 68.1159420289855
+          },
+          "harmonic_mean_pct": 75.60874043877529,
+          "harmonic_mean_exact_fraction": "3449800/45627",
+          "paired_hm_delta_pp": {
+            "vs_original": 2.4353783465671444,
+            "vs_single": 3.437683069709936,
+            "vs_matched": 2.5209121798135636
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "dtd",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 734,
+            "total": 864,
+            "accuracy_pct": 84.95370370370371
+          },
+          "novel": {
+            "correct": 535,
+            "total": 828,
+            "accuracy_pct": 64.61352657004831
+          },
+          "harmonic_mean_pct": 73.40054878914982,
+          "harmonic_mean_exact_fraction": "9817250/133749",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.519741255580974,
+            "vs_matched": 0.4415204709849237
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 731,
+            "total": 864,
+            "accuracy_pct": 84.60648148148148
+          },
+          "novel": {
+            "correct": 530,
+            "total": 828,
+            "accuracy_pct": 64.00966183574879
+          },
+          "harmonic_mean_pct": 72.88080753356886,
+          "harmonic_mean_exact_fraction": "19371500/265797",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.519741255580974,
+            "vs_single": 0.0,
+            "vs_matched": -0.0782207845960503
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 731,
+            "total": 864,
+            "accuracy_pct": 84.60648148148148
+          },
+          "novel": {
+            "correct": 531,
+            "total": 828,
+            "accuracy_pct": 64.1304347826087
+          },
+          "harmonic_mean_pct": 72.9590283181649,
+          "harmonic_mean_exact_fraction": "2156450/29557",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.4415204709849237,
+            "vs_single": 0.0782207845960503,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 733,
+            "total": 864,
+            "accuracy_pct": 84.83796296296296
+          },
+          "novel": {
+            "correct": 568,
+            "total": 828,
+            "accuracy_pct": 68.59903381642512
+          },
+          "harmonic_mean_pct": 75.85917884694572,
+          "harmonic_mean_exact_fraction": "20817200/274419",
+          "paired_hm_delta_pp": {
+            "vs_original": 2.4586300577959035,
+            "vs_single": 2.9783713133768774,
+            "vs_matched": 2.900150528780827
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "eurosat",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 4039,
+            "total": 4200,
+            "accuracy_pct": 96.16666666666667
+          },
+          "novel": {
+            "correct": 3182,
+            "total": 3900,
+            "accuracy_pct": 81.58974358974359
+          },
+          "harmonic_mean_pct": 88.28051448491405,
+          "harmonic_mean_exact_fraction": "3672028/41595",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -1.0430065210876627,
+            "vs_matched": -0.4532280646811796
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 4018,
+            "total": 4200,
+            "accuracy_pct": 95.66666666666667
+          },
+          "novel": {
+            "correct": 3267,
+            "total": 3900,
+            "accuracy_pct": 83.76923076923077
+          },
+          "harmonic_mean_pct": 89.32352100600171,
+          "harmonic_mean_exact_fraction": "312543/3499",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.0430065210876627,
+            "vs_single": 0.0,
+            "vs_matched": 0.5897784564064831
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 4022,
+            "total": 4200,
+            "accuracy_pct": 95.76190476190476
+          },
+          "novel": {
+            "correct": 3224,
+            "total": 3900,
+            "accuracy_pct": 82.66666666666667
+          },
+          "harmonic_mean_pct": 88.73374254959523,
+          "harmonic_mean_exact_fraction": "997456/11241",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.4532280646811796,
+            "vs_single": -0.5897784564064831,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 4003,
+            "total": 4200,
+            "accuracy_pct": 95.30952380952381
+          },
+          "novel": {
+            "correct": 3367,
+            "total": 3900,
+            "accuracy_pct": 86.33333333333333
+          },
+          "harmonic_mean_pct": 90.59964171800586,
+          "harmonic_mean_exact_fraction": "2073554/22887",
+          "paired_hm_delta_pp": {
+            "vs_original": 2.3191272330918027,
+            "vs_single": 1.27612071200414,
+            "vs_matched": 1.8658991684106232
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "eurosat",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 4030,
+            "total": 4200,
+            "accuracy_pct": 95.95238095238095
+          },
+          "novel": {
+            "correct": 3139,
+            "total": 3900,
+            "accuracy_pct": 80.48717948717949
+          },
+          "harmonic_mean_pct": 87.54200575762609,
+          "harmonic_mean_exact_fraction": "6325085/72252",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -1.4581956357429515,
+            "vs_matched": 0.858025614325277
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 4015,
+            "total": 4200,
+            "accuracy_pct": 95.5952380952381
+          },
+          "novel": {
+            "correct": 3247,
+            "total": 3900,
+            "accuracy_pct": 83.25641025641026
+          },
+          "harmonic_mean_pct": 89.00020139336904,
+          "harmonic_mean_exact_fraction": "26073410/292959",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.4581956357429515,
+            "vs_single": 0.0,
+            "vs_matched": 2.3162212500682284
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 3997,
+            "total": 4200,
+            "accuracy_pct": 95.16666666666667
+          },
+          "novel": {
+            "correct": 3104,
+            "total": 3900,
+            "accuracy_pct": 79.58974358974359
+          },
+          "harmonic_mean_pct": 86.68398014330081,
+          "harmonic_mean_exact_fraction": "3544768/40893",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.858025614325277,
+            "vs_single": -2.3162212500682284,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 3999,
+            "total": 4200,
+            "accuracy_pct": 95.21428571428571
+          },
+          "novel": {
+            "correct": 3243,
+            "total": 3900,
+            "accuracy_pct": 83.15384615384616
+          },
+          "harmonic_mean_pct": 88.77632997566461,
+          "harmonic_mean_exact_fraction": "2881946/32463",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.2343242180385163,
+            "vs_single": -0.22387141770443522,
+            "vs_matched": 2.0923498323637935
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "eurosat",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 4013,
+            "total": 4200,
+            "accuracy_pct": 95.54761904761905
+          },
+          "novel": {
+            "correct": 2997,
+            "total": 3900,
+            "accuracy_pct": 76.84615384615384
+          },
+          "harmonic_mean_pct": 85.18250873819414,
+          "harmonic_mean_exact_fraction": "8017974/94127",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -1.2324714017718124,
+            "vs_matched": 0.06715604109870628
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 3996,
+            "total": 4200,
+            "accuracy_pct": 95.14285714285714
+          },
+          "novel": {
+            "correct": 3087,
+            "total": 3900,
+            "accuracy_pct": 79.15384615384616
+          },
+          "harmonic_mean_pct": 86.41498013996595,
+          "harmonic_mean_exact_fraction": "456876/5287",
+          "paired_hm_delta_pp": {
+            "vs_original": 1.2324714017718124,
+            "vs_single": 0.0,
+            "vs_matched": 1.2996274428705186
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 3996,
+            "total": 4200,
+            "accuracy_pct": 95.14285714285714
+          },
+          "novel": {
+            "correct": 3003,
+            "total": 3900,
+            "accuracy_pct": 77.0
+          },
+          "harmonic_mean_pct": 85.11535269709543,
+          "harmonic_mean_exact_fraction": "102564/1205",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.06715604109870628,
+            "vs_single": -1.2996274428705186,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 3970,
+            "total": 4200,
+            "accuracy_pct": 94.52380952380952
+          },
+          "novel": {
+            "correct": 3305,
+            "total": 3900,
+            "accuracy_pct": 84.74358974358974
+          },
+          "harmonic_mean_pct": 89.36691186486854,
+          "harmonic_mean_exact_fraction": "1312085/14682",
+          "paired_hm_delta_pp": {
+            "vs_original": 4.184403126674405,
+            "vs_single": 2.9519317249025923,
+            "vs_matched": 4.251559167773111
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "stanford_cars",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 3274,
+            "total": 4002,
+            "accuracy_pct": 81.80909545227387
+          },
+          "novel": {
+            "correct": 3014,
+            "total": 4039,
+            "accuracy_pct": 74.62243129487497
+          },
+          "harmonic_mean_pct": 78.0506811079173,
+          "harmonic_mean_exact_fraction": "986783600/12642857",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 1.1405539515195833,
+            "vs_matched": 0.9873690411334266
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 3137,
+            "total": 4002,
+            "accuracy_pct": 78.38580709645177
+          },
+          "novel": {
+            "correct": 3049,
+            "total": 4039,
+            "accuracy_pct": 75.48898242139143
+          },
+          "harmonic_mean_pct": 76.91012715639772,
+          "harmonic_mean_exact_fraction": "1912942600/24872441",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.1405539515195833,
+            "vs_single": 0.0,
+            "vs_matched": -0.15318491038615656
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 3153,
+            "total": 4002,
+            "accuracy_pct": 78.7856071964018
+          },
+          "novel": {
+            "correct": 3046,
+            "total": 4039,
+            "accuracy_pct": 75.41470661054717
+          },
+          "harmonic_mean_pct": 77.06331206678388,
+          "harmonic_mean_exact_fraction": "640269200/8308353",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.9873690411334266,
+            "vs_single": 0.15318491038615656,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 3146,
+            "total": 4002,
+            "accuracy_pct": 78.61069465267366
+          },
+          "novel": {
+            "correct": 3036,
+            "total": 4039,
+            "accuracy_pct": 75.1671205743996
+          },
+          "harmonic_mean_pct": 76.85035132888969,
+          "harmonic_mean_exact_fraction": "86829600/1129853",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.2003297790276133,
+            "vs_single": -0.05977582750803004,
+            "vs_matched": -0.2129607378941866
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "stanford_cars",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 3233,
+            "total": 4002,
+            "accuracy_pct": 80.78460769615192
+          },
+          "novel": {
+            "correct": 3026,
+            "total": 4039,
+            "accuracy_pct": 74.91953453825204
+          },
+          "harmonic_mean_pct": 77.74160814989142,
+          "harmonic_mean_exact_fraction": "1956611600/25168139",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 1.1582760784998378,
+            "vs_matched": 1.1559123229618866
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 3111,
+            "total": 4002,
+            "accuracy_pct": 77.73613193403298
+          },
+          "novel": {
+            "correct": 3048,
+            "total": 4039,
+            "accuracy_pct": 75.46422381777668
+          },
+          "harmonic_mean_pct": 76.58333207139158,
+          "harmonic_mean_exact_fraction": "25286208/330179",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.1582760784998378,
+            "vs_single": 0.0,
+            "vs_matched": -0.0023637555379510534
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 3107,
+            "total": 4002,
+            "accuracy_pct": 77.63618190904548
+          },
+          "novel": {
+            "correct": 3052,
+            "total": 4039,
+            "accuracy_pct": 75.5632582322357
+          },
+          "harmonic_mean_pct": 76.58569582692952,
+          "harmonic_mean_exact_fraction": "270930400/3537611",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.1559123229618866,
+            "vs_single": 0.0023637555379510534,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 3109,
+            "total": 4002,
+            "accuracy_pct": 77.68615692153924
+          },
+          "novel": {
+            "correct": 3034,
+            "total": 4039,
+            "accuracy_pct": 75.11760336717009
+          },
+          "harmonic_mean_pct": 76.38029210440985,
+          "harmonic_mean_exact_fraction": "1886541200/24699319",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.361316045481574,
+            "vs_single": -0.20303996698173626,
+            "vs_matched": -0.20540372251968733
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "stanford_cars",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 3250,
+            "total": 4002,
+            "accuracy_pct": 81.20939530234882
+          },
+          "novel": {
+            "correct": 3026,
+            "total": 4039,
+            "accuracy_pct": 74.91953453825204
+          },
+          "harmonic_mean_pct": 77.93776723374063,
+          "harmonic_mean_exact_fraction": "983450000/12618401",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.8904051648138627,
+            "vs_matched": 0.8595410959967741
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 3142,
+            "total": 4002,
+            "accuracy_pct": 78.51074462768615
+          },
+          "novel": {
+            "correct": 3055,
+            "total": 4039,
+            "accuracy_pct": 75.63753404307997
+          },
+          "harmonic_mean_pct": 77.04736206892677,
+          "harmonic_mean_exact_fraction": "239970250/3114581",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.8904051648138627,
+            "vs_single": 0.0,
+            "vs_matched": -0.03086406881708863
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 3135,
+            "total": 4002,
+            "accuracy_pct": 78.33583208395802
+          },
+          "novel": {
+            "correct": 3064,
+            "total": 4039,
+            "accuracy_pct": 75.86036147561278
+          },
+          "harmonic_mean_pct": 77.07822613774385,
+          "harmonic_mean_exact_fraction": "640376000/8308131",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.8595410959967741,
+            "vs_single": 0.03086406881708863,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 3128,
+            "total": 4002,
+            "accuracy_pct": 78.16091954022988
+          },
+          "novel": {
+            "correct": 3035,
+            "total": 4039,
+            "accuracy_pct": 75.14236197078485
+          },
+          "harmonic_mean_pct": 76.62192289914367,
+          "harmonic_mean_exact_fraction": "41276000/538697",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.3158443345969555,
+            "vs_single": -0.4254391697830929,
+            "vs_matched": -0.4563032386001815
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "food101",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 13810,
+            "total": 15300,
+            "accuracy_pct": 90.26143790849673
+          },
+          "novel": {
+            "correct": 13731,
+            "total": 15000,
+            "accuracy_pct": 91.54
+          },
+          "harmonic_mean_pct": 90.89622305740444,
+          "harmonic_mean_exact_fraction": "126416740/1390781",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.18519236420127266,
+            "vs_matched": -0.3929620999919864
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 13874,
+            "total": 15300,
+            "accuracy_pct": 90.6797385620915
+          },
+          "novel": {
+            "correct": 13723,
+            "total": 15000,
+            "accuracy_pct": 91.48666666666666
+          },
+          "harmonic_mean_pct": 91.08141542160571,
+          "harmonic_mean_exact_fraction": "380785804/4180719",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.18519236420127266,
+            "vs_single": 0.0,
+            "vs_matched": -0.2077697357907137
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 13879,
+            "total": 15300,
+            "accuracy_pct": 90.7124183006536
+          },
+          "novel": {
+            "correct": 13781,
+            "total": 15000,
+            "accuracy_pct": 91.87333333333333
+          },
+          "harmonic_mean_pct": 91.28918515739642,
+          "harmonic_mean_exact_fraction": "382532998/4190343",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.3929620999919864,
+            "vs_single": 0.2077697357907137,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 13877,
+            "total": 15300,
+            "accuracy_pct": 90.69934640522875
+          },
+          "novel": {
+            "correct": 13809,
+            "total": 15000,
+            "accuracy_pct": 92.06
+          },
+          "harmonic_mean_pct": 91.37460813141179,
+          "harmonic_mean_exact_fraction": "127751662/1398109",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.4783850740073487,
+            "vs_single": 0.29319270980607604,
+            "vs_matched": 0.08542297401536234
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "food101",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 13890,
+            "total": 15300,
+            "accuracy_pct": 90.7843137254902
+          },
+          "novel": {
+            "correct": 13728,
+            "total": 15000,
+            "accuracy_pct": 91.52
+          },
+          "harmonic_mean_pct": 91.15067243738115,
+          "harmonic_mean_exact_fraction": "10593440/116219",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.07497158635938808,
+            "vs_matched": -0.1848648946355077
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 13935,
+            "total": 15300,
+            "accuracy_pct": 91.07843137254902
+          },
+          "novel": {
+            "correct": 13706,
+            "total": 15000,
+            "accuracy_pct": 91.37333333333333
+          },
+          "harmonic_mean_pct": 91.22564402374054,
+          "harmonic_mean_exact_fraction": "31832185/348939",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.07497158635938808,
+            "vs_single": 0.0,
+            "vs_matched": -0.10989330827611962
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 13914,
+            "total": 15300,
+            "accuracy_pct": 90.94117647058823
+          },
+          "novel": {
+            "correct": 13760,
+            "total": 15000,
+            "accuracy_pct": 91.73333333333333
+          },
+          "harmonic_mean_pct": 91.33553733201666,
+          "harmonic_mean_exact_fraction": "2127296/23291",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.1848648946355077,
+            "vs_single": 0.10989330827611962,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 13920,
+            "total": 15300,
+            "accuracy_pct": 90.98039215686275
+          },
+          "novel": {
+            "correct": 13797,
+            "total": 15000,
+            "accuracy_pct": 91.98
+          },
+          "harmonic_mean_pct": 91.47746538948749,
+          "harmonic_mean_exact_fraction": "42678720/466549",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.32679295210634113,
+            "vs_single": 0.251821365746953,
+            "vs_matched": 0.1419280574708334
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "food101",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 13867,
+            "total": 15300,
+            "accuracy_pct": 90.63398692810458
+          },
+          "novel": {
+            "correct": 13734,
+            "total": 15000,
+            "accuracy_pct": 91.56
+          },
+          "harmonic_mean_pct": 91.0946402024991,
+          "harmonic_mean_exact_fraction": "4534509/49778",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": -0.02928472400034061,
+            "vs_matched": -0.1617205625474034
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 13903,
+            "total": 15300,
+            "accuracy_pct": 90.86928104575163
+          },
+          "novel": {
+            "correct": 13707,
+            "total": 15000,
+            "accuracy_pct": 91.38
+          },
+          "harmonic_mean_pct": 91.12392492649944,
+          "harmonic_mean_exact_fraction": "127045614/1394207",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.02928472400034061,
+            "vs_single": 0.0,
+            "vs_matched": -0.13243583854706278
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 13895,
+            "total": 15300,
+            "accuracy_pct": 90.81699346405229
+          },
+          "novel": {
+            "correct": 13755,
+            "total": 15000,
+            "accuracy_pct": 91.7
+          },
+          "harmonic_mean_pct": 91.2563607650465,
+          "harmonic_mean_exact_fraction": "520070/5699",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.1617205625474034,
+            "vs_single": 0.13243583854706278,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 13916,
+            "total": 15300,
+            "accuracy_pct": 90.95424836601308
+          },
+          "novel": {
+            "correct": 13786,
+            "total": 15000,
+            "accuracy_pct": 91.90666666666667
+          },
+          "harmonic_mean_pct": 91.42797721425,
+          "harmonic_mean_exact_fraction": "191845976/2098329",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.33333701175090963,
+            "vs_single": 0.30405228775056903,
+            "vs_matched": 0.17161644920350622
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "sun397",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 8252,
+            "total": 9950,
+            "accuracy_pct": 82.93467336683418
+          },
+          "novel": {
+            "correct": 7852,
+            "total": 9900,
+            "accuracy_pct": 79.31313131313131
+          },
+          "harmonic_mean_pct": 81.08348402161903,
+          "harmonic_mean_exact_fraction": "64794704/799111",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.9816399386576209,
+            "vs_matched": 0.6474953215530364
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 8115,
+            "total": 9950,
+            "accuracy_pct": 81.55778894472361
+          },
+          "novel": {
+            "correct": 7791,
+            "total": 9900,
+            "accuracy_pct": 78.6969696969697
+          },
+          "harmonic_mean_pct": 80.1018440829614,
+          "harmonic_mean_exact_fraction": "84298620/1052393",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.9816399386576209,
+            "vs_single": 0.0,
+            "vs_matched": -0.3341446171045846
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 8144,
+            "total": 9950,
+            "accuracy_pct": 81.84924623115577
+          },
+          "novel": {
+            "correct": 7828,
+            "total": 9900,
+            "accuracy_pct": 79.07070707070707
+          },
+          "harmonic_mean_pct": 80.43598870006599,
+          "harmonic_mean_exact_fraction": "63751232/792571",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.6474953215530364,
+            "vs_single": 0.3341446171045846,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 8244,
+            "total": 9950,
+            "accuracy_pct": 82.85427135678393
+          },
+          "novel": {
+            "correct": 7937,
+            "total": 9900,
+            "accuracy_pct": 80.17171717171718
+          },
+          "harmonic_mean_pct": 81.4909238660865,
+          "harmonic_mean_exact_fraction": "261730512/3211775",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.40743984446748566,
+            "vs_single": 1.3890797831251065,
+            "vs_matched": 1.054935166020522
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "sun397",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 8276,
+            "total": 9950,
+            "accuracy_pct": 83.17587939698493
+          },
+          "novel": {
+            "correct": 7841,
+            "total": 9900,
+            "accuracy_pct": 79.20202020202021
+          },
+          "harmonic_mean_pct": 81.1403238567468,
+          "harmonic_mean_exact_fraction": "259568464/3199007",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 1.0572070164158374,
+            "vs_matched": 0.47595824883135596
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 8135,
+            "total": 9950,
+            "accuracy_pct": 81.75879396984925
+          },
+          "novel": {
+            "correct": 7769,
+            "total": 9900,
+            "accuracy_pct": 78.47474747474747
+          },
+          "harmonic_mean_pct": 80.08311684033096,
+          "harmonic_mean_exact_fraction": "252803260/3156761",
+          "paired_hm_delta_pp": {
+            "vs_original": -1.0572070164158374,
+            "vs_single": 0.0,
+            "vs_matched": -0.5812487675844813
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 8176,
+            "total": 9950,
+            "accuracy_pct": 82.17085427135679
+          },
+          "novel": {
+            "correct": 7842,
+            "total": 9900,
+            "accuracy_pct": 79.21212121212122
+          },
+          "harmonic_mean_pct": 80.66436560791544,
+          "harmonic_mean_exact_fraction": "42744128/529901",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.47595824883135596,
+            "vs_single": 0.5812487675844813,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 8273,
+            "total": 9950,
+            "accuracy_pct": 83.14572864321607
+          },
+          "novel": {
+            "correct": 7935,
+            "total": 9900,
+            "accuracy_pct": 80.15151515151516
+          },
+          "harmonic_mean_pct": 81.62117099180975,
+          "harmonic_mean_exact_fraction": "87528340/1072373",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.480847135062956,
+            "vs_single": 1.5380541514787933,
+            "vs_matched": 0.9568053838943119
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "sun397",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 8272,
+            "total": 9950,
+            "accuracy_pct": 83.1356783919598
+          },
+          "novel": {
+            "correct": 7825,
+            "total": 9900,
+            "accuracy_pct": 79.04040404040404
+          },
+          "harmonic_mean_pct": 81.03633423275079,
+          "harmonic_mean_exact_fraction": "258913600/3195031",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.9913795582443155,
+            "vs_matched": 0.5710214573787307
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 8126,
+            "total": 9950,
+            "accuracy_pct": 81.66834170854271
+          },
+          "novel": {
+            "correct": 7770,
+            "total": 9900,
+            "accuracy_pct": 78.48484848484848
+          },
+          "harmonic_mean_pct": 80.04495467450647,
+          "harmonic_mean_exact_fraction": "42092680/525863",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.9913795582443155,
+            "vs_single": 0.0,
+            "vs_matched": -0.4203581008655847
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 8175,
+            "total": 9950,
+            "accuracy_pct": 82.1608040201005
+          },
+          "novel": {
+            "correct": 7805,
+            "total": 9900,
+            "accuracy_pct": 78.83838383838383
+          },
+          "harmonic_mean_pct": 80.46531277537207,
+          "harmonic_mean_exact_fraction": "51044700/634369",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.5710214573787307,
+            "vs_single": 0.4203581008655847,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 8245,
+            "total": 9950,
+            "accuracy_pct": 82.8643216080402
+          },
+          "novel": {
+            "correct": 7912,
+            "total": 9900,
+            "accuracy_pct": 79.91919191919192
+          },
+          "harmonic_mean_pct": 81.36511466486726,
+          "harmonic_mean_exact_fraction": "130468880/1603499",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.32878043211647506,
+            "vs_single": 1.3201599903607906,
+            "vs_matched": 0.8998018894952058
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "ucf101",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1714,
+            "total": 1934,
+            "accuracy_pct": 88.62461220268872
+          },
+          "novel": {
+            "correct": 1475,
+            "total": 1849,
+            "accuracy_pct": 79.7728501892915
+          },
+          "harmonic_mean_pct": 83.9660860906873,
+          "harmonic_mean_exact_fraction": "126407500/1505459",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.9928890024183165,
+            "vs_matched": -0.07404920863471628
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1673,
+            "total": 1934,
+            "accuracy_pct": 86.50465356773526
+          },
+          "novel": {
+            "correct": 1474,
+            "total": 1849,
+            "accuracy_pct": 79.71876690102758
+          },
+          "harmonic_mean_pct": 82.97319708826898,
+          "harmonic_mean_exact_fraction": "493200400/5944093",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.9928890024183165,
+            "vs_single": 0.0,
+            "vs_matched": -1.0669382110530328
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1692,
+            "total": 1934,
+            "accuracy_pct": 87.48707342295761
+          },
+          "novel": {
+            "correct": 1495,
+            "total": 1849,
+            "accuracy_pct": 80.85451595457003
+          },
+          "harmonic_mean_pct": 84.040135299322,
+          "harmonic_mean_exact_fraction": "252954000/3009919",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.07404920863471628,
+            "vs_single": 1.0669382110530328,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1679,
+            "total": 1934,
+            "accuracy_pct": 86.81489141675284
+          },
+          "novel": {
+            "correct": 1512,
+            "total": 1849,
+            "accuracy_pct": 81.77393185505679
+          },
+          "harmonic_mean_pct": 84.21904699188661,
+          "harmonic_mean_exact_fraction": "507729600/6028679",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.2529609011993219,
+            "vs_single": 1.2458499036176383,
+            "vs_matched": 0.17891169256460562
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "ucf101",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1722,
+            "total": 1934,
+            "accuracy_pct": 89.0382626680455
+          },
+          "novel": {
+            "correct": 1479,
+            "total": 1849,
+            "accuracy_pct": 79.98918334234722
+          },
+          "harmonic_mean_pct": 84.2714965544762,
+          "harmonic_mean_exact_fraction": "14149100/167899",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.9084986799419753,
+            "vs_matched": 0.6193244406026196
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1682,
+            "total": 1934,
+            "accuracy_pct": 86.97001034126163
+          },
+          "novel": {
+            "correct": 1480,
+            "total": 1849,
+            "accuracy_pct": 80.04326663061114
+          },
+          "harmonic_mean_pct": 83.36299787453423,
+          "harmonic_mean_exact_fraction": "248936000/2986169",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.9084986799419753,
+            "vs_single": 0.0,
+            "vs_matched": -0.2891742393393557
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1688,
+            "total": 1934,
+            "accuracy_pct": 87.28024819027921
+          },
+          "novel": {
+            "correct": 1485,
+            "total": 1849,
+            "accuracy_pct": 80.31368307193077
+          },
+          "harmonic_mean_pct": 83.65217211387359,
+          "harmonic_mean_exact_fraction": "250668000/2996551",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.6193244406026196,
+            "vs_single": 0.2891742393393557,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1696,
+            "total": 1934,
+            "accuracy_pct": 87.69389865563599
+          },
+          "novel": {
+            "correct": 1515,
+            "total": 1849,
+            "accuracy_pct": 81.93618171984856
+          },
+          "harmonic_mean_pct": 84.71732372071216,
+          "harmonic_mean_exact_fraction": "256944000/3032957",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.44582716623596014,
+            "vs_single": 1.3543258461779355,
+            "vs_matched": 1.0651516068385798
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "ucf101",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 1697,
+            "total": 1934,
+            "accuracy_pct": 87.74560496380559
+          },
+          "novel": {
+            "correct": 1464,
+            "total": 1849,
+            "accuracy_pct": 79.17793401838831
+          },
+          "harmonic_mean_pct": 83.24189341527047,
+          "harmonic_mean_exact_fraction": "496881600/5969129",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.3481122292342674,
+            "vs_matched": 0.3586074869678971
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 1666,
+            "total": 1934,
+            "accuracy_pct": 86.1427094105481
+          },
+          "novel": {
+            "correct": 1477,
+            "total": 1849,
+            "accuracy_pct": 79.88101676581937
+          },
+          "harmonic_mean_pct": 82.89378118603621,
+          "harmonic_mean_exact_fraction": "8788150/106017",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.3481122292342674,
+            "vs_single": 0.0,
+            "vs_matched": 0.010495257733629741
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 1668,
+            "total": 1934,
+            "accuracy_pct": 86.24612202688728
+          },
+          "novel": {
+            "correct": 1475,
+            "total": 1849,
+            "accuracy_pct": 79.7728501892915
+          },
+          "harmonic_mean_pct": 82.88328592830257,
+          "harmonic_mean_exact_fraction": "246030000/2968391",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.3586074869678971,
+            "vs_single": -0.010495257733629741,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 1666,
+            "total": 1934,
+            "accuracy_pct": 86.1427094105481
+          },
+          "novel": {
+            "correct": 1511,
+            "total": 1849,
+            "accuracy_pct": 81.71984856679286
+          },
+          "harmonic_mean_pct": 83.87301198059276,
+          "harmonic_mean_exact_fraction": "125866300/1500677",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.63111856532229,
+            "vs_single": 0.9792307945565574,
+            "vs_matched": 0.9897260522901872
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "imagenet",
+      "seed": 1,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 19543,
+            "total": 25000,
+            "accuracy_pct": 78.172
+          },
+          "novel": {
+            "correct": 17788,
+            "total": 25000,
+            "accuracy_pct": 71.152
+          },
+          "harmonic_mean_pct": 74.49698834748601,
+          "harmonic_mean_exact_fraction": "347630884/4666375",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.6614163279094414,
+            "vs_matched": 0.2127540653044591
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 19268,
+            "total": 25000,
+            "accuracy_pct": 77.072
+          },
+          "novel": {
+            "correct": 17715,
+            "total": 25000,
+            "accuracy_pct": 70.86
+          },
+          "harmonic_mean_pct": 73.83557201957656,
+          "harmonic_mean_exact_fraction": "68266524/924575",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.6614163279094414,
+            "vs_single": 0.0,
+            "vs_matched": -0.4486622626049823
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 19354,
+            "total": 25000,
+            "accuracy_pct": 77.416
+          },
+          "novel": {
+            "correct": 17849,
+            "total": 25000,
+            "accuracy_pct": 71.396
+          },
+          "harmonic_mean_pct": 74.28423428218154,
+          "harmonic_mean_exact_fraction": "345449546/4650375",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.2127540653044591,
+            "vs_single": 0.4486622626049823,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 19394,
+            "total": 25000,
+            "accuracy_pct": 77.576
+          },
+          "novel": {
+            "correct": 18119,
+            "total": 25000,
+            "accuracy_pct": 72.476
+          },
+          "harmonic_mean_pct": 74.9393300455842,
+          "harmonic_mean_exact_fraction": "351399886/4689125",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.4423416980981939,
+            "vs_single": 1.1037580260076352,
+            "vs_matched": 0.655095763402653
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "imagenet",
+      "seed": 2,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 19468,
+            "total": 25000,
+            "accuracy_pct": 77.872
+          },
+          "novel": {
+            "correct": 17706,
+            "total": 25000,
+            "accuracy_pct": 70.824
+          },
+          "harmonic_mean_pct": 74.1809669123581,
+          "harmonic_mean_exact_fraction": "172350204/2323375",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.511012062633175,
+            "vs_matched": 0.10681924543085496
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 19218,
+            "total": 25000,
+            "accuracy_pct": 76.872
+          },
+          "novel": {
+            "correct": 17681,
+            "total": 25000,
+            "accuracy_pct": 70.724
+          },
+          "harmonic_mean_pct": 73.66995484972493,
+          "harmonic_mean_exact_fraction": "339793458/4612375",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.511012062633175,
+            "vs_single": 0.0,
+            "vs_matched": -0.40419281720232
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 19294,
+            "total": 25000,
+            "accuracy_pct": 77.176
+          },
+          "novel": {
+            "correct": 17803,
+            "total": 25000,
+            "accuracy_pct": 71.212
+          },
+          "harmonic_mean_pct": 74.07414766692725,
+          "harmonic_mean_exact_fraction": "343491082/4637125",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.10681924543085496,
+            "vs_single": 0.40419281720232,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 19386,
+            "total": 25000,
+            "accuracy_pct": 77.544
+          },
+          "novel": {
+            "correct": 18107,
+            "total": 25000,
+            "accuracy_pct": 72.428
+          },
+          "harmonic_mean_pct": 74.89873885792015,
+          "harmonic_mean_exact_fraction": "351022302/4686625",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.7177719455620454,
+            "vs_single": 1.2287840081952204,
+            "vs_matched": 0.8245911909929003
+          }
+        }
+      }
+    },
+    {
+      "method": "mmrl",
+      "dataset": "imagenet",
+      "seed": 3,
+      "configurations": {
+        "original": {
+          "base": {
+            "correct": 19479,
+            "total": 25000,
+            "accuracy_pct": 77.916
+          },
+          "novel": {
+            "correct": 17826,
+            "total": 25000,
+            "accuracy_pct": 71.304
+          },
+          "harmonic_mean_pct": 74.4635097708082,
+          "harmonic_mean_exact_fraction": "38581406/518125",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.0,
+            "vs_single": 0.7047698623153635,
+            "vs_matched": 0.2360442735119233
+          }
+        },
+        "single_template_probability_fusion": {
+          "base": {
+            "correct": 19198,
+            "total": 25000,
+            "accuracy_pct": 76.792
+          },
+          "novel": {
+            "correct": 17739,
+            "total": 25000,
+            "accuracy_pct": 70.956
+          },
+          "harmonic_mean_pct": 73.75873990849284,
+          "harmonic_mean_exact_fraction": "340553322/4617125",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.7047698623153635,
+            "vs_single": 0.0,
+            "vs_matched": -0.4687255888034402
+          }
+        },
+        "matched_template_probability_fusion": {
+          "base": {
+            "correct": 19315,
+            "total": 25000,
+            "accuracy_pct": 77.26
+          },
+          "novel": {
+            "correct": 17856,
+            "total": 25000,
+            "accuracy_pct": 71.424
+          },
+          "harmonic_mean_pct": 74.22746549729628,
+          "harmonic_mean_exact_fraction": "68977728/929275",
+          "paired_hm_delta_pp": {
+            "vs_original": -0.2360442735119233,
+            "vs_single": 0.4687255888034402,
+            "vs_matched": 0.0
+          }
+        },
+        "description_probability_fusion": {
+          "base": {
+            "correct": 19404,
+            "total": 25000,
+            "accuracy_pct": 77.616
+          },
+          "novel": {
+            "correct": 18134,
+            "total": 25000,
+            "accuracy_pct": 72.536
+          },
+          "harmonic_mean_pct": 74.99006574671,
+          "harmonic_mean_exact_fraction": "175936068/2346125",
+          "paired_hm_delta_pp": {
+            "vs_original": 0.5265559759017979,
+            "vs_single": 1.2313258382171615,
+            "vs_matched": 0.7626002494137212
+          }
+        }
+      }
+    }
+  ]
+}

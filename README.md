@@ -2,15 +2,15 @@
 
 **Class-Description Posterior Fusion for Base-to-Novel Recognition** 的代码与实验结果。
 
-CDPF 将训练后的 CoOp 分类器与冻结类别描述分类器的概率等权平均。两个分支共享冻结 CLIP 图像编码器；描述原型可提前缓存，CoOp 的训练过程保持不变，新增可训练参数为 0。
+CDPF 将训练后的提示分类器与冻结类别描述分类器的后验概率等权平均。名称中的 Class-Description 指新增的辅助分支，另一侧为已学习的提示分类器；融合不增加可训练参数，也不改变底座训练。对 CoOp，两分支共享冻结 CLIP 图像编码器；对 MaPLe 和 MMRL，描述分支使用单独的原始冻结 CLIP 图像编码器，描述原型可提前缓存。
 
 ```text
-p_CDPF = 0.5 * softmax(z_CoOp) + 0.5 * softmax(z_description)
+p_CDPF = 0.5 * softmax(z_prompt) + 0.5 * softmax(z_description)
 ```
 
 每类最多保留 20 条有效描述：经 CLIP 分词、截断和去重后，分别归一化描述向量，取均值，再归一化为类别原型。所有数据集、类别划分和随机种子使用同一融合权重 `alpha=0.5`。
 
-## 主要结果
+## CoOp 主结果
 
 CLIP ViT-B/16，16-shot Base-to-Novel，seed 1/2/3，CoOp 训练 20 epochs。下表为十一个数据集的 **Macro HM（%）**。
 
@@ -24,6 +24,25 @@ CLIP ViT-B/16，16-shot Base-to-Novel，seed 1/2/3，CoOp 训练 20 epochs。下
 
 在 **UCF101 novel split、单张 RTX 4090、batch 64** 的已测设置中，CDPF 相对 CoOp 的推理延迟增加 0.74%。该计时不含模型加载、磁盘读取、CPU 预处理和一次性文本编码；它只描述这一测量设置。
 
+## MaPLe 与 MMRL 扩展结果
+
+2026-11-11 更新：CLIP ViT-B/16，16-shot，十一数据集 × 三个种子，每种底座 33 组，共 66 组本地训练与评估。每组四种推理配置共用同一 checkpoint，融合固定 `alpha=0.5`，不增加训练或按测试结果选择权重。
+
+| 推理配置 | MaPLe Macro HM | MMRL Macro HM |
+|---|---:|---:|
+| 原方法 | 78.09 | 80.89 |
+| 单模板后验融合 | 78.55 | 80.54 |
+| 数量匹配模板后验融合 | 78.67 | 80.51 |
+| **CDPF 描述后验融合** | **79.78** | **81.68** |
+
+上表沿用 CoOp 主结果的 `Macro HM = mean_dataset(HM)`：每集先平均三个种子的 Base/Novel，再计算该集 HM，最后对十一集等权平均。CDPF 相对原方法分别提高 **1.69 / 0.79 个百分点**，相对数量匹配模板分别提高 **1.11 / 1.16 个百分点**。
+
+采用部分论文 Average 栏的另一口径 `HM(mean_dataset(Base), mean_dataset(Novel))` 时，MaPLe + CDPF 为 **79.93**，MMRL + CDPF 为 **81.80**；这两个值不能与上表的 Macro HM 混用。
+
+相对原方法，MaPLe 有 9/11 个数据集提升，Oxford Pets 与 Stanford Cars 下降；MMRL 有 10/11 个数据集提升，Stanford Cars 下降。完整四分支、逐集/逐种子计数、冻结版本与两个汇总口径见 [扩展结果](results/multimodal_20261110/README.md)。这些均为本地实验，文献报告值应单独标注。
+
+MaPLe/MMRL 的额外推理延迟与显存尚待 GPU 实测。上述 CoOp 的 0.74% 仅适用于其已测共享图像编码器设置。
+
 ## 无需 GPU 的结果复算
 
 在仓库根目录执行：
@@ -32,7 +51,7 @@ CLIP ViT-B/16，16-shot Base-to-Novel，seed 1/2/3，CoOp 训练 20 epochs。下
 python tools/summarize_results.py
 ```
 
-该入口读取仓库内保存的逐种子结果，校验并重新计算论文汇总指标，无需下载数据集或训练模型。结果见 [results/cdpf_results.json](results/cdpf_results.json)，详细口径与复现范围见 [复现说明](docs/REPRODUCIBILITY.md)。结果复算验证已保存的指标；重新训练和逐图推理还需要数据、CLIP 权重、checkpoint 与对应冻结源码。
+该入口读取仓库内保存的 CoOp 逐种子结果，校验并重新计算原论文汇总指标，无需下载数据集或训练模型。MaPLe/MMRL 的原始正确数与样本数另存于 [seed_results.json](results/multimodal_20261110/seed_results.json)。结果见 [results/cdpf_results.json](results/cdpf_results.json)，详细口径与复现范围见 [复现说明](docs/REPRODUCIBILITY.md)。结果复算验证已保存的指标；重新训练和逐图推理还需要数据、CLIP 权重、checkpoint 与对应冻结源码。
 
 ## 代码与证据
 
@@ -47,6 +66,6 @@ python tools/summarize_results.py
 | [paper/README.md](paper/README.md) | 论文版本与同步说明 |
 | [docs/HISTORY.md](docs/HISTORY.md) | 历史材料位置与旧版本说明 |
 
-当前仓库提供结果复算与训练核心。`scripts/repro/evaluate_frozen_fusion.py` 支持用当前精简源码新训练的十数据集 checkpoint，并严格校验固定源码哈希；旧实验 checkpoint 需要对应的历史脚本与冻结源码。ImageNet 与模板控制的公开评估包装、历史冻结源码和 checkpoint 发布仍需补齐，尚无十一数据集统一重评估入口；详见 [复现范围](docs/REPRODUCIBILITY.md#公开复现范围)。
+训练、融合评估与结果复算的输入和使用方式见 [复现说明](docs/REPRODUCIBILITY.md)。各底座按其冻结源码版本和实验协议解释，历史 checkpoint 使用对应版本。
 
-本地匹配结果、模板控制和文献报告值应分别解读。当前结果不宣称 SOTA；KgCoOp 与 Ding 等方法的新增本地对照尚未完成，不属于已完成的受控比较。
+本地同检查点对照与文献报告值分别标注。CDPF 对不同底座的结果按各自数据范围和协议独立汇总。

@@ -23,9 +23,9 @@ python tools/summarize_results.py
 
 ## 方法与指标口径
 
-CDPF 的训练部分仅优化 CoOp 的共享上下文提示；CLIP 编码器和 logit scale 冻结。当前配置有 4 个 context tokens、2,048 个可训练参数。描述分支不增加可训练参数，也不改变 CoOp 训练损失。
+原 CoOp 实验的训练部分仅优化 CoOp 的共享上下文提示；CLIP 编码器和 logit scale 冻结。当前配置有 4 个 context tokens、2,048 个可训练参数。描述分支不增加可训练参数，也不改变 CoOp 训练损失。
 
-每类描述在 CLIP 分词与截断后去除重复 token 序列，最多保留 20 条有效描述。对各描述嵌入归一化，取有效描述的均值，再次归一化。两个分类器共享归一化图像特征，分别得到 logits，并在各自 softmax 后按 `alpha=0.5` 平均概率。
+每类描述在 CLIP 分词与截断后去除重复 token 序列，最多保留 20 条有效描述。对各描述嵌入归一化，取有效描述的均值，再次归一化。在 CoOp 实验中，两个分类器共享归一化图像特征，分别得到 logits，并在各自 softmax 后按 `alpha=0.5` 平均概率。MaPLe/MMRL 的辅助图像编码规则见下文扩展协议。
 
 保留代码中的分支名称含义为：
 
@@ -47,9 +47,9 @@ dataset_HM = 2 * B * N / (B + N)
 Macro_HM = mean_dataset(dataset_HM)
 ```
 
-`mean_s(HM_s)` 与 `dataset_HM` 是两种统计量；`H(mean_dataset(B), mean_dataset(N))` 与 `Macro_HM` 也不同。主表使用上面的 `Macro_HM`，从未舍入的数值计算后再显示两位小数。
+`mean_s(HM_s)` 与 `dataset_HM` 是两种统计量；`H(mean_dataset(B), mean_dataset(N))` 与 `Macro_HM` 也不同。原 CoOp 主表与 MaPLe/MMRL 扩展主表使用上面的 `Macro_HM`，从未舍入的数值计算后再显示两位小数。MaPLe/MMRL 同时单列 `H(mean_dataset(B), mean_dataset(N))`，用于与采用这一口径的论文 Average-HM 对照。
 
-匹配数量模板控制与 CDPF 共用 CoOp checkpoint、类别划分、图像和 `alpha=0.5`，并匹配每类保留文本数量与原型聚合方式。它是对已评估描述配置的控制，不代表所有可能的文本集成方法。KgCoOp/Ding 的新增本地对照尚未完成；文献报告值不能标为本地受控复现。
+匹配数量模板控制与 CDPF 共用 CoOp checkpoint、类别划分、图像和 `alpha=0.5`，并匹配每类保留文本数量与原型聚合方式。它是对已评估描述配置的控制，不代表所有可能的文本集成方法。MaPLe/MMRL 的十一数据集三种子四配置对照已完成，完整结果见 [扩展结果](../results/multimodal_20261110/README.md)。文献报告值不能标为本地受控复现。
 
 ## 环境与数据
 
@@ -90,3 +90,16 @@ python scripts/repro/run_pilot.py \
 0.74% 是 UCF101 novel split、单张 RTX 4090、batch 64 的 CUDA-event 测量：CoOp 为 90.128 ms/batch，CDPF 为 90.796 ms/batch。每组使用 20 次预热与 100 次计时迭代，共享同一 checkpoint 与输入张量。测量排除模型加载、磁盘读取、CPU 预处理和一次性文本编码，不应推广为其他硬件或数据集的固定开销。
 
 论文版本见 [paper/README.md](../paper/README.md)，旧材料与历史冻结版本见 [HISTORY.md](HISTORY.md)。
+
+
+## MaPLe 与 MMRL 扩展协议
+
+[公开结果目录](../results/multimodal_20261110/README.md)提供 66 个案例的四配置 Base/Novel 正确数与样本数、22 组逐数据集结果及两个独立定义的宏指标。`tools/summarize_results.py` 仍对应原 CoOp 结果；新增结构化数据为单独的数据格式。两个研究范围各自汇总。
+
+MaPLe 固定官方提交 `69bce21ae8eda80ad6187534b2dce09cf6c59e17`，十一集均训练 5 epochs、batch 4。MMRL 固定官方提交 `27d8821f6ac135a1d0c8e4c5ed78af14df0cd82e`，ImageNet 为 5 epochs、batch 32，其余为 10 epochs、batch 4；EuroSAT 保留 `rep_dim=2048` 和官方逐集正则配置。逐集训练轮数、batch 与输入资产哈希见 [protocol.json](../results/multimodal_20261110/protocol.json)。
+
+原方法保持官方推理：MaPLe 使用原生前向；MMRL Base 使用 `0.7 * class_logits + 0.3 * representation_logits`，Novel 使用 class logits。三种融合分别使用单模板、匹配描述数量的普通模板、类别描述，均与同一原方法后验按 0.5/0.5 融合。
+
+MaPLe/MMRL 含有学习后的视觉提示，辅助分支使用单独的原始冻结 CLIP 图像编码器。描述原型预计算；图像前向不能直接复用底座含学习视觉提示的特征。对应新增延迟与显存状态为待 GPU 测量，不套用上述 CoOp 的计时数值。
+
+类别描述复用 [ATPrompt](https://github.com/zhengli97/ATPrompt) 发布的固定文本资产。ATPrompt 学习带锚定属性的结构化提示；CDPF 在推理阶段融合已训练提示分类器与冻结描述分类器的后验，描述文本的来源与本方法贡献分别标注。

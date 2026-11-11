@@ -1,0 +1,269 @@
+{
+  "version": 1,
+  "created_utc": "2026-11-10T03:52:46.453769+00:00",
+  "datasets": [
+    "caltech101",
+    "oxford_pets",
+    "oxford_flowers",
+    "fgvc_aircraft",
+    "dtd",
+    "eurosat",
+    "stanford_cars",
+    "food101",
+    "sun397",
+    "ucf101",
+    "imagenet"
+  ],
+  "seeds": [
+    1,
+    2,
+    3
+  ],
+  "alpha": 0.5,
+  "description_limit": 20,
+  "shots": 16,
+  "primary_branches": [
+    "original",
+    "single_template_probability_fusion",
+    "matched_template_probability_fusion",
+    "description_probability_fusion"
+  ],
+  "class_description_policy": "Reuse accepted released descriptions and frozen matched-template helper; no accuracy selection",
+  "original_inference_policy": {
+    "maple": "native model(image)",
+    "mmrl": "native official Base0.7class+0.3representation logits, Novelclass logits"
+  },
+  "auxiliary_image_encoder": "separate frozen original CLIP; no learned visual tokens",
+  "aggregation": [
+    "mean of 11 per-dataset HM, each after three-seed Base/Novel averaging",
+    "HM of mean dataset Base and mean dataset Novel, reported separately"
+  ],
+  "amp_policy": "Keep native GradScaler skip behavior; log nonfinite gradients and observed skipped steps, require finite optimizer updates; no fixed scale or recipe adjustment",
+  "schema": "cdpf_multimodal_public_protocol_v1",
+  "scope": "local MaPLe and CVPR2025 MMRL reproductions, 11 datasets x 3 seeds x 2 methods; same-checkpoint four inference branches",
+  "backbone": "CLIP ViT-B/16",
+  "protocol_source_sha256": "6557650a6a5de9a775bece5583add92eb10543dbc0bdd170f7800955fff78178",
+  "production_payload_manifest_sha256": "b3a9e42e22a5d11ba66fbae6fbb876260aaaa8e9bc83ef947e45dffa8f99ab4d",
+  "description_source": {
+    "repository": "https://github.com/zhengli97/ATPrompt",
+    "usage": "fixed released descriptions; attribution to original authors; no test-accuracy selection"
+  },
+  "timing": {
+    "status": "not_measured",
+    "requires_separate_frozen_CLIP_image_forward": true,
+    "CoOp_0_74_percent_result_applies": false
+  },
+  "methods": {
+    "maple": {
+      "repository": "https://github.com/muzairkhattak/multimodal-prompt-learning",
+      "commit": "69bce21ae8eda80ad6187534b2dce09cf6c59e17",
+      "recipes": {
+        "caltech101": {
+          "epochs": 5,
+          "batch_size": 4,
+          "trainable_parameters": 3555072,
+          "trainable_tensors": 27
+        },
+        "oxford_pets": {
+          "epochs": 5,
+          "batch_size": 4,
+          "trainable_parameters": 3555072,
+          "trainable_tensors": 27
+        },
+        "oxford_flowers": {
+          "epochs": 5,
+          "batch_size": 4,
+          "trainable_parameters": 3555072,
+          "trainable_tensors": 27
+        },
+        "fgvc_aircraft": {
+          "epochs": 5,
+          "batch_size": 4,
+          "trainable_parameters": 3555072,
+          "trainable_tensors": 27
+        },
+        "dtd": {
+          "epochs": 5,
+          "batch_size": 4,
+          "trainable_parameters": 3555072,
+          "trainable_tensors": 27
+        },
+        "eurosat": {
+          "epochs": 5,
+          "batch_size": 4,
+          "trainable_parameters": 3555072,
+          "trainable_tensors": 27
+        },
+        "stanford_cars": {
+          "epochs": 5,
+          "batch_size": 4,
+          "trainable_parameters": 3555072,
+          "trainable_tensors": 27
+        },
+        "food101": {
+          "epochs": 5,
+          "batch_size": 4,
+          "trainable_parameters": 3555072,
+          "trainable_tensors": 27
+        },
+        "sun397": {
+          "epochs": 5,
+          "batch_size": 4,
+          "trainable_parameters": 3555072,
+          "trainable_tensors": 27
+        },
+        "ucf101": {
+          "epochs": 5,
+          "batch_size": 4,
+          "trainable_parameters": 3555072,
+          "trainable_tensors": 27
+        },
+        "imagenet": {
+          "epochs": 5,
+          "batch_size": 4,
+          "trainable_parameters": 3555072,
+          "trainable_tensors": 27
+        }
+      }
+    },
+    "mmrl": {
+      "repository": "https://github.com/yunncheng/MMRL",
+      "commit": "27d8821f6ac135a1d0c8e4c5ed78af14df0cd82e",
+      "recipes": {
+        "caltech101": {
+          "epochs": 10,
+          "batch_size": 4,
+          "trainable_parameters": 4992256,
+          "trainable_tensors": 30
+        },
+        "oxford_pets": {
+          "epochs": 10,
+          "batch_size": 4,
+          "trainable_parameters": 4992256,
+          "trainable_tensors": 30
+        },
+        "oxford_flowers": {
+          "epochs": 10,
+          "batch_size": 4,
+          "trainable_parameters": 4992256,
+          "trainable_tensors": 30
+        },
+        "fgvc_aircraft": {
+          "epochs": 10,
+          "batch_size": 4,
+          "trainable_parameters": 4992256,
+          "trainable_tensors": 30
+        },
+        "dtd": {
+          "epochs": 10,
+          "batch_size": 4,
+          "trainable_parameters": 4992256,
+          "trainable_tensors": 30
+        },
+        "eurosat": {
+          "epochs": 10,
+          "batch_size": 4,
+          "trainable_parameters": 18762496,
+          "trainable_tensors": 30
+        },
+        "stanford_cars": {
+          "epochs": 10,
+          "batch_size": 4,
+          "trainable_parameters": 4992256,
+          "trainable_tensors": 30
+        },
+        "food101": {
+          "epochs": 10,
+          "batch_size": 4,
+          "trainable_parameters": 4992256,
+          "trainable_tensors": 30
+        },
+        "sun397": {
+          "epochs": 10,
+          "batch_size": 4,
+          "trainable_parameters": 4992256,
+          "trainable_tensors": 30
+        },
+        "ucf101": {
+          "epochs": 10,
+          "batch_size": 4,
+          "trainable_parameters": 4992256,
+          "trainable_tensors": 30
+        },
+        "imagenet": {
+          "epochs": 5,
+          "batch_size": 32,
+          "trainable_parameters": 4992256,
+          "trainable_tensors": 30
+        }
+      }
+    }
+  },
+  "input_sha256": {
+    "data/caltech-101/split_fewshot/shot_16-seed_1.pkl": "187bd10aa9e9e07652c47e7bf683e72fbe4e059f81771225a78a1aab7190a882",
+    "data/caltech-101/split_zhou_Caltech101.json": "52ce83205ff8ff8a1a18119aad6376120ae35c36e783a984bc560cbf10e73fa5",
+    "data/caltech-101/split_fewshot/shot_16-seed_2.pkl": "c29270b5e78c49c392b4540a4ed3e2c2ac6e4670c1829791c922c6a7a5a47db4",
+    "data/caltech-101/split_fewshot/shot_16-seed_3.pkl": "e7a9be75672324ba9007cb96081c4903e99315ba5292742f3cc88c107576c7af",
+    "templates/cal_prompts_full.json": "aaec243406bc68264ea20d51a1f4edaa2b7e35f3443a9c59cb63e510eb23e5d5",
+    "trainers/textconsistency_common.py": "6f21fdd44101c0ca42958daf930673cf04799669954b84ef76d896cadcdd5044",
+    "data/oxford_pets/split_fewshot/shot_16-seed_1.pkl": "9bd76b76a993027449f6b43e1781338704d24098699fa264e2a4e7a62f43b7df",
+    "data/oxford_pets/split_zhou_OxfordPets.json": "d7f3ffe65b3919f95132e51422894ae18686b83c331fd8c0adcdc3dc2de6301e",
+    "data/oxford_pets/split_fewshot/shot_16-seed_2.pkl": "fed21e0ec31982d25853a2b461a4729b7a4471a8bd1187893d716d11f0be9fc4",
+    "data/oxford_pets/split_fewshot/shot_16-seed_3.pkl": "c564fb7ab66e0ca5b0295988fb6f20a06ce4e05f3118302b5c8deec0ee65ad14",
+    "templates/pets_prompts_full.json": "6948e8ebaf0883e31747a084b8844c6e635e15bf629b53450fa3c7507fe5fc64",
+    "data/oxford_flowers/split_fewshot/shot_16-seed_1.pkl": "fbd1b14b6cacad5a4e1b15addd446f2ca16b1508d04d2bd1f30cf6616715e050",
+    "data/oxford_flowers/split_zhou_OxfordFlowers.json": "2f50c42fc1a17ca13c271cb4269b1347bdb43d2be672e34f74a4e4cbfbcca794",
+    "data/oxford_flowers/split_fewshot/shot_16-seed_2.pkl": "62c06c3432c20c3de069228d36ffdd862deccba936024677eb1d3df2da3a1eca",
+    "data/oxford_flowers/split_fewshot/shot_16-seed_3.pkl": "0f92cf76c622b9b373189026a3dd3d8d12614702885175a903cef3c288154693",
+    "templates/flower_prompts_full.json": "9e2252fc5c1bd56aeb9e3a1b28b1072e1d2a813c8973ea62b77f66938bae4a84",
+    "data/fgvc_aircraft/split_fewshot/shot_16-seed_1.pkl": "9c1c14e39011ff2044265ae4c85813d3f3ab93d10714caac655750fe2880969a",
+    "data/fgvc_aircraft/variants.txt": "6e14e778b0a7c94c80619a7ba2c9f90c6784c9c997e308938ff8d3ee11662f0b",
+    "data/fgvc_aircraft/images_variant_train.txt": "29ac66fb762b9e1e5d007a18cb2cd2404ee326a4bce1dc0040e267c5585c46e7",
+    "data/fgvc_aircraft/images_variant_val.txt": "17afd8d6aac16d6188109465637f224a69e6c68d8b6e8422a2591f87aa3a8281",
+    "data/fgvc_aircraft/images_variant_test.txt": "06b5f65d559c399d6887d660dcec09dbf661576c0f3bd85e981e976b2bed3511",
+    "data/fgvc_aircraft/split_fewshot/shot_16-seed_2.pkl": "474407e7cf8af1500c1a76afc998ed1b12480afc78b30f429117e58f663143b2",
+    "data/fgvc_aircraft/split_fewshot/shot_16-seed_3.pkl": "bb1d7527399184e2f6ec53e9d1b500680ec4569a7578a382300394ab3746bf7d",
+    "templates/airplane_prompts_full.json": "d86833c2483c1d12907abeb6198412f1d0a020bd12999a3f170967a7f549e3b8",
+    "data/dtd/split_fewshot/shot_16-seed_1.pkl": "2537d6aaed25f44a9820cadef0a630b371ac688c5428ee84312d09b2fdb7101f",
+    "data/dtd/split_zhou_DescribableTextures.json": "f26ebeccd2b58e68d70f07a0dc39fe49bf7b69024bac34396b954dfd87969c38",
+    "data/dtd/split_fewshot/shot_16-seed_2.pkl": "6dc39ee163a364d304398c8b096ca9388e654d95f39d098e52035274e8f0f99a",
+    "data/dtd/split_fewshot/shot_16-seed_3.pkl": "a7ee3cb72239433421e937751b6708a936127366abb6bd15f660375ded8084bd",
+    "templates/texture_prompts_full.json": "dabdcafded7babd67046d0f90abeb510b648bdaaf397b884f265f3460a7942a9",
+    "data/eurosat/split_fewshot/shot_16-seed_1.pkl": "664deec1672ce8aa1f167eef56a75051d80d373204b60d4704155e3977f42966",
+    "data/eurosat/split_zhou_EuroSAT.json": "541503a77d0b26b735d85ec7a3e672804fe0aa466c2e5f07da772cc6c0af8ad2",
+    "data/eurosat/split_fewshot/shot_16-seed_2.pkl": "50c6cca09ed632b0de21d46579bfe30484f5bccc029b9eb77452d81a27178092",
+    "data/eurosat/split_fewshot/shot_16-seed_3.pkl": "79af978c7570d3c450fd37aff164d06902cb20eef0528659174f74057602eef0",
+    "templates/eurosat_prompts_full.json": "fe1076499e4fb8c019e83e677af2e9ecc302cb2240edcca0a1ed7fbb35af2110",
+    "data/stanford_cars/split_fewshot/shot_16-seed_1.pkl": "bb889352b18fe35a9910e2ce5270128b6574cc13f36fde181af90ac584949977",
+    "data/stanford_cars/split_zhou_StanfordCars.json": "40acee7aa65c8e4727a32d90e884b7c3f8960b523422317e163f7af65432959d",
+    "data/stanford_cars/split_fewshot/shot_16-seed_2.pkl": "1c815f7cb9ba313a131e9781d7201169f7bde196b6ea0322bb773bb6b973e124",
+    "data/stanford_cars/split_fewshot/shot_16-seed_3.pkl": "31b59d1d2a74001cd84b4b933d91e638365832db245a2f4103dfbde522aa6120",
+    "templates/cars_prompts_full.json": "d10a188ef0ec68c445a9fbe8dd4a2aa980f8d0423f8494e92ec5e0a44c8844a2",
+    "data/food-101/split_fewshot/shot_16-seed_1.pkl": "f1a6adfc4fe9f5336e803066e51973d475e0c7ca7cd47feb0c1b46b92b283a7d",
+    "data/food-101/split_zhou_Food101.json": "7c3d456c4f348255e1a363e0ea5118318936488f3ec20d83758e0ee67cb9037c",
+    "data/food-101/split_fewshot/shot_16-seed_2.pkl": "aa21825e9b39a58e16ce1701e919855597c353b91f937a2643e8800f13b3c183",
+    "data/food-101/split_fewshot/shot_16-seed_3.pkl": "6a95353833b8bf1b51a7c2828c96e11f4d8d1fcfab1fd59a59a481b797684e71",
+    "templates/food_prompts_full.json": "67cb17f323b7f0726e4b152224365fda289658ff92b0d14ee264910a16af96dc",
+    "data/sun397/split_fewshot/shot_16-seed_1.pkl": "eeec23700b14d740eeb30bc9e094f010a8331c18ffd076203db5de268c2b4c53",
+    "data/sun397/split_zhou_SUN397.json": "9847f9ef611008073ac42adee6614bbb83f877cfbcfbd3115fc8284e0c8c1c47",
+    "data/sun397/split_fewshot/shot_16-seed_2.pkl": "24b62aeda7f6bcc64e3686efc62451cda7352ff3cc918f3c8840f6d7930a80f4",
+    "data/sun397/split_fewshot/shot_16-seed_3.pkl": "1ead9993f753391a33f3291cedc2541ff6cf5a454b492371d9ff7bbbf1019d9a",
+    "templates/sun_prompts_full.json": "67af625aaec8727dbde84006e876049f4276d462b91367656ade95ee3976ce30",
+    "data/ucf101/split_fewshot/shot_16-seed_1.pkl": "c0fd93db0cf3411be7ada1faf535f6be180d290ce6f1e09753557a796c5596ed",
+    "data/ucf101/split_zhou_UCF101.json": "d78cb834f7c5792ceaff2c5ee2d7c76a9e4086e48a3a6b01232989d29cbefdd8",
+    "data/ucf101/split_fewshot/shot_16-seed_2.pkl": "66a553580b086aa239aab8f9e71ee13fdcacec732a16bc1933c598b4d778bfd1",
+    "data/ucf101/split_fewshot/shot_16-seed_3.pkl": "2219b25f7c434371e9f28afb8a5003559a0880eaf7c1828d8f85a6fe0b36d416",
+    "templates/ucf_prompts_full.json": "3acc805cbcd115331cc975f6146b24de2fc1732c45ee54a57c25259facbc6b9a",
+    "data/imagenet/split_fewshot/shot_16-seed_1.pkl": "e6cf28f34a8646d0d6ae2c91fb2f745c56e07a14c3da8ae11bdfff347bebc17b",
+    "data/imagenet/preprocessed.pkl": "f694f17577c46a5963bf0e01ff82e3bd61b30c2ee67c31f6f0b17d7060a61bc1",
+    "data/imagenet/split_fewshot/shot_16-seed_2.pkl": "fa54e93fbdf32cd5511116c762e244de807d1dbbae698009b7b90604b50c9dd6",
+    "data/imagenet/split_fewshot/shot_16-seed_3.pkl": "48240be7909ae56f8936b1667692f608350bf78c543f0d6bc61623119e1549cb",
+    "templates/imagenet_prompts_full.json": "31da80d50a83ef6935238eafc5b44df4b839d23f3cead8591fcfa2cb2d808b91",
+    "reference_code/CDPF-matchedtext-20261023/code/matched_helpers.py": "89bf3bb56277f6da5535f2336af567cd5e196b94a78b45e4789ac55de82ea49e",
+    "reference_code/CDPF-matchedtext-20261023/code/TextConsistency_MatchedText_CandidatePool_20261023.json": "c6fcd4ff9b05cc4c80c7645d6337c7c377c62ef64cb2d3d39dba020f7947065b",
+    "reference_inputs/ViT-B-16.pt": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+    "reference_inputs/imagenet_runtime.py": "629a1624de8bff8cb8aab79d13bc75cb23fa6391512d9fe960d7b68856b9cb6f",
+    "reference_inputs/imagenet_io.py": "c4f54a0d2d2dedbaf69bd976af9b240e60a9cd8019f5eba7d37096a00299a5d3",
+    "reference_inputs/imagenet_val_index.json": "50ada414a37e85b07996f611cf0eb237af9d7506604f49591747eb08d736556c"
+  }
+}

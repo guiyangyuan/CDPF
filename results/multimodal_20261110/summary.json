@@ -1,0 +1,492 @@
+{
+  "schema_version": 1,
+  "provenance": {
+    "kind": "local_reproduction",
+    "experiment": "CDPF_Multimodal_20261110",
+    "statement": "Locally reproduced results, not values transcribed from original papers.",
+    "source_summaries_sha256": {
+      "maple11-locally-verified-summary-v1.json": "4c7f6cc063343a12c7e1b143a62d1a8caa551459abd720de9afff6f1eee5db4a",
+      "mmrl11-locally-verified-summary-v1.json": "81136ef77e72b706be730139bde3373751f02338b94a12cfb0c9ec4cd5da3ddb"
+    },
+    "source_independent_audits_sha256": {
+      "maple11-independent-arithmetic-audit-v1.json": "fc0b160fd3f3057a1ad927596fcaef8bb872c82754979e8bcb9adf1787f82ceb",
+      "mmrl11-independent-arithmetic-audit-v1.json": "781c3ebda62a4d7eb746afbe771ade085c6361134686c3e900420c09bf32e9c8"
+    }
+  },
+  "scope": {
+    "methods": [
+      "maple",
+      "mmrl"
+    ],
+    "datasets": [
+      "caltech101",
+      "oxford_pets",
+      "oxford_flowers",
+      "fgvc_aircraft",
+      "dtd",
+      "eurosat",
+      "stanford_cars",
+      "food101",
+      "sun397",
+      "ucf101",
+      "imagenet"
+    ],
+    "seeds": [
+      1,
+      2,
+      3
+    ],
+    "unique_case_count": 66,
+    "cases_per_method": 33,
+    "configurations": [
+      "original",
+      "single_template_probability_fusion",
+      "matched_template_probability_fusion",
+      "description_probability_fusion"
+    ]
+  },
+  "alpha": 0.5,
+  "accuracy_unit": "percent",
+  "difference_unit": "percentage_points",
+  "timing": {
+    "status": "not_measured"
+  },
+  "aggregation": {
+    "seed_hm": "H_ds=2*B_ds*N_ds/(B_ds+N_ds), from integer correct/total percentages.",
+    "dataset_hm": "B_d=mean over three seed Base accuracies; N_d=mean over three seed Novel accuracies; H_d=2*B_d*N_d/(B_d+N_d).",
+    "mean_dataset_hm": "Unweighted arithmetic mean of the eleven H_d values.",
+    "hm_of_mean_base_novel": "2*mean_d(B_d)*mean_d(N_d)/(mean_d(B_d)+mean_d(N_d)); reported separately from mean_dataset_hm.",
+    "paired_comparisons": "Compute HM within the same method, dataset and seed before subtracting the reference configuration.",
+    "exact_arithmetic": "All aggregation and comparison signs computed with exact rational arithmetic from integer correct/total.",
+    "float_renderings": "Numeric values are floating point renderings; exact fractions are provided for seed HM, dataset metrics and macro metrics.",
+    "statistical_significance_claimed": false
+  },
+  "methods": {
+    "maple": {
+      "case_count": 33,
+      "dataset_count": 11,
+      "macro": {
+        "original": {
+          "mean_base_accuracy_pct": 82.13438880949536,
+          "mean_novel_accuracy_pct": 74.92448073053558,
+          "mean_dataset_hm": 78.09058260338705,
+          "hm_of_mean_base_novel": 78.36394658504608,
+          "exact_fractions": {
+            "mean_base_accuracy_pct": "790324449502026264737677/9622333117193156896536",
+            "mean_novel_accuracy_pct": "182650157218262913283459669/2437790097940893324003375",
+            "mean_dataset_hm": "68992718822843618383954844299742611776100015559752889011599704439007/883496018633252834466639228616658390190655346101610106715171084194",
+            "hm_of_mean_base_novel": "288705769909964371719838053335790285409898588497826/3684165773818455173164933599829372671536999466459"
+          },
+          "delta_pp": {
+            "vs_original": {
+              "mean_base_accuracy_pct": 0.0,
+              "mean_novel_accuracy_pct": 0.0,
+              "mean_dataset_hm": 0.0,
+              "hm_of_mean_base_novel": 0.0
+            },
+            "vs_single": {
+              "mean_base_accuracy_pct": 0.9332676007972627,
+              "mean_novel_accuracy_pct": -1.5419423167260624,
+              "mean_dataset_hm": -0.46274991707929,
+              "hm_of_mean_base_novel": -0.3987349237905265
+            },
+            "vs_matched": {
+              "mean_base_accuracy_pct": 1.0953725041582334,
+              "mean_novel_accuracy_pct": -1.8493634825726788,
+              "mean_dataset_hm": -0.5827497695334344,
+              "hm_of_mean_base_novel": -0.48484675879290073
+            }
+          }
+        },
+        "single_template_probability_fusion": {
+          "mean_base_accuracy_pct": 81.2011212086981,
+          "mean_novel_accuracy_pct": 76.46642304726164,
+          "mean_dataset_hm": 78.55333252046634,
+          "hm_of_mean_base_novel": 78.76268150883661,
+          "exact_fractions": {
+            "mean_base_accuracy_pct": "97668029719958920112059541/1202791639649144612067000",
+            "mean_novel_accuracy_pct": "186409088929573748753291627/2437790097940893324003375",
+            "mean_dataset_hm": "1533869491938506640254888499681787458996052154282511644574638468416/19526472559758952734426289245788300994514767845971473259449113875",
+            "hm_of_mean_base_novel": "36412416875288148431367979255481169661812043921526414/462305449455817956381362344514585563471016747959875"
+          },
+          "delta_pp": {
+            "vs_original": {
+              "mean_base_accuracy_pct": -0.9332676007972627,
+              "mean_novel_accuracy_pct": 1.5419423167260624,
+              "mean_dataset_hm": 0.46274991707929,
+              "hm_of_mean_base_novel": 0.3987349237905265
+            },
+            "vs_single": {
+              "mean_base_accuracy_pct": 0.0,
+              "mean_novel_accuracy_pct": 0.0,
+              "mean_dataset_hm": 0.0,
+              "hm_of_mean_base_novel": 0.0
+            },
+            "vs_matched": {
+              "mean_base_accuracy_pct": 0.16210490336097066,
+              "mean_novel_accuracy_pct": -0.30742116584661633,
+              "mean_dataset_hm": -0.11999985245414439,
+              "hm_of_mean_base_novel": -0.08611183500237428
+            }
+          }
+        },
+        "matched_template_probability_fusion": {
+          "mean_base_accuracy_pct": 81.03901630533713,
+          "mean_novel_accuracy_pct": 76.77384421310826,
+          "mean_dataset_hm": 78.67333237292048,
+          "hm_of_mean_base_novel": 78.84879334383898,
+          "exact_fractions": {
+            "mean_base_accuracy_pct": "1282540148650660685240449/15826205784857165948250",
+            "mean_novel_accuracy_pct": "374317034407144150450470421/4875580195881786648006750",
+            "mean_dataset_hm": "564274067971484489334542771283175223338525633192083019456667/7172367700109124944737987225985880939193890984611031066000",
+            "hm_of_mean_base_novel": "480076624951013129080605738850971854531763547259029/6088572882244683784880467843290469382212683372000"
+          },
+          "delta_pp": {
+            "vs_original": {
+              "mean_base_accuracy_pct": -1.0953725041582334,
+              "mean_novel_accuracy_pct": 1.8493634825726788,
+              "mean_dataset_hm": 0.5827497695334344,
+              "hm_of_mean_base_novel": 0.48484675879290073
+            },
+            "vs_single": {
+              "mean_base_accuracy_pct": -0.16210490336097066,
+              "mean_novel_accuracy_pct": 0.30742116584661633,
+              "mean_dataset_hm": 0.11999985245414439,
+              "hm_of_mean_base_novel": 0.08611183500237428
+            },
+            "vs_matched": {
+              "mean_base_accuracy_pct": 0.0,
+              "mean_novel_accuracy_pct": 0.0,
+              "mean_dataset_hm": 0.0,
+              "hm_of_mean_base_novel": 0.0
+            }
+          }
+        },
+        "description_probability_fusion": {
+          "mean_base_accuracy_pct": 81.55102277671229,
+          "mean_novel_accuracy_pct": 78.3642792030979,
+          "mean_dataset_hm": 79.77887201642821,
+          "hm_of_mean_base_novel": 79.9258987608243,
+          "exact_fractions": {
+            "mean_base_accuracy_pct": "7006349171476179297156491/85913688546367472290500",
+            "mean_novel_accuracy_pct": "6946751413585000423027859/88646912652396120872850",
+            "mean_dataset_hm": "1447667071245325282518191281796255245001049926922189030510788956328/18145995733647613091913302400338180510995234982550019155937307925",
+            "hm_of_mean_base_novel": "48671366011022245057557655041200327811235175682769/608956130185908247748898572723546695515002104425"
+          },
+          "delta_pp": {
+            "vs_original": {
+              "mean_base_accuracy_pct": -0.5833660327830763,
+              "mean_novel_accuracy_pct": 3.439798472562306,
+              "mean_dataset_hm": 1.6882894130411579,
+              "hm_of_mean_base_novel": 1.5619521757782218
+            },
+            "vs_single": {
+              "mean_base_accuracy_pct": 0.3499015680141865,
+              "mean_novel_accuracy_pct": 1.8978561558362432,
+              "mean_dataset_hm": 1.225539495961868,
+              "hm_of_mean_base_novel": 1.1632172519876953
+            },
+            "vs_matched": {
+              "mean_base_accuracy_pct": 0.5120064713751571,
+              "mean_novel_accuracy_pct": 1.590434989989627,
+              "mean_dataset_hm": 1.1055396435077236,
+              "hm_of_mean_base_novel": 1.0771054169853211
+            }
+          }
+        }
+      },
+      "description_probability_fusion_comparisons": {
+        "vs_original": {
+          "reference_configuration": "original",
+          "dataset_hm": {
+            "improved": 9,
+            "declined": 2,
+            "unchanged": 0,
+            "n": 11,
+            "declined_datasets": [
+              "oxford_pets",
+              "stanford_cars"
+            ]
+          },
+          "paired_seed_hm": {
+            "improved": 28,
+            "declined": 5,
+            "unchanged": 0,
+            "n": 33,
+            "declined_cases": [
+              "oxford_pets/seed2",
+              "oxford_pets/seed3",
+              "stanford_cars/seed1",
+              "stanford_cars/seed2",
+              "ucf101/seed2"
+            ]
+          }
+        },
+        "vs_single": {
+          "reference_configuration": "single_template_probability_fusion",
+          "dataset_hm": {
+            "improved": 10,
+            "declined": 1,
+            "unchanged": 0,
+            "n": 11,
+            "declined_datasets": [
+              "stanford_cars"
+            ]
+          },
+          "paired_seed_hm": {
+            "improved": 29,
+            "declined": 4,
+            "unchanged": 0,
+            "n": 33,
+            "declined_cases": [
+              "stanford_cars/seed1",
+              "stanford_cars/seed2",
+              "stanford_cars/seed3",
+              "ucf101/seed2"
+            ]
+          }
+        },
+        "vs_matched": {
+          "reference_configuration": "matched_template_probability_fusion",
+          "dataset_hm": {
+            "improved": 10,
+            "declined": 1,
+            "unchanged": 0,
+            "n": 11,
+            "declined_datasets": [
+              "stanford_cars"
+            ]
+          },
+          "paired_seed_hm": {
+            "improved": 30,
+            "declined": 3,
+            "unchanged": 0,
+            "n": 33,
+            "declined_cases": [
+              "stanford_cars/seed1",
+              "stanford_cars/seed2",
+              "stanford_cars/seed3"
+            ]
+          }
+        }
+      }
+    },
+    "mmrl": {
+      "case_count": 33,
+      "dataset_count": 11,
+      "macro": {
+        "original": {
+          "mean_base_accuracy_pct": 85.65825828636355,
+          "mean_novel_accuracy_pct": 76.96043615096208,
+          "mean_dataset_hm": 80.88515749903185,
+          "hm_of_mean_base_novel": 81.07674139753983,
+          "exact_fractions": {
+            "mean_base_accuracy_pct": "981228923178525128433023/11455158472848996305400",
+            "mean_novel_accuracy_pct": "1364461012232928771022201/17729382530479224174570",
+            "mean_dataset_hm": "3068015861578751165548116150615300004779089862763277364719544616/37930517247437810730744768031142886387546719383142217835602825",
+            "hm_of_mean_base_novel": "1338848609752397100576564071881283639581074543623/16513350027077218055488248756383795957540505255"
+          },
+          "delta_pp": {
+            "vs_original": {
+              "mean_base_accuracy_pct": 0.0,
+              "mean_novel_accuracy_pct": 0.0,
+              "mean_dataset_hm": 0.0,
+              "hm_of_mean_base_novel": 0.0
+            },
+            "vs_single": {
+              "mean_base_accuracy_pct": 1.0773015251386238,
+              "mean_novel_accuracy_pct": -0.213295142105471,
+              "mean_dataset_hm": 0.34843799653890706,
+              "hm_of_mean_base_novel": 0.3689967489219817
+            },
+            "vs_matched": {
+              "mean_base_accuracy_pct": 1.0553510580625705,
+              "mean_novel_accuracy_pct": -0.16079070776571422,
+              "mean_dataset_hm": 0.37092806252492166,
+              "hm_of_mean_base_novel": 0.38773306745883396
+            }
+          }
+        },
+        "single_template_probability_fusion": {
+          "mean_base_accuracy_pct": 84.58095676122493,
+          "mean_novel_accuracy_pct": 77.17373129306755,
+          "mean_dataset_hm": 80.53671950249294,
+          "hm_of_mean_base_novel": 80.70774464861786,
+          "exact_fractions": {
+            "mean_base_accuracy_pct": "2076189136039329162711461/24546768156104992083000",
+            "mean_novel_accuracy_pct": "2787160858776167687279933/36115408858383604800050",
+            "mean_dataset_hm": "620974992073553929873733856772398440331609451678209761598631976/7710457986239832356309135350930457142761102372717388448864725",
+            "hm_of_mean_base_novel": "5786673095385126310962665557865836863266014412113/71699105464771833769910887654188981341259406025"
+          },
+          "delta_pp": {
+            "vs_original": {
+              "mean_base_accuracy_pct": -1.0773015251386238,
+              "mean_novel_accuracy_pct": 0.213295142105471,
+              "mean_dataset_hm": -0.34843799653890706,
+              "hm_of_mean_base_novel": -0.3689967489219817
+            },
+            "vs_single": {
+              "mean_base_accuracy_pct": 0.0,
+              "mean_novel_accuracy_pct": 0.0,
+              "mean_dataset_hm": 0.0,
+              "hm_of_mean_base_novel": 0.0
+            },
+            "vs_matched": {
+              "mean_base_accuracy_pct": -0.02195046707605346,
+              "mean_novel_accuracy_pct": 0.05250443433975677,
+              "mean_dataset_hm": 0.022490065986014572,
+              "hm_of_mean_base_novel": 0.018736318536852252
+            }
+          }
+        },
+        "matched_template_probability_fusion": {
+          "mean_base_accuracy_pct": 84.60290722830098,
+          "mean_novel_accuracy_pct": 77.1212268587278,
+          "mean_dataset_hm": 80.51422943650692,
+          "hm_of_mean_base_novel": 80.68900833008101,
+          "exact_fractions": {
+            "mean_base_accuracy_pct": "3768876648304170365890099/44547838505523874521000",
+            "mean_novel_accuracy_pct": "188005363177259872041331796/2437790097940893324003375",
+            "mean_dataset_hm": "60270470899800027377980819691555212387799212458058639241494507328/748569182386934324351560718948334971893491706139622198308950125",
+            "hm_of_mean_base_novel": "1417138046069438952941943155003361660639085860575608/17562962730589506926843491296750040008615524800125"
+          },
+          "delta_pp": {
+            "vs_original": {
+              "mean_base_accuracy_pct": -1.0553510580625705,
+              "mean_novel_accuracy_pct": 0.16079070776571422,
+              "mean_dataset_hm": -0.37092806252492166,
+              "hm_of_mean_base_novel": -0.38773306745883396
+            },
+            "vs_single": {
+              "mean_base_accuracy_pct": 0.02195046707605346,
+              "mean_novel_accuracy_pct": -0.05250443433975677,
+              "mean_dataset_hm": -0.022490065986014572,
+              "hm_of_mean_base_novel": -0.018736318536852252
+            },
+            "vs_matched": {
+              "mean_base_accuracy_pct": 0.0,
+              "mean_novel_accuracy_pct": 0.0,
+              "mean_dataset_hm": 0.0,
+              "hm_of_mean_base_novel": 0.0
+            }
+          }
+        },
+        "description_probability_fusion": {
+          "mean_base_accuracy_pct": 84.88169649402253,
+          "mean_novel_accuracy_pct": 78.93645004557457,
+          "mean_dataset_hm": 81.67917825948113,
+          "hm_of_mean_base_novel": 81.80119158489548,
+          "exact_fractions": {
+            "mean_base_accuracy_pct": "102094994902246421385873089/1202791639649144612067000",
+            "mean_novel_accuracy_pct": "12828699752513844792879439/162519339862726221600225",
+            "mean_dataset_hm": "99287822238498893362261257004523794735938912926519061204143609065612/1215583020718916057173815299006934465385131675655205560137700182825",
+            "hm_of_mean_base_novel": "2619492071670701823570819572218757855465546663034142/32022663984694190287845540860707794528457934258025"
+          },
+          "delta_pp": {
+            "vs_original": {
+              "mean_base_accuracy_pct": -0.776561792341006,
+              "mean_novel_accuracy_pct": 1.9760138946124972,
+              "mean_dataset_hm": 0.7940207604492893,
+              "hm_of_mean_base_novel": 0.7244501873556372
+            },
+            "vs_single": {
+              "mean_base_accuracy_pct": 0.30073973279761784,
+              "mean_novel_accuracy_pct": 1.7627187525070263,
+              "mean_dataset_hm": 1.1424587569881963,
+              "hm_of_mean_base_novel": 1.093446936277619
+            },
+            "vs_matched": {
+              "mean_base_accuracy_pct": 0.27878926572156437,
+              "mean_novel_accuracy_pct": 1.8152231868467832,
+              "mean_dataset_hm": 1.1649488229742109,
+              "hm_of_mean_base_novel": 1.112183254814471
+            }
+          }
+        }
+      },
+      "description_probability_fusion_comparisons": {
+        "vs_original": {
+          "reference_configuration": "original",
+          "dataset_hm": {
+            "improved": 10,
+            "declined": 1,
+            "unchanged": 0,
+            "n": 11,
+            "declined_datasets": [
+              "stanford_cars"
+            ]
+          },
+          "paired_seed_hm": {
+            "improved": 30,
+            "declined": 3,
+            "unchanged": 0,
+            "n": 33,
+            "declined_cases": [
+              "stanford_cars/seed1",
+              "stanford_cars/seed2",
+              "stanford_cars/seed3"
+            ]
+          }
+        },
+        "vs_single": {
+          "reference_configuration": "single_template_probability_fusion",
+          "dataset_hm": {
+            "improved": 10,
+            "declined": 1,
+            "unchanged": 0,
+            "n": 11,
+            "declined_datasets": [
+              "stanford_cars"
+            ]
+          },
+          "paired_seed_hm": {
+            "improved": 29,
+            "declined": 4,
+            "unchanged": 0,
+            "n": 33,
+            "declined_cases": [
+              "eurosat/seed2",
+              "stanford_cars/seed1",
+              "stanford_cars/seed2",
+              "stanford_cars/seed3"
+            ]
+          }
+        },
+        "vs_matched": {
+          "reference_configuration": "matched_template_probability_fusion",
+          "dataset_hm": {
+            "improved": 10,
+            "declined": 1,
+            "unchanged": 0,
+            "n": 11,
+            "declined_datasets": [
+              "stanford_cars"
+            ]
+          },
+          "paired_seed_hm": {
+            "improved": 29,
+            "declined": 4,
+            "unchanged": 0,
+            "n": 33,
+            "declined_cases": [
+              "oxford_pets/seed2",
+              "stanford_cars/seed1",
+              "stanford_cars/seed2",
+              "stanford_cars/seed3"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "validation": {
+    "unique_cases_checked": 66,
+    "dataset_configuration_rows": 88,
+    "metrics_json_files_sha256_checked": 132,
+    "integer_correct_total_pairs": 528,
+    "all_integer_count_pairs_match_sha256_checked_metrics": true,
+    "all_dataset_and_macro_fractions_match_formal_summaries_and_independent_audits": true,
+    "all_macro_float_values_match_formal_state": true
+  },
+  "negative_results_preserved": true
+}

@@ -4,6 +4,7 @@
 
 | 材料 | 入口 |
 | --- | --- |
+| MaPLe/MMRL 代表性推理计时（4 组案例、32 分支，2026-11-12） | [测量范围与汇总](../results/multimodal_20261110/README.md#推理开销)、[全部原始值](../results/multimodal_20261110/timing_20261112.json)、[CSV](../results/multimodal_20261110/timing_results.csv) |
 | KgCoOp 十一数据集三种子四配置（33 组，2026-11-11） | [完整结果与双 HM 口径](../results/kgcoop_20261110/README.md)、[逐种子正确数/样本数](../results/kgcoop_20261110/seed_results.json) |
 | MaPLe/MMRL 十一数据集三种子四配置（66 组，2026-11-11） | [完整扩展结果与双 HM 口径](../results/multimodal_20261110/README.md)、[逐种子正确数/样本数](../results/multimodal_20261110/seed_results.json) |
 | 十数据集结果与独立复核 | [StanfordCars / SUN397 汇总](experiments/斯坦福汽车与SUN397扩展验证-20260917/结果报告.md) |

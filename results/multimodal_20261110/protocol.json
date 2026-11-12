@@ -49,8 +49,32 @@
     "usage": "fixed released descriptions; attribution to original authors; no test-accuracy selection"
   },
   "timing": {
-    "status": "not_measured",
-    "requires_separate_frozen_CLIP_image_forward": true,
+    "status": "measured_representative_novel_seed1_cases",
+    "measured_date_local": "2026-11-12",
+    "timezone": "Asia/Shanghai",
+    "datasets": [
+      "ucf101",
+      "imagenet"
+    ],
+    "methods": [
+      "maple",
+      "mmrl"
+    ],
+    "seed": 1,
+    "split": "new",
+    "batches": [
+      1,
+      64
+    ],
+    "warmup": 20,
+    "repetitions": 100,
+    "cases": 4,
+    "branch_measurements": 32,
+    "raw_cuda_event_values": 3200,
+    "results": "timing_20261112.json",
+    "table": "timing_results.csv",
+    "scope": "Resident-batch CUDA-event GPU prediction only; native inference versus fusion with an additional original frozen CLIP image forward. Timing does not cover all eleven datasets or all three seeds.",
+    "memory": "Common resident-context snapshots only; neither native-only nor incremental fusion memory.",
     "CoOp_0_74_percent_result_applies": false
   },
   "methods": {

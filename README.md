@@ -41,7 +41,20 @@ CLIP ViT-B/16，16-shot Base-to-Novel，seed 1/2/3，CoOp 训练 20 epochs。下
 
 相对原方法，KgCoOp 有 8/11 个数据集提升，Oxford Pets、Flowers102 与 Stanford Cars 下降；MaPLe 有 9/11 个数据集提升，Oxford Pets 与 Stanford Cars 下降；MMRL 有 10/11 个数据集提升，Stanford Cars 下降。完整四分支、逐集/逐种子计数、冻结版本与两个汇总口径见 [KgCoOp 结果](results/kgcoop_20261110/README.md)与 [MaPLe/MMRL 结果](results/multimodal_20261110/README.md)。这些均为本地实验，文献报告值应单独标注。
 
-MaPLe/MMRL 的额外推理延迟与显存尚待 GPU 实测。上述 CoOp 的 0.74% 仅适用于其已测共享图像编码器设置。
+### 多模态底座推理计时
+
+2026-11-12 补充：单张 RTX 4090，UCF101 与 ImageNet 的 Novel seed1，20 次预热、100 次 CUDA-event 测量。下表为 **batch 64 的延迟中位数，ms/批**，原生分支与融合分支处于相同常驻环境。
+
+| 数据集 | 底座 | 原生分支 | CDPF | 中位延迟增幅 |
+|---|---|---:|---:|---:|
+| UCF101 | MaPLe | 35.80 | 66.39 | +85.44% |
+| UCF101 | MMRL | 77.90 | 107.68 | +38.22% |
+| ImageNet | MaPLe | 81.33 | 110.10 | +35.38% |
+| ImageNet | MMRL | 77.87 | 107.63 | +38.22% |
+
+三种融合均额外执行一次原始冻结 CLIP 图像前向；MaPLe 原生逐次文本编码包含在计时中，MMRL 保留官方预热文本缓存。测量重复同一驻留 GPU batch，排除 CPU 预处理、磁盘/归档读取、H2D、加载和一次性辅助文本原型准备。两种 batch、四分支和全部原始值见 [计时明细](results/multimodal_20261110/README.md#推理开销)。
+
+这些开销不属于 CoOp 已测共享图像编码器的 0.74% 设置。显存只记录共同常驻上下文，不宣称为原生独立部署或融合新增显存。
 
 ## 无需 GPU 的结果复算
 

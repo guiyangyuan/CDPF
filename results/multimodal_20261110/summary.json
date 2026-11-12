@@ -49,7 +49,33 @@
   "accuracy_unit": "percent",
   "difference_unit": "percentage_points",
   "timing": {
-    "status": "not_measured"
+    "status": "measured_representative_novel_seed1_cases",
+    "measured_date_local": "2026-11-12",
+    "timezone": "Asia/Shanghai",
+    "datasets": [
+      "ucf101",
+      "imagenet"
+    ],
+    "methods": [
+      "maple",
+      "mmrl"
+    ],
+    "seed": 1,
+    "split": "new",
+    "batches": [
+      1,
+      64
+    ],
+    "warmup": 20,
+    "repetitions": 100,
+    "cases": 4,
+    "branch_measurements": 32,
+    "raw_cuda_event_values": 3200,
+    "results": "timing_20261112.json",
+    "table": "timing_results.csv",
+    "scope": "Resident-batch CUDA-event GPU prediction only; native inference versus fusion with an additional original frozen CLIP image forward. Timing does not cover all eleven datasets or all three seeds.",
+    "memory": "Common resident-context snapshots only; neither native-only nor incremental fusion memory.",
+    "CoOp_0_74_percent_result_applies": false
   },
   "aggregation": {
     "seed_hm": "H_ds=2*B_ds*N_ds/(B_ds+N_ds), from integer correct/total percentages.",

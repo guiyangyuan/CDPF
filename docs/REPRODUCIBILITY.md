@@ -100,7 +100,7 @@ MaPLe 固定官方提交 `69bce21ae8eda80ad6187534b2dce09cf6c59e17`，十一集�
 
 原方法保持官方推理：MaPLe 使用原生前向；MMRL Base 使用 `0.7 * class_logits + 0.3 * representation_logits`，Novel 使用 class logits。三种融合分别使用单模板、匹配描述数量的普通模板、类别描述，均与同一原方法后验按 0.5/0.5 融合。
 
-MaPLe/MMRL 含有学习后的视觉提示，辅助分支使用单独的原始冻结 CLIP 图像编码器。描述原型预计算；图像前向不能直接复用底座含学习视觉提示的特征。对应新增延迟与显存状态为待 GPU 测量，不套用上述 CoOp 的计时数值。
+MaPLe/MMRL 含有学习后的视觉提示，辅助分支使用单独的原始冻结 CLIP 图像编码器。描述原型预计算；图像前向不能直接复用底座含学习视觉提示的特征。2026-11-12 已完成 UCF101/ImageNet Novel seed1、batch 1/64 的独占 RTX 4090 测量，20 次预热和 100 次 CUDA-event；完整 32 分支、3,200 个原始值见 [计时数据](../results/multimodal_20261110/timing_20261112.json)及 [表格](../results/multimodal_20261110/timing_results.csv)。计时覆盖原生前向以及融合额外的原始 CLIP 图像前向；MaPLe 逐次原生文本编码包含在内，MMRL 保持其官方热缓存。数据 IO、CPU 预处理、H2D、加载和辅助文本原型准备统一排除，不套用 CoOp 的计时数值。显存快照包括所有分支共同常驻的原生训练器及其编码器/优化器/缓存、独立原始 CLIP、三组辅助原型及 input64；不表示原生独立部署或融合新增显存。
 
 类别描述复用 [ATPrompt](https://github.com/zhengli97/ATPrompt) 发布的固定文本资产。ATPrompt 学习带锚定属性的结构化提示；CDPF 在推理阶段融合已训练提示分类器与冻结描述分类器的后验，描述文本的来源与本方法贡献分别标注。
 
